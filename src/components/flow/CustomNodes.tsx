@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Handle, NodeProps, Position } from 'reactflow';
+import { Handle, NodeProps, Position,  } from 'reactflow';
 import { EdgeProps } from 'reactflow';
 import { Dialog } from 'primereact/dialog';
 import Image from 'next/image';
+
+
 export default function CustomNodes(props: NodeProps) {
 	const node = props.data.node;
 	const edges = props.data.edges;
@@ -74,9 +76,9 @@ export default function CustomNodes(props: NodeProps) {
 						isConnectable={false}
 					/>
 				))
-			) : (
-				<></>
-			)}
+				) : (
+					<></>
+					)}
 			<div
 				style={{
 					border: '1px solid var(--primary-color)',
@@ -94,7 +96,7 @@ export default function CustomNodes(props: NodeProps) {
 					color: !props.data.visible && props.data.mask ? 'transparent' : 'black',
 				}}>
 				<div className="flex flex-column justify-content-center">
-					{node.external_link ? (
+					{node.external_link && props.data.visible? (
 						node.link_type === 0 ? (
 							<a
 								className=" cursor-pointer border-2 border-round border-gray-500 hover:border-blue-700 hover:shadow-4"
@@ -144,7 +146,8 @@ export default function CustomNodes(props: NodeProps) {
 							</a>
 						)
 					) : (
-						<strong>{String(node.text_1)}</strong>
+
+						<strong>{String(node.text_1)} </strong>
 					)}
 				</div>
 			</div>

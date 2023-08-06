@@ -2,7 +2,6 @@ import CustomEdge from './CustomEdge';
 import CustomNode from './CustomNodes';
 import { useState, useCallback, useEffect, use } from 'react';
 import { useMemo } from 'react';
-
 import { useSelector } from 'react-redux';
 import { selectFlow } from '@/redux/features/flowSlice';
 
@@ -18,16 +17,19 @@ import ReactFlow, {
 	EdgeTypes,
 	NodeTypes,
 	useEdgesState,
+	applyNodeChanges,
+	applyEdgeChanges
 } from 'reactflow';
 import dagre from '@dagrejs/dagre';
 import 'reactflow/dist/style.css';
 import { Card } from 'primereact/card';
+import { set } from 'immer/dist/internal';
 
 const position = { x: 0, y: 0 };
 const edgeType = 'smooth';
 
 let nodeData: { id: string; data: any; position: { x: number; y: number }; width: number; height: number }[] = [];
-let edgeData: { id: string; data: { edge:any, visable:boolean, mask:boolean };source: string; target: string; type: string; animated: boolean; sourceHandle:string }[] = [];
+let edgeData: { id: string; data: { edge:any, visible:boolean, mask:boolean };source: string; target: string; type: string; animated: boolean; sourceHandle:string }[] = [];
 
 
 export const Flow = ({ mask }: any) => {
@@ -94,8 +96,8 @@ export const Flow = ({ mask }: any) => {
 	
 
 
-		const [nodes, setNodes] = useNodesState([]);
-		const [edges, setEdges] = useEdgesState([]);
+		const [nodes, setNodes,onNodesChange] = useNodesState([]);
+		const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
 
 
@@ -110,11 +112,13 @@ export const Flow = ({ mask }: any) => {
 				if (node.node_type == 1) {
 					const newNode = {
 						id: node.id.toString(),
-						data: { node: node, edges: [], visable: true, },
+						data: { node: node, edges: [], visible: false, mask:mask },
 						type: 'custom',
 						width: nodeWidth,
 						height: nodeHeight,
 						position,
+						selectable: false,
+						draggable: false,
 						
 						
 					};
@@ -123,12 +127,13 @@ export const Flow = ({ mask }: any) => {
 				} else if (node.node_type == 2) {
 					edgeData.push({
 						id: node.id.toString(),
-						data: { edge:node,  visable: true, mask:mask },
+						data: { edge:node,  visible: false, mask:mask },
 						type: 'custom',
 						sourceHandle: node.id.toString(),
 						source: node.source.toString(),
 						target: node.target.toString(),
 						animated: true,
+						
 					});
 				}
 			
@@ -150,7 +155,7 @@ export const Flow = ({ mask }: any) => {
 			setEdges([...layoutedEdges]);
 
 		// }
-			
+		
 
 			
 		}, [selectedFlowData]);
@@ -166,7 +171,54 @@ export const Flow = ({ mask }: any) => {
 
 			setCenter(x, y, { zoom, duration: 1000 });}
 		}, [selectedProcess, nodes]);
+		useEffect(()=>{
+			const _activeArray:any = [];
+			(history || []).forEach((hist:any) => {
+				_activeArray.push(hist.id.toString());
+			});
 
+			(currentOptions || []).forEach((element:any) => {
+				_activeArray.push(element.id.toString());
+
+			});
+
+			setNodes((nds) =>
+			nds.map((node) => {
+				if (_activeArray.includes(node.id)) {
+					node.data = {
+						...node.data,
+						visible: true
+					  };
+			  } else if(node.data.visible) {
+				node.data = {
+					...node.data,
+					visible: false
+				  };
+			  }
+	  
+			  return node;
+			})
+			);
+			setEdges((eds) =>
+			  eds.map((edge) => {
+				if (_activeArray.includes(edge.id) ) {
+					edge.data = {
+						...edge.data,
+						visible: true
+					  };
+				}else if(edge.data.visible) {
+					edge.data = {
+						...edge	.data,
+						visible: false
+					  };
+				  }
+		
+				return edge;
+			  })
+			);
+		},[history, currentOptions,setNodes,setEdges])
+
+		
 		return (
 			<>
 
@@ -176,7 +228,10 @@ export const Flow = ({ mask }: any) => {
 						edges={edges}
 						connectionLineType={ConnectionLineType.SmoothStep}
 						edgeTypes={edgeTypes}
-						nodeTypes={nodeTypes}>
+						nodeTypes={nodeTypes}
+						onNodesChange={onNodesChange}
+						onEdgesChange={onEdgesChange}>
+						
 						<Background />
 						<Controls showInteractive={false} />
 				{/* <MiniMap pannable={true} /> */}

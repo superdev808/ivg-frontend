@@ -24,7 +24,6 @@ function useSearchRouteListener() {
         dispatch(setSelectedFlowData(_selectedFlowData)); 
         dispatch(setSelectedStart(_selectedStart));
  
-        console.log(_selectedFlowData)
     }
 
 

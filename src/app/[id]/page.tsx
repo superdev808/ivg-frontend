@@ -16,7 +16,7 @@ export default function SearchPage() {
         <div className='search-container flex justify-content-between'>
 
          <Search />
-         <Flow/>
+         <Flow mask={true}/>
 
         </div>
 		</>
