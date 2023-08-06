@@ -117,7 +117,7 @@ export const Flow = ({ mask }: any) => {
 						width: nodeWidth,
 						height: nodeHeight,
 						position,
-						selectable: false,
+						// selectable: false,
 						draggable: false,
 						
 						
