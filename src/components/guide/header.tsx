@@ -5,7 +5,7 @@ import { selectFlow, restart} from '@/redux/features/flowSlice';
 
 
 
-export default function SearchHeader() {
+export default function GuideHeader() {
     const {selectedFlow, selectedFlowData} = useSelector(selectFlow);
 
 

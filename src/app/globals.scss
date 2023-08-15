@@ -121,7 +121,7 @@ cursor: pointer;
 }
 
 }
-.search-menu  {
+.guide-menu  {
   width: 50%;
   white-space: nowrap;
   margin-right: 20px;
@@ -155,7 +155,7 @@ cursor: pointer;
 
 }
 
-.search-wrapper {
+.guide-wrapper {
   margin: 10rem;
   // height: calc(100vh - 6rem);
 }
@@ -233,13 +233,13 @@ cursor: pointer;
 }
 
 
-.search-container{
-  .search-text-container {
+.guide-page {
+  .guide-container {
     // padding: 1.5rem 0;
     width: 33.3333%;
     height: calc(100vh - 15rem);
 
-    .search-text-body {
+    .guide-body {
     width: 100%;
     height: calc(100vh - 20rem); 
     max-height: calc(100vh - 20rem); /* Adjust as needed */
