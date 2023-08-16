@@ -52,8 +52,33 @@ export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 		setFilterValue('');
 		router.push('/'+event.value.id);
 	}
+    const suggestionTemplate = (suggestion:any) => {
+		const _suggestionText = suggestion.text_1;
+		const _lowerSuggestionText = _suggestionText.toLowerCase();
+		const _lowerFilterValue = filterValue.toLowerCase();
+		const startIndex = _lowerSuggestionText.indexOf(_lowerFilterValue);
+
+		if (startIndex !== -1) {
+			const beforeBold = _suggestionText.substring(0, startIndex);
+			const boldText = _suggestionText.substring(startIndex, startIndex + filterValue.length);
+			const afterBold = _suggestionText.substring(startIndex + filterValue.length);
+	
+			const formattedString = (
+				<span>
+					{beforeBold}
+					<span className="font-bold">{boldText}</span>
+					{afterBold}
+				</span>
+			)
+			
+			return formattedString;
+		}
+	
+		return _suggestionText; 
 
 
+  
+    };
 
 	return (
 		<>
@@ -72,6 +97,7 @@ export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 				placeholder="Search..."
 				className="w-full"
 				inputClassName={'w-full p-inputtext-sm my-2 ' + (!hideIcon ? ' px-6' : ' px-3')}
+				itemTemplate={suggestionTemplate}
 				field="text_1"
 				value={filterValue}
 				suggestions={filteredFlows}

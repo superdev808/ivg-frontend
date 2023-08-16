@@ -243,7 +243,7 @@ export const Flow = ({ mask }: any) => {
 					>
 						<Background />
 						<Controls showInteractive={false} />
-						{/* <MiniMap pannable={true} /> */}
+						<MiniMap pannable={true} zoomable={true}/>
 					</ReactFlow>
 				</div>
 			</>
