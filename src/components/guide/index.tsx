@@ -33,9 +33,9 @@ export default function GuideContainer() {
 	useEffect(() => {
 		dispatch(reset());
 	}, []);
-	const selectCurrentQuestion = ({ option, reset }: any) => {
+	const selectCurrentQuestion = ({ option }: any) => {
+
 		if (selectedFlowData) {
-			console.log(history);
 			const _selectedOption = { ...option };
 			_selectedOption.options = currentOptions;
 
@@ -85,6 +85,27 @@ export default function GuideContainer() {
 	const resetFlow = () => {
 		dispatch(restart());
 	};
+
+	const reverseHistory = (process: any) => {
+		const currentHistory = history;
+		const newHistory = [];
+
+		for (let i = 0; i < currentHistory.length; i++) {
+			newHistory.push(currentHistory[i])
+			if(currentHistory[i].id === process.id){
+				if (process.start) {
+					selectCurrentQuestion({ option: { target: process?.id } });
+				} else {
+					selectCurrentQuestion({ option: currentHistory[i-1] });
+				}
+				dispatch(setHistory([...newHistory]));
+				break;
+		}
+		
+		}
+	
+		
+	};
 	return (
 		<>
 			<Card className="guide-container">
@@ -103,16 +124,14 @@ export default function GuideContainer() {
 								key={el.id}
 								className={"flex w-full  justify-content-center mb-2"}
 							>
-								<div
-									style={{ width: "100%" }}
-									className={
-										"border-round border-1 font-bold p-2 overflow-none white-space-normal text-blue-700 text-center"
-									}
-								>
+								<button 
+								onClick={() => reverseHistory(el)}
+								className="p-button  w-full p-button-outlined text-center text-blue-700 ">
 									{el.text_1}
 									<br />
 									{el.text_2}
-								</div>
+								</button>
+							
 							</div>
 						) : (
 							<div
@@ -121,13 +140,17 @@ export default function GuideContainer() {
 							>
 								{(el.options || []).map((option: any) => {
 									return (
-										<Button
+										<span
 											key={el.id + "_" + option.id + "_option"}
-											className={"p-button text-center m-4"}
-											disabled={el.id !== option.id}
-											outlined
-											label={option.text_1}
-										></Button>
+											className={
+												"text-center m-4 border-1 bg-white p-2 border-round " +
+												(el.id === option.id
+													? " text-blue-500"
+													: "text-gray-500")
+											}
+										>
+											{option.text_1}
+										</span>
 									);
 								})}
 							</div>

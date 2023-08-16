@@ -175,10 +175,10 @@ export const Flow = ({ mask }: any) => {
 					height: 0,
 				};
 
-				const x = _node.position.x + _node.width / 3;
+				const x = _node.position.x + _node.width / 2;
 
-				const y = _node.position.y + _node.height / 3;
-				const zoom = 1.5;
+				const y = _node.position.y + _node.height / 2;
+				const zoom = 1;
 
 				setCenter(x, y, { zoom, duration: 1000 });
 			}
