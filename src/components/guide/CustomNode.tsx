@@ -33,7 +33,7 @@ export default function CustomNode(props: NodeProps) {
 					justifyContent: 'center',
 					textShadow: !props.data.active ? '0 0 8px #000' : '',
 					color: !props.data.active ? 'transparent' : 'black',
-					// width: !props.data.active ? '0' : '175px',
+					width: '175px',
 					// height: !props.data.active ? '0' : 'auto',
 				}}>
 				<strong>{String(node.value)} </strong>

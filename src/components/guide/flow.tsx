@@ -154,8 +154,8 @@ const GuideFlow = () => {
 			return { newNodes, newEdges };
 		}
 
-		const defaultWidth = 200;
-		const defaultHeight = 100;
+		const defaultWidth = 150;
+		const defaultHeight = 50;
 		let nodeId = 0;
 		const edgeType = 'smoothstep';
 
@@ -218,7 +218,7 @@ const GuideFlow = () => {
 		if (!currentNode) return;
 		const targetNode: Node | undefined = (nodes as Node[]).find((node: Node) => node.data.refId === currentNode.id);
 		if (!targetNode) return;
-		setCenter(targetNode?.position.x / 0.95, targetNode.position.y == 0 ? 50 : targetNode.position.y * 1.25, { zoom: 2, duration: 500 });
+		setCenter(targetNode?.position.x + 150,  targetNode.position.y +100  , { zoom: 1.75, duration: 500 });
 	
 	}, [currentNode, nodes]);
 
@@ -279,7 +279,6 @@ const GuideFlow = () => {
 					}
 					if (unmaskedEdges.includes(edge.data.refId)) {
 						if(edge.data.masked ){
-							console.log(unmaskedEdges, edge.data.refId )
 						edge.data = {
 							...edge.data,
 							masked: false,
