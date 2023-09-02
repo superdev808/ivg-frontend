@@ -1,0 +1,8 @@
+@import 'primeflex/primeflex.scss';
+
+.new-node-button {
+    min-width: 8rem;
+    @include styleclass('flex flex-column align-items-center justify-content-center max-w-8rem mb-4 mr-4');
+
+}
+

@@ -14,7 +14,7 @@ const Navigation = () => {
   const navLinks = [
       // {id: 'home',title: 'Home', link: '/'},
       // {id:'search',title: 'Search', link: '/search'},
-      {id:'flows',title: 'Flows', link: '/flows'},
+      // {id:'explore',title: 'Explore', link: '/explore'},
 
   ]
 

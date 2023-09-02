@@ -1,0 +1,389 @@
+[
+    {
+        "id": 3,
+        "guideId": 2,
+        "value": "what is wrong with the crown?",
+        "start": true
+    },
+    {
+        "id": 4,
+        "guideId": 2,
+        "value": "trying to seat crown..but im having an issue"
+    },
+    {
+        "id": 5,
+        "guideId": 2,
+        "value": "Hyper (high) or Hypo (Open)"
+    },
+    {
+        "id": 6,
+        "guideId": 2,
+        "value": "Is this a color issue or translucency issue (most of the time they are confused) "
+    },
+    {
+        "id": 7,
+        "guideId": 2,
+        "value": "Open or closed?"
+    },
+    {
+        "id": 8,
+        "guideId": 2,
+        "value": "Is the crown fully seated?"
+    },
+    {
+        "id": 9,
+        "guideId": 2,
+        "value": "Send back to lab with pick up impression if possible"
+    },
+    {
+        "id": 11,
+        "guideId": 2,
+        "value": "Is the crown fully seated?"
+    },
+    {
+        "id": 12,
+        "guideId": 2,
+        "value": "Adjust occlusion with articulator paper"
+    },
+    {
+        "id": 13,
+        "guideId": 2,
+        "value": "Adjust contacts,and/or remove any interferences (tissue, etc) etc until fully seated"
+    },
+    {
+        "id": 14,
+        "guideId": 2,
+        "value": "Send back to lab to add porcelian or reamke "
+    },
+    {
+        "id": 15,
+        "guideId": 2,
+        "value": "Is there a model with the case?"
+    },
+    {
+        "id": 16,
+        "guideId": 2,
+        "value": "Check Bite Scan on Scanner"
+    },
+    {
+        "id": 17,
+        "guideId": 2,
+        "value": "Is the bite closed on both side?"
+    },
+    {
+        "id": 18,
+        "guideId": 2,
+        "value": "Seat crown on model Check with articulating paper"
+    },
+    {
+        "id": 19,
+        "guideId": 2,
+        "value": "Is crown Open on the model exactly like the mouth?"
+    },
+    {
+        "id": 20,
+        "guideId": 2,
+        "value": "Send photo to lab for refab"
+    },
+    {
+        "id": 21,
+        "guideId": 2,
+        "value": "If margin and color is satisfactory Redo the bite scan or physical bite and send back to lab "
+    },
+    {
+        "id": 23,
+        "guideId": 2,
+        "value": "Is the crown have enough thickness and anatomy to clinical satisfaction?"
+    },
+    {
+        "id": 24,
+        "guideId": 2,
+        "value": "Completed"
+    },
+    {
+        "id": 25,
+        "guideId": 2,
+        "value": "Seat crown fully and scan crown in mouth as a prescan or take a pick up impression (may need to change material or reprep) "
+    },
+    {
+        "id": 26,
+        "guideId": 2,
+        "value": "Is the crown still high? "
+    },
+    {
+        "id": 27,
+        "guideId": 2,
+        "value": "Send back to the lab for Remake with Pick up impression or Prescan scan "
+    },
+    {
+        "id": 28,
+        "guideId": 2,
+        "value": "Rescan Bite so both sides are closed"
+    },
+    {
+        "id": 29,
+        "guideId": 2,
+        "value": "Send whole file with new bite scan sent back to lab"
+    },
+    {
+        "id": 30,
+        "guideId": 2,
+        "value": "Contact lab and review the case to see how open the case was made (how many mm)"
+    },
+    {
+        "id": 31,
+        "guideId": 2,
+        "value": "Based on lab review...lab fault or new scan needed?"
+    },
+    {
+        "id": 32,
+        "guideId": 2,
+        "value": "No need to send new scan, lab will refabricate"
+    },
+    {
+        "id": 33,
+        "guideId": 2,
+        "value": "Lab will instruct for proper type of scan needed"
+    },
+    {
+        "id": 35,
+        "guideId": 2,
+        "value": "Adjust contacts appropriately"
+    },
+    {
+        "id": 36,
+        "guideId": 2,
+        "value": "Inspect prep for artifacts (blood, tissue) interfereing with seating the crown. Remove if possible"
+    },
+    {
+        "id": 37,
+        "guideId": 2,
+        "value": "Consider remake with new material"
+    },
+    {
+        "id": 38,
+        "guideId": 2,
+        "value": "Take photo of crown in mouth with 3 shade tabs at the same time (1 shade tab thats a little lighter, 1 a little darker, 1 thats the closest in the same plane "
+    },
+    {
+        "id": 40,
+        "guideId": 2,
+        "value": "Short or Open margin"
+    },
+    {
+        "id": 41,
+        "guideId": 2,
+        "value": "Scanned or Physical Impression?"
+    },
+    {
+        "id": 42,
+        "guideId": 2,
+        "value": "Scanned or physical?"
+    },
+    {
+        "id": 43,
+        "guideId": 2,
+        "value": "Do you have a 3d printed die?"
+    },
+    {
+        "id": 44,
+        "guideId": 2,
+        "value": "Re-Scan Item"
+    },
+    {
+        "id": 45,
+        "guideId": 2,
+        "value": "Does the crown fit the margin of the die?"
+    },
+    {
+        "id": 47,
+        "guideId": 2,
+        "value": "Review scan in black and white to see if tissue, etc created a short margin situation"
+    },
+    {
+        "id": 48,
+        "guideId": 2,
+        "value": "Try crown on die "
+    },
+    {
+        "id": 49,
+        "guideId": 2,
+        "value": "Is there an obstruction on the margin "
+    },
+    {
+        "id": 50,
+        "guideId": 2,
+        "value": "Is it short on the die?"
+    },
+    {
+        "id": 52,
+        "guideId": 2,
+        "value": "rescan and resend to Lab"
+    },
+    {
+        "id": 53,
+        "guideId": 2,
+        "value": "Is there a 3d printed die?"
+    },
+    {
+        "id": 54,
+        "guideId": 2,
+        "value": "????Resend to lab to make to the die"
+    },
+    {
+        "id": 55,
+        "guideId": 2,
+        "value": "Consult with lab to reverify any obstruction, if no obstruction, resend original scan to lab for refrabrication"
+    },
+    {
+        "id": 56,
+        "guideId": 2,
+        "value": "Try crown on die "
+    },
+    {
+        "id": 57,
+        "guideId": 2,
+        "value": "Is it open on the die?"
+    },
+    {
+        "id": 58,
+        "guideId": 2,
+        "value": "Send back old impression for refabrication at athe lab. If you feel impression is damanged, then then reimpress"
+    },
+    {
+        "id": 60,
+        "guideId": 2,
+        "value": "Reimpress and send back to lab for refabrication"
+    },
+    {
+        "id": 118,
+        "guideId": 117,
+        "value": "Single or Bridge Or Veneer?",
+        "start": true
+    },
+    {
+        "id": 119,
+        "guideId": 117,
+        "value": "Retentive Prep?"
+    },
+    {
+        "id": 120,
+        "guideId": 117,
+        "value": "Translucent Teeth?"
+    },
+    {
+        "id": 121,
+        "guideId": 117,
+        "value": "Stump Shade?"
+    },
+    {
+        "id": 122,
+        "guideId": 117,
+        "value": "Transulcent Teeth?"
+    },
+    {
+        "id": 123,
+        "guideId": 117,
+        "value": "Occlusion Issues?"
+    },
+    {
+        "id": 124,
+        "guideId": 117,
+        "value": "Occulsion Issues?"
+    },
+    {
+        "id": 125,
+        "guideId": 117,
+        "value": " E.max MT, LT,  IF NO METAL ALLERGY PFM "
+    },
+    {
+        "id": 126,
+        "guideId": 117,
+        "value": "E.max HT, MT Multi, "
+    },
+    {
+        "id": 127,
+        "guideId": 117,
+        "value": "Katana STML Bruxzir,  IF NO METAL ALLERGY PFM (metal occulsal), FMC, FGC"
+    },
+    {
+        "id": 128,
+        "guideId": 117,
+        "value": "E.max MT E.max LT Zirconia 3y, 4y"
+    },
+    {
+        "id": 129,
+        "guideId": 117,
+        "value": "3Y or 4Y zirconia, IF NO METAL ALLERGY PFM"
+    },
+    {
+        "id": 130,
+        "guideId": 117,
+        "value": "Stump Shade?"
+    },
+    {
+        "id": 131,
+        "guideId": 117,
+        "value": "E.max HT E.max Multi Zirconia 5Y E.max Layered"
+    },
+    {
+        "id": 132,
+        "guideId": 117,
+        "value": "Zirconia Layered, E.max LT E.max layered,  IF NO METAL ALLERGY PFM "
+    },
+    {
+        "id": 133,
+        "guideId": 117,
+        "value": "Pontic larger than 9mm in width?"
+    },
+    {
+        "id": 134,
+        "guideId": 117,
+        "value": "Translucent Teeth?"
+    },
+    {
+        "id": 135,
+        "guideId": 117,
+        "value": "Transulcent Teeth?"
+    },
+    {
+        "id": 136,
+        "guideId": 117,
+        "value": "Occlusion Issues?"
+    },
+    {
+        "id": 137,
+        "guideId": 117,
+        "value": "E.max Multi E.max layered, Zirconia layered"
+    },
+    {
+        "id": 138,
+        "guideId": 117,
+        "value": "Zirconia 3Y, PFM or Full metal if no allergies"
+    },
+    {
+        "id": 139,
+        "guideId": 117,
+        "value": "Occlusion Issues?"
+    },
+    {
+        "id": 140,
+        "guideId": 117,
+        "value": "Zirconia Layered (cutback), Origin Beyond  IF NO METAL ALLERGY PFM "
+    },
+    {
+        "id": 141,
+        "guideId": 117,
+        "value": "Zirconia 3Y,  IF NO METAL ALLERGY PFM (metal occulsal), FMC, FGC"
+    },
+    {
+        "id": 142,
+        "guideId": 117,
+        "value": "Veneer / Inlay / Onlay"
+    },
+    {
+        "id": 143,
+        "guideId": 117,
+        "value": "Emax Pressed Or  CAD due to renentive nature"
+    }
+]

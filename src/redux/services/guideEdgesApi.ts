@@ -1,16 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import  {Flow}  from "@/types/flow";
+
 import { Response } from "@/types/reponse";
 
 
-export const flowApi = createApi({
-  reducerPath: "flowApi",
+export const guideEdgesApi = createApi({
+  reducerPath: "guideEdgesApi",
   refetchOnFocus: false,
   baseQuery: fetchBaseQuery({
-    baseUrl: `/api/flows`,
+    baseUrl: `/api/guides/edges`,
   }),
   endpoints: (builder) => ({
-    getFlows: builder.query<Flow[], null>({
+    getGuideEdges: builder.query<any[], null>({
       query: () => "",
       transformResponse: (response:Response) => response.data
 
@@ -19,4 +19,4 @@ export const flowApi = createApi({
   }),
 });
 
-export const { useGetFlowsQuery } = flowApi;
+export const { useGetGuideEdgesQuery } = guideEdgesApi;

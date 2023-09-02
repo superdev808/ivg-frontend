@@ -10,6 +10,7 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
 export default function RootLayout({ children }: PropsWithChildren) {
+
 	return (
 		<html>
 			<head></head>

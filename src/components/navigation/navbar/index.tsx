@@ -9,9 +9,9 @@ const Navbar = ({ toggle, isOpen, navLinks }: { toggle: () => void; isOpen: bool
 	const pathname = usePathname();
 
 	return (
-		<>
+		<div className='h-6rem mx-6'>
 			<div className="w-full pt-3  sticky top-0">
-				<div className="container mx-auto  h-full">
+				<div className=" mx-auto  h-full">
 					<div className="flex justify-content-between items-center h-full">
 						<Logo />
 						<div
@@ -61,7 +61,7 @@ const Navbar = ({ toggle, isOpen, navLinks }: { toggle: () => void; isOpen: bool
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

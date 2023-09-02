@@ -3,30 +3,27 @@ import { useRef,useState  } from 'react';
 import { useRouter } from 'next/navigation';
 import { AutoComplete, AutoCompleteSelectEvent, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 
-import { useGetFlowsQuery } from '@/redux/services/flowApi';
-import { reset, restart } from '@/redux/features/flowSlice';
-import { useDispatch } from 'react-redux';
+import { useGetGuidesQuery } from '@/redux/services/guidesApi';
+
 export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
+	const { isLoading, isFetching, data:guides, error } = useGetGuidesQuery(null);
 
-
-	const { isLoading, isFetching, data: flows, error } = useGetFlowsQuery(null);
-	const _suggestions = [4, 236, 114];
+	const suggestions = [2, 117, 173];
 
 	const [filterValue, setFilterValue] = useState<string>('');
-	const [filteredFlows, setFilteredFlows] = useState<any>(flows);
+	const [filteredGuides, setFilteredGuides] = useState<any>(guides);
 
 	const searchBar = useRef<AutoComplete>(null);
 	const router = useRouter();
-	const dispatch = useDispatch();
 
 	
 	const handleOnChange = (event: AutoCompleteChangeEvent) => {
 		setFilterValue(event.target.value);
 	};
 	const handleOnFocus = () => {
-		let _filteredArray = flows?.filter(el => _suggestions.includes(el.id));
+		const filteredArray = guides?.filter((el:any) => suggestions.includes(el.id));
 
-		setFilteredFlows(_filteredArray);
+		setFilteredGuides(filteredArray);
 		
 		if (searchBar.current) {
 			searchBar.current.show();
@@ -35,17 +32,17 @@ export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 
 	const handleCompleteMethod = (event: AutoCompleteCompleteEvent) => {
 		setTimeout(() => {
-			let _filteredArray: any;
+			let filteredArray: any;
 			if (!event.query.trim().length) {
-				_filteredArray = [...(flows || [])];
+				filteredArray = [...(guides || [])];
 			} else {
-				_filteredArray = flows?.filter((el: { text_1: string }) => {
+				filteredArray = guides?.filter((el: { value: string }) => {
 			
-					return el.text_1.toString().toLowerCase().includes(event.query.toLowerCase());
+					return el.value.toString().toLowerCase().includes(event.query.toLowerCase());
 				});
 			}
 
-			setFilteredFlows(_filteredArray);
+			setFilteredGuides(filteredArray);
 		}, 100);
 	};
 	const handleOnSelect= (event:AutoCompleteSelectEvent)=>{
@@ -53,15 +50,15 @@ export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 		router.push('/'+event.value.id);
 	}
     const suggestionTemplate = (suggestion:any) => {
-		const _suggestionText = suggestion.text_1;
-		const _lowerSuggestionText = _suggestionText.toLowerCase();
-		const _lowerFilterValue = filterValue.toLowerCase();
-		const startIndex = _lowerSuggestionText.indexOf(_lowerFilterValue);
+		const suggestionText = suggestion.value;
+		const lowerSuggestionText = suggestionText.toLowerCase();
+		const lowerFilterValue = filterValue.toLowerCase();
+		const startIndex = lowerSuggestionText.indexOf(lowerFilterValue);
 
 		if (startIndex !== -1) {
-			const beforeBold = _suggestionText.substring(0, startIndex);
-			const boldText = _suggestionText.substring(startIndex, startIndex + filterValue.length);
-			const afterBold = _suggestionText.substring(startIndex + filterValue.length);
+			const beforeBold = suggestionText.substring(0, startIndex);
+			const boldText = suggestionText.substring(startIndex, startIndex + filterValue.length);
+			const afterBold = suggestionText.substring(startIndex + filterValue.length);
 	
 			const formattedString = (
 				<span>
@@ -74,7 +71,7 @@ export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 			return formattedString;
 		}
 	
-		return _suggestionText; 
+		return suggestionText; 
 
 
   
@@ -92,7 +89,7 @@ export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 
 			<AutoComplete
 				ref={searchBar}
-				aria-label="Prompts"
+				aria-label="Guides"
 				dropdownAriaLabel="Search prompt"
 				placeholder="Search..."
 				className="w-full"
@@ -100,7 +97,7 @@ export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 				itemTemplate={suggestionTemplate}
 				field="text_1"
 				value={filterValue}
-				suggestions={filteredFlows}
+				suggestions={filteredGuides}
 				completeMethod={(e) => handleCompleteMethod(e)}
 				onClick={handleOnFocus}
 				onSelect={handleOnSelect}

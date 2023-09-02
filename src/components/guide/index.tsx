@@ -1,175 +1,184 @@
-import { use, useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { use, useEffect, useRef, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import {
-	selectFlow,
-	setHistory,
-	setSelectedProcess,
-	setCurrentOptions,
-	reset,
-	restart,
-} from "@/redux/features/flowSlice";
-import {} from "@/redux/features/flowSlice";
+import { selectGuide, setCurrentPath } from '@/redux/features/guideSlice';
+import { setCurrentNode, setCurrentEdges } from '@/redux/features/guideSlice';
 
-import { Flow } from "@/types/flow";
+import { Flow } from '@/types/flow';
 
-import { Card } from "primereact/card";
-import { Button } from "primereact/button";
-import { Dialog } from "primereact/dialog";
-export default function GuideContainer() {
+import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
+import { Dialog } from 'primereact/dialog';
+
+import { ConfirmPopup } from 'primereact/confirmpopup';
+import { confirmPopup } from 'primereact/confirmpopup';
+
+const GuideContainer = () => {
 	const containerRef = useRef<any>(null);
-	const {
-		selectedFlow,
-		selectedFlowData,
-		selectedStart,
-		currentOptions,
-		history,
-	} = useSelector(selectFlow);
+	const { selectedGuide, guideNodeData, guideEdgeData, currentNode, currentEdges, currentPath } = useSelector(selectGuide);
 
 	const dispatch = useDispatch();
 
-	const [displayResponsive, setDisplayResponsive] = useState(false);
-	const [selectedVideo, setSelectedVideo] = useState("");
+	// resets the guide when node data changes
 	useEffect(() => {
-		dispatch(reset());
-	}, []);
-	const selectCurrentQuestion = ({ option }: any) => {
+		if (guideNodeData && selectedGuide) {
+			const selectedNode = guideNodeData.find((el: any) => el.start);
 
-		if (selectedFlowData) {
-			const _selectedOption = { ...option };
-			_selectedOption.options = currentOptions;
-
-			const _selectedProcess = selectedFlowData.find(
-				(el: { id: string }) => el.id == option.target
-			);
-			dispatch(setSelectedProcess(_selectedProcess));
-
-			const _currentOptions = selectedFlowData.filter(
-				(el: { source: string }) => el.source == option.target
-			);
-			dispatch(setCurrentOptions(_currentOptions));
-
-			let _newHistory = [...history];
-
-			if (selectedStart.id !== option.target) {
-				_newHistory.push(_selectedOption);
+			if (selectedNode) {
+				setGuideNode(selectedNode);
 			}
-
-			_newHistory.push(_selectedProcess);
-
-			dispatch(setHistory([..._newHistory]));
 		}
-		scrollToBottom();
+	}, [selectedGuide, guideNodeData]);
+
+	// const [displayResponsive, setDisplayResponsive] = useState(false);
+	// const [selectedVideo, setSelectedVideo] = useState("");
+
+	const setGuideNode = (currentNode: any) => {
+		if (guideNodeData) {
+			const currentEdges = guideEdgeData.filter((el: any) => el.source === currentNode?.id);
+			dispatch(setCurrentNode(currentNode));
+			dispatch(setCurrentEdges(currentEdges));
+		}
+	};
+
+	const onSelectEdge = (edge: any) => {
+		let newPath = [...currentPath];
+		newPath.push([currentNode, currentEdges, edge.id]);
+
+		dispatch(setCurrentPath([...newPath]));
+
+		let selectedNode = {
+			id: 0,
+			guideId: selectedGuide?.id,
+			value: 'Please contact lab for help',
+		};
+		if (edge.target) {
+			selectedNode = guideNodeData.find((el: any) => el.id === edge.target);
+		}
+
+		if (selectedNode) {
+			setGuideNode(selectedNode);
+		}
 	};
 	const scrollToBottom = () => {
-		containerRef.current.scrollTop = containerRef.current.scrollHeight;
+		containerRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 
 	useEffect(() => {
 		scrollToBottom();
-	}, [history]);
-	useEffect(() => {
-		if (selectedStart) {
-			selectCurrentQuestion({ option: { target: selectedStart?.id } });
-		}
-	}, [selectedFlowData]);
+	}, [currentPath]);
 
-	const onVideoDialogHide = () => {
-		setSelectedVideo("");
-		setDisplayResponsive(false);
-	};
-	const onVideoDialogShow = (videoLink: string) => {
-		setDisplayResponsive(true);
-		setSelectedVideo(videoLink);
-	};
-	const resetFlow = () => {
-		dispatch(restart());
-	};
-
-	const reverseHistory = (process: any) => {
-		const currentHistory = history;
-		const newHistory = [];
-
-		for (let i = 0; i < currentHistory.length; i++) {
-			newHistory.push(currentHistory[i])
-			if(currentHistory[i].id === process.id){
-				if (process.start) {
-					selectCurrentQuestion({ option: { target: process?.id } });
-				} else {
-					selectCurrentQuestion({ option: currentHistory[i-1] });
-				}
-				dispatch(setHistory([...newHistory]));
+	const jumpToNode = (node: any) => {
+		let newPath = [...currentPath];
+		for (let i = 0; i < newPath.length; i++) {
+			if (node[0].id == newPath[i][0].id) {
+				newPath = newPath.splice(0, i);
+				dispatch(setCurrentPath([...newPath]));
+				setGuideNode(node[0]);
 				break;
+			}
 		}
-		
-		}
-	
-		
 	};
+	const confirmJump = (event, node) => {
+		confirmPopup({
+			target: event.currentTarget,
+			message: 'Are you sure you want to change your response?',
+			icon: 'pi pi-exclamation-triangle',
+			accept: () => {
+				jumpToNode(node);
+			},
+		});
+	};
+	
 	return (
 		<>
-			<Card className="guide-container">
-				<div className="flex justify-content-end">
+			<div className=" mb-6">
+				<div className="flex m-4 justify-content-end">
+					
 					<Button
-						className="p-button-rounded p-button-outlined text-center p-button-danger p-button-sm mb-2"
-						onClick={resetFlow}
-					>
-						Reset
-					</Button>
+						icon="pi pi-refresh "
+						rounded
+						outlined
+						severity="danger"
+						aria-label="Restart"
+						label="Restart"
+						onClick={(event) => confirmJump(event, currentPath[0])}
+					/>
 				</div>
-				<div ref={containerRef} className="guide-body">
-					{(history || []).map((el: any) => {
-						return !el.target ? (
+				<div
+					className="px-4  overflow-y-auto"
+					style={{ height: 'calc(100vh - 12rem)' }}>
+					{(currentPath || []).map((el: any) => {
+						return (
 							<div
-								key={el.id}
-								className={"flex w-full  justify-content-center mb-2"}
-							>
-								<button 
-								onClick={() => reverseHistory(el)}
-								className="p-button  w-full p-button-outlined text-center text-blue-700 ">
-									{el.text_1}
-									<br />
-									{el.text_2}
-								</button>
-							
-							</div>
-						) : (
-							<div
-								key={el.id}
-								className="flex justify-content-center   flex-wrap"
-							>
-								{(el.options || []).map((option: any) => {
-									return (
-										<span
-											key={el.id + "_" + option.id + "_option"}
-											className={
-												"text-center m-4 border-1 bg-white p-2 border-round " +
-												(el.id === option.id
-													? " text-blue-500"
-													: "text-gray-500")
-											}
-										>
-											{option.text_1}
-										</span>
-									);
-								})}
+								key={'path_' + el[0]?.id}
+								className="flex flex-column  border-1 border-round border-blue-500 bg-gray-50 px-6 py-4 mb-4 relative" >
+								<span>
+									<h3 className="text-center">{el[0]?.value}</h3>
+								</span>
+								<div
+									className="flex flex-wrap justify-content-center align-self-center"
+									style={{ maxWidth: '500px' }}>
+									{el[1]?.map((edge: any) => {
+										return (
+											<div
+												key={edge.id}
+												className="flex justify-content-center mb-2 "
+												style={{ minWidth: '125px' }}>
+												<button
+													disabled={edge.id != el[2]}
+													className={'p-button justify-content-center' + (edge.id == el[2] ? '' : '')}>
+													{edge.value}
+												</button>
+											</div>
+										);
+									})}
+								</div>
+								<div className="flex  justify-content-end m-2 absolute top-0 right-0 text-xs">
+								
+									<Button
+									className='mr-2'
+										icon="pi pi-refresh "
+										rounded
+										text
+										severity="warning"
+										aria-label="Change response"
+										style={{ width: '10px',height:'10px' }}
+										onClick={(event) => confirmJump(event, el)}
+									/>
+								</div>
 							</div>
 						);
 					})}
-					<div className="flex justify-content-center  flex-wrap">
-						{(currentOptions || []).map((el: any) => {
-							return (
-								<Button
-									key={el.id}
-									className="p-button text-center m-4"
-									onClick={() => selectCurrentQuestion({ option: el })}
-									label={el.text_1}
-								></Button>
-							);
-						})}
+
+					<div
+						ref={containerRef}
+						className={!selectedGuide ? '':'flex flex-column  border-1 border-round border-blue-500 bg-blue-50 p-2 '}>
+						<span>
+							<h3 className="text-center">{currentNode?.value}</h3>
+						</span>
+						<div
+							className="flex flex-wrap justify-content-center align-self-center"
+							style={{ maxWidth: '500px' }}>
+							{currentEdges?.map((el: any) => {
+								return (
+									<div
+										key={el.id}
+										className="flex align-items-center justify-content-center mb-2 "
+										style={{ minWidth: '125px' }}>
+										<button
+											onClick={() => onSelectEdge(el)}
+											className="p-button justify-content-center p-button-outlined bg-white  text-blue-700 ">
+											{el.value}
+										</button>
+									</div>
+								);
+							})}
+						</div>
 					</div>
 				</div>
-			</Card>
+			</div>
+			{/*
 			<Dialog
 				visible={displayResponsive}
 				onHide={() => onVideoDialogHide()}
@@ -194,7 +203,10 @@ export default function GuideContainer() {
 						}}
 					></iframe>
 				</div>
-			</Dialog>
+			</Dialog> */}
+			<ConfirmPopup />
 		</>
 	);
-}
+};
+
+export default GuideContainer;
