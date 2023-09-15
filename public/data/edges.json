@@ -1,591 +1,1122 @@
 [
     {
-        "id": 62,
+        "id": 176,
         "guideId": 2,
-        "value": "Occlusion",
-        "source": 3,
-        "target": 5,
-        "file": "link"
+        "value": "Nobel Biocare",
+        "source": 4,
+        "target": 5
     },
     {
-        "id": 64,
+        "id": 177,
         "guideId": 2,
-        "value": "Contacts",
-        "source": 3,
+        "value": "Nobel ReplaceConical",
+        "source": 5,
         "target": 7
     },
     {
-        "id": 65,
+        "id": 178,
         "guideId": 2,
-        "value": "too tight",
-        "source": 7,
-        "target": 35
+        "value": "NobelReplace Tapered",
+        "source": 5,
+        "target": 6
     },
     {
-        "id": 66,
+        "id": 179,
         "guideId": 2,
-        "value": "open",
+        "value": "4.3/5.0",
         "source": 7,
-        "target": 8
+        "target": 96
     },
     {
-        "id": 67,
+        "id": 180,
         "guideId": 2,
-        "value": "Yes",
-        "source": 8,
+        "value": "3.5",
+        "source": 7,
+        "target": 104
+    },
+    {
+        "id": 181,
+        "guideId": 2,
+        "value": "3.0",
+        "source": 7,
+        "target": 106
+    },
+    {
+        "id": 182,
+        "guideId": 2,
+        "value": "5.0",
+        "source": 6,
+        "target": 86
+    },
+    {
+        "id": 183,
+        "guideId": 2,
+        "value": "4.3",
+        "source": 6,
+        "target": 87
+    },
+    {
+        "id": 184,
+        "guideId": 2,
+        "value": "3.5",
+        "source": 6,
+        "target": 89
+    },
+    {
+        "id": 185,
+        "guideId": 2,
+        "value": "6.0",
+        "source": 6,
+        "target": 83
+    },
+    {
+        "id": 186,
+        "guideId": 2,
+        "value": "Tissue Level",
+        "source": 30,
         "target": 9
     },
     {
-        "id": 68,
+        "id": 187,
         "guideId": 2,
-        "value": "No",
+        "value": "Bone Level",
+        "source": 30,
+        "target": 8
+    },
+    {
+        "id": 188,
+        "guideId": 2,
+        "value": "RN  4.8",
+        "source": 9,
+        "target": 159
+    },
+    {
+        "id": 189,
+        "guideId": 2,
+        "value": "NNC  3.5",
+        "source": 9,
+        "target": 161
+    },
+    {
+        "id": 190,
+        "guideId": 2,
+        "value": "WN  6.5",
+        "source": 9,
+        "target": 157
+    },
+    {
+        "id": 191,
+        "guideId": 2,
+        "value": "NC 3.3",
         "source": 8,
-        "target": null
+        "target": 164
     },
     {
-        "id": 69,
+        "id": 192,
         "guideId": 2,
-        "value": "HYPO / Open",
-        "source": 5,
-        "target": 15
+        "value": "RC 4.1/4.8",
+        "source": 8,
+        "target": 165
     },
     {
-        "id": 70,
+        "id": 193,
         "guideId": 2,
-        "value": "Hyper / High",
-        "source": 5,
+        "value": "SC 2.9",
+        "source": 8,
+        "target": 167
+    },
+    {
+        "id": 194,
+        "guideId": 2,
+        "value": "Straumann",
+        "source": 4,
+        "target": 30
+    },
+    {
+        "id": 195,
+        "guideId": 2,
+        "value": "BLX",
+        "source": 30,
+        "target": 169
+    },
+    {
+        "id": 196,
+        "guideId": 2,
+        "value": "Next",
+        "source": 3,
+        "target": 4
+    },
+    {
+        "id": 197,
+        "guideId": 2,
+        "value": "External Hex",
+        "source": 10,
         "target": 11
     },
     {
-        "id": 71,
+        "id": 198,
         "guideId": 2,
-        "value": "Yes",
-        "source": 11,
+        "value": "Certain",
+        "source": 10,
         "target": 12
     },
     {
-        "id": 72,
+        "id": 199,
         "guideId": 2,
-        "value": "No",
+        "value": "3.4",
         "source": 11,
+        "target": 70
+    },
+    {
+        "id": 200,
+        "guideId": 2,
+        "value": "4.1 or 5",
+        "source": 11,
+        "target": 72
+    },
+    {
+        "id": 201,
+        "guideId": 2,
+        "value": "3.4",
+        "source": 12,
+        "target": 73
+    },
+    {
+        "id": 202,
+        "guideId": 2,
+        "value": "4.1 or 5.0",
+        "source": 12,
+        "target": 75
+    },
+    {
+        "id": 203,
+        "guideId": 2,
+        "value": "Camlog",
+        "source": 4,
         "target": 13
     },
     {
-        "id": 73,
+        "id": 204,
         "guideId": 2,
-        "value": "Yes",
-        "source": 15,
-        "target": 18
+        "value": "Camlog",
+        "source": 13,
+        "target": 14
     },
     {
-        "id": 74,
+        "id": 205,
         "guideId": 2,
-        "value": "No",
+        "value": "Conelog",
+        "source": 13,
+        "target": 15
+    },
+    {
+        "id": 206,
+        "guideId": 2,
+        "value": "4.3",
+        "source": 14,
+        "target": 112
+    },
+    {
+        "id": 207,
+        "guideId": 2,
+        "value": "3.3",
+        "source": 14,
+        "target": 108
+    },
+    {
+        "id": 208,
+        "guideId": 2,
+        "value": "3.8",
+        "source": 14,
+        "target": 110
+    },
+    {
+        "id": 209,
+        "guideId": 2,
+        "value": "5.0, 6.0",
+        "source": 14,
+        "target": 114
+    },
+    {
+        "id": 210,
+        "guideId": 2,
+        "value": "3.3",
         "source": 15,
+        "target": 116
+    },
+    {
+        "id": 211,
+        "guideId": 2,
+        "value": "3.8, 4.3",
+        "source": 15,
+        "target": 117
+    },
+    {
+        "id": 212,
+        "guideId": 2,
+        "value": "Dentium",
+        "source": 4,
+        "target": 28
+    },
+    {
+        "id": 213,
+        "guideId": 2,
+        "value": "Astra",
+        "source": 20,
         "target": 16
     },
     {
-        "id": 75,
+        "id": 214,
         "guideId": 2,
-        "value": "Next",
+        "value": "TX",
         "source": 16,
         "target": 17
     },
     {
-        "id": 76,
+        "id": 215,
         "guideId": 2,
-        "value": "Next",
+        "value": "EV",
+        "source": 16,
+        "target": 18
+    },
+    {
+        "id": 216,
+        "guideId": 2,
+        "value": "4.5/5.0",
+        "source": 17,
+        "target": 124
+    },
+    {
+        "id": 217,
+        "guideId": 2,
+        "value": "4.2",
         "source": 18,
+        "target": 133
+    },
+    {
+        "id": 218,
+        "guideId": 2,
+        "value": "3.6",
+        "source": 18,
+        "target": 131
+    },
+    {
+        "id": 219,
+        "guideId": 2,
+        "value": "3.0",
+        "source": 18,
+        "target": 130
+    },
+    {
+        "id": 220,
+        "guideId": 2,
+        "value": "4.8",
+        "source": 18,
+        "target": 127
+    },
+    {
+        "id": 221,
+        "guideId": 2,
+        "value": "3.5/4.0",
+        "source": 17,
+        "target": 121
+    },
+    {
+        "id": 222,
+        "guideId": 2,
+        "value": "3.0",
+        "source": 17,
+        "target": 119
+    },
+    {
+        "id": 223,
+        "guideId": 2,
+        "value": "5.4",
+        "source": 18,
+        "target": 125
+    },
+    {
+        "id": 224,
+        "guideId": 2,
+        "value": "Hiossen ET System",
+        "source": 4,
         "target": 19
     },
     {
-        "id": 77,
+        "id": 225,
         "guideId": 2,
-        "value": "YES",
+        "value": "M",
         "source": 19,
-        "target": 14
+        "target": 59
     },
     {
-        "id": 78,
+        "id": 226,
         "guideId": 2,
-        "value": "NO",
-        "source": 77,
+        "value": "R",
+        "source": 19,
+        "target": 61
+    },
+    {
+        "id": 227,
+        "guideId": 2,
+        "value": "DENTSPLY Sirona",
+        "source": 4,
+        "target": 20
+    },
+    {
+        "id": 228,
+        "guideId": 2,
+        "value": "XiVe S",
+        "source": 20,
         "target": 21
     },
     {
-        "id": 79,
+        "id": 229,
         "guideId": 2,
-        "value": "Next",
-        "source": 12,
+        "value": "ANKYLOS C/X",
+        "source": 20,
+        "target": 29
+    },
+    {
+        "id": 230,
+        "guideId": 2,
+        "value": "3.4",
+        "source": 21,
+        "target": 140
+    },
+    {
+        "id": 231,
+        "guideId": 2,
+        "value": "3.8",
+        "source": 21,
+        "target": 142
+    },
+    {
+        "id": 232,
+        "guideId": 2,
+        "value": "4.5, 5.5",
+        "source": 21,
+        "target": 144
+    },
+    {
+        "id": 233,
+        "guideId": 2,
+        "value": "3.5",
+        "source": 22,
+        "target": 149
+    },
+    {
+        "id": 234,
+        "guideId": 2,
+        "value": "D 4,5",
+        "source": 22,
+        "target": 147
+    },
+    {
+        "id": 235,
+        "guideId": 2,
+        "value": "5, 7",
+        "source": 22,
+        "target": 145
+    },
+    {
+        "id": 236,
+        "guideId": 2,
+        "value": "SEVEN Internal Hex",
+        "source": 4,
+        "target": 22
+    },
+    {
+        "id": 237,
+        "guideId": 2,
+        "value": "BioHorizons",
+        "source": 4,
         "target": 23
     },
     {
-        "id": 80,
+        "id": 238,
         "guideId": 2,
-        "value": "Yes",
-        "source": 23,
-        "target": 24
-    },
-    {
-        "id": 81,
-        "guideId": 2,
-        "value": "No",
+        "value": "Tapered Internal Plus",
         "source": 23,
         "target": 25
     },
     {
-        "id": 82,
+        "id": 239,
         "guideId": 2,
-        "value": "Next",
-        "source": 13,
+        "value": "Tapered Internal",
+        "source": 23,
         "target": 26
     },
     {
-        "id": 83,
+        "id": 240,
         "guideId": 2,
-        "value": "YES",
-        "source": 26,
-        "target": 12
-    },
-    {
-        "id": 84,
-        "guideId": 2,
-        "value": "NO",
-        "source": 26,
+        "value": "Tapered  Tissue level",
+        "source": 23,
         "target": 24
     },
     {
-        "id": 85,
+        "id": 241,
         "guideId": 2,
-        "value": "Next",
-        "source": 25,
-        "target": 27
+        "value": "3.5",
+        "source": 24,
+        "target": 36
     },
     {
-        "id": 86,
+        "id": 242,
         "guideId": 2,
-        "value": "Next",
-        "source": 28,
-        "target": 29
-    },
-    {
-        "id": 87,
-        "guideId": 2,
-        "value": "NO",
-        "source": 17,
-        "target": 28
-    },
-    {
-        "id": 88,
-        "guideId": 2,
-        "value": "YES",
-        "source": 17,
-        "target": null
-    },
-    {
-        "id": 89,
-        "guideId": 2,
-        "value": "Next",
-        "source": 30,
-        "target": null
-    },
-    {
-        "id": 90,
-        "guideId": 2,
-        "value": "Lab fault",
-        "source": 31,
-        "target": 32
-    },
-    {
-        "id": 91,
-        "guideId": 2,
-        "value": "Dr Fault",
-        "source": 31,
-        "target": 33
-    },
-    {
-        "id": 92,
-        "guideId": 2,
-        "value": "Next",
-        "source": 36,
-        "target": 8
-    },
-    {
-        "id": 93,
-        "guideId": 2,
-        "value": "Translucency",
-        "source": 6,
-        "target": null
-    },
-    {
-        "id": 94,
-        "guideId": 2,
-        "value": "Color",
-        "source": 6,
-        "target": 38
-    },
-    {
-        "id": 95,
-        "guideId": 2,
-        "value": "Next",
-        "source": 38,
-        "target": 20
-    },
-    {
-        "id": 96,
-        "guideId": 2,
-        "value": "Margin Issue",
-        "source": 3,
+        "value": "D 4,5",
+        "source": 24,
         "target": 40
     },
     {
-        "id": 97,
+        "id": 243,
         "guideId": 2,
-        "value": "Short",
-        "source": 40,
-        "target": 41
+        "value": "5, 7",
+        "source": 24,
+        "target": 38
     },
     {
-        "id": 98,
+        "id": 244,
         "guideId": 2,
-        "value": "Open",
-        "source": 40,
-        "target": 42
+        "value": "3.5",
+        "source": 25,
+        "target": 52
     },
     {
-        "id": 99,
+        "id": 245,
         "guideId": 2,
-        "value": "Scanned",
-        "source": 42,
-        "target": 43
-    },
-    {
-        "id": 100,
-        "guideId": 2,
-        "value": "No",
-        "source": 43,
-        "target": 44
-    },
-    {
-        "id": 101,
-        "guideId": 2,
-        "value": "Yes",
-        "source": 43,
-        "target": 45
-    },
-    {
-        "id": 102,
-        "guideId": 2,
-        "value": "Yes",
-        "source": 45,
-        "target": 44
-    },
-    {
-        "id": 103,
-        "guideId": 2,
-        "value": "Scanned",
-        "source": 41,
-        "target": 53
-    },
-    {
-        "id": 104,
-        "guideId": 2,
-        "value": "Physical ",
-        "source": 41,
-        "target": 48
-    },
-    {
-        "id": 105,
-        "guideId": 2,
-        "value": "Next",
-        "source": 48,
+        "value": "D 4,5",
+        "source": 25,
         "target": 50
     },
     {
-        "id": 106,
+        "id": 246,
         "guideId": 2,
-        "value": "Next",
-        "source": 47,
-        "target": 49
-    },
-    {
-        "id": 107,
-        "guideId": 2,
-        "value": "Yes",
-        "source": 49,
-        "target": 52
-    },
-    {
-        "id": 108,
-        "guideId": 2,
-        "value": "No",
-        "source": 49,
-        "target": 55
-    },
-    {
-        "id": 109,
-        "guideId": 2,
-        "value": "No",
-        "source": 53,
-        "target": 47
-    },
-    {
-        "id": 110,
-        "guideId": 2,
-        "value": "Yes",
-        "source": 53,
+        "value": "5, 7",
+        "source": 25,
         "target": 48
     },
     {
-        "id": 111,
+        "id": 247,
         "guideId": 2,
-        "value": "Yes",
-        "source": 50,
-        "target": 54
+        "value": "3.5",
+        "source": 26,
+        "target": 46
     },
     {
-        "id": 112,
+        "id": 248,
         "guideId": 2,
-        "value": "No",
-        "source": 50,
-        "target": 52
+        "value": "D 4,5",
+        "source": 26,
+        "target": 44
     },
     {
-        "id": 113,
+        "id": 249,
         "guideId": 2,
-        "value": "Phyiscal",
-        "source": 42,
-        "target": null
+        "value": "5, 7",
+        "source": 26,
+        "target": 42
     },
     {
-        "id": 114,
+        "id": 250,
+        "guideId": 2,
+        "value": "5, 7",
+        "source": 27,
+        "target": 63
+    },
+    {
+        "id": 251,
+        "guideId": 2,
+        "value": "Zimmer TSV",
+        "source": 62,
+        "target": 27
+    },
+    {
+        "id": 252,
+        "guideId": 2,
+        "value": "Osstem",
+        "source": 4,
+        "target": 32
+    },
+    {
+        "id": 253,
         "guideId": 2,
         "value": "Next",
-        "source": 56,
-        "target": null
-    },
-    {
-        "id": 115,
-        "guideId": 2,
-        "value": "No",
-        "source": 57,
-        "target": null
-    },
-    {
-        "id": 116,
-        "guideId": 2,
-        "value": "yes",
-        "source": 57,
-        "target": 58
-    },
-    {
-        "id": 144,
-        "guideId": 117,
-        "value": "Single",
-        "source": 118,
-        "target": 119
-    },
-    {
-        "id": 145,
-        "guideId": 117,
-        "value": "No",
-        "source": 119,
-        "target": 120
-    },
-    {
-        "id": 146,
-        "guideId": 117,
-        "value": "Yes",
-        "source": 120,
-        "target": 121
-    },
-    {
-        "id": 147,
-        "guideId": 117,
-        "value": "Yes",
-        "source": 119,
-        "target": 122
-    },
-    {
-        "id": 148,
-        "guideId": 117,
-        "value": "Yes",
-        "source": 122,
-        "target": 123
-    },
-    {
-        "id": 149,
-        "guideId": 117,
-        "value": "No",
-        "source": 122,
-        "target": 124
-    },
-    {
-        "id": 150,
-        "guideId": 117,
-        "value": "No",
-        "source": 120,
-        "target": 125
-    },
-    {
-        "id": 151,
-        "guideId": 117,
-        "value": "Dark",
-        "source": 121,
-        "target": 125
-    },
-    {
-        "id": 152,
-        "guideId": 117,
-        "value": "Light",
-        "source": 121,
-        "target": 126
-    },
-    {
-        "id": 153,
-        "guideId": 117,
-        "value": "Yes",
-        "source": 124,
-        "target": 127
-    },
-    {
-        "id": 154,
-        "guideId": 117,
-        "value": "No",
-        "source": 124,
-        "target": 128
-    },
-    {
-        "id": 155,
-        "guideId": 117,
-        "value": "Yes",
-        "source": 123,
-        "target": 129
-    },
-    {
-        "id": 156,
-        "guideId": 117,
-        "value": "No",
-        "source": 123,
-        "target": 130
-    },
-    {
-        "id": 157,
-        "guideId": 117,
-        "value": "Light",
-        "source": 130,
-        "target": 131
-    },
-    {
-        "id": 158,
-        "guideId": 117,
-        "value": "Dark",
-        "source": 130,
-        "target": 132
-    },
-    {
-        "id": 159,
-        "guideId": 117,
-        "value": "Bridge",
-        "source": 118,
-        "target": 133
-    },
-    {
-        "id": 160,
-        "guideId": 117,
-        "value": "Yes",
-        "source": 133,
-        "target": 134
-    },
-    {
-        "id": 161,
-        "guideId": 117,
-        "value": "No",
-        "source": 133,
-        "target": 135
-    },
-    {
-        "id": 162,
-        "guideId": 117,
-        "value": "Yes",
-        "source": 135,
+        "source": 28,
         "target": 136
     },
     {
-        "id": 163,
-        "guideId": 117,
-        "value": "No",
-        "source": 136,
+        "id": 254,
+        "guideId": 2,
+        "value": "Next",
+        "source": 29,
         "target": 137
     },
     {
-        "id": 164,
-        "guideId": 117,
-        "value": "No",
-        "source": 135,
-        "target": 138
+        "id": 255,
+        "guideId": 2,
+        "value": "Branemark System",
+        "source": 5,
+        "target": 35
     },
     {
-        "id": 165,
-        "guideId": 117,
-        "value": "Yes",
-        "source": 134,
-        "target": 139
+        "id": 256,
+        "guideId": 2,
+        "value": "SRA",
+        "source": 30,
+        "target": 31
     },
     {
-        "id": 166,
-        "guideId": 117,
-        "value": "No",
-        "source": 134,
-        "target": 138
+        "id": 257,
+        "guideId": 2,
+        "value": "Pure",
+        "source": 30,
+        "target": 156
     },
     {
-        "id": 167,
-        "guideId": 117,
-        "value": "No",
-        "source": 139,
-        "target": 140
+        "id": 258,
+        "guideId": 2,
+        "value": "3,5 NC/RC",
+        "source": 31,
+        "target": 154
     },
     {
-        "id": 168,
-        "guideId": 117,
-        "value": "Yes",
-        "source": 136,
-        "target": 141
+        "id": 259,
+        "guideId": 2,
+        "value": " 4,6 RC",
+        "source": 31,
+        "target": 151
     },
     {
-        "id": 169,
-        "guideId": 117,
-        "value": "Yes",
-        "source": 139,
-        "target": 141
+        "id": 260,
+        "guideId": 2,
+        "value": "M",
+        "source": 32,
+        "target": 55
     },
     {
-        "id": 170,
-        "guideId": 117,
-        "value": "Next",
-        "source": 142,
-        "target": 143
+        "id": 261,
+        "guideId": 2,
+        "value": "R",
+        "source": 32,
+        "target": 57
     },
     {
-        "id": 171,
-        "guideId": 117,
-        "value": "Veneer/Inlay Onlay",
-        "source": 118,
-        "target": 142
+        "id": 262,
+        "guideId": 2,
+        "value": "T-Plus Implant Tech",
+        "source": 4,
+        "target": 33
     },
     {
-        "id": 172,
-        "guideId": 117,
-        "value": "Option",
-        "source": 119,
+        "id": 263,
+        "guideId": 2,
+        "value": "A+ ",
+        "source": 33,
+        "target": 102
+    },
+    {
+        "id": 264,
+        "guideId": 2,
+        "value": "ST",
+        "source": 33,
+        "target": 100
+    },
+    {
+        "id": 265,
+        "guideId": 2,
+        "value": "NobelActive",
+        "source": 5,
+        "target": 34
+    },
+    {
+        "id": 266,
+        "guideId": 2,
+        "value": "4.3/5.0",
+        "source": 34,
+        "target": 94
+    },
+    {
+        "id": 267,
+        "guideId": 2,
+        "value": "3.0",
+        "source": 34,
+        "target": 92
+    },
+    {
+        "id": 268,
+        "guideId": 2,
+        "value": "3.5",
+        "source": 34,
+        "target": 98
+    },
+    {
+        "id": 269,
+        "guideId": 2,
+        "value": "RP 4,1",
+        "source": 35,
+        "target": 80
+    },
+    {
+        "id": 270,
+        "guideId": 2,
+        "value": "WP 5,1",
+        "source": 35,
+        "target": 78
+    },
+    {
+        "id": 271,
+        "guideId": 2,
+        "value": "NP 3.5",
+        "source": 35,
+        "target": 82
+    },
+    {
+        "id": 272,
+        "guideId": 2,
+        "value": "Zimmer Biomet   ",
+        "source": 4,
+        "target": 62
+    },
+    {
+        "id": 273,
+        "guideId": 2,
+        "value": "D 4,5",
+        "source": 27,
+        "target": 67
+    },
+    {
+        "id": 274,
+        "guideId": 2,
+        "value": "3.5",
+        "source": 27,
+        "target": 65
+    },
+    {
+        "id": 275,
+        "guideId": 2,
+        "value": "Biomet 3i",
+        "source": 62,
+        "target": 10
+    },
+    {
+        "id": 399,
+        "guideId": 342,
+        "value": "Nobel Biocare",
+        "source": 345,
         "target": null
     },
     {
-        "id": 63,
-        "guideId": 2,
-        "value": "Color",
-        "source": 3,
-        "target": 6
+        "id": 400,
+        "guideId": 342,
+        "value": "Next",
+        "source": 344,
+        "target": 345
+    },
+    {
+        "id": 401,
+        "guideId": 342,
+        "value": "Zimmer Biomet",
+        "source": 345,
+        "target": 396
+    },
+    {
+        "id": 402,
+        "guideId": 342,
+        "value": "Hiossen ET System",
+        "source": 345,
+        "target": null
+    },
+    {
+        "id": 403,
+        "guideId": 342,
+        "value": "DENTSPLY Sirona",
+        "source": 345,
+        "target": 368
+    },
+    {
+        "id": 404,
+        "guideId": 342,
+        "value": "BioHorizons",
+        "source": 345,
+        "target": 346
+    },
+    {
+        "id": 405,
+        "guideId": 342,
+        "value": "Osstem",
+        "source": 345,
+        "target": null
+    },
+    {
+        "id": 406,
+        "guideId": 342,
+        "value": "Tapered Internal",
+        "source": 346,
+        "target": 347
+    },
+    {
+        "id": 407,
+        "guideId": 342,
+        "value": "3.5",
+        "source": 347,
+        "target": 348
+    },
+    {
+        "id": 408,
+        "guideId": 342,
+        "value": "4.5",
+        "source": 347,
+        "target": 351
+    },
+    {
+        "id": 409,
+        "guideId": 342,
+        "value": "5.7",
+        "source": 347,
+        "target": 350
+    },
+    {
+        "id": 410,
+        "guideId": 342,
+        "value": "External",
+        "source": 346,
+        "target": 352
+    },
+    {
+        "id": 411,
+        "guideId": 342,
+        "value": "3.5",
+        "source": 352,
+        "target": 353
+    },
+    {
+        "id": 412,
+        "guideId": 342,
+        "value": "4.0",
+        "source": 352,
+        "target": 354
+    },
+    {
+        "id": 413,
+        "guideId": 342,
+        "value": "5.0",
+        "source": 352,
+        "target": 355
+    },
+    {
+        "id": 414,
+        "guideId": 342,
+        "value": "MIS ",
+        "source": 345,
+        "target": 356
+    },
+    {
+        "id": 415,
+        "guideId": 342,
+        "value": "M4",
+        "source": 356,
+        "target": 358
+    },
+    {
+        "id": 416,
+        "guideId": 342,
+        "value": "SEVEN",
+        "source": 356,
+        "target": 357
+    },
+    {
+        "id": 417,
+        "guideId": 342,
+        "value": " NP 3.3",
+        "source": 358,
+        "target": 359
+    },
+    {
+        "id": 418,
+        "guideId": 342,
+        "value": "SP 3.75, 4.2",
+        "source": 358,
+        "target": 360
+    },
+    {
+        "id": 419,
+        "guideId": 342,
+        "value": "WP 5.0, 6.0",
+        "source": 358,
+        "target": 361
+    },
+    {
+        "id": 420,
+        "guideId": 342,
+        "value": " NP 3.3",
+        "source": 357,
+        "target": 362
+    },
+    {
+        "id": 421,
+        "guideId": 342,
+        "value": "SP 3.75, 4.2",
+        "source": 357,
+        "target": 364
+    },
+    {
+        "id": 422,
+        "guideId": 342,
+        "value": "WP 5.0, 6.0",
+        "source": 357,
+        "target": 363
+    },
+    {
+        "id": 423,
+        "guideId": 342,
+        "value": "Astra",
+        "source": 368,
+        "target": 365
+    },
+    {
+        "id": 424,
+        "guideId": 342,
+        "value": "TX",
+        "source": 365,
+        "target": 391
+    },
+    {
+        "id": 425,
+        "guideId": 342,
+        "value": "EV",
+        "source": 365,
+        "target": 375
+    },
+    {
+        "id": 426,
+        "guideId": 342,
+        "value": "3.0",
+        "source": 366,
+        "target": 395
+    },
+    {
+        "id": 427,
+        "guideId": 342,
+        "value": "4.8 \u00e2\u20ac\u201c Blue",
+        "source": 367,
+        "target": 387
+    },
+    {
+        "id": 428,
+        "guideId": 342,
+        "value": " 3.6 \u00e2\u20ac\u201c Purple",
+        "source": 367,
+        "target": 385
+    },
+    {
+        "id": 429,
+        "guideId": 342,
+        "value": "3.0 \u00e2\u20ac\u201c Green",
+        "source": 367,
+        "target": 384
+    },
+    {
+        "id": 430,
+        "guideId": 342,
+        "value": "4.2 \u00e2\u20ac\u201c Yellow",
+        "source": 367,
+        "target": 386
+    },
+    {
+        "id": 431,
+        "guideId": 342,
+        "value": "4.5, 5.0",
+        "source": 366,
+        "target": 393
+    },
+    {
+        "id": 432,
+        "guideId": 342,
+        "value": "3.5/4.0",
+        "source": 366,
+        "target": 394
+    },
+    {
+        "id": 433,
+        "guideId": 342,
+        "value": "5.4 \u00e2\u20ac\u201c Brown",
+        "source": 367,
+        "target": 388
+    },
+    {
+        "id": 434,
+        "guideId": 342,
+        "value": "XiVe S",
+        "source": 368,
+        "target": 369
+    },
+    {
+        "id": 435,
+        "guideId": 342,
+        "value": "ANKYLOS C/X",
+        "source": 368,
+        "target": 370
+    },
+    {
+        "id": 436,
+        "guideId": 342,
+        "value": " 3.0",
+        "source": 369,
+        "target": null
+    },
+    {
+        "id": 437,
+        "guideId": 342,
+        "value": " 3.4",
+        "source": 369,
+        "target": 373
+    },
+    {
+        "id": 438,
+        "guideId": 342,
+        "value": "3.8, 4.5, 5.5",
+        "source": 369,
+        "target": 374
+    },
+    {
+        "id": 439,
+        "guideId": 342,
+        "value": "Next",
+        "source": 370,
+        "target": 371
+    },
+    {
+        "id": 440,
+        "guideId": 342,
+        "value": "EV",
+        "source": 375,
+        "target": 367
+    },
+    {
+        "id": 441,
+        "guideId": 342,
+        "value": "Profile EV",
+        "source": 375,
+        "target": 376
+    },
+    {
+        "id": 442,
+        "guideId": 342,
+        "value": "C1",
+        "source": 356,
+        "target": 377
+    },
+    {
+        "id": 443,
+        "guideId": 342,
+        "value": " NP 3.3",
+        "source": 377,
+        "target": 378
+    },
+    {
+        "id": 444,
+        "guideId": 342,
+        "value": "SP 3.75, 4.2",
+        "source": 377,
+        "target": 379
+    },
+    {
+        "id": 445,
+        "guideId": 342,
+        "value": "WP 5.0, 6.0",
+        "source": 377,
+        "target": 380
+    },
+    {
+        "id": 446,
+        "guideId": 342,
+        "value": "V3",
+        "source": 356,
+        "target": 381
+    },
+    {
+        "id": 447,
+        "guideId": 342,
+        "value": " NP 3.3",
+        "source": 381,
+        "target": 382
+    },
+    {
+        "id": 448,
+        "guideId": 342,
+        "value": " SP 3.9, 4.3, 5.0",
+        "source": 381,
+        "target": 383
+    },
+    {
+        "id": 449,
+        "guideId": 342,
+        "value": "4.8 \u00e2\u20ac\u201c Blue",
+        "source": 376,
+        "target": 390
+    },
+    {
+        "id": 450,
+        "guideId": 342,
+        "value": "4.2 \u00e2\u20ac\u201c Yellow",
+        "source": 376,
+        "target": 389
+    },
+    {
+        "id": 451,
+        "guideId": 342,
+        "value": "TX",
+        "source": 391,
+        "target": 366
+    },
+    {
+        "id": 452,
+        "guideId": 342,
+        "value": "TX Profile",
+        "source": 391,
+        "target": 392
+    },
+    {
+        "id": 453,
+        "guideId": 342,
+        "value": "Zimmer TSV",
+        "source": 396,
+        "target": null
+    },
+    {
+        "id": 454,
+        "guideId": 342,
+        "value": "Biomet 3i",
+        "source": 396,
+        "target": 397
+    },
+    {
+        "id": 455,
+        "guideId": 342,
+        "value": "3.4",
+        "source": 398,
+        "target": null
+    },
+    {
+        "id": 456,
+        "guideId": 342,
+        "value": "4.1 or 5.0",
+        "source": 398,
+        "target": null
+    },
+    {
+        "id": 457,
+        "guideId": 342,
+        "value": "Certain",
+        "source": 397,
+        "target": 398
+    },
+    {
+        "id": 458,
+        "guideId": 342,
+        "value": "Prevail",
+        "source": 397,
+        "target": null
     }
 ]
