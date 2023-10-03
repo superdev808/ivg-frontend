@@ -1,11 +1,14 @@
 'use client';
-import { InputText } from 'primereact/inputtext';
-import SearchBar from '@/components/searchBar';
-import { Divider } from 'primereact/divider';
-import { useRouter } from 'next/navigation';
-import { useGetFlowsQuery } from '@/redux/services/flowApi';
+import React from 'react';
+import { redirect } from 'next/navigation'
+
+
 
 export default function Index() {
+
+	React.useEffect(() => {
+		redirect('/calculators')
+	}, []);
 	return (<>
 		</>
 	

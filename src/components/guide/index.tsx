@@ -23,6 +23,7 @@ const GuideContainer = () => {
 	useEffect(() => {
 		if (guideNodeData && selectedGuide) {
 			const selectedNode = guideNodeData.find((el: any) => el.start);
+			
 
 			if (selectedNode) {
 				setGuideNode(selectedNode);
@@ -38,13 +39,14 @@ const GuideContainer = () => {
 			const currentEdges = guideEdgeData.filter((el: any) => el.source === currentNode?.id);
 			dispatch(setCurrentNode(currentNode));
 			dispatch(setCurrentEdges(currentEdges));
+
 		}
 	};
 
 	const onSelectEdge = (edge: any) => {
 		let newPath = [...currentPath];
 		newPath.push([currentNode, currentEdges, edge.id]);
-
+		
 		dispatch(setCurrentPath([...newPath]));
 
 		let selectedNode = {

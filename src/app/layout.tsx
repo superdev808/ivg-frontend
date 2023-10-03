@@ -17,7 +17,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			<body>
 				<Providers>
 					<Navigation />
-					<div className='container'>
+					<div className='container p-6'>
 
 					{children}
 					</div>

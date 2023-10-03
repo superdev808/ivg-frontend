@@ -19,6 +19,7 @@ import CustomNode from './CustomNode';
 import CustomEdge from './CustomEdge';
 
 import { selectGuide, setGuideData } from '@/redux/features/guideSlice';
+import { set } from 'immer/dist/internal';
 
 interface NodeData {
 	id: number;
@@ -39,7 +40,7 @@ interface EdgeData {
 
 interface Node {
 	id: string;
-	data: { value: string; refId: number; start: boolean, end: boolean, active:boolean, masked:boolean };
+	data: { value: string; refId: number; start: boolean; end: boolean; active: boolean; marked: boolean };
 	position: { x: number; y: number };
 	targetPosition: 'top' | 'bottom';
 	sourcePosition: 'top' | 'bottom';
@@ -47,11 +48,12 @@ interface Node {
 	height: number;
 	type: string;
 	draggable: boolean;
+	hidden: boolean;
 }
 
 interface Edge {
 	id: string;
-	data: { value: string; refId: number, masked:boolean};
+	data: { value: string; refId: number };
 	source: string;
 	target: string;
 	type: string; // replace with your edge type
@@ -59,15 +61,15 @@ interface Edge {
 	style: any;
 }
 
-
-
 const GuideFlow = () => {
-	const {currentPath, currentNode, guideNodeData, guideEdgeData,currentEdges } = useSelector(selectGuide);
+	const { currentPath, currentNode, guideNodeData, guideEdgeData, currentEdges } = useSelector(selectGuide);
+
+	const [initialNodes, setInitialNodes] = useState<Node[]>([]);
+	const [initialEdges, setInitialEdges] = useState<Edge[]>([]);
+
 	const [nodes, setNodes, onNodesChange] = useNodesState([]);
 	const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
-		const dagreGraph = new dagre.graphlib.Graph();
-	dagreGraph.setDefaultEdgeLabel(() => ({}));
 	const nodeTypes: NodeTypes = useMemo(
 		() => ({
 			custom: CustomNode,
@@ -81,8 +83,8 @@ const GuideFlow = () => {
 		[]
 	);
 
-
-	const getLayoutedElements = (nodeData: NodeData[], edgeData: EdgeData[]) => {
+	const generateData = (nodeData: NodeData[], edgeData: EdgeData[]) => {
+		let nodeId = 0;
 		function nestNodesEdges(nodes: NodeData[], edges: EdgeData[]) {
 			nodes.forEach((node: NodeData) => {
 				node.children = [];
@@ -109,7 +111,7 @@ const GuideFlow = () => {
 
 			const newNode: Node = {
 				id: String(nodeId),
-				data: { value: node.value, refId: node.id, start: node.start, end: false,active: false, masked:true },
+				data: { value: node.value, refId: node.id, start: node.start, end: false, active: false, marked: false },
 				width: 0,
 				height: 0,
 				targetPosition: 'top',
@@ -117,6 +119,7 @@ const GuideFlow = () => {
 				position: { x: 0, y: 0 },
 				type: 'custom',
 				draggable: false,
+				// hidden: true,
 			};
 			nodeId++;
 
@@ -130,22 +133,22 @@ const GuideFlow = () => {
 					if (child) {
 						let newEdge: Edge = {
 							id: 'edge_' + newNode.id + '_' + child.id,
-							data: {value: node.edges[i].value, refId: node.edges[i].id, masked:true},
+							data: { value: node.edges[i].value, refId: node.edges[i].id, option:true },
 							source: String(newNode.id),
 							target: String(child.id),
 							type: 'custom',
 							animated: true,
 							style: {
 								strokeWidth: 2,
-								stroke: '#FF0072'}
+								stroke: '#FF0072',
+							},
 						};
-						
+
 						newEdges = [...newEdges, newEdge];
 					}
 					newEdges = [...newEdges, ...ungrouped.newEdges];
 				}
-			}
-			else {
+			} else {
 				newNode.data.end = true;
 			}
 
@@ -153,23 +156,82 @@ const GuideFlow = () => {
 
 			return { newNodes, newEdges };
 		}
-
-		const defaultWidth = 150;
-		const defaultHeight = 50;
-		let nodeId = 0;
-		const edgeType = 'smoothstep';
-
 		const rootNode = nestNodesEdges(nodeData, edgeData);
 
 		if (!rootNode) return { nodes: [], edges: [] };
 		const { newNodes: nodes, newEdges: edges } = unpackNodesEdges(rootNode);
+		setInitialNodes(nodes);
+		setInitialEdges(edges);
+	};
 
+	// Function to calculate the XY position for nodes
+	const getHierarchicalMultiLevelLayout = (nodes) => {
+
+		const spacingX = 200;
+		const spacingY = 50;
+		const maxChildrenPerLevel = 4;
+		const activeOffset = -250; // Additional Y-offset for active nodes
+
+		// Helper function to get the deepest y-position among children
+		const getDeepestChildY = (node) => {
+			const children = nodes.filter((n) => n.data.parent === node.id);
+			if (children.length === 0) return node.position.y;
+			return Math.max(...children.map(getDeepestChildY));
+		};
+
+		// Helper function to set positions recursively
+		const setPositions = (node, x, y, level) => {
+			// Additional offset for active nodes
+			const additionalOffset = node.data.active ? activeOffset : 0;
+
+			// If the node is active, move it beyond the last layer of children
+			if (node.data.active) {
+				y = getDeepestChildY(node) + activeOffset;
+			}
+
+			// Set the position of the current node
+			node.position = { x, y: y + additionalOffset };
+
+			// Retrieve the children of the current node
+			let children = [];
+			const edgeConnectors = initialEdges.filter((edge: Edge) => edge.source === String(node.id));
+			if (edgeConnectors.length > 0) {
+				const targetIds = edgeConnectors.map((edge: Edge) => edge.target);
+
+				children = nodes.filter((node: Node) => targetIds.includes(String(node.id)));
+			}
+			// Calculate the starting x-position for the first child
+			let nextX = x - ((Math.min(maxChildrenPerLevel, children.length) - 1) * spacingX) / 2;
+
+			// Iterate over the children, recursively setting positions
+			for (let i = 0; i < children.length; i++) {
+				if (i !== 0 && i % maxChildrenPerLevel === 0) {
+					// Move to the next level when max children per level is reached
+					nextX = x - ((Math.min(maxChildrenPerLevel, children.length - i) - 1) * spacingX) / 2;
+					y += spacingY;
+				}
+				setPositions(children[i], nextX, y + spacingY, level + 1); // Pass next level
+				nextX += spacingX;
+			}
+		};
+		// Set positions starting from the root node (assuming root node has id 'root')
+		setPositions(
+			nodes.find((n) => n.data.start),
+			0,
+			0,
+			0
+		); // Start from level 0
+	};
+
+	// Now, nodes will have their x, y positions set in node.position
+
+	const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
+		const dagreGraph = new dagre.graphlib.Graph();
+		dagreGraph.setDefaultEdgeLabel(() => ({}));
 		dagreGraph.setGraph({ rankdir: 'TB' });
-		
+
 		nodes.forEach((node: Node) => {
-			const nodeWidth = node.data.active ? defaultWidth : defaultWidth;
-			const nodeHeight = node.data.active ? defaultHeight : defaultWidth;
-			dagreGraph.setNode(node.id, { width:  nodeWidth, height:  nodeHeight });
+			dagreGraph.setNode(node.id, {});
 		});
 
 		edges.forEach((edge: Edge) => {
@@ -177,17 +239,16 @@ const GuideFlow = () => {
 		});
 
 		dagre.layout(dagreGraph);
+		// getHierarchicalMultiLevelLayout(nodes)
 
 		nodes.forEach((node: Node) => {
-			const nodeWidth = !node.data.active ? defaultWidth : defaultWidth;
-			const nodeHeight = !node.data.active ? defaultHeight : defaultWidth;
+			const nodeWidth = 250;
+			const nodeHeight = 150;
 
 			const nodeWithPosition = dagreGraph.node(node.id);
 			node.targetPosition = 'top';
 			node.sourcePosition = 'bottom';
 
-			// We are shifting the dagre node position (anchor=center center) to the top left
-			// so it matches the React Flow node anchor point (top left).
 			node.position = {
 				x: nodeWithPosition.x - nodeWidth / 2,
 				y: nodeWithPosition.y - nodeHeight / 2,
@@ -202,15 +263,10 @@ const GuideFlow = () => {
 	const { setCenter, getNode, getNodes } = useReactFlow();
 
 	useEffect(() => {
-	
 		if (!guideNodeData || !guideEdgeData) return;
 		const nodes = JSON.parse(JSON.stringify(guideNodeData));
 		const edges = JSON.parse(JSON.stringify(guideEdgeData));
-
-		const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(nodes, edges);
-
-		setNodes([...layoutedNodes]);
-		setEdges([...layoutedEdges]);
+		generateData(nodes, edges);
 	}, [guideNodeData]);
 
 	useEffect(() => {
@@ -218,84 +274,240 @@ const GuideFlow = () => {
 		if (!currentNode) return;
 		const targetNode: Node | undefined = (nodes as Node[]).find((node: Node) => node.data.refId === currentNode.id);
 		if (!targetNode) return;
-		setCenter(targetNode?.position.x + 150,  targetNode.position.y +100  , { zoom: 1.75, duration: 500 });
-	
+		setCenter(targetNode?.position.x + 150, targetNode.position.y, { zoom: 1.25, duration: 500 });
 	}, [currentNode, nodes]);
 
+	// Updates nodes and edges when currentPath or currentNode changes
 	useEffect(() => {
-		if (!currentPath || !currentEdges || !currentNode ) return;
-		let activeNodes:Number[] = [];
-		let activeEdges:Number[] = [];
+		if (!currentPath || !currentEdges || !currentNode || initialNodes.length == 0) return;
+		console.log('🚀 ~ file: flow.tsx:265 ~ useEffect ~ initialNodes.length:', initialNodes.length);
 
-		let unmaskedEdges:Number[] = [];
+		let activeNodes: Number[] = [currentNode.id];
+		let activeEdges: Number[] = [...currentEdges.map((edge: any) => edge.id)];
 
+		let potentialNodes: Node[] = [];
 		currentPath.forEach((path: any) => {
 			if (path[0]) {
 				activeNodes.push(path[0].id);
+
 				activeEdges.push(path[2]);
-				unmaskedEdges =   path[1].map((edge: any) => edge.id);
+				// activeEdges = path[1].map((edge: any) => edge.id);
+				// potentialNodes = path[1].map((edge: any) => edge.target);
 			}
-
 		});
-		activeNodes.push(currentNode?.id);
 
-		unmaskedEdges = [...unmaskedEdges,...currentEdges?.map((edge: any) => edge.id)];
+		const newNodes = [];
+		let currentNodeId = '';
+		initialNodes.forEach((node: Node) => {
+			if (node.data.refId === currentNode.id) {
+				currentNodeId = node.id;
+				node.data = {
+					...node.data,
+					active: true,
+					marked: false,
+				};
+				newNodes.push(node);
+			}
+			if (activeNodes.includes(node.data.refId) && node.id !== currentNodeId) {
+				// set new node active if not active
+				// if (!node.data.active) {
 
-		setNodes((nds) =>
-				nds.map((node) => {
-					if (activeNodes.includes(node.data.refId)) {
-						if(!node.data.active){
+				node.data = {
+					...node.data,
+					active: true,
+					marked: false,
+				};
+				// }
+				newNodes.push(node);
+			}
+			// else if (node.data.active) {
+			// 	// set node inactive if active
+			// 	node.data = {
+			// 		...node.data,
+			// 		active: false,
+			// 	};
+			// }
+		});
 
-							node.data = {
-								...node.data,
-								active: true,
-							};
-						}
-					} else if (node.data.active) {
-						node.data = {
-							...node.data,
-							active: false,
-						};
-					}
+		//  initialEdges.filter((edge: Edge) => edge.source === currentNodeId );
 
-					return node;
-				})
-			);
+		const newEdges = [];
+		initialEdges.forEach((edge: Edge) => {
+			if (activeEdges.includes(edge.data.refId)) {
+				const targetNode = initialNodes.find((node: Node) => String(node.id) === edge.target);
+				if (targetNode && !newNodes.includes(targetNode)) {
+					targetNode.data.marked = true;
+					potentialNodes.push(targetNode);
+				}
 	
-			setEdges((eds) =>
+				newEdges.push(edge);
+			}
+			// else if (edge.data.active) {
+			// 	edge.data = {
+			// 		...edge.data,
+			// 		active: false,
+			// 	};
+			// }
+		});
+
+		// potentialNodes.forEach((node: Node) => {
+
+		// 		node.data.marked = true;
+		// });
+		// console.log(newNodes)
+		const layoutnodes: Node[] = [...newNodes, ...potentialNodes];
+		console.log('🚀 ~ file: flow.tsx:338 ~ useEffect ~ layoutnodes:', layoutnodes);
+		const layoutedges: Edge[] = [...newEdges];
+		// const layoutnodes = JSON.parse(JSON.stringify([...newNodes]));
+		// const layoutedges = JSON.parse(JSON.stringify([...newEdges]));
+
+		// getHierarchicalMultiLevelLayout(layoutnodes);
+		// console.log(layoutnodes, layoutedges);
+		// const { nodes: layoutNodes, edges: layoutEdges } = getLayoutedElements(layoutnodes, layoutedges);
+
+		// setNodes(layoutnodes);
+
+		setEdges((eds) => 
+		
+		{
+			const filteredArray = layoutedges.filter((obj1) => {
+				return !eds.some((obj2) => {
+					return obj1.id === obj2.id;
+				});
+			});
+			if (eds.length > 0) {
 				eds.map((edge) => {
+				
+					console.log("🚀 ~ file: flow.tsx:378 ~ eds.map ~ activeEdges:", activeEdges)
 					if (activeEdges.includes(edge.data.refId)) {
-						if(!edge.data.active){
+						// set new node active if not active
 						edge.data = {
 							...edge.data,
 							active: true,
+							
 						};
 					}
-					} else if (edge.data.active) {
+					else  {
+						// set node inactive if active
 						edge.data = {
 							...edge.data,
 							active: false,
+							option: false
 						};
 					}
-					if (unmaskedEdges.includes(edge.data.refId)) {
-						if(edge.data.masked ){
-						edge.data = {
-							...edge.data,
-							masked: false,
-						};
-					}
-					} else if (!edge.data.masked) {
-						edge.data = {
-							...edge.data,
-							masked: true,
-						};
-					}
-					return edge;
-			})
-	);
 
-	}, [currentPath, currentNode]);
+				});
+			}
 
+
+			console.log("🚀 ~ file: flow.tsx:396 ~ useEffect ~ eds:", eds)
+			return [...eds, ...filteredArray]
+
+
+		}
+		);
+
+		setNodes((nds) => {
+			// filter out existing nodes
+			const filteredArray = layoutnodes.filter((obj1) => {
+				return !nds.some((obj2) => {
+					return obj1.id === obj2.id;
+				});
+			});
+
+			// unhide exisiting nodes
+
+			if (nds.length > 0) {
+				nds.map((node) => {
+					if (activeNodes.includes(node.data.refId)) {
+						// set new node active if not active
+						node.data = {
+							...node.data,
+							active: true,
+							marked: false,
+						};
+					}
+					return node;
+				});
+			}
+			const nodes = [...nds, ...filteredArray];
+
+			getHierarchicalMultiLevelLayout(nodes);
+			console.log('🚀 ~ file: flow.tsx:378 ~ setNodes ~ final:', nodes);
+
+			return nodes;
+		});
+		// setEdges(layoutEdges);
+
+		// // add existing active nodes/edges and unmask edges
+		// currentPath.forEach((path: any) => {
+		// 	if (path[0]) {
+		// 		activeNodes.push(path[0].id);
+		// 		// activeEdges.push(path[2]);
+		// 		activeEdges = path[1].map((edge: any) => edge.id);
+		// 		potentialNodes = path[1].map((edge: any) => edge.target);
+		// 	}
+		// });
+		// // include current node
+		// activeNodes.push(currentNode?.id);
+		// activeEdges = [...activeEdges, ...currentEdges?.map((edge: any) => edge.id)]
+
+		// setNodes((nds) =>
+		// 	nds.map((node) => {
+		// 		if (activeNodes.includes(node.data.refId)) {
+		// 			// set new node active if not active
+		// 			if (!node.data.active) {
+		// 				node.hidden = false;
+		// 				node.data = {
+		// 					...node.data,
+		// 					active: true,
+		// 				};
+		// 			}
+		// 		}
+		// 		else if (node.data.active) {
+		// 			// set node inactive if active
+		// 			node.hidden = true;
+		// 			node.data = {
+		// 				...node.data,
+		// 				active: false,
+		// 			};
+		// 		}
+		// 		if(potentialNodes.includes(node.data.refId)){
+		// 			node.data = {
+		// 				...node.data,
+		// 				marked: true,
+		// 			}
+		// 		} else if(node.data.marked){
+		// 				node.data = {
+		// 					...node.data,
+		// 					marked: false,
+		// 				}
+		// 			}
+
+		// 		return node;
+		// 	})
+		// );
+
+		// setEdges((eds) =>
+		// 	eds.map((edge) => {
+		// 		if (activeEdges.includes(edge.data.refId)) {
+		// 			if (!edge.data.active) {
+		// 				edge.data = {
+		// 					...edge.data,
+		// 					active: true,
+		// 				};
+		// 			}
+		// 		}
+		// 		// else if (edge.data.active) {
+		// 		// 	edge.data = {
+		// 		// 		...edge.data,
+		// 		// 		active: false,
+		// 		// 	};
+		// 		// }
+		// 		return edge;
+		// 	})
+		// );
+	}, [currentPath, initialNodes]);
 
 	return (
 		<ReactFlow

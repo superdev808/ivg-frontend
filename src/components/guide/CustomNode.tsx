@@ -9,14 +9,14 @@ export default function CustomNode(props: NodeProps) {
 
 	return (
 		<>
-
+			
 				<Handle
 				className={node.start ? 'hidden' : ''}
 					key={'th_' + props.id}
 					id={'th_' + props.id}
 					type="target"
 					position={Position.Top}
-					style={{ background: '#555' }}
+					style={{ background: node.marked? 'transparent' :'#555' }}
 					isConnectable={false}
 				/>
 		
@@ -26,26 +26,26 @@ export default function CustomNode(props: NodeProps) {
 					borderRadius: '0.25rem',
 					padding: '0.75rem',
 					background: 'white',
-					fontSize: '0.75rem',
+					fontSize: '0.65rem',
 					alignItems: 'center',
 					textAlign: 'center',
-					display: 'flex',
+					// display: node.marked ? 'none' : 'flex',
 					justifyContent: 'center',
-					textShadow: !props.data.active ? '0 0 8px #000' : '',
-					color: !props.data.active ? 'transparent' : 'black',
-					width: '175px',
+					color:'black',
+					width:  '175px',
+					opacity: node.marked  || !node.active? '0' : '1',
 					// height: !props.data.active ? '0' : 'auto',
 				}}>
 				<strong>{String(node.value)} </strong>
 			</div>
 
 			<Handle
-			className={node.end ? 'hidden' : ''}
+			className={node.end  ? 'hidden' : ''}
 				key={'sh_' + props.id}
 				id={'sh_' + props.id}
 				type="source"
 				position={Position.Bottom}
-				style={{ background: '#555' }}
+				style={{ background: node.marked? 'transparent' : '#555'	}}
 				isConnectable={false}
 			/>
 		</>

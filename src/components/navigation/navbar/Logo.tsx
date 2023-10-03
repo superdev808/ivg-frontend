@@ -36,7 +36,7 @@ const Logo = () => {
   return (
     <>
       <Link href="/" style={{ display: showButton ? "none" : "block", textDecoration: "none", alignSelf: "center" }}>
-        <div className="logo">LOGO</div>
+        <div className="logo">IVORY<span className="text-gray-500">GUIDE</span></div>
         {/* <Image
           src="next.svg"
           alt="Logo"

@@ -24,10 +24,10 @@ const Navbar = ({ toggle, isOpen, navLinks }: { toggle: () => void; isOpen: bool
 								<div className="bar-bottom"></div>
 							</div>
 						</div>
-
+							
 						<div className=" navbar-nav hidden md:flex gap-x-6  ">
 							<div className={(pathname === '/' ? '' : 'active') + ' search-bar-mini py-2'}>
-							<SearchBar />
+							{/* <SearchBar /> */}
 							</div>
 
 							{navLinks.map((item) => {
@@ -47,7 +47,7 @@ const Navbar = ({ toggle, isOpen, navLinks }: { toggle: () => void; isOpen: bool
 				</div>
 			</div>
 			<div className={(pathname !== '/' ? ' hidden' : '') }>
-				<div className={' search-wrapper flex  justify-content-center  '}>
+				<div className={' search-wrapper flex  justify-content-center align-items-center'} >
 					<div className={' w-full md:w-5 '}>
 						<div className="search-title flex justify-content-center ">
 							<h1 className="text-dark text-color-secondary m-0">How can we help you?</h1>

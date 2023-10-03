@@ -12,8 +12,8 @@ const Navigation = () => {
 
 
   const navLinks = [
-      // {id: 'home',title: 'Home', link: '/'},
-      // {id:'search',title: 'Search', link: '/search'},
+      // {id: 'guides',title: 'Guides', link: '/'},
+      {id:'calculators',title: 'Calculators', link: '/calculators'},
       // {id:'explore',title: 'Explore', link: '/explore'},
 
   ]
@@ -31,7 +31,7 @@ const Navigation = () => {
   useCheckMobileScreen(closeMenu);
 
   return (
-    <div ref={boxRef}>
+    <div ref={boxRef} className="border-bottom-1 border-200	 bg-white">
       
       <Sidebar isOpen={isOpen} toggle={toggle} navLinks={navLinks} />
       <Navbar isOpen={isOpen} toggle={toggle} navLinks={navLinks}/>

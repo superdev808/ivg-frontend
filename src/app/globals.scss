@@ -167,7 +167,11 @@ body {
 	border-radius: 0px;
 	border: 0px solid #ffffff;
 }
+.search-wrapper {
+	height: calc(100vh - 10rem);
+	margin-top: -6rem;
 
+}
 .search-bar-mini {
 	overflow: hidden !important;
 	& input {
