@@ -6,7 +6,7 @@ import path from 'path';
 export async function GET(request: NextRequest) {
   try {
     // Read the JSON file using fs
-    const filePath = path.join(process.cwd(), 'public', '/data/edges.json');
+    const filePath = path.join(process.cwd(), 'public', '/data/calc_edges.json');
     const rawData = fs.readFileSync(filePath, 'utf8');
     const data = JSON.parse(rawData);
 

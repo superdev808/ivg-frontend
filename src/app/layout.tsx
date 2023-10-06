@@ -5,10 +5,9 @@ import './globals.scss';
 import { Providers } from '@/redux/provider';
 
 import '../styles/theme/custom/theme.css'; //theme
-import 'primereact/resources/primereact.min.css'; //core css
+import 'primereact/resources/primereact.min.css'; //core css 
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-
 export default function RootLayout({ children }: PropsWithChildren) {
 
 	return (

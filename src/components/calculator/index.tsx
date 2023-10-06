@@ -1,13 +1,13 @@
 import { use, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import Link from 'next/link';
 import { selectCalculator } from '@/redux/features/calculatorSlice';
 
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { Skeleton } from 'primereact/skeleton';
 import { Divider } from 'primereact/divider';
-
+import { Button } from 'primereact/button';
 const CalculatorContainer = () => {
 	const { calculatorNodeData, calculatorEdgeData } = useSelector(selectCalculator);
 	function nestNodesEdges(nodes, edges) {
@@ -58,7 +58,7 @@ const CalculatorContainer = () => {
 			<div className="flex w-content-max p-4 border-1 border-round border-blue-700 border-2 bg-white">
 				<div className="border-1 border-blue-200 border-2 border-round">
 					<img
-						src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
+						src={'https://ivoryguide.s3.us-west-1.amazonaws.com/images/calculators/' + selectedResult.guideId + '/' + selectedResult.thumbnail || '/images/no-image.png'}
 						alt=""
 						width={150}
 					/>
@@ -66,7 +66,12 @@ const CalculatorContainer = () => {
 				<div className="align-self-center px-5">
 					<p className="font-bold ">{selectedResult.value}</p>
 					<p className=" text-gray-500 text-sm">Description</p>
-					<button className="p-button">Buy</button>
+
+					<Link
+						className="no-underline text-white"
+						href={String(selectedResult.value) || ''}>
+						<Button className="justify-content-center">Purchase</Button>
+					</Link>
 				</div>
 			</div>
 		);
@@ -74,8 +79,8 @@ const CalculatorContainer = () => {
 
 	const questionFields = () => {
 		return (
-			<>				
-			{(questions || []).map((el, key) => {
+			<>
+				{(questions || []).map((el, key) => {
 					return (
 						<div
 							className="field grid"
@@ -191,14 +196,8 @@ const CalculatorContainer = () => {
 				skeleton()
 			) : (
 				<>
-					<div>
-					{questionFields()}
-
-					</div>
-					<div>
-					{selectedResult ? resultLink() : null}
-
-					</div>
+					<div>{questionFields()}</div>
+					<div>{selectedResult ? resultLink() : null}</div>
 				</>
 			)}
 		</div>
