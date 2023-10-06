@@ -4,7 +4,7 @@ import { FlowDataService } from '@/services/flowDataService';
 import { Flow } from '@/components/flow';
 import useArrayFilter from '@/hooks/useSearchBarFilter';
 
-import FlowMenu from '@/components/flow/Menu';
+// import FlowMenu from '@/components/flow/Menu';
 
 export default function FlowsPage() {
 	const [prompts, setPrompts] = useState<any>([]);
@@ -45,7 +45,7 @@ export default function FlowsPage() {
 	return (
 		<>
 			<div className="flow-container flex justify-content-between pt-4">
-				<FlowMenu></FlowMenu>
+				{/* <FlowMenu></FlowMenu> */}
 				<Flow></Flow>
 			</div>
 		</>
