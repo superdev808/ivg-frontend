@@ -1,7 +1,7 @@
 
 import { useState, useRef } from "react";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import Navbar from "./navbar";
+import Sidebar from "./sidebar";
 import SearchBar from "../searchBar";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import useCheckMobileScreen from "@/hooks/useCheckMobileScreen";
