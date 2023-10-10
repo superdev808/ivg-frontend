@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Button from "@/components/Navigation/Navbar/Button";
+import Button from "@/components/navigation/navbar/Button";
 import styles from "../Navigation.module.scss"
 
 const Logo = () => {
