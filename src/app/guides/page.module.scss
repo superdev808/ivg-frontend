@@ -1,0 +1,22 @@
+.selectionContainer {
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+}
+
+
+.selectionItem {
+  border: solid 1px #E0E0E0;
+  margin: 1rem 0;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  &:hover {
+    border-color:var(--primary-color) !important;
+    cursor: pointer;
+    border-width: 2px;
+  }
+  
+
+}
+

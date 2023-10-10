@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Flow } from "@/types/flow";
+import { Flow } from "@/types/Guide";
 
 
 const initialState:any = {

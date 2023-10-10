@@ -3,7 +3,7 @@
 import CalculatorHeader from '@/components/calculator/header';
 import CalculatorContainer from '@/components/calculator';
 import styles from './page.module.scss';
-import useGuideRouteListener from '@/hooks/useGuideRouteListener';
+import useGuideRouteListener from '@/hooks/useSelectCalculator';
 
 export default function CalculatorPage() {
 	useGuideRouteListener();

@@ -2,7 +2,8 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Button from "./Button";
+import Button from "@/components/Navigation/Navbar/Button";
+import styles from "../Navigation.module.scss"
 
 const Logo = () => {
   //update the size of the logo when the size of the screen changes
@@ -36,7 +37,7 @@ const Logo = () => {
   return (
     <>
       <Link href="/" style={{ display: showButton ? "none" : "block", textDecoration: "none", alignSelf: "center" }}>
-        <div className="logo">IVORY<span className="text-gray-500">GUIDE</span></div>
+        <div className={styles.logo}>IVORY<span className="text-gray-500">GUIDE</span></div>
         {/* <Image
           src="next.svg"
           alt="Logo"

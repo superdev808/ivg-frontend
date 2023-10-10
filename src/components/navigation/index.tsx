@@ -1,7 +1,7 @@
 
 import { useState, useRef } from "react";
-import Navbar from "./navbar";
-import Sidebar from "./sidebar";
+import Navbar from "@/components/Navigation/Navbar";
+import Sidebar from "@/components/Navigation/Sidebar";
 import SearchBar from "../searchBar";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import useCheckMobileScreen from "@/hooks/useCheckMobileScreen";
@@ -12,7 +12,7 @@ const Navigation = () => {
 
 
   const navLinks = [
-      // {id: 'guides',title: 'Guides', link: '/'},
+      {id: 'guides',title: 'Guides', link: '/guides'},
       {id:'calculators',title: 'Calculators', link: '/calculators'},
       // {id:'explore',title: 'Explore', link: '/explore'},
 
@@ -31,7 +31,7 @@ const Navigation = () => {
   useCheckMobileScreen(closeMenu);
 
   return (
-    <div ref={boxRef} className="border-bottom-1 border-200	 bg-white">
+    <div ref={boxRef} className="absolute z-2 w-full border-bottom-1 border-500	 bg-white shadow-3 ">
       
       <Sidebar isOpen={isOpen} toggle={toggle} navLinks={navLinks} />
       <Navbar isOpen={isOpen} toggle={toggle} navLinks={navLinks}/>
