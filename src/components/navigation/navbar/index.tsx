@@ -3,7 +3,7 @@ import React from 'react';
 import styles from '../Navigation.module.scss';
 
 import Link from 'next/link';
-import Logo from '@/components/Navigation/Navbar/Logo';
+import Logo from './Logo';
 
 import { Divider } from 'primereact/divider';
 import SearchBar from '@/components/searchBar';
