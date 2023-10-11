@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
-import guideReducer from "./features/guideSlice";
+import guidesReducer from "./features/guidesSlice";
+import guideReducer from "./features/guideSelectionSlice";
 import calculatorReducer from "./features/calculatorSlice";
 import flowReducer from "./features/flowSlice";
 import editorReducer from "./features/editorSlice";
-import { setupListeners } from "@reduxjs/toolkit/dist/query";
+
 import { guidesApi } from "./services/guidesApi";
 import { guideEdgesApi } from "./services/guideEdgesApi";
 import { guideNodesApi } from "./services/guideNodesApi";
@@ -17,6 +19,7 @@ export const store = configureStore({
     flow: flowReducer,
     editor: editorReducer,
     guide: guideReducer,
+    guides: guidesReducer,
     calculator: calculatorReducer,
     [guidesApi.reducerPath]: guidesApi.reducer,
     [guideEdgesApi.reducerPath]: guideEdgesApi.reducer,

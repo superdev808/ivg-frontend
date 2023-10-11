@@ -34,7 +34,8 @@ const CustomEdge: FC<EdgeProps> = ({ id, sourceX, sourceY, targetX, targetY, sou
 						fontWeight: 600,
 						zIndex: '10',
 						color: data.option &&  !data.active ? '#1769aa' : 'white',
-
+						width: '150px',
+						textAlign: 'center',
 						// textShadow: !data.active  ? '0 0 8px #000' : '',
 						// color: !data.active    ? 'transparent' : 'white',
 					}}

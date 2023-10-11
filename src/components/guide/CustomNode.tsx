@@ -16,7 +16,7 @@ export default function CustomNode(props: NodeProps) {
 					id={'th_' + props.id}
 					type="target"
 					position={Position.Top}
-					style={{ background: node.marked? 'transparent' :'#555' }}
+					style={{ background: node.marked? 'transparent' :'#555',}}
 					isConnectable={false}
 				/>
 		
@@ -32,8 +32,11 @@ export default function CustomNode(props: NodeProps) {
 					// display: node.marked ? 'none' : 'flex',
 					justifyContent: 'center',
 					color:'black',
-					width:  '175px',
-					opacity: node.marked  || !node.active? '0' : '1',
+					width:  '250px',
+					maxHeight: '100px',
+					overflowY: 'auto',
+
+					// opacity: node.marked  || !node.active? '0' : '1',
 					// height: !props.data.active ? '0' : 'auto',
 				}}>
 				<strong>{String(node.value)} </strong>

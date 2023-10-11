@@ -3,7 +3,7 @@
 	text-decoration: unset;
 	color: var(--primary-dark-color);
 
-	font-size: 40px;
+	font-size: 25px;
 	letter-spacing: 5px;
 	&:hover {
 		color: var(--primary-color);
@@ -18,8 +18,9 @@
 }
 .sidebar-nav,
 .navbarNav {
+	align-items: center;
 	list-style: none;
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: bold;
 	a {
 		// font-variant: small-caps;

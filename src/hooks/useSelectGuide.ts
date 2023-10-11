@@ -1,47 +1,43 @@
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { setSelectedGuide, setGuideData, reset } from '@/redux/features/guideSlice';
+import { Node,Edge, Guide } from '@/types/Guide';
 
-import {useGetGuidesQuery} from '@/redux/services/guidesApi';
-import { useGetGuideNodesQuery } from '@/redux/services/guideNodesApi';
-import { useGetGuideEdgesQuery } from '@/redux/services/guideEdgesApi';
+import { reset, setSelectedData } from '@/redux/features/guideSelectionSlice';
+
+import { selectGuides } from '@/redux/features/guidesSlice';
+import useLoadGuidesData from './useLoadGuidesData';
 
 
-import { Guide } from '@/types/Guide';
+
 function useSelectGuide() {
   const dispatch = useDispatch();
   const pathname = usePathname();
+  useLoadGuidesData();
+  
+  const {guidesData, nodesData, edgesData} = useSelector(selectGuides);
 
-
-  const { isLoading, isFetching, data: guides, error } = useGetGuidesQuery(null);
-
-  const { isLoading:nodesIsLoading, isFetching: nodesIsFetching, data: nodes = [], error: nodesError } = useGetGuideNodesQuery(null);
-  const { isLoading:edgesIsLoading, isFetching: edgesIsFetching, data: edges = [], error: edgesError } = useGetGuideEdgesQuery(null);
   useEffect(() => {
-    if (
-      guides && nodes && edges && !isLoading && !nodesIsLoading && !edgesIsLoading
-    ) {
-    const currentPath = pathname.split('/');
- 
-    const matchGuide = (guides as Guide[]).find((guide) => Number(guide.id) === Number(currentPath[2]));
+    if (guidesData.length === 0 || nodesData.length === 0 || edgesData.length === 0) {
+      return;
+    }
 
-    
-    if (!matchGuide) {
+    const currentPath = pathname.split('/');
+    const selectedGuide = (guidesData as Guide[]).find((guide) => Number(guide.id) === Number(currentPath[2]));
+
+    if (!selectedGuide) {
       dispatch(reset());
       return;
     }
 
-    const nodeData = nodes.filter((node) => Number(node.guideId) === Number(matchGuide.id));
-    const edgeData = edges.filter((edge) =>  Number(edge.guideId) === Number(matchGuide.id));
+    const nodes = nodesData.filter((node: Node) => Number(node.guideId) === Number(selectedGuide.id));
+    const edges = edgesData.filter((edge: Edge) =>  Number(edge.guideId) === Number(selectedGuide.id));
     
-    dispatch(setSelectedGuide(matchGuide));
-    dispatch(setGuideData({nodeData,edgeData})); 
-  
-    }
+    dispatch(setSelectedData({nodes,edges})); 
 
-  }, [guides, nodes, edges, isLoading, nodesIsLoading, edgesIsLoading]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [guidesData, nodesData, edgesData]);
 
   return; 
 }

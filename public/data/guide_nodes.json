@@ -8,7 +8,7 @@
     {
         "id": 6,
         "guideId": 2,
-        "value": "II - Scan Strategy ",
+        "value": "Scan Strategy ",
         "type": 0
     },
     {
@@ -50,7 +50,7 @@
     {
         "id": 13,
         "guideId": 2,
-        "value": " You will be promted to mark the tooth.Click on the Mark Tooth option from the left-hand side menu, then click the center of the tooth on the occlusal surface for both abutment teeth.",
+        "value": " You will be promted to mark the tooth. Click on the Mark Tooth option from the left-hand side menu, then click the center of the tooth on the occlusal surface for both abutment teeth.",
         "type": 0
     },
     {
@@ -170,7 +170,7 @@
     {
         "id": 35,
         "guideId": 2,
-        "value": "Roll the scanner 60-90 degres to the lingual side. Use the tip to keep the tongue away. Go along the lingual surface until you reach the last molar. Slowly roll over the lingual surface until you reach the last molar going towards the buccal side.\n",
+        "value": "Roll the scanner 60-90 degrees to the lingual side. Use the tip to keep the tongue away. Go along the lingual surface until you reach the last molar. Slowly roll over the lingual surface until you reach the last molar going towards the buccal side.\n",
         "type": 0
     },
     {
@@ -188,7 +188,7 @@
     {
         "id": 38,
         "guideId": 2,
-        "value": "Tip: You can turn the tip of the scanner up for easier upper arch scanning. Use your finger or a dental mmirror to create a space between the teeth, lips, and cheeks if necessary. The scan should consist of 3 swipes: occlusal, lingual, and buccal. ",
+        "value": "Tip: You can turn the tip of the scanner up for easier upper arch scanning. Use your finger or a dental mirror to create a space between the teeth, lips, and cheeks if necessary. The scan should consist of 3 swipes: occlusal, lingual, and buccal. ",
         "type": 4
     },
     {
@@ -224,7 +224,7 @@
     {
         "id": 44,
         "guideId": 2,
-        "value": "Tip: You can turn the tip of the scanner up for easier upper arch scanning. Use your finger or a dental mmirror to create a space between the teeth, lips, and cheeks if necessary. The scan should consist of 3 swipes: occlusal, lingual, and buccal. ",
+        "value": "Tip: You can turn the tip of the scanner up for easier upper arch scanning. Use your finger or a dental mirror to create a space between the teeth, lips, and cheeks if necessary. The scan should consist of 3 swipes: occlusal, lingual, and buccal. ",
         "type": 4
     },
     {
@@ -557,5 +557,750 @@
         "guideId": 2,
         "value": "What product are you scanning for?",
         "type": 0
+    },
+    {
+        "id": 207,
+        "guideId": 206,
+        "value": "What intraoral scanner are you using ",
+        "type": 0
+    },
+    {
+        "id": 208,
+        "guideId": 206,
+        "value": "What product are you scanning for?",
+        "type": 0
+    },
+    {
+        "id": 209,
+        "guideId": 206,
+        "value": "Do you need guidance on case setup or scanning instructions?",
+        "type": 0
+    },
+    {
+        "id": 210,
+        "guideId": 206,
+        "value": "Scan Strategy ",
+        "type": 0
+    },
+    {
+        "id": 229,
+        "guideId": 228,
+        "value": "Patrick Francia",
+        "type": 0
+    },
+    {
+        "id": 230,
+        "guideId": 228,
+        "value": "  |  10/5/2023",
+        "type": 0
+    },
+    {
+        "id": 231,
+        "guideId": 228,
+        "value": "Start with either creating your patient or finding an existing one. Then create a new case.",
+        "type": 0
+    },
+    {
+        "id": 232,
+        "guideId": 228,
+        "value": "Scan Strategy ",
+        "type": 0
+    },
+    {
+        "id": 233,
+        "guideId": 228,
+        "value": "Select the lab you'd like to send your scans to.",
+        "type": 0
+    },
+    {
+        "id": 234,
+        "guideId": 228,
+        "value": "Create the order and choose the type of implant.",
+        "type": 0
+    },
+    {
+        "id": 235,
+        "guideId": 228,
+        "value": "Select the order order details, and Save.",
+        "type": 0
+    },
+    {
+        "id": 236,
+        "guideId": 228,
+        "value": " Don't forget to select a delivery date",
+        "type": 0
+    },
+    {
+        "id": 237,
+        "guideId": 228,
+        "value": "Decide whether you would like to utilize the Emergence profile step (default) or not.",
+        "type": 0
+    },
+    {
+        "id": 238,
+        "guideId": 228,
+        "value": " At this point you can scan the preparation area to capture the emergence profile before removing the healing cap.",
+        "type": 0
+    },
+    {
+        "id": 239,
+        "guideId": 228,
+        "value": "Mark the tooth scan on the occlusal surface.",
+        "type": 0
+    },
+    {
+        "id": 240,
+        "guideId": 228,
+        "value": "Use the lock surface tool to paint over the area of the scan you wish to lock.",
+        "type": 0
+    },
+    {
+        "id": 241,
+        "guideId": 228,
+        "value": "OPTIONAL: Take an HD Photo of the emergence profile.",
+        "type": 0
+    },
+    {
+        "id": 242,
+        "guideId": 228,
+        "value": "OPTIONAL: Perform a shade measurement. ",
+        "type": 0
+    },
+    {
+        "id": 243,
+        "guideId": 228,
+        "value": "Remove the healing cap and insert the scan body. Then proceed to the next scan.\n",
+        "type": 0
+    },
+    {
+        "id": 244,
+        "guideId": 228,
+        "value": "Remove the scanbody, ask the patient to bite, and then proceed to scanning the occlusion.",
+        "type": 0
+    },
+    {
+        "id": 245,
+        "guideId": 228,
+        "value": "Here you can use the Direction tool, where you can set the insertion direction.",
+        "type": 0
+    },
+    {
+        "id": 246,
+        "guideId": 228,
+        "value": "You can now add any annotations to the scan by clicking the Annotations button at the bottom of the screen. ",
+        "type": 0
+    },
+    {
+        "id": 247,
+        "guideId": 228,
+        "value": "What intraoral scanner are you using ",
+        "type": 0
+    },
+    {
+        "id": 248,
+        "guideId": 228,
+        "value": "What product are you scanning for?",
+        "type": 0
+    },
+    {
+        "id": 249,
+        "guideId": 228,
+        "value": "A new case can be also created from the Cases page and from the Calendar page.",
+        "type": 4
+    },
+    {
+        "id": 250,
+        "guideId": 228,
+        "value": "Here you can also see all the other available for you options, such as: Status Scan.",
+        "type": 4
+    },
+    {
+        "id": 251,
+        "guideId": 228,
+        "value": "Case setup complete!",
+        "type": 0
+    },
+    {
+        "id": 252,
+        "guideId": 228,
+        "value": "Press Next or select the scan step on the workflow bar at the top of the page. ",
+        "type": 0
+    },
+    {
+        "id": 253,
+        "guideId": 228,
+        "value": "Review and send the order to the lab.",
+        "type": 0
+    },
+    {
+        "id": 254,
+        "guideId": 228,
+        "value": "Start by scanning the opposing arch from where the implant was placed. ",
+        "type": 0
+    },
+    {
+        "id": 255,
+        "guideId": 228,
+        "value": "Follow the official scan strategy for quadrant scanning.When possible, include at least 3 teeth on either side of the implant (which obviously will not be possible for some posterior cases). When in doubt, feel free to perform a full arch scan.",
+        "type": 4
+    },
+    {
+        "id": 256,
+        "guideId": 228,
+        "value": "Scan the arch that the implant is placed in. ",
+        "type": 0
+    },
+    {
+        "id": 257,
+        "guideId": 228,
+        "value": "Continue to scan the implant arch, or use the hands-free method?",
+        "type": 0
+    },
+    {
+        "id": 258,
+        "guideId": 228,
+        "value": "First, scan the molar occlusal surface.",
+        "type": 0
+    },
+    {
+        "id": 259,
+        "guideId": 228,
+        "value": "Roll to the lingual side and scan the lingual surface. \n",
+        "type": 0
+    },
+    {
+        "id": 260,
+        "guideId": 228,
+        "value": "Scan the buccal side until the canine has been scanned.",
+        "type": 0
+    },
+    {
+        "id": 261,
+        "guideId": 228,
+        "value": "Inspect the result and prepare the scan for trimming.",
+        "type": 0
+    },
+    {
+        "id": 262,
+        "guideId": 228,
+        "value": "Tip: You can turn the tip of the scanner up for easier upper arch scanning. Use your finger or a dental mirror to create a space between the teeth, lips, and cheeks if necessary. The scan should consist of 3 swipes: occlusal, lingual, and buccal. ",
+        "type": 4
+    },
+    {
+        "id": 263,
+        "guideId": 228,
+        "value": "First, scan the molar occlusal surface.",
+        "type": 0
+    },
+    {
+        "id": 264,
+        "guideId": 228,
+        "value": "Roll to the lingual side and scan the lingual surface. \n",
+        "type": 0
+    },
+    {
+        "id": 265,
+        "guideId": 228,
+        "value": "Scan the buccal side until the canine has been scanned.",
+        "type": 0
+    },
+    {
+        "id": 266,
+        "guideId": 228,
+        "value": "Inspect the result and prepare the scan for trimming.",
+        "type": 0
+    },
+    {
+        "id": 267,
+        "guideId": 228,
+        "value": "Follow the official scan strategy for  quadrant scanning. When possible, include at least 3 teeth on either side of the implant (which obviously will not be possible for some posterior cases). When in doubt, feel free to perform a full arch scan.",
+        "type": 4
+    },
+    {
+        "id": 268,
+        "guideId": 228,
+        "value": "Tip: You can turn the tip of the scanner up for easier upper arch scanning. Use your finger or a dental mirror to create a space between the teeth, lips, and cheeks if necessary. The scan should consist of 3 swipes: occlusal, lingual, and buccal. ",
+        "type": 4
+    },
+    {
+        "id": 269,
+        "guideId": 228,
+        "value": "Scan the scanbody from all angles.",
+        "type": 0
+    },
+    {
+        "id": 270,
+        "guideId": 228,
+        "value": "Make sure to cover the upper third of the scanbody.",
+        "type": 0
+    },
+    {
+        "id": 271,
+        "guideId": 228,
+        "value": "When the scan is complete, remove the scanbody.",
+        "type": 0
+    },
+    {
+        "id": 272,
+        "guideId": 228,
+        "value": "Position the scanner between the first and second molar on the buccal side.",
+        "type": 0
+    },
+    {
+        "id": 273,
+        "guideId": 228,
+        "value": "Align the scan area to cover 50/50 of the upper and lower teeth. Ask the patient to bite in centric occlusion.",
+        "type": 0
+    },
+    {
+        "id": 274,
+        "guideId": 228,
+        "value": "Start the scan. After a few clicks, slowly move out the tip while scanning. Keep scanning until both arches snap into position.",
+        "type": 0
+    },
+    {
+        "id": 275,
+        "guideId": 228,
+        "value": "Scan 3-4 teeth for perfect alignment.",
+        "type": 0
+    },
+    {
+        "id": 276,
+        "guideId": 228,
+        "value": "FOR A FULL ARCH ONLY: Repeat the procedure on the opposite side.",
+        "type": 0
+    },
+    {
+        "id": 277,
+        "guideId": 228,
+        "value": "Make sure you have already scanned the upper and lower arches before proceeding to the bite.",
+        "type": 0
+    },
+    {
+        "id": 278,
+        "guideId": 228,
+        "value": "Tips:\n Avoid artifacts on the molar surface. These may result from soft tissue (lips, cheek, tongue) being scanned onto the teeth. \nAvoid excess soft tissue at the back. This may be to the distal of the last molars, or it may be large portions of sulcus to the cheek. If you scan those areas, remember to use the trim tool to clean up the scan.\nAvoid bubbles of saliva being scanned onto the occlusal surface. Dry the teeth before scanning. Check the 2D live stream to see if there is a lot of white spots. \nIf you should accidentally scan one or more of these artifacts, simply trim away the artifacts and rescan that area.",
+        "type": 4
+    },
+    {
+        "id": 279,
+        "guideId": 228,
+        "value": "Do you need guidance on case setup or scanning instructions?",
+        "type": 0,
+        "start": true
+    },
+    {
+        "id": 280,
+        "guideId": 228,
+        "value": "new case",
+        "type": 2
+    },
+    {
+        "id": 281,
+        "guideId": 228,
+        "value": "select lab",
+        "type": 2
+    },
+    {
+        "id": 282,
+        "guideId": 228,
+        "value": "single unit option",
+        "type": 2
+    },
+    {
+        "id": 283,
+        "guideId": 228,
+        "value": "select the implant connection",
+        "type": 2
+    },
+    {
+        "id": 284,
+        "guideId": 228,
+        "value": "choose delivery date",
+        "type": 2
+    },
+    {
+        "id": 285,
+        "guideId": 228,
+        "value": "add emergence profile step",
+        "type": 2
+    },
+    {
+        "id": 286,
+        "guideId": 228,
+        "value": "You have completed case setup. Would you like to proceed to scan strategy guidance?",
+        "type": 0
+    },
+    {
+        "id": 287,
+        "guideId": 228,
+        "value": "the scanner is now ready",
+        "type": 2
+    },
+    {
+        "id": 288,
+        "guideId": 228,
+        "value": "full scan path 1",
+        "type": 2
+    },
+    {
+        "id": 289,
+        "guideId": 228,
+        "value": "full scan path 1",
+        "type": 2
+    },
+    {
+        "id": 290,
+        "guideId": 228,
+        "value": "occlusal scan path",
+        "type": 2
+    },
+    {
+        "id": 291,
+        "guideId": 228,
+        "value": "occlusal scan path",
+        "type": 2
+    },
+    {
+        "id": 292,
+        "guideId": 228,
+        "value": "lingual scan path",
+        "type": 2
+    },
+    {
+        "id": 293,
+        "guideId": 228,
+        "value": "lingual scan path",
+        "type": 2
+    },
+    {
+        "id": 294,
+        "guideId": 228,
+        "value": "buccal scan path",
+        "type": 2
+    },
+    {
+        "id": 295,
+        "guideId": 228,
+        "value": "buccal scan path",
+        "type": 2
+    },
+    {
+        "id": 296,
+        "guideId": 228,
+        "value": "inspect the result",
+        "type": 2
+    },
+    {
+        "id": 297,
+        "guideId": 228,
+        "value": "inspect the result",
+        "type": 2
+    },
+    {
+        "id": 298,
+        "guideId": 228,
+        "value": "scan the prep area",
+        "type": 2
+    },
+    {
+        "id": 299,
+        "guideId": 228,
+        "value": "missing scan data warning",
+        "type": 2
+    },
+    {
+        "id": 300,
+        "guideId": 228,
+        "value": "mark tooth",
+        "type": 2
+    },
+    {
+        "id": 301,
+        "guideId": 228,
+        "value": "lock surface icon",
+        "type": 2
+    },
+    {
+        "id": 302,
+        "guideId": 228,
+        "value": "lock surface tool",
+        "type": 2
+    },
+    {
+        "id": 303,
+        "guideId": 228,
+        "value": "hd photo icon",
+        "type": 2
+    },
+    {
+        "id": 304,
+        "guideId": 228,
+        "value": "hd photo example",
+        "type": 2
+    },
+    {
+        "id": 305,
+        "guideId": 228,
+        "value": "shade icon",
+        "type": 2
+    },
+    {
+        "id": 306,
+        "guideId": 228,
+        "value": "blue overlay",
+        "type": 2
+    },
+    {
+        "id": 307,
+        "guideId": 228,
+        "value": "remove healing cap",
+        "type": 2
+    },
+    {
+        "id": 308,
+        "guideId": 228,
+        "value": "insert scan body",
+        "type": 2
+    },
+    {
+        "id": 309,
+        "guideId": 228,
+        "value": "start at neighboring tooth",
+        "type": 2
+    },
+    {
+        "id": 310,
+        "guideId": 228,
+        "value": "scan body scan",
+        "type": 2
+    },
+    {
+        "id": 311,
+        "guideId": 228,
+        "value": "occlusion",
+        "type": 2
+    },
+    {
+        "id": 312,
+        "guideId": 228,
+        "value": "position the scanner",
+        "type": 2
+    },
+    {
+        "id": 313,
+        "guideId": 228,
+        "value": "both arches snap",
+        "type": 2
+    },
+    {
+        "id": 314,
+        "guideId": 228,
+        "value": "perfect alignment",
+        "type": 2
+    },
+    {
+        "id": 315,
+        "guideId": 228,
+        "value": "direction icon",
+        "type": 2
+    },
+    {
+        "id": 316,
+        "guideId": 228,
+        "value": "insertion direction",
+        "type": 2
+    },
+    {
+        "id": 317,
+        "guideId": 228,
+        "value": "annotations icon",
+        "type": 2
+    },
+    {
+        "id": 318,
+        "guideId": 228,
+        "value": "send to lab icon",
+        "type": 2
+    },
+    {
+        "id": 319,
+        "guideId": 228,
+        "value": "post processing",
+        "type": 2
+    },
+    {
+        "id": 320,
+        "guideId": 228,
+        "value": "First, select the Single units option, from the drop down list choose Implant abutment or Screw-retained crown then select the tooth you'll be working on.",
+        "type": 4
+    },
+    {
+        "id": 321,
+        "guideId": 228,
+        "value": "Select the implant connection, choose manufacturer, system and type of connection.\nLastly, choose the material for the implant and a crown, and a shade, if needed.\nPress Save.",
+        "type": 4
+    },
+    {
+        "id": 322,
+        "guideId": 228,
+        "value": "When you select an Abutment, TRIOS software automatically adds an extra scan step to the workflow. The Emergence profile step can be deselected by clicking it, if you do not wish to scan the gingiva around the healing cap.",
+        "type": 4
+    },
+    {
+        "id": 323,
+        "guideId": 228,
+        "value": "In selecting the emergence profile scan, you will have to perform 5 scans: lower arch, upper arch, prep area, scan body, and occlusion. It is recommended that you start by scanning the opposing arch first.",
+        "type": 4
+    },
+    {
+        "id": 324,
+        "guideId": 228,
+        "value": "Start with the molar occlusal surface, wait 3-5 clicks, then move towards the canine while the scanning captures the occlusal surface. When you reach the canine, turn slowly lingual, taking care first of areas where soft tissue may interfere with the scan.",
+        "type": 4
+    },
+    {
+        "id": 325,
+        "guideId": 228,
+        "value": "When the scanning is complete, you can inspect the result and prepare the scan for trimming unnecessary parts. If an important area is missing, simply start scanning the area.",
+        "type": 4
+    },
+    {
+        "id": 326,
+        "guideId": 228,
+        "value": "Scan the buccal side by moving mesial, and stop the scanning when the canine has been scanned.",
+        "type": 4
+    },
+    {
+        "id": 327,
+        "guideId": 228,
+        "value": "Roll the scanner 60-90 degres to the lingual side. Use the tip to keep the tongue away. Go along the lingual surface until you reach the last molar. Slowly roll over the lingual surface until you reach the last molar going towards the buccal side.",
+        "type": 4
+    },
+    {
+        "id": 328,
+        "guideId": 228,
+        "value": "When you have finished scanning the opposing arch, it is recommended to press Next to move on to scanning the implant arch. Alternatively, you can move on to the next step by using the hands-free method.",
+        "type": 4
+    },
+    {
+        "id": 329,
+        "guideId": 228,
+        "value": "Start with the molar occlusal surface, wait 3-5 clicks, then move towards the canine while the scanning captures the occlusal surface. When you reach the canine, turn slowly lingual, taking care first of areas where soft tissue may interfere with the scan.",
+        "type": 4
+    },
+    {
+        "id": 330,
+        "guideId": 228,
+        "value": "When the scanning is complete, you can inspect the result and prepare the scan for trimming unnecessary parts. If an important area is missing, simply start scanning the area.",
+        "type": 4
+    },
+    {
+        "id": 331,
+        "guideId": 228,
+        "value": "Scan the buccal side by moving mesial, and stop the scanning when the canine has been scanned.",
+        "type": 4
+    },
+    {
+        "id": 332,
+        "guideId": 228,
+        "value": "Roll the scanner 60-90 degres to the lingual side. Use the tip to keep the tongue away. Go along the lingual surface until you reach the last molar. Slowly roll over the lingual surface until you reach the last molar going towards the buccal side.",
+        "type": 4
+    },
+    {
+        "id": 333,
+        "guideId": 228,
+        "value": " You will be promted to mark the tooth. Click on the Mark Tooth option from the left-hand side menu, then click the center of the tooth on the occlusal surface for both abutment teeth. \nAt this point you may receive a warning informing you about missing scan data near the preparation area, which means you may have to scan again in those areas.",
+        "type": 4
+    },
+    {
+        "id": 334,
+        "guideId": 228,
+        "value": "At this step you can use the Lock surface tool, which can be found in the menu on the left-hand side of the screen.\nNow you can paint over the area of the scan which you wish to lock, which means that in the next scanning steps no further data will be collected from this area. So, if the gingiva collapses after you remove the healing cap you will still have a good scan of the emergence profile.",
+        "type": 4
+    },
+    {
+        "id": 335,
+        "guideId": 228,
+        "value": "To take an HD Photo of the emergence profile, select it from the left-hand side of the screen or select it from the navigation wheel. Then tap the scanner button to start taking a photo. The green box means that the photo is in focus and if you tap the scanner button again the HD photo will be taken.",
+        "type": 4
+    },
+    {
+        "id": 336,
+        "guideId": 228,
+        "value": "To perform a shade measurement, you will be prompted to Add a shade to the scan by clicking an area which is free from blue overlay. To remove an area of blue overlay, place the scan tip over the area and re-scan to collect more information. The blue overlay will disappear as you do so.",
+        "type": 4
+    },
+    {
+        "id": 337,
+        "guideId": 228,
+        "value": "\nThe software will automatically remove that area of the scan that was marked previously and replace it with data as you scan.\nIt is important to scan only the scan body and the closest area to ensure good coverage of the scan body. Complete the following scan sequence.",
+        "type": 4
+    },
+    {
+        "id": 338,
+        "guideId": 228,
+        "value": "Start the scanner pointing at a neighboring tooth. Once the scanner has picked up the position, slowly move to the scan body and circle around it to scan it from all angles.",
+        "type": 4
+    },
+    {
+        "id": 339,
+        "guideId": 228,
+        "value": "It is especially important to cover the upper third of the scanbody to make it possible for the laboratory to recognize the correct position.",
+        "type": 4
+    },
+    {
+        "id": 340,
+        "guideId": 228,
+        "value": "Scanning the occlusion is the final scanning stage of the workflow. Remember to remove the scan body and ask the patient to bite and then scan the occlusion following the official scanning strategy. The bite will snap into place. Now you can move on to the validation stage of the workflow by selecting it from the workflow bar at the top of the screen.",
+        "type": 4
+    },
+    {
+        "id": 341,
+        "guideId": 228,
+        "value": "Tip: Pull out the cheek a bit with the scanner tip. Not touching sensitive gingiva will increase patient comfort.",
+        "type": 4
+    },
+    {
+        "id": 342,
+        "guideId": 228,
+        "value": "Tip: Ask the patient to bite in centric occlusion.",
+        "type": 4
+    },
+    {
+        "id": 343,
+        "guideId": 228,
+        "value": "Tip: The scanner tip will hold out the cheek. ",
+        "type": 4
+    },
+    {
+        "id": 344,
+        "guideId": 228,
+        "value": "Tip: Make sure the patient gets the same bite position again.",
+        "type": 4
+    },
+    {
+        "id": 345,
+        "guideId": 228,
+        "value": "Tip: Continue scanning even if the scan snaps together before scanning 3-4 teeth.",
+        "type": 4
+    },
+    {
+        "id": 346,
+        "guideId": 228,
+        "value": "When you click the direction button, the software will automatically suggest an optimal insertion direction.\n\nYou can make adjustments to this by rotating the scan so that you can see all the preparation area, then click the Use View button. You can inspect to see if there are any undercuts, which would be highlighted in red.",
+        "type": 4
+    },
+    {
+        "id": 347,
+        "guideId": 228,
+        "value": "When you have completed adding your annotations to the scan, you can proceed to sending the order.",
+        "type": 4
+    },
+    {
+        "id": 348,
+        "guideId": 228,
+        "value": "After reviewing the order, post-processing will occur, and then the order will be sent. You have successfully navigated the workflow for an implant.",
+        "type": 4
     }
 ]

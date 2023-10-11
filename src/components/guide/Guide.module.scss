@@ -6,19 +6,25 @@
 }
 
 
-.calculatorList {
+.guidesContainer {
+  height: 45rem;
+  display: flex;
+  justify-content: center;
+}
+
+
+.guidesSelection {
   border: solid 1px #E0E0E0;
   margin: 1rem 0;
   padding: 2rem;
   border-radius: 0.5rem;
   font-weight: bold;
-  &:hover,  + .selected{
-    border-color:var(--primary-color);
+  &:hover {
+    border-color:var(--primary-color) !important;
     cursor: pointer;
     border-width: 2px;
   }
   
 
 }
-
 

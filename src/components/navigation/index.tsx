@@ -31,7 +31,7 @@ const Navigation = () => {
   useCheckMobileScreen(closeMenu);
 
   return (
-    <div ref={boxRef} className="absolute z-2 w-full border-bottom-1 border-500	 bg-white shadow-3 ">
+    <div ref={boxRef} className="absolute z-2 w-full border-bottom-1 border-100	 bg-white shadow-1 ">
       
       <Sidebar isOpen={isOpen} toggle={toggle} navLinks={navLinks} />
       <Navbar isOpen={isOpen} toggle={toggle} navLinks={navLinks}/>

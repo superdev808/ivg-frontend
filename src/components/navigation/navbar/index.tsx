@@ -12,9 +12,9 @@ const Navbar = ({ toggle, isOpen, navLinks }: { toggle: () => void; isOpen: bool
 	const pathname = usePathname();
 
 	return (
-		<div className="h-6rem mx-6">
-			<div className="w-full pt-3 sticky top-0">
-				<div className=" mx-auto  h-full">
+		<div className="h-4rem px-6 w-full sticky top-0">
+			{/* <div className=""> */}
+				{/* <div className=" mx-auto  h-full"> */}
 					<div className="flex justify-content-between items-center h-full">
 						<Logo />
 						<div
@@ -44,8 +44,8 @@ const Navbar = ({ toggle, isOpen, navLinks }: { toggle: () => void; isOpen: bool
 						</div>
 					</div>
 					{/* <Divider/> */}
-				</div>
-			</div>
+				{/* </div> */}
+			{/* </div> */}
 			<div className={pathname !== '/' ? ' hidden' : ''}>
 				<div className={' search-wrapper flex  justify-content-center align-items-center'}>
 					<div className={' w-full md:w-5 '}>

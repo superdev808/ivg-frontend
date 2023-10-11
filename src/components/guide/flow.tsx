@@ -12,14 +12,14 @@ import ReactFlow, {
 	MiniMap,
 	EdgeTypes,
 } from 'reactflow';
-import dagre from '@dagrejs/dagre';
 import 'reactflow/dist/style.css';
+
+import dagre from '@dagrejs/dagre';
 
 import CustomNode from './CustomNode';
 import CustomEdge from './CustomEdge';
 
-import { selectGuide, setGuideData } from '@/redux/features/guideSlice';
-import { set } from 'immer/dist/internal';
+import { selectGuide } from '@/redux/features/guideSelectionSlice';
 
 interface NodeData {
 	id: number;
@@ -61,14 +61,16 @@ interface Edge {
 	style: any;
 }
 
-const GuideFlow = () => {
-	const { currentPath, currentNode, guideNodeData, guideEdgeData, currentEdges } = useSelector(selectGuide);
+const Flow = () => {
+	const { selectedEdgeData, selectedNodeData, selectedPathIds } = useSelector(selectGuide);
 
 	const [initialNodes, setInitialNodes] = useState<Node[]>([]);
 	const [initialEdges, setInitialEdges] = useState<Edge[]>([]);
 
 	const [nodes, setNodes, onNodesChange] = useNodesState([]);
 	const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+	const { setCenter, getNode, getNodes } = useReactFlow();
 
 	const nodeTypes: NodeTypes = useMemo(
 		() => ({
@@ -83,8 +85,7 @@ const GuideFlow = () => {
 		[]
 	);
 
-	const generateData = (nodeData: NodeData[], edgeData: EdgeData[]) => {
-		let nodeId = 0;
+	const initializeFlow = () => {
 		function nestNodesEdges(nodes: NodeData[], edges: EdgeData[]) {
 			nodes.forEach((node: NodeData) => {
 				node.children = [];
@@ -109,7 +110,7 @@ const GuideFlow = () => {
 			let newNodes: Node[] | any = [];
 			let newEdges: Edge[] | any = [];
 
-			const newNode: Node = {
+			const newNode = {
 				id: String(nodeId),
 				data: { value: node.value, refId: node.id, start: node.start, end: false, active: false, marked: false },
 				width: 0,
@@ -119,7 +120,7 @@ const GuideFlow = () => {
 				position: { x: 0, y: 0 },
 				type: 'custom',
 				draggable: false,
-				// hidden: true,
+				hidden: false,
 			};
 			nodeId++;
 
@@ -133,7 +134,7 @@ const GuideFlow = () => {
 					if (child) {
 						let newEdge: Edge = {
 							id: 'edge_' + newNode.id + '_' + child.id,
-							data: { value: node.edges[i].value, refId: node.edges[i].id, option:true },
+							data: { value: node.edges[i].value, refId: node.edges[i].id, option: true },
 							source: String(newNode.id),
 							target: String(child.id),
 							type: 'custom',
@@ -156,21 +157,24 @@ const GuideFlow = () => {
 
 			return { newNodes, newEdges };
 		}
-		const rootNode = nestNodesEdges(nodeData, edgeData);
+		let nodeId = 0;
 
+		const nodesCopy = JSON.parse(JSON.stringify(selectedNodeData));
+		const edgesCopy = JSON.parse(JSON.stringify(selectedEdgeData));
+		const rootNode = nestNodesEdges(nodesCopy, edgesCopy);
 		if (!rootNode) return { nodes: [], edges: [] };
 		const { newNodes: nodes, newEdges: edges } = unpackNodesEdges(rootNode);
+		
 		setInitialNodes(nodes);
 		setInitialEdges(edges);
 	};
 
 	// Function to calculate the XY position for nodes
 	const getHierarchicalMultiLevelLayout = (nodes) => {
-
-		const spacingX = 200;
-		const spacingY = 50;
+		const spacingX = 600;
+		const spacingY = 150;
 		const maxChildrenPerLevel = 4;
-		const activeOffset = -250; // Additional Y-offset for active nodes
+		const activeOffset = 0; // Additional Y-offset for active nodes
 
 		// Helper function to get the deepest y-position among children
 		const getDeepestChildY = (node) => {
@@ -181,6 +185,8 @@ const GuideFlow = () => {
 
 		// Helper function to set positions recursively
 		const setPositions = (node, x, y, level) => {
+			
+			
 			// Additional offset for active nodes
 			const additionalOffset = node.data.active ? activeOffset : 0;
 
@@ -214,6 +220,7 @@ const GuideFlow = () => {
 				nextX += spacingX;
 			}
 		};
+
 		// Set positions starting from the root node (assuming root node has id 'root')
 		setPositions(
 			nodes.find((n) => n.data.start),
@@ -223,7 +230,6 @@ const GuideFlow = () => {
 		); // Start from level 0
 	};
 
-	// Now, nodes will have their x, y positions set in node.position
 
 	const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
 		const dagreGraph = new dagre.graphlib.Graph();
@@ -260,256 +266,197 @@ const GuideFlow = () => {
 		return { nodes, edges };
 	};
 
-	const { setCenter, getNode, getNodes } = useReactFlow();
-
+	// inintialize  nodes and edges for flow
 	useEffect(() => {
-		if (!guideNodeData || !guideEdgeData) return;
-		const nodes = JSON.parse(JSON.stringify(guideNodeData));
-		const edges = JSON.parse(JSON.stringify(guideEdgeData));
-		generateData(nodes, edges);
-	}, [guideNodeData]);
+		if (selectedNodeData.length === 0 || selectedEdgeData.length === 0) return;
+		initializeFlow();
+	}, [selectedNodeData, selectedEdgeData]); //
 
-	useEffect(() => {
-		if (!nodes) return;
-		if (!currentNode) return;
-		const targetNode: Node | undefined = (nodes as Node[]).find((node: Node) => node.data.refId === currentNode.id);
-		if (!targetNode) return;
-		setCenter(targetNode?.position.x + 150, targetNode.position.y, { zoom: 1.25, duration: 500 });
-	}, [currentNode, nodes]);
+	// useEffect(() => {
+	// 	if (!nodes) return;
+	// 	if (!currentNode) return;
+	// 	const targetNode: Node | undefined = (nodes as Node[]).find((node: Node) => node.data.refId === currentNode.id);
+	// 	if (!targetNode) return;
+	// 	setCenter(targetNode?.position.x + 150, targetNode.position.y, { zoom: 1.25, duration: 500 });
+	// }, [currentNode, nodes]);
 
 	// Updates nodes and edges when currentPath or currentNode changes
 	useEffect(() => {
-		if (!currentPath || !currentEdges || !currentNode || initialNodes.length == 0) return;
-		console.log('🚀 ~ file: flow.tsx:265 ~ useEffect ~ initialNodes.length:', initialNodes.length);
+		if (initialNodes.length === 0) return;
 
-		let activeNodes: Number[] = [currentNode.id];
-		let activeEdges: Number[] = [...currentEdges.map((edge: any) => edge.id)];
+		const nodes = JSON.parse(JSON.stringify(initialNodes));
+		// getHierarchicalMultiLevelLayout(nodes);
+		// const { nodes: layoutNodes, edges: layoutEdges } = getLayoutedElements(initialNodes, initialEdges);
+		// console.log("🚀 ~ file: flow.tsx:292 ~ useEffect ~ nodes:", nodes)
+		// console.log("🚀 ~ file: flow.tsx:293 ~ useEffect ~ initialEdges:", initialEdges)
 
-		let potentialNodes: Node[] = [];
-		currentPath.forEach((path: any) => {
-			if (path[0]) {
-				activeNodes.push(path[0].id);
-
-				activeEdges.push(path[2]);
-				// activeEdges = path[1].map((edge: any) => edge.id);
-				// potentialNodes = path[1].map((edge: any) => edge.target);
-			}
-		});
-
-		const newNodes = [];
-		let currentNodeId = '';
-		initialNodes.forEach((node: Node) => {
-			if (node.data.refId === currentNode.id) {
-				currentNodeId = node.id;
-				node.data = {
-					...node.data,
-					active: true,
-					marked: false,
-				};
-				newNodes.push(node);
-			}
-			if (activeNodes.includes(node.data.refId) && node.id !== currentNodeId) {
-				// set new node active if not active
-				// if (!node.data.active) {
-
-				node.data = {
-					...node.data,
-					active: true,
-					marked: false,
-				};
-				// }
-				newNodes.push(node);
-			}
-			// else if (node.data.active) {
-			// 	// set node inactive if active
-			// 	node.data = {
-			// 		...node.data,
-			// 		active: false,
-			// 	};
-			// }
-		});
-
-		//  initialEdges.filter((edge: Edge) => edge.source === currentNodeId );
-
-		const newEdges = [];
-		initialEdges.forEach((edge: Edge) => {
-			if (activeEdges.includes(edge.data.refId)) {
-				const targetNode = initialNodes.find((node: Node) => String(node.id) === edge.target);
-				if (targetNode && !newNodes.includes(targetNode)) {
-					targetNode.data.marked = true;
-					potentialNodes.push(targetNode);
-				}
+		// setNodes((nds) => {return [...nds,...layoutNodes]});
+		setEdges([...initialEdges]);
 	
-				newEdges.push(edge);
-			}
-			// else if (edge.data.active) {
-			// 	edge.data = {
-			// 		...edge.data,
-			// 		active: false,
-			// 	};
-			// }
-		});
+		// getHierarchicalMultiLevelLayout(nodes);
+		// console.log("🚀 ~ file: flow.tsx:292 ~ useEffect ~ nodes:", nodes)
 
-		// potentialNodes.forEach((node: Node) => {
+		// setNodes(nodes);
+		// setEdges(initialEdges);
+		// console.log(initialNodes)
+		// getHierarchicalMultiLevelLayout(initialNodes);
+		// let activeNodes: Number[] = [currentNode.id];
+		// let activeEdges: Number[] = [...currentEdges.map((edge: any) => edge.id)];
 
-		// 		node.data.marked = true;
+		// let potentialNodes: Node[] = [];
+		// currentPath.forEach((path: any) => {
+		// 	if (path[0]) {
+		// 		activeNodes.push(path[0].id);
+
+		// 		activeEdges.push(path[2]);
+		// 		// activeEdges = path[1].map((edge: any) => edge.id);
+		// 		// potentialNodes = path[1].map((edge: any) => edge.target);
+		// 	}
 		// });
-		// console.log(newNodes)
-		const layoutnodes: Node[] = [...newNodes, ...potentialNodes];
-		console.log('🚀 ~ file: flow.tsx:338 ~ useEffect ~ layoutnodes:', layoutnodes);
-		const layoutedges: Edge[] = [...newEdges];
-		// const layoutnodes = JSON.parse(JSON.stringify([...newNodes]));
-		// const layoutedges = JSON.parse(JSON.stringify([...newEdges]));
 
-		// getHierarchicalMultiLevelLayout(layoutnodes);
-		// console.log(layoutnodes, layoutedges);
-		// const { nodes: layoutNodes, edges: layoutEdges } = getLayoutedElements(layoutnodes, layoutedges);
+		// const newNodes = [];
+		// let currentNodeId = '';
+		// initialNodes.forEach((node: Node) => {
+		// 	if (node.data.refId === currentNode.id) {
+		// 		currentNodeId = node.id;
+		// 		node.data = {
+		// 			...node.data,
+		// 			active: true,
+		// 			marked: false,
+		// 		};
+		// 		newNodes.push(node);
+		// 	}
+		// 	if (activeNodes.includes(node.data.refId) && node.id !== currentNodeId) {
+		// 		// set new node active if not active
+		// 		// if (!node.data.active) {
 
-		// setNodes(layoutnodes);
+		// 		node.data = {
+		// 			...node.data,
+		// 			active: true,
+		// 			marked: false,
+		// 		};
+		// 		// }
+		// 		newNodes.push(node);
+		// 	}
+		// 	// else if (node.data.active) {
+		// 	// 	// set node inactive if active
+		// 	// 	node.data = {
+		// 	// 		...node.data,
+		// 	// 		active: false,
+		// 	// 	};
+		// 	// }
+		// });
 
-		setEdges((eds) => 
-		
-		{
-			const filteredArray = layoutedges.filter((obj1) => {
-				return !eds.some((obj2) => {
-					return obj1.id === obj2.id;
-				});
-			});
-			if (eds.length > 0) {
-				eds.map((edge) => {
-				
-					console.log("🚀 ~ file: flow.tsx:378 ~ eds.map ~ activeEdges:", activeEdges)
-					if (activeEdges.includes(edge.data.refId)) {
-						// set new node active if not active
-						edge.data = {
-							...edge.data,
-							active: true,
-							
-						};
-					}
-					else  {
-						// set node inactive if active
-						edge.data = {
-							...edge.data,
-							active: false,
-							option: false
-						};
-					}
+		// //  initialEdges.filter((edge: Edge) => edge.source === currentNodeId );
 
-				});
-			}
+		// const newEdges = [];
+		// initialEdges.forEach((edge: Edge) => {
+		// 	if (activeEdges.includes(edge.data.refId)) {
+		// 		const targetNode = initialNodes.find((node: Node) => String(node.id) === edge.target);
+		// 		if (targetNode && !newNodes.includes(targetNode)) {
+		// 			targetNode.data.marked = true;
+		// 			potentialNodes.push(targetNode);
+		// 		}
 
+		// 		newEdges.push(edge);
+		// 	}
+		// 	// else if (edge.data.active) {
+		// 	// 	edge.data = {
+		// 	// 		...edge.data,
+		// 	// 		active: false,
+		// 	// 	};
+		// 	// }
+		// });
 
-			console.log("🚀 ~ file: flow.tsx:396 ~ useEffect ~ eds:", eds)
-			return [...eds, ...filteredArray]
+		// // potentialNodes.forEach((node: Node) => {
 
+		// // 		node.data.marked = true;
+		// // });
+		// // console.log(newNodes)
+		// const layoutnodes: Node[] = [...newNodes, ...potentialNodes];
+		// console.log('🚀 ~ file: flow.tsx:338 ~ useEffect ~ layoutnodes:', layoutnodes);
+		// const layoutedges: Edge[] = [...newEdges];
+		// // const layoutnodes = JSON.parse(JSON.stringify([...newNodes]));
+		// // const layoutedges = JSON.parse(JSON.stringify([...newEdges]));
 
-		}
-		);
+		// // getHierarchicalMultiLevelLayout(layoutnodes);
+		// // console.log(layoutnodes, layoutedges);
+		// // const { nodes: layoutNodes, edges: layoutEdges } = getLayoutedElements(layoutnodes, layoutedges);
+
+		// // setNodes(layoutnodes);
+
+		// setEdges((eds) =>
+
+		// {
+		// 	const filteredArray = layoutedges.filter((obj1) => {
+		// 		return !eds.some((obj2) => {
+		// 			return obj1.id === obj2.id;
+		// 		});
+		// 	});
+		// 	if (eds.length > 0) {
+		// 		eds.map((edge) => {
+
+		// 			console.log("🚀 ~ file: flow.tsx:378 ~ eds.map ~ activeEdges:", activeEdges)
+		// 			if (activeEdges.includes(edge.data.refId)) {
+		// 				// set new node active if not active
+		// 				edge.data = {
+		// 					...edge.data,
+		// 					active: true,
+
+		// 				};
+		// 			}
+		// 			else  {
+		// 				// set node inactive if active
+		// 				edge.data = {
+		// 					...edge.data,
+		// 					active: false,
+		// 					option: false
+		// 				};
+		// 			}
+
+		// 		});
+		// 	}
+
+		// 	console.log("🚀 ~ file: flow.tsx:396 ~ useEffect ~ eds:", eds)
+		// 	return [...eds, ...filteredArray]
+
+		// }
+		// );
 
 		setNodes((nds) => {
 			// filter out existing nodes
-			const filteredArray = layoutnodes.filter((obj1) => {
-				return !nds.some((obj2) => {
-					return obj1.id === obj2.id;
-				});
-			});
+			// const filteredArray = layoutnodes.filter((obj1) => {
+			// 	return !nds.some((obj2) => {
+			// 		return obj1.id === obj2.id;
+			// 	});
+			// });
 
-			// unhide exisiting nodes
+			// // unhide exisiting nodes
 
-			if (nds.length > 0) {
-				nds.map((node) => {
-					if (activeNodes.includes(node.data.refId)) {
-						// set new node active if not active
-						node.data = {
-							...node.data,
-							active: true,
-							marked: false,
-						};
-					}
-					return node;
-				});
-			}
-			const nodes = [...nds, ...filteredArray];
+			// if (nds.length > 0) {
+			// 	nds.map((node) => {
+			// 		if (activeNodes.includes(node.data.refId)) {
+			// 			// set new node active if not active
+			// 			node.data = {
+			// 				...node.data,
+			// 				active: true,
+			// 				marked: false,
+			// 			};
+			// 		}
+			// 		return node;
+			// 	});
+			// }
+			// const nodes = [...nds, ...filteredArray];
 
 			getHierarchicalMultiLevelLayout(nodes);
 			console.log('🚀 ~ file: flow.tsx:378 ~ setNodes ~ final:', nodes);
 
 			return nodes;
 		});
-		// setEdges(layoutEdges);
-
-		// // add existing active nodes/edges and unmask edges
-		// currentPath.forEach((path: any) => {
-		// 	if (path[0]) {
-		// 		activeNodes.push(path[0].id);
-		// 		// activeEdges.push(path[2]);
-		// 		activeEdges = path[1].map((edge: any) => edge.id);
-		// 		potentialNodes = path[1].map((edge: any) => edge.target);
-		// 	}
-		// });
-		// // include current node
-		// activeNodes.push(currentNode?.id);
-		// activeEdges = [...activeEdges, ...currentEdges?.map((edge: any) => edge.id)]
-
-		// setNodes((nds) =>
-		// 	nds.map((node) => {
-		// 		if (activeNodes.includes(node.data.refId)) {
-		// 			// set new node active if not active
-		// 			if (!node.data.active) {
-		// 				node.hidden = false;
-		// 				node.data = {
-		// 					...node.data,
-		// 					active: true,
-		// 				};
-		// 			}
-		// 		}
-		// 		else if (node.data.active) {
-		// 			// set node inactive if active
-		// 			node.hidden = true;
-		// 			node.data = {
-		// 				...node.data,
-		// 				active: false,
-		// 			};
-		// 		}
-		// 		if(potentialNodes.includes(node.data.refId)){
-		// 			node.data = {
-		// 				...node.data,
-		// 				marked: true,
-		// 			}
-		// 		} else if(node.data.marked){
-		// 				node.data = {
-		// 					...node.data,
-		// 					marked: false,
-		// 				}
-		// 			}
-
-		// 		return node;
-		// 	})
-		// );
-
-		// setEdges((eds) =>
-		// 	eds.map((edge) => {
-		// 		if (activeEdges.includes(edge.data.refId)) {
-		// 			if (!edge.data.active) {
-		// 				edge.data = {
-		// 					...edge.data,
-		// 					active: true,
-		// 				};
-		// 			}
-		// 		}
-		// 		// else if (edge.data.active) {
-		// 		// 	edge.data = {
-		// 		// 		...edge.data,
-		// 		// 		active: false,
-		// 		// 	};
-		// 		// }
-		// 		return edge;
-		// 	})
-		// );
-	}, [currentPath, initialNodes]);
+	}, [initialNodes, initialEdges]);
 
 	return (
+	
 		<ReactFlow
 			nodes={nodes}
 			edges={edges}
@@ -529,13 +476,15 @@ const GuideFlow = () => {
 				gap={20}
 			/>
 		</ReactFlow>
+		
+
 	);
 };
-function Flow() {
+function GuideFlow() {
 	return (
 		<ReactFlowProvider>
-			<GuideFlow />
+			<Flow />
 		</ReactFlowProvider>
 	);
 }
-export default Flow;
+export default GuideFlow;

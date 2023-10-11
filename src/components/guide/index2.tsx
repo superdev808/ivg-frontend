@@ -1,8 +1,8 @@
 import { use, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectGuide, setCurrentPath } from '@/redux/features/guideSlice';
-import { setCurrentNode, setCurrentEdges } from '@/redux/features/guideSlice';
+import { selectGuide, setCurrentPath } from '@/redux/features/guidesSlice';
+import { setCurrentNode, setCurrentEdges } from '@/redux/features/guidesSlice';
 
 import { Flow } from '@/types/Guide';
 

@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 
-import { selectGuide } from '@/redux/features/guideSlice';
+
 import { Button } from 'primereact/button';
 export default function GuideHeader() {
-	const { selectedGuide } = useSelector(selectGuide);
+	
 
 	return (
 		<>

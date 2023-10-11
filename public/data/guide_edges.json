@@ -66,599 +66,592 @@
         "id": 106,
         "guideId": 2,
         "value": "Next",
-        "source": 11,
-        "target": 11
-    },
-    {
-        "id": 107,
-        "guideId": 2,
-        "value": "Next",
         "source": 10,
         "target": 11
     },
     {
-        "id": 108,
+        "id": 107,
         "guideId": 2,
         "value": "Yes, proceed to scan strategy guidance.",
         "source": 62,
         "target": 6
     },
     {
-        "id": 109,
+        "id": 108,
         "guideId": 2,
         "value": "Next",
         "source": 6,
         "target": 28
     },
     {
-        "id": 110,
+        "id": 109,
         "guideId": 2,
         "value": "Next",
         "source": 63,
         "target": 28
     },
     {
-        "id": 111,
+        "id": 110,
         "guideId": 2,
         "value": "Next",
         "source": 74,
         "target": 12
     },
     {
-        "id": 112,
+        "id": 111,
         "guideId": 2,
         "value": "Next",
         "source": 76,
         "target": 13
     },
     {
-        "id": 113,
+        "id": 112,
         "guideId": 2,
         "value": "Next",
         "source": 13,
         "target": 14
     },
     {
-        "id": 114,
+        "id": 113,
         "guideId": 2,
         "value": "Next",
         "source": 78,
         "target": 14
     },
     {
-        "id": 115,
+        "id": 114,
         "guideId": 2,
         "value": "Next",
         "source": 77,
         "target": 14
     },
     {
-        "id": 116,
+        "id": 115,
         "guideId": 2,
         "value": "Next",
         "source": 12,
         "target": 13
     },
     {
-        "id": 117,
+        "id": 116,
         "guideId": 2,
         "value": "Next",
         "source": 14,
         "target": 15
     },
     {
-        "id": 118,
+        "id": 117,
         "guideId": 2,
         "value": "Next",
         "source": 80,
         "target": 15
     },
     {
-        "id": 119,
+        "id": 118,
         "guideId": 2,
         "value": "Next",
         "source": 79,
         "target": 15
     },
     {
-        "id": 120,
+        "id": 119,
         "guideId": 2,
         "value": "Next",
         "source": 15,
         "target": 16
     },
     {
-        "id": 121,
+        "id": 120,
         "guideId": 2,
         "value": "Next",
         "source": 82,
         "target": 16
     },
     {
-        "id": 122,
+        "id": 121,
         "guideId": 2,
         "value": "Next",
         "source": 81,
         "target": 16
     },
     {
-        "id": 123,
+        "id": 122,
         "guideId": 2,
         "value": "Next",
         "source": 16,
         "target": 17
     },
     {
-        "id": 124,
+        "id": 123,
         "guideId": 2,
         "value": "Next",
         "source": 84,
         "target": 17
     },
     {
-        "id": 125,
+        "id": 124,
         "guideId": 2,
         "value": "Next",
         "source": 83,
         "target": 17
     },
     {
-        "id": 126,
+        "id": 125,
         "guideId": 2,
         "value": "Next",
         "source": 87,
         "target": 18
     },
     {
-        "id": 127,
+        "id": 126,
         "guideId": 2,
         "value": "Next",
         "source": 92,
         "target": 19
     },
     {
-        "id": 128,
+        "id": 127,
         "guideId": 2,
         "value": "Next",
         "source": 91,
         "target": 19
     },
     {
-        "id": 129,
+        "id": 128,
         "guideId": 2,
         "value": "Next",
         "source": 19,
         "target": 20
     },
     {
-        "id": 130,
+        "id": 129,
         "guideId": 2,
         "value": "Next",
         "source": 20,
         "target": 29
     },
     {
-        "id": 131,
+        "id": 130,
         "guideId": 2,
         "value": "Next",
         "source": 94,
         "target": 29
     },
     {
-        "id": 132,
+        "id": 131,
         "guideId": 2,
         "value": "Next",
         "source": 95,
         "target": 29
     },
     {
-        "id": 133,
+        "id": 132,
         "guideId": 2,
         "value": "Next",
         "source": 93,
         "target": 20
     },
     {
-        "id": 134,
+        "id": 133,
         "guideId": 2,
         "value": "Next",
         "source": 61,
         "target": 11
     },
     {
-        "id": 135,
+        "id": 134,
         "guideId": 2,
         "value": "Next",
         "source": 60,
         "target": 10
     },
     {
-        "id": 136,
+        "id": 135,
         "guideId": 2,
         "value": "Next",
         "source": 57,
         "target": 7
     },
     {
-        "id": 137,
+        "id": 136,
         "guideId": 2,
         "value": "Next",
         "source": 56,
         "target": 5
     },
     {
-        "id": 138,
+        "id": 137,
         "guideId": 2,
         "value": "Next",
         "source": 23,
         "target": 5
     },
     {
-        "id": 139,
+        "id": 138,
         "guideId": 2,
         "value": "Next",
         "source": 24,
         "target": 7
     },
     {
-        "id": 140,
+        "id": 139,
         "guideId": 2,
         "value": "Next",
         "source": 25,
         "target": 13
     },
     {
-        "id": 141,
+        "id": 140,
         "guideId": 2,
         "value": "Next",
         "source": 26,
         "target": 19
     },
     {
-        "id": 142,
+        "id": 141,
         "guideId": 2,
         "value": "No, I am confident scanning.",
         "source": 62,
         "target": null
     },
     {
-        "id": 143,
+        "id": 142,
         "guideId": 2,
         "value": "I have already scanned the arches. Skip to the prep scan.",
         "source": 28,
         "target": 12
     },
     {
-        "id": 144,
+        "id": 143,
         "guideId": 2,
         "value": "I have already scanned the arches and the prep. Skip to the scanbody scan.",
         "source": 28,
         "target": 17
     },
     {
-        "id": 145,
+        "id": 144,
         "guideId": 2,
         "value": "Implant Arch Scan",
         "source": 33,
         "target": 32
     },
     {
-        "id": 146,
+        "id": 145,
         "guideId": 2,
         "value": "I'd like a full walkthrough of all necessary scans.",
         "source": 28,
         "target": 30
     },
     {
-        "id": 147,
+        "id": 146,
         "guideId": 2,
         "value": "I have already scanned the arches, prep, and scanbody. Skip to the occlusion scan.",
         "source": 28,
         "target": 18
     },
     {
-        "id": 148,
+        "id": 147,
         "guideId": 2,
         "value": "Next",
         "source": 75,
         "target": 13
     },
     {
-        "id": 149,
+        "id": 148,
         "guideId": 2,
         "value": "Next",
         "source": 31,
         "target": 30
     },
     {
-        "id": 150,
+        "id": 149,
         "guideId": 2,
         "value": "Next",
         "source": 54,
         "target": 18
     },
     {
-        "id": 151,
+        "id": 150,
         "guideId": 2,
         "value": "Next",
         "source": 64,
         "target": 30
     },
     {
-        "id": 152,
+        "id": 151,
         "guideId": 2,
         "value": "Next",
         "source": 30,
         "target": 34
     },
     {
-        "id": 153,
+        "id": 152,
         "guideId": 2,
         "value": "Next",
         "source": 34,
         "target": 35
     },
     {
-        "id": 154,
+        "id": 153,
         "guideId": 2,
         "value": "Next",
         "source": 35,
         "target": 36
     },
     {
-        "id": 155,
+        "id": 154,
         "guideId": 2,
         "value": "Next",
         "source": 36,
         "target": 37
     },
     {
-        "id": 156,
+        "id": 155,
         "guideId": 2,
         "value": "Next",
         "source": 38,
         "target": 34
     },
     {
-        "id": 157,
+        "id": 156,
         "guideId": 2,
         "value": "Next",
         "source": 72,
         "target": 37
     },
     {
-        "id": 158,
+        "id": 157,
         "guideId": 2,
         "value": "Next",
         "source": 37,
         "target": 33
     },
     {
-        "id": 159,
+        "id": 158,
         "guideId": 2,
         "value": "Next",
         "source": 66,
         "target": 34
     },
     {
-        "id": 160,
+        "id": 159,
         "guideId": 2,
         "value": "Next",
         "source": 68,
         "target": 35
     },
     {
-        "id": 161,
+        "id": 160,
         "guideId": 2,
         "value": "Next",
         "source": 70,
         "target": 36
     },
     {
-        "id": 162,
+        "id": 161,
         "guideId": 2,
         "value": "Next",
         "source": 39,
         "target": 40
     },
     {
-        "id": 163,
+        "id": 162,
         "guideId": 2,
         "value": "Next",
         "source": 40,
         "target": 41
     },
     {
-        "id": 164,
+        "id": 163,
         "guideId": 2,
         "value": "Next",
         "source": 41,
         "target": 42
     },
     {
-        "id": 165,
+        "id": 164,
         "guideId": 2,
         "value": "Next",
         "source": 73,
         "target": 42
     },
     {
-        "id": 166,
+        "id": 165,
         "guideId": 2,
         "value": "Next",
         "source": 67,
         "target": 39
     },
     {
-        "id": 167,
+        "id": 166,
         "guideId": 2,
         "value": "Next",
         "source": 69,
         "target": 40
     },
     {
-        "id": 168,
+        "id": 167,
         "guideId": 2,
         "value": "Next",
         "source": 71,
         "target": 41
     },
     {
-        "id": 169,
+        "id": 168,
         "guideId": 2,
         "value": "Next",
         "source": 32,
         "target": 39
     },
     {
-        "id": 170,
+        "id": 169,
         "guideId": 2,
         "value": "Next",
         "source": 44,
         "target": 39
     },
     {
-        "id": 171,
+        "id": 170,
         "guideId": 2,
         "value": "Next",
         "source": 65,
         "target": 32
     },
     {
-        "id": 172,
+        "id": 171,
         "guideId": 2,
         "value": "Next",
         "source": 43,
-        "target": 32
+        "target": 65
     },
     {
-        "id": 173,
+        "id": 172,
         "guideId": 2,
         "value": "Hands-free Method",
         "source": 33,
         "target": 12
     },
     {
-        "id": 174,
+        "id": 173,
         "guideId": 2,
         "value": "Next",
         "source": 42,
         "target": 12
     },
     {
-        "id": 175,
+        "id": 174,
         "guideId": 2,
         "value": "Next",
         "source": 85,
         "target": 45
     },
     {
-        "id": 176,
+        "id": 175,
         "guideId": 2,
         "value": "Next",
         "source": 86,
         "target": 46
     },
     {
-        "id": 177,
+        "id": 176,
         "guideId": 2,
         "value": "Next",
         "source": 17,
         "target": 45
     },
     {
-        "id": 178,
+        "id": 177,
         "guideId": 2,
         "value": "Next",
         "source": 45,
         "target": 46
     },
     {
-        "id": 179,
+        "id": 178,
         "guideId": 2,
         "value": "Next",
         "source": 46,
         "target": 47
     },
     {
-        "id": 180,
+        "id": 179,
         "guideId": 2,
         "value": "Next",
         "source": 47,
         "target": 18
     },
     {
-        "id": 181,
+        "id": 180,
         "guideId": 2,
         "value": "Next",
         "source": 53,
         "target": 48
     },
     {
-        "id": 182,
+        "id": 181,
         "guideId": 2,
         "value": "Next",
         "source": 48,
         "target": 49
     },
     {
-        "id": 183,
+        "id": 182,
         "guideId": 2,
         "value": "Next",
         "source": 49,
         "target": 50
     },
     {
-        "id": 184,
+        "id": 183,
         "guideId": 2,
         "value": "Next",
         "source": 50,
         "target": 51
     },
     {
-        "id": 185,
+        "id": 184,
         "guideId": 2,
         "value": "Next",
         "source": 51,
         "target": 52
     },
     {
-        "id": 186,
+        "id": 185,
         "guideId": 2,
         "value": "Next",
         "source": 52,
         "target": 19
     },
     {
-        "id": 187,
+        "id": 186,
         "guideId": 2,
         "value": "Next",
         "source": 88,
         "target": 48
     },
     {
-        "id": 188,
+        "id": 187,
         "guideId": 2,
         "value": "Next",
         "source": 89,
         "target": 50
     },
     {
-        "id": 189,
+        "id": 188,
         "guideId": 2,
         "value": "Next",
         "source": 90,
         "target": 51
     },
     {
-        "id": 204,
+        "id": 189,
         "guideId": 2,
-        "value": "Next",
-        "source": 11,
-        "target": 62
+        "value": "iTero",
+        "source": 21,
+        "target": null
     },
     {
-        "id": 205,
+        "id": 204,
         "guideId": 2,
         "value": "Next",
         "source": 18,
@@ -667,99 +660,1128 @@
     {
         "id": 190,
         "guideId": 2,
-        "value": "iTero",
+        "value": "Primescan",
         "source": 21,
         "target": null
     },
     {
         "id": 191,
         "guideId": 2,
-        "value": "Primescan",
+        "value": "Planmeca",
         "source": 21,
         "target": null
     },
     {
         "id": 192,
         "guideId": 2,
-        "value": "Planmeca",
+        "value": "Medit",
         "source": 21,
         "target": null
     },
     {
         "id": 193,
         "guideId": 2,
-        "value": "Medit",
+        "value": "Carestream",
         "source": 21,
         "target": null
     },
     {
         "id": 194,
         "guideId": 2,
-        "value": "Carestream",
+        "value": "Dental Wings",
         "source": 21,
         "target": null
     },
     {
         "id": 195,
         "guideId": 2,
-        "value": "Dental Wings",
-        "source": 21,
-        "target": null
-    },
-    {
-        "id": 196,
-        "guideId": 2,
         "value": "Trios",
         "source": 21,
         "target": 22
     },
     {
-        "id": 197,
+        "id": 196,
         "guideId": 2,
         "value": "Full Arch",
         "source": 22,
         "target": null
     },
     {
-        "id": 198,
+        "id": 197,
         "guideId": 2,
         "value": "Full Denture",
         "source": 22,
         "target": null
     },
     {
-        "id": 199,
+        "id": 198,
         "guideId": 2,
         "value": "Partial Denture",
         "source": 22,
         "target": null
     },
     {
-        "id": 200,
+        "id": 199,
         "guideId": 2,
         "value": "Surgical Guide",
         "source": 22,
         "target": null
     },
     {
-        "id": 201,
+        "id": 200,
         "guideId": 2,
         "value": "Crown",
         "source": 22,
         "target": null
     },
     {
-        "id": 202,
+        "id": 201,
         "guideId": 2,
         "value": "Bridge",
         "source": 22,
         "target": null
     },
     {
-        "id": 203,
+        "id": 202,
         "guideId": 2,
         "value": "Implant Bridge",
         "source": 22,
         "target": null
+    },
+    {
+        "id": 203,
+        "guideId": 2,
+        "value": "Next",
+        "source": 11,
+        "target": 62
+    },
+    {
+        "id": 211,
+        "guideId": 206,
+        "value": "Implant Crown",
+        "source": 208,
+        "target": 209
+    },
+    {
+        "id": 212,
+        "guideId": 206,
+        "value": "Case Setup",
+        "source": 209,
+        "target": null
+    },
+    {
+        "id": 213,
+        "guideId": 206,
+        "value": "Scanning Instructions",
+        "source": 209,
+        "target": 210
+    },
+    {
+        "id": 214,
+        "guideId": 206,
+        "value": "iTero",
+        "source": 207,
+        "target": null
+    },
+    {
+        "id": 215,
+        "guideId": 206,
+        "value": "Primescan",
+        "source": 207,
+        "target": null
+    },
+    {
+        "id": 216,
+        "guideId": 206,
+        "value": "Planmeca",
+        "source": 207,
+        "target": null
+    },
+    {
+        "id": 217,
+        "guideId": 206,
+        "value": "Medit",
+        "source": 207,
+        "target": null
+    },
+    {
+        "id": 218,
+        "guideId": 206,
+        "value": "Carestream",
+        "source": 207,
+        "target": null
+    },
+    {
+        "id": 219,
+        "guideId": 206,
+        "value": "Dental Wings",
+        "source": 207,
+        "target": null
+    },
+    {
+        "id": 220,
+        "guideId": 206,
+        "value": "Trios",
+        "source": 207,
+        "target": 208
+    },
+    {
+        "id": 221,
+        "guideId": 206,
+        "value": "Full Arch",
+        "source": 208,
+        "target": null
+    },
+    {
+        "id": 222,
+        "guideId": 206,
+        "value": "Full Denture",
+        "source": 208,
+        "target": null
+    },
+    {
+        "id": 223,
+        "guideId": 206,
+        "value": "Partial Denture",
+        "source": 208,
+        "target": null
+    },
+    {
+        "id": 224,
+        "guideId": 206,
+        "value": "Surgical Guide",
+        "source": 208,
+        "target": null
+    },
+    {
+        "id": 225,
+        "guideId": 206,
+        "value": "Crown",
+        "source": 208,
+        "target": null
+    },
+    {
+        "id": 226,
+        "guideId": 206,
+        "value": "Bridge",
+        "source": 208,
+        "target": null
+    },
+    {
+        "id": 227,
+        "guideId": 206,
+        "value": "Implant Bridge",
+        "source": 208,
+        "target": null
+    },
+    {
+        "id": 350,
+        "guideId": 228,
+        "value": "Implant Crown",
+        "source": 248,
+        "target": 279
+    },
+    {
+        "id": 351,
+        "guideId": 228,
+        "value": "Case Setup",
+        "source": 279,
+        "target": 231
+    },
+    {
+        "id": 352,
+        "guideId": 228,
+        "value": "Scanning Instructions",
+        "source": 279,
+        "target": 232
+    },
+    {
+        "id": 353,
+        "guideId": 228,
+        "value": "Next",
+        "source": 231,
+        "target": 233
+    },
+    {
+        "id": 354,
+        "guideId": 228,
+        "value": "Next",
+        "source": 233,
+        "target": 234
+    },
+    {
+        "id": 355,
+        "guideId": 228,
+        "value": "Next",
+        "source": 282,
+        "target": 234
+    },
+    {
+        "id": 356,
+        "guideId": 228,
+        "value": "Next",
+        "source": 234,
+        "target": 235
+    },
+    {
+        "id": 357,
+        "guideId": 228,
+        "value": "Next",
+        "source": 283,
+        "target": 235
+    },
+    {
+        "id": 358,
+        "guideId": 228,
+        "value": "Next",
+        "source": 235,
+        "target": 236
+    },
+    {
+        "id": 359,
+        "guideId": 228,
+        "value": "Next",
+        "source": 236,
+        "target": 237
+    },
+    {
+        "id": 360,
+        "guideId": 228,
+        "value": "Yes, proceed to scan strategy guidance.",
+        "source": 286,
+        "target": 232
+    },
+    {
+        "id": 361,
+        "guideId": 228,
+        "value": "Next",
+        "source": 232,
+        "target": 252
+    },
+    {
+        "id": 362,
+        "guideId": 228,
+        "value": "Next",
+        "source": 287,
+        "target": 252
+    },
+    {
+        "id": 363,
+        "guideId": 228,
+        "value": "Next",
+        "source": 298,
+        "target": 238
+    },
+    {
+        "id": 364,
+        "guideId": 228,
+        "value": "Next",
+        "source": 300,
+        "target": 239
+    },
+    {
+        "id": 365,
+        "guideId": 228,
+        "value": "Next",
+        "source": 239,
+        "target": 240
+    },
+    {
+        "id": 366,
+        "guideId": 228,
+        "value": "Next",
+        "source": 302,
+        "target": 240
+    },
+    {
+        "id": 367,
+        "guideId": 228,
+        "value": "Next",
+        "source": 301,
+        "target": 240
+    },
+    {
+        "id": 368,
+        "guideId": 228,
+        "value": "Next",
+        "source": 238,
+        "target": 239
+    },
+    {
+        "id": 369,
+        "guideId": 228,
+        "value": "Next",
+        "source": 240,
+        "target": 241
+    },
+    {
+        "id": 370,
+        "guideId": 228,
+        "value": "Next",
+        "source": 304,
+        "target": 241
+    },
+    {
+        "id": 371,
+        "guideId": 228,
+        "value": "Next",
+        "source": 303,
+        "target": 241
+    },
+    {
+        "id": 372,
+        "guideId": 228,
+        "value": "Next",
+        "source": 306,
+        "target": 242
+    },
+    {
+        "id": 373,
+        "guideId": 228,
+        "value": "Next",
+        "source": 305,
+        "target": 242
+    },
+    {
+        "id": 374,
+        "guideId": 228,
+        "value": "Next",
+        "source": 242,
+        "target": 243
+    },
+    {
+        "id": 375,
+        "guideId": 228,
+        "value": "Next",
+        "source": 308,
+        "target": 243
+    },
+    {
+        "id": 376,
+        "guideId": 228,
+        "value": "Next",
+        "source": 307,
+        "target": 243
+    },
+    {
+        "id": 377,
+        "guideId": 228,
+        "value": "Next",
+        "source": 311,
+        "target": 244
+    },
+    {
+        "id": 378,
+        "guideId": 228,
+        "value": "Next",
+        "source": 316,
+        "target": 245
+    },
+    {
+        "id": 379,
+        "guideId": 228,
+        "value": "Next",
+        "source": 315,
+        "target": 245
+    },
+    {
+        "id": 380,
+        "guideId": 228,
+        "value": "Next",
+        "source": 245,
+        "target": 246
+    },
+    {
+        "id": 381,
+        "guideId": 228,
+        "value": "Next",
+        "source": 246,
+        "target": 253
+    },
+    {
+        "id": 382,
+        "guideId": 228,
+        "value": "Next",
+        "source": 318,
+        "target": 253
+    },
+    {
+        "id": 383,
+        "guideId": 228,
+        "value": "Next",
+        "source": 319,
+        "target": 253
+    },
+    {
+        "id": 384,
+        "guideId": 228,
+        "value": "Next",
+        "source": 317,
+        "target": 246
+    },
+    {
+        "id": 385,
+        "guideId": 228,
+        "value": "Next",
+        "source": 285,
+        "target": 237
+    },
+    {
+        "id": 386,
+        "guideId": 228,
+        "value": "Next",
+        "source": 284,
+        "target": 236
+    },
+    {
+        "id": 387,
+        "guideId": 228,
+        "value": "Next",
+        "source": 281,
+        "target": 233
+    },
+    {
+        "id": 388,
+        "guideId": 228,
+        "value": "Next",
+        "source": 280,
+        "target": 231
+    },
+    {
+        "id": 389,
+        "guideId": 228,
+        "value": "Next",
+        "source": 249,
+        "target": 231
+    },
+    {
+        "id": 390,
+        "guideId": 228,
+        "value": "Next",
+        "source": 250,
+        "target": 233
+    },
+    {
+        "id": 391,
+        "guideId": 228,
+        "value": "Next",
+        "source": 333,
+        "target": 239
+    },
+    {
+        "id": 392,
+        "guideId": 228,
+        "value": "Next",
+        "source": 346,
+        "target": 245
+    },
+    {
+        "id": 393,
+        "guideId": 228,
+        "value": "No, I am confident scanning.",
+        "source": 286,
+        "target": null
+    },
+    {
+        "id": 394,
+        "guideId": 228,
+        "value": "I have already scanned the arches. Skip to the prep scan.",
+        "source": 252,
+        "target": 238
+    },
+    {
+        "id": 395,
+        "guideId": 228,
+        "value": "I have already scanned the arches and the prep. Skip to the scanbody scan.",
+        "source": 252,
+        "target": 243
+    },
+    {
+        "id": 396,
+        "guideId": 228,
+        "value": "Implant Arch Scan",
+        "source": 257,
+        "target": 256
+    },
+    {
+        "id": 397,
+        "guideId": 228,
+        "value": "I'd like a full walkthrough of all necessary scans.",
+        "source": 252,
+        "target": 254
+    },
+    {
+        "id": 398,
+        "guideId": 228,
+        "value": "I have already scanned the arches, prep, and scanbody. Skip to the occlusion scan.",
+        "source": 252,
+        "target": 244
+    },
+    {
+        "id": 399,
+        "guideId": 228,
+        "value": "Next",
+        "source": 299,
+        "target": 239
+    },
+    {
+        "id": 400,
+        "guideId": 228,
+        "value": "Next",
+        "source": 255,
+        "target": 254
+    },
+    {
+        "id": 401,
+        "guideId": 228,
+        "value": "Next",
+        "source": 278,
+        "target": 244
+    },
+    {
+        "id": 402,
+        "guideId": 228,
+        "value": "Next",
+        "source": 288,
+        "target": 254
+    },
+    {
+        "id": 403,
+        "guideId": 228,
+        "value": "Next",
+        "source": 254,
+        "target": 258
+    },
+    {
+        "id": 404,
+        "guideId": 228,
+        "value": "Next",
+        "source": 258,
+        "target": 259
+    },
+    {
+        "id": 405,
+        "guideId": 228,
+        "value": "Next",
+        "source": 259,
+        "target": 260
+    },
+    {
+        "id": 406,
+        "guideId": 228,
+        "value": "Next",
+        "source": 260,
+        "target": 261
+    },
+    {
+        "id": 407,
+        "guideId": 228,
+        "value": "Next",
+        "source": 296,
+        "target": 261
+    },
+    {
+        "id": 408,
+        "guideId": 228,
+        "value": "Next",
+        "source": 261,
+        "target": 257
+    },
+    {
+        "id": 409,
+        "guideId": 228,
+        "value": "Next",
+        "source": 290,
+        "target": 258
+    },
+    {
+        "id": 410,
+        "guideId": 228,
+        "value": "Next",
+        "source": 292,
+        "target": 259
+    },
+    {
+        "id": 411,
+        "guideId": 228,
+        "value": "Next",
+        "source": 294,
+        "target": 260
+    },
+    {
+        "id": 412,
+        "guideId": 228,
+        "value": "Next",
+        "source": 263,
+        "target": 264
+    },
+    {
+        "id": 413,
+        "guideId": 228,
+        "value": "Next",
+        "source": 264,
+        "target": 265
+    },
+    {
+        "id": 414,
+        "guideId": 228,
+        "value": "Next",
+        "source": 265,
+        "target": 266
+    },
+    {
+        "id": 415,
+        "guideId": 228,
+        "value": "Next",
+        "source": 297,
+        "target": 266
+    },
+    {
+        "id": 416,
+        "guideId": 228,
+        "value": "Next",
+        "source": 291,
+        "target": 263
+    },
+    {
+        "id": 417,
+        "guideId": 228,
+        "value": "Next",
+        "source": 293,
+        "target": 264
+    },
+    {
+        "id": 418,
+        "guideId": 228,
+        "value": "Next",
+        "source": 295,
+        "target": 265
+    },
+    {
+        "id": 419,
+        "guideId": 228,
+        "value": "Next",
+        "source": 256,
+        "target": 263
+    },
+    {
+        "id": 420,
+        "guideId": 228,
+        "value": "Next",
+        "source": 268,
+        "target": 263
+    },
+    {
+        "id": 421,
+        "guideId": 228,
+        "value": "Next",
+        "source": 289,
+        "target": 256
+    },
+    {
+        "id": 422,
+        "guideId": 228,
+        "value": "Next",
+        "source": 267,
+        "target": 289
+    },
+    {
+        "id": 423,
+        "guideId": 228,
+        "value": "Hands-free Method",
+        "source": 257,
+        "target": 238
+    },
+    {
+        "id": 424,
+        "guideId": 228,
+        "value": "Next",
+        "source": 266,
+        "target": 238
+    },
+    {
+        "id": 425,
+        "guideId": 228,
+        "value": "Next",
+        "source": 309,
+        "target": 269
+    },
+    {
+        "id": 426,
+        "guideId": 228,
+        "value": "Next",
+        "source": 310,
+        "target": 270
+    },
+    {
+        "id": 427,
+        "guideId": 228,
+        "value": "Next",
+        "source": 243,
+        "target": 269
+    },
+    {
+        "id": 428,
+        "guideId": 228,
+        "value": "Next",
+        "source": 269,
+        "target": 270
+    },
+    {
+        "id": 429,
+        "guideId": 228,
+        "value": "Next",
+        "source": 270,
+        "target": 271
+    },
+    {
+        "id": 430,
+        "guideId": 228,
+        "value": "Next",
+        "source": 271,
+        "target": 244
+    },
+    {
+        "id": 431,
+        "guideId": 228,
+        "value": "Next",
+        "source": 277,
+        "target": 272
+    },
+    {
+        "id": 432,
+        "guideId": 228,
+        "value": "Next",
+        "source": 272,
+        "target": 273
+    },
+    {
+        "id": 433,
+        "guideId": 228,
+        "value": "Next",
+        "source": 273,
+        "target": 274
+    },
+    {
+        "id": 434,
+        "guideId": 228,
+        "value": "Next",
+        "source": 274,
+        "target": 275
+    },
+    {
+        "id": 435,
+        "guideId": 228,
+        "value": "Next",
+        "source": 275,
+        "target": 276
+    },
+    {
+        "id": 436,
+        "guideId": 228,
+        "value": "Next",
+        "source": 276,
+        "target": 245
+    },
+    {
+        "id": 437,
+        "guideId": 228,
+        "value": "Next",
+        "source": 312,
+        "target": 272
+    },
+    {
+        "id": 438,
+        "guideId": 228,
+        "value": "Next",
+        "source": 313,
+        "target": 274
+    },
+    {
+        "id": 439,
+        "guideId": 228,
+        "value": "Next",
+        "source": 314,
+        "target": 275
+    },
+    {
+        "id": 440,
+        "guideId": 228,
+        "value": "iTero",
+        "source": 247,
+        "target": null
+    },
+    {
+        "id": 441,
+        "guideId": 228,
+        "value": "Primescan",
+        "source": 247,
+        "target": null
+    },
+    {
+        "id": 442,
+        "guideId": 228,
+        "value": "Planmeca",
+        "source": 247,
+        "target": null
+    },
+    {
+        "id": 443,
+        "guideId": 228,
+        "value": "Medit",
+        "source": 247,
+        "target": null
+    },
+    {
+        "id": 444,
+        "guideId": 228,
+        "value": "Carestream",
+        "source": 247,
+        "target": null
+    },
+    {
+        "id": 445,
+        "guideId": 228,
+        "value": "Dental Wings",
+        "source": 247,
+        "target": null
+    },
+    {
+        "id": 446,
+        "guideId": 228,
+        "value": "Trios",
+        "source": 247,
+        "target": 248
+    },
+    {
+        "id": 447,
+        "guideId": 228,
+        "value": "Full Arch",
+        "source": 248,
+        "target": null
+    },
+    {
+        "id": 448,
+        "guideId": 228,
+        "value": "Full Denture",
+        "source": 248,
+        "target": null
+    },
+    {
+        "id": 449,
+        "guideId": 228,
+        "value": "Partial Denture",
+        "source": 248,
+        "target": null
+    },
+    {
+        "id": 450,
+        "guideId": 228,
+        "value": "Surgical Guide",
+        "source": 248,
+        "target": null
+    },
+    {
+        "id": 451,
+        "guideId": 228,
+        "value": "Crown",
+        "source": 248,
+        "target": null
+    },
+    {
+        "id": 452,
+        "guideId": 228,
+        "value": "Bridge",
+        "source": 248,
+        "target": null
+    },
+    {
+        "id": 453,
+        "guideId": 228,
+        "value": "Implant Bridge",
+        "source": 248,
+        "target": null
+    },
+    {
+        "id": 454,
+        "guideId": 228,
+        "value": "Next",
+        "source": 237,
+        "target": 286
+    },
+    {
+        "id": 455,
+        "guideId": 228,
+        "value": "Next",
+        "source": 244,
+        "target": 277
+    },
+    {
+        "id": 456,
+        "guideId": 228,
+        "value": "Next",
+        "source": 320,
+        "target": 234
+    },
+    {
+        "id": 457,
+        "guideId": 228,
+        "value": "Next",
+        "source": 321,
+        "target": 235
+    },
+    {
+        "id": 458,
+        "guideId": 228,
+        "value": "Next",
+        "source": 322,
+        "target": 237
+    },
+    {
+        "id": 459,
+        "guideId": 228,
+        "value": "Next",
+        "source": 323,
+        "target": 252
+    },
+    {
+        "id": 460,
+        "guideId": 228,
+        "value": "Next",
+        "source": 262,
+        "target": 258
+    },
+    {
+        "id": 461,
+        "guideId": 228,
+        "value": "Next",
+        "source": 324,
+        "target": 258
+    },
+    {
+        "id": 462,
+        "guideId": 228,
+        "value": "Next",
+        "source": 327,
+        "target": 259
+    },
+    {
+        "id": 463,
+        "guideId": 228,
+        "value": "Next",
+        "source": 326,
+        "target": 260
+    },
+    {
+        "id": 464,
+        "guideId": 228,
+        "value": "Next",
+        "source": 325,
+        "target": 261
+    },
+    {
+        "id": 465,
+        "guideId": 228,
+        "value": "Next",
+        "source": 328,
+        "target": 257
+    },
+    {
+        "id": 466,
+        "guideId": 228,
+        "value": "Next",
+        "source": 334,
+        "target": 240
+    },
+    {
+        "id": 467,
+        "guideId": 228,
+        "value": "Next",
+        "source": 241,
+        "target": 242
+    },
+    {
+        "id": 468,
+        "guideId": 228,
+        "value": "Next",
+        "source": 335,
+        "target": 241
+    },
+    {
+        "id": 469,
+        "guideId": 228,
+        "value": "Next",
+        "source": 336,
+        "target": 242
+    },
+    {
+        "id": 470,
+        "guideId": 228,
+        "value": "Next",
+        "source": 337,
+        "target": 243
+    },
+    {
+        "id": 471,
+        "guideId": 228,
+        "value": "Next",
+        "source": 338,
+        "target": 269
+    },
+    {
+        "id": 472,
+        "guideId": 228,
+        "value": "Next",
+        "source": 340,
+        "target": 244
+    },
+    {
+        "id": 473,
+        "guideId": 228,
+        "value": "Next",
+        "source": 344,
+        "target": 276
+    },
+    {
+        "id": 474,
+        "guideId": 228,
+        "value": "Next",
+        "source": 343,
+        "target": 274
+    },
+    {
+        "id": 475,
+        "guideId": 228,
+        "value": "Next",
+        "source": 342,
+        "target": 273
+    },
+    {
+        "id": 476,
+        "guideId": 228,
+        "value": "Next",
+        "source": 345,
+        "target": 275
+    },
+    {
+        "id": 477,
+        "guideId": 228,
+        "value": "Next",
+        "source": 341,
+        "target": 272
+    },
+    {
+        "id": 478,
+        "guideId": 228,
+        "value": "Next",
+        "source": 347,
+        "target": 246
+    },
+    {
+        "id": 479,
+        "guideId": 228,
+        "value": "Next",
+        "source": 348,
+        "target": 253
     }
 ]

@@ -1,35 +1,38 @@
 import { useEffect, useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
-
-import { selectGuide } from '@/redux/features/guideSlice';
-import { Button } from 'primereact/button';
-
+import { useDispatch, useSelector } from 'react-redux';
 import styles from '@/components/Guide/Guide.module.scss';
 
-import { nestNodesEdges } from '@/helpers/nestNodesEdges';
-import { Edge } from '@/types/Guide';
-
+import { Button } from 'primereact/button';
 import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup';
+
+import { Edge, PathIds } from '@/types/Guide';
+import { setSelectedPathIds } from '@/redux/features/guideSelectionSlice';
+import { selectGuide } from '@/redux/features/guideSelectionSlice';
+
+import { nestNodesEdges } from '@/helpers/nestNodesEdges';
+
 const GuideText = () => {
 	const containerRef = useRef<any>(null);
-	const { selectedGuide, guideNodeData, guideEdgeData } = useSelector(selectGuide);
+	const dispatch = useDispatch();
+
+	const { selectedNodeData,selectedEdgeData, selectedPathIds } = useSelector(selectGuide);
 
 	const [nestedNodes, setNestedNodes] = useState<any>();
-	const [currentPathIds, setCurrentPathIds] = useState<[number | null, number][]>([]);
+	// const [currentPathIds, setCurrentPathIds] = useState<[number | null, number][]>([]);
 	const [pathElements, setPathElements] = useState<JSX.Element[]>([]);
 
 	const resetToNode = (nodeId: number) => {
-		const newPathIds = [];
-		for (const ids of currentPathIds) {
+		const newPathIds:PathIds[] = [];
+		for (const ids of selectedPathIds) {
 			newPathIds.push(ids);
 			if (ids[1] === nodeId) {
 				break;
 			}
 		}
 
-		setCurrentPathIds(newPathIds as [number | null, number][]);
+		dispatch(setSelectedPathIds(newPathIds));
 	};
-	const confirmReset = (event, nodeId) => {
+	const confirmReset = (event: any, nodeId: number) => {
 		confirmPopup({
 			target: event.currentTarget,
 			message: 'Are you sure you want to change your response?',
@@ -39,23 +42,25 @@ const GuideText = () => {
 			},
 		});
 	};
-	useEffect(() => {
-		if (selectedGuide && guideNodeData && guideEdgeData) {
-			const nestedNodes = JSON.parse(JSON.stringify(guideNodeData));
-			const nodes = nestNodesEdges(nestedNodes, guideEdgeData);
-			if (!nodes) return;
 
-			setCurrentPathIds([...currentPathIds, [null, nodes.id]]);
-			setNestedNodes(nodes);
-		}
-	}, [selectedGuide, guideNodeData, guideEdgeData]);
+	useEffect(() => {
+		if (!selectedEdgeData || !selectedNodeData) return;
+		const nestedNodes = JSON.parse(JSON.stringify(selectedNodeData));
+		const nodes = nestNodesEdges(nestedNodes, selectedEdgeData);
+		if (!nodes) return;
+		dispatch(setSelectedPathIds([[null, nodes.id]]));
+		setNestedNodes(nodes);
+		
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedEdgeData, selectedNodeData]);
 
 	useEffect(() => {
 		const elements: JSX.Element[] = [];
-		if (nestedNodes) {
+		
+		if (nestedNodes && selectedPathIds.length > 0) {
 			let currentNodeLayer = { ...nestedNodes };
 
-			currentPathIds.forEach((ids: [null | number, number], idx: number) => {
+			selectedPathIds.forEach((ids: [null | number, number], idx: number) => {
 				if (idx !== 0) {
 					currentNodeLayer = currentNodeLayer?.children.find((node: any) => node.id === ids[1]);
 				}
@@ -82,14 +87,14 @@ const GuideText = () => {
 									{currentNodeLayer.images &&
 										currentNodeLayer.images.map((image: string) => {
 											return (
-												<p key={image.replace(' ', '_')}>
+												<p style={{height:'200px'}} key={image.replace(' ', '_')}>
 													<img
 														src={
 															'https://ivoryguide.s3.us-west-1.amazonaws.com/images/guides/' + currentNodeLayer.guideId + '/' + image + '.png' ||
 															'/images/no-image.png'
 														}
 														alt=""
-														width={'100%'}
+														height={'200px'}
 													/>
 												</p>
 											);
@@ -107,8 +112,8 @@ const GuideText = () => {
 										return (
 											<Button
 												className={`mx-2 mb-2 ${
-													currentPathIds.length !== idx + 1
-														? currentPathIds[idx + 1][0] === edge.id
+													selectedPathIds.length !== idx + 1
+														? selectedPathIds[idx + 1][0] === edge.id
 															? 'pointer-events-none focus:bg-primary'
 															: 'pointer-events-none  bg-gray-300 text-gray-500'
 														: 'bg-white text-blue-700 border-blue-700 border-1 hover:text-white hover:bg-blue-700'
@@ -127,11 +132,12 @@ const GuideText = () => {
 
 			setPathElements(elements);
 		}
-	}, [currentPathIds]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedPathIds,nestedNodes]);
 
 	const selectPath = (edgeId: number) => {
-		const selectedEdge = guideEdgeData.find((edge: Edge) => edge.id === edgeId);
-		setCurrentPathIds([...currentPathIds, [edgeId, selectedEdge.target]]);
+		const selectedEdge = selectedEdgeData.find((edge: Edge) => edge.id === edgeId);
+		dispatch(setSelectedPathIds([...selectedPathIds, [edgeId, selectedEdge.target]]));
 	};
 
 	const scrollToBottom = () => {
