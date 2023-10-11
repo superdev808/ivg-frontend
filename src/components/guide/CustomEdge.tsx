@@ -24,8 +24,8 @@ const CustomEdge: FC<EdgeProps> = ({ id, sourceX, sourceY, targetX, targetY, sou
 					style={{
 						position: 'absolute',
 
-						// transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
-						transform: `translate(-50%, -100%) translate(${targetX}px,${targetY}px)`,
+						transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
+						// transform: `translate(-50%, -100%) translate(${targetX}px,${targetY}px)`,
 						background: data.active ? '#4baaf5' : data.option ? '#f4fafe' : 'grey',
 						border: data.option ? 'solid 1px #1769aa' : '',
 						padding: 7,
