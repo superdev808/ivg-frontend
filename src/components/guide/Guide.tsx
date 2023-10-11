@@ -2,9 +2,9 @@
 
 import styles from './Guide.module.scss';
 
-import GuideHeader from './Header';
-import GuideText from './Text';
-import GuideFlow from './Flow';
+import GuideHeader from './header';
+import GuideText from './text';
+import GuideFlow from './flow';
 
 import useSelectGuide from '@/hooks/useSelectGuide';
 
