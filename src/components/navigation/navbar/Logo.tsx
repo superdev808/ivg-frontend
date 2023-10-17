@@ -36,15 +36,15 @@ const Logo = () => {
 
   return (
     <>
-      <Link href="/" style={{ display: showButton ? "none" : "block", textDecoration: "none", alignSelf: "center" }}>
-        <div className={styles.logo}>IVORY<span className="text-gray-500">GUIDE</span></div>
-        {/* <Image
-          src="next.svg"
+      <Link href="/" className="align-items-center" style={{ display: showButton ? "none" : "flex", textDecoration: "none", alignSelf: "center" }}>
+        <div className={styles.logo}>Ivory<span className="text-primary">Guide</span></div>
+        <Image
+          src="/images/logo-white.png"
           alt="Logo"
-          width={width < 1024 ? "150" : "250"}
-          height={width < 1024 ? "45" : "74"}
+          height={30}
+          width={53}
           className="relative"
-        /> */}
+        />
       </Link>
       <div
         style={{

@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Node,Edge, Guide } from '@/types/Guide';
 
-import { reset, setSelectedData } from '@/redux/features/guideSelectionSlice';
+import { reset, setSelectedData, setSelectedPathIds } from '@/redux/features/guideSelectionSlice';
 
 import { selectGuides } from '@/redux/features/guidesSlice';
 import useLoadGuidesData from './useLoadGuidesData';
 
-
+import { nestNodesEdges } from '@/helpers/nestNodesEdges';
+import { unpackNodesEdges } from '@/helpers/unpackNodesEdges';
 
 function useSelectGuide() {
   const dispatch = useDispatch();
@@ -31,10 +32,16 @@ function useSelectGuide() {
       return;
     }
 
-    const nodes = nodesData.filter((node: Node) => Number(node.guideId) === Number(selectedGuide.id));
-    const edges = edgesData.filter((edge: Edge) =>  Number(edge.guideId) === Number(selectedGuide.id));
+    const filteredNodes = nodesData.filter((node: Node) => Number(node.guideId) === Number(selectedGuide.id));
+    const filteredEdges = edgesData.filter((edge: Edge) =>  Number(edge.guideId) === Number(selectedGuide.id));
     
-    dispatch(setSelectedData({nodes,edges})); 
+    const nodeCopy = JSON.parse(JSON.stringify(filteredNodes));
+    const edgeCopy = JSON.parse(JSON.stringify(filteredEdges));
+		const nestedNodes = nestNodesEdges(nodeCopy, edgeCopy);
+    const {newNodes:nodes, newEdges:edges} = unpackNodesEdges(nestedNodes)
+
+    dispatch(setSelectedPathIds([[null, "0"]]))
+    dispatch(setSelectedData({nodes, edges})); 
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [guidesData, nodesData, edgesData]);

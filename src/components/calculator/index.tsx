@@ -55,8 +55,8 @@ const CalculatorContainer = () => {
 
 	const resultLink = () => {
 		return (
-			<div className="flex w-content-max p-4 border-1 border-round border-blue-700 border-2 bg-white">
-				<div className="border-1 border-blue-200 border-2 border-round">
+			<div className="flex w-content-max p-4 border-1 border-round border-green-700 border-2 bg-white">
+				<div className="border-1 border-green-200 border-2 border-round">
 					<img
 						src={'https://ivoryguide.s3.us-west-1.amazonaws.com/images/calculators/' + selectedResult.guideId + '/' + selectedResult.thumbnail || '/images/no-image.png'}
 						alt=""

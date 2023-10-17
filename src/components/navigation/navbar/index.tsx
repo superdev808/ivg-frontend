@@ -12,7 +12,7 @@ const Navbar = ({ toggle, isOpen, navLinks }: { toggle: () => void; isOpen: bool
 	const pathname = usePathname();
 
 	return (
-		<div className="h-4rem px-6 w-full sticky top-0">
+		<div className="h-4rem px-6 w-full sticky top-0 bg-teal-900">
 			{/* <div className=""> */}
 				{/* <div className=" mx-auto  h-full"> */}
 					<div className="flex justify-content-between items-center h-full">

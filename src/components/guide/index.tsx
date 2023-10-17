@@ -74,7 +74,7 @@ export default function GuidesComponent() {
 						<div
 							key={item && item.id}
 							className={`${styles.guidesSelection} flex flex-column ${
-								item && selectedItem && selectedItem.id === item.id ? 'border-blue-700 border-2' : ''
+								item && selectedItem && selectedItem.id === item.id ? 'border-green-700 border-2' : ''
 							}`}
 							onClick={() => setSelectedItem(item)}
 							>

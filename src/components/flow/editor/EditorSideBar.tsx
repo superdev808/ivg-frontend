@@ -26,7 +26,7 @@ const EditSideBarComponent = () => {
 		let element = document.createElement('div');
 		element.setAttribute('id', 'drag-ghost');
 
-		element.innerHTML = `<div class=" border-round border-1 border-blue-500 p-2  text-xs text-blue-500 w-8rem flex justify-content-center bg-white">${dataType}</div>`;
+		element.innerHTML = `<div class=" border-round border-1 border-green-500 p-2  text-xs text-green-500 w-8rem flex justify-content-center bg-white">${dataType}</div>`;
 		element.style.position = 'absolute';
 		element.style.top = '0';
 		element.style.zIndex = '-1';

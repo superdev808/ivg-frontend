@@ -99,7 +99,7 @@ export default function CustomNodes(props: NodeProps) {
 					{node.external_link && props.data.visible? (
 						node.link_type === 0 ? (
 							<a
-								className=" cursor-pointer border-2 border-round border-gray-500 hover:border-blue-700 hover:shadow-4"
+								className=" cursor-pointer border-2 border-round border-gray-500 hover:border-green-700 hover:shadow-4"
 								onClick={() => openLink(node.external_link, node.link_type)}>
 								<div className="flex justify-content-start">
 									<Image

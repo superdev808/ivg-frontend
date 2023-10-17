@@ -47,7 +47,7 @@ export default function CalculatorsPage() {
 						return (
 							<div
 								key={item.id}
-								className={`${styles.calculatorList} flex flex-column ${selectedCalc?.id === item.id ? 'border-blue-700 border-2' : ''}`}
+								className={`${styles.calculatorList} flex flex-column ${selectedCalc?.id === item.id ? 'border-green-700 border-2' : ''}`}
 								onClick={() => selectItem(item)}>
 								{item.value}
 								{/* <span
