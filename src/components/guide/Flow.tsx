@@ -165,7 +165,29 @@ const Flow = () => {
 		
 		let flowNodes = JSON.parse(JSON.stringify(getNodes()));
 		let flowEdges = JSON.parse(JSON.stringify(getEdges()));
+
+		flowNodes = flowNodes.map(obj => ({
+			...obj, 
+			data: {
+
+				...obj.data,
+				hidden: true, 
+				active: false,
+				selected: false
+			}
 		
+		  }));
+		flowEdges = flowEdges.map(obj => ({
+			...obj, 
+			data: {
+
+				...obj.data,
+				hidden: true, 
+				active: false,
+				selected: false
+			}
+		  }));
+
 		selectedPathIds.forEach((ids: [null | number, number], idx: number) => {
 
 			const currentNode = flowNodes.find((node: any) => node.id === ids[1]);
@@ -173,7 +195,8 @@ const Flow = () => {
 				const nodeCopy = JSON.parse(JSON.stringify(currentNode));
 				nodeCopy.data.hidden = false;
 				flowNodes = [...flowNodes,nodeCopy]
-			}
+			} 
+
 			
 			flowEdges.forEach((edge: any) => {
 

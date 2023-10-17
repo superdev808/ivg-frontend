@@ -16,9 +16,6 @@ const GuideText = () => {
 	const dispatch = useDispatch();
 
 	const { selectedNodeData,selectedEdgeData, selectedPathIds } = useSelector(selectGuide);
-
-	const [nestedNodes, setNestedNodes] = useState<any>();
-	// const [currentPathIds, setCurrentPathIds] = useState<[number | null, number][]>([]);
 	const [pathElements, setPathElements] = useState<JSX.Element[]>([]);
 
 	const resetToNode = (nodeId: number) => {
@@ -43,20 +40,7 @@ const GuideText = () => {
 		});
 	};
 
-	// useEffect(() => {
-	// 	if (!selectedEdgeData || !selectedNodeData) return;
-	// 	console.log(selectedEdgeData, selectedNodeData)
-	// 	// const nestedNodes = JSON.parse(JSON.stringify(selectedNodeData));
-	// 	// const nodes = nestNodesEdges(nestedNodes, selectedEdgeData);
-		
-	// 	// if (!nodes) return;
-	// 	// console.log(selectedNodeData)
-		
-	// 	// dispatch(setSelectedPathIds([[null, nodes.id]]));
-	// 	// setNestedNodes(nodes);
-		
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [selectedEdgeData, selectedNodeData]);
+	
 
 	useEffect(() => {
 		const elements: JSX.Element[] = [];
@@ -74,10 +58,11 @@ const GuideText = () => {
 										className="m-2"
 										icon="pi pi-refresh "
 										rounded
-										text
+										
+										label='Reset'
 										severity="warning"
 										aria-label="Change response"
-										style={{ width: '10px', height: '10px' }}
+										style={{ }}
 										onClick={(event) => confirmReset(event, ids[1])}
 									/>
 								</div>
@@ -87,14 +72,14 @@ const GuideText = () => {
 									{currrentNode.data.images &&
 										currrentNode.data.images.map((image: string) => {
 											return (
-												<p style={{height:'200px',justifyContent:'center',display:'flex'}} key={image.replace(' ', '_')}>
+												<p style={{width:'100%',justifyContent:'center',display:'flex'}} key={image.replace(' ', '_')}>
 													<img
 														src={
 															'https://ivoryguide.s3.us-west-1.amazonaws.com/images/guides/' + currrentNode.data.guideId + '/' + image + '.png' ||
 															'/images/no-image.png'
 														}
 														alt=""
-														// width={'200px'}
+														style={{maxWidth:"250px"}}
 													/>
 												</p>
 											);
@@ -111,7 +96,7 @@ const GuideText = () => {
 									currrentEdges.map((edge: Edge) => {
 										return (
 											<Button
-												className={`w-full justify-content-center mx-2 mb-2 ${
+												className={`w-full max-w-25rem justify-content-center mx-2 mb-2 ${
 													selectedPathIds.length !== idx + 1
 														? selectedPathIds[idx + 1][0] === edge.id
 															? 'pointer-events-none focus:bg-primary'

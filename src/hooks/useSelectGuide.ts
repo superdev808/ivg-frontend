@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Node,Edge, Guide } from '@/types/Guide';
 
-import { reset, setSelectedData, setSelectedPathIds } from '@/redux/features/guideSelectionSlice';
+import { reset, setSelectedData, setSelectedPathIds, setLoading } from '@/redux/features/guideSelectionSlice';
 
 import { selectGuides } from '@/redux/features/guidesSlice';
 import useLoadGuidesData from './useLoadGuidesData';
@@ -17,9 +17,10 @@ function useSelectGuide() {
   const pathname = usePathname();
   useLoadGuidesData();
   
-  const {guidesData, nodesData, edgesData} = useSelector(selectGuides);
+  const {guidesData, nodesData, edgesData, isLoading} = useSelector(selectGuides);
 
   useEffect(() => {
+    if (!isLoading) setLoading(true);
     if (guidesData.length === 0 || nodesData.length === 0 || edgesData.length === 0) {
       return;
     }
@@ -42,7 +43,7 @@ function useSelectGuide() {
 
     dispatch(setSelectedPathIds([[null, "0"]]))
     dispatch(setSelectedData({nodes, edges})); 
-
+    if (isLoading) setLoading(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [guidesData, nodesData, edgesData]);
 
