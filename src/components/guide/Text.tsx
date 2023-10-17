@@ -96,13 +96,14 @@ const GuideText = () => {
 									currrentEdges.map((edge: Edge) => {
 										return (
 											<Button
-												className={`w-full max-w-25rem justify-content-center mx-2 mb-2 ${
+												className={`w-full border-1 max-w-25rem justify-content-center mx-2 mb-2 ${
 													selectedPathIds.length !== idx + 1
 														? selectedPathIds[idx + 1][0] === edge.id
 															? 'pointer-events-none focus:bg-primary'
 															: 'pointer-events-none  bg-gray-300 text-gray-500'
 														: 'bg-white text-green-700 border-green-700 border-1 hover:text-white hover:bg-green-700'
 												}`}
+												style={{border:'1px solid var(--primary-color)'}}
 												onClick={() => selectPath(edge.id)}
 												key={'edge_' + edge.source + edge.target}>
 												{edge.data.value}
