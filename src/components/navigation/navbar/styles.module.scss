@@ -1,0 +1,26 @@
+@import "@/styles/variables.scss";
+
+.navbarNav {
+	align-items: center;
+	list-style: none;
+	font-size: 18px;
+	font-weight: bold;
+    background-color: $ps-green-dark;
+	a {
+		// font-variant: small-caps;
+		text-decoration: unset;
+        color: white;
+		p {
+			padding: 0 20px;
+		}
+	}
+	a:hover {
+		p {
+			color: $ps-green-light;
+		}
+	}
+
+    & button {
+        color: white !important;
+    }
+}

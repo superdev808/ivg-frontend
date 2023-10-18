@@ -7,10 +7,10 @@
   --surface-e:#ffffff;
   --surface-f:#ffffff;
   --text-color:rgba(0, 0, 0, 0.87);
-  --text-color-secondary:var(--blue-700);
-  --primary-color:var(--blue-400);
+  --text-color-secondary:var(--green-dark);
+  --primary-color: var(--green-light);
   --primary-color-text:#ffffff;
-  --primary-dark-color:var(--blue-700);
+  --primary-dark-color:var(--green-dark);
   --font-family:Montserrat, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
   --surface-0: #ffffff;
   --surface-50: #FAFAFA;
@@ -45,7 +45,7 @@
   --focus-ring: none;
   --maskbg: rgba(0, 0, 0, 0.32);
   --highlight-bg: rgba(63, 81, 181, 0.12);
-  --highlight-text-color: var(--blue-300);;
+  --highlight-text-color: var(--green-300);;
   color-scheme: light;
 }
 
@@ -166,6 +166,8 @@
   --green-700:#496f27;
   --green-800:#39571f;
   --green-900:#2a4016;
+  --green-light: #83B899;
+  --green-dark: #023932;
   --yellow-50:#fffcf5;
   --yellow-100:#fef0cd;
   --yellow-200:#fde4a5;

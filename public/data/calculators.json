@@ -1,72 +1,72 @@
 [
     {
         "id": 2,
-        "value": "NT Trading Scan Body Calculator",
+        "value": "NT Trading Scan Body",
         "category": 0
     },
     {
         "id": 233,
-        "value": "Dess Scan Body Calculator [MISSING INFO]",
+        "value": "Dess Scan Body",
         "category": 0
     },
     {
         "id": 343,
-        "value": "Medentika Scan Body Calculator",
+        "value": "Medentika Scan Body",
         "category": 0
     },
     {
         "id": 554,
-        "value": "Elos Scan Body Calculator",
+        "value": "Elos Scan Body",
         "category": 0
     },
     {
         "id": 745,
-        "value": "Flo Scan Body Calculator",
+        "value": "Flo Scan Body",
         "category": 0
     },
     {
         "id": 974,
-        "value": "Biohorizons Scanbody Calculator",
+        "value": "Biohorizons Scan Body",
         "category": 0
     },
     {
         "id": 1033,
-        "value": "Biomet 3i Scanbody Calculator",
+        "value": "Biomet 3i Scan Body",
         "category": 0
     },
     {
         "id": 1154,
-        "value": "Zimmer TSV Scanbody Calculator",
+        "value": "Zimmer TSV Scan Body",
         "category": 0
     },
     {
         "id": 1252,
-        "value": "Nobel Scanbody Calculator",
+        "value": "Nobel Scan Body",
         "category": 0
     },
     {
         "id": 1284,
-        "value": "Straumann Scanbody Calculator",
+        "value": "Straumann Scan Body",
         "category": 0
     },
     {
         "id": 1310,
-        "value": "Dentsply Sirona Astra Scanbody Calculator",
+        "value": "Dentsply Sirona Astra Scan Body",
         "category": 0
     },
     {
         "id": 1334,
-        "value": "Straumann Abutment Screwbody Calculator",
+        "value": "Straumann Abutment Screwbody",
         "category": 1
     },
     {
         "id": 1374,
-        "value": "Dentsply Abutment Astra Screw Driver Calculator",
+        "value": "Dentsply Abutment Astra Screw Driver",
         "category": 1
     },
     {
         "id": 1406,
-        "value": "Biomet 3i Abutment Screw Driver Calculator",
+        "value": "Biomet 3i Abutment Screw Driver",
         "category": 1
     },
     {
@@ -76,42 +76,42 @@
     },
     {
         "id": 1449,
-        "value": "Nobel Abutment Screw Driver Calculator",
+        "value": "Nobel Abutment Screw Driver",
         "category": 1
     },
     {
         "id": 1505,
-        "value": "Biohorizons Abutment Screw Driver Calculator",
+        "value": "Biohorizons Abutment Screw Driver",
         "category": 1
     },
     {
         "id": 1569,
-        "value": "Dentsply Sirona Astra Abutment Screw Calculator",
+        "value": "Dentsply Sirona Astra Abutment Screw",
         "category": 2
     },
     {
         "id": 1593,
-        "value": "Biohorizons Abutment Screw Calculator",
+        "value": "Biohorizons Abutment Screw",
         "category": 2
     },
     {
         "id": 1605,
-        "value": "Biomet 3i Abutment Screw Calculator",
+        "value": "Biomet 3i Abutment Screw",
         "category": 2
     },
     {
         "id": 1609,
-        "value": "Zimmer TSV Abutment Screw Calculator",
+        "value": "Zimmer TSV Abutment Screw",
         "category": 2
     },
     {
         "id": 1613,
-        "value": "Nobel Abutment Screw Calculator",
+        "value": "Nobel Abutment Screw",
         "category": 2
     },
     {
         "id": 1660,
-        "value": "Straumann Abutment Screw Calculator",
+        "value": "Straumann Abutment Screw",
         "category": 2
     }
 ]

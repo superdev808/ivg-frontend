@@ -1,5 +1,5 @@
 .logo {
-	font-weight: bolder;
+	font-weight: bold;
 	text-decoration: unset;
 	color: var(--primary-dark-color);
 
@@ -17,26 +17,6 @@
 	border-bottom: black 1px solid;
 }
 .sidebar-nav,
-.navbarNav {
-	align-items: center;
-	list-style: none;
-	font-size: 18px;
-	font-weight: bold;
-	a {
-		// font-variant: small-caps;
-		text-decoration: unset;
-		color: black;
-		p {
-			padding: 0 20px;
-		}
-	}
-	a:hover {
-		p {
-			color: var(--primary-color);
-		}
-	}
-}
-
 .hamburger-menu {
 	margin: 2rem 0;
 	display: flex;
@@ -65,4 +45,8 @@
 }
 .hamburger-menu.active .bar-bottom {
 	transform: rotate(-45deg);
+}
+
+.nav-header {
+	background-color: var(--primary-dark-color) !important;
 }
