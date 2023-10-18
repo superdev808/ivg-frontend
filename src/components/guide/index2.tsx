@@ -114,7 +114,7 @@ const GuideContainer = () => {
 						return (
 							<div
 								key={'path_' + el[0]?.id}
-								className="flex flex-column  border-1 border-round border-blue-500 bg-gray-50 px-6 py-4 mb-4 relative" >
+								className="flex flex-column  border-1 border-round border-green-500 bg-gray-50 px-6 py-4 mb-4 relative" >
 								<span>
 									<h3 className="text-center">{el[0]?.value}</h3>
 								</span>
@@ -155,7 +155,7 @@ const GuideContainer = () => {
 
 					<div
 						ref={containerRef}
-						className={!selectedGuide ? '':'flex flex-column  border-1 border-round border-blue-500 bg-blue-50 p-2 '}>
+						className={!selectedGuide ? '':'flex flex-column  border-1 border-round border-green-500 bg-green-50 p-2 '}>
 						<span>
 							<h3 className="text-center">{currentNode?.value}</h3>
 						</span>

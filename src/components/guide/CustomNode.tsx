@@ -16,7 +16,7 @@ export default function CustomNode(props: NodeProps) {
 					id={'th_' + props.id}
 					type="target"
 					position={Position.Top}
-					style={{ background: node.marked? 'transparent' :'#555',}}
+					style={{ background: node.hidden? 'transparent' :'#555' }}
 					isConnectable={false}
 				/>
 		
@@ -29,14 +29,14 @@ export default function CustomNode(props: NodeProps) {
 					fontSize: '0.65rem',
 					alignItems: 'center',
 					textAlign: 'center',
-					// display: node.marked ? 'none' : 'flex',
+					display: 'flex',
 					justifyContent: 'center',
 					color:'black',
-					width:  '250px',
+					width:  '175px',
 					maxHeight: '100px',
 					overflowY: 'auto',
-
-					// opacity: node.marked  || !node.active? '0' : '1',
+					// visibility:'visible'
+					opacity: node.hidden ? '0' : '1',
 					// height: !props.data.active ? '0' : 'auto',
 				}}>
 				<strong>{String(node.value)} </strong>
@@ -48,7 +48,7 @@ export default function CustomNode(props: NodeProps) {
 				id={'sh_' + props.id}
 				type="source"
 				position={Position.Bottom}
-				style={{ background: node.marked? 'transparent' : '#555'	}}
+				style={{ background: node.hidden? 'transparent' : '#555'	}}
 				isConnectable={false}
 			/>
 		</>

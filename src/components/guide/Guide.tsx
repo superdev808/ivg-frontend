@@ -15,13 +15,13 @@ export default function GuideComponent() {
 	return (
 		<div className={styles.container}>
 			<Splitter className="w-full border-0 overflow-hidden">
-				<SplitterPanel size={25} minSize={20} className='h-full'>
+				<SplitterPanel size={35} minSize={20} className='h-full'>
 					<GuideText />
 				
 				</SplitterPanel>
 				<SplitterPanel
 					className=""
-					size={75}>
+					size={65}>
 					<div className="flex flex-column h-full">
 						<div className="px-6 py-4 bg-gray-100">
 							<GuideHeader />

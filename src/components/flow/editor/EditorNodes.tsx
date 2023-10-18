@@ -19,7 +19,7 @@ const EditNodeComponent = ({ selected, data, isConnectable }: any) => {
 				);
 			default:
 				return (
-					<div className=" border-round border-1 border-blue-500 p-2  text-xs text-blue-500 max-w-8rem white-space-normal  text-center flex justify-content-center bg-white">
+					<div className=" border-round border-1 border-green-500 p-2  text-xs text-green-500 max-w-8rem white-space-normal  text-center flex justify-content-center bg-white">
 						{data.label}
 					</div>
 				);

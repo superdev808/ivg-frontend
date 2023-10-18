@@ -10,15 +10,12 @@ import { setSelectedPathIds } from '@/redux/features/guideSelectionSlice';
 import { selectGuide } from '@/redux/features/guideSelectionSlice';
 
 import { nestNodesEdges } from '@/helpers/nestNodesEdges';
-
+import { unpackNodesEdges } from '@/helpers/unpackNodesEdges';
 const GuideText = () => {
 	const containerRef = useRef<any>(null);
 	const dispatch = useDispatch();
 
 	const { selectedNodeData,selectedEdgeData, selectedPathIds } = useSelector(selectGuide);
-
-	const [nestedNodes, setNestedNodes] = useState<any>();
-	// const [currentPathIds, setCurrentPathIds] = useState<[number | null, number][]>([]);
 	const [pathElements, setPathElements] = useState<JSX.Element[]>([]);
 
 	const resetToNode = (nodeId: number) => {
@@ -43,88 +40,77 @@ const GuideText = () => {
 		});
 	};
 
-	useEffect(() => {
-		if (!selectedEdgeData || !selectedNodeData) return;
-		const nestedNodes = JSON.parse(JSON.stringify(selectedNodeData));
-		const nodes = nestNodesEdges(nestedNodes, selectedEdgeData);
-		if (!nodes) return;
-		dispatch(setSelectedPathIds([[null, nodes.id]]));
-		setNestedNodes(nodes);
-		
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedEdgeData, selectedNodeData]);
+	
 
 	useEffect(() => {
 		const elements: JSX.Element[] = [];
-		
-		if (nestedNodes && selectedPathIds.length > 0) {
-			let currentNodeLayer = { ...nestedNodes };
-
+		if (selectedPathIds.length > 0) {
 			selectedPathIds.forEach((ids: [null | number, number], idx: number) => {
-				if (idx !== 0) {
-					currentNodeLayer = currentNodeLayer?.children.find((node: any) => node.id === ids[1]);
-				}
-
-				currentNodeLayer &&
+				const currrentNode = selectedNodeData.find((node: any) => node.id === ids[1]);
+				const currrentEdges = selectedEdgeData.filter((edge: any) => edge.source === ids[1]);
+		
+				currrentNode &&
 					elements.push(
 						<div key={idx}>
-							<div className={'flex flex-column bg-gray-50  border-blue-700 border-2 border-round mb-4'}>
+							<div className={'flex flex-column bg-gray-50  border-green-700 border-2 border-round mb-4'}>
 								<div className="w-full text-right pb-2">
 									<Button
 										className="m-2"
 										icon="pi pi-refresh "
 										rounded
-										text
+										
+										label='Reset'
 										severity="warning"
 										aria-label="Change response"
-										style={{ width: '10px', height: '10px' }}
+										style={{ }}
 										onClick={(event) => confirmReset(event, ids[1])}
 									/>
 								</div>
 								<div className="px-4 pb-4">
-									<strong>{currentNodeLayer.value}</strong>
+									<strong>{currrentNode.data.value}</strong>
 
-									{currentNodeLayer.images &&
-										currentNodeLayer.images.map((image: string) => {
+									{currrentNode.data.images &&
+										currrentNode.data.images.map((image: string) => {
 											return (
-												<p style={{height:'200px'}} key={image.replace(' ', '_')}>
+												<p style={{width:'100%',justifyContent:'center',display:'flex'}} key={image.replace(' ', '_')}>
 													<img
 														src={
-															'https://ivoryguide.s3.us-west-1.amazonaws.com/images/guides/' + currentNodeLayer.guideId + '/' + image + '.png' ||
+															'https://ivoryguide.s3.us-west-1.amazonaws.com/images/guides/' + currrentNode.data.guideId + '/' + image + '.png' ||
 															'/images/no-image.png'
 														}
 														alt=""
-														height={'200px'}
+														style={{maxWidth:"250px"}}
 													/>
 												</p>
 											);
 										})}
 
-									{currentNodeLayer.texts &&
-										currentNodeLayer.texts.map((text: string) => {
+									{currrentNode.data.texts &&
+										currrentNode.data.texts.map((text: string) => {
 											return <p key={text.replace(' ', '_')}>{text}</p>;
 										})}
 								</div>
 							</div>
 							<div className="flex flex-wrap justify-content-center mb-4">
-								{currentNodeLayer.edges &&
-									currentNodeLayer.edges.map((edge: Edge) => {
+								{currrentEdges &&
+									currrentEdges.map((edge: Edge) => {
 										return (
 											<Button
-												className={`mx-2 mb-2 ${
+												className={`w-full border-1 max-w-25rem justify-content-center mx-2 mb-2 ${
 													selectedPathIds.length !== idx + 1
 														? selectedPathIds[idx + 1][0] === edge.id
 															? 'pointer-events-none focus:bg-primary'
 															: 'pointer-events-none  bg-gray-300 text-gray-500'
-														: 'bg-white text-blue-700 border-blue-700 border-1 hover:text-white hover:bg-blue-700'
+														: 'bg-white text-green-700 border-green-700 border-1 hover:text-white hover:bg-green-700'
 												}`}
+												style={{border:'1px solid var(--primary-color)'}}
 												onClick={() => selectPath(edge.id)}
 												key={'edge_' + edge.source + edge.target}>
-												{edge.value}
+												{edge.data.value}
 											</Button>
 										);
 									})}
-								{!currentNodeLayer.edges && <h4 className="w-full text-center text-blue-700">Please contact lab if you have further questions.</h4>}
+								{!currrentEdges && <h4 className="w-full text-center text-green-700">Please contact lab if you have further questions.</h4>}
 							</div>
 						</div>
 					);
@@ -133,7 +119,7 @@ const GuideText = () => {
 			setPathElements(elements);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedPathIds,nestedNodes]);
+	}, [selectedPathIds]);
 
 	const selectPath = (edgeId: number) => {
 		const selectedEdge = selectedEdgeData.find((edge: Edge) => edge.id === edgeId);

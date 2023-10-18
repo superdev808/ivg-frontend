@@ -5,12 +5,14 @@ type GuideState = {
 	selectedNodeData: Node[];
 	selectedEdgeData: Edge[];
 	selectedPathIds: PathIds[];
+	isLoading: boolean;
 };
 
 const initialState: GuideState = {
 	selectedNodeData: [],
 	selectedEdgeData: [],
-	selectedPathIds: []
+	selectedPathIds: [],
+	isLoading: false,
 };
 
 export const guideSlice = createSlice({
@@ -24,16 +26,14 @@ export const guideSlice = createSlice({
 		},
 		setSelectedPathIds: (state, action) => {
 			state.selectedPathIds = action.payload;
-		}
-	
+		},
+		setLoading: (state, action) => {
+			state.isLoading = action.payload;
+		},
 	},
 });
 
-export const {
-	reset,
-	setSelectedData,
-	setSelectedPathIds
-} = guideSlice.actions;
+export const { reset, setSelectedData, setSelectedPathIds, setLoading } = guideSlice.actions;
 export default guideSlice.reducer;
 
 export const selectGuide = (state: any) => state.guide;

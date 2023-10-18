@@ -4,21 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Node,Edge, Guide } from '@/types/Guide';
 
-import { reset, setSelectedData } from '@/redux/features/guideSelectionSlice';
+import { reset, setSelectedData, setSelectedPathIds, setLoading } from '@/redux/features/guideSelectionSlice';
 
 import { selectGuides } from '@/redux/features/guidesSlice';
 import useLoadGuidesData from './useLoadGuidesData';
 
-
+import { nestNodesEdges } from '@/helpers/nestNodesEdges';
+import { unpackNodesEdges } from '@/helpers/unpackNodesEdges';
 
 function useSelectGuide() {
   const dispatch = useDispatch();
   const pathname = usePathname();
   useLoadGuidesData();
   
-  const {guidesData, nodesData, edgesData} = useSelector(selectGuides);
+  const {guidesData, nodesData, edgesData, isLoading} = useSelector(selectGuides);
 
   useEffect(() => {
+    if (!isLoading) setLoading(true);
     if (guidesData.length === 0 || nodesData.length === 0 || edgesData.length === 0) {
       return;
     }
@@ -31,11 +33,17 @@ function useSelectGuide() {
       return;
     }
 
-    const nodes = nodesData.filter((node: Node) => Number(node.guideId) === Number(selectedGuide.id));
-    const edges = edgesData.filter((edge: Edge) =>  Number(edge.guideId) === Number(selectedGuide.id));
+    const filteredNodes = nodesData.filter((node: Node) => Number(node.guideId) === Number(selectedGuide.id));
+    const filteredEdges = edgesData.filter((edge: Edge) =>  Number(edge.guideId) === Number(selectedGuide.id));
     
-    dispatch(setSelectedData({nodes,edges})); 
+    const nodeCopy = JSON.parse(JSON.stringify(filteredNodes));
+    const edgeCopy = JSON.parse(JSON.stringify(filteredEdges));
+		const nestedNodes = nestNodesEdges(nodeCopy, edgeCopy);
+    const {newNodes:nodes, newEdges:edges} = unpackNodesEdges(nestedNodes)
 
+    dispatch(setSelectedPathIds([[null, "0"]]))
+    dispatch(setSelectedData({nodes, edges})); 
+    if (isLoading) setLoading(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [guidesData, nodesData, edgesData]);
 
