@@ -1,20 +1,33 @@
-.calculatorContainer {
-  height: 40rem;
-}
+@import "@/styles/variables.scss";
 
+.calculatorCard {
+  box-sizing: border-box;
+  background-color: $ps-green-light;
 
-.calculatorList {
-  border: solid 1px #E0E0E0;
-  margin: 1rem 0;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  &:hover {
-    border-color:var(--primary-color) !important;
-    cursor: pointer;
-    border-width: 2px;
+  & div:first-child {
+    padding: 0px !important;
   }
-  
 
+  &:hover {
+    background-color: $ps-green-dark;
+  }
 }
 
+.calculatorCardHeader {
+  font-size: 16px;
+  color: white;
+  margin: 0px;
+  padding: 16px;
+}
+
+.calculatorCardText {
+  margin: 0px;
+  padding: 0px 16px;
+  color: white;
+}
+
+.calculatorButton {
+  &:enabled:focus {
+    background-color: $ps-green-light !important;
+  }
+}

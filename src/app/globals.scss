@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import '~video-react/styles/scss/video-react';
+@import "@/styles/variables.scss";
 
 html,
 body {
@@ -8,6 +9,7 @@ body {
 	padding: 0;
 	font-family: var(--font-family);
 	background-color: var(--surface-100);
+	color: $ps-green-dark;
 }
 
 .container {

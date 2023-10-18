@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Button from "@/components/navigation/navbar/Button";
 import styles from "../Navigation.module.scss"
 
 const Logo = () => {
@@ -35,25 +34,15 @@ const Logo = () => {
   }, []);
 
   return (
-    <>
-      <Link href="/" className="align-items-center" style={{ display: showButton ? "none" : "flex", textDecoration: "none", alignSelf: "center" }}>
-        <div className={styles.logo}>Ivory<span className="text-primary">Guide</span></div>
-        <Image
-          src="/images/logo-white.png"
-          alt="Logo"
-          height={30}
-          width={53}
-          className="relative"
-        />
-      </Link>
-      <div
-        style={{
-          display: showButton ? "block" : "none",
-        }}
-      >
-        <Button />
-      </div>
-    </>
+    <Link href="/" style={{ display: showButton ? "none" : "block", textDecoration: "none", alignSelf: "center" }}>
+      <Image
+        src="/Ivory-Guide-Horizontal-Logo-White.png"
+        alt="Logo"
+        width={width < 1024 ? "180" : "320"}
+        height={width < 1024 ? "45" : "64"}
+        className="relative"
+      />
+    </Link>
   );
 };
 

@@ -1,10 +1,13 @@
 
 import { useState, useRef } from "react";
 import Navbar from "./navbar";
-import Sidebar from "./sidebar";
-import SearchBar from "../searchBar";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import useCheckMobileScreen from "@/hooks/useCheckMobileScreen";
+import { PrimeIcons } from 'primereact/api';
+import styles from "./Navigation.module.scss";
+import classNames from "classnames/bind";
+const cx = classNames.bind(styles);
+
 const Navigation = () => {
   // toggle sidebar
   const [isOpen, setIsOpen] = useState(false);
@@ -12,10 +15,13 @@ const Navigation = () => {
 
 
   const navLinks = [
-      {id: 'guides',title: 'Guides', link: '/guides'},
-      {id:'calculators',title: 'Calculators', link: '/calculators'},
-      // {id:'explore',title: 'Explore', link: '/explore'},
+      {id:'calculators',title: 'Calculators', link: '/calculators', icon: PrimeIcons.QRCODE},
+      {id: 'workflows',title: 'Workflows', link: '/guides', icon: PrimeIcons.SITEMAP},
+  ]
 
+  const rightNavLinks = [
+    {id: 'register', title: 'Register', link: '/signup', icon: PrimeIcons.USER},
+    {id: 'signin', title: 'Login', link: '/signin', icon: PrimeIcons.SIGN_IN}
   ]
 
   const toggle = () => {
@@ -31,11 +37,8 @@ const Navigation = () => {
   useCheckMobileScreen(closeMenu);
 
   return (
-    <div ref={boxRef} className="absolute z-2 w-full border-bottom-1 border-100	 bg-white shadow-1 ">
-      
-      <Sidebar isOpen={isOpen} toggle={toggle} navLinks={navLinks} />
-      <Navbar isOpen={isOpen} toggle={toggle} navLinks={navLinks}/>
-      
+    <div ref={boxRef} className={cx("absolute z-2 w-full", "nav-header")}>
+      <Navbar isOpen={isOpen} toggle={toggle} navLinks={navLinks} rightNavLinks={rightNavLinks} />
     </div>
   );
 };

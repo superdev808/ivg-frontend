@@ -1,19 +1,85 @@
-'use client';
+"use client";
 
-import CalculatorHeader from '@/components/calculator/header';
-import CalculatorContainer from '@/components/calculator';
-import styles from './page.module.scss';
-import useGuideRouteListener from '@/hooks/useSelectCalculator';
+import { useGetCalculatorsQuery } from "@/redux/services/calculatorsApi";
+import { useRouter, useParams } from "next/navigation";
+import { useMemo, useState } from "react";
+import { Dropdown } from "primereact/dropdown";
+import { Divider } from "primereact/divider";
+import { Card } from "primereact/card";
+import { ProgressSpinner } from "primereact/progressspinner";
+
+const tabItems = [
+  {
+    type: "Scanbodies",
+    label: "scanbody",
+    placeholder: "Select Manufacturer",
+    description:
+      "This calculator will provide the correct scanbody for you to use based on the implant (manufacturer, system, size) that was placed.",
+    value: 0,
+  },
+  {
+    type: "Implant Drivers",
+    label: "implant driver",
+    placeholder: "Select Manufacturer",
+    description:
+      "This calculator will provide the correct implant driver for you to use based on the implant (manufacturer, system, size) that was placed.",
+    value: 1,
+  },
+  {
+    type: "Implant Screws",
+    label: "implant screw",
+    placeholder: "Select Implant Manufacturer",
+    description:
+      "This calculator will provide you with the correct implant screw to use based on the implant (manufacturer, system, size) that was placed.",
+    value: 2,
+  },
+];
 
 export default function CalculatorPage() {
-	useGuideRouteListener();
-	return (
-		<div className={'flex justify-content-center ' + styles.calculatorContainer}>
-			<div className="flex w-5 p-5 border-round bg-white flex-column">
-				<CalculatorHeader />
+  const {
+    isLoading,
+    data: calculatorOptions,
+    error: calcError,
+  } = useGetCalculatorsQuery(null);
+  // const router = useRouter();
+  const searchParams = useParams();
+  const selectedType = useMemo(() => {
+    const tabId = decodeURIComponent(searchParams.id as string);
+    return tabItems.find((item) => item.type === tabId);
+  }, [searchParams.id]);
 
-				<CalculatorContainer />
-			</div>
-		</div>
-	);
+  const selectedOptions = useMemo(() => {
+    if (!calculatorOptions) {
+      return [];
+    }
+    return calculatorOptions
+      .filter((option) => option.category === selectedType?.value)
+      .sort((a, b) => a.value.localeCompare(b.value));
+  }, [calculatorOptions, selectedType]);
+
+  const [scanBodyOption, setScanBodyOption] = useState(null);
+
+  return (
+    <div className="flex justify-content-center mt-6">
+      {isLoading ? (
+        <ProgressSpinner />
+      ) : (
+        <Card
+          className="w-12 md:w-5 flex px-4 py-2 border-round bg-white flex-column"
+          title={`What type of ${selectedType?.label} do you want?`}
+          subTitle={selectedType?.description}
+        >
+          <Dropdown
+            value={scanBodyOption}
+            onChange={(e) => setScanBodyOption(e.value)}
+            options={selectedOptions}
+            optionLabel="value"
+            optionValue="id"
+            placeholder={selectedType?.placeholder}
+            className="w-full"
+          />
+        </Card>
+      )}
+    </div>
+  );
 }
