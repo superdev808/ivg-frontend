@@ -1430,8 +1430,7 @@
         "id": 524,
         "guideId": 506,
         "value": "What type of Full Denture scan are you performing?",
-        "type": 0,
-        "start": true
+        "type": 0
     },
     {
         "id": 525,

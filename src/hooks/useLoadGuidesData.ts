@@ -16,6 +16,7 @@ function useLoadGuidesData() {
 	const { isLoading: edgesIsLoading, isFetching: edgesIsFetching, data: edgesData = [], error: edgesError } = useGetGuideEdgesQuery(null);
 	useEffect(() => {
 		if (guidesData && nodesData && edgesData && !isLoading && !nodesIsLoading && !edgesIsLoading) {
+
 			dispatch(setGuidesData({ guidesData, nodesData, edgesData }));
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
