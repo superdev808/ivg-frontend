@@ -2,6 +2,7 @@ import { Edge, Guide, Node, PathIds } from '@/types/Guide';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type GuideState = {
+	selectedHeader: String;
 	selectedNodeData: Node[];
 	selectedEdgeData: Edge[];
 	selectedPathIds: PathIds[];
@@ -9,6 +10,7 @@ type GuideState = {
 };
 
 const initialState: GuideState = {
+	selectedHeader: '',
 	selectedNodeData: [],
 	selectedEdgeData: [],
 	selectedPathIds: [],
@@ -20,6 +22,10 @@ export const guideSlice = createSlice({
 	initialState,
 	reducers: {
 		reset: () => initialState,
+		setHeader: (state, action: PayloadAction<String>) => {
+			state.selectedHeader = action.payload;
+
+		},
 		setSelectedData: (state, action) => {
 			state.selectedNodeData = action.payload.nodes;
 			state.selectedEdgeData = action.payload.edges;
@@ -33,7 +39,7 @@ export const guideSlice = createSlice({
 	},
 });
 
-export const { reset, setSelectedData, setSelectedPathIds, setLoading } = guideSlice.actions;
+export const { reset, setSelectedData, setSelectedPathIds, setLoading, setHeader } = guideSlice.actions;
 export default guideSlice.reducer;
 
 export const selectGuide = (state: any) => state.guide;

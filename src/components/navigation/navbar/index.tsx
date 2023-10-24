@@ -28,7 +28,7 @@ const Navbar = ({
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <div className="h-3rem md:h-4rem px-3 md:px-6 w-full sticky top-0 mt-2 mb-3">
+    <div className="h-3rem md:h-4rem px-3 md:px-6 w-full sticky top-0 mt-1 mb-1">
       <div className="flex items-center justify-content-between">
         <div className="flex align-items-center">
           <Logo />
