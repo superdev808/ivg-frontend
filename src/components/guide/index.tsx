@@ -13,23 +13,15 @@ import { Edge, Node } from '@/types/Guide';
 import useLoadGuidesData from '@/hooks/useLoadGuidesData';
 import { selectGuides } from '@/redux/features/guidesSlice';
 
-
-const selectionItems: Edge[] = [
-	{ id: 0, guideId:2, value: 'Trios', source: 0, target: 1 },
-	{ id: 1, guideId:2,value: 'Implant Crown', source: 1, target: 1 },
-	{ id: 2, guideId:228, value: 'Trios (v2)', source: 0, target: 3 },
-	{ id: 3, guideId:228,value: 'Implant Crown', source: 3, target: 3 },
+let selectionItems = [
+	{ id: 0, value: 'Trios', source: 0, target: 1 },
+	{ id: 1, value: 'Medit', source: 0, target: 2 },
+	{ id: 2, value: 'Primescan', source: 0, target: 3 },
 ];
 
-const questionItems: Node[] = [
-	{ id: 0, guideId: 2, value: 'What intraoral scanner are you using?', start: true, type: 0 },
-	{ id: 1, guideId: 2, value: 'What product are you scanning for?', term:true, type: 0 },
-
-	{ id: 3, guideId: 228, value: 'What product are you scanning for?', term:true, type: 0 },
-];
-export default function GuidesComponent() {	
-
-	const {guidesData, nodesData, edgesData} = useSelector(selectGuides);
+let questionItems: Node[] = [{ id: 0, guideId: 2, value: 'What intraoral scanner are you using?', start: true, type: 0 }];
+export default function GuidesComponent() {
+	const { guidesData, nodesData, edgesData } = useSelector(selectGuides);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [currentQuestion, setCurrentQuestion] = useState<Node>();
 	const [currentSelectionItems, setCurrentSelectionItems] = useState<Edge[]>([]);
@@ -37,25 +29,27 @@ export default function GuidesComponent() {
 
 	useLoadGuidesData();
 
-
 	useEffect(() => {
 		if (!guidesData || !nodesData || !edgesData) return;
-		
+		const { flowSeletionItems, flowQuestionItems } = scannersToEdge(guidesData);
+		selectionItems = [...selectionItems, ...flowSeletionItems];
+		questionItems = [...questionItems, ...flowQuestionItems];
+		console.log(selectionItems);
+		console.log(questionItems);
 		const initialQuestion = questionItems.find((item) => item.start);
 
-		if (!initialQuestion || !nodesData ) return;
+		if (!initialQuestion || !nodesData) return;
 
 		selectItems(initialQuestion.id);
 
 		setIsLoading(false);
-
 	}, [guidesData, nodesData, edgesData]);
 
 	const selectItems = (sourceId?: number) => {
-		const sourceItem =  questionItems.find((item) => item.id === sourceId);
+		const sourceItem = questionItems.find((item) => item.id === sourceId);
 		setSelectedItem(null);
 		setCurrentQuestion(sourceItem);
-
+		console.log(sourceItem);
 		const filtered = selectionItems.filter((item: Edge) => item && item.source === sourceId);
 
 		setCurrentSelectionItems(filtered);
@@ -76,8 +70,7 @@ export default function GuidesComponent() {
 							className={`${styles.guidesSelection} flex flex-column ${
 								item && selectedItem && selectedItem.id === item.id ? 'border-green-700 border-2' : ''
 							}`}
-							onClick={() => setSelectedItem(item)}
-							>
+							onClick={() => setSelectedItem(item)}>
 							{item && item.value}
 						</div>
 					);
@@ -136,24 +129,55 @@ export default function GuidesComponent() {
 				</div>
 				<div className={'flex w-full justify-content-end p-4'}>
 					{currentQuestion && currentQuestion.term ? (
-						<Link className="no-underline text-white" href={String(currentQuestion?.guideId)}>
+						<Link
+							className="no-underline text-white"
+							href={String(selectedItem?.target)}>
 							<Button className="justify-content-center">View</Button>
 						</Link>
 					) : (
-						<Button className="justify-content-center" onClick={() => selectedItem && selectItems(selectedItem.target)}>Next</Button>
+						<Button
+							className="justify-content-center"
+							onClick={() => selectedItem && selectItems(selectedItem.target)}>
+							Next
+						</Button>
 					)}
-						
-				
 				</div>
 			</>
 		);
+	};
+
+	const scannersToEdge = (scanners: Edge[]) => {
+		const flowSeletionItems = [];
+		const flowQuestionItems = [];
+
+		for (let i = 0; i < selectionItems.length; i++) {
+			flowQuestionItems.push({
+				id: i+ 1,
+				guideId: i+ 1,
+				value: 'What product are you scanning for?',
+				term: true,
+				type: 0,
+			});
+		}
+
+		for (let i = selectionItems.length; i < scanners.length; i++) {
+			flowSeletionItems.push({
+				id: i,
+				guideId: scanners[i].id,
+				value: scanners[i].value,
+				source: scanners[i].source + 1,
+				target: scanners[i].id,
+			});
+		}
+
+		return { flowSeletionItems, flowQuestionItems };
 	};
 
 	return (
 		<div className={styles.guidesContainer}>
 			<div className="flex flex-column overflow-hidden w-8 mt-4  border-round bg-white shadow-1">
 				{/* <div className="overflow-hidden"> */}
-				<h2 className="m-5 text-700 ">Guides</h2>
+				<h2 className="m-5 text-700 ">Workflows</h2>
 				<div className="flex h-full border-top-1 border-gray-300">
 					<div className="col-6  px-5 py-2  overflow-auto">{selectionPanel()}</div>
 					{/* <div className="flex  h-full align-items-center border-left-1  border-gray-300"> */}
