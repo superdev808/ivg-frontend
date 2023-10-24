@@ -175,7 +175,7 @@ export default function GuidesComponent() {
 
 	return (
 		<div className={styles.guidesContainer}>
-			<div className="flex flex-column overflow-hidden w-8 mt-4  border-round bg-white shadow-1">
+			<div className="flex flex-column overflow-hidden w-8 mt-4 pb-8 border-round bg-white shadow-1">
 				{/* <div className="overflow-hidden"> */}
 				<h2 className="m-5 text-700 ">Workflows</h2>
 				<div className="flex h-full border-top-1 border-gray-300">

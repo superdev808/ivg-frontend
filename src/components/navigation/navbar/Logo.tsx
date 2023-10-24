@@ -38,8 +38,10 @@ const Logo = () => {
       <Image
         src="/Ivory-Guide-Horizontal-Logo-White.png"
         alt="Logo"
-        width={width < 1024 ? "180" : "320"}
-        height={width < 1024 ? "45" : "64"}
+        // width={width < 1024 ? "180" : "320"}
+        // height={width < 1024 ? "45" : "64"}
+        width={width < 1024 ? "150" : "300"}
+        height={width < 1024 ? "30" : "60"}
         className="relative"
       />
     </Link>

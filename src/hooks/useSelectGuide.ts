@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Node,Edge, Guide } from '@/types/Guide';
 
-import { reset, setSelectedData, setSelectedPathIds, setLoading } from '@/redux/features/guideSelectionSlice';
+import { reset, setSelectedData, setSelectedPathIds, setLoading, setHeader } from '@/redux/features/guideSelectionSlice';
 
 import { selectGuides } from '@/redux/features/guidesSlice';
 import useLoadGuidesData from './useLoadGuidesData';
@@ -41,6 +41,7 @@ function useSelectGuide() {
 		const nestedNodes = nestNodesEdges(nodeCopy, edgeCopy);
     const {newNodes:nodes, newEdges:edges} = unpackNodesEdges(nestedNodes)
 
+    dispatch(setHeader(selectedGuide.value))
     dispatch(setSelectedPathIds([[null, "0"]]))
     dispatch(setSelectedData({nodes, edges})); 
     if (isLoading) setLoading(false);
