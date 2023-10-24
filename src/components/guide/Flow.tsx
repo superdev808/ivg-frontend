@@ -87,7 +87,7 @@ const Flow = () => {
 
 	// Function to calculate the XY position for nodes
 	const getHierarchicalMultiLevelLayout = (nodes, edges) => {
-		const spacingX = 600;
+		const spacingX = 200;
 		const spacingY = 200;
 		const maxChildrenPerLevel = 4;
 		const activeOffset = 0; // Additional Y-offset for active nodes

@@ -30,12 +30,12 @@ export default function GuidesComponent() {
 	useLoadGuidesData();
 
 	useEffect(() => {
-		if (!guidesData || !nodesData || !edgesData) return;
+		if (!guidesData.length < 0 || !nodesData.length < 0 || !edgesData.length < 0) return;
+
 		const { flowSeletionItems, flowQuestionItems } = scannersToEdge(guidesData);
 		selectionItems = [...selectionItems, ...flowSeletionItems];
 		questionItems = [...questionItems, ...flowQuestionItems];
-		console.log(selectionItems);
-		console.log(questionItems);
+
 		const initialQuestion = questionItems.find((item) => item.start);
 
 		if (!initialQuestion || !nodesData) return;
@@ -49,7 +49,6 @@ export default function GuidesComponent() {
 		const sourceItem = questionItems.find((item) => item.id === sourceId);
 		setSelectedItem(null);
 		setCurrentQuestion(sourceItem);
-		console.log(sourceItem);
 		const filtered = selectionItems.filter((item: Edge) => item && item.source === sourceId);
 
 		setCurrentSelectionItems(filtered);
@@ -160,7 +159,7 @@ export default function GuidesComponent() {
 			});
 		}
 
-		for (let i = selectionItems.length; i < scanners.length; i++) {
+		for (let i = 0; i < scanners.length; i++) {
 			flowSeletionItems.push({
 				id: i,
 				guideId: scanners[i].id,
