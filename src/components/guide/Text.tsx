@@ -47,6 +47,7 @@ const GuideText = () => {
 		if (selectedPathIds.length > 0) {
 			selectedPathIds.forEach((ids: [null | number, number], idx: number) => {
 				const currrentNode = selectedNodeData.find((node: any) => node.id === ids[1]);
+
 				const currrentEdges = selectedEdgeData.filter((edge: any) => edge.source === ids[1]);
 		
 				currrentNode &&
@@ -79,7 +80,7 @@ const GuideText = () => {
 															'/images/no-image.png'
 														}
 														alt=""
-														style={{maxWidth:"250px"}}
+														style={{height: "150px"}}
 													/>
 												</p>
 											);
