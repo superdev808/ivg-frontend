@@ -1,0 +1,733 @@
+{
+    "start": {
+        "question": "What brand of implant was placed?",
+        "answers": [
+            {
+                "text": "Biohorizons",
+                "next": "level-1"
+            },
+            {
+                "text": "Nobel",
+                "next": "level-2"
+            },
+            {
+                "text": "Camlog",
+                "next": "level-3"
+            },
+            {
+                "text": "Osstem (Hiossen)",
+                "next": "level-4"
+            },
+            {
+                "text": "Straumann",
+                "next": "level-5"
+            },
+            {
+                "text": "Neodent",
+                "next": "level-6"
+            },
+            {
+                "text": "Dentsply Sirona",
+                "next": "level-7"
+            },
+            {
+                "text": "Megagen",
+                "next": "level-8"
+            },
+            {
+                "text": "Dentium",
+                "next": "level-9"
+            },
+            {
+                "text": "MIS",
+                "next": "level-10"
+            },
+            {
+                "text": "Zimmer",
+                "next": "level-11"
+            }
+        ]
+    },
+    "level-1": {
+        "question": "What is the system of the implant placed?",
+        "answers": [
+            {
+                "text": "Internal Hex",
+                "next": "level-1-1"
+            },
+            {
+                "text": "External Hex",
+                "next": "level-1-2"
+            }
+        ]
+    },
+    "level-1-1": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.0",
+                "next": "level-1-1-1"
+            },
+            {
+                "text": "3.5",
+                "next": "level-1-1-2"
+            },
+            {
+                "text": "4.5",
+                "next": "level-1-1-3"
+            },
+            {
+                "text": "5.7",
+                "next": "level-1-1-4"
+            }
+        ]
+    },
+    "level-1-1-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-0-52-099/",
+        "img": "/Dess Scan Body/Biohorizons3screw.jpg"
+    },
+    "level-1-1-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-5-52-087/",
+        "img": "/Dess Scan Body/Biohorizons3.5screw.jpg"
+    },
+    "level-1-1-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-5-52-088/",
+        "img": "/Dess Scan Body/Biohorizons4.5screw.jpeg"
+    },
+    "level-1-1-4": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-5-7-52-089/",
+        "img": "/Dess Scan Body/Biohorizons5.7screw.jpg"
+    },
+    "level-1-2": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.7",
+                "next": "level-1-2-1"
+            },
+            {
+                "text": "4.25",
+                "next": "level-1-2-2"
+            },
+            {
+                "text": "5.25",
+                "next": "level-1-2-3"
+            }
+        ]
+    },
+    "level-1-2-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-7-52-020/",
+        "img": "/Dess Scan Body/BiohorizonsExternal3.7.jpeg"
+    },
+    "level-1-2-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-25-52-021/",
+        "img": "/Dess Scan Body/BiohorizonsExternal4.25.jpeg"
+    },
+    "level-1-2-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-5-25-52-022/",
+        "img": "/Dess Scan Body/BiohorizonsExternal5.25.jpeg"
+    },
+    "level-2": {
+        "question": "What is the system of the implant placed?",
+        "answers": [
+            {
+                "text": "Branemark",
+                "next": "level-2-1"
+            }
+        ]
+    },
+    "level-2-1": {
+        "question": "Choose Size",
+        "answers": [
+            {
+                "text": "NP 3.5",
+                "next": "level-2-1-1"
+            },
+            {
+                "text": "WP 5,1",
+                "next": "level-2-1-2"
+            },
+            {
+                "text": "RP 4,1",
+                "next": "level-2-1-3"
+            }
+        ]
+    },
+    "level-2-1-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-5-np-52-001/",
+        "img": "/Dess Scan Body/Branemark3.5.jpeg"
+    },
+    "level-2-1-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-5-0-wp-52-003/",
+        "img": "/Dess Scan Body/Branemark5.0.jpeg"
+    },
+    "level-2-1-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-1-rp-52-002/",
+        "img": "/Dess Scan Body/Branemark4.1.jpeg"
+    },
+    "level-3": {
+        "question": "What is the system of the implant placed?",
+        "answers": [
+            {
+                "text": "Camlog",
+                "next": "level-3-1"
+            },
+            {
+                "text": "Conelog",
+                "next": "level-3-2"
+            }
+        ]
+    },
+    "level-3-1": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.3",
+                "next": "level-3-1-1"
+            },
+            {
+                "text": "3.8",
+                "next": "level-3-1-2"
+            },
+            {
+                "text": "4.3",
+                "next": "level-3-1-3"
+            },
+            {
+                "text": "5.0",
+                "next": "level-3-1-4"
+            }
+        ]
+    },
+    "level-3-1-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-3-52-064/",
+        "img":"/Dess Scan Body/Camlog3.3.jpeg"
+    },
+    "level-3-1-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-3-52-065/}",
+        "img":"/Dess Scan Body/Camlog3.8.jpeg"
+    },
+    "level-3-1-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-3-52-066/",
+        "img":"/Dess Scan Body/Camlog4.3.jpeg"
+    },
+    "level-3-1-4": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-5-0-52-067/",
+        "img":"/Dess Scan Body/Camlog5.0.jpeg"
+    },
+    "level-3-2": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.3",
+                "next": "level-3-2-1"
+            },
+            {
+                "text": "3.8",
+                "next": "level-3-2-2"
+            },
+            {
+                "text": "4.3",
+                "next": "level-3-2-3"
+            },
+            {
+                "text": "5.0",
+                "next": "level-3-2-4"
+            }
+        ]
+    },
+    "level-3-2-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-3-52-074/",
+        "img": "/Dess Scan Body/Conelog3.3.jpeg"
+    },
+    "level-3-2-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-8-4-3-52-075/",
+        "img": "/Dess Scan Body/Conelog3.8-4.3.jpeg"
+    },
+    "level-3-2-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-8-4-3-52-075/",
+        "img": "/Dess Scan Body/Conelog3.8-4.3.jpeg"
+    },
+    "level-3-2-4": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-5-0-52-076/",
+        "img": "/Dess Scan Body/Conelog5.0.jpeg"
+    },
+    "level-4": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.5 (Mini)",
+                "next": "level-4-1"
+            },
+            {
+                "text": "4.0-7.0 (Standard)",
+                "next": "level-4-2"
+            }
+        ]
+    },
+    "level-4-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-mini-52-072/",
+        "img":"/Dess Scan Body/OsstemMini.jpeg"
+    },
+    "level-4-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-standard-52-073/",
+        "img":"/Dess Scan Body/OsstemStandard.jpeg"
+    },
+    "level-5": {
+        "question": "What is the system of the implant placed?",
+        "answers": [
+            {
+                "text": "Tissue Level",
+                "next": "level-5-1"
+            },
+            {
+                "text": "BLX",
+                "next": "level-5-2"
+            },
+            {
+                "text": "Bone Level",
+                "next": "level-5-3"
+            }
+        ]
+    },
+    "level-5-1": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "NNC",
+                "next": "level-5-1-1"
+            },
+            {
+                "text": "WN",
+                "next": "level-5-1-2"
+            },
+            {
+                "text": "RN",
+                "next": "level-5-1-3"
+            }
+        ]
+    },
+    "level-5-1-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-3-nnc-52-070/",
+        "img": "/Dess Scan Body/StraumannNNC.jpeg"
+    },
+    "level-5-1-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-for-on-implant-6-5-wn-52-045/",
+        "img": "/Dess Scan Body/StraumannWN.jpeg"
+    },
+    "level-5-1-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-for-on-implant-4-8-rn-52-009/",
+        "img": "/Dess Scan Body/StraumannRN.jpeg"
+    },
+    "level-5-2": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "RB/WB",
+                "next": "level-5-2-1"
+            }
+        ]
+    },
+    "level-5-2-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-rb-wb-52-062/",
+        "img": "/Dess Scan Body/StraumannRB-WB.jpeg"
+    },
+    "level-5-3": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "RC",
+                "next": "level-5-3-1"
+            },
+            {
+                "text": "RC",
+                "next": "level-5-3-2"
+            }
+        ]
+    },
+    "level-5-3-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-1-4-8-rc-52-044/",
+        "img": "/Dess Scan Body/StraumannRC.jpeg"
+    },
+    "level-5-3-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-3-nc-52-043/",
+        "img": "/Dess Scan Body/StraumannNC.jpeg"
+    },
+    "level-6": {
+        "question": "What is the system of the implant placed?",
+        "answers": [
+            {
+                "text": "GM",
+                "next": "level-6-1"
+            }
+        ]
+    },
+    "level-6-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-52-035/",
+        "img": "/Dess Scan Body/neodent.jpeg"
+    },
+    "level-7": {
+        "question": "What is the system of the implant placed?",
+        "answers": [
+            {
+                "text": "Ankylos",
+                "next": "level-7-1"
+            },
+            {
+                "text": "Astra",
+                "next": "level-7-2"
+            },
+            {
+                "text": "Xive",
+                "next": "level-7-3"
+            }
+        ]
+    },
+    "level-7-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-52-049/",
+        "img": "/Dess Scan Body/Ankylos.jpeg"
+    },
+    "level-7-2": {
+        "question": "Osseospeed or EV?",
+        "answers": [
+            {
+                "text": "Osseospeed",
+                "next": "level-7-2-1"
+            },
+            {
+                "text": "EV",
+                "next": "level-7-2-2"
+            }
+        ]
+    },
+    "level-7-2-1": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.0",
+                "next": "level-7-2-1-1"
+            },
+            {
+                "text": "Lilac",
+                "next": "level-7-2-1-2"
+            },
+            {
+                "text": "Aqua",
+                "next": "level-7-2-1-3"
+            }
+        ]
+    },
+    "level-7-2-1-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-0-52-023/",
+        "img": "/Dess Scan Body/osseospeed3.0.jpeg"
+    },
+    "level-7-2-1-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-5-5-0-lilac-52-025/",
+        "img": "/Dess Scan Body/lilac.jpeg"
+    },
+    "level-7-2-1-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-5-4-0-aqua-52-024/",
+        "img": "/Dess Scan Body/aqua.jpeg"
+    },
+    "level-7-2-2": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.6",
+                "next": "level-7-2-2-1"
+            },
+            {
+                "text": "4.2",
+                "next": "level-7-2-2-2"
+            },
+            {
+                "text": "4.8",
+                "next": "level-7-2-2-3"
+            },
+            {
+                "text": "5.4",
+                "next": "level-7-2-2-4"
+            }
+        ]
+    },
+    "level-7-2-2-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-6-52-059/",
+        "img":"/Dess Scan Body/ev3.6.jpeg"
+    },
+    "level-7-2-2-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-2-52-060/",
+        "img":"/Dess Scan Body/ev4.2.jpeg"
+    },
+    "level-7-2-2-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-8-52-061/",
+        "img":"/Dess Scan Body/ev4.8.jpeg"
+    },
+    "level-7-2-2-4": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-5-4-52-407/",
+        "img":"/Dess Scan Body/ev5.4.jpeg"
+    },
+    "level-7-3": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.4",
+                "next": "level-7-3-1"
+            },
+            {
+                "text": "3.8",
+                "next": "level-7-3-2"
+            },
+            {
+                "text": "4.5",
+                "next": "level-7-3-3"
+            }
+        ]
+    },
+    "level-7-3-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-4-52-038/",
+        "img":"/Dess Scan Body/Xive3.4.jpeg"
+    },
+    "level-7-3-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-8-52-039/",
+        "img":"/Dess Scan Body/Xive3.8.jpeg"
+    },
+    "level-7-3-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-5-52-040/",
+        "img":"/Dess Scan Body/Xive4.5.jpeg"
+    },
+    "level-8": {
+        "question": "What is the system of the implant placed?",
+        "answers": [
+            {
+                "text": "Anyridge",
+                "next": "level-8-1"
+            }
+        ]
+    },
+    "level-8-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-52-057/",
+        "img": "/Dess Scan Body/megagen.jpeg"
+    },
+    "level-9": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.6-5.0",
+                "next": "level-9-1"
+            }
+        ]
+    },
+    "level-9-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-6-3-8-4-0-4-5-5-0-52-090/",
+        "img":"/Dess Scan Body/Dentium.jpeg"
+    },
+    "level-10": {
+        "question": "What is the system of the implant placed?",
+        "answers": [
+            {
+                "text": "MIS SEVEN",
+                "next": "level-10-1"
+            },
+            {
+                "text": "C1",
+                "next": "level-10-2"
+            },
+            {
+                "text": "V3",
+                "next": "level-10-3"
+            }
+        ]
+    },
+    "level-10-1": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "NP 3.3",
+                "next": "level-10-1-1"
+            },
+            {
+                "text": "SP 3.75, 4.2",
+                "next": "level-10-1-2"
+            },
+            {
+                "text": "WP 5.0, 6.0",
+                "next": "level-10-1-3"
+            }
+        ]
+    },
+    "level-10-1-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-0-52-056/",
+        "img": "/Dess Scan Body/MISSevenNP.jpeg"
+    },
+    "level-10-1-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-5-52-017/",
+        "img": "/Dess Scan Body/MISSevenSP.jpeg"
+    },
+    "level-10-1-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-5-52-018/",
+        "img": "/Dess Scan Body/MISSevenWP.jpeg"
+    },
+    "level-10-2": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "NP 3.3",
+                "next": "level-10-2-1"
+            },
+            {
+                "text": "SP 3.75, 4.2",
+                "next": "level-10-2-2"
+            },
+            {
+                "text": "WP 5.0, 6.0",
+                "next": "level-10-2-3"
+            }
+        ]
+    },
+    "level-10-2-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-52-081/",
+        "img": "/Dess Scan Body/MISNP.jpeg"
+    },
+    "level-10-2-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-52-082/",
+        "img": "/Dess Scan Body/MISSP.jpeg"
+    },
+    "level-10-2-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-52-083/",
+        "img": "/Dess Scan Body/MISWP.jpeg"
+    },
+    "level-10-3": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "NP 3.3",
+                "next": "level-10-3-1"
+            },
+            {
+                "text": "SP 3.9, 4.3, 5.0",
+                "next": "level-10-3-2"
+            }
+        ]
+    },
+    "level-10-3-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-52-084/",
+        "img": "/Dess Scan Body/MISV3NP.jpeg"
+    },
+    "level-10-3-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-mis-multiunit-52-085/",
+        "img": "/Dess Scan Body/MISV3WP.jpeg"
+    },
+    "level-11": {
+        "question": "What is the system of the implant placed?",
+        "answers": [
+            {
+                "text": "TSV",
+                "next": "level-11-1"
+            },
+            {
+                "text": "Biomet 3i",
+                "next": "level-11-2"
+            }
+        ]
+    },
+    "level-11-1": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.5",
+                "next": "level-11-1-1"
+            },
+            {
+                "text": "4.5",
+                "next": "level-11-1-2"
+            },
+            {
+                "text": "5.7",
+                "next": "level-11-1-3"
+            }
+        ]
+    },
+    "level-11-1-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-5-52-017/",
+        "img": "/Dess Scan Body/zimmer3.5.jpeg"
+    },
+    "level-11-1-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-5-52-018/",
+        "img":"/Dess Scan Body/zimmer4.5.jpeg"
+    },
+    "level-11-1-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-5-7-52-019/",
+        "img":"/Dess Scan Body/zimmer4.5.jpeg"
+    },
+    "level-11-2": {
+        "question": "What is the system of the implant placed?",
+        "answers": [
+            {
+                "text": "Osseotite External Hex",
+                "next": "level-11-2-1"
+            },
+            {
+                "text": "Certain",
+                "next": "level-11-2-2"
+            }
+        ]
+    },
+    "level-11-2-1": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.4",
+                "next": "level-11-2-1-1"
+            },
+            {
+                "text": "4.1",
+                "next": "level-11-2-1-2"
+            },
+            {
+                "text": "5.0",
+                "next": "level-11-2-1-3"
+            }
+        ]
+    },
+    "level-11-2-1-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-4-52-011/",
+        "img": "/Dess Scan Body/3iosseotite3.4.jpeg"
+    },
+    "level-11-2-1-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-1-52-012/",
+        "img": "/Dess Scan Body/3iosseotite4.1.jpeg"
+    },
+    "level-11-2-1-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-5-0-52-013/",
+        "img": "/Dess Scan Body/3iosseotite5.0.jpeg"
+    },
+    "level-11-2-2": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.4",
+                "next": "level-11-2-2-1"
+            },
+            {
+                "text": "4.1",
+                "next": "level-11-2-2-2"
+            },
+            {
+                "text": "5.0",
+                "next": "level-11-2-2-3"
+            }
+        ]
+    },
+    "level-11-2-2-1": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-3-4-52-014/",
+        "img": "/Dess Scan Body/biomet3.4.jpeg"
+    },
+    "level-11-2-2-2": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-4-1-52-015/",
+        "img": "/Dess Scan Body/biomet4.1.jpeg"
+    },
+    "level-11-2-2-3": {
+        "url": "https://www.dess-usa.com/intraoral-scan-body-5-0-52-016/",
+        "img": "/Dess Scan Body/biomet5.jpeg"
+    }
+}

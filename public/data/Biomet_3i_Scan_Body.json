@@ -1,0 +1,369 @@
+{
+    "start": {
+        "question": "What is the platform diameter?",
+        "answers": [
+            {
+                "text": "3.4",
+                "next": "level-1"
+            },
+            {
+                "text": "4.1",
+                "next": "level-2"
+            },
+            {
+                "text": "5.0",
+                "next": "level-3"
+            },
+            {
+                "text": "6.0",
+                "next": "level-4"
+            }
+        ]
+    },
+    "level-1": {
+        "question": "What abutment height do you want?",
+        "answers": [
+            {
+                "text": "3mm (H)",
+                "next": "level-1-1"
+            },
+            {
+                "text": "5mm (H)",
+                "next": "level-1-2"
+            },
+            {
+                "text": "7mm (H)",
+                "next": "level-1-3"
+            }
+        ]
+    },
+    "level-1-1": {
+        "question": "What Emergence profile do you want?",
+        "answers": [
+            {
+                "text": "3.8mm",
+                "next": "level-1-1-1"
+            },
+            {
+                "text": "5mm",
+                "next": "level-1-1-2"
+            }
+        ]
+    },
+    "level-1-1-1": {
+        "text": "IEEHA343"
+    },
+    "level-1-1-2": {
+        "text": "IEEHA353"
+    },
+    "level-1-2": {
+        "question": "What Emergence profile do you want?",
+        "answers": [
+            {
+                "text": "3.8mm",
+                "next": "level-1-2-1"
+            },
+            {
+                "text": "5mm",
+                "next": "level-1-2-2"
+            }
+        ]
+    },
+    "level-1-2-1": {
+        "text": "IEEHA345"
+    },
+    "level-1-2-2": {
+        "text": "IEEHA355"
+    },
+    "level-1-3": {
+        "question": "What Emergence profile do you want?",
+        "answers": [
+            {
+                "text": "3.8mm",
+                "next": "level-1-3-1"
+            },
+            {
+                "text": "5mm",
+                "next": "level-1-3-2"
+            }
+        ]
+    },
+    "level-1-3-1": {
+        "text": "IEEHA347"
+    },
+    "level-1-3-2": {
+        "text": "IEEHA357"
+    },
+    "level-2": {
+        "question": "What abutment height do you want?",
+        "answers": [
+            {
+                "text": "3mm (H)",
+                "next": "level-2-1"
+            },
+            {
+                "text": "5mm (H)",
+                "next": "level-2-2"
+            },
+            {
+                "text": "7mm (H)",
+                "next": "level-2-3"
+            }
+        ]
+    },
+    "level-2-1": {
+        "question": "What Emergence profile do you want?",
+        "answers": [
+            {
+                "text": "4.1",
+                "next": "level-2-1-1"
+            },
+            {
+                "text": "5.0",
+                "next": "level-2-1-2"
+            },
+            {
+                "text": "6.0",
+                "next": "level-2-1-3"
+            },
+            {
+                "text": "7.5",
+                "next": "level-2-1-4"
+            }
+        ]
+    },
+    "level-2-1-1": {
+        "text": "IEEHA443"
+    },
+    "level-2-1-2": {
+        "text": "IEEHA453"
+    },
+    "level-2-1-3": {
+        "text": "IEEHA463"
+    },
+    "level-2-1-4": {
+        "text": "IEEHA473"
+    },
+
+    "level-2-2": {
+        "question": "What Emergence profile do you want?",
+        "answers": [
+            {
+                "text": "4.1",
+                "next": "level-2-1-1"
+            },
+            {
+                "text": "5.0",
+                "next": "level-2-1-2"
+            },
+            {
+                "text": "6.0",
+                "next": "level-2-1-3"
+            },
+            {
+                "text": "7.5",
+                "next": "level-2-1-4"
+            }
+        ]
+    },
+    "level-2-2-1": {
+        "text": "IEEHA445"
+    },
+    "level-2-2-2": {
+        "text": "IEEHA455"
+    },
+    "level-2-2-3": {
+        "text": "IEEHA465"
+    },
+    "level-2-2-4": {
+        "text": "IEEHA475"
+    },
+
+    "level-2-3": {
+        "question": "What Emergence profile do you want?",
+        "answers": [
+            {
+                "text": "4.1",
+                "next": "level-2-1-1"
+            },
+            {
+                "text": "5.0",
+                "next": "level-2-1-2"
+            },
+            {
+                "text": "6.0",
+                "next": "level-2-1-3"
+            },
+            {
+                "text": "7.5",
+                "next": "level-2-1-4"
+            }
+        ]
+    },
+    "level-2-3-1": {
+        "text": "IEEHA447"
+    },
+    "level-2-3-2": {
+        "text": "IEEHA457"
+    },
+    "level-2-3-3": {
+        "text": "IEEHA467"
+    },
+    "level-2-3-4": {
+        "text": "IEEHA477"
+    },
+
+    "level-3": {
+        "question": "What abutment height do you want?",
+        "answers": [
+            {
+                "text": "3mm (H)",
+                "next": "level-3-1"
+            },
+            {
+                "text": "5mm (H)",
+                "next": "level-3-2"
+            },
+            {
+                "text": "7mm (H)",
+                "next": "level-3-3"
+            }
+        ]
+    },
+    "level-3-1": {
+        "question": "What Emergence profile do you want?",
+        "answers": [
+            {
+                "text": "5.0",
+                "next": "level-3-1-1"
+            },
+            {
+                "text": "6.0",
+                "next": "level-3-1-2"
+            },
+            {
+                "text": "7.5",
+                "next": "level-3-1-3"
+            }
+        ]
+    },
+    "level-3-1-1": {
+        "text": "IEEHA553"
+    },
+    "level-3-1-2": {
+        "text": "IEEHA563"
+    },
+    "level-3-1-3": {
+        "text": "IEEHA573"
+    },
+    "level-3-2": {
+        "question": "What Emergence profile do you want?",
+        "answers": [
+            {
+                "text": "5.0",
+                "next": "level-3-2-1"
+            },
+            {
+                "text": "7.5",
+                "next": "level-3-2-2"
+            }
+        ]
+    },
+    "level-3-2-1": {
+        "text": "IEEHA555"
+    },
+    "level-3-2-2": {
+        "text": "IEEHA575"
+    },
+    "level-3-3": {
+        "question": "What Emergence profile do you want?",
+        "answers": [
+            {
+                "text": "5.0",
+                "next": "level-3-3-1"
+            },
+            {
+                "text": "6.0",
+                "next": "level-3-3-2"
+            },
+            {
+                "text": "7.5",
+                "next": "level-3-3-3"
+            }
+        ]
+    },
+    "level-3-3-1": {
+        "text": "IEEHA557"
+    },
+    "level-3-3-2": {
+        "text": "IEEHA567"
+    },
+    "level-3-3-3": {
+        "text": "IEEHA577"
+    },
+    "level-4": {
+        "question": "What abutment height do you want?",
+        "answers": [
+            {
+                "text": "3mm (H)",
+                "next": "level-4-1"
+            },
+            {
+                "text": "5mm (H)",
+                "next": "level-4-2"
+            }
+        ]
+    },
+    "level-4-1": {
+        "question": "What Emergence profile do you want?",
+        "answers": [
+            {
+                "text": "6.0mm",
+                "next": "level-4-1-1"
+            },
+            {
+                "text": "6.8mm",
+                "next": "level-4-1-2"
+            },
+            {
+                "text": "7.5mm",
+                "next": "level-4-1-3"
+            }
+        ]
+    },
+    "level-4-1-1": {
+        "text": "IEEHA663"
+    },
+    "level-4-1-2": {
+        "text": "IEEHA6683"
+    },
+    "level-4-1-3": {
+        "text": "IEEHA673"
+    },
+    "level-4-2": {
+        "question": "What Emergence profile do you want?",
+        "answers": [
+            {
+                "text": "6.0mm",
+                "next": "level-4-2-1"
+            },
+            {
+                "text": "6.8mm",
+                "next": "level-4-2-2"
+            },
+            {
+                "text": "7.5mm",
+                "next": "level-4-2-3"
+            }
+        ]
+    },
+    "level-4-2-1": {
+        "text": "IEEHA665"
+    },
+    "level-4-2-2": {
+        "text": "IEEHA6685"
+    },
+    "level-4-2-3": {
+        "text": "IEEHA675"
+    }
+}

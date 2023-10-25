@@ -1,0 +1,241 @@
+{
+    "start": {
+        "question": "What brand of implant was placed?",
+        "answers": [
+            {
+                "text": "Biohorizons",
+                "next": "level-1"
+            }
+        ]
+    },
+    "level-1": {
+        "question": "What is the platform size?",
+        "answers": [
+            {
+                "text": "5.7",
+                "next": "level-1-1"
+            },
+            {
+                "text": "3.5",
+                "next": "level-1-2"
+            },
+            {
+                "text": "4.5",
+                "next": "level-1-3"
+            },
+            {
+                "text": "3.0",
+                "next": "level-1-4"
+            }
+        ]
+    },
+    "level-1-1": {
+        "question": "What type of scanbody: PEEK or Snap?",
+        "answers": [
+            {
+                "text": "Snap",
+                "next": "level-1-1-1"
+            },
+            {
+                "text": "PEEK",
+                "next": "level-1-1-2"
+            }
+        ]
+    },
+    "level-1-2": {
+        "question": "What type of scanbody: PEEK, titanium, or snap?",
+        "answers": [
+            {
+                "text": "PEEK",
+                "next": "level-1-2-1"
+            },
+            {
+                "text": "Titanium",
+                "next": "level-1-2-2"
+            },
+            {
+                "text": "Snap",
+                "next": "level-1-2-3"
+            }
+        ]
+    },
+    "level-1-3": {
+        "question": "What type of scanbody: PEEK, titanium, or snap?",
+        "answers": [
+            {
+                "text": "PEEK",
+                "next": "level-1-3-1"
+            },
+            {
+                "text": "Titanium",
+                "next": "level-1-3-2"
+            },
+            {
+                "text": "Snap",
+                "next": "level-1-3-3"
+            }
+        ]
+    },
+    "level-1-4": {
+        "question": "What type of scanbody: PEEK, titanium, or snap?",
+        "answers": [
+            {
+                "text": "PEEK",
+                "next": "level-1-4-1"
+            },
+            {
+                "text": "Titanium",
+                "next": "level-1-4-2"
+            },
+            {
+                "text": "Snap",
+                "next": "level-1-4-3"
+            }
+        ]
+    },
+    "level-1-1-1": {
+        "question": "What height scan body do you need?",
+        "answers": [
+            {
+                "text": "Default",
+                "next": "level-1-1-1-1"
+            },
+            {
+                "text": "8mm",
+                "next": "level-1-1-1-2"
+            },
+            {
+                "text": "11mm",
+                "next": "level-1-1-1-3"
+            }
+        ]
+    },
+    "level-1-1-2": {
+        "url": "https://usstore.biohorizons.com/peek-scan-abutment-57mm",
+        "img": "/Biohorizons_Scanbody_Calculator/5.7mm.png"
+    },
+    "level-1-2-1": {
+        "url": "https://usstore.biohorizons.com/peek-scan-abutment-35mm",
+        "img": "/Biohorizons_Scanbody_Calculator/PYPSA.png"
+    },
+    "level-1-2-2": {
+        "url": "https://usstore.biohorizons.com/35mm-titanium-scan-body",
+        "img": "/Biohorizons_Scanbody_Calculator/SB.png"
+    },
+    "level-1-2-3": {
+        "question": "What height scan body do you need?",
+        "answers": [
+            {
+                "text": "Default",
+                "next": "level-1-2-3-1"
+            },
+            {
+                "text": "8mm",
+                "next": "level-1-2-3-2"
+            },
+            {
+                "text": "11mm",
+                "next": "level-1-2-3-3"
+            }
+        ]
+
+    },
+    "level-1-3-1": {
+        "url": "https://usstore.biohorizons.com/peek-scan-abutment-45mm",
+        "img": "/Biohorizons_Scanbody_Calculator/4.5mm.png"
+    },
+    "level-1-3-2": {
+        "url": "https://usstore.biohorizons.com/45mm-titanium-scan-body",
+        "img": "/Biohorizons_Scanbody_Calculator/G4.5.png"
+    },
+    "level-1-3-3": {
+        "question": "What height scan body do you need?",
+        "answers": [
+            {
+                "text": "8mm",
+                "next": "level-1-3-3-1"
+            },
+            {
+                "text": "11mm",
+                "next": "level-1-3-3-2"
+            },
+            {
+                "text": "Default",
+                "next": "level-1-3-3-3"
+            }
+        ]
+    },
+    "level-1-4-1": {
+        "url": "https://usstore.biohorizons.com/peek-scan-abutment-30mm",
+        "img": "/Biohorizons_Scanbody_Calculator/TP3PSA.png"
+    },
+    "level-1-4-2": {
+        "url": "https://usstore.biohorizons.com/30mm-titanium-scan-body",
+        "img": "/Biohorizons_Scanbody_Calculator/TSB.png"
+    },
+    "level-1-4-3": {
+        "question": "What height scan body do you need?",
+        "answers": [
+            {
+                "text": "8mm",
+                "next": "level-1-4-3-1"
+            },
+            {
+                "text": "11mm",
+                "next": "level-1-4-3-2"
+            },
+            {
+                "text": "Default",
+                "next": "level-1-4-3-3"
+            }
+        ]
+    },
+    "level-1-1-1-1": {
+        "url": "https://usstore.biohorizons.com/snap-scan-body-57mm",
+        "img": "/Biohorizons_Scanbody_Calculator/PBSSB.png"
+    },
+    "level-1-1-1-2": {
+        "url": "https://usstore.biohorizons.com/57mm-snap-scan-body-8mm-2",
+        "img": "/Biohorizons_Scanbody_Calculator/PS8.png"
+    },
+    "level-1-1-1-3": {
+        "url": "https://usstore.biohorizons.com/57mm-snap-scan-body-11mm-2",
+        "img": "/Biohorizons_Scanbody_Calculator/11m.png"
+    },
+    "level-1-2-3-1": {
+        "url": "https://usstore.biohorizons.com/snap-scan-body-35mm",
+        "img":"/Biohorizons_Scanbody_Calculator/3.5mm.png"
+    },
+    "level-1-2-3-2": {
+        "url": "https://usstore.biohorizons.com/35mm-snap-scan-body-8mm-2",
+        "img":"/Biohorizons_Scanbody_Calculator/8mm.png"
+    },
+    "level-1-2-3-3": {
+        "url": "https://usstore.biohorizons.com/35mm-snap-scan-body-11mm-2",
+        "img": "/Biohorizons_Scanbody_Calculator/11mm.png"
+    },
+    "level-1-3-3-1": {
+        "url": "https://usstore.biohorizons.com/45mm-snap-scan-body-8mm-2",
+        "img": "/Biohorizons_Scanbody_Calculator/GB8.png"
+    },
+    "level-1-3-3-2": {
+        "url": "https://usstore.biohorizons.com/45mm-snap-scan-body-11mm-2",
+        "img":"/Biohorizons_Scanbody_Calculator/PGSSB11.png"
+    },
+    "level-1-3-3-3": {
+        "url": "https://usstore.biohorizons.com/snap-scan-body-45mm",
+        "img":"/Biohorizons_Scanbody_Calculator/GGG.png"
+    },
+    "level-1-4-3-1": {
+        "url": "https://usstore.biohorizons.com/30mm-snap-scan-body-8mm-2",
+        "img":"/Biohorizons_Scanbody_Calculator/T8mm.png"
+    },
+    "level-1-4-3-2": {
+        "url": "https://usstore.biohorizons.com/30mm-snap-scan-body-11mm-2",
+        "img": "/Biohorizons_Scanbody_Calculator/TP3SSB11.png"
+    },
+    "level-1-4-3-3": {
+        "url": "https://usstore.biohorizons.com/snap-scan-body-30mm",
+        "img": "/Biohorizons_Scanbody_Calculator/TP3SSB.png"
+    }
+}
