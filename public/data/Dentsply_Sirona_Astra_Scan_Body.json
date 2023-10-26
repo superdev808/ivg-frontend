@@ -1,0 +1,89 @@
+{
+    "start": {
+        "question": "What is the system of the implant placed?",
+        "answers": [
+            {
+                "text": "EV",
+                "next": "level-1"
+            },
+            {
+                "text": "Osseospeed",
+                "next": "level-2"
+            }
+        ]
+    },
+    "level-1": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "XS (green)",
+                "next": "level-1-1"
+            },
+            {
+                "text": "S (purple)",
+                "next": "level-1-2"
+            },
+            {
+                "text": "M (yellow)",
+                "next": "level-1-3"
+            },
+            {
+                "text": "L (blue)",
+                "next": "level-1-4"
+            },
+            {
+                "text": "XL (brown)",
+                "next": "level-1-5"
+            }
+        ]
+    },
+    "level-1-1": {
+        "url": "https://www.dentsplysirona.com/en-us/shop/I-BP-1000191540/atlantis-io-flo-for-intraoral-scanning-atlantis-abutments.html#I-35243-1000163025",
+        "img": "/Dentsply Sirona Astra Scanbody Calculator/WHite.png"
+    },
+    "level-1-2": {
+        "url": "https://www.dentsplysirona.com/en-us/shop/I-BP-1000191540/atlantis-io-flo-for-intraoral-scanning-atlantis-abutments.html#I-35244-1000163026",
+        "img": "/Dentsply Sirona Astra Scanbody Calculator/02.png"
+    },
+    "level-1-3": {
+        "url": "https://www.dentsplysirona.com/en-us/shop/I-BP-1000191540/atlantis-io-flo-for-intraoral-scanning-atlantis-abutments.html#I-35246-1000163028",
+        "img": "/Dentsply Sirona Astra Scanbody Calculator/yellow.png"
+    },
+    "level-1-4": {
+        "url": "https://www.dentsplysirona.com/en-us/shop/I-BP-1000191540/atlantis-io-flo-for-intraoral-scanning-atlantis-abutments.html#I-35245-1000163027",
+        "img": "/Dentsply Sirona Astra Scanbody Calculator/blue.png"
+    },
+    "level-1-5": {
+        "url": "https://www.dentsplysirona.com/en-us/shop/I-BP-1000191540/atlantis-io-flo-for-intraoral-scanning-atlantis-abutments.html#I-35247-1000163029",
+        "img": "/Dentsply Sirona Astra Scanbody Calculator/5.0.png"
+    },
+    "level-2": {
+        "question": "What is the size of the implant placed?",
+        "answers": [
+            {
+                "text": "3.0 Yellow",
+                "next": "level-2-1"
+            },
+            {
+                "text": "3.5/4.0 aqua",
+                "next": "level-2-2"
+            },
+            {
+                "text": "4.5/5.0 lilac",
+                "next": "level-2-3"
+            }
+        ]
+    },
+    "level-2-1": {
+        "url": "https://www.dentsplysirona.com/en-us/shop/I-BP-1000191539/atlantis-flo-for-model-scanning-atlantis-abutments.html#I-34530-1000163042",
+        "img":"/Dentsply Sirona Astra Scanbody Calculator/c1.png"
+    },
+    "level-2-2": {
+        "url": "https://www.dentsplysirona.com/en-us/shop/I-BP-1000191539/atlantis-flo-for-model-scanning-atlantis-abutments.html#I-34531-1000163043",
+        "img":"/Dentsply Sirona Astra Scanbody Calculator/c2.png"
+    },
+    "level-2-3": {
+        "url": "https://www.dentsplysirona.com/en-us/shop/I-BP-1000191539/atlantis-flo-for-model-scanning-atlantis-abutments.html#I-34592-1000163067",
+        "img":"/Dentsply Sirona Astra Scanbody Calculator/04.png"
+    }
+}

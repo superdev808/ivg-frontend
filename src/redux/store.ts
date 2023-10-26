@@ -13,6 +13,7 @@ import { guideNodesApi } from "./services/guideNodesApi";
 import { calculatorsApi } from "./services/calculatorsApi";
 import { calcEdgesApi } from "./services/calcEdgesApi";
 import { calcNodesApi } from "./services/calcNodesApi";
+import { calcOperationsApi } from "./services/calcOperationsApi";
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ export const store = configureStore({
     [calculatorsApi.reducerPath]: calculatorsApi.reducer,
     [calcEdgesApi.reducerPath]: calcEdgesApi.reducer,
     [calcNodesApi.reducerPath]: calcNodesApi.reducer,
+    [calcOperationsApi.reducerPath]: calcOperationsApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return (
@@ -34,12 +36,13 @@ export const store = configureStore({
       calculatorsApi.middleware,
       calcEdgesApi.middleware,
       calcNodesApi.middleware,
+      calcOperationsApi.middleware,
       guidesApi.middleware,
       guideEdgesApi.middleware,
       guideNodesApi.middleware)
     )
   }
-  
+
 });
 
 setupListeners(store.dispatch);
