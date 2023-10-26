@@ -9,8 +9,6 @@ import { Edge, PathIds } from '@/types/Guide';
 import { setSelectedPathIds } from '@/redux/features/guideSelectionSlice';
 import { selectGuide } from '@/redux/features/guideSelectionSlice';
 
-import { nestNodesEdges } from '@/helpers/nestNodesEdges';
-import { unpackNodesEdges } from '@/helpers/unpackNodesEdges';
 const GuideText = () => {
 	const containerRef = useRef<any>(null);
 	const dispatch = useDispatch();

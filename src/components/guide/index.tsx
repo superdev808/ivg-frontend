@@ -30,7 +30,7 @@ export default function GuidesComponent() {
 	useLoadGuidesData();
 
 	useEffect(() => {
-		if (!guidesData.length < 0 || !nodesData.length < 0 || !edgesData.length < 0) return;
+		if (guidesData.length < 0 || nodesData.length < 0 || edgesData.length < 0) return;
 
 		const { flowSeletionItems, flowQuestionItems } = scannersToEdge(guidesData);
 		selectionItems = [...selectionItems, ...flowSeletionItems];
