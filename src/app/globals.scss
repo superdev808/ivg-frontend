@@ -50,7 +50,7 @@ body {
 		background-color: var(--primary-dark-color);
 	}
 }
-.guide-menu {
+.workflow-menu {
 	width: 50%;
 	white-space: nowrap;
 	margin-right: 20px;
@@ -80,7 +80,7 @@ body {
 	display: none;
 }
 
-.guide-wrapper {
+.workflow-wrapper {
 	margin: 10rem;
 	// height: calc(100vh - 6rem);
 }
@@ -152,13 +152,13 @@ body {
 	}
 }
 
-.guide-page {
-	.guide-container {
+.workflow-page {
+	.workflow-container {
 		// padding: 1.5rem 0;
 		width: 33.3333%;
 		height: calc(100vh - 15rem);
 
-		.guide-body {
+		.workflow-body {
 			width: 100%;
 			height: calc(100vh - 20rem);
 			max-height: calc(100vh - 20rem); /* Adjust as needed */

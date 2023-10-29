@@ -3,15 +3,15 @@ import { useRef,useState  } from 'react';
 import { useRouter } from 'next/navigation';
 import { AutoComplete, AutoCompleteSelectEvent, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 
-import { useGetGuidesQuery } from '@/redux/services/guidesApi';
+import { useGetWorkflowsQuery } from '@/redux/services/workflowsApi';
 
 export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
-	const { isLoading, isFetching, data:guides, error } = useGetGuidesQuery(null);
+	const { isLoading, isFetching, data:workflows, error } = useGetWorkflowsQuery(null);
 
 	const suggestions = [2, 117, 173];
 
 	const [filterValue, setFilterValue] = useState<string>('');
-	const [filteredGuides, setFilteredGuides] = useState<any>(guides);
+	const [filteredWorkflows, setFilteredWorkflows] = useState<any>(workflows);
 
 	const searchBar = useRef<AutoComplete>(null);
 	const router = useRouter();
@@ -21,9 +21,9 @@ export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 		setFilterValue(event.target.value);
 	};
 	const handleOnFocus = () => {
-		const filteredArray = guides?.filter((el:any) => suggestions.includes(el.id));
+		const filteredArray = workflows?.filter((el:any) => suggestions.includes(el.id));
 
-		setFilteredGuides(filteredArray);
+		setFilteredWorkflows(filteredArray);
 		
 		if (searchBar.current) {
 			searchBar.current.show();
@@ -34,15 +34,15 @@ export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 		setTimeout(() => {
 			let filteredArray: any;
 			if (!event.query.trim().length) {
-				filteredArray = [...(guides || [])];
+				filteredArray = [...(workflows || [])];
 			} else {
-				filteredArray = guides?.filter((el: { value: string }) => {
+				filteredArray = workflows?.filter((el: { value: string }) => {
 			
 					return el.value.toString().toLowerCase().includes(event.query.toLowerCase());
 				});
 			}
 
-			setFilteredGuides(filteredArray);
+			setFilteredWorkflows(filteredArray);
 		}, 100);
 	};
 	const handleOnSelect= (event:AutoCompleteSelectEvent)=>{
@@ -89,7 +89,7 @@ export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 
 			<AutoComplete
 				ref={searchBar}
-				aria-label="Guides"
+				aria-label="Workflows"
 				dropdownAriaLabel="Search prompt"
 				placeholder="Search..."
 				className="w-full"
@@ -97,7 +97,7 @@ export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 				itemTemplate={suggestionTemplate}
 				field="text_1"
 				value={filterValue}
-				suggestions={filteredGuides}
+				suggestions={filteredWorkflows}
 				completeMethod={(e) => handleCompleteMethod(e)}
 				onClick={handleOnFocus}
 				onSelect={handleOnSelect}

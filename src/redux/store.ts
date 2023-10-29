@@ -1,15 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
-import guidesReducer from "./features/guidesSlice";
-import guideReducer from "./features/guideSelectionSlice";
-import calculatorReducer from "./features/calculatorSlice";
+
+
+import workflowsReducer from "./features/workflowsSlice";
+import workflowReducer from "./features/workflowSelectionSlice";
 import flowReducer from "./features/flowSlice";
+
+
+import calculatorReducer from "./features/calculatorSlice";
 import editorReducer from "./features/editorSlice";
 
-import { guidesApi } from "./services/guidesApi";
-import { guideEdgesApi } from "./services/guideEdgesApi";
-import { guideNodesApi } from "./services/guideNodesApi";
+import { workflowsApi } from "./services/workflowsApi";
+import { workflowEdgesApi } from "./services/workflowEdgesApi";
+import { workflowNodesApi } from "./services/workflowNodesApi";
 import { calculatorsApi } from "./services/calculatorsApi";
 import { calcEdgesApi } from "./services/calcEdgesApi";
 import { calcNodesApi } from "./services/calcNodesApi";
@@ -19,12 +23,12 @@ export const store = configureStore({
   reducer: {
     flow: flowReducer,
     editor: editorReducer,
-    guide: guideReducer,
-    guides: guidesReducer,
+    workflow: workflowReducer,
+    workflows: workflowsReducer,
     calculator: calculatorReducer,
-    [guidesApi.reducerPath]: guidesApi.reducer,
-    [guideEdgesApi.reducerPath]: guideEdgesApi.reducer,
-    [guideNodesApi.reducerPath]: guideNodesApi.reducer,
+    [workflowsApi.reducerPath]: workflowsApi.reducer,
+    [workflowEdgesApi.reducerPath]: workflowEdgesApi.reducer,
+    [workflowNodesApi.reducerPath]: workflowNodesApi.reducer,
     [calculatorsApi.reducerPath]: calculatorsApi.reducer,
     [calcEdgesApi.reducerPath]: calcEdgesApi.reducer,
     [calcNodesApi.reducerPath]: calcNodesApi.reducer,
@@ -37,9 +41,9 @@ export const store = configureStore({
       calcEdgesApi.middleware,
       calcNodesApi.middleware,
       calcOperationsApi.middleware,
-      guidesApi.middleware,
-      guideEdgesApi.middleware,
-      guideNodesApi.middleware)
+      workflowsApi.middleware,
+      workflowEdgesApi.middleware,
+      workflowNodesApi.middleware)
     )
   }
 

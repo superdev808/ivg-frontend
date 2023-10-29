@@ -16,7 +16,7 @@ const Navigation = () => {
 
   const navLinks = [
       {id:'calculators',title: 'Calculators', link: '/calculators', icon: PrimeIcons.QRCODE},
-      {id: 'workflows',title: 'Workflows', link: '/guides', icon: PrimeIcons.SITEMAP},
+      {id: 'workflows',title: 'Workflows', link: '/workflows', icon: PrimeIcons.SITEMAP},
   ]
 
   const rightNavLinks = [

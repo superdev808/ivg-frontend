@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, use } from 'react';
-import { useSelector } from 'react-redux';
-
+import { useSelector,useDispatch } from 'react-redux';
+import { setSelectedPathIds } from '@/redux/features/workflowSelectionSlice';
 import ReactFlow, {
 	ConnectionLineType,
 	useNodesState,
@@ -18,12 +18,11 @@ import dagre from '@dagrejs/dagre';
 
 import CustomNode from './CustomNode';
 import CustomEdge from './CustomEdge';
-
-import { selectGuide } from '@/redux/features/guideSelectionSlice';
-
+import {  PathIds } from '@/types/Workflow';
+import { selectWorkflow } from '@/redux/features/workflowSelectionSlice';
 interface NodeData {
 	id: number;
-	guideId: number;
+	flowId: number;
 	value: string;
 	start: boolean;
 	children: NodeData[];
@@ -32,7 +31,7 @@ interface NodeData {
 
 interface EdgeData {
 	id: number;
-	guideId: number;
+	flowId: number;
 	value: string;
 	source: number | null;
 	target: number | null;
@@ -62,7 +61,8 @@ interface Edge {
 }
 
 const Flow = () => {
-	const { selectedEdgeData, selectedNodeData, selectedPathIds } = useSelector(selectGuide);
+	const dispatch = useDispatch();
+	const { selectedEdgeData, selectedNodeData, selectedPathIds } = useSelector(selectWorkflow);
 
 
 	const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -151,6 +151,7 @@ const Flow = () => {
 		if (selectedNodeData.length === 0 || selectedEdgeData.length === 0) return;
 		const nodesCopy = JSON.parse(JSON.stringify(selectedNodeData));
 		const edgesCopy = JSON.parse(JSON.stringify(selectedEdgeData));
+
 		getHierarchicalMultiLevelLayout(nodesCopy, edgesCopy);
 		setEdges([...edgesCopy]);
 		setNodes([...nodesCopy]);
@@ -233,8 +234,17 @@ const Flow = () => {
 	// Updates nodes and edges when currentPath or currentNode changes
 
 	const onNodeClick = (el, node)=> {
-		console.log(node)
+	
+		const newPathIds:PathIds[] = [];
+		for (const ids of selectedPathIds) {
+			newPathIds.push(ids);
+			console.log(ids[1],node.id)
+			if (ids[1] === node.id) {
+				break;
+			}
+		}
 
+		dispatch(setSelectedPathIds(newPathIds));
 	}
 
 	const onEdgeClick = (el, edge)=> {
@@ -267,11 +277,11 @@ const Flow = () => {
 
 	);
 };
-function GuideFlow() {
+function WorkflowFlow() {
 	return (
 		<ReactFlowProvider>
 			<Flow />
 		</ReactFlowProvider>
 	);
 }
-export default GuideFlow;
+export default WorkflowFlow;

@@ -1,6 +1,6 @@
 interface NodeData {
 	id: number;
-	guideId: number;
+	flowId: number;
 	value: string;
 	start: boolean;
 	children: NodeData[];
@@ -12,7 +12,7 @@ interface NodeData {
 
 interface EdgeData {
 	id: number;
-	guideId: number;
+	flowId: number;
 	value: string;
 	source: number | null;
 	target: number | null;
@@ -61,7 +61,7 @@ export function unpackNodesEdges(nestedNodes) {
 				images: node.images,
 				texts: node.texts,
 				type: node.type,
-				guideId: node.guideId
+				flowId: node.flowId
 			},
 			width: 200,
 			height: 100,

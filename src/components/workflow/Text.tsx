@@ -1,19 +1,19 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from '@/components/Guide/Guide.module.scss';
+import styles from '@/components/workflow/Workflow.module.scss';
 
 import { Button } from 'primereact/button';
 import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup';
 
-import { Edge, PathIds } from '@/types/Guide';
-import { setSelectedPathIds } from '@/redux/features/guideSelectionSlice';
-import { selectGuide } from '@/redux/features/guideSelectionSlice';
+import { Edge, PathIds } from '@/types/Workflow';
+import { setSelectedPathIds } from '@/redux/features/workflowSelectionSlice';
+import { selectWorkflow } from '@/redux/features/workflowSelectionSlice';
 
-const GuideText = () => {
+const WorkflowText = () => {
 	const containerRef = useRef<any>(null);
 	const dispatch = useDispatch();
 
-	const { selectedNodeData,selectedEdgeData, selectedPathIds } = useSelector(selectGuide);
+	const { selectedNodeData,selectedEdgeData, selectedPathIds } = useSelector(selectWorkflow);
 	const [pathElements, setPathElements] = useState<JSX.Element[]>([]);
 
 	const resetToNode = (nodeId: number) => {
@@ -74,7 +74,7 @@ const GuideText = () => {
 												<p style={{width:'100%',justifyContent:'center',display:'flex'}} key={image.replace(' ', '_')}>
 													<img
 														src={
-															'https://ivoryguide.s3.us-west-1.amazonaws.com/images/guides/' + currrentNode.data.guideId + '/' + image + '.png' ||
+															'https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/' + currrentNode.data.flowId + '/' + image + '.png' ||
 															'/images/no-image.png'
 														}
 														alt=""
@@ -149,4 +149,4 @@ const GuideText = () => {
 	);
 };
 
-export default GuideText;
+export default WorkflowText;

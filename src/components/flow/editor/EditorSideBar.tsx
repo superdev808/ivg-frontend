@@ -200,7 +200,7 @@ const EditSideBarComponent = () => {
 	};
 
 
-	const guideSelectionView = () => {
+	const workflowSelectionView = () => {
 
 		return (
 			<>
@@ -212,7 +212,7 @@ const EditSideBarComponent = () => {
 	return <aside className="mx-6">
 		
 		
-		{/* {guideSelectionView()} */}
+		{/* {workflowSelectionView()} */}
 		{currentView === 'new' ? newView() : editView()}
 
 	
