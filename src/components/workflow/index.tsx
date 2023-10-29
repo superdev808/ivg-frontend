@@ -6,12 +6,12 @@ import Link from 'next/link';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
 
-import styles from './Guide.module.scss';
+import styles from './Workflow.module.scss';
 
-import { Edge, Node } from '@/types/Guide';
+import { Edge, Node } from '@/types/Workflow';
 
-import useLoadGuidesData from '@/hooks/useLoadGuidesData';
-import { selectGuides } from '@/redux/features/guidesSlice';
+import useLoadWorkflowsData from '@/hooks/useLoadWorkflowData';
+import { selectWorkflows } from '@/redux/features/workflowsSlice';
 
 let selectionItems = [
 	{ id: 0, value: 'Trios', source: 0, target: 1 },
@@ -19,20 +19,20 @@ let selectionItems = [
 	{ id: 2, value: 'Primescan', source: 0, target: 3 },
 ];
 
-let questionItems: Node[] = [{ id: 0, guideId: 2, value: 'What intraoral scanner are you using?', start: true, type: 0 }];
-export default function GuidesComponent() {
-	const { guidesData, nodesData, edgesData } = useSelector(selectGuides);
+let questionItems: Node[] = [{ id: 0, flowId: 2, value: 'What intraoral scanner are you using?', start: true, type: 0 }];
+export default function WorkflowsComponent() {
+	const { workflowsData, nodesData, edgesData } = useSelector(selectWorkflows);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [currentQuestion, setCurrentQuestion] = useState<Node>();
 	const [currentSelectionItems, setCurrentSelectionItems] = useState<Edge[]>([]);
 	const [selectedItem, setSelectedItem] = useState<Edge | null>(null);
 
-	useLoadGuidesData();
+	useLoadWorkflowsData();
 
 	useEffect(() => {
-		if (guidesData.length < 0 || nodesData.length < 0 || edgesData.length < 0) return;
+		if (workflowsData.length < 0 || nodesData.length < 0 || edgesData.length < 0) return;
 
-		const { flowSeletionItems, flowQuestionItems } = scannersToEdge(guidesData);
+		const { flowSeletionItems, flowQuestionItems } = scannersToEdge(workflowsData);
 		selectionItems = [...selectionItems, ...flowSeletionItems];
 		questionItems = [...questionItems, ...flowQuestionItems];
 
@@ -43,7 +43,7 @@ export default function GuidesComponent() {
 		selectItems(initialQuestion.id);
 
 		setIsLoading(false);
-	}, [guidesData, nodesData, edgesData]);
+	}, [workflowsData, nodesData, edgesData]);
 
 	const selectItems = (sourceId?: number) => {
 		const sourceItem = questionItems.find((item) => item.id === sourceId);
@@ -66,7 +66,7 @@ export default function GuidesComponent() {
 					return (
 						<div
 							key={item && item.id}
-							className={`${styles.guidesSelection} flex flex-column ${
+							className={`${styles.workflowsSelection} flex flex-column ${
 								item && selectedItem && selectedItem.id === item.id ? 'border-green-700 border-2' : ''
 							}`}
 							onClick={() => setSelectedItem(item)}>
@@ -152,7 +152,7 @@ export default function GuidesComponent() {
 		for (let i = 0; i < selectionItems.length; i++) {
 			flowQuestionItems.push({
 				id: i+ 1,
-				guideId: i+ 1,
+				flowId: i+ 1,
 				value: 'What product are you scanning for?',
 				term: true,
 				type: 0,
@@ -162,7 +162,7 @@ export default function GuidesComponent() {
 		for (let i = 0; i < scanners.length; i++) {
 			flowSeletionItems.push({
 				id: i,
-				guideId: scanners[i].id,
+				flowId: scanners[i].id,
 				value: scanners[i].value,
 				source: scanners[i].source + 1,
 				target: scanners[i].id,
@@ -173,7 +173,7 @@ export default function GuidesComponent() {
 	};
 
 	return (
-		<div className={styles.guidesContainer}>
+		<div className={styles.workflowsContainer}>
 			<div className="flex flex-column overflow-hidden w-8 mt-4 pb-8 border-round bg-white shadow-1">
 				{/* <div className="overflow-hidden"> */}
 				<h2 className="m-5 text-700 ">Workflows</h2>

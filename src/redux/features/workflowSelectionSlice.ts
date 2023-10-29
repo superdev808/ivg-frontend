@@ -1,7 +1,7 @@
-import { Edge, Guide, Node, PathIds } from '@/types/Guide';
+import { Edge, Workflow, Node, PathIds } from '@/types/Workflow';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type GuideState = {
+type WorkflowState = {
 	selectedHeader: String;
 	selectedNodeData: Node[];
 	selectedEdgeData: Edge[];
@@ -9,7 +9,7 @@ type GuideState = {
 	isLoading: boolean;
 };
 
-const initialState: GuideState = {
+const initialState: WorkflowState = {
 	selectedHeader: '',
 	selectedNodeData: [],
 	selectedEdgeData: [],
@@ -17,8 +17,8 @@ const initialState: GuideState = {
 	isLoading: false,
 };
 
-export const guideSlice = createSlice({
-	name: 'guide',
+export const workflowSlice = createSlice({
+	name: 'workflow',
 	initialState,
 	reducers: {
 		reset: () => initialState,
@@ -39,7 +39,7 @@ export const guideSlice = createSlice({
 	},
 });
 
-export const { reset, setSelectedData, setSelectedPathIds, setLoading, setHeader } = guideSlice.actions;
-export default guideSlice.reducer;
+export const { reset, setSelectedData, setSelectedPathIds, setLoading, setHeader } = workflowSlice.actions;
+export default workflowSlice.reducer;
 
-export const selectGuide = (state: any) => state.guide;
+export const selectWorkflow = (state: any) => state.workflow;

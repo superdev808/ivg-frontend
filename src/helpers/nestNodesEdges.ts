@@ -1,4 +1,4 @@
-import { Edge, Node } from "@/types/Guide";
+import { Edge, Node } from "@/types/Workflow";
 
 type NestNodes = Node & {children: NestNodes[], edges: Edge[]};
 
