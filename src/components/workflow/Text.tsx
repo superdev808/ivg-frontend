@@ -9,15 +9,19 @@ import { Edge, PathIds } from '@/types/Workflow';
 import { setSelectedPathIds } from '@/redux/features/workflowSelectionSlice';
 import { selectWorkflowSelection } from '@/redux/features/workflowSelectionSlice';
 
+import { Dialog } from 'primereact/dialog';
+
 const WorkflowText = () => {
 	const containerRef = useRef<any>(null);
 	const dispatch = useDispatch();
 
-	const { selectedNodeData,selectedEdgeData, selectedPathIds } = useSelector(selectWorkflowSelection);
+	const { selectedNodeData, selectedEdgeData, selectedPathIds } = useSelector(selectWorkflowSelection);
 	const [pathElements, setPathElements] = useState<JSX.Element[]>([]);
+	const [visible, setVisible] = useState(false);
+	const [selectedImage, setSelectedImage] = useState(null);
 
 	const resetToNode = (nodeId: number) => {
-		const newPathIds:PathIds[] = [];
+		const newPathIds: PathIds[] = [];
 		for (const ids of selectedPathIds) {
 			newPathIds.push(ids);
 			if (ids[1] === nodeId) {
@@ -38,7 +42,10 @@ const WorkflowText = () => {
 		});
 	};
 
-	
+	const openImage = (url) => {
+		setSelectedImage(url);
+		setVisible(true);
+	};
 
 	useEffect(() => {
 		const elements: JSX.Element[] = [];
@@ -47,7 +54,7 @@ const WorkflowText = () => {
 				const currrentNode = selectedNodeData.find((node: any) => node.id === ids[1]);
 
 				const currrentEdges = selectedEdgeData.filter((edge: any) => edge.source === ids[1]);
-		
+
 				currrentNode &&
 					elements.push(
 						<div key={idx}>
@@ -57,11 +64,10 @@ const WorkflowText = () => {
 										className="m-2"
 										icon="pi pi-refresh "
 										rounded
-										
-										label='Reset'
+										label="Reset"
 										severity="warning"
 										aria-label="Change response"
-										style={{ }}
+										style={{}}
 										onClick={(event) => confirmReset(event, ids[1])}
 									/>
 								</div>
@@ -71,15 +77,24 @@ const WorkflowText = () => {
 									{currrentNode.data.images &&
 										currrentNode.data.images.map((image: string) => {
 											return (
-												<p style={{width:'100%',justifyContent:'center',display:'flex'}} key={image.replace(' ', '_')}>
-													<img
-														src={
-															'https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/' + currrentNode.data.flowId + '/' + image + '.png' ||
-															'/images/no-image.png'
-														}
-														alt=""
-														style={{height: "150px"}}
-													/>
+												<p
+													onClick={() =>
+														openImage(
+															'https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/' + currrentNode.data.flowId + '/' + image + '.png'
+														)
+													}
+													style={{ width: '100%', justifyContent: 'center', display: 'flex' }}
+													key={image.replace(' ', '_')}>
+													<Button className="bg-transparent p-0 hover:pointer">
+														<img
+															src={
+																'https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/' + currrentNode.data.flowId + '/' + image + '.png' ||
+																'/images/no-image.png'
+															}
+															alt=""
+															style={{ width: '150px', maxHeight: '150px' }}
+														/>
+													</Button>
 												</p>
 											);
 										})}
@@ -102,7 +117,7 @@ const WorkflowText = () => {
 															: 'pointer-events-none  bg-gray-300 text-gray-500'
 														: 'bg-white text-green-700 border-green-700 border-1 hover:text-white hover:bg-green-700'
 												}`}
-												style={{border:'1px solid var(--primary-color)'}}
+												style={{ border: '1px solid var(--primary-color)' }}
 												onClick={() => selectPath(edge.id)}
 												key={'edge_' + edge.source + edge.target}>
 												{edge.data.value}
@@ -117,7 +132,7 @@ const WorkflowText = () => {
 
 			setPathElements(elements);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedPathIds]);
 
 	const selectPath = (edgeId: number) => {
@@ -140,12 +155,25 @@ const WorkflowText = () => {
 	}, [pathElements]);
 
 	return (
-		<div
-			ref={containerRef}
-			className="px-6 py-4 h-full overflow-auto">
-			{pathElements}
-			<ConfirmPopup />
-		</div>
+		<>
+			<div
+				ref={containerRef}
+				className="px-6 py-4 h-full overflow-auto">
+				{pathElements}
+				<ConfirmPopup />
+			</div>
+			<Dialog
+				visible={visible}
+				// style={{ width: '50vw' }}
+				onHide={() => setVisible(false)}>
+				<p className="flex m-0 justify-content-center">
+					<img
+						src={selectedImage}
+						alt=""
+					/>
+				</p>
+			</Dialog>
+		</>
 	);
 };
 
