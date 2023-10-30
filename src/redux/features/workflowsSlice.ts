@@ -5,12 +5,16 @@ type WorkflowState = {
 	workflowsData: Workflow[];
 	nodesData: Node[];
 	edgesData: Edge[];
+	menuItems: any[];
+	menuQuestions: any[];
 };
 
 const initialState: WorkflowState = {
 	workflowsData: [],
 	nodesData: [],
-	edgesData: []
+	edgesData: [],
+	menuItems:[],
+	menuQuestions:[]
 };
 
 export const workflowsSlice = createSlice({
@@ -23,13 +27,21 @@ export const workflowsSlice = createSlice({
 			state.nodesData = action.payload.nodesData;
 			state.edgesData = action.payload.edgesData;
 		},
+		setMenuItems: (state, action) => {
+			state.menuItems = action.payload;
+		},
+		setMenuQuestions: (state, action) => {
+			state.menuQuestions = action.payload;
+		},
 
 	},
 });
 
 export const {
 	reset,
-	setWorkflowsData
+	setWorkflowsData,
+	setMenuItems,
+	setMenuQuestions
 } = workflowsSlice.actions;
 export default workflowsSlice.reducer;
 

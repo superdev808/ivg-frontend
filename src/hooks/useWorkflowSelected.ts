@@ -7,17 +7,16 @@ import { Node,Edge, Workflow } from '@/types/Workflow';
 import { reset, setSelectedData, setSelectedPathIds, setLoading, setHeader } from '@/redux/features/workflowSelectionSlice';
 
 import { selectWorkflows } from '@/redux/features/workflowsSlice';
-import useLoadWorkflowsData from './useLoadWorkflowData';
 
 import { nestNodesEdges } from '@/helpers/nestNodesEdges';
 import { unpackNodesEdges } from '@/helpers/unpackNodesEdges';
 
-function useSelectWorkflow() {
+function useWorkflowSelected() {
   const dispatch = useDispatch();
   const pathname = usePathname();
-  useLoadWorkflowsData();
   
   const {workflowsData, nodesData, edgesData, isLoading} = useSelector(selectWorkflows);
+  const {selectedId} = useSelector(selectWorkflows);
 
   useEffect(() => {
     if (!isLoading) setLoading(true);
@@ -26,7 +25,9 @@ function useSelectWorkflow() {
     }
 
     const currentPath = pathname.split('/');
-    const selectedWorkflow = (workflowsData as Workflow[]).find((workflow) => Number(workflow.id) === Number(currentPath[2]));
+    
+    const selectedWorkflow = (workflowsData as Workflow[]).find((workflow) => Number(workflow.id) === Number(currentPath[currentPath.length - 2]));
+    console.log("🚀 ~ file: useWorkflowSelected.ts:30 ~ useEffect ~ selectedWorkflow:", selectedWorkflow)
 
     if (!selectedWorkflow) {
       dispatch(reset());
@@ -34,7 +35,10 @@ function useSelectWorkflow() {
     }
 
     const filteredNodes = nodesData.filter((node: Node) => Number(node.flowId) === Number(selectedWorkflow.id));
+    console.log("🚀 ~ file: useWorkflowSelected.ts:38 ~ useEffect ~ filteredNodes:", filteredNodes)
+    console.log("🚀 ~ file: useWorkflowSelected.ts:38 ~ useEffect ~ Number(selectedWorkflow.id):", Number(selectedWorkflow.id))
     const filteredEdges = edgesData.filter((edge: Edge) =>  Number(edge.flowId) === Number(selectedWorkflow.id));
+    console.log("🚀 ~ file: useWorkflowSelected.ts:39 ~ useEffect ~ filteredEdges:", filteredEdges)
     
     const nodeCopy = JSON.parse(JSON.stringify(filteredNodes));
     const edgeCopy = JSON.parse(JSON.stringify(filteredEdges));
@@ -51,4 +55,4 @@ function useSelectWorkflow() {
   return; 
 }
 
-export default useSelectWorkflow;
+export default useWorkflowSelected;

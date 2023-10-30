@@ -19,7 +19,7 @@ import dagre from '@dagrejs/dagre';
 import CustomNode from './CustomNode';
 import CustomEdge from './CustomEdge';
 import {  PathIds } from '@/types/Workflow';
-import { selectWorkflow } from '@/redux/features/workflowSelectionSlice';
+import { selectWorkflowSelection } from '@/redux/features/workflowSelectionSlice';
 interface NodeData {
 	id: number;
 	flowId: number;
@@ -62,7 +62,7 @@ interface Edge {
 
 const Flow = () => {
 	const dispatch = useDispatch();
-	const { selectedEdgeData, selectedNodeData, selectedPathIds } = useSelector(selectWorkflow);
+	const { selectedEdgeData, selectedNodeData, selectedPathIds } = useSelector(selectWorkflowSelection);
 
 
 	const [nodes, setNodes, onNodesChange] = useNodesState([]);
