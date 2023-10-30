@@ -4,7 +4,7 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
 
 import workflowsReducer from "./features/workflowsSlice";
-import workflowReducer from "./features/workflowSelectionSlice";
+import workflowSelectionReducer from "./features/workflowSelectionSlice";
 import flowReducer from "./features/flowSlice";
 
 
@@ -18,17 +18,21 @@ import { calculatorsApi } from "./services/calculatorsApi";
 import { calcEdgesApi } from "./services/calcEdgesApi";
 import { calcNodesApi } from "./services/calcNodesApi";
 import { calcOperationsApi } from "./services/calcOperationsApi";
+import { workflowMenuItemsApi } from "./services/workflowsMenuItemsApi";
+import { workflowMenuQuestionsApi } from "./services/workflowsMenuQuestionsApi";
 
 export const store = configureStore({
   reducer: {
     flow: flowReducer,
     editor: editorReducer,
-    workflow: workflowReducer,
+    workflowSelection: workflowSelectionReducer,
     workflows: workflowsReducer,
     calculator: calculatorReducer,
     [workflowsApi.reducerPath]: workflowsApi.reducer,
     [workflowEdgesApi.reducerPath]: workflowEdgesApi.reducer,
     [workflowNodesApi.reducerPath]: workflowNodesApi.reducer,
+    [workflowMenuItemsApi.reducerPath]: workflowMenuItemsApi.reducer,
+    [workflowMenuQuestionsApi.reducerPath]: workflowMenuQuestionsApi.reducer,
     [calculatorsApi.reducerPath]: calculatorsApi.reducer,
     [calcEdgesApi.reducerPath]: calcEdgesApi.reducer,
     [calcNodesApi.reducerPath]: calcNodesApi.reducer,
@@ -43,7 +47,9 @@ export const store = configureStore({
       calcOperationsApi.middleware,
       workflowsApi.middleware,
       workflowEdgesApi.middleware,
-      workflowNodesApi.middleware)
+      workflowNodesApi.middleware,
+      workflowMenuQuestionsApi.middleware,
+      workflowMenuItemsApi.middleware)
     )
   }
 

@@ -2,6 +2,7 @@ import { Edge, Workflow, Node, PathIds } from '@/types/Workflow';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type WorkflowState = {
+	selectedId: string ;
 	selectedHeader: String;
 	selectedNodeData: Node[];
 	selectedEdgeData: Edge[];
@@ -10,6 +11,7 @@ type WorkflowState = {
 };
 
 const initialState: WorkflowState = {
+	selectedId: '0',
 	selectedHeader: '',
 	selectedNodeData: [],
 	selectedEdgeData: [],
@@ -17,8 +19,8 @@ const initialState: WorkflowState = {
 	isLoading: false,
 };
 
-export const workflowSlice = createSlice({
-	name: 'workflow',
+export const workflowSelectionSlice = createSlice({
+	name: 'workflowSelection',
 	initialState,
 	reducers: {
 		reset: () => initialState,
@@ -36,10 +38,13 @@ export const workflowSlice = createSlice({
 		setLoading: (state, action) => {
 			state.isLoading = action.payload;
 		},
+		setSelectedId: (state, action) => {
+			state.selectedId = action.payload;
+		}
 	},
 });
 
-export const { reset, setSelectedData, setSelectedPathIds, setLoading, setHeader } = workflowSlice.actions;
-export default workflowSlice.reducer;
+export const { reset, setSelectedData, setSelectedPathIds, setLoading, setHeader,setSelectedId } = workflowSelectionSlice.actions;
+export default workflowSelectionSlice.reducer;
 
-export const selectWorkflow = (state: any) => state.workflow;
+export const selectWorkflowSelection = (state: any) => state.workflowSelection;

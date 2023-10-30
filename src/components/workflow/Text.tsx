@@ -7,13 +7,13 @@ import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup';
 
 import { Edge, PathIds } from '@/types/Workflow';
 import { setSelectedPathIds } from '@/redux/features/workflowSelectionSlice';
-import { selectWorkflow } from '@/redux/features/workflowSelectionSlice';
+import { selectWorkflowSelection } from '@/redux/features/workflowSelectionSlice';
 
 const WorkflowText = () => {
 	const containerRef = useRef<any>(null);
 	const dispatch = useDispatch();
 
-	const { selectedNodeData,selectedEdgeData, selectedPathIds } = useSelector(selectWorkflow);
+	const { selectedNodeData,selectedEdgeData, selectedPathIds } = useSelector(selectWorkflowSelection);
 	const [pathElements, setPathElements] = useState<JSX.Element[]>([]);
 
 	const resetToNode = (nodeId: number) => {

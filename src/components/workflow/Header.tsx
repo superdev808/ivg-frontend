@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 
-import { selectWorkflow } from '@/redux/features/workflowSelectionSlice';
+import { selectWorkflowSelection } from '@/redux/features/workflowSelectionSlice';
 export default function WorkflowHeader() {
-	const { selectedHeader } = useSelector(selectWorkflow);
+	const { selectedHeader } = useSelector(selectWorkflowSelection);
 
 	return (
 		<>

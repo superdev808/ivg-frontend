@@ -1,0 +1,125 @@
+[
+	{
+		"id": 1,
+		"value": "Trios",
+		"hierarchy": [],
+		"description": "Use this section to learn about case setup and scan strategies across a variety of products using Trios intraoral scanners"
+	},
+	{
+		"id": 2,
+		"value": "Medit",
+		"hierarchy": [],
+		"description": "Use this section to learn about case setup and scan strategies across a variety of products using Medit intraoral scanners"
+	},
+	{
+		"id": 3,
+		"value": "Primescan",
+		"hierarchy": [],
+		"description": "Use this section to learn about case setup and scan strategies across a variety of products using Primescan intraoral scanners"
+	},
+	{
+		"id": 2,
+		"value": "Implant Crown",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 259,
+		"value": "Reference Denture ",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 430,
+		"value": "Implant Bridge ",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 655,
+		"value": "Implant Crown - Emergence Profile",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 853,
+		"value": "Relined Reference Denture ",
+		"hierarchy": ["2"], "flow": true
+	},
+	{
+		"id": 951,
+		"value": "Edentulous Scanning (Dentures)",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 1080,
+		"value": "Bridges ",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 1286,
+		"value": "Single-Unit Surgical Guide ",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 1378,
+		"value": "Sleep Appliances ",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 1530,
+		"value": "Single Implant Crown",
+		"hierarchy": ["3"], "flow": true
+	},
+	{
+		"id": 1674,
+		"value": "Single Crown",
+		"hierarchy": ["3"], "flow": true
+	},
+	{
+		"id": 1867,
+		"value": "Bridges ",
+		"hierarchy": ["3"], "flow": true
+	},
+	{
+		"id": 2068,
+		"value": "Clear Aligners and Night Guards ",
+		"hierarchy": ["3"], "flow": true
+	},
+	{
+		"id": 2318,
+		"value": "Sleep Apnea Devices",
+		"hierarchy": ["3"], "flow": true
+	},
+	{
+		"id": 2634,
+		"value": "Clear Aligners",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 2752,
+		"value": "Post and Core",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 2875,
+		"value": "Edentulous Scanning (Dentures)",
+		"hierarchy": ["2"], "flow": true
+	},
+	{
+		"id": 2976,
+		"value": "Inlays and Onlays",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 3099,
+		"value": "Full Arch Scanning",
+		"hierarchy": ["1"], "flow": true
+	},
+	{
+		"id": 3191,
+		"value": "Trimming Tools",
+		"hierarchy": ["2"], "flow": true
+	},
+	{
+		"id": 3268,
+		"value": "Occlusal Guards / Splints ",
+		"hierarchy": ["1"], "flow": true
+	}
+]

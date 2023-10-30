@@ -1,0 +1,6 @@
+[
+	{ "id": 1, "value": "What intraoral scanner are you using?", "hierarchy": [] },
+	{ "id": 2, "value": "What product are you scanning for?", "hierarchy": ["1"] },
+	{ "id": 3, "value": "What product are you scanning for?", "hierarchy": ["2"] },
+	{ "id": 4, "value": "What product are you scanning for?", "hierarchy": ["3"] }
+]

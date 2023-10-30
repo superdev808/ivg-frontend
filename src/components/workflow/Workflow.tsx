@@ -6,15 +6,15 @@ import WorkflowHeader from './Header';
 import WorkflowText from './Text';
 import WorkflowFlow from './Flow';
 
-import useSelectWorkflow from '@/hooks/useSelectWorkflow';
+import useWorkflowSelected from '@/hooks/useWorkflowSelected';
 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
 
 export default function WorkflowComponent() {
-	useSelectWorkflow();
+	useWorkflowSelected();
 	return (
-		<div className={styles.container}>
-			<Splitter className="w-full border-0 overflow-hidden">
+		<div className='w-full h-full'>
+			<Splitter className="w-full h-full border-0 overflow-hidden">
 				<SplitterPanel size={35} minSize={20} className='h-full'>
 					<WorkflowText />
 				
