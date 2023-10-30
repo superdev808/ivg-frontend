@@ -292,7 +292,8 @@
         "id": 55,
         "flowId": 2,
         "value": "select lab",
-        "type": 2
+        "type": 2,
+        "start": true
     },
     {
         "id": 56,
@@ -1697,8 +1698,7 @@
         "id": 953,
         "flowId": 951,
         "value": "Which arch are you scanning?",
-        "type": 0,
-        "start":true
+        "type": 0
     },
     {
         "id": 954,
@@ -2238,8 +2238,8 @@
     {
         "id": 1144,
         "flowId": 1080,
-        "value": "<<Lower scanning>>",
-        "type": 4
+        "value": "Lower scanning",
+        "type": 3
     },
     {
         "id": 1145,
@@ -2250,8 +2250,8 @@
     {
         "id": 1146,
         "flowId": 1080,
-        "value": "<<Upper scanning>>",
-        "type": 4
+        "value": "Upper scanning",
+        "type": 3
     },
     {
         "id": 1313,
@@ -2328,14 +2328,14 @@
     {
         "id": 1325,
         "flowId": 1286,
-        "value": "<<Lingual Scanning>>",
-        "type": 4
+        "value": "Lingual Scanning",
+        "type": 3
     },
     {
         "id": 1326,
         "flowId": 1286,
-        "value": "<<Buccal Scanning>>",
-        "type": 4
+        "value": "Buccal Scanning",
+        "type": 3
     },
     {
         "id": 1327,
@@ -2346,8 +2346,8 @@
     {
         "id": 1328,
         "flowId": 1286,
-        "value": "<<Trimming>>",
-        "type": 4
+        "value": "Trimming",
+        "type": 3
     },
     {
         "id": 1329,
@@ -2358,8 +2358,8 @@
     {
         "id": 1330,
         "flowId": 1286,
-        "value": "<<Scanning for single unit surgical guide>>",
-        "type": 4
+        "value": "Scanning for single unit surgical guide",
+        "type": 3
     },
     {
         "id": 1331,
@@ -2394,9 +2394,8 @@
     {
         "id": 1383,
         "flowId": 1378,
-        "value": "Do you need guidance on case setup or scanning instructions?",
-        "type": 0,
-        "start": true
+        "value": "Oral sleep apnea appliances",
+        "type": 0
     },
     {
         "id": 1384,
@@ -3237,8 +3236,8 @@
     {
         "id": 2125,
         "flowId": 2068,
-        "value": "<<Upper Jaw Scanning>>",
-        "type": 4
+        "value": "Upper Jaw Scanning",
+        "type": 3
     },
     {
         "id": 2126,
@@ -4000,8 +3999,8 @@
     {
         "id": 2386,
         "flowId": 2318,
-        "value": "<<Partner>>",
-        "type": 4
+        "value": "Partner",
+        "type": 3
     },
     {
         "id": 2387,
@@ -4234,8 +4233,8 @@
     {
         "id": 2645,
         "flowId": 2634,
-        "value": "<<Lower arch Scanning Strategy>>",
-        "type": 4
+        "value": "Lower arch Scanning Strategy",
+        "type": 3
     },
     {
         "id": 2646,
@@ -4330,8 +4329,8 @@
     {
         "id": 2661,
         "flowId": 2634,
-        "value": "<<Bite Scan>>",
-        "type": 4
+        "value": "Bite Scan",
+        "type": 3
     },
     {
         "id": 2662,
@@ -4342,8 +4341,8 @@
     {
         "id": 2663,
         "flowId": 2634,
-        "value": "<<Lower arch scanning strategy (2)>>",
-        "type": 4
+        "value": "Lower arch scanning strategy (2)",
+        "type": 3
     },
     {
         "id": 2664,
@@ -4433,8 +4432,8 @@
     {
         "id": 2678,
         "flowId": 2634,
-        "value": "<<Upper arch Scanning Strategy>>",
-        "type": 4
+        "value": "Upper arch Scanning Strategy",
+        "type": 3
     },
     {
         "id": 2679,
@@ -4451,8 +4450,8 @@
     {
         "id": 2681,
         "flowId": 2634,
-        "value": "<<Upper arch scanning strategy (2)>>",
-        "type": 4
+        "value": "Upper arch scanning strategy (2)",
+        "type": 3
     },
     {
         "id": 2682,
@@ -5942,8 +5941,7 @@
         "id": 659,
         "flowId": 655,
         "value": "Scan Strategy for Emergence Profile",
-        "type": 0,
-        "start": true
+        "type": 0
     },
     {
         "id": 660,
@@ -6615,56 +6613,56 @@
     {
         "id": 1167,
         "flowId": 1080,
-        "value": "<<Lower scanning>>",
-        "type": 4
+        "value": "Lower scanning",
+        "type": 3
     },
     {
         "id": 1168,
         "flowId": 1080,
-        "value": "<<Lower scanning>>",
-        "type": 4
+        "value": "Lower scanning",
+        "type": 3
     },
     {
         "id": 1169,
         "flowId": 1080,
-        "value": "<<Upper scanning>>",
-        "type": 4
+        "value": "Upper scanning",
+        "type": 3
     },
     {
         "id": 1170,
         "flowId": 1080,
-        "value": "<<Upper scanning>>",
-        "type": 4
+        "value": "Upper scanning",
+        "type": 3
     },
     {
         "id": 1171,
         "flowId": 1080,
-        "value": "<<Preparation scanning>>",
-        "type": 4
+        "value": "Preparation scanning",
+        "type": 3
     },
     {
         "id": 1172,
         "flowId": 1080,
-        "value": "<<Preparation scanning>>",
-        "type": 4
+        "value": "Preparation scanning",
+        "type": 3
     },
     {
         "id": 1173,
         "flowId": 1080,
-        "value": "<<Preparation scanning with retraction cord>>",
-        "type": 4
+        "value": "Preparation scanning with retraction cord",
+        "type": 3
     },
     {
         "id": 1174,
         "flowId": 1080,
-        "value": "<<Preparation scanning with retraction cord>>",
-        "type": 4
+        "value": "Preparation scanning with retraction cord",
+        "type": 3
     },
     {
         "id": 1175,
         "flowId": 1080,
-        "value": "<<Preparation scanning with retraction cord>>",
-        "type": 4
+        "value": "Preparation scanning with retraction cord",
+        "type": 3
     },
     {
         "id": 1288,
@@ -6772,8 +6770,7 @@
         "id": 1305,
         "flowId": 1286,
         "value": "Is it a Single unit or Multi-unit?",
-        "type": 0,
-        "start":true
+        "type": 0
     },
     {
         "id": 1306,
@@ -8106,8 +8103,8 @@
     {
         "id": 2079,
         "flowId": 2068,
-        "value": "<<Lower Jaw Scanning>>",
-        "type": 4
+        "value": "Lower Jaw Scanning",
+        "type": 3
     },
     {
         "id": 2080,
@@ -9280,8 +9277,7 @@
         "id": 3218,
         "flowId": 3191,
         "value": "After completing the scaning step, remove all unnecessary data by using trimming tools. If the scan data is incomplete, perform additional scans to complete the data. Check the margin line, undercuts, and tooth reduction of prepped teeth.",
-        "type": 0,
-        "start":true
+        "type": 0
     },
     {
         "id": 3219,

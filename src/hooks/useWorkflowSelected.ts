@@ -25,9 +25,8 @@ function useWorkflowSelected() {
     }
 
     const currentPath = pathname.split('/');
-    
+
     const selectedWorkflow = (workflowsData as Workflow[]).find((workflow) => Number(workflow.id) === Number(currentPath[currentPath.length - 2]));
-    console.log("🚀 ~ file: useWorkflowSelected.ts:30 ~ useEffect ~ selectedWorkflow:", selectedWorkflow)
 
     if (!selectedWorkflow) {
       dispatch(reset());
@@ -35,10 +34,7 @@ function useWorkflowSelected() {
     }
 
     const filteredNodes = nodesData.filter((node: Node) => Number(node.flowId) === Number(selectedWorkflow.id));
-    console.log("🚀 ~ file: useWorkflowSelected.ts:38 ~ useEffect ~ filteredNodes:", filteredNodes)
-    console.log("🚀 ~ file: useWorkflowSelected.ts:38 ~ useEffect ~ Number(selectedWorkflow.id):", Number(selectedWorkflow.id))
     const filteredEdges = edgesData.filter((edge: Edge) =>  Number(edge.flowId) === Number(selectedWorkflow.id));
-    console.log("🚀 ~ file: useWorkflowSelected.ts:39 ~ useEffect ~ filteredEdges:", filteredEdges)
     
     const nodeCopy = JSON.parse(JSON.stringify(filteredNodes));
     const edgeCopy = JSON.parse(JSON.stringify(filteredEdges));

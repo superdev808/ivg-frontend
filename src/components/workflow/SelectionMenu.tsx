@@ -53,7 +53,12 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 		}
 		let currentItems = filterCurrentSelections(flowIds);
 		let currentQuestion = filterCurrentQuestions(flowIds);
-		if (currentItems.length == 0) {
+		let selectedWorkflow = null;
+		if(flowIds){
+			selectedWorkflow = (menuItems).find((item) => Number(item.id) === Number(flowIds[flowIds.length - 1]) && item.flow);
+		} 
+	
+		if (currentItems.length == 0 && !selectedWorkflow) {
 			currentItems = filterCurrentSelections([] as string[]);
 			currentQuestion = filterCurrentQuestions([] as string[]);
             router.push('/workflows', { scroll: false });

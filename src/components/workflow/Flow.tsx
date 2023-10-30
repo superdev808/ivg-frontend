@@ -263,10 +263,10 @@ const Flow = () => {
 			onNodeClick={onNodeClick}
 			onEdgeClick={onEdgeClick}
 			fitView>
-			<MiniMap
+			{/* <MiniMap
 				pannable={true}
 				zoomable={true}
-			/>
+			/> */}
 			<Background
 				style={{ backgroundColor: '#FAFAFA' }}
 				// color="#fffff"

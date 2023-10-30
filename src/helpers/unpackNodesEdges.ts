@@ -6,6 +6,7 @@ interface NodeData {
 	children: NodeData[];
 	edges: EdgeData[];
 	images: [];
+	videos: [];
 	texts: [];
 	type: number;
 }
@@ -59,6 +60,7 @@ export function unpackNodesEdges(nestedNodes) {
 				selected: false,
 				hidden: true,
 				images: node.images,
+				videos: node.videos,
 				texts: node.texts,
 				type: node.type,
 				flowId: node.flowId
