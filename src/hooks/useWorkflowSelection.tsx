@@ -44,10 +44,11 @@ function useWorkflowSelection(params: string[]) {
 		
 		let currentItems = filterCurrentSelections(params);
 		let currentQuestion = filterCurrentQuestions(params);
-		if (currentItems.length == 0) {
+	
+		if (currentItems.length == 0 && !selectedWorkflow) {
 			currentItems = filterCurrentSelections([] as string[]);
 			currentQuestion = filterCurrentQuestions([] as string[]);
-			router.push('/workflows', { scroll: false });
+			// router.push('/workflows', { scroll: false });
 		}
 	
 		setBreadcrumbs(mappedBreadcrumbs);

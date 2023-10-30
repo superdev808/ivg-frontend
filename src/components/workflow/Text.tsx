@@ -10,6 +10,9 @@ import { setSelectedPathIds } from '@/redux/features/workflowSelectionSlice';
 import { selectWorkflowSelection } from '@/redux/features/workflowSelectionSlice';
 
 import { Dialog } from 'primereact/dialog';
+import Image from 'next/image';
+import ImageComponent from '../shared/ImageComponent';
+import ReactPlayer from 'react-player';
 
 const WorkflowText = () => {
 	const containerRef = useRef<any>(null);
@@ -47,6 +50,22 @@ const WorkflowText = () => {
 		setVisible(true);
 	};
 
+	async function mediaRenderer(url) {
+		let isValid = false;
+		const type = 'image';
+
+		const validation = await validateContent(url);
+		isValid = validation;
+
+		return (
+			<img
+				style={{ maxHeight: '150px', height: '50px' }}
+				src={isValid ? url : '/images/no-image.png'}
+				alt="content"
+			/>
+		);
+	}
+
 	useEffect(() => {
 		const elements: JSX.Element[] = [];
 		if (selectedPathIds.length > 0) {
@@ -73,32 +92,39 @@ const WorkflowText = () => {
 								</div>
 								<div className="px-4 pb-4">
 									<strong>{currrentNode.data.value}</strong>
+									<div className="flex justify-content-center align-items-center p-2">
+										{currrentNode.data.images &&
+											currrentNode.data.images.map((image: string) => {
+												return (
+													<div
+														className="p-2"
+														key={image}>
+														{
+															<ImageComponent
+																key={image}
+																src={`https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/${currrentNode.data.flowId}/${image}.png`}
+																fallbackSrc={`/images/no-image.png`}></ImageComponent>
+														}
+													</div>
+												);
+											})}
+									</div>
+									<div className="flex justify-content-center align-items-center p-2">
+									
+										{currrentNode.data.videos &&
+											currrentNode.data.videos.map((video: string) => {
+												return (
+													<div
+														className="p-2"
+														key={video}>
+														{
+															<ReactPlayer width={300} height={200} controls loop={false} url={`https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/${currrentNode.data.flowId}/${video}.mp4`} />
 
-									{currrentNode.data.images &&
-										currrentNode.data.images.map((image: string) => {
-											return (
-												<p
-													onClick={() =>
-														openImage(
-															'https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/' + currrentNode.data.flowId + '/' + image + '.png'
-														)
-													}
-													style={{ width: '100%', justifyContent: 'center', display: 'flex' }}
-													key={image.replace(' ', '_')}>
-													<Button className="bg-transparent p-0 hover:pointer">
-														<img
-															src={
-																'https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/' + currrentNode.data.flowId + '/' + image + '.png' ||
-																'/images/no-image.png'
-															}
-															alt=""
-															style={{ width: '150px', maxHeight: '150px' }}
-														/>
-													</Button>
-												</p>
-											);
-										})}
-
+														}
+													</div>
+												);
+											})}
+									</div>
 									{currrentNode.data.texts &&
 										currrentNode.data.texts.map((text: string) => {
 											return <p key={text.replace(' ', '_')}>{text}</p>;
@@ -162,17 +188,6 @@ const WorkflowText = () => {
 				{pathElements}
 				<ConfirmPopup />
 			</div>
-			<Dialog
-				visible={visible}
-				// style={{ width: '50vw' }}
-				onHide={() => setVisible(false)}>
-				<p className="flex m-0 justify-content-center">
-					<img
-						src={selectedImage}
-						alt=""
-					/>
-				</p>
-			</Dialog>
 		</>
 	);
 };
