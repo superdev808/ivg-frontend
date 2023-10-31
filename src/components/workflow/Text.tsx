@@ -9,8 +9,8 @@ import { Edge, PathIds } from '@/types/Workflow';
 import { setSelectedPathIds } from '@/redux/features/workflowSelectionSlice';
 import { selectWorkflowSelection } from '@/redux/features/workflowSelectionSlice';
 
-import { Dialog } from 'primereact/dialog';
-import Image from 'next/image';
+
+
 import ImageComponent from '../shared/ImageComponent';
 import ReactPlayer from 'react-player';
 
@@ -45,26 +45,7 @@ const WorkflowText = () => {
 		});
 	};
 
-	const openImage = (url) => {
-		setSelectedImage(url);
-		setVisible(true);
-	};
-
-	async function mediaRenderer(url) {
-		let isValid = false;
-		const type = 'image';
-
-		const validation = await validateContent(url);
-		isValid = validation;
-
-		return (
-			<img
-				style={{ maxHeight: '150px', height: '50px' }}
-				src={isValid ? url : '/images/no-image.png'}
-				alt="content"
-			/>
-		);
-	}
+	
 
 	useEffect(() => {
 		const elements: JSX.Element[] = [];
@@ -127,7 +108,7 @@ const WorkflowText = () => {
 									</div>
 									{currrentNode.data.texts &&
 										currrentNode.data.texts.map((text: string) => {
-											return <p key={text.replace(' ', '_')}>{text}</p>;
+											return <p style={{whiteSpace: "pre-wrap"}} key={text.replace(' ', '_')}>{text.replaceAll('\n','\n\n')}</p>;
 										})}
 								</div>
 							</div>
