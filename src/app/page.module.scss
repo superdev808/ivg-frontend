@@ -202,6 +202,108 @@
   }
 }
 
+.landing-top {
+  background-color: var(--primary-dark-color);
+
+  &-title {
+    color: var(--primary-color);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+  }
+
+  &-image-container {
+    position: absolute;
+    border: 2px solid var(--primary-color);
+    right: 40px;
+  }
+
+  &-image-sub-container {
+    position: relative;
+    top: 40px;
+    left: 40px;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.landing-middle {
+  color: var(--primary-dark-color);
+  &-title {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+  }
+
+  &-description {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 10;
+  }
+
+  &-item {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-color: gainsboro !important;
+
+    &-description {
+      text-align: center;
+      font-size: 22px;
+      line-height: 32px;
+    }
+  }
+}
+
+.landing-help-introduction {
+  background-color: #F7FAF7;
+}
+
+.landing-missing-section {
+  background-color: var(--primary-dark-color);
+  color: var(--primary-color);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  &-title {
+    font-size: 48px;
+    font-weight: bold;
+  }
+
+  &-description {
+    font-size: 22px;
+    font-weight: 100;
+  }
+}
+
+.request-demo {
+  color: var(--primary-dark-color);
+  font-size: 20px;
+}
+
+.landing-contact-container {
+  border-color: gainsboro !important;
+}
+
+.landing-contact-section {
+  color: var(--primary-dark-color);
+  width: 200px;
+
+  & button {
+    color: var(--primary-dark-color) !important;
+    & span {
+      font-size: 32px !important;
+    }
+  }
+
+  &-contact-us {
+    color: var(--primary-dark-color) !important;
+  }
+}
+
+.blur-shadow {
+  border-radius: 30%;
+  background: #F1FCF5;
+  box-shadow: 0 0 10px #F1FCF5, 0 0 20px #F1FCF5, 0 0 30px #F1FCF5;
+}
+
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {

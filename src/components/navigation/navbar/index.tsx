@@ -7,7 +7,7 @@ import SearchBar from "@/components/searchBar";
 import { usePathname } from "next/navigation";
 import styles from "./styles.module.scss";
 import classNames from "classnames/bind";
-import 'primeicons/primeicons.css';
+import "primeicons/primeicons.css";
 import { Button } from "primereact/button";
 import { Sidebar } from "primereact/sidebar";
 
@@ -21,8 +21,8 @@ const Navbar = ({
 }: {
   toggle: () => void;
   isOpen: boolean;
-  navLinks: { id: string; link: string; title: string, icon: string }[];
-  rightNavLinks: { id: string; link: string; title: string, icon: string }[];
+  navLinks: { id: string; link: string; title: string; icon: string }[];
+  rightNavLinks: { id: string; link: string; title: string; icon: string }[];
 }) => {
   const pathname = usePathname();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -50,17 +50,23 @@ const Navbar = ({
               return (
                 <div key={item.id}>
                   <Link href={item.link}>
-                    <p><i className={cx(item.icon, "px-2")} /> {item.title}</p>
+                    <p>
+                      <i className={cx(item.icon, "px-2")} /> {item.title}
+                    </p>
                   </Link>
                 </div>
               );
             })}
           </div>
 
-		  <Button className="md:hidden h-2rem w-2rem" icon="pi pi-bars" onClick={() => setShowSidebar(true)} />
+          <Button
+            className="md:hidden h-2rem w-2rem"
+            icon="pi pi-bars"
+            onClick={() => setShowSidebar(true)}
+          />
         </div>
       </div>
-      <div className={pathname !== "/" ? " hidden" : ""}>
+      <div className={pathname !== "/home/" ? " hidden" : ""}>
         <div
           className={
             " search-wrapper flex  justify-content-center align-items-center"
@@ -81,17 +87,29 @@ const Navbar = ({
           </div>
         </div>
       </div>
-	  <Sidebar visible={showSidebar} position="right" onHide={() => setShowSidebar(false)} className={cx("navbarNav", "align-items-end")}>
-          <div className={cx("navbarNav", "flex flex-column gap-x-3 align-items-start")}>
-            {[...navLinks, ...rightNavLinks].map((item) => {
-              return (
-				<Link href={item.link} key={item.id}>
-					<p><i className={cx(item.icon, "px-2")} /> {item.title}</p>
-				</Link>
-              );
-            })}
-          </div>
-	  </Sidebar>
+      <Sidebar
+        visible={showSidebar}
+        position="right"
+        onHide={() => setShowSidebar(false)}
+        className={cx("navbarNav", "align-items-end")}
+      >
+        <div
+          className={cx(
+            "navbarNav",
+            "flex flex-column gap-x-3 align-items-start"
+          )}
+        >
+          {[...navLinks, ...rightNavLinks].map((item) => {
+            return (
+              <Link href={item.link} key={item.id}>
+                <p>
+                  <i className={cx(item.icon, "px-2")} /> {item.title}
+                </p>
+              </Link>
+            );
+          })}
+        </div>
+      </Sidebar>
     </div>
   );
 };

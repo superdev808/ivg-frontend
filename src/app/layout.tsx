@@ -16,9 +16,8 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			<body>
 				<Providers>
 					<Navigation />
-					<div className='container z-1'>
-
-					{children}
+					<div className='container z-1' style={{overflowX: "hidden"}}>
+						{children}
 					</div>
 				</Providers>
 			</body>

@@ -21,7 +21,7 @@ const Navigation = () => {
 
   const rightNavLinks = [
     {id: 'register', title: 'Register', link: '/signup', icon: PrimeIcons.USER},
-    {id: 'signin', title: 'Login', link: '/signin', icon: PrimeIcons.SIGN_IN}
+    {id: 'signin', title: 'Login', link: '/home', icon: PrimeIcons.SIGN_IN}
   ]
 
   const toggle = () => {
