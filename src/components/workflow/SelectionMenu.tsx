@@ -1,6 +1,7 @@
 'use client';
-import { use, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, use, useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { InputText } from 'primereact/inputtext';
 
 import Link from 'next/link';
 import { Button } from 'primereact/button';
@@ -8,6 +9,7 @@ import { Skeleton } from 'primereact/skeleton';
 
 import styles from './Workflow.module.scss';
 import { useAppSelector } from '@/redux/hooks';
+import useFilteredList from '@/hooks/useFilteredList';
 
 type MenuItem = {
 	id: number;
@@ -17,6 +19,7 @@ type MenuItem = {
 };
 export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:string[]}) {
 	const router = useRouter();
+	
 	// const { currentItems, currentQuestion, breadcrumbs, isLoading } = useWorkflowSelections(params.flowIds);
 
     const {  menuItems, menuQuestions } = useAppSelector((state) => state.workflows);
@@ -28,6 +31,7 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 	const [currentQuestion, setCurrentQuestion] = useState<MenuItem | null>(null);
 	const [breadcrumbs, setBreadcrumbs] = useState<{value:string, path:string}[]>([]);
 
+	const { filteredList, input, setInput } = useFilteredList(currentItems, 'value');
 
 	function filterCurrentSelections(ids: string[]) {
 		return menuItems.filter((item) => String(item.hierarchy) == String(ids));
@@ -80,8 +84,8 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 		}
 		return (
 			<>
-				{currentItems &&
-					currentItems.map((item) => {
+				{filteredList &&
+					filteredList.map((item) => {
 						return (
 							<div
 								key={item.id}
@@ -145,6 +149,16 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 			</>
 		);
 	};
+
+
+
+	const handleInputChange = (event: FormEvent<HTMLInputElement>) => {
+
+		setInput(event.target.value);
+
+	  };
+
+
 	return (
 		<div
 			className={'flex lg:h-full justify-content-center align-items-center  lg:py-5'}
@@ -180,15 +194,26 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
                             
                             )}
 					</div>
-					<div className="flex justify-content-center">
+					<div className="flex justify-content-between align-items-end my-3">
 						{isLoading ? (
 						<Skeleton
                         width="60%"
                         height="2rem"
-                        className="my-3"></Skeleton>
+                        className="my-0"></Skeleton>
 						) : (
-							<h2 className="">{currentQuestion && currentQuestion.value}</h2>
+							<h2 className="my-0">{currentQuestion && currentQuestion.value}</h2>
 						)}
+						<div className=''>
+						<InputText
+						type="text" className="p-inputtext-sm"
+						value={input}
+						onChange={handleInputChange}
+						placeholder="Filter..."
+						
+						></InputText>
+
+						</div>
+						
 					</div>
 				</div>
 				<div className="flex flex-column lg:flex-row h-full border-top-1 border-gray-300 lg:overflow-hidden ">
