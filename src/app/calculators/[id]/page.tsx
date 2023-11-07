@@ -82,7 +82,7 @@ export default function CalculatorPage() {
     <div className="flex flex-column align-items-center justify-content-center mt-6">
       <Card
         className="w-12 md:w-5 flex px-4 py-2 border-round bg-white flex-column"
-        title={`What type of ${selectedType?.label} do you want?`}
+        title={`What type of ${selectedType?.label} should you use?`}
         subTitle={selectedType?.description}
       />
       <CalculatorContainer option={searchParams.id as string} input={selectedType?.input || []} output={selectedType?.output || []} />
