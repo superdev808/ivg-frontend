@@ -16,7 +16,7 @@ const initialState: WorkflowState = {
 	selectedNodeData: [],
 	selectedEdgeData: [],
 	selectedPathIds: [],
-	isLoading: false,
+	isLoading: true,
 };
 
 export const workflowSelectionSlice = createSlice({

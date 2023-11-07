@@ -6,21 +6,26 @@ import WorkflowComponent from './Workflow';
 import useWorkflowLoadData from '@/hooks/useWorkflowLoadData';
 import { useAppSelector } from '@/redux/hooks';
 import { useDispatch } from 'react-redux';
-import { setSelectedId } from '@/redux/features/workflowSelectionSlice';
+import { setSelectedId, setLoading } from '@/redux/features/workflowSelectionSlice';
 
 const WorkflowsComponent = (params: { flowIds: string[] }) => {
 	const dispatch = useDispatch();
 	useWorkflowLoadData();
 
 	const { menuItems, menuQuestions } = useAppSelector((state) => state.workflows);
-	const { selectedId } = useAppSelector((state) => state.workflowSelection);
+	const { selectedId, isLoading } = useAppSelector((state) => state.workflowSelection);
 
 	const [renderComponent, setRenderComponent] = useState<any>(null);
 
 	useEffect(() => {
 		if (menuItems.length == 0 || menuQuestions.length == 0) return;
+		
 
-		if (!params.flowIds) return;
+		if (!params.flowIds) {
+			dispatch(setLoading(false));
+			dispatch(setSelectedId(0));
+			return;
+		};
 
 		const currentSelection = params.flowIds[params.flowIds.length - 1];
 		const flow = menuItems.find(
@@ -31,10 +36,12 @@ const WorkflowsComponent = (params: { flowIds: string[] }) => {
 		} else {
 			dispatch(setSelectedId(0));
 		}
+		dispatch(setLoading(false));
 	}, [menuItems, menuQuestions]);
 
 
 	useEffect(() => {
+		if (isLoading) return;
 		if (Number(selectedId)  > 0) {
 			setRenderComponent(<WorkflowComponent />);
 		} else if (Number(selectedId) === 0) {
