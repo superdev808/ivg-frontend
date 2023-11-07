@@ -1,56 +1,72 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Card } from "primereact/card";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { useGetCalcOperationsQuery } from "@/redux/services/calcOperationsApi";
+import _ from "lodash";
 import Quiz from "./quiz";
 import DetailView from "./detail";
+
+interface QuizOption {
+  name: string;
+  text: string;
+}
 interface CalculatorContainerProps {
   option: string;
+  input: Array<QuizOption>;
+  output: Array<QuizOption>;
 }
 
 export default function CalculatorContainer(props: CalculatorContainerProps) {
+  const { input, output } = props;
   const {
     isLoading,
     data: calculatorOperations,
     error,
   } = useGetCalcOperationsQuery(props.option);
 
-  const [questions, setQuestions] = useState<any[]>([]);
-  const [answers, setAnswers] = useState<any>({});
-
-  const handleAnswerClick = (nextQuestionKey: string) => {
-    const index = questions.findIndex((item) => {
-        const answerIndex = item.quiz.answers.findIndex((answer: { next: string; }) => answer.next === nextQuestionKey)
-        return answerIndex >= 0;
-    });
-    let newQuestions = [...questions].slice(0, index + 1);
-    newQuestions = [
-        ...newQuestions,
-        { key: nextQuestionKey, quiz: calculatorOperations[nextQuestionKey] },
-    ];
-
-    setQuestions(newQuestions);
-  };
-
-  const handleSelectAnswer = (quizKey: string) => (text: string) => {
-    const newAnswer: any = {};
-    const standardCount = quizKey.split("-").length;
-
-    Object.keys(answers).forEach(keyItem => {
-      const levelCount = keyItem.split("-").length;
-      if (levelCount < standardCount)
-        newAnswer[keyItem] = answers[keyItem];
-    })
-    newAnswer[quizKey] = text;
-    setAnswers(newAnswer);
-  }
+  const [level, setLevel] = useState(0);
+  const [answerOptions, setAnswerOptions] = useState<any[]>([]);
+  const [answers, setAnswers] = useState<any[]>([]);
+  const [itemInfo, setItemInfo] = useState<any>(null);
 
   useEffect(() => {
-    if (calculatorOperations) {
-      setQuestions([{ key: "start", quiz: calculatorOperations["start"] }]);
-      setAnswers({});
+    if (!calculatorOperations || level > input.length) {
+      return;
     }
-  }, [calculatorOperations]);
+    const filteredRows = calculatorOperations.filter((operation: any) => {
+      let isFineFlag = true;
+      for (let i = 0; i <= level; i ++) {
+        if (answers[i] && operation[input[i].name] !== answers[i]) {
+          isFineFlag = false;
+          break;
+        }
+      }
+      return isFineFlag;
+    })
+    if (level < input.length) {
+      const question = input[level].name;
+      const newAnswerOptions = _.uniq(filteredRows.map((field: any) => field[question]));
+      const originalAnswerOptions: any[] = answerOptions.slice(0, level);
+      if (newAnswerOptions.length) {
+        setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
+        setItemInfo(null);
+      } else {
+        setItemInfo(filteredRows[0]);
+      }
+    } else {
+      setItemInfo(filteredRows[0]);
+    }
+  }, [input, level, calculatorOperations, answers])
+
+  const questions = useMemo(() => {
+    return input.slice(0, level + 1);
+  }, [input, level]);
+
+  const handleSelectAnswer = (index: number) => (e: any) => {
+    setLevel(index + 1);
+    const newAnswers = answers.slice(0, index);
+    setAnswers([...newAnswers, e.value]);
+  }
 
   return (
     <div className="w-12 md:w-8 flex justify-content-center mt-6">
@@ -58,25 +74,22 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
         <ProgressSpinner />
       ) : (
         <Card className="w-12 flex px-4 py-2 border-round bg-white flex-column">
-          {questions.map((item, index) =>
-            item.quiz.question ? (
+          <div className="grid">
+            {questions.map((quiz, index) => (
               <Quiz
                 key={`quiz-${index}`}
-                question={item.quiz.question}
-                answers={item.quiz.answers}
-                selectedAnswer={answers[item.key] || null}
-                handleSelectAnswer={handleSelectAnswer(item.key)}
-                handleAnswer={handleAnswerClick}
+                question={quiz.text}
+                answers={answerOptions[index]}
+                selectedAnswer={answers[index] || null}
+                handleSelectAnswer={handleSelectAnswer(index)}
               />
-            ) : (
-              <DetailView
-                key={`detail-${index}`}
-                img={item.quiz.img}
-                url={item.quiz.url}
-                text={item.quiz.text}
-              />
-            )
-          )}
+            ))}
+          </div>
+          {itemInfo && <DetailView
+            url={itemInfo["Link to Purchase"]}
+            name={{label: "Scanbody", value: itemInfo["SCANBODY"]}}
+            text={{label: "Scanbody Item #", value: itemInfo["SCANBODY ITEM #"]}}
+          />}
         </Card>
       )}
     </div>

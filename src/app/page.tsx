@@ -27,7 +27,7 @@ export default function Index() {
             aria-label="Filter"
           />
         </div>
-        <div className="col-9 md:col-4 mt-4 md:mt-7 py-7 flex flex-column align-items-end md:align-items-start">
+        <div className="col-9 md:col-5 mt-4 md:mt-7 py-7 flex flex-column align-items-end md:align-items-start">
           <h1 className={cx("landing-top-title", "my-2 text-lg md:text-6xl")}>
             High Quality Patient
           </h1>
@@ -36,11 +36,11 @@ export default function Index() {
           </h1>
           <div>
             <Button className={cx("mt-2 px-4 py-3", "request-demo")}>
-              Request a Demo
+              Request More Information
             </Button>
           </div>
         </div>
-        <div className="col-12 md:col-6 relative">
+        <div className="col-12 md:col-5 relative">
           <div className={cx("landing-top-image-container", "static md:absolute")}>
             <div className={cx("landing-top-image-sub-container", "static md:relative")}>
               <Image
@@ -145,7 +145,7 @@ export default function Index() {
 		</div>
       </div>
 	  <div className={cx("grid my-6 py-6", "landing-missing-section")}>
-		<div className="col-12 md:col-4 md:col-offset-4 flex flex-column align-items-center">
+		<div className="col-12 flex flex-column align-items-center">
 			<p className={cx("landing-missing-section-title", "my-2 px-2 text-xl md:text-6xl")}>What are we missing?</p>
 			<p className={cx("landing-missing-section-description", "my-1 px-2 text-lg md:text-xl text-center")}>Request a Workflow, Calculator, or additional feature <b>here</b>.</p>
 		</div>
