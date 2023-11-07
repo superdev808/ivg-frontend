@@ -21,7 +21,7 @@ interface EdgeData {
 
 interface Node {
 	id: string;
-	data: { value: string; refId: number; start: boolean; end: boolean; active: boolean; marked: boolean };
+	data: { value: string; refId: number; start: boolean; end: boolean; selected: boolean; hidden: boolean; images: []; videos: []; texts: []; type: number; flowId: number};
 	position: { x: number; y: number };
 	targetPosition: 'top' | 'bottom';
 	sourcePosition: 'top' | 'bottom';
@@ -39,7 +39,6 @@ interface Edge {
 	target: string;
 	type: string; // replace with your edge type
 	animated: boolean;
-	style: any;
 	
 }
 
@@ -56,7 +55,6 @@ export function unpackNodesEdges(nestedNodes) {
 				refId: node.id,
 				start: node.start,
 				end: false,
-				active: false,
 				selected: false,
 				hidden: true,
 				images: node.images,
@@ -90,11 +88,8 @@ export function unpackNodesEdges(nestedNodes) {
 						source: String(newNode.id),
 						target: String(child.id),
 						type: 'custom',
-						animated: true,
-						style: {
-							strokeWidth: 2,
-							stroke: '#FF0072',
-						},
+						animated: true
+					
 					};
 
 					newEdges = [...newEdges, newEdge];

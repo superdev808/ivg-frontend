@@ -1,52 +1,93 @@
-import { Button } from 'primereact/button';
-import { ZIndexUtils } from 'primereact/utils';
-import React, { FC } from 'react';
-import { EdgeProps, getSmoothStepPath, EdgeLabelRenderer, BaseEdge, getStraightPath, Position } from 'reactflow';
+import React, { FC, useEffect, useCallback } from 'react';
+import { EdgeProps, getSmoothStepPath, BaseEdge, EdgeText, useStore, MarkerType, EdgeLabelRenderer } from 'reactflow';
+
+import styles from '@/components/workflow/Workflow.module.scss';
+
+import { Properties } from 'csstype';
+
+type EdgeStyles = {
+	[key: string]: any;
+};
+// 023932
+const edgeStyles: EdgeStyles = {
+	active: {
+		background: 'white',
+		border: 'solid 1px #023932',
+		color: '#023932',
+	},
+
+	hidden: {
+		visibility: 'hidden',
+	},
+	selected: {
+		background: '#023932',
+		border: 'solid 1px #023932',
+		color: 'white',
+
+	},
+};
 
 const CustomEdge: FC<EdgeProps> = ({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, style }) => {
+	const [buttonState, setButtonState] = React.useState<string>('hidden');
+
 	const [edgePath, labelX, labelY] = getSmoothStepPath({
 		sourceX,
 		sourceY,
 		sourcePosition,
 		targetX,
-		targetY,
+		targetY:  data.selected ? targetY : targetY -50,
 		targetPosition,
 	});
+
+	useEffect(() => {
+		if (data.hidden) {
+			setButtonState('hidden');
+		} else if (data.selected) {
+			setButtonState('selected');
+		} else if (data.active) {
+			setButtonState('active');
+		} else {
+			setButtonState('disabled');
+		}
+	}, [data]);
+
 
 	return (
 		<>
 			<BaseEdge
 				id={id}
 				path={edgePath}
+				interactionWidth={0}
 				style={
 					data.selected
-						? { ...style, stroke: 'var(--primary-color)', strokeWidth: 4 }
-						: { visibility: !data.hidden ? 'visible' : 'hidden', width: '150px' }
+						? { ...style, strokeWidth: 2, stroke: '#023932' }
+						: { visibility: !data.hidden ? 'visible' : 'hidden', width: '150px', height: '200px' }
 				}
+				markerEnd={MarkerType.ArrowClosed}
 			/>
+		
 			<EdgeLabelRenderer>
 				<div
-					onClick={() => console.log('test')}
 					style={{
 						position: 'absolute',
-
-						// transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
-						transform: data.selected
-							? `translate(-50%,-200%) translate(${targetX}px,${targetY}px)`
-							: `translate(-50%,-100%) translate(${targetX}px,${targetY}px)`,
-						background: data.selected ? 'var(--primary-color)' : data.active ? 'var(--green-100)' : 'grey',
-						border: data.selected ? 'white' : data.active ? 'solid 1px var(--primary-color)' : '',
-						padding: 7,
-						borderRadius: 5,
-						fontSize: 10,
-						fontWeight: 600,
-						zIndex: '10',
-						color: data.selected ? 'white' : data.active ? 'var(--primary-dark-color)' : 'white',
-						width: '150px',
-						textAlign: 'center',
-						visibility: !data.hidden ? 'visible' : 'hidden',
-					}}>
-					{data.value}
+						transform:`translate(-50%, -75px) translate(${targetX}px,${targetY}px)`,
+            			pointerEvents: 'all',
+					}}
+					className="nodrag nopan">
+					<button
+						className={`${styles.edge} ${data.selected ? styles.selected : ''}`}
+						style={{
+							...edgeStyles[buttonState],
+						
+							borderRadius: '0.2rem',
+							padding: '0.5rem',
+							fontSize: '0.65rem',
+							cursor: 'grab',
+							wordBreak: 'break-word',
+							maxWidth: '150px',
+						}}>
+						{data.value}
+					</button>
 				</div>
 			</EdgeLabelRenderer>
 		</>
