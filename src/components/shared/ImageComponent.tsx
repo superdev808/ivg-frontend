@@ -10,13 +10,14 @@ const ImageComponent = (props) => {
 	const [visible, setVisible] = useState(false);
 
 	return (
-		<div>
+		<div className='border-2 border-round border-green-300'>
 			<Image
+				style={{ cursor: 'zoom-in' }}
 				alt={props.key}
 				{...rest}
 				src={imgSrc}
-				width={100}
-				height={100 / ratio}
+				width={200}
+				height={200 / ratio}
 				onError={() => {
 					setImgSrc(fallbackSrc);
 				}}
@@ -25,16 +26,17 @@ const ImageComponent = (props) => {
 			/>
 			<Dialog
 				visible={visible}
+				dismissableMask
 				onHide={() => setVisible(false)}>
 				<Image
 					alt={props.key}
 					src={imgSrc}
-					width={1.5 * naturalSize.naturalWidth}
-					height={1.5* naturalSize.naturalHeight}
+					width={1000}
+					height={1000 / ratio}
 					onError={() => {
 						setImgSrc(fallbackSrc);
 					}}
-					onLoadingComplete={({ naturalWidth, naturalHeight }) => setNaturalSize({ naturalWidth, naturalHeight })}
+					
 				/>
 			</Dialog>
 		</div>

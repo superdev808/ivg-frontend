@@ -73,7 +73,7 @@ const WorkflowText = () => {
 								</div>
 								<div className="px-4 pb-4">
 									<strong>{currrentNode.data.value}</strong>
-									<div className="flex justify-content-center align-items-center p-2">
+									<div className="flex justify-content-start align-items-center p-2">
 										{currrentNode.data.images &&
 											currrentNode.data.images.map((image: string) => {
 												return (
