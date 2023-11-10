@@ -7,8 +7,7 @@ import { Dropdown } from "primereact/dropdown";
 import { Card } from "primereact/card";
 import { ProgressSpinner } from "primereact/progressspinner";
 import CalculatorContainer from "@/components/calculator";
-import { redirect } from 'next/navigation';
-import createClient from '@/lib/supabase-server';
+
 const tabItems = [
   {
     type: "Scanbodies",
@@ -36,14 +35,7 @@ const tabItems = [
   },
 ];
 
-export default async  function CalculatorPage() {
-  const supabase = createClient();
-
-	const { data } = await supabase.auth.getSession();
-
-	if (!data) {
-		redirect('/login');
-	}
+export default function CalculatorPage() {
   const {
     isLoading,
     data: calculatorOptions,
