@@ -3,7 +3,10 @@
 
 const nextConfig = {
     reactStrictMode: false,
-    experimental:{appDir: true},
+    experimental:{appDir: true,
+      serverComponentsExternalPackages: ["@prisma/client", "bcryptjs"],},
+    
+
     // output: 'export',
     images: {
       remotePatterns: [

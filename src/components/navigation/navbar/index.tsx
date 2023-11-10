@@ -22,7 +22,7 @@ const Navbar = ({
   toggle: () => void;
   isOpen: boolean;
   navLinks: { id: string; link: string; title: string; icon: string }[];
-  rightNavLinks: { id: string; link: string; title: string; icon: string }[];
+  rightNavLinks: { id: string; link?: string; title: string; icon: string, onClick?: any }[];
 }) => {
   const pathname = usePathname();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -47,9 +47,14 @@ const Navbar = ({
         <div className="flex align-items-center">
           <div className={cx("navbarNav", "hidden md:flex gap-x-6 ml-3")}>
             {rightNavLinks.map((item) => {
+              if (item.onClick) {
+                return <div onClick={item.onClick} key={item.id}><p><i className={cx(item.icon, "px-2")} /> {item.title}</p></div>
+              }
               return (
+
+                
                 <div key={item.id}>
-                  <Link href={item.link}>
+                  <Link href={item.link || '/'}>
                     <p>
                       <i className={cx(item.icon, "px-2")} /> {item.title}
                     </p>
@@ -66,7 +71,7 @@ const Navbar = ({
           />
         </div>
       </div>
-      <div className={pathname !== "/home/" ? " hidden" : ""}>
+      {/* <div className={pathname !== "/home/" ? " hidden" : ""}>
         <div
           className={
             " search-wrapper flex  justify-content-center align-items-center"
@@ -86,7 +91,7 @@ const Navbar = ({
             <SearchBar />
           </div>
         </div>
-      </div>
+      </div> */}
       <Sidebar
         visible={showSidebar}
         position="right"
