@@ -12,10 +12,44 @@ const tabItems = [
   {
     type: "Scanbodies",
     label: "scanbody",
-    placeholder: "Select Manufacturer",
     description:
       "This calculator will provide the correct scanbody for you to use based on the implant (manufacturer, system, size) that was placed.",
-    value: 0,
+    input: [
+      {
+        name: "IMPLANT BRAND",
+        text: "Implant Brand"
+      },
+      {
+        name: "IMPLANT SYSTEM",
+        text: "Implant System"
+      },
+      {
+        name: "EXTERNAL DIAMETER",
+        text: "External Diameter"
+      },
+      {
+        name: "PLATFORM",
+        text: "Platform"
+      },
+      {
+        name: "Authentic/ Generic",
+        text: "Authentic or Generic"
+      }
+    ],
+    output: [
+      {
+        name: "SCANBODY",
+        text: "Scanbody"
+      },
+      {
+        name: "SCANBODY ITEM #",
+        text: "Scanbody Item #"
+      },
+      {
+        name: "Link to Purchase",
+        text: "Link to Purchase"
+      }
+    ]
   },
   {
     type: "Implant Drivers",
@@ -36,11 +70,6 @@ const tabItems = [
 ];
 
 export default function CalculatorPage() {
-  const {
-    isLoading,
-    data: calculatorOptions,
-    error: calcError,
-  } = useGetCalculatorsQuery(null);
 
   // const router = useRouter();
   const searchParams = useParams();
@@ -49,41 +78,14 @@ export default function CalculatorPage() {
     return tabItems.find((item) => item.type === tabId);
   }, [searchParams.id]);
 
-  const selectedOptions = useMemo(() => {
-    if (!calculatorOptions) {
-      return [];
-    }
-    return calculatorOptions
-      .filter((option) => option.category === selectedType?.value)
-      .sort((a, b) => a.value.localeCompare(b.value));
-  }, [calculatorOptions, selectedType]);
-
-  const [scanBodyOption, setScanBodyOption] = useState<string | null>(null);
-
   return (
     <div className="flex flex-column align-items-center justify-content-center mt-6">
-      {isLoading ? (
-        <ProgressSpinner />
-      ) : (
-        <>
-          <Card
-            className="w-12 md:w-5 flex px-4 py-2 border-round bg-white flex-column"
-            title={`What type of ${selectedType?.label} do you want?`}
-            subTitle={selectedType?.description}
-          >
-            <Dropdown
-              value={scanBodyOption}
-              onChange={(e) => setScanBodyOption(e.value)}
-              options={selectedOptions}
-              optionLabel="value"
-              optionValue="value"
-              placeholder={selectedType?.placeholder}
-              className="w-full"
-            />
-          </Card>
-          {scanBodyOption && <CalculatorContainer option={scanBodyOption.replaceAll(" ", "_")} />}
-        </>
-      )}
+      <Card
+        className="w-12 md:w-5 flex px-4 py-2 border-round bg-white flex-column"
+        title={`What type of ${selectedType?.label} should you use?`}
+        subTitle={selectedType?.description}
+      />
+      <CalculatorContainer option={searchParams.id as string} input={selectedType?.input || []} output={selectedType?.output || []} />
     </div>
   );
 }
