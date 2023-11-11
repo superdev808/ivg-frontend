@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 import React, { useMemo } from "react";
 import { useRouter } from 'next/navigation';
 import { Button } from "primereact/button";
