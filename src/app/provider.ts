@@ -28,13 +28,6 @@ const AuthProvider = ({ accessToken, children }) => {
 		};
 	}, [accessToken, supabase, router]);
 
-	// useEffect(() => {
-	// 	if (session) {
-	// 		dispatch({ type: 'auth/setAuth', payload: session });
-	// 	} else {
-	// 		dispatch({ type: 'auth/setAuth', payload: null });
-	// 	}
-	// }, [accessToken]);
 
 
 	return children;
