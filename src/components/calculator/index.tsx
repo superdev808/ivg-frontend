@@ -27,7 +27,7 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
   const [level, setLevel] = useState(0);
   const [answerOptions, setAnswerOptions] = useState<any[]>([]);
   const [answers, setAnswers] = useState<any[]>([]);
-  const [itemInfo, setItemInfo] = useState<any>(null);
+  const [itemInfo, setItemInfo] = useState<any[]>([]);
 
   useEffect(() => {
     if (!calculatorOperations || level > input.length) {
@@ -35,28 +35,30 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
     }
     const filteredRows = calculatorOperations.filter((operation: any) => {
       let isFineFlag = true;
-      for (let i = 0; i <= level; i ++) {
+      for (let i = 0; i <= level; i++) {
         if (answers[i] && operation[input[i].name] !== answers[i]) {
           isFineFlag = false;
           break;
         }
       }
       return isFineFlag;
-    })
+    });
     if (level < input.length) {
       const question = input[level].name;
-      const newAnswerOptions = _.uniq(filteredRows.map((field: any) => field[question]));
+      const newAnswerOptions = _.uniq(
+        filteredRows.map((field: any) => field[question])
+      );
       const originalAnswerOptions: any[] = answerOptions.slice(0, level);
       if (newAnswerOptions.length) {
         setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
-        setItemInfo(null);
+        setItemInfo([]);
       } else {
-        setItemInfo(filteredRows[0]);
+        setItemInfo(filteredRows);
       }
     } else {
-      setItemInfo(filteredRows[0]);
+      setItemInfo(filteredRows);
     }
-  }, [input, level, calculatorOperations, answers])
+  }, [input, level, calculatorOperations, answers]);
 
   const questions = useMemo(() => {
     return input.slice(0, level + 1);
@@ -66,7 +68,7 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
     setLevel(index + 1);
     const newAnswers = answers.slice(0, index);
     setAnswers([...newAnswers, e.value]);
-  }
+  };
 
   return (
     <div className="w-12 md:w-8 flex justify-content-center mt-6">
@@ -85,11 +87,18 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
               />
             ))}
           </div>
-          {itemInfo && <DetailView
-            url={itemInfo["Link to Purchase"]}
-            name={{label: "Scanbody", value: itemInfo["SCANBODY"]}}
-            text={{label: "Scanbody Item #", value: itemInfo["SCANBODY ITEM #"]}}
-          />}
+          {itemInfo.length > 0 && <h2>Compatible Scanbodies</h2>}
+          {itemInfo.map((item, index) => (
+            <DetailView
+              key={`result-item-${index}`}
+              url={item["Link to Purchase"]}
+              name={{ label: "Brand", value: item["SCANBODY"] }}
+              text={{
+                label: "Item #",
+                value: item["SCANBODY ITEM #"],
+              }}
+            />
+          ))}
         </Card>
       )}
     </div>
