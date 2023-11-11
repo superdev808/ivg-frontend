@@ -9,7 +9,7 @@ export function nestNodesEdges(nodes: NestNodes[], edges:Edge[]) {
     const imageNodes = nodes.filter((node) => node.type === 2)
     const textNodes = nodes.filter((node) => node.type === 4);
     const videoNodes = nodes.filter((node) => node.type === 3);
-    console.log(nodes)
+
     const addAdditionalNode = (currentNodeId:number, searchNodes: Node[]) => {  
         const matchEdges = edges.filter((edge) => edge.target === currentNodeId)
         

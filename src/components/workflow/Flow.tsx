@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, use } from 'react';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedPathIds } from '@/redux/features/workflowSelectionSlice';
 import ReactFlow, {
 	ConnectionLineType,
@@ -18,7 +18,7 @@ import dagre from '@dagrejs/dagre';
 
 import CustomNode from './CustomNode';
 import CustomEdge from './CustomEdge';
-import {  PathIds } from '@/types/Workflow';
+import { PathIds } from '@/types/Workflow';
 import { selectWorkflowSelection } from '@/redux/features/workflowSelectionSlice';
 interface NodeData {
 	id: number;
@@ -64,7 +64,6 @@ const Flow = () => {
 	const dispatch = useDispatch();
 	const { selectedEdgeData, selectedNodeData, selectedPathIds } = useSelector(selectWorkflowSelection);
 
-
 	const [nodes, setNodes, onNodesChange] = useNodesState([]);
 	const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -84,13 +83,12 @@ const Flow = () => {
 		[]
 	);
 
-
 	// Function to calculate the XY position for nodes
 	const getHierarchicalMultiLevelLayout = (nodes, edges) => {
 		const spacingX = 200;
 		const spacingY = 200;
 		const maxChildrenPerLevel = 4;
-		const activeOffset = 0; // Additional Y-offset for active nodes
+		const activeOffset = -100; // Additional Y-offset for active nodes
 
 		// Helper function to get the deepest y-position among children
 		const getDeepestChildY = (node) => {
@@ -101,8 +99,6 @@ const Flow = () => {
 
 		// Helper function to set positions recursively
 		const setPositions = (node, x, y, level) => {
-			
-			
 			// Additional offset for active nodes
 			const additionalOffset = node.data.active ? activeOffset : 0;
 
@@ -136,7 +132,7 @@ const Flow = () => {
 				nextX += spacingX;
 			}
 		};
-		
+
 		// Set positions starting from the root node (assuming root node has id 'root')
 		setPositions(
 			nodes.find((n) => n.data.start),
@@ -158,100 +154,96 @@ const Flow = () => {
 		setIsLoading(false);
 	}, [selectedNodeData, selectedEdgeData]); //
 
-
-
 	useEffect(() => {
-		
 		if (selectedPathIds.length === 0 || nodes.length === 0) return;
-		
+
 		let flowNodes = JSON.parse(JSON.stringify(getNodes()));
 		let flowEdges = JSON.parse(JSON.stringify(getEdges()));
 
-		flowNodes = flowNodes.map(obj => ({
-			...obj, 
+		flowNodes = flowNodes.map((obj) => ({
+			...obj,
 			data: {
-
 				...obj.data,
-				hidden: true, 
-				active: false,
-				selected: false
-			}
-		
-		  }));
-		flowEdges = flowEdges.map(obj => ({
-			...obj, 
+				hidden: true,
+				selected: false,
+			},
+		}));
+		flowEdges = flowEdges.map((obj) => ({
+			...obj,
 			data: {
-
 				...obj.data,
-				hidden: true, 
+				hidden: true,
 				active: false,
-				selected: false
-			}
-		  }));
+				selected: false,
+			},
+		}));
 
 		selectedPathIds.forEach((ids: [null | number, number], idx: number) => {
-
 			const currentNode = flowNodes.find((node: any) => node.id === ids[1]);
 			if (currentNode) {
 				const nodeCopy = JSON.parse(JSON.stringify(currentNode));
 				nodeCopy.data.hidden = false;
-				flowNodes = [...flowNodes,nodeCopy]
-			} 
+				if (idx === selectedPathIds.length - 1) {
+					nodeCopy.data.selected = true;
 
-			
+				}
+				flowNodes = [...flowNodes, nodeCopy];
+			}
+		
+
 			flowEdges.forEach((edge: any) => {
-
-				if(edge.source === ids[1]) {
-					// const edgeCopy = JSON.parse(JSON.stringify(edge));
+				if (edge.id === ids[0]) {
+					edge.data.selected = true;
+				}
+				if (edge.source === ids[1]) {
 					edge.data.hidden = false;
 					edge.data.active = true;
-					// flowEdges = [...flowEdges,edgeCopy]
-				}
-				if(edge.id === ids[0]) {
-					edge.data.selected = true;
-
 				}
 			});
-
-
 		});
-	
-		setEdges((eds)=> [...flowEdges]);
-		setNodes((nds)=> [...flowNodes]);
-	
-		
-	}, [selectedPathIds,isLoading]);
 
-	useEffect(() => {	
+		setEdges((eds) => [...flowEdges]);
+		setNodes((nds) => [...flowNodes]);
+	}, [selectedPathIds, isLoading]);
+
+	useEffect(() => {
 		if (selectedPathIds.length === 0 || nodes.length === 0) return;
-		const currentNodeId = selectedPathIds.slice(-1)[0][1]
-		const currentNode = getNode(currentNodeId)
-		if(currentNode){
-			setCenter(currentNode.position.x + 100,  currentNode.position.y +100, {zoom: 1.5 , duration: 800});
-
-		}}, [nodes, edges])
+		const currentNodeId = selectedPathIds.slice(-1)[0][1];
+		const currentNode = getNode(currentNodeId);
+		if (currentNode) {
+			setCenter(currentNode.position.x + 100, currentNode.position.y + 100, { zoom: 1.5, duration: 800 });
+		}
+	}, [nodes, edges]);
 
 	// Updates nodes and edges when currentPath or currentNode changes
 
-	const onNodeClick = (el, node)=> {
-	
-		const newPathIds:PathIds[] = [];
+	const onNodeClick = (el, node) => {
+		const exist = selectedPathIds.find((ids: [null | number, number]) => ids[1] === node.id);
+		if (!exist) return;
+		const newPathIds: PathIds[] = [];
 		for (const ids of selectedPathIds) {
 			newPathIds.push(ids);
-			console.log(ids[1],node.id)
 			if (ids[1] === node.id) {
 				break;
 			}
 		}
-
 		dispatch(setSelectedPathIds(newPathIds));
-	}
+	};
 
-	const onEdgeClick = (el, edge)=> {
-		console.log(edge)
-	}
-	return (
+	const onEdgeClick = (el, edge) => {
+		if(edge.data.selected) return;
+		const newPathIds: PathIds[] = [];
+		for (const ids of selectedPathIds) {
+			newPathIds.push(ids);
+			if (ids[1] === edge.source) {
+				break;
+			}
+		}
+		newPathIds.push([edge.id, edge.target]);
+		dispatch(setSelectedPathIds(newPathIds));
 	
+	};
+	return (
 		<ReactFlow
 			nodes={nodes}
 			edges={edges}
@@ -262,6 +254,10 @@ const Flow = () => {
 			connectionLineType={ConnectionLineType.SmoothStep}
 			onNodeClick={onNodeClick}
 			onEdgeClick={onEdgeClick}
+			elementsSelectable={false}
+			panOnScroll={false}
+			edgesFocusable={false}
+			edgesUpdatable={false}
 			fitView>
 			{/* <MiniMap
 				pannable={true}
@@ -273,8 +269,6 @@ const Flow = () => {
 				gap={20}
 			/>
 		</ReactFlow>
-		
-
 	);
 };
 function WorkflowFlow() {

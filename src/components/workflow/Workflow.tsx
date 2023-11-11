@@ -9,9 +9,13 @@ import WorkflowFlow from './Flow';
 import useWorkflowSelected from '@/hooks/useWorkflowSelected';
 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
+import { useAppSelector } from '@/redux/hooks';
+import { selectWorkflowSelection } from '@/redux/features/workflowSelectionSlice';
 
 export default function WorkflowComponent() {
 	useWorkflowSelected();
+
+
 	return (
 		<div className='w-full h-full'>
 			<Splitter className="w-full h-full border-0 overflow-hidden">

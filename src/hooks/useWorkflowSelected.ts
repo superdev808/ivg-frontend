@@ -19,7 +19,7 @@ function useWorkflowSelected() {
   const {selectedId} = useSelector(selectWorkflows);
 
   useEffect(() => {
-    if (!isLoading) setLoading(true);
+    if (!isLoading) dispatch(setLoading(true));
     if (workflowsData.length === 0 || nodesData.length === 0 || edgesData.length === 0) {
       return;
     }
@@ -44,7 +44,7 @@ function useWorkflowSelected() {
     dispatch(setHeader(selectedWorkflow.value))
     dispatch(setSelectedPathIds([[null, "0"]]))
     dispatch(setSelectedData({nodes, edges})); 
-    if (isLoading) setLoading(false);
+    if (isLoading) dispatch(setLoading(false));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workflowsData, nodesData, edgesData]);
 

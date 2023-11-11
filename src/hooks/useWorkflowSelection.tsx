@@ -13,7 +13,7 @@ type MenuItem = {
 function useWorkflowSelection(params: string[]) {
 	const {  data: itemsData = [], error: itemsError } = useGetWorkflowMenuItemsQuery(null);
 	const {  data: questionsData = [], error: questionsError } = useGetWorkflowMenuQuestionsQuery(null);
-	console.log('test');
+
 	const router = useRouter();
 	
 	const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -45,7 +45,7 @@ function useWorkflowSelection(params: string[]) {
 		let currentItems = filterCurrentSelections(params);
 		let currentQuestion = filterCurrentQuestions(params);
 	
-		if (currentItems.length == 0 && !selectedWorkflow) {
+		if (currentItems.length == 0) {
 			currentItems = filterCurrentSelections([] as string[]);
 			currentQuestion = filterCurrentQuestions([] as string[]);
 			// router.push('/workflows', { scroll: false });

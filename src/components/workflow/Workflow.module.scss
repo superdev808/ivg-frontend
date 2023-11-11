@@ -19,3 +19,19 @@
     border-width: 2px;
   }
 }
+
+
+.edge:not(.selected):hover {
+  background-color: #126e62 !important;
+  color:white !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.node:not(.selected):hover {
+  // border-width: 2px !important;
+  background-color: #97c7ab !important;
+  // color: #83B899 !important;
+  cursor: pointer !important;
+}
+
