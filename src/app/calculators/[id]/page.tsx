@@ -32,18 +32,18 @@ const tabItems = [
         text: "Platform"
       },
       {
-        name: "Authentic/ Generic",
+        name: "Authentic or Generic",
         text: "Authentic or Generic"
       }
     ],
     output: [
       {
         name: "SCANBODY",
-        text: "Scanbody"
+        text: "Brand"
       },
       {
         name: "SCANBODY ITEM #",
-        text: "Scanbody Item #"
+        text: "Item #"
       },
       {
         name: "Link to Purchase",

@@ -14,39 +14,39 @@ interface DetailViewProps {
 }
 
 export default function DetailView(props: DetailViewProps) {
-  const [previewData, setPreviewData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+//   const [previewData, setPreviewData] = useState<any>(null);
+//   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!props.url) {
-        return;
-      }
-      try {
-        const response = await fetch(props.url);
-        const data = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(data, "text/html");
-        const title = doc.querySelector("title")?.textContent || "";
-        const description =
-          doc
-            .querySelector('meta[name="description"]')
-            ?.getAttribute("content") || "";
-        const image =
-          doc
-            .querySelector('meta[property="og:image"]')
-            ?.getAttribute("content") || "";
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       if (!props.url) {
+//         return;
+//       }
+//       try {
+//         const response = await fetch(props.url);
+//         const data = await response.text();
+//         const parser = new DOMParser();
+//         const doc = parser.parseFromString(data, "text/html");
+//         const title = doc.querySelector("title")?.textContent || "";
+//         const description =
+//           doc
+//             .querySelector('meta[name="description"]')
+//             ?.getAttribute("content") || "";
+//         const image =
+//           doc
+//             .querySelector('meta[property="og:image"]')
+//             ?.getAttribute("content") || "";
 
-        setPreviewData({ title, description, image });
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    };
+//         setPreviewData({ title, description, image });
+//         setLoading(false);
+//       } catch (error) {
+//         console.error(error);
+//         setLoading(false);
+//       }
+//     };
 
-    fetchData();
-  }, [props.url]);
+//     fetchData();
+//   }, [props.url]);
 
   return (
     <Card className="w-12 mt-4 py-2 border-round bg-white">
