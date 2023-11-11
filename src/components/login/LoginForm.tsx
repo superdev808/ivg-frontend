@@ -63,7 +63,7 @@ export const LoginForm = () => {
 		
 			setError('Success');
 			setLoading(false);
-			router.push( data.callback_url + '/workflows' );
+			router.push( '/workflows' );
 			window.location.reload();
 		} catch (error: any) {
 			setError(error?.message ?? '');
