@@ -10,6 +10,7 @@ import flowReducer from "./features/flowSlice";
 
 import calculatorReducer from "./features/calculatorSlice";
 import editorReducer from "./features/editorSlice";
+import authSliceReducer from "./features/authSlice";
 
 import { workflowsApi } from "./services/workflowsApi";
 import { workflowEdgesApi } from "./services/workflowEdgesApi";
@@ -28,6 +29,7 @@ export const store = configureStore({
     workflowSelection: workflowSelectionReducer,
     workflows: workflowsReducer,
     calculator: calculatorReducer,
+    auth: authSliceReducer,
     [workflowsApi.reducerPath]: workflowsApi.reducer,
     [workflowEdgesApi.reducerPath]: workflowEdgesApi.reducer,
     [workflowNodesApi.reducerPath]: workflowNodesApi.reducer,
