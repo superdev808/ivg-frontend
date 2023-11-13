@@ -49,6 +49,7 @@ const Navigation = () => {
 
   const rightNavLinks = [
     // {id: 'register', title: 'Register', link: '/signup', icon: PrimeIcons.USER},
+    {id: 'contact', title: 'Contact Us', link: '/contact', icon: PrimeIcons.PHONE, auth: true},
     {id: 'login', title: 'Login', link: '/login', icon: PrimeIcons.SIGN_IN,auth: !authenticated},
     {id: 'signout', title: 'Sign Out', onClick:onSignOut,  icon: PrimeIcons.SIGN_OUT, auth: authenticated}
   ]

@@ -62,7 +62,7 @@ export default function Index() {
           <h2 className={cx("landing-middle-description")}>
             With <b><u>Ivory Guide</u></b>, you gain easy and instantaneous access to
             trustworthy clinical and manufacturer recommendations, allowing you
-            to easily solve challenges and develop treatment plans while your
+            to easily troubleshoot cases and develop treatment plans while your
             patient is in the chair
           </h2>
         </div>
@@ -73,7 +73,7 @@ export default function Index() {
           <h2 className={cx("landing-middle-item")}>Workflows</h2>
           <h5 className={cx("mt-2 mb-0", "landing-middle-item-description")}>
             Our guides can walk you through seemingly complicated processes &
-            decisions & make you confident that you've chosen the right
+            decisions and make you confident that you've chosen the right
             treatment plan every time
           </h5>
         </div>
@@ -109,10 +109,7 @@ export default function Index() {
 						<Image src="/Practices.svg" height="110px" alt="practices" />
 					</div>
 					<h5 className={cx("landing-middle-item-description", "mt-6 px-2 text-sm md:text-xl font-light")}>
-						Our technology can uplevel your practice's level of patient care
-						while guiding you and your staff through complicated workflows,
-						material selection, and issue that -can arise while patients are in
-						chair.
+						Our technology can uplevel your practice's patient care while guiding you and your staff through complicated workflows, material selection, and issues that can arise while patients are in chair.
 					</h5>
 				</div>
 				<div className={cx("landing-middle-item", "col-12 md:col-3 px-4 flex flex-column align-items-center")}>
@@ -138,7 +135,7 @@ export default function Index() {
 						Our vast database of information and advanced treatment planning
 						tools provide future clinicians, assistants, and technicans with an
 						additional resource to leverage while they are learning the
-						fundamentals of dentisty.
+						fundamentals of dentistry.
 					</h5>
 				</div>
 			</div>
@@ -167,8 +164,11 @@ export default function Index() {
 		</div>
 	  </div>
 	  <div className={"grid"}>
+	  	<div className="col-10 col-offset-1 md:col-4 md:col-offset-0 flex flex-column align-items-center">
+			<p className="text-center md:text-left">@ 2023 Ivory Guide, LLC and its subsidiaries. All rights reserved.</p>
+		</div>
 	  	<div className="col-10 col-offset-1 md:col-4 md:col-offset-4 flex flex-column align-items-center">
-			<p className="text-center">@ 2023 Ivory Guide, LLC and its subsidiaries. All rights reserved.</p>
+			<p className="text-center md:text-right">Report feedback/mistakes by emailing feedback@ivoryguide.com.</p>
 		</div>
 	  </div>
     </>

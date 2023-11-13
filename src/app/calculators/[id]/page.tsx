@@ -13,7 +13,7 @@ const tabItems = [
     type: "Scanbodies",
     label: "scanbody",
     description:
-      "This calculator will provide the correct scanbody for you to use based on the implant (manufacturer, system, size) that was placed.",
+      "Enter your implant information below to determine compatible authentic and generic scanbodies.",
     input: [
       {
         name: "IMPLANT BRAND",
