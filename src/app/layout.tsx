@@ -27,16 +27,16 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 		<html>
 			<head></head>
 			<body>
-					<Providers>
-				<AuthProvider accessToken={accessToken}>
+				<Providers>
+					<AuthProvider accessToken={accessToken}>
 						<Navigation />
 						<div
-							className="container z-1"
+							className="z-1 p-0"
 							style={{ overflowX: 'hidden' }}>
 							{children}
 						</div>
-				</AuthProvider>
-					</Providers>
+					</AuthProvider>
+				</Providers>
 			</body>
 		</html>
 	);
