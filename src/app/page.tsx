@@ -9,7 +9,7 @@ let cx = classNames.bind(styles);
 export default function Index() {
   return (
     <>
-      <div className={cx("grid md:mt-2", "landing-top")}>
+      <div className={cx("grid md:mt-0 md:pt-6", "landing-top")}>
         <div className="col-2 my-4 md:my-8 py-6 md:py-8 px-4 md:px-6 flex flex-column">
           <Button icon="pi pi-linkedin" rounded outlined aria-label="Filter" />
           <Button
@@ -59,8 +59,8 @@ export default function Index() {
           <h1 className={cx("landing-middle-title", "my-2 text-3xl md:text-6xl")}>Our Platform</h1>
         </div>
         <div className="col-12 md:col-6 md:col-offset-3 mt-4 px-6 flex justify-content-center">
-          <h2 className={cx("landing-middle-description", "text-lg md:text-2xl")}>
-            With <b>Ivory Guide</b>, you gain easy and instantaneous access to
+          <h2 className={cx("landing-middle-description")}>
+            With <b><u>Ivory Guide</u></b>, you gain easy and instantaneous access to
             trustworthy clinical and manufacturer recommendations, allowing you
             to easily solve challenges and develop treatment plans while your
             patient is in the chair
@@ -88,7 +88,7 @@ export default function Index() {
         </div>
         <div className="col-12 md:col-3 px-6 py-4 flex flex-column align-items-center">
           <Image src="/Calculator.svg" alt="calculator" />
-          <h2 className={cx("landing-middle-item")}>Calculator</h2>
+          <h2 className={cx("landing-middle-item", "pt-1")}>Calculator</h2>
           <h5 className={cx("mt-2", "landing-middle-item-description")}>
             Utilize simple input-output guidance to help make decisions around
             topics like what materials to use and where to purchase them.
@@ -147,7 +147,7 @@ export default function Index() {
 	  <div className={cx("grid my-6 py-6", "landing-missing-section")}>
 		<div className="col-12 flex flex-column align-items-center">
 			<p className={cx("landing-missing-section-title", "my-2 px-2 text-xl md:text-6xl")}>What are we missing?</p>
-			<p className={cx("landing-missing-section-description", "my-1 px-2 text-lg md:text-xl text-center")}>Request a Workflow, Calculator, or additional feature <b>here</b>.</p>
+			<p className={cx("landing-missing-section-description", "my-1 px-2 text-lg md:text-xl text-center")}>Request a Workflow, Calculator, or additional feature <b><u>here</u></b>.</p>
 		</div>
 	  </div>
 	  <div className="grid">
