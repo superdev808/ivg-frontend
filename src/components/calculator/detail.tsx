@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "primereact/card";
-import { Image } from "primereact/image";
+import { isUrl } from "@/helpers/util";
 
 interface DetailViewOption {
   label: string;
@@ -29,7 +29,7 @@ export default function DetailView(props: DetailViewProps) {
             <div className="col-8">{props.text.value}</div>
           </>
         )}
-        {props.url && (
+        {props.url && isUrl(props.url) && (
           <>
             <div className="col-3 col-offset-1">Link To Purchase</div>
             <div className="col-8">
