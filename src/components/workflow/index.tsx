@@ -52,7 +52,7 @@ const WorkflowsComponent = (params: { flowIds: string[] }) => {
 	return (
 		<>
 	
-			{renderComponent};
+			{renderComponent}
 		</>
 	);
 };

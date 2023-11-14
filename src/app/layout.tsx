@@ -1,4 +1,3 @@
-
 import React, { PropsWithChildren } from 'react';
 import Navigation from '@/components/navigation';
 import './globals.scss';
@@ -9,18 +8,16 @@ import 'primereact/resources/primereact.min.css'; //core css
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
-
 import AuthProvider from './provider';
 import createClient from '@/lib/supabase-server';
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export default async function RootLayout({ children }: PropsWithChildren) {
-	
 	const supabase = createClient();
 
 	const {
 		data: { session },
-	} = await supabase.auth.getSession();;
+	} = await supabase.auth.getSession();
 	const accessToken = session?.access_token || null;
 
 	return (
@@ -31,8 +28,8 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 					<AuthProvider accessToken={accessToken}>
 						<Navigation />
 						<div
-							className="z-1 p-0"
-							style={{ overflowX: 'hidden' }}>
+							className="z-1  h-full"
+							style={{ paddingTop: '5rem' }}>
 							{children}
 						</div>
 					</AuthProvider>
