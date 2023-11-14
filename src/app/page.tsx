@@ -9,7 +9,7 @@ let cx = classNames.bind(styles);
 export default function Index() {
   return (
     <>
-      <div className={cx("grid md:mt-0 md:pt-6", "landing-top")}>
+      <div className={cx("grid -mt-8 md:pt-6", "landing-top")}>
         <div className="col-2 my-4 md:my-8 py-6 md:py-8 px-4 md:px-6 flex flex-column">
           <Button icon="pi pi-linkedin" rounded outlined aria-label="Filter" />
           <Button
@@ -149,6 +149,7 @@ export default function Index() {
 	  </div>
 	  <div className="grid">
 		<div className={cx("landing-contact-container", "col-10 col-offset-1 pb-4 flex flex-column md:flex-row align-items-center justify-content-between border-bottom-1")}>
+    >
 			<Image
 				src="/Ivory-Guide-Logo-Stack.svg"
 				alt="Ivory Guid Logo Stack"
