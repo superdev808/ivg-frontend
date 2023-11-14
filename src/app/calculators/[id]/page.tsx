@@ -70,7 +70,7 @@ const tabItems = [
   {
     type: "Crown Materials",
     label: "crownMaterials",
-    description: "Enter your implant information below to determine compatible crown materials",
+    description: "Enter your implant information below to determine compatible crown materials.",
     input: [
       {
         name: "Fixed / Removable",
