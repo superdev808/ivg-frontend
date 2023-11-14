@@ -3,41 +3,40 @@ import { Card } from "primereact/card";
 import { isUrl } from "@/helpers/util";
 
 interface DetailViewOption {
-  label: string;
-  value: string;
+  name: string;
+  text: string;
 }
 
 interface DetailViewProps {
-  url?: string;
-  name?: DetailViewOption;
-  text?: DetailViewOption;
+  fields?: Array<DetailViewOption>;
+  data?: any;
 }
 
 export default function DetailView(props: DetailViewProps) {
+  const { fields, data } = props;
   return (
     <Card className="w-12 mt-4 py-2 border-round bg-white">
-      <div className="grid">
-        {props.name && (
-          <>
-            <div className="col-3 col-offset-1">{props.name.label}</div>
-            <div className="col-8">{props.name.value}</div>
-          </>
-        )}
-        {props.text && (
-          <>
-            <div className="col-3 col-offset-1">{props.text.label}</div>
-            <div className="col-8">{props.text.value}</div>
-          </>
-        )}
-        {props.url && isUrl(props.url) && (
-          <>
-            <div className="col-3 col-offset-1">Link To Purchase</div>
-            <div className="col-8">
-              <a href={props.url} target="_blank" rel="noopener noreferrer" style={{ overflowWrap: "break-word" }}>
-                {props.url}
-              </a>
+      <div>
+        {fields?.map((field) =>
+          data[field.name] ? (
+            <div key={field.name}  className="grid">
+              <div className="col-3 col-offset-1">{field.text}</div>
+              <div className="col-8">
+                {isUrl(data[field.name]) ? (
+                  <a
+                    href={data[field.name]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ overflowWrap: "break-word" }}
+                  >
+                    {data[field.name]}
+                  </a>
+                ) : (
+                  data[field.name]
+                )}
+              </div>
             </div>
-          </>
+          ) : null
         )}
       </div>
     </Card>
