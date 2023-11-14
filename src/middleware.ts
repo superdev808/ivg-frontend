@@ -3,7 +3,6 @@ import { redirect } from 'next/navigation';
 import { NextResponse } from 'next/server';
 
 import type { NextRequest } from 'next/server';
-import path from 'path';
 
 const public_routes = ['/login'];
 function isPublicRoute(path: string) {

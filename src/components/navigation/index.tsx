@@ -7,13 +7,13 @@ import { PrimeIcons } from 'primereact/api';
 import styles from "./Navigation.module.scss";
 import classNames from "classnames/bind";
 
-import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation';
 import { useAppSelector } from "@/redux/hooks";
 const cx = classNames.bind(styles);
 
 const Navigation = () => {
   const {authenticated,session} = useAppSelector((state) => state.auth);
-  const router = useRouter()
+  const pathname = usePathname()
 
   // toggle sidebar
   const [isOpen, setIsOpen] = useState(false);
@@ -68,7 +68,11 @@ const Navigation = () => {
   useCheckMobileScreen(closeMenu);
 
   return (
-    <div ref={boxRef} className={cx("absolute z-2 w-full py-2", "nav-header")}>
+    <div ref={boxRef} className={cx("z-2 w-full py-2 absolute", "nav-header")} style={{
+      background: pathname === '/' ? 'transparent' : '#023932 ',
+
+
+    }}>
       <Navbar isOpen={isOpen} toggle={toggle} navLinks={navLinks} rightNavLinks={rightNavLinks} />
     </div>
   );

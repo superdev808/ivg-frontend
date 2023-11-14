@@ -111,7 +111,7 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 							width="100%"
 							height="5rem"
 							className="my-3"></Skeleton>
-					);
+					)
 				})}
 			</div>
 		);
@@ -161,9 +161,10 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 
 	return (
 		<div
-			className={'flex lg:h-full justify-content-center align-items-center  lg:py-5'}
-			style={{ minHeight: '50rem' }}>
-			<div className="flex flex-column w-full xl:w-7 h-full  shadow-1 bg-white">
+			className={'flex lg:h-full justify-content-center align-items-center '}
+			// 
+			>
+			<div className="flex flex-column w-full xl:w-7 h-full  shadow-1 bg-white" style={{ maxHeight: '45rem' }}>
 				<div className="flex flex-column mx-5 my-0">
 					<div className="flex align-items-center mt-4">
                     {isLoading ? (
@@ -226,5 +227,5 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 				</div>
 			</div>
 		</div>
-	);
+	)
 }
