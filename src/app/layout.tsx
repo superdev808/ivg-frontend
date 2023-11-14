@@ -1,5 +1,6 @@
+'use client';
 
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import Navigation from '@/components/navigation';
 import './globals.scss';
 import { Providers } from '@/redux/provider';
@@ -9,34 +10,51 @@ import 'primereact/resources/primereact.min.css'; //core css
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
-
 import AuthProvider from './provider';
-import createClient from '@/lib/supabase-server';
-export const dynamic = "force-dynamic";
 
-export default async function RootLayout({ children }: PropsWithChildren) {
-	
-	const supabase = createClient();
+import { usePathname } from 'next/navigation';
+export const dynamic = 'force-dynamic';
 
-	const {
-		data: { session },
-	} = await supabase.auth.getSession();;
-	const accessToken = session?.access_token || null;
+export default function RootLayout({ children }: PropsWithChildren) {
+	const [accessToken, setAccessToken] = React.useState(null);
+	const activePath = usePathname();
+
+	useEffect(() => {
+		async function getSession() {
+			try {
+				const response = await fetch('/api/auth/session', {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				});
+				const data = await response.json();
+				if (!response.ok) {
+					throw new Error(data.error);
+				}
+				setAccessToken(data.session.accessToken || null);
+			} catch (error: any) {
+				return null;
+			}
+		}
+		getSession();
+	}, []);
 
 	return (
 		<html>
 			<head></head>
 			<body>
-					<Providers>
-				<AuthProvider accessToken={accessToken}>
-						<Navigation />
+				<Providers>
+					<AuthProvider accessToken={accessToken}>
+						{activePath !== '/login/' ? <Navigation /> : null}
+
 						<div
 							className="container z-1"
 							style={{ overflowX: 'hidden' }}>
 							{children}
 						</div>
-				</AuthProvider>
-					</Providers>
+					</AuthProvider>
+				</Providers>
 			</body>
 		</html>
 	);

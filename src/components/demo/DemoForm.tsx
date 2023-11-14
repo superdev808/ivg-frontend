@@ -17,7 +17,7 @@ type FormValues = {
 	email: string;
 	password: string;
 };
-export const LoginForm = () => {
+export const DemoForm = () => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 	const [rememberMe, setRememberMe] = useState<boolean>(false);
