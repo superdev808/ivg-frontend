@@ -87,16 +87,12 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
               />
             ))}
           </div>
-          {itemInfo.length > 0 && <h2>Compatible Scanbodies</h2>}
+          {itemInfo.length > 0 && <h2>Compatible {decodeURI(props.option)}</h2>}
           {itemInfo.map((item, index) => (
             <DetailView
               key={`result-item-${index}`}
-              url={item["Link to Purchase"]}
-              name={{ label: "Brand", value: item["SCANBODY"] }}
-              text={{
-                label: "Item #",
-                value: item["SCANBODY ITEM #"],
-              }}
+              data={item}
+              fields={output}
             />
           ))}
         </Card>
