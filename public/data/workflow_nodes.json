@@ -224,7 +224,7 @@
     {
         "id": 40,
         "flowId": 2,
-        "value": "Follow the official scan strategy for quadrant scanning. When possible, include at least 3 teeth on either side of the implant (which obviously will not be possible for some posterior cases). When in doubt, feel free to perform a full arch scan.",
+        "value": "Follow the official scan strategy for  quadrant scanning. When possible, include at least 3 teeth on either side of the implant (which obviously will not be possible for some posterior cases). When in doubt, feel free to perform a full arch scan.",
         "type": 4
     },
     {
@@ -7432,254 +7432,254 @@
     {
         "id": 2644,
         "flowId": 2634,
-        "value": "The recommended scanning path consists of 3 sweeps - occlusal, lingual and buccal - to ensure good data coverage of all surfaces.",
+        "value": "When the tooth surface is scanned move the tip a bit forwards and then roll the tip slowly over the occlusal surface to the buccal side and complete the buccal swipe.",
         "type": 4
     },
     {
         "id": 2645,
         "flowId": 2634,
-        "value": "Lower arch Scanning Strategy",
-        "type": 3
-    },
-    {
-        "id": 2646,
-        "flowId": 2634,
-        "value": "When the tooth surface is scanned move the tip a bit forwards and then roll the tip slowly over the occlusal surface to the buccal side and complete the buccal swipe.",
-        "type": 4
-    },
-    {
-        "id": 2647,
-        "flowId": 2634,
         "value": "Slowly roll the tip lingual and proceed scanning the lingual surface, following the arch till you reach the last tooth on the opposite side.",
         "type": 4
     },
     {
-        "id": 2648,
+        "id": 2646,
         "flowId": 2634,
         "value": "On the scanning page, choose the Upper arch.",
         "type": 0
     },
     {
-        "id": 2649,
+        "id": 2647,
         "flowId": 2634,
         "value": "Scan occlusal surfaces and incisal edges.",
         "type": 0
     },
     {
-        "id": 2650,
+        "id": 2648,
         "flowId": 2634,
         "value": "Scan the buccal surface",
         "type": 0
     },
     {
-        "id": 2651,
+        "id": 2649,
         "flowId": 2634,
         "value": "Scan the lingual surface",
         "type": 0
     },
     {
-        "id": 2652,
+        "id": 2650,
         "flowId": 2634,
         "value": "When the last tooth surface in the opposing side is scanned, shift the tip forwards and roll over the occlusal surface to the palatal side to complete the palatal swipe.",
         "type": 4
     },
     {
-        "id": 2653,
+        "id": 2651,
         "flowId": 2634,
         "value": "Scan the palate",
         "type": 0
     },
     {
-        "id": 2654,
+        "id": 2652,
         "flowId": 2634,
         "value": "Slowly roll the tip buccally and scan the buccal surface following the arch to reach the last tooth on the opposing side.",
         "type": 4
     },
     {
-        "id": 2655,
+        "id": 2653,
         "flowId": 2634,
         "value": "Place the scanner tip above the back molars and start scanning the occlusal surface. Move the tip forwards following the arch, and roll the tip bucally when it reaches the canine area. \nSlowly wiggle the scanner when passing the incisors, making sure to capture all incisal edges and a bit of both the buccal and the palatal surface. \nOnce in the area of the other canine, proceed with scanning of the occlusal surfaces until the back teeth.",
         "type": 4
     },
     {
-        "id": 2656,
-        "flowId": 2634,
-        "value": "The recommended scanning path consists of 3 swipes - occlusal, buccal and palatal - to ensure good data coverage of all surfaces.",
-        "type": 4
-    },
-    {
-        "id": 2657,
+        "id": 2654,
         "flowId": 2634,
         "value": "To include the palate: Move the tip back following the palatal side. Proceed from the incisors swiping the tip across the palate in a distal direction.",
         "type": 4
     },
     {
-        "id": 2658,
+        "id": 2655,
         "flowId": 2634,
         "value": "Send the scans to the lab",
         "type": 0
     },
     {
-        "id": 2659,
+        "id": 2656,
         "flowId": 2634,
         "value": "Proceed to the opposing side of the jaw and follow the same steps.",
         "type": 0
     },
     {
-        "id": 2660,
+        "id": 2657,
         "flowId": 2634,
         "value": "Insert the scanner tip in an open mouth buccally of the molar area. Ask the patient to bite in the desired occlusion.",
         "type": 0
     },
     {
-        "id": 2661,
+        "id": 2658,
         "flowId": 2634,
         "value": "Bite Scan",
         "type": 3
     },
     {
-        "id": 2662,
+        "id": 2659,
         "flowId": 2634,
         "value": "Is this an individual step? Or is this just a note.",
         "type": 4
     },
     {
-        "id": 2663,
-        "flowId": 2634,
-        "value": "Lower arch scanning strategy (2)",
-        "type": 3
-    },
-    {
-        "id": 2664,
+        "id": 2660,
         "flowId": 2634,
         "value": "Open Interproximal Areas, which are especially important in areas where interproximal reduction could be needed.",
         "type": 4
     },
     {
-        "id": 2665,
+        "id": 2661,
         "flowId": 2634,
         "value": "Interproximal Areas",
         "type": 2
     },
     {
-        "id": 2666,
+        "id": 2662,
         "flowId": 2634,
         "value": "Capture a minimum of 2-4 mm of gingiva from the margin",
         "type": 4
     },
     {
-        "id": 2667,
+        "id": 2663,
         "flowId": 2634,
-        "value": "2-4mm of Gingiva ",
+        "value": "2-4mm of Gingiva",
         "type": 2
     },
     {
-        "id": 2668,
-        "flowId": 2634,
-        "value": "Even if the treatment does NOT include the molars, the aligners will be made to cover parts of the back molars.",
-        "type": 4
-    },
-    {
-        "id": 2669,
+        "id": 2664,
         "flowId": 2634,
         "value": "Move the scanner tip distally to capture the back teeth.\u2028",
         "type": 0
     },
     {
-        "id": 2670,
+        "id": 2665,
         "flowId": 2634,
         "value": "Keep scanning until the scans snap into position and the jaws are aligned on to the blue bite.",
         "type": 0
     },
     {
-        "id": 2671,
+        "id": 2666,
         "flowId": 2634,
         "value": "Then move the tip mesial following the arch capturing both upper and lower teeth by moving the tip gently up and down. \u2028",
         "type": 0
     },
     {
-        "id": 2672,
+        "id": 2667,
         "flowId": 2634,
         "value": "What intraoral scanner are you using?",
         "type": 0
     },
     {
-        "id": 2673,
+        "id": 2668,
         "flowId": 2634,
         "value": "What product are you scanning for?",
         "type": 0
     },
     {
-        "id": 2674,
+        "id": 2669,
         "flowId": 2634,
         "start": true,
         "value": "Do you need guidance on case setup or scanning instructions?",
         "type": 0
     },
     {
-        "id": 2675,
+        "id": 2670,
         "flowId": 2634,
         "value": "Scan Strategy",
         "type": 0
     },
     {
-        "id": 2676,
+        "id": 2671,
         "flowId": 2634,
         "value": "It is recommended to scan the lower arch, then the upper arch, then the occlusion.",
         "type": 4
     },
     {
-        "id": 2677,
+        "id": 2672,
         "flowId": 2634,
         "value": "Trios has not provided case setup instructions at this time. Click next to continue to scanning instructions",
         "type": 0
     },
     {
-        "id": 2678,
+        "id": 2673,
         "flowId": 2634,
         "value": "Upper arch Scanning Strategy",
         "type": 3
     },
     {
-        "id": 2679,
+        "id": 2674,
         "flowId": 2634,
         "value": "Press Next or select the scan step on the workflow bar at the top of the page. ",
         "type": 0
     },
     {
-        "id": 2680,
+        "id": 2675,
         "flowId": 2634,
         "value": "Incisal Edges",
         "type": 2
     },
     {
-        "id": 2681,
+        "id": 2676,
         "flowId": 2634,
         "value": "Upper arch scanning strategy (2)",
         "type": 3
     },
     {
-        "id": 2682,
+        "id": 2677,
         "flowId": 2634,
         "value": "Incisal edges. Double check that there aren't stitching issues.",
         "type": 4
     },
     {
-        "id": 2683,
+        "id": 2678,
         "flowId": 2634,
-        "value": "Capture the back teeth ",
-        "type": 2
+        "value": "The scan should cover at least 3-4 teeth for perfect alignment even if the scans snap together earlier.",
+        "type": 4
     },
     {
-        "id": 2684,
+        "id": 2679,
         "flowId": 2634,
         "value": "Capture the back molars",
         "type": 4
     },
     {
+        "id": 2680,
+        "flowId": 2634,
+        "value": "Even if the treatment does NOT include the molars, the aligners will be made to cover parts of the back molars.",
+        "type": 4
+    },
+    {
+        "id": 2681,
+        "flowId": 2634,
+        "value": "Capture the back teeth",
+        "type": 2
+    },
+    {
+        "id": 2682,
+        "flowId": 2634,
+        "value": "The recommended scanning path consists of 3 sweeps - occlusal, lingual and buccal - to ensure good data coverage of all surfaces.",
+        "type": 4
+    },
+    {
+        "id": 2683,
+        "flowId": 2634,
+        "value": "Lower arch Scanning Strategy",
+        "type": 3
+    },
+    {
+        "id": 2684,
+        "flowId": 2634,
+        "value": "Lower arch scanning strategy (2)",
+        "type": 3
+    },
+    {
         "id": 2685,
         "flowId": 2634,
-        "value": "The scan should cover at least 3-4 teeth for perfect alignment even if the scans snap together earlier.",
+        "value": "The recommended scanning path consists of 3 swipes - occlusal, buccal and palatal - to ensure good data coverage of all surfaces.",
         "type": 4
     },
     {
