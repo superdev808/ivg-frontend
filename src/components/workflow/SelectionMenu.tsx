@@ -164,7 +164,7 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 			className={'flex lg:h-full justify-content-center align-items-center '}
 			// 
 			>
-			<div className="flex flex-column w-full xl:w-7 h-full  shadow-1 bg-white" style={{ maxHeight: '45rem' }}>
+			<div className="flex flex-column w-full xl:w-7 h-full  shadow-1 bg-white" style={{ maxHeight: '40rem' }}>
 				<div className="flex flex-column mx-5 my-0">
 					<div className="flex align-items-center mt-4">
                     {isLoading ? (

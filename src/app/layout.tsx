@@ -13,6 +13,7 @@ import 'primeflex/primeflex.css';
 import AuthProvider from './provider';
 
 import { usePathname } from 'next/navigation';
+import Footer from '@/components/footer';
 export const dynamic = 'force-dynamic';
 
 export default function RootLayout({ children }: PropsWithChildren) {
@@ -46,13 +47,21 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			<body>
 				<Providers>
 					<AuthProvider accessToken={accessToken}>
-						{activePath !== '/login/' ? <Navigation /> : null}
 
+						{activePath !== '/login/' ? <Navigation /> : null}
 						<div
-							className="z-1  h-full"
-							style={{ paddingTop: '5rem' }}>
+							className={"z-1   w-full  -mb-4"}
+							style={{ paddingTop: '5rem',height: '95%'}}>
 							{children}
+							
+							
 						</div>
+						<div className='fixed w-full'>
+
+							{activePath !== '/' ?<Footer /> : null}
+
+						</div>
+						
 					</AuthProvider>
 				</Providers>
 			</body>

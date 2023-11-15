@@ -17,7 +17,7 @@ export default function WorkflowComponent() {
 
 
 	return (
-		<div className='w-full h-full'>
+		<div className='w-full ' style={{'height': '95%'}}>
 			<Splitter className="w-full h-full border-0 overflow-hidden">
 				<SplitterPanel size={35} minSize={20} className='h-full'>
 					<WorkflowText />
