@@ -100,7 +100,7 @@ export function unpackNodesEdges(nestedNodes) {
 						source: String(newNode.id),
 						target: String(child.id),
 						type: 'custom',
-						animated: true,
+						animated: false,
 					};
 
 					newEdges = [...newEdges, newEdge];
