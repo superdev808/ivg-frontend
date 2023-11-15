@@ -21,7 +21,19 @@ interface EdgeData {
 
 interface Node {
 	id: string;
-	data: { value: string; refId: number; start: boolean; end: boolean; selected: boolean; hidden: boolean; images: []; videos: []; texts: []; type: number; flowId: number};
+	data: {
+		value: string;
+		refId: number;
+		start: boolean;
+		end: boolean;
+		selected: boolean;
+		hidden: boolean;
+		images: [];
+		videos: [];
+		texts: [];
+		type: number;
+		flowId: number;
+	};
 	position: { x: number; y: number };
 	targetPosition: 'top' | 'bottom';
 	sourcePosition: 'top' | 'bottom';
@@ -34,12 +46,11 @@ interface Node {
 
 interface Edge {
 	id: string;
-	data: { value: string; refId: number, hidden: boolean };
+	data: { value: string; refId: number; hidden: boolean };
 	source: string;
 	target: string;
 	type: string; // replace with your edge type
 	animated: boolean;
-	
 }
 
 export function unpackNodesEdges(nestedNodes) {
@@ -47,7 +58,7 @@ export function unpackNodesEdges(nestedNodes) {
 	function unpack(node: NodeData) {
 		let newNodes: Node[] | any = [];
 		let newEdges: Edge[] | any = [];
-	
+
 		const newNode = {
 			id: String(nodeId),
 			data: {
@@ -61,7 +72,7 @@ export function unpackNodesEdges(nestedNodes) {
 				videos: node.videos,
 				texts: node.texts,
 				type: node.type,
-				flowId: node.flowId
+				flowId: node.flowId,
 			},
 			width: 200,
 			height: 100,
@@ -70,11 +81,12 @@ export function unpackNodesEdges(nestedNodes) {
 			position: { x: 0, y: 0 },
 			type: 'custom',
 			draggable: false,
-			
 		};
 		nodeId++;
 
 		if (node.children && node.children.length > 0) {
+
+
 			for (let i = 0; i <= node.children.length - 1; i++) {
 				const ungrouped: { newNodes: Node[]; newEdges: Edge[] } = unpack(node.children[i]);
 				const children = ungrouped.newNodes;
@@ -88,12 +100,12 @@ export function unpackNodesEdges(nestedNodes) {
 						source: String(newNode.id),
 						target: String(child.id),
 						type: 'custom',
-						animated: true
-					
+						animated: true,
 					};
 
 					newEdges = [...newEdges, newEdge];
 				}
+
 				newEdges = [...newEdges, ...ungrouped.newEdges];
 			}
 		} else {
