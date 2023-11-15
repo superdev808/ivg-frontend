@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import classNames from "classnames/bind";
 import styles from "./page.module.scss";
+import Footer from "@/components/footer";
 let cx = classNames.bind(styles);
 
 export default function Index() {
@@ -163,14 +164,7 @@ export default function Index() {
 			<Button outlined className={cx("landing-contact-section-contact-us", "px-5 py-3")}>Contact Us</Button>
 		</div>
 	  </div>
-	  <div className={"grid"}>
-	  	<div className="col-10 col-offset-1 md:col-4 md:col-offset-0 flex flex-column align-items-center">
-			<p className="text-center md:text-left">@ 2023 Ivory Guide, LLC and its subsidiaries. All rights reserved.</p>
-		</div>
-	  	<div className="col-10 col-offset-1 md:col-4 md:col-offset-4 flex flex-column align-items-center">
-			<p className="text-center md:text-right">Report feedback/mistakes by emailing feedback@ivoryguide.com.</p>
-		</div>
-	  </div>
+    <Footer />
     </>
   );
 }
