@@ -18,6 +18,7 @@ export default function CalculatorsPage() {
     { label: "Scanbodies", value: 0 },
     { label: "Implant Drivers", value: 1 },
     { label: "Implant Screws", value: 2 },
+    { label: "Crown Materials", value: 2 },
   ];
 
   return (

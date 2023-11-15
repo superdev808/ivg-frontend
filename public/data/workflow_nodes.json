@@ -152,7 +152,7 @@
     {
         "id": 28,
         "flowId": 2,
-        "value": "Follow the official scan strategy for quadrant scanning.When possible, include at least 3 teeth on either side of the implant (which obviously will not be possible for some posterior cases). When in doubt, feel free to perform a full arch scan.",
+        "value": "Follow the official scan strategy for quadrant scanning. When possible, include at least 3 teeth on either side of the implant (which obviously will not be possible for some posterior cases). When in doubt, feel free to perform a full arch scan.",
         "type": 4
     },
     {
@@ -4602,7 +4602,7 @@
     {
         "id": 1576,
         "flowId": 1530,
-        "value": "General Tips Before Scanning:\u20281. Camera grip: Hold the camera using a pen or pencil grip, resting the black area on the fleshy pad between your thumb and fingers. Change the lens direction by rolling the sleeve or flipping the camera over.\n2. Viewing during scanning: As a beginner, it's more natural to look in the mouth while scanning. However, as you gain experience, you may prefer looking at the screen, especially for capturing missing data.\n3. Scanning enough: The goal is to capture all critical areas with minimal duplication. Overscanning slows down processes and increases file size. Avoid rescanning areas already captured.\n4. Managing scan data: Take a simple framework scan and then stop. Zoom in to identify holes in critical areas and fill those in. Holes in non-critical areas are acceptable.",
+        "value": "General Tips Before Scanning:\u2028\n1. Camera grip: Hold the camera using a pen or pencil grip, resting the black area on the fleshy pad between your thumb and fingers. Change the lens direction by rolling the sleeve or flipping the camera over.\n2. Viewing during scanning: As a beginner, it's more natural to look in the mouth while scanning. However, as you gain experience, you may prefer looking at the screen, especially for capturing missing data.\n3. Scanning enough: The goal is to capture all critical areas with minimal duplication. Overscanning slows down processes and increases file size. Avoid rescanning areas already captured.\n4. Managing scan data: Take a simple framework scan and then stop. Zoom in to identify holes in critical areas and fill those in. Holes in non-critical areas are acceptable.",
         "type": 4
     },
     {
@@ -5967,13 +5967,13 @@
     {
         "id": 2095,
         "flowId": 2068,
-        "value": "Upper Jaw icon",
+        "value": "upper jaw icon",
         "type": 2
     },
     {
         "id": 2096,
         "flowId": 2068,
-        "value": "Buccal icon",
+        "value": "Buccal Icon",
         "type": 2
     },
     {
@@ -6009,7 +6009,7 @@
     {
         "id": 2102,
         "flowId": 2068,
-        "value": "General Tips Before Scanning:\u20281. Camera grip: Hold the camera using a pen or pencil grip, resting the black area on the fleshy pad between your thumb and fingers. Change the lens direction by rolling the sleeve or flipping the camera over.\n2. Viewing during scanning: As a beginner, it's more natural to look in the mouth while scanning. However, as you gain experience, you may prefer looking at the screen, especially for capturing missing data.\n3. Scanning enough: The goal is to capture all critical areas with minimal duplication. Overscanning slows down processes and increases file size. Avoid rescanning areas already captured.\n4. Managing scan data: Take a simple framework scan and then stop. Zoom in to identify holes in critical areas and fill those in. Holes in non-critical areas are acceptable.\u20285. Quadrant or full-arch scan: Decide if you need a quadrant (to the midline) for single restorations or a full-arch scan for bridges, clear aligners, splints, and digital denture preliminary scans.",
+        "value": "General Tips Before Scanning:\u2028\u2028\n1. Camera grip: Hold the camera using a pen or pencil grip, resting the black area on the fleshy pad between your thumb and fingers. Change the lens direction by rolling the sleeve or flipping the camera over.\u2028\n2. Viewing during scanning: As a beginner, it's more natural to look in the mouth while scanning. However, as you gain experience, you may prefer looking at the screen, especially for capturing missing data.\u2028\n3. Scanning enough: The goal is to capture all critical areas with minimal duplication. Overscanning slows down processes and increases file size. Avoid rescanning areas already captured.\u2028\n4. Managing scan data: Take a simple framework scan and then stop. Zoom in to identify holes in critical areas and fill those in. Holes in non-critical areas are acceptable.\u2028\u2028\n5. Quadrant or full-arch scan: Decide if you need a quadrant (to the midline) for single restorations or a full-arch scan for bridges, clear aligners, splints, and digital denture preliminary scans.",
         "type": 4
     },
     {
@@ -6021,13 +6021,13 @@
     {
         "id": 2104,
         "flowId": 2068,
-        "value": "Catalogs",
-        "type": 2
+        "value": "It is important to be quick in scanning to avoid tissue collapse.",
+        "type": 4
     },
     {
         "id": 2105,
         "flowId": 2068,
-        "value": "It is important to be quick in scanning to avoid tissue collapse.",
+        "value": "Ensure all teeth are captured, even if they are malpositioned.",
         "type": 4
     },
     {
@@ -6039,470 +6039,470 @@
     {
         "id": 2107,
         "flowId": 2068,
-        "value": "Ensure all teeth are captured, even if they are malpositioned.",
-        "type": 4
-    },
-    {
-        "id": 2108,
-        "flowId": 2068,
         "value": "Scan the bite registration on the patient's right side then take the camera out.",
         "type": 0
     },
     {
-        "id": 2109,
+        "id": 2108,
         "flowId": 2068,
         "value": "Right Side",
         "type": 2
     },
     {
-        "id": 2110,
+        "id": 2109,
         "flowId": 2068,
         "value": "Left Side",
         "type": 2
     },
     {
-        "id": 2111,
+        "id": 2110,
         "flowId": 2068,
         "value": "Open the Connect software and click on \"Add New Patient\".",
         "type": 0
     },
     {
-        "id": 2112,
+        "id": 2111,
         "flowId": 2068,
         "value": "Enter the patient's last name, first name, and date of birth then Click on \"Add Case\"",
         "type": 0
     },
     {
-        "id": 2113,
+        "id": 2112,
         "flowId": 2068,
         "value": " Select the \"Jaw Scan\" option under indications then Choose the \"Aligner\" option.",
         "type": 0
     },
     {
-        "id": 2114,
+        "id": 2113,
         "flowId": 2068,
         "value": "Add new Patient",
         "type": 2
     },
     {
-        "id": 2115,
+        "id": 2114,
         "flowId": 2068,
         "value": "New Patient chart",
         "type": 2
     },
     {
-        "id": 2116,
+        "id": 2115,
         "flowId": 2068,
         "value": "Add Case",
         "type": 2
     },
     {
-        "id": 2117,
+        "id": 2116,
         "flowId": 2068,
         "value": "Jaw scan icon",
         "type": 2
     },
     {
-        "id": 2118,
+        "id": 2117,
         "flowId": 2068,
         "value": "Aligner",
         "type": 2
     },
     {
-        "id": 2119,
+        "id": 2118,
         "flowId": 2068,
         "value": "Rotate the camera about 40 degrees to the lingual side and move it all the way around the arch on the lingual side.",
         "type": 4
     },
     {
-        "id": 2120,
+        "id": 2119,
         "flowId": 2068,
         "value": "Roll about 40 degrees to the buccal and come all the way around the arch on the buccal side.",
         "type": 4
     },
     {
-        "id": 2121,
+        "id": 2120,
         "flowId": 2068,
         "value": "Keep the camera pointed towards the back of the throat as you cross the anterior region for a smooth transition.",
         "type": 4
     },
     {
-        "id": 2122,
+        "id": 2121,
         "flowId": 2068,
         "value": "Assess the model by checking for missing data. ",
         "type": 0
     },
     {
-        "id": 2123,
+        "id": 2122,
         "flowId": 2068,
         "value": "Keep the camera pointed towards the back of the throat as you scan the anterior region.",
         "type": 4
     },
     {
-        "id": 2124,
+        "id": 2123,
         "flowId": 2068,
         "value": "Roll about 40 degrees to the buccal and come all the way around the arch on the buccal side.",
         "type": 4
     },
     {
-        "id": 2125,
+        "id": 2124,
         "flowId": 2068,
         "value": "Upper Jaw Scanning",
         "type": 3
     },
     {
-        "id": 2126,
+        "id": 2125,
         "flowId": 2068,
         "value": "Assess the model by checking for missing data. ",
         "type": 0
     },
     {
-        "id": 2127,
+        "id": 2126,
         "flowId": 2068,
         "value": "Missing upper data",
         "type": 2
     },
     {
-        "id": 2128,
+        "id": 2127,
         "flowId": 2068,
         "value": "Look for any holes in the model where the white screen is visible. Spot-fill the missing areas by rescanning those specific regions.",
+        "type": 4
+    },
+    {
+        "id": 2128,
+        "flowId": 2068,
+        "value": "All the surfaces of\nthe teeth are critical, especially the embrasures\nand the distal contacts of the terminal teeth.",
         "type": 4
     },
     {
         "id": 2129,
         "flowId": 2068,
-        "value": "All the surfaces of\nthe teeth are critical, especially the embrasures\nand the distal contacts of the terminal teeth.",
+        "value": "Ensure that at least two millimeters of soft tissue is captured around the dentition for aligner creation.",
         "type": 4
     },
     {
         "id": 2130,
         "flowId": 2068,
-        "value": "Ensure that at least two millimeters of soft tissue is captured around the dentition for aligner creation.",
+        "value": "All the surfaces of\nthe teeth are critical, especially the embrasures\nand the distal contacts of the terminal teeth.",
         "type": 4
     },
     {
         "id": 2131,
         "flowId": 2068,
-        "value": "All the surfaces of\nthe teeth are critical, especially the embrasures\nand the distal contacts of the terminal teeth.",
-        "type": 4
-    },
-    {
-        "id": 2132,
-        "flowId": 2068,
         "value": "Missing data",
         "type": 2
     },
     {
-        "id": 2133,
+        "id": 2132,
         "flowId": 2068,
         "value": "Look for any holes in the model where the white screen is visible. Spot-fill the missing areas by rescanning those specific regions.",
         "type": 4
     },
     {
-        "id": 2134,
+        "id": 2133,
         "flowId": 2068,
         "value": "Ensure that at least two millimeters of soft tissue is captured around the dentition for aligner creation.",
         "type": 4
     },
     {
-        "id": 2135,
+        "id": 2134,
         "flowId": 2068,
         "value": "Perform a dual buccal bite registration.",
         "type": 4
     },
     {
-        "id": 2136,
+        "id": 2135,
         "flowId": 2068,
         "value": "Validate the articulation of the model by checking the green check mark.",
         "type": 0
     },
     {
-        "id": 2137,
+        "id": 2136,
         "flowId": 2068,
-        "value": "Green Check",
+        "value": "Green check",
         "type": 2
     },
     {
-        "id": 2138,
+        "id": 2137,
         "flowId": 2068,
         "value": "Sweep the scanner from gingiva to gingiva until the image catalog of both the upper and lower jaw appears in the background and Make sure to capture enough gingiva from both the upper and lower jaw.\u2028You have to get about six teeth in each side.",
         "type": 4
     },
     {
-        "id": 2139,
+        "id": 2138,
         "flowId": 2068,
         "value": "Note that the green check mark does not necessarily indicate a correct bite.",
         "type": 4
     },
     {
-        "id": 2140,
+        "id": 2139,
         "flowId": 2068,
         "value": "make sure that the bite was stitched together correctly. ",
         "type": 4
     },
     {
-        "id": 2141,
+        "id": 2140,
         "flowId": 2068,
         "value": "Model Icon",
         "type": 2
     },
     {
+        "id": 2141,
+        "flowId": 2068,
+        "value": "Review data",
+        "type": 2
+    },
+    {
         "id": 2142,
         "flowId": 2068,
-        "value": "Review  data",
+        "value": "Proccesing",
         "type": 2
     },
     {
         "id": 2143,
         "flowId": 2068,
-        "value": "Processing",
-        "type": 2
-    },
-    {
-        "id": 2144,
-        "flowId": 2068,
         "value": "Allow the software to process the scanned data, which may take longer depending on the scanning duration. The software will clean up any unnecessary data.",
         "type": 4
     },
     {
-        "id": 2145,
+        "id": 2144,
         "flowId": 2068,
         "value": "unnecessary data",
         "type": 2
     },
     {
-        "id": 2146,
+        "id": 2145,
         "flowId": 2068,
         "value": "To save time, you can take  your digital impression first let it be processing while you're taking your intra oral and extra oral photos.",
         "type": 4
     },
     {
-        "id": 2147,
+        "id": 2146,
         "flowId": 2068,
         "value": "It is important to avoid any holes or missing data in the inner proximals or gum lines. These gaps may appear as stone-like or digital calculus-like structures .",
         "type": 4
     },
     {
-        "id": 2148,
+        "id": 2147,
         "flowId": 2068,
         "value": "  Are there any missing data or voids in critical areas?",
         "type": 0
     },
     {
-        "id": 2149,
+        "id": 2148,
         "flowId": 2068,
         "value": "Holes",
         "type": 2
     },
     {
-        "id": 2150,
+        "id": 2149,
         "flowId": 2068,
         "value": "Go back to the acquisition stage by clicking on \"Acquisition\" and then fill in the missing data.",
         "type": 0
     },
     {
-        "id": 2151,
+        "id": 2150,
         "flowId": 2068,
         "value": "Acquisition",
         "type": 2
     },
     {
-        "id": 2152,
+        "id": 2151,
         "flowId": 2068,
         "value": "Click on the icon for the upper jaw to review it. ",
         "type": 0
     },
     {
-        "id": 2153,
+        "id": 2152,
         "flowId": 2068,
-        "value": "Upper Jaw",
+        "value": "Upper jaw",
         "type": 2
     },
     {
-        "id": 2154,
+        "id": 2153,
         "flowId": 2068,
         "value": "Review the final rendering of the Upper jaw to ensure critical data capture.",
         "type": 0
     },
     {
-        "id": 2155,
+        "id": 2154,
         "flowId": 2068,
         "value": "  Are there any missing data or voids in critical areas?",
         "type": 0
     },
     {
-        "id": 2156,
+        "id": 2155,
         "flowId": 2068,
-        "value": "Holes",
+        "value": "Hole",
         "type": 2
     },
     {
-        "id": 2157,
+        "id": 2156,
         "flowId": 2068,
         "value": "Review upper data",
         "type": 2
     },
     {
-        "id": 2158,
+        "id": 2157,
         "flowId": 2068,
         "value": "Click on the buccal bite registration icon to review the bite. ",
         "type": 0
     },
     {
-        "id": 2159,
+        "id": 2158,
         "flowId": 2068,
         "value": "Go back to the acquisition stage by clicking on \"Acquisition\" and then fill in the missing data.",
         "type": 0
     },
     {
-        "id": 2160,
+        "id": 2159,
         "flowId": 2068,
         "value": "Acquisition",
         "type": 2
     },
     {
-        "id": 2161,
+        "id": 2160,
         "flowId": 2068,
         "value": "It is important to avoid any holes or missing data in the inner proximals or gum lines. These gaps may appear as stone-like or digital calculus-like structures .",
         "type": 4
     },
     {
-        "id": 2162,
+        "id": 2161,
         "flowId": 2068,
         "value": "Buccal bite icon",
         "type": 2
     },
     {
-        "id": 2163,
+        "id": 2162,
         "flowId": 2068,
         "value": "Verify the correctness of the buccal bite registration in the final articulated model.",
         "type": 0
     },
     {
-        "id": 2164,
+        "id": 2163,
         "flowId": 2068,
         "value": "Buccal model",
         "type": 2
     },
     {
-        "id": 2165,
+        "id": 2164,
         "flowId": 2068,
         "value": "The grayscale representation shows a modeled appearance with variations in shading, which is the desired outcome.",
         "type": 4
     },
     {
-        "id": 2166,
+        "id": 2165,
         "flowId": 2068,
         "value": "Now, Move to the Connect phase.",
         "type": 0
     },
     {
-        "id": 2167,
+        "id": 2166,
         "flowId": 2068,
         "value": "Connect icon",
         "type": 2
     },
     {
-        "id": 2168,
+        "id": 2167,
         "flowId": 2068,
         "value": "Make sure you are connected to the internet.",
         "type": 4
     },
     {
-        "id": 2169,
+        "id": 2168,
         "flowId": 2068,
         "value": "Log in",
         "type": 2
     },
     {
-        "id": 2170,
+        "id": 2169,
         "flowId": 2068,
         "value": "Enter Order Data",
         "type": 2
     },
     {
-        "id": 2171,
+        "id": 2170,
         "flowId": 2068,
         "value": " Order Data sheet",
         "type": 2
     },
     {
-        "id": 2172,
+        "id": 2171,
         "flowId": 2068,
         "value": "Select SureSmile as the lab.",
         "type": 4
     },
     {
-        "id": 2173,
+        "id": 2172,
         "flowId": 2068,
         "value": "Note that fields marked with an orange asterisk are obligatory. Also,selecting the \"Anonymize\" option ensures that only an order number is forwarded without any patient data.",
         "type": 4
     },
     {
-        "id": 2174,
+        "id": 2173,
         "flowId": 2068,
         "value": "Anonymize",
         "type": 2
     },
     {
-        "id": 2175,
+        "id": 2174,
         "flowId": 2068,
         "value": "Skip additional notes because you're going to fill out the prescription for this case within the suresmile portal and select a any return date and time. This date does not indicate the treatment delivery date but is required to move forward.",
         "type": 4
     },
     {
-        "id": 2176,
+        "id": 2175,
         "flowId": 2068,
         "value": "Press (Add to Cart) ",
         "type": 0
     },
     {
-        "id": 2177,
+        "id": 2176,
         "flowId": 2068,
         "value": " Add to Cart",
         "type": 2
     },
     {
-        "id": 2178,
+        "id": 2177,
         "flowId": 2068,
         "value": "Once the case is fully uploaded, click on \"Submit Cart\" to proceed.",
         "type": 0
     },
     {
-        "id": 2179,
+        "id": 2178,
         "flowId": 2068,
         "value": "Submit Cart",
         "type": 2
     },
     {
-        "id": 2180,
+        "id": 2179,
         "flowId": 2068,
         "value": "Review the billing and shipping address details and enter the ConnectCase Center password again.",
         "type": 0
     },
     {
-        "id": 2181,
+        "id": 2180,
         "flowId": 2068,
         "value": "Reviewing",
         "type": 2
     },
     {
-        "id": 2182,
+        "id": 2181,
         "flowId": 2068,
         "value": "Click on \"Commission\" to submit the case to SureSmile.",
         "type": 0
     },
     {
-        "id": 2183,
+        "id": 2182,
         "flowId": 2068,
         "value": "Commission",
         "type": 2
     },
     {
-        "id": 2184,
+        "id": 2183,
         "flowId": 2068,
         "value": "Primescan Clear aligners",
         "type": 0
+    },
+    {
+        "id": 2184,
+        "flowId": 2068,
+        "value": "Catalogs",
+        "type": 2
     },
     {
         "id": 2319,
@@ -6856,7 +6856,7 @@
     {
         "id": 2377,
         "flowId": 2318,
-        "value": "General Tips Before Scanning:\u20281. Camera grip: Hold the camera using a pen or pencil grip, resting the black area on the fleshy pad between your thumb and fingers. Change the lens direction by rolling the sleeve or flipping the camera over.\n2. Viewing during scanning: As a beginner, it's more natural to look in the mouth while scanning. However, as you gain experience, you may prefer looking at the screen, especially for capturing missing data.\n3. Scanning enough: The goal is to capture all critical areas with minimal duplication. Overscanning slows down processes and increases file size. Avoid rescanning areas already captured.\n4. Managing scan data: Take a simple framework scan and then stop. Zoom in to identify holes in critical areas and fill those in. Holes in non-critical areas are acceptable.\u20285. Quadrant or full-arch scan: Decide if you need a quadrant (to the midline) for single restorations or a full-arch scan for bridges, clear aligners, splints, and digital denture preliminary scans.",
+        "value": "General Tips Before Scanning:\n\n1. Camera grip: Hold the camera using a pen or pencil grip, resting the black area on the fleshy pad between your thumb and fingers. Change the lens direction by rolling the sleeve or flipping the camera over.\n2. Viewing during scanning: As a beginner, it's more natural to look in the mouth while scanning. However, as you gain experience, you may prefer looking at the screen, especially for capturing missing data.\n3. Scanning enough: The goal is to capture all critical areas with minimal duplication. Overscanning slows down processes and increases file size. Avoid rescanning areas already captured.\n4. Managing scan data: Take a simple framework scan and then stop. Zoom in to identify holes in critical areas and fill those in. Holes in non-critical areas are acceptable.\n5. Quadrant or full-arch scan: Decide if you need a quadrant (to the midline) for single restorations or a full-arch scan for bridges, clear aligners, splints, and digital denture preliminary scans.",
         "type": 4
     },
     {
@@ -7432,254 +7432,254 @@
     {
         "id": 2644,
         "flowId": 2634,
-        "value": "The recommended scanning path consists of 3 sweeps - occlusal, lingual and buccal - to ensure good data coverage of all surfaces.",
+        "value": "When the tooth surface is scanned move the tip a bit forwards and then roll the tip slowly over the occlusal surface to the buccal side and complete the buccal swipe.",
         "type": 4
     },
     {
         "id": 2645,
         "flowId": 2634,
-        "value": "Lower arch Scanning Strategy",
-        "type": 3
-    },
-    {
-        "id": 2646,
-        "flowId": 2634,
-        "value": "When the tooth surface is scanned move the tip a bit forwards and then roll the tip slowly over the occlusal surface to the buccal side and complete the buccal swipe.",
-        "type": 4
-    },
-    {
-        "id": 2647,
-        "flowId": 2634,
         "value": "Slowly roll the tip lingual and proceed scanning the lingual surface, following the arch till you reach the last tooth on the opposite side.",
         "type": 4
     },
     {
-        "id": 2648,
+        "id": 2646,
         "flowId": 2634,
         "value": "On the scanning page, choose the Upper arch.",
         "type": 0
     },
     {
-        "id": 2649,
+        "id": 2647,
         "flowId": 2634,
         "value": "Scan occlusal surfaces and incisal edges.",
         "type": 0
     },
     {
-        "id": 2650,
+        "id": 2648,
         "flowId": 2634,
         "value": "Scan the buccal surface",
         "type": 0
     },
     {
-        "id": 2651,
+        "id": 2649,
         "flowId": 2634,
         "value": "Scan the lingual surface",
         "type": 0
     },
     {
-        "id": 2652,
+        "id": 2650,
         "flowId": 2634,
         "value": "When the last tooth surface in the opposing side is scanned, shift the tip forwards and roll over the occlusal surface to the palatal side to complete the palatal swipe.",
         "type": 4
     },
     {
-        "id": 2653,
+        "id": 2651,
         "flowId": 2634,
         "value": "Scan the palate",
         "type": 0
     },
     {
-        "id": 2654,
+        "id": 2652,
         "flowId": 2634,
         "value": "Slowly roll the tip buccally and scan the buccal surface following the arch to reach the last tooth on the opposing side.",
         "type": 4
     },
     {
-        "id": 2655,
+        "id": 2653,
         "flowId": 2634,
         "value": "Place the scanner tip above the back molars and start scanning the occlusal surface. Move the tip forwards following the arch, and roll the tip bucally when it reaches the canine area. \nSlowly wiggle the scanner when passing the incisors, making sure to capture all incisal edges and a bit of both the buccal and the palatal surface. \nOnce in the area of the other canine, proceed with scanning of the occlusal surfaces until the back teeth.",
         "type": 4
     },
     {
-        "id": 2656,
-        "flowId": 2634,
-        "value": "The recommended scanning path consists of 3 swipes - occlusal, buccal and palatal - to ensure good data coverage of all surfaces.",
-        "type": 4
-    },
-    {
-        "id": 2657,
+        "id": 2654,
         "flowId": 2634,
         "value": "To include the palate: Move the tip back following the palatal side. Proceed from the incisors swiping the tip across the palate in a distal direction.",
         "type": 4
     },
     {
-        "id": 2658,
+        "id": 2655,
         "flowId": 2634,
         "value": "Send the scans to the lab",
         "type": 0
     },
     {
-        "id": 2659,
+        "id": 2656,
         "flowId": 2634,
         "value": "Proceed to the opposing side of the jaw and follow the same steps.",
         "type": 0
     },
     {
-        "id": 2660,
+        "id": 2657,
         "flowId": 2634,
         "value": "Insert the scanner tip in an open mouth buccally of the molar area. Ask the patient to bite in the desired occlusion.",
         "type": 0
     },
     {
-        "id": 2661,
+        "id": 2658,
         "flowId": 2634,
         "value": "Bite Scan",
         "type": 3
     },
     {
-        "id": 2662,
+        "id": 2659,
         "flowId": 2634,
         "value": "Is this an individual step? Or is this just a note.",
         "type": 4
     },
     {
-        "id": 2663,
-        "flowId": 2634,
-        "value": "Lower arch scanning strategy (2)",
-        "type": 3
-    },
-    {
-        "id": 2664,
+        "id": 2660,
         "flowId": 2634,
         "value": "Open Interproximal Areas, which are especially important in areas where interproximal reduction could be needed.",
         "type": 4
     },
     {
-        "id": 2665,
+        "id": 2661,
         "flowId": 2634,
         "value": "Interproximal Areas",
         "type": 2
     },
     {
-        "id": 2666,
+        "id": 2662,
         "flowId": 2634,
         "value": "Capture a minimum of 2-4 mm of gingiva from the margin",
         "type": 4
     },
     {
-        "id": 2667,
+        "id": 2663,
         "flowId": 2634,
-        "value": "2-4mm of Gingiva ",
+        "value": "2-4mm of Gingiva",
         "type": 2
     },
     {
-        "id": 2668,
-        "flowId": 2634,
-        "value": "Even if the treatment does NOT include the molars, the aligners will be made to cover parts of the back molars.",
-        "type": 4
-    },
-    {
-        "id": 2669,
+        "id": 2664,
         "flowId": 2634,
         "value": "Move the scanner tip distally to capture the back teeth.\u2028",
         "type": 0
     },
     {
-        "id": 2670,
+        "id": 2665,
         "flowId": 2634,
         "value": "Keep scanning until the scans snap into position and the jaws are aligned on to the blue bite.",
         "type": 0
     },
     {
-        "id": 2671,
+        "id": 2666,
         "flowId": 2634,
         "value": "Then move the tip mesial following the arch capturing both upper and lower teeth by moving the tip gently up and down. \u2028",
         "type": 0
     },
     {
-        "id": 2672,
+        "id": 2667,
         "flowId": 2634,
         "value": "What intraoral scanner are you using?",
         "type": 0
     },
     {
-        "id": 2673,
+        "id": 2668,
         "flowId": 2634,
         "value": "What product are you scanning for?",
         "type": 0
     },
     {
-        "id": 2674,
+        "id": 2669,
         "flowId": 2634,
         "start": true,
         "value": "Do you need guidance on case setup or scanning instructions?",
         "type": 0
     },
     {
-        "id": 2675,
+        "id": 2670,
         "flowId": 2634,
         "value": "Scan Strategy",
         "type": 0
     },
     {
-        "id": 2676,
+        "id": 2671,
         "flowId": 2634,
         "value": "It is recommended to scan the lower arch, then the upper arch, then the occlusion.",
         "type": 4
     },
     {
-        "id": 2677,
+        "id": 2672,
         "flowId": 2634,
         "value": "Trios has not provided case setup instructions at this time. Click next to continue to scanning instructions",
         "type": 0
     },
     {
-        "id": 2678,
+        "id": 2673,
         "flowId": 2634,
         "value": "Upper arch Scanning Strategy",
         "type": 3
     },
     {
-        "id": 2679,
+        "id": 2674,
         "flowId": 2634,
         "value": "Press Next or select the scan step on the workflow bar at the top of the page. ",
         "type": 0
     },
     {
-        "id": 2680,
+        "id": 2675,
         "flowId": 2634,
         "value": "Incisal Edges",
         "type": 2
     },
     {
-        "id": 2681,
+        "id": 2676,
         "flowId": 2634,
         "value": "Upper arch scanning strategy (2)",
         "type": 3
     },
     {
-        "id": 2682,
+        "id": 2677,
         "flowId": 2634,
         "value": "Incisal edges. Double check that there aren't stitching issues.",
         "type": 4
     },
     {
-        "id": 2683,
+        "id": 2678,
         "flowId": 2634,
-        "value": "Capture the back teeth ",
-        "type": 2
+        "value": "The scan should cover at least 3-4 teeth for perfect alignment even if the scans snap together earlier.",
+        "type": 4
     },
     {
-        "id": 2684,
+        "id": 2679,
         "flowId": 2634,
         "value": "Capture the back molars",
         "type": 4
     },
     {
+        "id": 2680,
+        "flowId": 2634,
+        "value": "Even if the treatment does NOT include the molars, the aligners will be made to cover parts of the back molars.",
+        "type": 4
+    },
+    {
+        "id": 2681,
+        "flowId": 2634,
+        "value": "Capture the back teeth",
+        "type": 2
+    },
+    {
+        "id": 2682,
+        "flowId": 2634,
+        "value": "The recommended scanning path consists of 3 sweeps - occlusal, lingual and buccal - to ensure good data coverage of all surfaces.",
+        "type": 4
+    },
+    {
+        "id": 2683,
+        "flowId": 2634,
+        "value": "Lower arch Scanning Strategy",
+        "type": 3
+    },
+    {
+        "id": 2684,
+        "flowId": 2634,
+        "value": "Lower arch scanning strategy (2)",
+        "type": 3
+    },
+    {
         "id": 2685,
         "flowId": 2634,
-        "value": "The scan should cover at least 3-4 teeth for perfect alignment even if the scans snap together earlier.",
+        "value": "The recommended scanning path consists of 3 swipes - occlusal, buccal and palatal - to ensure good data coverage of all surfaces.",
         "type": 4
     },
     {
@@ -8973,8 +8973,8 @@
     {
         "id": 3207,
         "flowId": 3191,
-        "value": "[[Deleting the data]",
-        "type": 4
+        "value": "Deleting the data",
+        "type": 2
     },
     {
         "id": 3209,

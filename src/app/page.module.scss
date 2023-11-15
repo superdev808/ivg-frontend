@@ -203,11 +203,10 @@
 }
 
 .landing-top {
-  background-color: var(--primary-dark-color);
+  background: radial-gradient(circle, #31574D, #023932 300px);
 
   &-title {
     color: var(--primary-color);
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
     font-size: 48px;
   }
@@ -215,14 +214,15 @@
   &-image-container {
     position: absolute;
     border: 2px solid var(--primary-color);
-    right: 40px;
-    bottom: -20px;
+    top: 50px;
+    right: 20px;
+    bottom: -32px;
   }
 
   &-image-sub-container {
     position: relative;
-    top: 40px;
-    left: 40px;
+    top: 20px;
+    left: 20px;
     width: 100%;
     height: 100%;
   }
@@ -231,37 +231,34 @@
 .landing-middle {
   color: var(--primary-dark-color);
   &-title {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
     font-size: 48px;
   }
 
   &-description {
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: 10;
+    font-weight: 200;
   }
 
   &-item {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     border-color: gainsboro !important;
 
     &-description {
       text-align: center;
       font-size: 22px;
       line-height: 32px;
+      font-weight: 200;
     }
   }
 }
 
 .landing-help-introduction {
-  background-color: #F7FAF7;
+  background-color: rgba(131, 184, 153, 0.07);
 }
 
 .landing-missing-section {
   background-color: var(--primary-dark-color);
   color: var(--primary-color);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
 
   &-title {
     font-size: 48px;
@@ -277,6 +274,7 @@
 .request-demo {
   color: var(--primary-dark-color);
   font-size: 20px;
+  background-color: var(--primary-color) !important;
 }
 
 .landing-contact-container {

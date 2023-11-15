@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Logo from './Logo';
 
@@ -24,11 +24,9 @@ const Navbar = ({
 	navLinks: { id: string; link: string; title: string; icon: string; auth: boolean; onClick?: any }[];
 	rightNavLinks: { id: string; link?: string; title: string; icon: string; onClick?: any; auth: boolean }[];
 }) => {
-	const pathname = usePathname();
 	const [showSidebar, setShowSidebar] = useState(false);
 
-	return (
-		<div className="h-3rem md:h-4rem px-3 md:px-6 w-full sticky top-0 mt-1 mb-1">
+	return (<div className="px-3 md:px-6 w-full  top-0 mt-1 mb-1">
 			<div className="flex items-center justify-content-between">
 				<div className="flex align-items-center">
 					<Logo />
@@ -82,27 +80,6 @@ const Navbar = ({
 					/>
 				</div>
 			</div>
-			{/* <div className={pathname !== "/home/" ? " hidden" : ""}>
-        <div
-          className={
-            " search-wrapper flex  justify-content-center align-items-center"
-          }
-        >
-          <div className={" w-full md:w-5 "}>
-            <div className="search-title flex justify-content-center ">
-              <h1 className="text-dark text-color-secondary m-0">
-                How can we help you?
-              </h1>
-            </div>
-            <div className="flex  justify-content-center">
-              <div className=" w-6 m-0 ">
-                <Divider />
-              </div>
-            </div>
-            <SearchBar />
-          </div>
-        </div>
-      </div> */}
 			<Sidebar
 				visible={showSidebar}
 				position="right"
@@ -136,8 +113,7 @@ const Navbar = ({
 						})}
 				</div>
 			</Sidebar>
-		</div>
-	);
+		</div>);
 };
 
 export default Navbar;

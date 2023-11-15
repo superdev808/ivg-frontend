@@ -34,7 +34,16 @@ export function nestNodesEdges(nodes: NestNodes[], edges:Edge[]) {
         
         node.children = [];
         node.edges =  [];
-        const nodeEdges = edges.filter((edge) => edge.source === node.id);
+        let nodeEdges = edges.filter((edge) => edge.source === node.id);
+
+
+        // Order edges alphabetically
+        nodeEdges = nodeEdges
+        .sort((a, b) => a.value.localeCompare(b.value))
+        .map((item) => ({
+            ...item,
+            value: item.value.replace(/#.*?#/g, ''),
+        }));
 
         nodeEdges.forEach((edge) => {
             if (edge.target) {

@@ -20,10 +20,7 @@ type MenuItem = {
 export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:string[]}) {
 	const router = useRouter();
 	
-	// const { currentItems, currentQuestion, breadcrumbs, isLoading } = useWorkflowSelections(params.flowIds);
-
     const {  menuItems, menuQuestions } = useAppSelector((state) => state.workflows);
-    const {selectedId} = useAppSelector((state) => state.workflowSelection);
 	
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [highlightedItem, setHighlightedItem] = useState<any>(null);
@@ -41,8 +38,11 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 	}
 
 	useEffect(() => {
+		
         if (menuItems.length == 0 || menuQuestions.length == 0) return
+
 		let mappedBreadcrumbs:{value:string, path:string}[] = [];
+		
 		if (flowIds) {
 			mappedBreadcrumbs = flowIds.map((id, index) => {
 				const items = menuItems.filter((item) => String(item.id) == String(id));
@@ -59,7 +59,7 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 		let currentQuestion = filterCurrentQuestions(flowIds);
 		let selectedWorkflow = null;
 		if(flowIds){
-			selectedWorkflow = (menuItems).find((item) => Number(item.id) === Number(flowIds[flowIds.length - 1]) && item.flow);
+			selectedWorkflow = (menuItems).find((item) => Number(item.id) === Number(flowIds[flowIds.length - 1]) && item.workflow_id);
 		} 
 	
 		if (currentItems.length == 0 && !selectedWorkflow) {
@@ -73,7 +73,7 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 		setCurrentQuestion(currentQuestion[0]);
 		setCurrentItems(currentItems);
 		setIsLoading(false);
-	}, [menuItems, menuQuestions]);
+	}, [menuItems, menuQuestions]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
     
@@ -111,7 +111,7 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 							width="100%"
 							height="5rem"
 							className="my-3"></Skeleton>
-					);
+					)
 				})}
 			</div>
 		);
@@ -152,7 +152,7 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 
 
 
-	const handleInputChange = (event: FormEvent<HTMLInputElement>) => {
+	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 
 		setInput(event.target.value);
 
@@ -161,9 +161,10 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 
 	return (
 		<div
-			className={'flex lg:h-full justify-content-center align-items-center  lg:py-5'}
-			style={{ minHeight: '50rem' }}>
-			<div className="flex flex-column w-full xl:w-7 h-full  shadow-1 bg-white">
+			className={'flex lg:h-full justify-content-center align-items-center '}
+			// 
+			>
+			<div className="flex flex-column w-full xl:w-7 h-full  shadow-1 bg-white" style={{ maxHeight: '45rem' }}>
 				<div className="flex flex-column mx-5 my-0">
 					<div className="flex align-items-center mt-4">
                     {isLoading ? (
@@ -176,7 +177,7 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
                             <>
 						<h4 className="text-green-700 m-2">Workflows</h4>
 						{breadcrumbs &&
-							breadcrumbs.map((item) => {
+							breadcrumbs.filter(item => item.value !== '').map((item) => {
                                 return (
                                     <div
 										key={item.path}
@@ -226,5 +227,5 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 				</div>
 			</div>
 		</div>
-	);
+	)
 }
