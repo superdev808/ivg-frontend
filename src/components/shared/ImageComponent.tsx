@@ -10,10 +10,10 @@ const ImageComponent = (props) => {
 	const [visible, setVisible] = useState(false);
 
 	return (
-		<div className='border-2 border-round border-green-300'>
+		<div className='border-2 border-round border-green-300 hover:border-green-700 hover:shadow-2'>
 			<Image
 				style={{ cursor: 'zoom-in' }}
-				alt={props.key}
+				alt={imgSrc}
 				{...rest}
 				src={imgSrc}
 				width={200}
@@ -29,7 +29,7 @@ const ImageComponent = (props) => {
 				dismissableMask
 				onHide={() => setVisible(false)}>
 				<Image
-					alt={props.key}
+					alt={imgSrc}
 					src={imgSrc}
 					width={1000}
 					height={1000 / ratio}
