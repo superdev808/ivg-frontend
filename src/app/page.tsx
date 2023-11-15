@@ -63,7 +63,7 @@ export default function Index() {
             With <b><u>Ivory Guide</u></b>, you gain easy and instantaneous access to
             trustworthy clinical and manufacturer recommendations, allowing you
             to easily troubleshoot cases and develop treatment plans while your
-            patient is in the chair
+            patient is in the chair.
           </h2>
         </div>
       </div>
@@ -74,7 +74,7 @@ export default function Index() {
           <h5 className={cx("mt-2 mb-0", "landing-middle-item-description")}>
             Our guides can walk you through seemingly complicated processes &
             decisions and make you confident that you've chosen the right
-            treatment plan every time
+            treatment plan every time.
           </h5>
         </div>
         <div className="col-12 md:col-3 flex justify-content-center">
@@ -149,7 +149,6 @@ export default function Index() {
 	  </div>
 	  <div className="grid">
 		<div className={cx("landing-contact-container", "col-10 col-offset-1 pb-4 flex flex-column md:flex-row align-items-center justify-content-between border-bottom-1")}>
-    >
 			<Image
 				src="/Ivory-Guide-Logo-Stack.svg"
 				alt="Ivory Guid Logo Stack"

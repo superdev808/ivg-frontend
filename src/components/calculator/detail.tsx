@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "primereact/card";
 import { isUrl } from "@/helpers/util";
+import { Image } from "primereact/image";
 
 interface DetailViewOption {
   name: string;
@@ -14,6 +15,7 @@ interface DetailViewProps {
 
 export default function DetailView(props: DetailViewProps) {
   const { fields, data } = props;
+
   return (
     <Card className="w-12 mt-4 py-2 border-round bg-white">
       <div>
@@ -38,6 +40,11 @@ export default function DetailView(props: DetailViewProps) {
             </div>
           ) : null
         )}
+        {data.image && <div className="grid">
+            <div className="col-offset-4 col-8">
+                <Image src={data.image} alt="output image" width="200px" />
+            </div>
+        </div>}
       </div>
     </Card>
   );
