@@ -793,7 +793,7 @@
     {
         "id": 171,
         "flowId": 2,
-        "value": "<0>#0# I'd like a full walkthrough of all necessary scans.",
+        "value": "#0# I'd like a full walkthrough of all necessary scans.",
         "source": 25,
         "target": 27
     },
@@ -2298,7 +2298,7 @@
     {
         "id": 579,
         "flowId": 430,
-        "value": "<0>#0# I'd like a full walkthrough of all necessary scans.",
+        "value": "#0# I'd like a full walkthrough of all necessary scans.",
         "source": 454,
         "target": 457
     },
@@ -2984,7 +2984,7 @@
     {
         "id": 778,
         "flowId": 655,
-        "value": "<0>#0# I'd like a full walkthrough of all necessary scans.",
+        "value": "#0# I'd like a full walkthrough of all necessary scans.",
         "source": 677,
         "target": 680
     },
@@ -6505,7 +6505,7 @@
     {
         "id": 1668,
         "flowId": 1530,
-        "value": "<0>#0# I'd like a full walkthrough of all necessary scans.",
+        "value": "#0# I'd like a full walkthrough of all necessary scans.",
         "source": 1587,
         "target": 1555
     },
@@ -6813,7 +6813,7 @@
     {
         "id": 1802,
         "flowId": 1674,
-        "value": "<0>#0# I'd like a full walkthrough of all necessary scans.",
+        "value": "#0# I'd like a full walkthrough of all necessary scans.",
         "source": 1698,
         "target": 1703
     },
@@ -7520,7 +7520,7 @@
     {
         "id": 1997,
         "flowId": 1867,
-        "value": "<0>#0# I'd like a full walkthrough of all necessary scans.",
+        "value": "#0# I'd like a full walkthrough of all necessary scans.",
         "source": 1884,
         "target": 1888
     },
@@ -9144,7 +9144,7 @@
     {
         "id": 2493,
         "flowId": 2318,
-        "value": "<0>#0# I'd like a full walkthrough of all necessary scans.",
+        "value": "#0# I'd like a full walkthrough of all necessary scans.",
         "source": 2331,
         "target": 2334
     },
@@ -13484,7 +13484,7 @@
     {
         "id": 3684,
         "flowId": 3560,
-        "value": "<0>#0# I'd like a full walkthrough of all necessary scans.",
+        "value": "#0# I'd like a full walkthrough of all necessary scans.",
         "source": 3597,
         "target": 3565
     },
@@ -14142,7 +14142,7 @@
     {
         "id": 3851,
         "flowId": 3725,
-        "value": "<0>#0# I'd like a full walkthrough of all necessary scans.",
+        "value": "#0# I'd like a full walkthrough of all necessary scans.",
         "source": 3764,
         "target": 3730
     },
@@ -14751,7 +14751,7 @@
     {
         "id": 4012,
         "flowId": 3886,
-        "value": "<0>#0# I'd like a full walkthrough of all necessary scans.",
+        "value": "#0# I'd like a full walkthrough of all necessary scans.",
         "source": 3921,
         "target": 3891
     },
