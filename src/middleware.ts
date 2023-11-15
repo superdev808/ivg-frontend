@@ -16,12 +16,12 @@ export async function middleware(req: NextRequest) {
 		return NextResponse.redirect(new URL('/login', req.url));
 	}
   if (data.session && pathname === '/login/') {
-    return NextResponse.redirect(new URL('/workflows', req.url));
+    return NextResponse.redirect(new URL('/search', req.url));
   }
 
 	return res;
 }
 export const config = {
-    matcher: ['/workflows/:pathname*' ,'/calculators/:pathname*','/login'],
+    matcher: ['/workflows/:pathname*' ,'/calculators/:pathname*','/login',  '/search/:pathname*'],
 
 };

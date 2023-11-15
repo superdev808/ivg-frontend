@@ -13,6 +13,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Checkbox } from 'primereact/checkbox';
 import { Messages } from 'primereact/messages';
+
+
 type FormValues = {
 	email: string;
 	password: string;
@@ -79,7 +81,7 @@ export const LoginForm = () => {
 				throw new Error(data.error);
 			}
 
-			router.push('/workflows');
+			router.push('/search');
 			window.location.reload();
 			setLoading(false);
 		} catch (error: any) {
