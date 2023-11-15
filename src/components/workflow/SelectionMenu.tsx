@@ -162,7 +162,7 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 	return (
 		<div
 			className={'flex lg:h-full justify-content-center align-items-center '}
-			// 
+
 			>
 			<div className="flex flex-column w-full xl:w-7 h-full  shadow-1 bg-white" style={{ maxHeight: '40rem' }}>
 				<div className="flex flex-column mx-5 my-0">
@@ -217,8 +217,8 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 						
 					</div>
 				</div>
-				<div className="flex flex-column lg:flex-row h-full border-top-1 border-gray-300 lg:overflow-hidden ">
-					<div className="col-12 flex-order-1 lg:flex-order-0 lg:col-6 flex flex-column  px-5 py-2 border-right-1 border-gray-300 overflow-auto">
+				<div className="flex flex-column lg:flex-row h-full border-top-1 border-gray-300 lg:overflow-hidden overflow-auto pb-8 ">
+					<div className="col-12 flex-order-1 lg:flex-order-0 lg:col-6 flex flex-column  px-5 py-2 border-right-1 border-gray-300 ">
 						{selectionPanel()}
 					</div>
 					<div className="col-12 flex-order-0 lg:flex-order-1 lg:col-6 flex flex-column justify-content-center align-items-center p-0">
