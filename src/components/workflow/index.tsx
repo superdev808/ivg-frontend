@@ -8,11 +8,9 @@ import { useAppSelector } from '@/redux/hooks';
 import { useDispatch } from 'react-redux';
 import { setSelectedId, setLoading } from '@/redux/features/workflowSelectionSlice';
 
-
 const WorkflowsComponent = (params: { flowIds: string[] }) => {
 	const dispatch = useDispatch();
 	useWorkflowLoadData();
-
 
 	const { menuItems, menuQuestions } = useAppSelector((state) => state.workflows);
 	const { selectedId, isLoading } = useAppSelector((state) => state.workflowSelection);
@@ -30,7 +28,7 @@ const WorkflowsComponent = (params: { flowIds: string[] }) => {
 
 		const currentSelection = params.flowIds[params.flowIds.length - 1];
 		const flow = menuItems.find(
-			(item) => String(currentSelection) == String(item.id) && String(item.hierarchy) == String(params.flowIds.slice(0, -1)) && item.flow
+			(item) => String(currentSelection) == String(item.id) && String(item.hierarchy) == String(params.flowIds.slice(0, -1)) && item.workflow_id
 		);
 		if (flow) {
 			dispatch(setSelectedId(flow.id));
@@ -38,7 +36,7 @@ const WorkflowsComponent = (params: { flowIds: string[] }) => {
 			dispatch(setSelectedId(0));
 		}
 		dispatch(setLoading(false));
-	}, [menuItems, menuQuestions]);
+	}, [menuItems, menuQuestions]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	useEffect(() => {
 		if (isLoading) return;
@@ -47,14 +45,9 @@ const WorkflowsComponent = (params: { flowIds: string[] }) => {
 		} else if (Number(selectedId) === 0) {
 			setRenderComponent(<WorkflowSelectionMenuComponent flowIds={params.flowIds} />);
 		}
-	}, [selectedId]);
+	}, [selectedId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-	return (
-		<>
-	
-			{renderComponent}
-		</>
-	);
+	return <>{renderComponent}</>;
 };
 
 export default WorkflowsComponent;
