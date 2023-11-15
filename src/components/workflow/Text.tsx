@@ -73,15 +73,16 @@ const WorkflowText = () => {
 								</div>
 								<div className="px-4 pb-4">
 									<strong>{currrentNode.data.value}</strong>
-									<div className="flex justify-content-start align-items-center p-2">
+									<div className="flex justify-content-center align-items-center p-2">
 										{currrentNode.data.images &&
 											currrentNode.data.images.map((image: string) => {
 												return (
 													<div
-														className="p-2"
+														className="p-2 "
 														key={image}>
 														{
 															<ImageComponent
+																alt={image}
 																key={image}
 																src={`https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/${currrentNode.data.flowId}/${image}.png`}
 																fallbackSrc={`/images/no-image.png`}></ImageComponent>
@@ -90,16 +91,16 @@ const WorkflowText = () => {
 												);
 											})}
 									</div>
-									<div className="flex justify-content-center align-items-center p-2">
+									<div className="flex flex-column justify-content-center align-items-center p-2">
 									
 										{currrentNode.data.videos &&
 											currrentNode.data.videos.map((video: string) => {
 												return (
 													<div
-														className="p-2"
+														className="p-2 cursor-pointer border-2	 border-green-300 hover:border-4 hover:border-green-500 hover:shadow-2 mb-2"
 														key={video}>
 														{
-															<ReactPlayer width={300} height={200} controls loop={false} url={`https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/${currrentNode.data.flowId}/${video}.mp4`} />
+															<ReactPlayer width={400} height={200} controls loop={false} url={`https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/${currrentNode.data.flowId}/${video}.mp4`} />
 
 														}
 													</div>
