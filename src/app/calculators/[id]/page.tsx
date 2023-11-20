@@ -115,10 +115,6 @@ const tabItems = [
     ],
     output: [
       {
-        name: "Is the stump shade light or dark?",
-        text: "Is the stump shade light or dark?"
-      },
-      {
         name: "TOP SUGGESTED MATERIAL",
         text: "TOP SUGGESTED MATERIAL"
       },

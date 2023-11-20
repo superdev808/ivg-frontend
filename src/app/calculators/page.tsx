@@ -9,9 +9,11 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import styles from "./page.module.scss";
 import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
+import CalculatorProduct from "./product";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function CalculatorsPage() {
-
+  const {authenticated} = useAppSelector((state) => state.auth);
   const router = useRouter();
 
   const tabItems = [
@@ -22,7 +24,7 @@ export default function CalculatorsPage() {
   ];
 
   return (
-    <div className={"flex justify-content-center mt-6"}>
+    authenticated ? (<div className={"flex justify-content-center mt-6"}>
       <div className="flex flex-column col-12 md:col-8 p-5 border-round bg-white shadow-1">
         <h2 className="mt-0 mb-5">Calculators</h2>
         <div className="grid">
@@ -42,5 +44,6 @@ export default function CalculatorsPage() {
         </div>
       </div>
     </div>
+  ) : <CalculatorProduct />
   );
 }

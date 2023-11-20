@@ -20,12 +20,12 @@ export async function middleware(req: NextRequest) {
 	// 	return res;
 	// }
   console.log(pathname)
-	if (!data.session && pathname !== '/login/') {
-		return NextResponse.redirect(new URL('/login', req.url));
-	}
-  if (data.session && pathname === '/login/') {
-    return NextResponse.redirect(new URL('/workflows', req.url));
-  }
+// 	if (!data.session && pathname !== '/login/') {
+// 		return NextResponse.redirect(new URL('/login', req.url));
+// 	}
+//   if (data.session && pathname === '/login/') {
+//     return NextResponse.redirect(new URL('/workflows', req.url));
+//   }
 
 	return res;
 }
