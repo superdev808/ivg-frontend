@@ -67,7 +67,8 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
   const handleSelectAnswer = (index: number) => (e: any) => {
     setLevel(index + 1);
     const newAnswers = answers.slice(0, index);
-    setAnswers([...newAnswers, e.value]);
+    newAnswers[index] = e.value;
+    setAnswers(newAnswers);
   };
 
   return (
@@ -77,15 +78,21 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
       ) : (
         <Card className="w-12 flex px-4 py-2 border-round bg-white flex-column">
           <div className="grid">
-            {questions.map((quiz, index) => (
-              <Quiz
+            {questions.map((quiz, index) => {
+              if (answerOptions[index] && answerOptions[index].length === 1 && answerOptions[index][0] === '') {
+                if (index <= level && level < input.length && answers[index] !== '') {
+                  handleSelectAnswer(index)({ value: '' });
+                }
+                return null;
+              }
+              return <Quiz
                 key={`quiz-${index}`}
                 question={quiz.text}
                 answers={answerOptions[index]}
                 selectedAnswer={answers[index] || null}
                 handleSelectAnswer={handleSelectAnswer(index)}
               />
-            ))}
+            })}
           </div>
           {itemInfo.length > 0 && <h2>Compatible {decodeURI(props.option)}</h2>}
           {itemInfo.map((item, index) => (

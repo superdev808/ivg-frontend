@@ -25,6 +25,7 @@ const Navbar = ({
 	rightNavLinks: { id: string; link?: string; title: string; icon: string; onClick?: any; auth: boolean }[];
 }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
+	const pathName = usePathname();
 
 	return (<div className="px-3 md:px-6 w-full  top-0 mt-1 mb-1">
 			<div className="flex items-center justify-content-between">
@@ -37,7 +38,7 @@ const Navbar = ({
 								return (
 									<div key={item.id + '_full'}>
 										<Link href={item.link}>
-											<p>{item.title}</p>
+											<p className={cx({"underline": pathName.includes(item.link)})}>{item.title}</p>
 										</Link>
 									</div>
 								);

@@ -53,7 +53,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 							style={{ paddingTop: '5rem', height: '95%' }}>
 							{children}
 						</div>
-						<div className="fixed w-full">{activePath !== '/' ? <Footer /> : null}</div>
+						<div className="fixed w-full">{activePath !== '/' && accessToken ? <Footer /> : null}</div>
 					</AuthProvider>
 				</Providers>
 			</body>

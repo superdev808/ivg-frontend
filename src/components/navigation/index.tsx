@@ -41,10 +41,10 @@ const Navigation = () => {
 	};
 
   
-  
+
   const navLinks = [
-      {id:'calculators',title: 'Calculators', link: '/calculators', icon: PrimeIcons.QRCODE, auth: authenticated},
-      {id: 'workflows',title: 'Workflows', link: '/workflows', icon: PrimeIcons.SITEMAP, auth: authenticated},
+      {id:'calculators',title: 'Calculators', link: '/calculators', icon: PrimeIcons.QRCODE, auth: true},
+      {id: 'workflows',title: 'Workflows', link: '/workflows', icon: PrimeIcons.SITEMAP, auth: true},
   ]
 
   const rightNavLinks = [
@@ -67,9 +67,11 @@ const Navigation = () => {
   useOutsideClick(boxRef, closeMenu);
   useCheckMobileScreen(closeMenu);
 
+  const isBkTransparent = pathname === '/' || (!authenticated && pathname.includes('/calculators')) || (!authenticated && pathname.includes('/workflows'))
+
   return (
     <div ref={boxRef} className={cx("z-2 w-full py-2 absolute", "nav-header")} style={{
-      background: pathname === '/' ? 'transparent' : '#023932 ',
+      background: isBkTransparent ? 'transparent' : '#023932 ',
 
 
     }}>
