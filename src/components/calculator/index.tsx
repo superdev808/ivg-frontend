@@ -72,7 +72,7 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
   };
 
   return (
-    <div className="w-12 md:w-8 flex justify-content-center mt-6">
+    <div className="w-12 md:w-8 flex justify-content-center mt-6 mb-8">
       {isLoading ? (
         <ProgressSpinner />
       ) : (

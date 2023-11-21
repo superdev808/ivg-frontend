@@ -1,4 +1,6 @@
-import React, { PropsWithChildren } from 'react';
+'use client';
+
+import React, { PropsWithChildren, useEffect } from 'react';
 import Navigation from '@/components/navigation';
 import './globals.scss';
 import { Providers } from '@/redux/provider';
@@ -9,16 +11,35 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
 import AuthProvider from './provider';
-import createClient from '@/lib/supabase-server';
+
+import { usePathname } from 'next/navigation';
+import Footer from '@/components/footer';
 export const dynamic = 'force-dynamic';
 
-export default async function RootLayout({ children }: PropsWithChildren) {
-	const supabase = createClient();
+export default function RootLayout({ children }: PropsWithChildren) {
+	const [accessToken, setAccessToken] = React.useState(null);
+	const activePath = usePathname();
 
-	const {
-		data: { session },
-	} = await supabase.auth.getSession();
-	const accessToken = session?.access_token || null;
+	useEffect(() => {
+		async function getSession() {
+			try {
+				const response = await fetch('/api/auth/session', {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				});
+				const data = await response.json();
+				if (!response.ok) {
+					throw new Error(data.error);
+				}
+				setAccessToken(data.session.accessToken || null);
+			} catch (error: any) {
+				return null;
+			}
+		}
+		getSession();
+	}, []);
 
 	return (
 		<html>
@@ -26,12 +47,13 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 			<body>
 				<Providers>
 					<AuthProvider accessToken={accessToken}>
-						<Navigation />
+						{activePath !== '/login/' ? <Navigation /> : null}
 						<div
-							className="z-1  h-full"
-							style={{ paddingTop: '5rem' }}>
+							className={'z-1   w-full  -mb-4'}
+							style={{ paddingTop: '5rem', height: '95%' }}>
 							{children}
 						</div>
+						<div className="fixed w-full">{activePath !== '/' && accessToken ? <Footer /> : null}</div>
 					</AuthProvider>
 				</Providers>
 			</body>
