@@ -17,10 +17,10 @@ export default function CalculatorsPage() {
   const router = useRouter();
 
   const tabItems = [
-    { label: "Scanbodies", value: 0 },
+    { label: "Crown Materials", value: 0 },
     { label: "Implant Drivers", value: 1 },
     { label: "Implant Screws", value: 2 },
-    { label: "Crown Materials", value: 2 },
+    { label: "Scanbodies", value: 3 },
   ];
 
   return (
