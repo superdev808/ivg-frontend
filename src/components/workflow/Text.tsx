@@ -166,7 +166,7 @@ const WorkflowText = () => {
 		<>
 			<div
 				ref={containerRef}
-				className="px-6 py-4 h-full overflow-auto">
+				className="px-6 py-4 h-full overflow-auto pb-6">
 				{pathElements}
 				<ConfirmPopup />
 			</div>

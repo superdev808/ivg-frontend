@@ -278,7 +278,6 @@ export default function Index() {
           </Button>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
