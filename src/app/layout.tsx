@@ -49,11 +49,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
 					<AuthProvider accessToken={accessToken}>
 						{activePath !== '/login/' ? <Navigation /> : null}
 						<div
-							className={'z-1   w-full  -mb-4'}
-							style={{ paddingTop: '5rem', height: '95%' }}>
+							className={'z-1 w-full flex-grow-1 '}
+							style={{ paddingTop: '5rem'}}>
 							{children}
 						</div>
-						<div className="fixed w-full">{activePath !== '/' && accessToken ? <Footer /> : null}</div>
+						<Footer />
 					</AuthProvider>
 				</Providers>
 			</body>

@@ -17,16 +17,16 @@ type MenuItem = {
 	hierarchy: string[];
 	description?: string;
 };
-export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:string[]}) {
+export default function WorkflowSelectionMenuComponent({ flowIds }: { flowIds: string[] }) {
 	const router = useRouter();
-	
-    const {  menuItems, menuQuestions } = useAppSelector((state) => state.workflows);
-	
+
+	const { menuItems, menuQuestions } = useAppSelector((state) => state.workflows);
+
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [highlightedItem, setHighlightedItem] = useState<any>(null);
 	const [currentItems, setCurrentItems] = useState<MenuItem[]>([]);
 	const [currentQuestion, setCurrentQuestion] = useState<MenuItem | null>(null);
-	const [breadcrumbs, setBreadcrumbs] = useState<{value:string, path:string}[]>([]);
+	const [breadcrumbs, setBreadcrumbs] = useState<{ value: string; path: string }[]>([]);
 
 	const { filteredList, input, setInput } = useFilteredList(currentItems, 'value');
 
@@ -38,45 +38,38 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 	}
 
 	useEffect(() => {
-		
-        if (menuItems.length == 0 || menuQuestions.length == 0) return
+		if (menuItems.length == 0 || menuQuestions.length == 0) return;
 
-		let mappedBreadcrumbs:{value:string, path:string}[] = [];
-		
+		let mappedBreadcrumbs: { value: string; path: string }[] = [];
+
 		if (flowIds) {
 			mappedBreadcrumbs = flowIds.map((id, index) => {
 				const items = menuItems.filter((item) => String(item.id) == String(id));
-                let item = items[0]
-                if (index !== 0 ){
-                    item = items.find((item) => String(item.hierarchy) == String(flowIds.slice(0, -1)));
-                }
+				let item = items[0];
+				if (index !== 0) {
+					item = items.find((item) => String(item.hierarchy) == String(flowIds.slice(0, -1)));
+				}
 				return item ? { value: item.value, path: '/workflows/' + item.hierarchy.join('/') } : { value: '', path: '' };
-	
 			});
-
 		}
 		let currentItems = filterCurrentSelections(flowIds);
 		let currentQuestion = filterCurrentQuestions(flowIds);
 		let selectedWorkflow = null;
-		if(flowIds){
-			selectedWorkflow = (menuItems).find((item) => Number(item.id) === Number(flowIds[flowIds.length - 1]) && item.workflow_id);
-		} 
-	
+		if (flowIds) {
+			selectedWorkflow = menuItems.find((item) => Number(item.id) === Number(flowIds[flowIds.length - 1]) && item.workflow_id);
+		}
+
 		if (currentItems.length == 0 && !selectedWorkflow) {
 			currentItems = filterCurrentSelections([] as string[]);
 			currentQuestion = filterCurrentQuestions([] as string[]);
-            router.push('/workflows', { scroll: false });
-			
+			router.push('/workflows', { scroll: false });
 		}
-	
+
 		setBreadcrumbs(mappedBreadcrumbs);
 		setCurrentQuestion(currentQuestion[0]);
 		setCurrentItems(currentItems);
 		setIsLoading(false);
 	}, [menuItems, menuQuestions]); // eslint-disable-line react-hooks/exhaustive-deps
-
-
-    
 
 	const selectionPanel = () => {
 		if (isLoading) {
@@ -111,7 +104,7 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 							width="100%"
 							height="5rem"
 							className="my-3"></Skeleton>
-					)
+					);
 				})}
 			</div>
 		);
@@ -142,7 +135,7 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 				</div>
 				<div className={'flex flex-grow-1 p-6 '}>{highlightedItem && highlightedItem.description}</div>
 				<div className="flex w-full justify-content-end p-6">
-					<Link href={'/workflows/' + (flowIds ?  flowIds.join('/') + '/' : '') + highlightedItem.id}>
+					<Link href={'/workflows/' + (flowIds ? flowIds.join('/') + '/' : '') + highlightedItem.id}>
 						<Button className="justify-content-center">Next</Button>
 					</Link>
 				</div>
@@ -150,74 +143,63 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 		);
 	};
 
-
-
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-
 		setInput(event.target.value);
-
-	  };
-
+	};
 
 	return (
-		<div
-			className={'flex lg:h-full justify-content-center align-items-center '}
-
-			>
-			<div className="flex flex-column w-full xl:w-7 h-full  shadow-1 bg-white" style={{ maxHeight: '40rem' }}>
+		<div className={'flex justify-content-center xl:pt-8'}>
+			<div className="flex flex-column  w-full xl:w-7  xl:shadow-2 bg-white" style={{maxHeight: '40rem', minHeight: '40rem'}}>
 				<div className="flex flex-column mx-5 my-0">
 					<div className="flex align-items-center mt-4">
-                    {isLoading ? (
-						<Skeleton
-                        width="25%"
-                        height="1.5rem"
-                        className="my-2"></Skeleton>
+						{isLoading ? (
+							<Skeleton
+								width="25%"
+								height="1.5rem"
+								className="my-2"></Skeleton>
 						) : (
-							
-                            <>
-						<h4 className="text-green-700 m-2">Workflows</h4>
-						{breadcrumbs &&
-							breadcrumbs.filter(item => item.value !== '').map((item) => {
-                                return (
-                                    <div
-										key={item.path}
-										className="flex align-items-center">
-										<i className="pi pi-chevron-right text-xs"></i>
-										<Link
-											className="no-underline	"
-											href={item.path}>
-											<h4 className="text-green-700 m-2 hover:text-green-500">{item.value}</h4>
-										</Link>
-									</div>
-								);
-							})}
-                                </>
-                            
-                            )}
+							<>
+								<h4 className="text-green-700 m-2">Workflows</h4>
+								{breadcrumbs &&
+									breadcrumbs
+										.filter((item) => item.value !== '')
+										.map((item) => {
+											return (
+												<div
+													key={item.path}
+													className="flex align-items-center">
+													<i className="pi pi-chevron-right text-xs"></i>
+													<Link
+														className="no-underline	"
+														href={item.path}>
+														<h4 className="text-green-700 m-2 hover:text-green-500">{item.value}</h4>
+													</Link>
+												</div>
+											);
+										})}
+							</>
+						)}
 					</div>
 					<div className="flex justify-content-between align-items-end my-3">
 						{isLoading ? (
-						<Skeleton
-                        width="60%"
-                        height="2rem"
-                        className="my-0"></Skeleton>
+							<Skeleton
+								width="60%"
+								height="2rem"
+								className="my-0"></Skeleton>
 						) : (
 							<h2 className="my-0">{currentQuestion && currentQuestion.value}</h2>
 						)}
-						<div className=''>
-						<InputText
-						type="text" className="p-inputtext-sm"
-						value={input}
-						onChange={handleInputChange}
-						placeholder="Filter..."
-						
-						></InputText>
-
+						<div className="">
+							<InputText
+								type="text"
+								className="p-inputtext-sm"
+								value={input}
+								onChange={handleInputChange}
+								placeholder="Filter..."></InputText>
 						</div>
-						
 					</div>
 				</div>
-				<div className="flex flex-column lg:flex-row h-full border-top-1 border-gray-300 lg:overflow-hidden overflow-auto pb-8 ">
+				<div className="flex flex-column lg:flex-row h-full border-top-1 border-gray-300 lg:overflow-hidden overflow-auto ">
 					<div className="col-12 flex-order-1 lg:flex-order-0 lg:col-6 flex flex-column  px-5 py-2 border-right-1 border-gray-300 ">
 						{selectionPanel()}
 					</div>
@@ -227,5 +209,5 @@ export default function WorkflowSelectionMenuComponent({flowIds}: {flowIds:strin
 				</div>
 			</div>
 		</div>
-	)
+	);
 }
