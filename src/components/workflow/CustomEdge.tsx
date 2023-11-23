@@ -27,7 +27,7 @@ const edgeStyles: EdgeStyles = {
 	},
 };
 
-const CustomEdge: FC<EdgeProps> = ({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, style }) => {
+const CustomEdge: FC<EdgeProps> = ({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, style, markerEnd }) => {
 	const [buttonState, setButtonState] = React.useState<string>('hidden');
 
 	const [edgePath, labelX, labelY] = getSmoothStepPath({
@@ -63,7 +63,8 @@ const CustomEdge: FC<EdgeProps> = ({ id, sourceX, sourceY, targetX, targetY, sou
 						? { ...style, strokeWidth: 2, stroke: '#023932' }
 						: { visibility: !data.hidden ? 'visible' : 'hidden', width: '150px', height: '200px' }
 				}
-				markerEnd={MarkerType.ArrowClosed}
+				markerEnd={markerEnd}
+
 			/>
 		
 			<EdgeLabelRenderer>

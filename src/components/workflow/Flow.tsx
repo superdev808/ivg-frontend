@@ -147,8 +147,7 @@ const Flow = () => {
 		if (selectedNodeData.length === 0 || selectedEdgeData.length === 0) return;
 		const nodesCopy = JSON.parse(JSON.stringify(selectedNodeData));
 		const edgesCopy = JSON.parse(JSON.stringify(selectedEdgeData));
-		console.log(nodesCopy)
-		console.log(edgesCopy)
+
 		getHierarchicalMultiLevelLayout(nodesCopy, edgesCopy);
 		setEdges([...edgesCopy]);
 		setNodes([...nodesCopy]);

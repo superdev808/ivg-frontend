@@ -1,3 +1,6 @@
+import  { MarkerType } from 'reactflow';
+
+
 interface NodeData {
 	id: number;
 	flowId: number;
@@ -52,6 +55,7 @@ interface Edge {
 	type: string; // replace with your edge type
 	animated: boolean;
 	sourceHandle: string;
+	markerEnd: any;
 }
 
 export function unpackNodesEdges(nestedNodes) {
@@ -105,6 +109,12 @@ export function unpackNodesEdges(nestedNodes) {
 						type: 'custom',
 						animated: false,
 						sourceHandle:'sh_' + newNode.id + '_' + i.toString(),
+						markerEnd: {
+						  type: MarkerType.ArrowClosed,
+						  width: 10,
+						  height: 10,
+						  color: '#023932',
+						},
 					};
 
 					newEdges = [...newEdges, newEdge];

@@ -8,14 +8,16 @@ import { useAppSelector } from '@/redux/hooks';
 
 const nodeStyles: { [key: string]: any } = {
 	active: {
-		border: '1px solid #83B899',
+		border: '1px solid #023932',
+		background: '#CCD7D6',
 	},
 
 	hidden: {
 		visibility: 'hidden',
 	},
 	selected: {
-		border: '2px solid #83B899',
+		border: '2px solid #023932',
+		background: '#CCD7D6',
 	},
 };
 
@@ -25,7 +27,7 @@ const CustomNode = (props: NodeProps) => {
 
 	const getHandles = () => {
 		const count = node.children;
-		console.log(node)	
+	
 		if (count === 2) {
 			return [
 				[Position.Bottom, { bottom: '-10px', left: '53px' }],
@@ -66,7 +68,7 @@ const CustomNode = (props: NodeProps) => {
 				id={'th_' + props.id}
 				type="target"
 				position={Position.Top}
-				style={{ visibility: node.hidden ? 'hidden' : 'unset', background: '#83B899', width: '8px', height: '8px', top: '-10px' }}
+				style={{ visibility: 'hidden', background: '#83B899', width: '8px', height: '8px' }}
 				isConnectable={false}
 			/>
 
@@ -76,7 +78,6 @@ const CustomNode = (props: NodeProps) => {
 					...nodeStyles[buttonState],
 					borderRadius: '0.25rem',
 					padding: '0.75rem',
-					background: 'white',
 					fontSize: '0.65rem',
 					alignItems: 'center',
 					textAlign: 'center',
@@ -93,7 +94,7 @@ const CustomNode = (props: NodeProps) => {
 			</button>
 
 			{getHandles().map((handle: any, index: number) => {
-				console.log(handle)
+
 				return (
 					<Handle
 						className={node.end ? 'hidden' : ''}
@@ -101,7 +102,7 @@ const CustomNode = (props: NodeProps) => {
 						id={'sh_' + props.id + '_' + index} 
 						type="source"
 						position={handle[0]}
-						style={{ visibility: node.hidden ? 'hidden' : 'unset', background: '#83B899', width: '8px', height: '8px', ...handle[1] }}
+						style={{ visibility: node.hidden ? 'hidden' : 'unset', background: '#023932', width: '8px', height: '8px', ...handle[1] }}
 						isConnectable={false}
 					/>
 				);
