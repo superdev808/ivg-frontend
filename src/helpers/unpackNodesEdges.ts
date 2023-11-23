@@ -51,6 +51,7 @@ interface Edge {
 	target: string;
 	type: string; // replace with your edge type
 	animated: boolean;
+	sourceHandle: string;
 }
 
 export function unpackNodesEdges(nestedNodes) {
@@ -62,6 +63,7 @@ export function unpackNodesEdges(nestedNodes) {
 		const newNode = {
 			id: String(nodeId),
 			data: {
+				children: node.children.length,
 				value: node.value,
 				refId: node.id,
 				start: node.start,
@@ -78,12 +80,13 @@ export function unpackNodesEdges(nestedNodes) {
 			height: 100,
 			targetPosition: 'top',
 			sourcePosition: 'bottom',
+			
 			position: { x: 0, y: 0 },
 			type: 'custom',
 			draggable: false,
 		};
 		nodeId++;
-
+		
 		if (node.children && node.children.length > 0) {
 
 
@@ -101,6 +104,7 @@ export function unpackNodesEdges(nestedNodes) {
 						target: String(child.id),
 						type: 'custom',
 						animated: false,
+						sourceHandle:'sh_' + newNode.id + '_' + i.toString(),
 					};
 
 					newEdges = [...newEdges, newEdge];

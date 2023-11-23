@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useCallback } from 'react';
+import React, { FC, useEffect, memo } from 'react';
 import { EdgeProps, getSmoothStepPath, BaseEdge, EdgeText, useStore, MarkerType, EdgeLabelRenderer } from 'reactflow';
 
 import styles from '@/components/workflow/Workflow.module.scss';
@@ -94,4 +94,4 @@ const CustomEdge: FC<EdgeProps> = ({ id, sourceX, sourceY, targetX, targetY, sou
 	);
 };
 
-export default CustomEdge;
+export default memo(CustomEdge);
