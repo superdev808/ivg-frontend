@@ -12,7 +12,7 @@ import { useAppSelector } from "@/redux/hooks";
 const cx = classNames.bind(styles);
 
 const Navigation = () => {
-  const {authenticated,session} = useAppSelector((state) => state.auth);
+  const {authenticated,isLoading} = useAppSelector((state) => state.auth);
   const pathname = usePathname()
 
   // toggle sidebar
@@ -67,7 +67,7 @@ const Navigation = () => {
   useOutsideClick(boxRef, closeMenu);
   useCheckMobileScreen(closeMenu);
 
-  const isBkTransparent = pathname === '/' || (!authenticated && pathname.includes('/calculators')) || (!authenticated && pathname.includes('/workflows'))
+  const isBkTransparent =  !authenticated && !isLoading
 
   return (
     <div ref={boxRef} className={cx("z-2 w-full py-2 absolute", "nav-header")} style={{
