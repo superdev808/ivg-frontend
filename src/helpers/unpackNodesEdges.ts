@@ -1,5 +1,4 @@
-import  { MarkerType } from 'reactflow';
-
+import { MarkerType } from 'reactflow';
 
 interface NodeData {
 	id: number;
@@ -84,16 +83,14 @@ export function unpackNodesEdges(nestedNodes) {
 			height: 100,
 			targetPosition: 'top',
 			sourcePosition: 'bottom',
-			
 			position: { x: 0, y: 0 },
 			type: 'custom',
 			draggable: false,
+			term: node.children.length === 0 ? true : false,
 		};
 		nodeId++;
-		
+
 		if (node.children && node.children.length > 0) {
-
-
 			for (let i = 0; i <= node.children.length - 1; i++) {
 				const ungrouped: { newNodes: Node[]; newEdges: Edge[] } = unpack(node.children[i]);
 				const children = ungrouped.newNodes;
@@ -108,12 +105,12 @@ export function unpackNodesEdges(nestedNodes) {
 						target: String(child.id),
 						type: 'custom',
 						animated: false,
-						sourceHandle:'sh_' + newNode.id + '_' + i.toString(),
+						sourceHandle: 'sh_' + newNode.id + '_' + i.toString(),
 						markerEnd: {
-						  type: MarkerType.ArrowClosed,
-						  width: 10,
-						  height: 10,
-						  color: '#023932',
+							type: MarkerType.ArrowClosed,
+							width: 10,
+							height: 10,
+							color: '#023932',
 						},
 					};
 
