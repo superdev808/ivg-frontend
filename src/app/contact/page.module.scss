@@ -1,0 +1,57 @@
+.contact-us-header {
+    font-size: 60px;
+    color: var(--primary-color);
+}
+
+.contact-us-description {
+    font-weight: 300;
+    line-height: 34px;
+}
+
+.contact-us-options {
+    background: rgba(131,200,153,0.07);
+
+    & i {
+        color: #83B899;
+    }
+
+    &--right {
+        border-color: #D9D9D9;
+
+        & p {
+            font-weight: 100;
+            & i {
+                font-size: 10px;
+            }
+        }
+    }
+}
+
+.check-out-social {
+    background-color: var(--primary-dark-color);
+    color: var(--primary-color);
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 60px;
+}
+
+.landing-contact-container {
+    border-color: gainsboro !important;
+  }
+  
+  .landing-contact-section {
+    color: var(--primary-dark-color);
+    width: 200px;
+  
+    & button {
+      color: var(--primary-dark-color) !important;
+      & span {
+        font-size: 32px !important;
+      }
+    }
+  
+    &-contact-us {
+      color: var(--primary-dark-color) !important;
+    }
+}

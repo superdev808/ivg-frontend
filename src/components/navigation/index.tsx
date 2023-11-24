@@ -67,7 +67,7 @@ const Navigation = () => {
   useOutsideClick(boxRef, closeMenu);
   useCheckMobileScreen(closeMenu);
 
-  const isBkTransparent =  !authenticated && !isLoading
+  const isBkTransparent =  !authenticated && !isLoading && !pathname.includes('/contact')
 
   return (
     <div ref={boxRef} className={cx("z-2 w-full py-2 absolute", "nav-header")} style={{
