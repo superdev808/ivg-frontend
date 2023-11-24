@@ -5,7 +5,6 @@ import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import classNames from "classnames/bind";
 import styles from "./page.module.scss";
-import Footer from "@/components/footer";
 const cx = classNames.bind(styles);
 
 export default function ContactPage() {
@@ -99,6 +98,5 @@ export default function ContactPage() {
                 </div>
             </div>
         </div>
-        <Footer />
     </>
 }

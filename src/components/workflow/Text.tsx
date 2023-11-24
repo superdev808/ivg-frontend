@@ -20,8 +20,7 @@ const WorkflowText = () => {
 
 	const { selectedNodeData, selectedEdgeData, selectedPathIds } = useSelector(selectWorkflowSelection);
 	const [pathElements, setPathElements] = useState<JSX.Element[]>([]);
-	const [visible, setVisible] = useState(false);
-	const [selectedImage, setSelectedImage] = useState(null);
+	const [termPath, setTermPath] = useState<boolean>(false);
 
 	const resetToNode = (nodeId: number) => {
 		const newPathIds: PathIds[] = [];
@@ -51,11 +50,15 @@ const WorkflowText = () => {
 		const elements: JSX.Element[] = [];
 		if (selectedPathIds.length > 0) {
 			selectedPathIds.forEach((ids: [null | number, number], idx: number) => {
-				const currrentNode = selectedNodeData.find((node: any) => node.id === ids[1]);
-
-				const currrentEdges = selectedEdgeData.filter((edge: any) => edge.source === ids[1]);
-
-				currrentNode &&
+				const currentNode = selectedNodeData.find((node: any) => node.id === ids[1]);
+			
+				const currentEdges = selectedEdgeData.filter((edge: any) => edge.source === ids[1]);
+				if (currentNode && currentNode.term) {
+					setTermPath(true);
+				} else {
+					setTermPath(false);
+				}
+				currentNode &&
 					elements.push(
 						<div key={idx}>
 							<div className={'flex flex-column bg-gray-50  border-green-700 border-2 border-round mb-4'}>
@@ -72,10 +75,10 @@ const WorkflowText = () => {
 									/>
 								</div>
 								<div className="px-4 pb-4">
-									<strong>{currrentNode.data.value}</strong>
+									<strong>{currentNode.data.value}</strong>
 									<div className="flex justify-content-center align-items-center p-2">
-										{currrentNode.data.images &&
-											currrentNode.data.images.map((image: string) => {
+										{currentNode.data.images &&
+											currentNode.data.images.map((image: string) => {
 												return (
 													<div
 														className="p-2 "
@@ -84,7 +87,7 @@ const WorkflowText = () => {
 															<ImageComponent
 																alt={image}
 																key={image}
-																src={`https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/${currrentNode.data.flowId}/${image}.png`}
+																src={`https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/${currentNode.data.flowId}/${image}.png`}
 																fallbackSrc={`/images/no-image.png`}></ImageComponent>
 														}
 													</div>
@@ -93,29 +96,29 @@ const WorkflowText = () => {
 									</div>
 									<div className="flex flex-column justify-content-center align-items-center p-2">
 									
-										{currrentNode.data.videos &&
-											currrentNode.data.videos.map((video: string) => {
+										{currentNode.data.videos &&
+											currentNode.data.videos.map((video: string) => {
 												return (
 													<div
 														className="p-2 cursor-pointer border-2	 border-green-300 hover:border-4 hover:border-green-500 hover:shadow-2 mb-2"
 														key={video}>
 														{
-															<ReactPlayer width={400} height={200} controls loop={false} url={`https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/${currrentNode.data.flowId}/${video}.mp4`} />
+															<ReactPlayer width={400} height={200} controls loop={false} url={`https://ivoryguide.s3.us-west-1.amazonaws.com/images/workflows/${currentNode.data.flowId}/${video}.mp4`} />
 
 														}
 													</div>
 												);
 											})}
 									</div>
-									{currrentNode.data.texts &&
-										currrentNode.data.texts.map((text: string) => {
+									{currentNode.data.texts &&
+										currentNode.data.texts.map((text: string) => {
 											return <p style={{whiteSpace: "pre-wrap"}} key={text.replace(' ', '_')}>{text.replaceAll('\n','\n\n')}</p>;
 										})}
 								</div>
 							</div>
 							<div className="flex flex-wrap justify-content-center mb-4">
-								{currrentEdges &&
-									currrentEdges.map((edge: Edge) => {
+								{currentEdges &&
+									currentEdges.map((edge: Edge) => {
 										return (
 											<Button
 												className={`w-full border-1 max-w-25rem justify-content-center mx-2 mb-2 ${
@@ -132,9 +135,10 @@ const WorkflowText = () => {
 											</Button>
 										);
 									})}
-								{!currrentEdges && <h4 className="w-full text-center text-green-700">Please contact lab if you have further questions.</h4>}
+								{!currentEdges && <h4 className="w-full text-center text-green-700">Please contact lab if you have further questions.</h4>}
 							</div>
 						</div>
+						
 					);
 			});
 
@@ -166,8 +170,12 @@ const WorkflowText = () => {
 		<>
 			<div
 				ref={containerRef}
-				className="px-6 py-4 h-full overflow-auto">
+				className="px-6 py-4 h-full overflow-auto pb-6">
 				{pathElements}
+				{termPath ? <div>
+
+					<h3 className="w-full text-center text-green-700 border-1 border-round p-3">All steps completed! Please contact lab if you have further questions.</h3>
+				</div>:<></>}
 				<ConfirmPopup />
 			</div>
 		</>

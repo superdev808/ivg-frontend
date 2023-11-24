@@ -1,3 +1,5 @@
+import { MarkerType } from 'reactflow';
+
 interface NodeData {
 	id: number;
 	flowId: number;
@@ -51,6 +53,8 @@ interface Edge {
 	target: string;
 	type: string; // replace with your edge type
 	animated: boolean;
+	sourceHandle: string;
+	markerEnd: any;
 }
 
 export function unpackNodesEdges(nestedNodes) {
@@ -62,6 +66,7 @@ export function unpackNodesEdges(nestedNodes) {
 		const newNode = {
 			id: String(nodeId),
 			data: {
+				children: node.children.length,
 				value: node.value,
 				refId: node.id,
 				start: node.start,
@@ -81,12 +86,11 @@ export function unpackNodesEdges(nestedNodes) {
 			position: { x: 0, y: 0 },
 			type: 'custom',
 			draggable: false,
+			term: node.children.length === 0 ? true : false,
 		};
 		nodeId++;
 
 		if (node.children && node.children.length > 0) {
-
-
 			for (let i = 0; i <= node.children.length - 1; i++) {
 				const ungrouped: { newNodes: Node[]; newEdges: Edge[] } = unpack(node.children[i]);
 				const children = ungrouped.newNodes;
@@ -101,6 +105,13 @@ export function unpackNodesEdges(nestedNodes) {
 						target: String(child.id),
 						type: 'custom',
 						animated: false,
+						sourceHandle: 'sh_' + newNode.id + '_' + i.toString(),
+						markerEnd: {
+							type: MarkerType.ArrowClosed,
+							width: 10,
+							height: 10,
+							color: '#023932',
+						},
 					};
 
 					newEdges = [...newEdges, newEdge];

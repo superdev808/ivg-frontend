@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: any = {
-	authenticated: false,
+	authenticated: null,
     session: null,
+    isLoading: true,
 };
 
 export const authSlice = createSlice({
@@ -13,9 +14,11 @@ export const authSlice = createSlice({
             if (action.payload) {
                 state.authenticated = true;
                 state.session = action.payload;
+                state.isLoading = false;
             } else {
                 state.authenticated = false;
                 state.session = null;
+                state.isLoading = false;
             }
 		},
 	},
