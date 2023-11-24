@@ -3,7 +3,7 @@
 const Footer = () => {
 	return (
 		<>
-			<div className={'flex bg-white border-top-1 border-gray-300'}>
+			<div className={'flex flex-column md:flex-row bg-white'}>
         
 				<div className="col-10 col-offset-1 md:col-4 md:col-offset-0 flex flex-column align-items-center">
 					<p className="text-center md:text-left">@ 2023 Ivory Guide, LLC and its subsidiaries. All rights reserved.</p>
