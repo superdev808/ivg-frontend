@@ -1,10 +1,10 @@
-
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 // NOTE: `createServerComponentSupabaseClient` has been renamed to `createServerComponentClient` in version `0.7.0`
-import { cookies, headers } from 'next/headers';
+import { cookies } from 'next/headers';
 
 export default function createClient() {
+	const cookieStore = cookies();
 	return createServerComponentClient({
-		cookies,
+		cookies: () => cookieStore,
 	});
 }
