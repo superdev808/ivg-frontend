@@ -16,34 +16,34 @@ const tabItems = [
       "Enter your implant information below to determine compatible authentic and generic scanbodies.",
     input: [
       {
-        name: "IMPLANT BRAND",
+        name: "Implant Brand",
         text: "Implant Brand"
       },
       {
-        name: "IMPLANT SYSTEM",
+        name: "Implant System",
         text: "Implant System"
       },
       {
-        name: "EXTERNAL DIAMETER",
+        name: "External Diameter",
         text: "External Diameter"
       },
       {
-        name: "PLATFORM",
+        name: "Platform",
         text: "Platform"
       },
       {
-        name: "Authentic or Generic",
+        name: "Authentic or Generic?",
         text: "Authentic or Generic"
       }
     ],
     output: [
       {
-        name: "SCANBODY",
-        text: "Brand"
+        name: "Manufacturer",
+        text: "Manufacturer"
       },
       {
-        name: "SCANBODY ITEM #",
-        text: "Item #"
+        name: "Scanbody Item Number",
+        text: "Scanbody Item Number"
       },
       {
         name: "Link to Purchase",
