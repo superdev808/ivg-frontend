@@ -27,7 +27,14 @@
 }
 
 .calculatorButton {
-  &:enabled:focus {
-    background-color: $ps-green-light !important;
+  background-color: white !important;
+  color: #023932 !important;
+  border: 1px solid #E0E0E0;
+  &:hover {
+    border: 1px solid $ps-green-light !important;
+  }
+
+  &--highlighted {
+    border: 1px solid $ps-green-dark !important;
   }
 }
