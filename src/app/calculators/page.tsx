@@ -2,10 +2,6 @@
 import React, { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
-import { useGetCalculatorsQuery } from '@/redux/services/calculatorsApi';
-import { Divider } from 'primereact/divider';
-import { ProgressSpinner } from 'primereact/progressspinner';
 import styles from './page.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
