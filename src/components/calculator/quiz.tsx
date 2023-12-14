@@ -6,6 +6,7 @@ interface QuizProps {
   selectedAnswer: string | null;
   answers: Array<any>;
   handleSelectAnswer: (e: any) => void;
+  disabled?: boolean;
 }
 
 export default function Quiz(props: QuizProps) {
@@ -19,6 +20,7 @@ export default function Quiz(props: QuizProps) {
           options={props.answers}
           placeholder={"Select"}
           className="w-full"
+          disabled={props.disabled}
         />
       </div>
     </>

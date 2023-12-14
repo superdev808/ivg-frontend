@@ -4,6 +4,7 @@ import React, { PropsWithChildren, useEffect } from 'react';
 import Navigation from '@/components/navigation';
 import './globals.scss';
 import { Providers } from '@/redux/provider';
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import '../styles/theme/custom/theme.css'; //theme
 import 'primereact/resources/primereact.min.css'; //core css
@@ -15,6 +16,8 @@ import AuthProvider from './provider';
 import { usePathname } from 'next/navigation';
 import Footer from '@/components/footer';
 export const dynamic = 'force-dynamic';
+
+const queryClient = new QueryClient();
 
 export default function RootLayout({ children }: PropsWithChildren) {
 	const [accessToken, setAccessToken] = React.useState(null);
@@ -47,13 +50,15 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			<body>
 				<Providers>
 					<AuthProvider accessToken={accessToken}>
-						{activePath !== '/login/' ? <Navigation /> : null}
-						<div
-							className={'z-1 w-full flex-grow-1 '}
-							style={{ paddingTop: '5rem'}}>
-							{children}
-						</div>
-						<Footer />
+						<QueryClientProvider client={queryClient}>
+							{activePath !== '/login/' ? <Navigation /> : null}
+							<div
+								className={'z-1 w-full flex-grow-1 '}
+								style={{ paddingTop: '5rem'}}>
+								{children}
+							</div>
+							<Footer />
+						</QueryClientProvider>
 					</AuthProvider>
 				</Providers>
 			</body>
