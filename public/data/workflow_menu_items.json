@@ -1,476 +1,311 @@
 [
     {
-        "id": "10000",
-        "value": "Trios",
-        "slug": "trios",
-        "type": "0",
-        "description": "Use this section to learn about case setup and scan strategies across a variety of products using Trios intraoral scanners",
-        "": "",
-        "code": ":10000",
+        "id": 10000,
+        "label": " Trios",
+        "description": "",
         "hierarchy": []
     },
     {
-        "id": "10003",
-        "value": "Fixed Restorations",
-        "slug": "fixed-restorations",
-        "type": "1",
+        "id": 10003,
+        "label": " Fixed Restorations",
         "description": "",
-        "": "",
-        "code": ":10000:10003",
         "hierarchy": [
             "10000"
         ]
     },
     {
-        "id": "1080",
-        "value": "Bridge",
-        "slug": "bridge",
-        "type": "3",
+        "id": 1080,
+        "label": " Bridge",
         "description": "",
-        "": "",
-        "code": ":10000:10003:1080",
         "hierarchy": [
             "10000",
             "10003"
-        ],
-        "workflow_id": "1080"
+        ]
     },
     {
-        "id": "3099",
-        "value": "Full Arch Scanning",
-        "slug": "full-arch-scanning",
-        "type": "3",
+        "id": 3099,
+        "label": " Full Arch Scanning",
         "description": "",
-        "": "",
-        "code": ":10000:10003:3099",
         "hierarchy": [
             "10000",
             "10003"
-        ],
-        "workflow_id": "3099"
+        ]
     },
     {
-        "id": "10004",
-        "value": "Implant-Retained Restorations",
-        "slug": "implant-retained-restorations",
-        "type": "1",
+        "id": 10004,
+        "label": " Implant-Retained Restorations",
         "description": "",
-        "": "",
-        "code": ":10000:10004",
         "hierarchy": [
             "10000"
         ]
     },
     {
-        "id": "2",
-        "value": "Single Implant Crown",
-        "slug": "single-implant-crown",
-        "type": "3",
+        "id": 2,
+        "label": " Single Implant Crown",
         "description": "",
-        "": "",
-        "code": ":10000:10004:2",
         "hierarchy": [
             "10000",
             "10004"
-        ],
-        "workflow_id": "2"
+        ]
     },
     {
-        "id": "655",
-        "value": "Implant Crown - Emergence Profile",
-        "slug": "implant-crown-emergence-profile",
-        "type": "3",
+        "id": 655,
+        "label": " Implant Crown - Emergence Profile",
         "description": "",
-        "": "",
-        "code": ":10000:10004:655",
         "hierarchy": [
             "10000",
             "10004"
-        ],
-        "workflow_id": "655"
+        ]
     },
     {
-        "id": "430",
-        "value": "Implant Bridge",
-        "slug": "implant-bridge",
-        "type": "3",
+        "id": 430,
+        "label": " Implant Bridge",
         "description": "",
-        "": "",
-        "code": ":10000:10004:430",
         "hierarchy": [
             "10000",
             "10004"
-        ],
-        "workflow_id": "430"
+        ]
     },
     {
-        "id": "2976",
-        "value": "Inlay / Onlay",
-        "slug": "inlay-onlay",
-        "type": "3",
+        "id": 2976,
+        "label": " Inlay / Onlay",
         "description": "",
-        "": "",
-        "code": ":10000:10004:2976",
         "hierarchy": [
             "10000",
             "10004"
-        ],
-        "workflow_id": "2976"
+        ]
     },
     {
-        "id": "2752",
-        "value": "Post and Core",
-        "slug": "post-and-core",
-        "type": "3",
+        "id": 2752,
+        "label": " Post and Core",
         "description": "",
-        "": "",
-        "code": ":10000:10004:2752",
         "hierarchy": [
             "10000",
             "10004"
-        ],
-        "workflow_id": "2752"
+        ]
     },
     {
-        "id": "10005",
-        "value": "Removables",
-        "slug": "removables",
-        "type": "1",
+        "id": 10005,
+        "label": " Removables",
         "description": "",
-        "": "",
-        "code": ":10000:10005",
         "hierarchy": [
             "10000"
         ]
     },
     {
-        "id": "3268",
-        "value": "Occlusal Guard",
-        "slug": "occlusal-guard",
-        "type": "3",
+        "id": 3268,
+        "label": " Occlusal Guard",
         "description": "",
-        "": "",
-        "code": ":10000:10005:3268",
         "hierarchy": [
             "10000",
             "10005"
-        ],
-        "workflow_id": "3268"
+        ]
     },
     {
-        "id": "2634",
-        "value": "Aligners",
-        "slug": "aligners",
-        "type": "3",
+        "id": 2634,
+        "label": " Aligners",
         "description": "",
-        "": "",
-        "code": ":10000:10005:2634",
         "hierarchy": [
             "10000",
             "10005"
-        ],
-        "workflow_id": "2634"
+        ]
     },
     {
-        "id": "1378",
-        "value": "Sleep Apnea Device",
-        "slug": "sleep-apnea-device",
-        "type": "3",
+        "id": 1378,
+        "label": " Sleep Apnea Device",
         "description": "",
-        "": "",
-        "code": ":10000:10005:1378",
         "hierarchy": [
             "10000",
             "10005"
-        ],
-        "workflow_id": "1378"
+        ]
     },
     {
-        "id": "10006",
-        "value": "Dentures",
-        "slug": "dentures",
-        "type": "1",
+        "id": 10006,
+        "label": " Dentures",
         "description": "",
-        "": "",
-        "code": ":10000:10006",
         "hierarchy": [
             "10000"
         ]
     },
     {
-        "id": "10009",
-        "value": "Full Denture",
-        "slug": "full-denture",
-        "type": "2",
+        "id": 10009,
+        "label": " Full Denture",
         "description": "",
-        "": "",
-        "code": ":10000:10006:10009",
         "hierarchy": [
             "10000",
             "10006"
         ]
     },
     {
-        "id": "951",
-        "value": "Edentulous Scanning",
-        "slug": "edentulous-scanning",
-        "type": "3",
+        "id": 951,
+        "label": " Edentulous Scanning",
         "description": "",
-        "": "",
-        "code": ":10000:10006:10009:951",
         "hierarchy": [
             "10000",
             "10006",
             "10009"
-        ],
-        "workflow_id": "951"
+        ]
     },
     {
-        "id": "259",
-        "value": "Copy / Reference Denture",
-        "slug": "copy-reference-denture",
-        "type": "3",
+        "id": 259,
+        "label": " Copy / Reference Denture",
         "description": "",
-        "": "",
-        "code": ":10000:10006:10009:259",
         "hierarchy": [
             "10000",
             "10006",
             "10009"
-        ],
-        "workflow_id": "259"
+        ]
     },
     {
-        "id": "10007",
-        "value": "Surgical Guides",
-        "slug": "surgical-guides",
-        "type": "1",
+        "id": 10007,
+        "label": " Surgical Guides",
         "description": "",
-        "": "",
-        "code": ":10000:10007",
         "hierarchy": [
             "10000"
         ]
     },
     {
-        "id": "1286",
-        "value": "Tooth-borne",
-        "slug": "tooth-borne",
-        "type": "3",
+        "id": 1286,
+        "label": " Tooth-borne",
         "description": "",
-        "": "",
-        "code": ":10000:10007:1286",
         "hierarchy": [
             "10000",
             "10007"
-        ],
-        "workflow_id": "1286"
+        ]
     },
     {
-        "id": "10001",
-        "value": "Medit",
-        "slug": "medit",
-        "type": "0",
-        "description": "Use this section to learn about case setup and scan strategies across a variety of products using Medit intraoral scanners",
-        "": "",
-        "code": ":10001",
+        "id": 10001,
+        "label": " Medit",
+        "description": "",
         "hierarchy": []
     },
     {
-        "id": "10008",
-        "value": "Additional Scanning Tools",
-        "slug": "additional-scanning-tools",
-        "type": "1",
+        "id": 10008,
+        "label": " Additional Scanning Tools",
         "description": "",
-        "": "",
-        "code": ":10001:10008",
         "hierarchy": [
             "10001"
         ]
     },
     {
-        "id": "3191",
-        "value": "Trimming Tools",
-        "slug": "trimming-tools",
-        "type": "3",
+        "id": 3191,
+        "label": " Trimming Tools",
         "description": "",
-        "": "",
-        "code": ":10001:10008:3191",
         "hierarchy": [
             "10001",
             "10008"
-        ],
-        "workflow_id": "3191"
+        ]
     },
     {
-        "id": "10006",
-        "value": "Dentures",
-        "slug": "dentures",
-        "type": "1",
+        "id": 10014,
+        "label": " Dentures",
         "description": "",
-        "": "",
-        "code": ":10001:10006",
         "hierarchy": [
             "10001"
         ]
     },
     {
-        "id": "10009",
-        "value": "Full Denture",
-        "slug": "full-denture",
-        "type": "2",
+        "id": 10013,
+        "label": " Full Denture",
         "description": "",
-        "": "",
-        "code": ":10001:10006:10009",
         "hierarchy": [
             "10001",
-            "10006"
+            "10014"
         ]
     },
     {
-        "id": "853",
-        "value": "Copy / Reference Denture",
-        "slug": "copy-reference-denture",
-        "type": "3",
+        "id": 853,
+        "label": " Copy / Reference Denture",
         "description": "",
-        "": "",
-        "code": ":10001:10006:10009:853",
         "hierarchy": [
             "10001",
             "10006",
-            "10009"
-        ],
-        "workflow_id": "853"
+            "10013"
+        ]
     },
     {
-        "id": "2875",
-        "value": "Edentulous Scanning",
-        "slug": "edentulous-scanning",
-        "type": "3",
+        "id": 2875,
+        "label": " Edentulous Scanning",
         "description": "",
-        "": "",
-        "code": ":10001:10006:10009:2875",
         "hierarchy": [
             "10001",
             "10006",
-            "10009"
-        ],
-        "workflow_id": "2875"
+            "10013"
+        ]
     },
     {
-        "id": "10002",
-        "value": "Primescan",
-        "slug": "primescan",
-        "type": "0",
-        "description": "Use this section to learn about case setup and scan strategies across a variety of products using Primescan intraoral scanners",
-        "": "",
-        "code": ":10002",
+        "id": 10002,
+        "label": " Primescan",
+        "description": "",
         "hierarchy": []
     },
     {
-        "id": "10004",
-        "value": "Implant-Retained Restorations",
-        "slug": "implant-retained-restorations",
-        "type": "1",
+        "id": 10011,
+        "label": " Implant-Retained Restorations",
         "description": "",
-        "": "",
-        "code": ":10002:10004",
         "hierarchy": [
             "10002"
         ]
     },
     {
-        "id": "1530",
-        "value": "Single Implant Crown",
-        "slug": "single-implant-crown",
-        "type": "3",
+        "id": 1530,
+        "label": " Single Implant Crown",
         "description": "",
-        "": "3",
-        "code": ":10002:10004:1530",
         "hierarchy": [
             "10002",
-            "10004"
-        ],
-        "workflow_id": "1530"
+            "10011"
+        ]
     },
     {
-        "id": "10003",
-        "value": "Fixed Restorations",
-        "slug": "fixed-restorations",
-        "type": "1",
+        "id": 10010,
+        "label": " Fixed Restorations",
         "description": "",
-        "": "",
-        "code": ":10002:10003",
         "hierarchy": [
             "10002"
         ]
     },
     {
-        "id": "1674",
-        "value": "Single Crown",
-        "slug": "single-crown",
-        "type": "3",
+        "id": 1674,
+        "label": " Single Crown",
         "description": "",
-        "": "",
-        "code": ":10002:10003:1674",
         "hierarchy": [
             "10002",
-            "10003"
-        ],
-        "workflow_id": "1674"
+            "10010"
+        ]
     },
     {
-        "id": "1867",
-        "value": "Bridge",
-        "slug": "bridge",
-        "type": "3",
+        "id": 1867,
+        "label": " Bridge",
         "description": "",
-        "": "",
-        "code": ":10002:10003:1867",
         "hierarchy": [
             "10002",
-            "10003"
-        ],
-        "workflow_id": "1867"
+            "10010"
+        ]
     },
     {
-        "id": "10005",
-        "value": "Removables",
-        "slug": "removables",
-        "type": "1",
+        "id": 10012,
+        "label": " Removables",
         "description": "",
-        "": "",
-        "code": ":10002:10005",
         "hierarchy": [
             "10002"
         ]
     },
     {
-        "id": "2068",
-        "value": "Aligners",
-        "slug": "aligners",
-        "type": "3",
+        "id": 2068,
+        "label": " Aligners",
         "description": "",
-        "": "",
-        "code": ":10002:10005:2068",
         "hierarchy": [
             "10002",
-            "10005"
-        ],
-        "workflow_id": "2068"
+            "10012"
+        ]
     },
     {
-        "id": "2318",
-        "value": "Sleep Apnea Device",
-        "slug": "sleep-apnea-device",
-        "type": "3",
+        "id": 2318,
+        "label": " Sleep Apnea Device",
         "description": "",
-        "": "",
-        "code": ":10002:10005:2318",
         "hierarchy": [
             "10002",
-            "10005"
-        ],
-        "workflow_id": "2318"
+            "10012"
+        ]
     }
 ]

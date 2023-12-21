@@ -1,0 +1,40 @@
+@import '~video-react/styles/scss/video-react';
+@import "@/styles/variables.scss";
+@import "@/styles/theme.scss";
+
+html,
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
+	font-family: mundial, sans-serif;
+	background-color: var(--surface-0);
+	color: $ps-green-dark;
+}
+
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+	scrollbar-width: auto;
+	scrollbar-color: #c9c9c9 #f2f2f2;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+	width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+	background: #f2f2f2;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #c9c9c9;
+	border-radius: 0px;
+	border: 0px solid #ffffff;
+}
+
+

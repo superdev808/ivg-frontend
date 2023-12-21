@@ -1,6 +1,6 @@
 'use client';
-import { ChangeEvent, FormEvent, use, useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { InputText } from 'primereact/inputtext';
 
 import Link from 'next/link';
@@ -9,202 +9,177 @@ import { Skeleton } from 'primereact/skeleton';
 
 import styles from './Workflow.module.scss';
 import { useAppSelector } from '@/redux/hooks';
-import useFilteredList from '@/hooks/useFilteredList';
+import { classNames } from 'primereact/utils';
+import { MenuItem } from '@/types/Workflow';
+import { Divider } from 'primereact/divider';
 
-type MenuItem = {
-	id: number;
-	value: string;
-	hierarchy: string[];
-	description?: string;
-};
-export default function WorkflowSelectionMenuComponent({ flowIds }: { flowIds: string[] }) {
+export default function WorkflowSelectionMenuComponent() {
+	// Routing
 	const router = useRouter();
+	const { route } = useAppSelector((state) => state.route);
 
+	// Data Management
 	const { menuItems, menuQuestions } = useAppSelector((state) => state.workflows);
 
-	const [isLoading, setIsLoading] = useState<boolean>(true);
-	const [highlightedItem, setHighlightedItem] = useState<any>(null);
-	const [currentItems, setCurrentItems] = useState<MenuItem[]>([]);
-	const [currentQuestion, setCurrentQuestion] = useState<MenuItem | null>(null);
-	const [breadcrumbs, setBreadcrumbs] = useState<{ value: string; path: string }[]>([]);
-
-	const { filteredList, input, setInput } = useFilteredList(currentItems, 'value');
-
-	function filterCurrentSelections(ids: string[]) {
-		return menuItems.filter((item) => String(item.hierarchy) == String(ids));
-	}
-	function filterCurrentQuestions(ids: string[]) {
-		return menuQuestions.filter((item) => String(item.hierarchy) == String(ids));
-	}
-
+	// Local States
+	const [itemMap, setItemMap] = useState<Map<number, MenuItem>>();
+	const [primaryColumn, setPrimaryColumn] = useState<MenuItem[] | undefined>([]);
+	const [secondaryColumn, setSecondaryColumn] = useState<MenuItem[] | undefined>([]);
+	const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+	const [breadcrumbs, setBreadcrumbs] = useState<{ label: string; id: string; hierarchy: string[] }[]>([]);
+	// initiate data for menu
 	useEffect(() => {
 		if (menuItems.length == 0 || menuQuestions.length == 0) return;
 
-		let mappedBreadcrumbs: { value: string; path: string }[] = [];
+		const data = nestData(menuItems) || [];
+		let layerItems = data;
 
-		if (flowIds) {
-			mappedBreadcrumbs = flowIds.map((id, index) => {
-				const items = menuItems.filter((item) => String(item.id) == String(id));
-				let item = items[0];
-				if (index !== 0) {
-					item = items.find((item) => String(item.hierarchy) == String(flowIds.slice(0, -1)));
+		// checks for ids in route and sets the selected item
+		if (route) {
+			let currentItem: MenuItem | null = null;
+			// Loops through the route and finds the item in the nested data
+			route.forEach((id: string) => {
+				if (!currentItem) {
+					currentItem = data.find((item) => Number(item.id) === Number(id)) || null;
+				} else {
+					const hierarchyItems = currentItem.hierarchyItems;
+					layerItems = hierarchyItems || [];
+					currentItem = hierarchyItems?.find((item) => Number(item.id) === Number(id)) || null;
 				}
-				return item ? { value: item.value, path: '/workflows/' + item.hierarchy.join('/') } : { value: '', path: '' };
 			});
-		}
-		let currentItems = filterCurrentSelections(flowIds);
-		let currentQuestion = filterCurrentQuestions(flowIds);
-		let selectedWorkflow = null;
-		if (flowIds) {
-			selectedWorkflow = menuItems.find((item) => Number(item.id) === Number(flowIds[flowIds.length - 1]) && item.workflow_id);
-		}
 
-		if (currentItems.length == 0 && !selectedWorkflow) {
-			currentItems = filterCurrentSelections([] as string[]);
-			currentQuestion = filterCurrentQuestions([] as string[]);
-			router.push('/workflows', { scroll: false });
+			// If the currentItem is null, it means the route is invalid and we should redirect to the workflows page
+			if (!currentItem) {
+				router.push('/workflows', { scroll: false });
+				return;
+			}
+			// Sets the selected item and the secondary column
+			handlePrimarySelect(currentItem, 0);
 		}
+		// Sets the primary column
+		setPrimaryColumn(layerItems);
+	}, [menuItems, menuQuestions]);
 
-		setBreadcrumbs(mappedBreadcrumbs);
-		setCurrentQuestion(currentQuestion[0]);
-		setCurrentItems(currentItems);
-		setIsLoading(false);
-	}, [menuItems, menuQuestions]); // eslint-disable-line react-hooks/exhaustive-deps
+	useEffect(() => {
+		setBreadcrumbs([]);
+		if (!selectedItem) return;
+		const breadcrumb = getBreadCrumb();
 
-	const selectionPanel = () => {
-		if (isLoading) {
-			return selectionPanelSkeleton();
-		}
-		return (
-			<>
-				{filteredList &&
-					filteredList.map((item) => {
-						return (
-							<div
-								key={item.id}
-								className={`${styles.selectionItem} flex flex-column ${
-									item && highlightedItem && highlightedItem.id === item.id ? 'border-green-700 border-2' : ''
-								}`}
-								onClick={() => setHighlightedItem(item)}>
-								{item.value}
-							</div>
-						);
-					})}
-			</>
-		);
+		setBreadcrumbs(breadcrumb);
+	}, [selectedItem]);
+
+	// nest data for menu
+	const nestData = (data: MenuItem[]) => {
+		const map = new Map(data.map((item) => [item.id, { ...item, hierarchyItems: [] as MenuItem[] }]));
+		setItemMap(map);
+		const rootItems = data.filter((item) => item.hierarchy.length === 0).map((item) => map.get(item.id));
+		data.forEach((item) => {
+			if (item.hierarchy.length > 0) {
+				const parentId = Number(item.hierarchy[item.hierarchy.length - 1]);
+				const parentItem = map.get(parentId);
+				if (parentItem) {
+					parentItem.hierarchyItems?.push(map.get(item.id) as MenuItem);
+				}
+			}
+		});
+
+		return rootItems as MenuItem[];
 	};
 
-	const selectionPanelSkeleton = () => {
-		return (
-			<div>
-				{Array.from({ length: 6 }).map((_, index) => {
-					return (
-						<Skeleton
-							key={index}
-							width="100%"
-							height="5rem"
-							className="my-3"></Skeleton>
-					);
-				})}
-			</div>
-		);
+	const handlePrimarySelect = (item: MenuItem, index: number) => {
+		setSecondaryColumn(item.hierarchyItems);
+		setSelectedItem(item);
 	};
 
-	const descriptionPanel = () => {
-		if (!highlightedItem) {
-			return (
-				<>
-					<div>
-						<img
-							src="/images/select_calc.svg"
-							width="250"
-							alt=""
-						/>
-					</div>
-					<div>
-						<h4>Please make a selection</h4>
-					</div>
-				</>
-			);
-		}
-		return (
-			<>
-				<div className="flex flex-column align-items-center justify-content-center w-full py-6  bg-gray-200">
-					<h2 className="text-gray-800 m-0 text-center">{highlightedItem && highlightedItem.value}</h2>
-					<div className="w-5rem mt-4 divider-accent"></div>
-				</div>
-				<div className={'flex flex-grow-1 p-6 '}>{highlightedItem && highlightedItem.description}</div>
-				<div className="flex w-full justify-content-end p-6">
-					<Link href={'/workflows/' + (flowIds ? flowIds.join('/') + '/' : '') + highlightedItem.id}>
-						<Button className="justify-content-center">Next</Button>
-					</Link>
-				</div>
-			</>
-		);
+	const handleSecondarySelect = (item: MenuItem, index: number) => {
+		setPrimaryColumn(secondaryColumn);
+		setSelectedItem(item);
+		setSecondaryColumn(item.hierarchyItems);
 	};
 
-	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setInput(event.target.value);
-	};
+	const getBreadCrumb = () => {
+		const breadcrumb = [];
+		selectedItem?.hierarchy?.map((item) => {
+			const itemData = itemMap?.get(Number(item));
+			breadcrumb.push(itemData);
+		});
+		breadcrumb.push(selectedItem);
 
+		return breadcrumb as any[];
+	};
 	return (
-		<div className={'flex justify-content-center xl:pt-8'}>
-			<div className="flex flex-column  w-full xl:w-7  xl:shadow-2 bg-white" style={{maxHeight: '40rem', minHeight: '40rem'}}>
-				<div className="flex flex-column mx-5 my-0">
-					<div className="flex align-items-center mt-4">
-						{isLoading ? (
-							<Skeleton
-								width="25%"
-								height="1.5rem"
-								className="my-2"></Skeleton>
+		<div className="flex w-full justify-content-center align-items-center ">
+			<div className={classNames([styles.container, 'p-4'])}>
+				<div className="flex flex-column align-items-center">
+					<h2 className="m-0 mb-2">Workflows</h2>
+					<div className="flex">
+						{breadcrumbs.length > 0 ? (
+							breadcrumbs.map((item, index) => {
+								return (
+									<div
+										key={item.id}
+										className="flex align-items-center">
+										<i className={classNames([index !== 0 ? 'pi pi-chevron-right text-xs' : 'hidden'])}></i>
+										<Link
+											className="no-underline	"
+											href={`/workflows${item.hierarchy.length > 0 ? '/' + item.hierarchy.join('/') : ''}/${item.id.toString()}`}>
+											<h5 className="text-gray-700 m-2 hover:text-green-500">{item.label}</h5>
+										</Link>
+									</div>
+								);
+							})
 						) : (
-							<>
-								<h4 className="text-green-700 m-2">Workflows</h4>
-								{breadcrumbs &&
-									breadcrumbs
-										.filter((item) => item.value !== '')
-										.map((item) => {
-											return (
-												<div
-													key={item.path}
-													className="flex align-items-center">
-													<i className="pi pi-chevron-right text-xs"></i>
-													<Link
-														className="no-underline	"
-														href={item.path}>
-														<h4 className="text-green-700 m-2 hover:text-green-500">{item.value}</h4>
-													</Link>
-												</div>
-											);
-										})}
-							</>
+							<p></p>
 						)}
 					</div>
-					<div className="flex justify-content-between align-items-end my-3">
-						{isLoading ? (
-							<Skeleton
-								width="60%"
-								height="2rem"
-								className="my-0"></Skeleton>
-						) : (
-							<h2 className="my-0">{currentQuestion && currentQuestion.value}</h2>
-						)}
-						<div className="">
+
+					<div className="px-8 w-full">
+						<span className="p-input-icon-left w-full">
+							<i className="pi pi-search" />
 							<InputText
-								type="text"
-								className="p-inputtext-sm"
-								value={input}
-								onChange={handleInputChange}
-								placeholder="Filter..."></InputText>
-						</div>
+								className="p-inputtext-sm w-full"
+								placeholder="Search..."
+							/>
+						</span>
 					</div>
 				</div>
-				<div className="flex flex-column lg:flex-row h-full border-top-1 border-gray-300 lg:overflow-hidden overflow-auto ">
-					<div className="col-12 flex-order-1 lg:flex-order-0 lg:col-6 flex flex-column  px-5 py-2 border-right-1 border-gray-300 ">
-						{selectionPanel()}
+
+				<Divider />
+				<div className="flex h-full ">
+					<div className={styles.column}>
+						{primaryColumn &&
+							primaryColumn.map((item, index) => (
+								<Link
+									key={item.id}
+									className="no-underline	"
+									href={`/workflows${item.hierarchy.length > 0 ? '/' + item.hierarchy.join('/') : ''}/${item.id.toString()}`}>
+									<button
+										key={item.id}
+										onClick={() => handlePrimarySelect(item, index)}
+										className={classNames([selectedItem?.id === item.id ? styles.selected : '', styles.button, , 'w-20rem'])}>
+										{item.label}
+									</button>
+								</Link>
+							))}
 					</div>
-					<div className="col-12 flex-order-0 lg:flex-order-1 lg:col-6 flex flex-column justify-content-center align-items-center p-0">
-						{descriptionPanel()}
+					<Divider layout="vertical" />
+
+					<div className={`${styles.column} ${secondaryColumn ? styles.active : ''}`}>
+						{secondaryColumn &&
+							secondaryColumn.map((item, index) => (
+								<Link
+									key={item.id}
+									className="no-underline	"
+									href={`/workflows${item.hierarchy.length > 0 ? '/' + item.hierarchy.join('/') : ''}/${item.id.toString()}`}>
+									
+								<button
+									className={classNames([styles.button, 'w-20rem'])}
+									key={item.id}
+									onClick={() => handleSecondarySelect(item, index)}>
+									{item.label}
+								</button>
+								</Link>
+							))}
 					</div>
 				</div>
 			</div>

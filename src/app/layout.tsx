@@ -2,11 +2,10 @@
 
 import React, { PropsWithChildren, useEffect } from 'react';
 import Navigation from '@/components/navigation';
-import './globals.scss';
 import { Providers } from '@/redux/provider';
 import { QueryClient, QueryClientProvider } from "react-query";
 
-import '../styles/theme/custom/theme.css'; //theme
+import '../styles/globals.scss';
 import 'primereact/resources/primereact.min.css'; //core css
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
