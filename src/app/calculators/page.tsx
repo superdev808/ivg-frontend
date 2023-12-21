@@ -55,8 +55,9 @@ export default function CalculatorsPage() {
 								style={{ width: '100%' }}
 								label={groupItem.label}
 								onClick={() => {
-									setSelectedGroup(index);
-									// router.push('/calculators/' + tabItem.label);
+									groupItem.label === LABEL_ALL_ON_X_CALCULATOR
+									  ? router.push("/calculators/" + groupItem.label)
+									  : setSelectedGroup(index);
 								}}
 							/>
 						))}
