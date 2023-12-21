@@ -9,11 +9,14 @@ import classNames from "classnames/bind";
 
 import { usePathname } from 'next/navigation';
 import { useAppSelector } from "@/redux/hooks";
+import { deleteCookie } from "@/helpers/cookie";
+import { useDispatch } from "react-redux";
 const cx = classNames.bind(styles);
 
 const Navigation = () => {
-  const {authenticated,isLoading} = useAppSelector((state) => state.auth);
-  const pathname = usePathname()
+  const {authenticated} = useAppSelector((state) => state.auth);
+  const pathname = usePathname();
+  const dispatch = useDispatch();
 
   // toggle sidebar
   const [isOpen, setIsOpen] = useState(false);
@@ -21,20 +24,12 @@ const Navigation = () => {
 
   const onSignOut = async () => {
 		try {
-		
-			const response = await fetch('/api/auth/logout', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-      const data = await response.json()
-			if (!response.ok) {
-				throw new Error(data.error);
-			}
-	
+      deleteCookie('appToken', '/');
+      deleteCookie('email', '/');
+      dispatch({ type: 'auth/setAuth', payload: { authenticated: false } });
+
       // router.push( '/login' );
-			window.location.reload();
+			window.location.href = "/";
 		} catch (error: any) {
 		
 		}
@@ -67,13 +62,11 @@ const Navigation = () => {
   useOutsideClick(boxRef, closeMenu);
   useCheckMobileScreen(closeMenu);
 
-  const isBkTransparent =  !authenticated && !isLoading && !pathname.includes('/contact')
+  const isBkTransparent =  !authenticated && !pathname.includes('/contact')
 
   return (
     <div ref={boxRef} className={cx("z-2 w-full py-2 absolute", "nav-header")} style={{
       background: isBkTransparent ? 'transparent' : '#023932 ',
-
-
     }}>
       <Navbar isOpen={isOpen} toggle={toggle} navLinks={navLinks} rightNavLinks={rightNavLinks} />
     </div>
