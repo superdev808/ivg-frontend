@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
@@ -13,7 +13,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Checkbox } from 'primereact/checkbox';
 import { Messages } from 'primereact/messages';
-
+import { setCookie } from '@/helpers/cookie';
+import { useDispatch } from 'react-redux';
 
 type FormValues = {
 	email: string;
@@ -24,7 +25,7 @@ export const LoginForm = () => {
 	const [loading, setLoading] = useState(false);
 	const [rememberMe, setRememberMe] = useState<boolean>(false);
 	const errorMsgs = useRef(null);
-
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const remembered = localStorage.getItem('rememberMe') === 'true';
@@ -69,7 +70,7 @@ export const LoginForm = () => {
 				localStorage.removeItem('username');
 			}
 
-			const response = await fetch('/api/auth/login', {
+			const response = await fetch(`${process.env.NEXT_PUBLIC_APP_SERVER_URL}/login`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -81,8 +82,11 @@ export const LoginForm = () => {
 				throw new Error(data.error);
 			}
 
+			setCookie("appToken", data.token);
+			setCookie("email", data.user.email);
+			dispatch({ type: 'auth/setAuth', payload: { authenticated: true } });
+
 			router.push('/search');
-			window.location.reload();
 			setLoading(false);
 		} catch (error: any) {
 			addError(error?.message ?? '');
@@ -122,7 +126,7 @@ export const LoginForm = () => {
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className='mb-3'>
-					
+
 				<Controller
 					name="email"
 					control={control}
