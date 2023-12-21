@@ -8,6 +8,7 @@ const cx = classNames.bind(styles);
 import CalculatorProduct from './product';
 import { useAppSelector } from '@/redux/hooks';
 import SearchBar from '@/components/searchBar';
+import { LABEL_ALL_ON_X_CALCULATOR } from './constants';
 
 export default function CalculatorsPage() {
 	const { authenticated, isLoading } = useAppSelector((state) => state.auth);
@@ -56,8 +57,9 @@ export default function CalculatorsPage() {
 										style={{ width: '100%' }}
 										label={groupItem.label}
 										onClick={() => {
-											setSelectedGroup(index);
-											// router.push('/calculators/' + tabItem.label);
+											groupItem.label === LABEL_ALL_ON_X_CALCULATOR
+											  ? router.push("/calculators/" + groupItem.label)
+											  : setSelectedGroup(index);
 										}}
 									/>
 								))}

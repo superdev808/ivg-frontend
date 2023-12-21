@@ -7,6 +7,8 @@ import { Dropdown } from "primereact/dropdown";
 import { Card } from "primereact/card";
 import { ProgressSpinner } from "primereact/progressspinner";
 import CalculatorContainer from "@/components/calculator";
+import { LABEL_ALL_ON_X_CALCULATOR } from "../constants";
+import AllOnXCalculator from "@/components/calculator/AllOnX";
 
 const tabItems = [
   {
@@ -142,18 +144,28 @@ export default function CalculatorPage() {
 
   // const router = useRouter();
   const searchParams = useParams();
+  const tabId = decodeURIComponent(searchParams.id as string);
   const selectedType = useMemo(() => {
-    const tabId = decodeURIComponent(searchParams.id as string);
     return tabItems.find((item) => item.type === tabId);
   }, [searchParams.id]);
 
   return (
     <div className="flex flex-column align-items-center justify-content-center mt-6">
-      <Card
-        className="w-12 md:w-5 flex px-4 py-2 border-round bg-white flex-column"
-        title={selectedType?.description}
-      />
-      <CalculatorContainer option={searchParams.id as string} input={selectedType?.input || []} output={selectedType?.output || []} />
+      {tabId === LABEL_ALL_ON_X_CALCULATOR ? (
+        <AllOnXCalculator />
+      ) : (
+        <>
+          <Card
+            className="w-12 md:w-5 flex px-4 py-2 border-round bg-white flex-column"
+            title={selectedType?.description}
+          />
+          <CalculatorContainer
+            option={searchParams.id as string}
+            input={selectedType?.input || []}
+            output={selectedType?.output || []}
+          />
+        </>
+      )}
     </div>
   );
 }
