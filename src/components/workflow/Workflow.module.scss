@@ -1,24 +1,15 @@
+@import 'primeflex/primeflex.scss';
 
 .container {
-  padding: 3.5rem 0;
-  min-height: 50rem;
-
+  display: flex;
+  flex-direction: column;
+  border: solid 2px var(--primary-color);
+  box-shadow: 0 0 2px 0 rgba(0,0,0,0.3);
+  margin: 5rem;
+  height: calc(100vh - 20rem);
 }
 
 
-
-.selectionItem {
-  border: solid 1px #E0E0E0;
-  margin:  0.5rem 0 0.5rem 0;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  font-weight: bold;
-  &:hover {
-    border-color:var(--primary-color) !important;
-    cursor: pointer;
-    border-width: 2px;
-  }
-}
 
 
 .edge:not(.selected):hover {
@@ -34,4 +25,40 @@
   // color: #83B899 !important;
   cursor: pointer !important;
 }
+
+
+// MENU SELECTION
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.button {
+  font-size: medium;
+  font-weight: bold;
+  margin: 5px 0;
+  padding: 1rem;
+  cursor: pointer;
+  border: 2px solid var(--secondary-color); 
+  background-color: white; /* Background color for buttons */
+  border-radius: 5px; 
+  color: var(--secondary-color);
+&:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color:white
+}
+&.selected {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color:white
+}
+}
+
 

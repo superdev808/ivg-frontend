@@ -5,3 +5,12 @@ export type Edge = { id: number; flowId: number; value: string; source: number; 
 
 
 export type PathIds = [number | null, number]
+
+
+export interface MenuItem {
+    id: number,
+    description: string,
+    label: string,
+    hierarchy:string[]
+    hierarchyItems?:MenuItem[]
+}
