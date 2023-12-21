@@ -8,6 +8,7 @@ import { useAppDispatch } from '@/redux/hooks';
 export default function WorkflowPage({ params }: { params: { flowIds: string[] } }) {
 	const dispatch = useAppDispatch();
 	const { flowIds } = params;
+
 	useEffect(() => {dispatch(setRoute(flowIds))}, [flowIds]);
 	
 
@@ -23,4 +24,5 @@ export default function WorkflowPage({ params }: { params: { flowIds: string[] }
 	};
 
 	return <>{renderComponent()}</>;
+
 }
