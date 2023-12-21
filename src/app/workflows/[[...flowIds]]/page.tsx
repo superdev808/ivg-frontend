@@ -16,11 +16,12 @@ export default function WorkflowPage({ params }: { params: { flowIds: string[] }
 
 
 	const renderComponent = () => {
-		if (!isLoading) {
+		// return <WorkflowsComponent />
+		// if (!isLoading) {
 			return authenticated ? <WorkflowsComponent /> : <WorkflowProduct />;
-		} else {
-			<div>loading...</div>;
-		}
+		// } else {
+		// 	<div>loading...</div>;
+		// }
 	};
 
 	return <>{renderComponent()}</>;
