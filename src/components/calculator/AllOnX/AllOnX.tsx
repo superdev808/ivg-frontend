@@ -5,6 +5,7 @@ import { procedures, Site, sitesData } from "./constants";
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
+import styles from "./AllOnX.module.scss";
 
 const AllOnXCalculator: React.FC = () => {
   const [procedure, setProcedure] = useState<number>(1);
@@ -28,9 +29,9 @@ const AllOnXCalculator: React.FC = () => {
   };
 
   return (
-    <>
-      <h3>What part of the All-on-X procedure can we help you with?</h3>
-      <div className="card flex justify-content-center">
+    <div className={styles.allOnXCalculator}>
+      <div className={styles.procedureSelection}>
+        <h3>What part of the All-on-X procedure can we help you with?</h3>
         <SelectButton
           value={procedure}
           onChange={(e) => setProcedure(e.value)}
@@ -38,36 +39,7 @@ const AllOnXCalculator: React.FC = () => {
           options={procedures}
         />
       </div>
-
-      <div style={{ width: "100%" }}>
-        <div
-          className="card flex justify-content-center"
-          style={{ marginTop: 25, marginBottom: 25 }}
-        >
-          <div className="flex flex-row gap-3">
-            <TeethSelector
-              selectedSites={selectedSites}
-              onSiteChange={onSiteChange}
-            />
-            {/* {sites.map((site) => {
-              return (
-                <div key={site.key} className="flex align-items-center">
-                  <Checkbox
-                    inputId={site.key}
-                    name="site"
-                    value={site}
-                    checked={selectedSites.some(
-                      (item) => item.key === site.key
-                    )}
-                  />
-                  <label htmlFor={site.key} className="ml-2">
-                    {site.name}
-                  </label>
-                </div>
-              );
-            })} */}
-          </div>
-        </div>
+      <div className={styles.detailsContainer}>
         {selectedSites.length > 0 && (
           <div className="card">
             <TabView>
@@ -83,8 +55,14 @@ const AllOnXCalculator: React.FC = () => {
             </TabView>
           </div>
         )}
+        <div className={styles.teethSelectorWrapper}>
+          <TeethSelector
+            selectedSites={selectedSites}
+            onSiteChange={onSiteChange}
+          />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

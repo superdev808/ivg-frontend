@@ -1,0 +1,16 @@
+.allOnXCalculator {
+    .procedureSelection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .detailsContainer {
+        display: flex;
+        flex-direction: column-reverse;
+        margin: 25px auto;
+        .teethSelectorWrapper {
+            
+        }
+    }
+}
