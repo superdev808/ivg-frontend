@@ -4,13 +4,14 @@ import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import classNames from "classnames/bind";
 import styles from "./page.module.scss";
-import Footer from "@/components/footer";
+import FooterExtended from "@/components/footer/FooterExtended";
+
 let cx = classNames.bind(styles);
 
 export default function Index() {
   return (
     <>
-      <div className={cx("grid -mt-8 md:pt-6", "landing-top")}>
+      <div className={cx("grid p-0 -mt-8 md:pt-6", "landing-top")}>
         <div className="col-2 my-4 md:my-8 py-6 md:py-8 px-4 md:px-6 flex flex-column">
           <Button icon="pi pi-linkedin" rounded outlined aria-label="Filter" />
           <Button
@@ -246,38 +247,7 @@ export default function Index() {
           </p>
         </div>
       </div>
-      <div className="grid">
-        <div
-          className={cx(
-            "landing-contact-container",
-            "col-10 col-offset-1 pb-4 flex flex-column md:flex-row align-items-center justify-content-between border-bottom-1"
-          )}
-        >
-          <Image
-            src="/Ivory-Guide-Logo-Stack.svg"
-            alt="Ivory Guid Logo Stack"
-            width="200px"
-            className="relative"
-          />
-          <div
-            className={cx(
-              "landing-contact-section",
-              "blur-shadow",
-              "flex justify-content-between my-3"
-            )}
-          >
-            <Button icon="pi pi-facebook" rounded text aria-label="Filter" />
-            <Button icon="pi pi-instagram" rounded text aria-label="Filter" />
-            <Button icon="pi pi-linkedin" rounded text aria-label="Filter" />
-          </div>
-          <Button
-            outlined
-            className={cx("landing-contact-section-contact-us", "px-5 py-3")}
-          >
-            Contact Us
-          </Button>
-        </div>
-      </div>
+              <FooterExtended />
     </>
   );
 }

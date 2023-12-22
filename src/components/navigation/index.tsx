@@ -66,7 +66,7 @@ const Navigation = () => {
 
   return (
     <div ref={boxRef} className={cx("z-2 w-full py-2 absolute", "nav-header")} style={{
-      background: isBkTransparent ? 'transparent' : '#023932 ',
+      background: 'transparent',
     }}>
       <Navbar isOpen={isOpen} toggle={toggle} navLinks={navLinks} rightNavLinks={rightNavLinks} />
     </div>
