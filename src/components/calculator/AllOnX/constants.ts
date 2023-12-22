@@ -21,398 +21,88 @@ const SITES: Site[] = Array(SITE_COUNT)
 export const UPPER_SITES: Site[] = SITES.slice(0, 16);
 export const LOWER_SITES: Site[] = SITES.slice(16, 32);
 
-export interface Answer {
-  item: string;
+export interface InputDetails {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+export interface Component {
+  name: string;
   purchaseLink?: string;
   quantity?: number;
 }
 
-export interface Questionnaire {
-  id: string;
-  question: string;
-  answer: Answer[];
+export interface ComponentDetails {
+  label: string;
+  component: Component[];
 }
 
 export interface SiteData {
-  [key: string]: Questionnaire[];
+  [key: string]: {
+    inputDetails: InputDetails[];
+    componentDetails?: ComponentDetails;
+  };
 }
 
 export const sitesData: SiteData = {
-  "Site 1": [
-    {
-      id: "1",
-      question: "Implant Brand",
-      answer: [
-        {
-          item: "Nobel",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "2",
-      question: "Implant Model",
-      answer: [
-        {
-          item: "Active",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "3",
-      question: "Implant Diameter",
-      answer: [
-        {
-          item: "3.0",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "4",
-      question: "Implant Platform",
-      answer: [
-        {
-          item: "3.0",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "5",
-      question: "Implant Length",
-      answer: [
-        {
-          item: "10mm",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "6",
-      question: "Implant Surface Treatment",
-      answer: [
-        {
-          item: "TiUltra",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "7",
-      question: "Select Drill Kit",
-      answer: [
-        {
-          item: "Pilot Guided",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "8",
-      question: "Will you perform bone reduction?",
-      answer: [
-        {
-          item: "Yes",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "9",
-      question: "Select Driver",
-      answer: [
-        {
-          item: "Machine",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "10",
-      question: "Do you need to purchase materials for chairside pick-up?",
-      answer: [
-        {
-          item: "Yes",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "11",
-      question: "Do you need to purchase an implant?",
-      answer: [
-        {
-          item: "Yes",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-  ],
-  "Site 2": [
-    {
-      id: "1",
-      question: "Implant Brand",
-      answer: [
-        {
-          item: "Nobel",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "2",
-      question: "Implant Model",
-      answer: [
-        {
-          item: "Active",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "3",
-      question: "Implant Diameter",
-      answer: [
-        {
-          item: "3.0",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "4",
-      question: "Implant Platform",
-      answer: [
-        {
-          item: "3.0",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "5",
-      question: "Implant Length",
-      answer: [
-        {
-          item: "10mm",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "6",
-      question: "Implant Surface Treatment",
-      answer: [
-        {
-          item: "TiUltra",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "7",
-      question: "Select Drill Kit",
-      answer: [
-        {
-          item: "Pilot Guided",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-
-    {
-      id: "8",
-      question: "Will you perform bone reduction?",
-      answer: [
-        {
-          item: "Yes",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-
-    {
-      id: "9",
-      question: "Select Driver",
-      answer: [
-        {
-          item: "Machine",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-
-    {
-      id: "10",
-      question: "Do you need to purchase materials for chairside pick-up?",
-      answer: [
-        {
-          item: "Yes",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-
-    {
-      id: "11",
-      question: "Do you need to purchase an implant?",
-      answer: [
-        {
-          item: "Yes",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-  ],
-  "Site 3": [
-    {
-      id: "1",
-      question: "Implant Brand",
-      answer: [
-        {
-          item: "Nobel",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "2",
-      question: "Implant Model",
-      answer: [
-        {
-          item: "Active",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "3",
-      question: "Implant Diameter",
-      answer: [
-        {
-          item: "3.0",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "4",
-      question: "Implant Platform",
-      answer: [
-        {
-          item: "3.0",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "5",
-      question: "Implant Length",
-      answer: [
-        {
-          item: "10mm",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "6",
-      question: "Implant Surface Treatment",
-      answer: [
-        {
-          item: "TiUltra",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-    {
-      id: "7",
-      question: "Select Drill Kit",
-      answer: [
-        {
-          item: "Pilot Guided",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-
-    {
-      id: "8",
-      question: "Will you perform bone reduction?",
-      answer: [
-        {
-          item: "Yes",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-
-    {
-      id: "9",
-      question: "Select Driver",
-      answer: [
-        {
-          item: "Machine",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-
-    {
-      id: "10",
-      question: "Do you need to purchase materials for chairside pick-up?",
-      answer: [
-        {
-          item: "Yes",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-
-    {
-      id: "11",
-      question: "Do you need to purchase an implant?",
-      answer: [
-        {
-          item: "Yes",
-          purchaseLink: "",
-          quantity: 1,
-        },
-      ],
-    },
-  ],
+  "Site 1": {
+    inputDetails: [
+      {
+        id: "1",
+        question: "Implant Brand",
+        answer: "Nobel",
+      },
+      {
+        id: "2",
+        question: "Implant Model",
+        answer: "Active",
+      },
+      {
+        id: "3",
+        question: "Implant Diameter",
+        answer: "3.0",
+      },
+      {
+        id: "4",
+        question: "Implant Platform",
+        answer: "3.0",
+      },
+      {
+        id: "5",
+        question: "Implant Length",
+        answer: "10mm",
+      },
+      {
+        id: "6",
+        question: "Implant Surface Treatment",
+        answer: "TiUltra",
+      },
+      {
+        id: "7",
+        question: "Select Drill Kit",
+        answer: "Pilot Guided",
+      },
+      {
+        id: "8",
+        question: "Will you perform bone reduction?",
+        answer: "Yes",
+      },
+      {
+        id: "9",
+        question: "Select Driver",
+        answer: "Machine",
+      },
+      {
+        id: "10",
+        question: "Do you need to purchase materials for chairside pick-up?",
+        answer: "Yes",
+      },
+      {
+        id: "11",
+        question: "Do you need to purchase an implant?",
+        answer: "Yes",
+      },
+    ],
+  },
 };
