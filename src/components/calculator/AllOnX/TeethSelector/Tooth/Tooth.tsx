@@ -1,20 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { exists, validIcons } from "../svg";
 
 interface ToothProps {
   name: string;
   value: number;
+  isSelected: boolean;
   onClickHandler: (teeth: number) => void;
 }
 
 export const Tooth = (props: ToothProps) => {
-  const { name, value, onClickHandler, ...rest } = props;
-  const [activeTooth, setActiveTooth] = useState<boolean>(false);
-
+  const { name, value, isSelected, onClickHandler } = props;
   const toothHandler: () => void = () => {
-    const activeToothConst: boolean = !activeTooth;
-
-    setActiveTooth(activeToothConst);
     onClickHandler(value);
   };
 
@@ -28,11 +24,11 @@ export const Tooth = (props: ToothProps) => {
                 key={index}
                 d={path.d}
                 style={
-                  index === 0 && activeTooth
-                    ? { ...path.style, fill: "#31b431" }
+                  index === 0 && isSelected
+                    ? { ...path.style, fill: "lightgreen" }
                     : path.style
                 }
-                fill={index === 0 && activeTooth ? "green" : "inherit"}
+                fill={index === 0 && isSelected ? "green" : "inherit"}
               />
             </React.Fragment>
           ))}

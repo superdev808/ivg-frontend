@@ -39,7 +39,7 @@ const AllOnXCalculator: React.FC = () => {
           options={procedures}
         />
       </div>
-      <div className={styles.detailsContainer}>
+      <div className={`${styles.detailsContainer} grid grid-flow-row auto-rows-max`}>
         {selectedSites.length > 0 && (
           <div className="card">
             <TabView>
@@ -50,7 +50,10 @@ const AllOnXCalculator: React.FC = () => {
                 />
               </TabPanel>
               <TabPanel header="Component Details">
-                <ComponentDetails selectedSites={selectedSites} />
+                <ComponentDetails
+                  selectedSites={selectedSites}
+                  sitesData={sitesData}
+                />
               </TabPanel>
             </TabView>
           </div>

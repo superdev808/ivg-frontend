@@ -21,7 +21,7 @@ const SITES: Site[] = Array(SITE_COUNT)
 export const UPPER_SITES: Site[] = SITES.slice(0, 16);
 export const LOWER_SITES: Site[] = SITES.slice(16, 32);
 
-export interface InputDetails {
+export interface InputDetail {
   id: string;
   question: string;
   answer: string;
@@ -33,15 +33,15 @@ export interface Component {
   quantity?: number;
 }
 
-export interface ComponentDetails {
+export interface ComponentDetail {
   label: string;
   component: Component[];
 }
 
 export interface SiteData {
   [key: string]: {
-    inputDetails: InputDetails[];
-    componentDetails?: ComponentDetails;
+    inputDetails: InputDetail[];
+    componentDetails?: ComponentDetail[];
   };
 }
 

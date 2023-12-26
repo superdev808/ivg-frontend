@@ -9,7 +9,9 @@ interface TeethSelectorProps {
 }
 
 const TeethSelector = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
-  console.log("selectedSites", selectedSites);
+
+  const selectedSitesKeys: number[] = selectedSites.map((site:Site) => site.key)
+
   return (
     <div className={styles.teethSelector}>
       <h3>Select the sites where implants will be placed:</h3>
@@ -18,8 +20,8 @@ const TeethSelector = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            width="450"
-            height="300"
+            width="300"
+            height="200"
           >
             {/* upper teeth */}
             {UPPER_SITES.map((item: Site) => {
@@ -28,6 +30,7 @@ const TeethSelector = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
                   <Tooth
                     name={`tooth${item.key}`}
                     value={item.key}
+                    isSelected = {selectedSitesKeys.includes(item.key)}
                     onClickHandler={onSiteChange}
                   />
                 </React.Fragment>
@@ -40,8 +43,8 @@ const TeethSelector = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            width="450"
-            height="300"
+            width="300"
+            height="200"
           >
             {/* lower teeth */}
 
@@ -51,6 +54,7 @@ const TeethSelector = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
                   <Tooth
                     name={`tooth${item.key}`}
                     value={item.key}
+                    isSelected = {selectedSitesKeys.includes(item.key)}
                     onClickHandler={onSiteChange}
                   />
                 </React.Fragment>
