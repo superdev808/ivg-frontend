@@ -112,44 +112,111 @@ export const sitesData: SiteData = {
   },
 };
 
-export const AllOnXItems = [
-  {
-    type: "surgery",
-    input: [
+interface KeyValuePair {
+  name: string,
+  text: string
+}
+export interface Collection {
+  name: string;
+  input: KeyValuePair[];
+  output: KeyValuePair[];
+}
+export interface ProcedureRequest {
+  type: PROCEDURES;
+  collections: Collection[];
+}
+interface RequestParams  {
+  [key: string]: ProcedureRequest;
+}
+export const ALLONX_REQUEST_PARAMS: RequestParams = {
+  [PROCEDURES.SURGERY] : {
+    type: PROCEDURES.SURGERY,
+    collections: [
       {
-        name: "Implant Brand",
-        text: "Implant Brand"
+        name: "Drill Kit and Sequence Calculator",
+        input: [
+          {
+            name: "Implant Brand",
+            text: "Implant Brand"
+          },
+          {
+            name: "Implant Model",
+            text: "Implant Model"
+          },
+          {
+            name: "Implant Diameter",
+            text: "Implant Diameter"
+          },
+          {
+            name: "Implant Platform",
+            text: "Implant Platform"
+          },
+          {
+            name: "Implant Length",
+            text: "Implant Length"
+          },
+          {
+            name: "Implant Surface Treatment",
+            text: "Implant Surface Treatment"
+          },
+          {
+            name: "Select Drill Kit",
+            text: "Select Drill Kit"
+          }
+        ],
+        output: [ ]
       },
       {
-        name: "Implant System",
-        text: "Implant System"
-      },
-      {
-        name: "External Diameter",
-        text: "External Diameter"
-      },
-      {
-        name: "Platform",
-        text: "Platform"
-      },
-      {
-        name: "Authentic or Generic?",
-        text: "Authentic or Generic"
+        name: "Bone Reduction Calculator",
+        input: [
+         /** {
+            name: "Implant Brand",
+            text: "Implant Brand"
+          },
+          {
+            name: "Implant Model",
+            text: "Implant Model"
+          },
+          {
+            name: "Implant Diameter",
+            text: "Implant Diameter"
+          },
+          {
+            name: "Implant Platform",
+            text: "Implant Platform"
+          },
+          {
+            name: "Implant Length",
+            text: "Implant Length"
+          },
+          {
+            name: "Implant Surface Treatment",
+            text: "Implant Surface Treatment"
+          },*/
+          {
+            name: "Will you perform bone reduction?",
+            text: "Will you perform bone reduction?"
+          }
+        ],
+        output: [
+          {
+            name: "Bur Kit Name (Bone Reduction)",
+            text: "Bur Kit Name (Bone Reduction)"
+          },
+          {
+            name: "Bur Kit Product Code",
+            text: "Bur Kit Product Code"
+          },
+          {
+            name: "Bur Kit Link to Purchase",
+            text: "Bur Kit Link to Purchase"
+          },
+          {
+            name: "Surgical Bur Kit (Denture Conversion)",
+            text: "Surgical Bur Kit (Denture Conversion)"
+          }
+        ]
       }
-    ],
-    output: [
-      {
-        name: "Manufacturer",
-        text: "Manufacturer"
-      },
-      {
-        name: "Scanbody Item Number",
-        text: "Scanbody Item Number"
-      },
-      {
-        name: "Link to Purchase",
-        text: "Link to Purchase"
-      }
-    ]
+    ]    
   }
-];
+}

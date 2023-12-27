@@ -1,34 +1,48 @@
 import { TabPanel, TabView } from "primereact/tabview";
-import { Site, SiteData, AllOnXItems, InputDetail, PROCEDURES } from "../constants";
+import {
+  Site,
+  SiteData,
+  InputDetail,
+  PROCEDURES,
+  ALLONX_REQUEST_PARAMS,
+  ProcedureRequest,
+  Collection,
+} from "../constants";
 import React from "react";
 import Inputs from "./Inputs";
 
 interface InputDetailsProps {
-  procedure: PROCEDURES
+  procedure: PROCEDURES;
   selectedSites: Site[];
   sitesData: SiteData;
-  onInputSelect: (site: Site, question: string, answer: string) => void
+  onInputSelect: (site: Site, question: string, answer: string) => void;
 }
 
 const InputDetails: React.FC<InputDetailsProps> = ({
   procedure,
   selectedSites,
   sitesData,
-  onInputSelect
+  onInputSelect,
 }: InputDetailsProps) => {
+  
+  const requestParams: ProcedureRequest = ALLONX_REQUEST_PARAMS[procedure];
+
   return (
     <TabView renderActiveOnly={false} scrollable>
       {selectedSites.map((site: Site) => {
         return (
           <TabPanel key={site.name} header={site.name}>
-            <Inputs
-              procedure={procedure}
-              site={site}
-              input={AllOnXItems[0].input}
-              output={AllOnXItems[0].output}
-              option="Scanbodies"
-              onInputSelect={onInputSelect}
-            />
+            {requestParams.collections.map((collection: Collection) => (
+              <Inputs
+                procedure={procedure}
+                site={site}
+                collectionName={collection.name}
+                input={collection.input}
+                output={collection.output}
+                option="Scanbodies"
+                onInputSelect={onInputSelect}
+              />
+            ))}
           </TabPanel>
         );
       })}

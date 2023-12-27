@@ -45,16 +45,17 @@ const AllOnXCalculator: React.FC = () => {
 
   const onInputSelect = (site: Site, question: string, answer: string) => {
     let data: SiteData = { ...sitesData };
-    const indexOfQuestion: number = data[site.name].inputDetails.findIndex(
+    const {inputDetails} = data[site.name];
+    const indexOfQuestion: number = inputDetails.findIndex(
       (input) => input.question === question
     );
     if (indexOfQuestion > -1) {
-      data[site.name].inputDetails[indexOfQuestion].answer = answer;
-      data[site.name].inputDetails.splice(indexOfQuestion + 1);
+      inputDetails[indexOfQuestion].answer = answer;
+      inputDetails.splice(indexOfQuestion + 1);
     } else {
-      data[site.name].inputDetails.push({ question, answer });
+      inputDetails.push({ question, answer });
     }
-
+    data = {...data, [site.name]:{inputDetails}}
     setSitesData(data);
   };
 
@@ -69,7 +70,6 @@ const AllOnXCalculator: React.FC = () => {
           optionLabel="name"
           options={procedures}
         />
-        {procedure}
       </div>
       <div className={`${styles.detailsContainer}`}>
         <div>

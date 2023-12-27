@@ -11,6 +11,7 @@ interface KeyValuePair {
 interface InputProps {
   procedure: PROCEDURES
   site: Site;
+  collectionName: string;
   input: KeyValuePair[];
   output: KeyValuePair[];
   option: string;
@@ -18,7 +19,9 @@ interface InputProps {
 }
 
 const Inputs: React.FC<InputProps> = ({
+  procedure,
   site,
+  collectionName,
   input,
   output,
   option,
@@ -43,7 +46,7 @@ const Inputs: React.FC<InputProps> = ({
       });
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/materials`,
+        `/api/calculators/operations/all-on-x`,
         {
           method: "POST",
           headers: {
@@ -51,6 +54,8 @@ const Inputs: React.FC<InputProps> = ({
           },
           body: JSON.stringify({
             type: option,
+            procedure,
+            collectionName,
             quiz,
             fields: input[level]?.name
               ? [input[level]?.name]
