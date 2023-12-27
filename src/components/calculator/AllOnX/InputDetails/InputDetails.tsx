@@ -6,7 +6,6 @@ import {
   PROCEDURES,
   ALLONX_REQUEST_PARAMS,
   ProcedureRequest,
-  Collection,
 } from "../constants";
 import React from "react";
 import Inputs from "./Inputs";
@@ -32,17 +31,14 @@ const InputDetails: React.FC<InputDetailsProps> = ({
       {selectedSites.map((site: Site) => {
         return (
           <TabPanel key={site.name} header={site.name}>
-            {requestParams.collections.map((collection: Collection) => (
-              <Inputs
+            <Inputs
                 procedure={procedure}
                 site={site}
-                collectionName={collection.name}
-                input={collection.input}
-                output={collection.output}
+                input={requestParams.input}
+                output={requestParams.output}
                 option="Scanbodies"
                 onInputSelect={onInputSelect}
               />
-            ))}
           </TabPanel>
         );
       })}

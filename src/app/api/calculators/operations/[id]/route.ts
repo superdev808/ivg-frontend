@@ -25,13 +25,13 @@ export async function POST(request: Request) {
     const requestUrl = new URL(request.url);
 
     // Read the JSON file using fs
-    const filePath = path.join(process.cwd(), "public", `/data/allonx.json`);
+    const filePath = path.join(process.cwd(), "public", `/data/${body.collectionName}.json`);
     const rawData = fs.readFileSync(filePath, "utf8");
     const data = JSON.parse(rawData);
     let filteredResults:any = []
     filteredResults = Object.values(data).map((d:any) => {
       const res = body.fields.map((f:any) => d[f])
-      return Array.from(new Set<any>(res)) 
+      return Array.from(new Set<any>(res))
     })
     filteredResults = Array.from(new Set<any>(filteredResults.flat()))
     return NextResponse.json({

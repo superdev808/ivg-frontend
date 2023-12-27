@@ -1,7 +1,7 @@
 export enum PROCEDURES {
   SURGERY = "surgery",
   RESTORATIVE = "restorative",
-  SURGERY_AND_RESTORATIVE = "both"
+  SURGERY_AND_RESTORATIVE = "both",
 }
 export interface Procedure {
   name: string;
@@ -10,7 +10,10 @@ export interface Procedure {
 export const procedures: Procedure[] = [
   { name: "Surgery", value: PROCEDURES.SURGERY },
   { name: "Restorative", value: PROCEDURES.RESTORATIVE },
-  { name: "Surgery and Restorative", value: PROCEDURES.SURGERY_AND_RESTORATIVE },
+  {
+    name: "Surgery and Restorative",
+    value: PROCEDURES.SURGERY_AND_RESTORATIVE,
+  },
 ];
 
 export interface Site {
@@ -112,111 +115,66 @@ export const sitesData: SiteData = {
   },
 };
 
-interface KeyValuePair {
-  name: string,
-  text: string
-}
-export interface Collection {
+export interface KeyValuePair {
   name: string;
-  input: KeyValuePair[];
-  output: KeyValuePair[];
+  text: string;
+  collection: string
+  outputFrom?: string
 }
 export interface ProcedureRequest {
   type: PROCEDURES;
-  collections: Collection[];
+  input: KeyValuePair[];
+  output: KeyValuePair[];
 }
-interface RequestParams  {
+interface RequestParams {
   [key: string]: ProcedureRequest;
 }
 export const ALLONX_REQUEST_PARAMS: RequestParams = {
-  [PROCEDURES.SURGERY] : {
+  [PROCEDURES.SURGERY]: {
     type: PROCEDURES.SURGERY,
-    collections: [
+    input: [
       {
-        name: "Drill Kit and Sequence Calculator",
-        input: [
-          {
-            name: "Implant Brand",
-            text: "Implant Brand"
-          },
-          {
-            name: "Implant Model",
-            text: "Implant Model"
-          },
-          {
-            name: "Implant Diameter",
-            text: "Implant Diameter"
-          },
-          {
-            name: "Implant Platform",
-            text: "Implant Platform"
-          },
-          {
-            name: "Implant Length",
-            text: "Implant Length"
-          },
-          {
-            name: "Implant Surface Treatment",
-            text: "Implant Surface Treatment"
-          },
-          {
-            name: "Select Drill Kit",
-            text: "Select Drill Kit"
-          }
-        ],
-        output: [ ]
+        name: "Implant Brand",
+        text: "Implant Brand",
+        collection: "Drill-Kit-and-Sequence-Calculator",
       },
       {
-        name: "Bone Reduction Calculator",
-        input: [
-         /** {
-            name: "Implant Brand",
-            text: "Implant Brand"
-          },
-          {
-            name: "Implant Model",
-            text: "Implant Model"
-          },
-          {
-            name: "Implant Diameter",
-            text: "Implant Diameter"
-          },
-          {
-            name: "Implant Platform",
-            text: "Implant Platform"
-          },
-          {
-            name: "Implant Length",
-            text: "Implant Length"
-          },
-          {
-            name: "Implant Surface Treatment",
-            text: "Implant Surface Treatment"
-          },*/
-          {
-            name: "Will you perform bone reduction?",
-            text: "Will you perform bone reduction?"
-          }
-        ],
-        output: [
-          {
-            name: "Bur Kit Name (Bone Reduction)",
-            text: "Bur Kit Name (Bone Reduction)"
-          },
-          {
-            name: "Bur Kit Product Code",
-            text: "Bur Kit Product Code"
-          },
-          {
-            name: "Bur Kit Link to Purchase",
-            text: "Bur Kit Link to Purchase"
-          },
-          {
-            name: "Surgical Bur Kit (Denture Conversion)",
-            text: "Surgical Bur Kit (Denture Conversion)"
-          }
-        ]
-      }
-    ]    
-  }
-}
+        name: "Implant Model",
+        text: "Implant Model",
+        collection: "Drill-Kit-and-Sequence-Calculator",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        collection: "Drill-Kit-and-Sequence-Calculator",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        collection: "Drill-Kit-and-Sequence-Calculator",
+      },
+      {
+        name: "Implant Length",
+        text: "Implant Length",
+        collection: "Drill-Kit-and-Sequence-Calculator",
+      },
+      {
+        name: "Implant Surface Treatment",
+        text: "Implant Surface Treatment",
+        collection: "Drill-Kit-and-Sequence-Calculator",
+      },
+      // {
+      //   name: "Select Drill Kit",
+      //   text: "Select Drill Kit",
+      // collection: "Drill-Kit-and-Sequence-Calculator"
+      // }
+      {
+        name: "Will you perform bone reduction?",
+        text: "Will you perform bone reduction?",
+        collection: "Bone-Reduction-Calculator",
+        outputFrom: "Drill-Kit-and-Sequence-Calculator"
+      },
+    ],
+    output: [],
+  },
+};
