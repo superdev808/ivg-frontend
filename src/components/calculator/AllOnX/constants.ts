@@ -1,11 +1,16 @@
+export enum PROCEDURES {
+  SURGERY = "surgery",
+  RESTORATIVE = "restorative",
+  SURGERY_AND_RESTORATIVE = "both"
+}
 export interface Procedure {
   name: string;
-  value: number;
+  value: PROCEDURES;
 }
 export const procedures: Procedure[] = [
-  { name: "Surgery", value: 1 },
-  { name: "Restorative", value: 2 },
-  { name: "Surgery and Restorative", value: 3 },
+  { name: "Surgery", value: PROCEDURES.SURGERY },
+  { name: "Restorative", value: PROCEDURES.RESTORATIVE },
+  { name: "Surgery and Restorative", value: PROCEDURES.SURGERY_AND_RESTORATIVE },
 ];
 
 export interface Site {
@@ -109,10 +114,7 @@ export const sitesData: SiteData = {
 
 export const AllOnXItems = [
   {
-    type: "Scanbodies",
-    label: "scanbody",
-    description:
-      "Enter your implant information below to determine compatible authentic and generic scanbodies.",
+    type: "surgery",
     input: [
       {
         name: "Implant Brand",

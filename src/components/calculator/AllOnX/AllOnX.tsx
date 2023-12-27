@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { SelectButton } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
-import { procedures, Site, SiteData } from "./constants";
+import { PROCEDURES, procedures, Site, SiteData } from "./constants";
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
 import styles from "./AllOnX.module.scss";
 
 const AllOnXCalculator: React.FC = () => {
-  const [procedure, setProcedure] = useState<number>(1);
+  const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
 
@@ -83,6 +83,7 @@ const AllOnXCalculator: React.FC = () => {
             <TabView renderActiveOnly={false}>
               <TabPanel header="Input Details">
                 <InputDetails
+                  procedure={procedure}
                   selectedSites={selectedSites}
                   sitesData={sitesData}
                   onInputSelect={onInputSelect}

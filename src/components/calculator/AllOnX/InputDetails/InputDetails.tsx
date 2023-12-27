@@ -1,15 +1,17 @@
 import { TabPanel, TabView } from "primereact/tabview";
-import { Site, SiteData, AllOnXItems, InputDetail } from "../constants";
+import { Site, SiteData, AllOnXItems, InputDetail, PROCEDURES } from "../constants";
 import React from "react";
 import Inputs from "./Inputs";
 
 interface InputDetailsProps {
+  procedure: PROCEDURES
   selectedSites: Site[];
   sitesData: SiteData;
   onInputSelect: (site: Site, question: string, answer: string) => void
 }
 
 const InputDetails: React.FC<InputDetailsProps> = ({
+  procedure,
   selectedSites,
   sitesData,
   onInputSelect
@@ -20,6 +22,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
         return (
           <TabPanel key={site.name} header={site.name}>
             <Inputs
+              procedure={procedure}
               site={site}
               input={AllOnXItems[0].input}
               output={AllOnXItems[0].output}

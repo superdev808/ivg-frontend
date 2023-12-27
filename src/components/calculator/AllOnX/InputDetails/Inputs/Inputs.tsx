@@ -1,14 +1,19 @@
 import { useMemo, useState } from "react";
-import { Site } from "../../constants";
+import { PROCEDURES, Site } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Quiz from "@/components/calculator/quiz";
 
+interface KeyValuePair {
+  name: string,
+  text: string
+}
 interface InputProps {
+  procedure: PROCEDURES
   site: Site;
-  input: any;
-  output: any;
-  option: any;
+  input: KeyValuePair[];
+  output: KeyValuePair[];
+  option: string;
   onInputSelect: (site: Site, question: string, answer: string) => void
 }
 
@@ -20,8 +25,8 @@ const Inputs: React.FC<InputProps> = ({
   onInputSelect
 }: InputProps) => {
   const [level, setLevel] = useState(0);
-  const [answerOptions, setAnswerOptions] = useState<any[]>([]);
-  const [answers, setAnswers] = useState<any[]>([]);
+  const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
+  const [answers, setAnswers] = useState<string[]>([]);
   const [itemInfo, setItemInfo] = useState<any[]>([]);
 
   const { isLoading } = useQuery(
@@ -49,14 +54,14 @@ const Inputs: React.FC<InputProps> = ({
             quiz,
             fields: input[level]?.name
               ? [input[level]?.name]
-              : output.map((item: any) => item.name),
+              : output.map((item: KeyValuePair) => item.name),
           }),
         }
       );
 
       const { data: newAnswerOptions } = await response.json();
 
-      const originalAnswerOptions: any[] = answerOptions.slice(0, level);
+      const originalAnswerOptions: string[][] = answerOptions.slice(0, level);
       if (!input[level]) {
         setItemInfo(newAnswerOptions);
         return;
@@ -84,7 +89,7 @@ const Inputs: React.FC<InputProps> = ({
   return (
     <>
       <div className="">
-        {questions.map((quiz: any, index: any) => {
+        {questions.map((quiz: any, index: number) => {
           if (
             answerOptions[index] &&
             answerOptions[index].length === 1 &&
