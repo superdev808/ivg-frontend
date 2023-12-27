@@ -22,7 +22,7 @@ export const UPPER_SITES: Site[] = SITES.slice(0, 16);
 export const LOWER_SITES: Site[] = SITES.slice(16, 32);
 
 export interface InputDetail {
-  id: string;
+  id?: string;
   question: string;
   answer: string;
 }
@@ -106,3 +106,48 @@ export const sitesData: SiteData = {
     ],
   },
 };
+
+export const AllOnXItems = [
+  {
+    type: "Scanbodies",
+    label: "scanbody",
+    description:
+      "Enter your implant information below to determine compatible authentic and generic scanbodies.",
+    input: [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand"
+      },
+      {
+        name: "Implant System",
+        text: "Implant System"
+      },
+      {
+        name: "External Diameter",
+        text: "External Diameter"
+      },
+      {
+        name: "Platform",
+        text: "Platform"
+      },
+      {
+        name: "Authentic or Generic?",
+        text: "Authentic or Generic"
+      }
+    ],
+    output: [
+      {
+        name: "Manufacturer",
+        text: "Manufacturer"
+      },
+      {
+        name: "Scanbody Item Number",
+        text: "Scanbody Item Number"
+      },
+      {
+        name: "Link to Purchase",
+        text: "Link to Purchase"
+      }
+    ]
+  }
+];

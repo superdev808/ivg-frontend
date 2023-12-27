@@ -1,30 +1,42 @@
 import { TabPanel, TabView } from "primereact/tabview";
-import { Site, SiteData } from "../constants";
+import { Site, SiteData, AllOnXItems, InputDetail } from "../constants";
 import React from "react";
+import Inputs from "./Inputs";
 
 interface InputDetailsProps {
   selectedSites: Site[];
   sitesData: SiteData;
+  onInputSelect: (site: Site, question: string, answer: string) => void
 }
 
-const InputDetails = ({ selectedSites, sitesData }: InputDetailsProps) => {
+const InputDetails: React.FC<InputDetailsProps> = ({
+  selectedSites,
+  sitesData,
+  onInputSelect
+}: InputDetailsProps) => {
   return (
-    <TabView scrollable>
+    <TabView renderActiveOnly={false} scrollable>
       {selectedSites.map((site: Site) => {
         return (
           <TabPanel key={site.name} header={site.name}>
-            <p className="m-0">{site.name} input questions here</p>
+            <Inputs
+              site={site}
+              input={AllOnXItems[0].input}
+              output={AllOnXItems[0].output}
+              option="Scanbodies"
+              onInputSelect={onInputSelect}
+            />
           </TabPanel>
         );
       })}
       <TabPanel header="Summary">
-        {/* {selectedSites.map((site: Site) => {
-          const questionnaire: InputDetails[] =
+        {selectedSites.map((site: Site) => {
+          const questionnaire: InputDetail[] =
             sitesData[site.name]?.inputDetails || [];
           return (
             <React.Fragment key={site.key}>
               <h3>{site.name}</h3>
-              {questionnaire.map((data: InputDetails) => {
+              {questionnaire.map((data: InputDetail) => {
                 return (
                   <div className="flex my-2" key={data.id}>
                     <span className="flex-1">{data.question}</span>
@@ -34,7 +46,7 @@ const InputDetails = ({ selectedSites, sitesData }: InputDetailsProps) => {
               })}
             </React.Fragment>
           );
-        })} */}
+        })}
       </TabPanel>
     </TabView>
   );
