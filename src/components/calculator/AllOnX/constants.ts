@@ -118,8 +118,8 @@ export const sitesData: SiteData = {
 export interface InputOutputValues {
   name: string;
   text: string;
-  calculator: string
-  outputFrom?: string
+  calculator: string;
+  outputFrom?: string;
 }
 export interface ProcedureRequest {
   type: PROCEDURES;
@@ -163,16 +163,16 @@ export const ALLONX_REQUEST_PARAMS: RequestParams = {
         text: "Implant Surface Treatment",
         calculator: "Drill-Kit-and-Sequence-Calculator",
       },
-      // {
-      //   name: "Select Drill Kit",
-      //   text: "Select Drill Kit",
-      // calculator: "Drill-Kit-and-Sequence-Calculator"
-      // }
+      {
+        name: "Select Drill Kit",
+        text: "Select Drill Kit",
+        calculator: "Drill-Kit-and-Sequence-Calculator",
+      },
       {
         name: "Will you perform bone reduction?",
         text: "Will you perform bone reduction?",
         calculator: "Bone-Reduction-Calculator",
-        outputFrom: "Drill-Kit-and-Sequence-Calculator"
+        outputFrom: "Drill-Kit-and-Sequence-Calculator",
       },
     ],
     output: [],

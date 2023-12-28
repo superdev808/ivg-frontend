@@ -16,6 +16,7 @@ interface InputDetailsProps {
   selectedSites: Site[];
   sitesData: SiteData;
   onInputSelect: (site: Site, question: string, answer: string) => void;
+  onAutopopulate: () => void;
 }
 
 const InputDetails: React.FC<InputDetailsProps> = ({
@@ -23,23 +24,25 @@ const InputDetails: React.FC<InputDetailsProps> = ({
   selectedSites,
   sitesData,
   onInputSelect,
+  onAutopopulate
 }: InputDetailsProps) => {
-  
-  const requestParams: ProcedureRequest = ALLONX_REQUEST_PARAMS[procedure];
+  const requestParams: ProcedureRequest = ALLONX_REQUEST_PARAMS[procedure];  
 
   return (
     <TabView renderActiveOnly={false} scrollable>
-      {selectedSites.map((site: Site) => {
+      {selectedSites.map((site: Site, index: number) => {
         return (
           <TabPanel key={site.name} header={site.name}>
             <Inputs
-                procedure={procedure}
-                site={site}
-                input={requestParams.input}
-                output={requestParams.output}
-                option={LABEL_ALL_ON_X_CALCULATOR}
-                onInputSelect={onInputSelect}
-              />
+              procedure={procedure}
+              site={site}
+              input={requestParams.input}
+              output={requestParams.output}
+              option={LABEL_ALL_ON_X_CALCULATOR}
+              onInputSelect={onInputSelect}
+              showAutopopulatePrompt={index === 0}
+              onAutopopulate={onAutopopulate}
+            />
           </TabPanel>
         );
       })}
@@ -48,7 +51,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
           const questionnaire: InputDetail[] =
             sitesData[site.name]?.inputDetails || [];
           return (
-            <React.Fragment key={site.key}>
+            <React.Fragment key={site.name}>
               <h3>{site.name}</h3>
               {questionnaire.map((data: InputDetail) => {
                 return (
