@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     const requestUrl = new URL(request.url);
 
     // Read the JSON file using fs
-    const filePath = path.join(process.cwd(), "public", `/data/${body.collectionName}.json`);
+    const filePath = path.join(process.cwd(), "public", `/data/${body.calculator}.json`);
     const rawData = fs.readFileSync(filePath, "utf8");
     const data = JSON.parse(rawData);
     let filteredResults:any = []

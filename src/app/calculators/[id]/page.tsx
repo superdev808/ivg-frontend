@@ -149,23 +149,19 @@ export default function CalculatorPage() {
     return tabItems.find((item) => item.type === tabId);
   }, [searchParams.id]);
 
-  return (
+  return tabId === LABEL_ALL_ON_X_CALCULATOR ? (
+    <AllOnXCalculator />
+  ) : (
     <div className="flex flex-column align-items-center justify-content-center mt-6">
-      {tabId === LABEL_ALL_ON_X_CALCULATOR ? (
-        <AllOnXCalculator />
-      ) : (
-        <>
-          <Card
-            className="w-12 md:w-5 flex px-4 py-2 border-round bg-white flex-column"
-            title={selectedType?.description}
-          />
-          <CalculatorContainer
-            option={searchParams.id as string}
-            input={selectedType?.input || []}
-            output={selectedType?.output || []}
-          />
-        </>
-      )}
+      <Card
+        className="w-12 md:w-5 flex px-4 py-2 border-round bg-white flex-column"
+        title={selectedType?.description}
+      />
+      <CalculatorContainer
+        option={searchParams.id as string}
+        input={selectedType?.input || []}
+        output={selectedType?.output || []}
+      />
     </div>
   );
 }

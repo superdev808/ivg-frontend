@@ -115,16 +115,16 @@ export const sitesData: SiteData = {
   },
 };
 
-export interface KeyValuePair {
+export interface InputOutputValues {
   name: string;
   text: string;
-  collection: string
+  calculator: string
   outputFrom?: string
 }
 export interface ProcedureRequest {
   type: PROCEDURES;
-  input: KeyValuePair[];
-  output: KeyValuePair[];
+  input: InputOutputValues[];
+  output: InputOutputValues[];
 }
 interface RequestParams {
   [key: string]: ProcedureRequest;
@@ -136,42 +136,42 @@ export const ALLONX_REQUEST_PARAMS: RequestParams = {
       {
         name: "Implant Brand",
         text: "Implant Brand",
-        collection: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "Drill-Kit-and-Sequence-Calculator",
       },
       {
         name: "Implant Model",
         text: "Implant Model",
-        collection: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "Drill-Kit-and-Sequence-Calculator",
       },
       {
         name: "Implant Diameter",
         text: "Implant Diameter",
-        collection: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "Drill-Kit-and-Sequence-Calculator",
       },
       {
         name: "Implant Platform",
         text: "Implant Platform",
-        collection: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "Drill-Kit-and-Sequence-Calculator",
       },
       {
         name: "Implant Length",
         text: "Implant Length",
-        collection: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "Drill-Kit-and-Sequence-Calculator",
       },
       {
         name: "Implant Surface Treatment",
         text: "Implant Surface Treatment",
-        collection: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "Drill-Kit-and-Sequence-Calculator",
       },
       // {
       //   name: "Select Drill Kit",
       //   text: "Select Drill Kit",
-      // collection: "Drill-Kit-and-Sequence-Calculator"
+      // calculator: "Drill-Kit-and-Sequence-Calculator"
       // }
       {
         name: "Will you perform bone reduction?",
         text: "Will you perform bone reduction?",
-        collection: "Bone-Reduction-Calculator",
+        calculator: "Bone-Reduction-Calculator",
         outputFrom: "Drill-Kit-and-Sequence-Calculator"
       },
     ],

@@ -9,6 +9,7 @@ import {
 } from "../constants";
 import React from "react";
 import Inputs from "./Inputs";
+import { LABEL_ALL_ON_X_CALCULATOR } from "@/app/calculators/constants";
 
 interface InputDetailsProps {
   procedure: PROCEDURES;
@@ -36,7 +37,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
                 site={site}
                 input={requestParams.input}
                 output={requestParams.output}
-                option="Scanbodies"
+                option={LABEL_ALL_ON_X_CALCULATOR}
                 onInputSelect={onInputSelect}
               />
           </TabPanel>

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { KeyValuePair, PROCEDURES, Site } from "../../constants";
+import { InputOutputValues, PROCEDURES, Site } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Quiz from "@/components/calculator/quiz";
@@ -7,8 +7,8 @@ import Quiz from "@/components/calculator/quiz";
 interface InputProps {
   procedure: PROCEDURES
   site: Site;
-  input: KeyValuePair[];
-  output: KeyValuePair[];
+  input: InputOutputValues[];
+  output: InputOutputValues[];
   option: string;
   onInputSelect: (site: Site, question: string, answer: string) => void
 }
@@ -49,12 +49,12 @@ const Inputs: React.FC<InputProps> = ({
           body: JSON.stringify({
             type: option,
             procedure,
-            collectionName: input[level]?.collection,
+            calculator: input[level]?.calculator,
             output: input[level]?.outputFrom,
             quiz,
             fields: input[level]?.name
               ? [input[level]?.name]
-              : output.map((item: KeyValuePair) => item.name),
+              : output.map((item: InputOutputValues) => item.name),
           }),
         }
       );
