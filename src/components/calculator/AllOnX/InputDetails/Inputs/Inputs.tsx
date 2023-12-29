@@ -30,7 +30,7 @@ const Inputs: React.FC<InputProps> = ({
   const [itemInfo, setItemInfo] = useState<any[]>([]);
 
   const { isLoading } = useQuery(
-    [input, level, answers, option],
+    [input, level, option],
     async () => {
       if (level > input.length) {
         return;

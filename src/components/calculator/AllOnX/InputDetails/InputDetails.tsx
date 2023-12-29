@@ -48,11 +48,11 @@ const InputDetails: React.FC<InputDetailsProps> = ({
           const questionnaire: InputDetail[] =
             sitesData[site.name]?.inputDetails || [];
           return (
-            <React.Fragment key={site.name}>
+            <React.Fragment key={site.key}>
               <h3>{site.name}</h3>
-              {questionnaire.map((data: InputDetail) => {
+              {questionnaire.map((data: InputDetail, index: number) => {
                 return (
-                  <div className="flex my-2" key={data.id}>
+                  <div className="flex my-2" key={index}>
                     <span className="flex-1">{data.question}</span>
                     <span className="flex-1">{data.answer}</span>
                   </div>
