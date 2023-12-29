@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { InputOutputValues, PROCEDURES, Site } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
@@ -13,7 +13,8 @@ interface InputProps {
   option: string;
   showAutopopulatePrompt: boolean,
   onInputSelect: (site: Site, question: string, answer: string) => void,
-  onAutopopulate: () => void
+  onAutopopulate: (questions: InputOutputValues[], answerOptions: string[][], answers: string[]) => void
+  autoPopulateData: any
 }
 
 const Inputs: React.FC<InputProps> = ({
@@ -24,15 +25,26 @@ const Inputs: React.FC<InputProps> = ({
   option,
   showAutopopulatePrompt,
   onInputSelect,
-  onAutopopulate
+  onAutopopulate,
+  autoPopulateData
 }: InputProps) => {
   const [level, setLevel] = useState(0);
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<string[]>([]);  
+  const [autoQuestions, setAutoQuestions] = useState<any>(null);
   const [itemInfo, setItemInfo] = useState<any[]>([]);
 
+  useEffect(()=>{
+    if(autoPopulateData){
+      const {questions, answerOptions, answers} = autoPopulateData;      
+      setAnswerOptions(answerOptions);
+      setAnswers(answers)
+      setAutoQuestions(questions);
+    }    
+  }, [autoPopulateData])
+
   const { isLoading } = useQuery(
-    [input, level, answers, option],
+    [input, level, option],
     async () => {
       if (level > input.length) {
         return;
@@ -80,10 +92,11 @@ const Inputs: React.FC<InputProps> = ({
   );
 
   const questions = useMemo(() => {
-    return input.slice(0, level + 1);
-  }, [input, level]);
+    return autoQuestions ? autoQuestions : input.slice(0, level + 1);
+  }, [input, level, autoQuestions]);
 
   const handleSelectAnswer = (index: number) => (e: any) => {
+    setAutoQuestions(null)
     setLevel(index + 1);
     const newAnswers = answers.slice(0, index);
     newAnswers[index] = e.value;
@@ -96,7 +109,7 @@ const Inputs: React.FC<InputProps> = ({
     const value = e.value;
     setAutopopulate(value);
     if(value === "Yes"){
-      onAutopopulate();
+      onAutopopulate(questions, answerOptions, answers);
     }
   };
 
@@ -129,7 +142,7 @@ const Inputs: React.FC<InputProps> = ({
             />
           );
         })}
-        {(showAutopopulatePrompt && !input[level]) && (
+        {/* {(showAutopopulatePrompt && !input[level]) && (
           <>
             <p>Auto-populate these answers for all other sites?</p>
             <div className="flex flex-wrap gap-3">
@@ -159,7 +172,7 @@ const Inputs: React.FC<InputProps> = ({
               </div>
             </div>
           </>
-        )}
+        )} */}
       </div>
       <div className="w-12 flex justify-content-center">
         {isLoading && <ProgressSpinner className="w-1" />}

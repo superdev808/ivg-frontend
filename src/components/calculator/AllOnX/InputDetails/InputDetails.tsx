@@ -6,6 +6,7 @@ import {
   PROCEDURES,
   ALLONX_REQUEST_PARAMS,
   ProcedureRequest,
+  InputOutputValues,
 } from "../constants";
 import React from "react";
 import Inputs from "./Inputs";
@@ -16,7 +17,8 @@ interface InputDetailsProps {
   selectedSites: Site[];
   sitesData: SiteData;
   onInputSelect: (site: Site, question: string, answer: string) => void;
-  onAutopopulate: () => void;
+  onAutopopulate: (questions: InputOutputValues[], answerOptions:string[][], answers:string[]) => void;
+  autoPopulateData: any
 }
 
 const InputDetails: React.FC<InputDetailsProps> = ({
@@ -24,7 +26,8 @@ const InputDetails: React.FC<InputDetailsProps> = ({
   selectedSites,
   sitesData,
   onInputSelect,
-  onAutopopulate
+  onAutopopulate,
+  autoPopulateData
 }: InputDetailsProps) => {
   const requestParams: ProcedureRequest = ALLONX_REQUEST_PARAMS[procedure];  
 
@@ -42,6 +45,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               onInputSelect={onInputSelect}
               showAutopopulatePrompt={index === 0}
               onAutopopulate={onAutopopulate}
+              autoPopulateData={autoPopulateData}
             />
           </TabPanel>
         );
@@ -51,11 +55,11 @@ const InputDetails: React.FC<InputDetailsProps> = ({
           const questionnaire: InputDetail[] =
             sitesData[site.name]?.inputDetails || [];
           return (
-            <React.Fragment key={site.name}>
+            <React.Fragment key={site.key}>
               <h3>{site.name}</h3>
-              {questionnaire.map((data: InputDetail) => {
+              {questionnaire.map((data: InputDetail, index: number) => {
                 return (
-                  <div className="flex my-2" key={data.id}>
+                  <div className="flex my-2" key={index}>
                     <span className="flex-1">{data.question}</span>
                     <span className="flex-1">{data.answer}</span>
                   </div>

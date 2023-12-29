@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SelectButton } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
-import { InputDetail, PROCEDURES, procedures, Site, SiteData } from "./constants";
+import { AutoPopulateData, InputDetail, InputOutputValues, PROCEDURES, procedures, Site, SiteData } from "./constants";
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
@@ -11,6 +11,7 @@ const AllOnXCalculator: React.FC = () => {
   const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
+  const [autoPopulateData, setAutoPopulateData] = useState<AutoPopulateData | null>(null);
 
   const onSiteChange = (tooth: number): void => {
     let _selectedSites: Site[] = [...selectedSites];
@@ -59,7 +60,8 @@ const AllOnXCalculator: React.FC = () => {
     setSitesData(data);
   };
 
-  const handleAutopopulate = () => {
+  const handleAutopopulate = (questions: InputOutputValues[], answerOptions:string[][], answers:string[]) => {
+    setAutoPopulateData({questions, answerOptions, answers})
     let _sitesData: SiteData = sitesData;
     const data = {...sitesData[selectedSites[0].name]}
     Object.keys(sitesData).map(
@@ -101,6 +103,7 @@ const AllOnXCalculator: React.FC = () => {
                   sitesData={sitesData}
                   onInputSelect={handleInputSelect}
                   onAutopopulate={handleAutopopulate}
+                  autoPopulateData={autoPopulateData}
                 />
               </TabPanel>
               <TabPanel header="Component Details">
