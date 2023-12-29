@@ -8,6 +8,15 @@ interface ToothProps {
   onClickHandler: (teeth: number) => void;
 }
 
+/**
+ * The `Tooth` component renders an SVG icon and a text label based on the provided props.
+ * @param {ToothProps} props - The `props` parameter is an object that contains the following
+ * properties:
+ * @returns The `Tooth` component is returning a JSX element. It conditionally renders a group (`g`)
+ * element containing paths and text elements based on the existence of a valid icon for the given
+ * `name` prop. The paths are rendered with different styles and fills based on the `isSelected` prop.
+ * The text element displays the `value` prop.
+ */
 export const Tooth = (props: ToothProps) => {
   const { name, value, isSelected, onClickHandler } = props;
   const toothHandler: () => void = () => {
