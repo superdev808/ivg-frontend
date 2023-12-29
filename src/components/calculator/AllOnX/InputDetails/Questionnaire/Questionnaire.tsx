@@ -11,6 +11,16 @@ interface InputProps {
   onInputSelect: (site: Site, question: string, answer: string) => void
 }
 
+/**
+ * Name : Questionnaire.
+ * Desc : The `Questionnaire` component is a React functional component that renders a series of quiz
+ * questions based on the provided `input` and `option` props. It manages the state of the quiz level,
+ * answer options, selected answers, and item information.
+ * @param {object} site
+ * @param {array} input
+ * @param {string} option
+ * @param {func} onInputSelect
+ */
 const Questionnaire: React.FC<InputProps> = ({
   site,
   input,

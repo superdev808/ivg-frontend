@@ -6,6 +6,13 @@ interface ComponentDetailProps {
   sitesData: SiteData;
 }
 
+/**
+ * Name : ComponentDetails.
+ * Desc : The `ComponentDetails` function is a React functional component that renders a TabView component
+ * with multiple TabPanels based on the `selectedSites` prop, and a final TabPanel for the summary.
+ * @param {array} selectedSites
+ * @param {object} sitesData
+ */
 const ComponentDetails: React.FC<ComponentDetailProps> = ({ selectedSites }: ComponentDetailProps) => {
   return (
     <TabView scrollable>

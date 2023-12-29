@@ -7,6 +7,10 @@ import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
 import styles from "./AllOnX.module.scss";
 
+/* 
+ * Name : AllOnXCalculator.
+ * Desc : The code defines a functional component called `AllOnXCalculator` which is a           * calculator for the All-on-X dental procedure. 
+*/
 const AllOnXCalculator: React.FC = () => {
   const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);

@@ -1640,8 +1640,16 @@ const fullIcons: FullIcons = {
     yCordinate: "214.18651",
   },
 };
+
+/*
+ * The function returns validIcons
+*/
 export const validIcons: FullIcons = {
   ...fullIcons,
 };
 
+/**
+ * The function checks if an object property exists.
+ * @param {Icon} objProp
+ */
 export const exists = (objProp: Icon) => typeof objProp !== "undefined";

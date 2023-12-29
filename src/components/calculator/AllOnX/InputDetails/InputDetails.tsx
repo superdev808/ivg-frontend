@@ -21,8 +21,8 @@ interface InputDetailsProps {
 /**
  * Name : InputDetails.
  * Desc : The `InputDetails` component renders a tab view with multiple tabs, each containing a
- * `Questionnaire` component for a selected site, and a summary tab displaying the input details for
- * each selected site.
+ * `Questionnaire` component for a selected site, and a summary tab displaying the input details
+ * for each selected site.
  * @param {object} procedure
  * @param {array} selectedSites
  * @param {object} sitesData
