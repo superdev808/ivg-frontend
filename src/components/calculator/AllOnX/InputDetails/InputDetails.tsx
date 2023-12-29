@@ -38,7 +38,6 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               output={requestParams.output}
               option={LABEL_ALL_ON_X_CALCULATOR}
               onInputSelect={onInputSelect}
-              showAutopopulatePrompt={index === 0}
             />
           </TabPanel>
         );

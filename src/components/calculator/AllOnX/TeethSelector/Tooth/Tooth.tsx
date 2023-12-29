@@ -17,7 +17,7 @@ interface ToothProps {
  * `name` prop. The paths are rendered with different styles and fills based on the `isSelected` prop.
  * The text element displays the `value` prop.
  */
-export const Tooth = (props: ToothProps) => {
+export const Tooth: React.FC<ToothProps> = (props: ToothProps) => {
   const { name, value, isSelected, onClickHandler } = props;
   const toothHandler: () => void = () => {
     onClickHandler(value);

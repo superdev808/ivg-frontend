@@ -16,7 +16,7 @@ interface TeethSelectorProps {
   onSiteChange: (teeth: number) => void;
 }
 
-const TeethSelector = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
+const TeethSelector: React.FC<TeethSelectorProps> = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
   const selectedSitesKeys: number[] = selectedSites.map(
     (site: Site) => site.key
   );

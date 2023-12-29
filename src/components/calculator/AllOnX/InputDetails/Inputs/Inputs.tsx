@@ -3,7 +3,6 @@ import { InputOutputValues, PROCEDURES, Site } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Quiz from "@/components/calculator/quiz";
-import { RadioButton, RadioButtonChangeEvent } from "primereact/radiobutton";
 
 interface InputProps {
   procedure: PROCEDURES
@@ -11,7 +10,6 @@ interface InputProps {
   input: InputOutputValues[];
   output: InputOutputValues[];
   option: string;
-  showAutopopulatePrompt: boolean,
   onInputSelect: (site: Site, question: string, answer: string) => void
 }
 
@@ -21,7 +19,6 @@ const Inputs: React.FC<InputProps> = ({
   input,
   output,
   option,
-  showAutopopulatePrompt,
   onInputSelect
 }: InputProps) => {
   const [level, setLevel] = useState(0);
@@ -42,7 +39,7 @@ const Inputs: React.FC<InputProps> = ({
         quiz[input[index].name] = answer;
       });
 
-      const response = await fetch(
+      const response: Response = await fetch(
         `/api/calculators/operations/all-on-x`,
         {
           method: "POST",
@@ -77,7 +74,7 @@ const Inputs: React.FC<InputProps> = ({
     { refetchOnWindowFocus: false }
   );
 
-  const questions = useMemo(() => {
+  const questions: InputOutputValues[] = useMemo(() => {
     return input.slice(0, level + 1);
   }, [input, level]);
 
