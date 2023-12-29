@@ -8,7 +8,7 @@ import {
   ProcedureRequest,
 } from "../constants";
 import React from "react";
-import Inputs from "./Inputs";
+import Questionnaire from "./Questionnaire";
 import { LABEL_ALL_ON_X_CALCULATOR } from "@/app/calculators/constants";
 
 interface InputDetailsProps {
@@ -18,6 +18,16 @@ interface InputDetailsProps {
   onInputSelect: (site: Site, question: string, answer: string) => void;
 }
 
+/**
+ * Name : InputDetails.
+ * Desc : The `InputDetails` component renders a tab view with multiple tabs, each containing a
+ * `Questionnaire` component for a selected site, and a summary tab displaying the input details for
+ * each selected site.
+ * @param {object} procedure
+ * @param {array} selectedSites
+ * @param {object} sitesData
+ * @param {func} onInputSelect
+ */
 const InputDetails: React.FC<InputDetailsProps> = ({
   procedure,
   selectedSites,
@@ -31,11 +41,9 @@ const InputDetails: React.FC<InputDetailsProps> = ({
       {selectedSites.map((site: Site, index: number) => {
         return (
           <TabPanel key={site.name} header={site.name}>
-            <Inputs
-              procedure={procedure}
+            <Questionnaire
               site={site}
               input={requestParams.input}
-              output={requestParams.output}
               option={LABEL_ALL_ON_X_CALCULATOR}
               onInputSelect={onInputSelect}
             />
@@ -51,7 +59,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               <h3>{site.name}</h3>
               {questionnaire.map((data: InputDetail, index: number) => {
                 return (
-                  <div className="flex my-2" key={index}>
+                  <div className="flex my-2" key={`${site.key}-${index}`}>
                     <span className="flex-1">{data.question}</span>
                     <span className="flex-1">{data.answer}</span>
                   </div>

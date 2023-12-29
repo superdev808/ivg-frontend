@@ -7,8 +7,6 @@ import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
 import styles from "./AllOnX.module.scss";
 
-/* The code defines a functional component called `AllOnXCalculator` which is a calculator for the
-All-on-X dental procedure. */
 const AllOnXCalculator: React.FC = () => {
   const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
@@ -20,7 +18,7 @@ const AllOnXCalculator: React.FC = () => {
     setSitesData({})
   }
 
-  const onSiteChange = (tooth: number): void => {
+  const handleSiteChange = (tooth: number): void => {
     let _selectedSites: Site[] = [...selectedSites];
     const isSelected: Site[] = _selectedSites.filter(
       (site: Site) => site.key === tooth
@@ -83,7 +81,7 @@ const AllOnXCalculator: React.FC = () => {
         <div>
           <TeethSelector
             selectedSites={selectedSites}
-            onSiteChange={onSiteChange}
+            onSiteChange={handleSiteChange}
           />
         </div>
         {selectedSites.length > 0 && (

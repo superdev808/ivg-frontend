@@ -1,23 +1,19 @@
 import { useMemo, useState } from "react";
-import { InputOutputValues, PROCEDURES, Site } from "../../constants";
+import { InputOutputValues, Site } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Quiz from "@/components/calculator/quiz";
 
 interface InputProps {
-  procedure: PROCEDURES
   site: Site;
   input: InputOutputValues[];
-  output: InputOutputValues[];
   option: string;
   onInputSelect: (site: Site, question: string, answer: string) => void
 }
 
-const Inputs: React.FC<InputProps> = ({
-  procedure,
+const Questionnaire: React.FC<InputProps> = ({
   site,
   input,
-  output,
   option,
   onInputSelect
 }: InputProps) => {
@@ -47,14 +43,12 @@ const Inputs: React.FC<InputProps> = ({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            type: option,
-            procedure,
-            calculator: input[level]?.calculator,
+            type: input[level]?.calculator,
             output: input[level]?.outputFrom,
             quiz,
             fields: input[level]?.name
               ? [input[level]?.name]
-              : output.map((item: InputOutputValues) => item.name),
+              : [],
           }),
         }
       );
@@ -123,4 +117,4 @@ const Inputs: React.FC<InputProps> = ({
   );
 };
 
-export default Inputs;
+export default Questionnaire;
