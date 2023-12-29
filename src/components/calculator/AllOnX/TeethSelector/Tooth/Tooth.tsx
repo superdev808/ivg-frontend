@@ -41,13 +41,13 @@ export const Tooth = (props: ToothProps) => {
                 x={validIcons[name].xCordinate}
                 y={validIcons[name].yCordinate}
                 style={{
-                  fontSize: "10.13467216px",
+                  fontSize: "12px",
                   fontStyle: "normal",
                   fontWeight: "normal",
                   lineHeight: "125%",
                   letterSpacing: "0px",
                   wordSpacing: "0px",
-                  fill: "#000000",
+                  fill: "rgba(0, 0, 0, 0.87)",
                   fillOpacity: 1,
                   stroke: "none",
                   fontFamily: "Sans",

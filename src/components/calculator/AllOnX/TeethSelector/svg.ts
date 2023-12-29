@@ -58,7 +58,7 @@ const fullIcons: FullIcons = {
       },
     ],
     xCordinate: "120.37785",
-    yCordinate: "17.284296",
+    yCordinate: "15.284296",
   },
 
   tooth7: {
@@ -233,7 +233,7 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "32.785339",
+    xCordinate: "29.785339",
     yCordinate: "88.226982",
   },
 
@@ -430,7 +430,7 @@ const fullIcons: FullIcons = {
       },
     ],
     xCordinate: "155.84921",
-    yCordinate: "17.284296",
+    yCordinate: "14.284296",
   },
 
   tooth10: {
@@ -464,7 +464,7 @@ const fullIcons: FullIcons = {
       },
     ],
     xCordinate: "192.76837",
-    yCordinate: "29.590677",
+    yCordinate: "26.590677",
   },
 
   tooth11: {
@@ -706,7 +706,7 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "264.43497",
+    xCordinate: "266.43497",
     yCordinate: "139.62425",
   },
 
@@ -758,7 +758,7 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "268.77841",
+    xCordinate: "271.77841",
     yCordinate: "169.3044",
   },
 
@@ -781,7 +781,7 @@ const fullIcons: FullIcons = {
       },
     ],
     xCordinate: "151.50578",
-    yCordinate: "360.41531",
+    yCordinate: "368.41531",
   },
 
   tooth23: {
@@ -815,7 +815,7 @@ const fullIcons: FullIcons = {
       },
     ],
     xCordinate: "176.84245",
-    yCordinate: "355.34799",
+    yCordinate: "364.34799",
   },
 
   tooth22: {
@@ -854,8 +854,8 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "202.17912",
-    yCordinate: "346.6611",
+    xCordinate: "204.17912",
+    yCordinate: "354.6611",
   },
 
   tooth21: {
@@ -894,8 +894,8 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "222.44849",
-    yCordinate: "330.01129",
+    xCordinate: "224.44849",
+    yCordinate: "334.01129",
   },
 
   tooth20: {
@@ -931,8 +931,8 @@ const fullIcons: FullIcons = {
         d: "m 223.07985,287.46469 -0.21759,1.74743",
       },
     ],
-    xCordinate: "240.5461",
-    yCordinate: "309.01804",
+    xCordinate: "243.5461",
+    yCordinate: "313.01804",
   },
 
   tooth19: {
@@ -989,8 +989,8 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "257.91986",
-    yCordinate: "282.95749",
+    xCordinate: "260.91986",
+    yCordinate: "283.95749",
   },
 
   tooth18: {
@@ -1053,8 +1053,8 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "265.15891",
-    yCordinate: "245.31441",
+    xCordinate: "267.15891",
+    yCordinate: "247.31441",
   },
 
   tooth17: {
@@ -1105,8 +1105,8 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "265.15891",
-    yCordinate: "214.18651",
+    xCordinate: "270.15891",
+    yCordinate: "216.18651",
   },
 
   tooth25: {
@@ -1129,7 +1129,7 @@ const fullIcons: FullIcons = {
       },
     ],
     xCordinate: "128.34082",
-    yCordinate: "360.41531",
+    yCordinate: "368.41531",
   },
 
   tooth26: {
@@ -1163,7 +1163,7 @@ const fullIcons: FullIcons = {
       },
     ],
     xCordinate: "100.10851",
-    yCordinate: "356.79581",
+    yCordinate: "364.79581",
   },
 
   tooth27: {
@@ -1203,7 +1203,7 @@ const fullIcons: FullIcons = {
       },
     ],
     xCordinate: "76.94355",
-    yCordinate: "347.38501",
+    yCordinate: "356.38501",
   },
 
   tooth28: {
@@ -1242,8 +1242,8 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "55.950298",
-    yCordinate: "330.01129",
+    xCordinate: "47.950298",
+    yCordinate: "334.01129",
   },
 
   tooth29: {
@@ -1282,7 +1282,7 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "38.57658",
+    xCordinate: "28.57658",
     yCordinate: "310.46585",
   },
 
@@ -1340,7 +1340,7 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "20.478951",
+    xCordinate: "14.478951",
     yCordinate: "287.30087",
   },
 
@@ -1404,7 +1404,7 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "12.515995",
+    xCordinate: "6.515995",
     yCordinate: "244.5905",
   },
 
@@ -1456,7 +1456,7 @@ const fullIcons: FullIcons = {
         },
       },
     ],
-    xCordinate: "12.515995",
+    xCordinate: "6.515995",
     yCordinate: "214.18651",
   },
 };
