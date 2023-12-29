@@ -12,8 +12,7 @@ interface InputProps {
   output: InputOutputValues[];
   option: string;
   showAutopopulatePrompt: boolean,
-  onInputSelect: (site: Site, question: string, answer: string) => void,
-  onAutopopulate: () => void
+  onInputSelect: (site: Site, question: string, answer: string) => void
 }
 
 const Inputs: React.FC<InputProps> = ({
@@ -23,8 +22,7 @@ const Inputs: React.FC<InputProps> = ({
   output,
   option,
   showAutopopulatePrompt,
-  onInputSelect,
-  onAutopopulate
+  onInputSelect
 }: InputProps) => {
   const [level, setLevel] = useState(0);
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
@@ -91,15 +89,6 @@ const Inputs: React.FC<InputProps> = ({
     onInputSelect(site, questions[index].text, newAnswers[index])
   };
 
-  const [autopopulate, setAutopopulate] = useState("");
-  const autoPopulateResponse = (e: RadioButtonChangeEvent) => {
-    const value = e.value;
-    setAutopopulate(value);
-    if(value === "Yes"){
-      onAutopopulate();
-    }
-  };
-
   return (
     <>
       <div className="">
@@ -129,37 +118,6 @@ const Inputs: React.FC<InputProps> = ({
             />
           );
         })}
-        {(showAutopopulatePrompt && !input[level]) && (
-          <>
-            <p>Auto-populate these answers for all other sites?</p>
-            <div className="flex flex-wrap gap-3">
-              <div className="flex align-items-center">
-                <RadioButton
-                  inputId="Autopopulate1"
-                  name="pizza"
-                  value="Yes"
-                  onChange={(e) => autoPopulateResponse(e)}
-                  checked={autopopulate === "Yes"}
-                />
-                <label htmlFor="Autopopulate1" className="ml-2">
-                  Yes
-                </label>
-              </div>
-              <div className="flex align-items-center">
-                <RadioButton
-                  inputId="Autopopulate2"
-                  name="pizza"
-                  value="No"
-                  onChange={(e) => autoPopulateResponse(e)}
-                  checked={autopopulate === "No"}
-                />
-                <label htmlFor="Autopopulate2" className="ml-2">
-                  No
-                </label>
-              </div>
-            </div>
-          </>
-        )}
       </div>
       <div className="w-12 flex justify-content-center">
         {isLoading && <ProgressSpinner className="w-1" />}

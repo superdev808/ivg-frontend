@@ -16,15 +16,13 @@ interface InputDetailsProps {
   selectedSites: Site[];
   sitesData: SiteData;
   onInputSelect: (site: Site, question: string, answer: string) => void;
-  onAutopopulate: () => void;
 }
 
 const InputDetails: React.FC<InputDetailsProps> = ({
   procedure,
   selectedSites,
   sitesData,
-  onInputSelect,
-  onAutopopulate
+  onInputSelect
 }: InputDetailsProps) => {
   const requestParams: ProcedureRequest = ALLONX_REQUEST_PARAMS[procedure];  
 
@@ -41,7 +39,6 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               option={LABEL_ALL_ON_X_CALCULATOR}
               onInputSelect={onInputSelect}
               showAutopopulatePrompt={index === 0}
-              onAutopopulate={onAutopopulate}
             />
           </TabPanel>
         );

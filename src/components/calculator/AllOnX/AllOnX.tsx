@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SelectButton } from "primereact/selectbutton";
+import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
 import { InputDetail, PROCEDURES, procedures, Site, SiteData } from "./constants";
 import InputDetails from "./InputDetails";
@@ -11,6 +11,12 @@ const AllOnXCalculator: React.FC = () => {
   const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
+
+  const handleProcedureChange = (e: SelectButtonChangeEvent) => {
+    setProcedure(e.value);
+    setSelectedSites([])
+    setSitesData({})
+  }
 
   const onSiteChange = (tooth: number): void => {
     let _selectedSites: Site[] = [...selectedSites];
@@ -59,19 +65,6 @@ const AllOnXCalculator: React.FC = () => {
     setSitesData(data);
   };
 
-  const handleAutopopulate = () => {
-    let _sitesData: SiteData = sitesData;
-    const data = {...sitesData[selectedSites[0].name]}
-    Object.keys(sitesData).map(
-      (siteName: string) =>
-        (_sitesData = {
-          ..._sitesData,
-          [siteName]: data,
-        })
-    );
-    setSitesData(_sitesData);
-  };
-
   return (
     <div className={styles.allOnXCalculator}>
       <div className={styles.procedureSelection}>
@@ -79,7 +72,7 @@ const AllOnXCalculator: React.FC = () => {
         <SelectButton
           unselectable={false}
           value={procedure}
-          onChange={(e) => setProcedure(e.value)}
+          onChange={(e) => handleProcedureChange(e)}
           optionLabel="name"
           options={procedures}
         />
@@ -100,7 +93,6 @@ const AllOnXCalculator: React.FC = () => {
                   selectedSites={selectedSites}
                   sitesData={sitesData}
                   onInputSelect={handleInputSelect}
-                  onAutopopulate={handleAutopopulate}
                 />
               </TabPanel>
               <TabPanel header="Component Details">

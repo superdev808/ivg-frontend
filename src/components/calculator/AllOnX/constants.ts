@@ -1,7 +1,7 @@
 export enum PROCEDURES {
-  SURGERY = "surgery",
-  RESTORATIVE = "restorative",
-  SURGERY_AND_RESTORATIVE = "both",
+  SURGERY = "Surgery",
+  RESTORATIVE = "Restorative",
+  SURGERY_AND_RESTORATIVE = "SurgeryAndRestorative",
 }
 export interface Procedure {
   name: string;
@@ -52,68 +52,6 @@ export interface SiteData {
     componentDetails?: ComponentDetail[];
   };
 }
-
-export const sitesData: SiteData = {
-  "Site 1": {
-    inputDetails: [
-      {
-        id: "1",
-        question: "Implant Brand",
-        answer: "Nobel",
-      },
-      {
-        id: "2",
-        question: "Implant Model",
-        answer: "Active",
-      },
-      {
-        id: "3",
-        question: "Implant Diameter",
-        answer: "3.0",
-      },
-      {
-        id: "4",
-        question: "Implant Platform",
-        answer: "3.0",
-      },
-      {
-        id: "5",
-        question: "Implant Length",
-        answer: "10mm",
-      },
-      {
-        id: "6",
-        question: "Implant Surface Treatment",
-        answer: "TiUltra",
-      },
-      {
-        id: "7",
-        question: "Select Drill Kit",
-        answer: "Pilot Guided",
-      },
-      {
-        id: "8",
-        question: "Will you perform bone reduction?",
-        answer: "Yes",
-      },
-      {
-        id: "9",
-        question: "Select Driver",
-        answer: "Machine",
-      },
-      {
-        id: "10",
-        question: "Do you need to purchase materials for chairside pick-up?",
-        answer: "Yes",
-      },
-      {
-        id: "11",
-        question: "Do you need to purchase an implant?",
-        answer: "Yes",
-      },
-    ],
-  },
-};
 
 export interface InputOutputValues {
   name: string;
@@ -175,6 +113,16 @@ export const ALLONX_REQUEST_PARAMS: RequestParams = {
         outputFrom: "Drill-Kit-and-Sequence-Calculator",
       },
     ],
+    output: [],
+  },
+  [PROCEDURES.RESTORATIVE]: {
+    type: PROCEDURES.RESTORATIVE,
+    input: [],
+    output: [],
+  },
+  [PROCEDURES.SURGERY_AND_RESTORATIVE]: {
+    type: PROCEDURES.SURGERY_AND_RESTORATIVE,
+    input: [],
     output: [],
   },
 };
