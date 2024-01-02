@@ -8,7 +8,7 @@ interface InputProps {
   site: Site;
   input: InputOutputValues[];
   option: string;
-  onInputSelect: (site: Site, question: string, answer: string) => void
+  onInputSelect: (site: Site, question: string, answer: string) => void;
 }
 
 /**
@@ -25,12 +25,11 @@ const Questionnaire: React.FC<InputProps> = ({
   site,
   input,
   option,
-  onInputSelect
+  onInputSelect,
 }: InputProps) => {
   const [level, setLevel] = useState(0);
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
   const [answers, setAnswers] = useState<string[]>([]);
-  const [itemInfo, setItemInfo] = useState<any[]>([]);
 
   const { isLoading } = useQuery(
     [input, level, answers, option],
@@ -46,7 +45,7 @@ const Questionnaire: React.FC<InputProps> = ({
       });
 
       const response: Response = await fetch(
-        `/api/calculators/operations/all-on-x`,
+        `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/allOnXCalculator`,
         {
           method: "POST",
           headers: {
@@ -56,23 +55,21 @@ const Questionnaire: React.FC<InputProps> = ({
             type: input[level]?.calculator,
             output: input[level]?.outputFrom,
             quiz,
-            fields: input[level]?.name
-              ? [input[level]?.name]
-              : [],
+            fields: input[level]?.name ? [input[level]?.name] : [],
           }),
         }
       );
 
-      const { data: newAnswerOptions } = await response.json();
+      const {
+        data: { result: newAnswerOptions },
+      } = await response.json();
 
       const originalAnswerOptions: string[][] = answerOptions.slice(0, level);
       if (!input[level]) {
-        setItemInfo(newAnswerOptions);
         return;
       }
       if (newAnswerOptions.length) {
         setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
-        setItemInfo([]);
       }
     },
     { refetchOnWindowFocus: false }
@@ -87,7 +84,7 @@ const Questionnaire: React.FC<InputProps> = ({
     const newAnswers = answers.slice(0, index);
     newAnswers[index] = e.value;
     setAnswers(newAnswers);
-    onInputSelect(site, questions[index].text, newAnswers[index])
+    onInputSelect(site, questions[index].text, newAnswers[index]);
   };
 
   return (
