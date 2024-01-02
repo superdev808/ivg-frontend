@@ -33,7 +33,7 @@ const Questionnaire: React.FC<InputProps> = ({
   const [itemInfo, setItemInfo] = useState<any[]>([]);
 
   const { isLoading } = useQuery(
-    [input, level, option],
+    [input, level, answers, option],
     async () => {
       if (level > input.length) {
         return;
@@ -91,8 +91,8 @@ const Questionnaire: React.FC<InputProps> = ({
   };
 
   return (
-    <>
-      <div className="">
+    <div className="mt-3 mb-3">
+      <div className="grid">
         {questions.map((quiz: any, index: number) => {
           if (
             answerOptions[index] &&
@@ -123,7 +123,7 @@ const Questionnaire: React.FC<InputProps> = ({
       <div className="w-12 flex justify-content-center">
         {isLoading && <ProgressSpinner className="w-1" />}
       </div>
-    </>
+    </div>
   );
 };
 

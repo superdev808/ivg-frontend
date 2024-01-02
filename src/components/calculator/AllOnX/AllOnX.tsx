@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
-import { InputDetail, PROCEDURES, procedures, Site, SiteData } from "./constants";
+import {
+  InputDetail,
+  PROCEDURES,
+  procedures,
+  Site,
+  SiteData,
+} from "./constants";
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
-import styles from "./AllOnX.module.scss";
 
-/* 
+/*
  * Name : AllOnXCalculator.
- * Desc : The code defines a functional component called `AllOnXCalculator` which is a           * calculator for the All-on-X dental procedure. 
-*/
+ * Desc : The code defines a functional component called `AllOnXCalculator` which is a           * calculator for the All-on-X dental procedure.
+ */
 const AllOnXCalculator: React.FC = () => {
   const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
@@ -18,9 +23,9 @@ const AllOnXCalculator: React.FC = () => {
 
   const handleProcedureChange = (e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
-    setSelectedSites([])
-    setSitesData({})
-  }
+    setSelectedSites([]);
+    setSitesData({});
+  };
 
   const handleSiteChange = (tooth: number): void => {
     let _selectedSites: Site[] = [...selectedSites];
@@ -65,49 +70,61 @@ const AllOnXCalculator: React.FC = () => {
     } else {
       inputDetails.push({ question, answer });
     }
-    data = {...data, [site.name]:{inputDetails, componentDetails: data[site.name].componentDetails}}
+    data = {
+      ...data,
+      [site.name]: {
+        inputDetails,
+        componentDetails: data[site.name].componentDetails,
+      },
+    };
     setSitesData(data);
   };
 
   return (
-    <div className={styles.allOnXCalculator}>
-      <div className={styles.procedureSelection}>
-        <h3>What part of the All-on-X procedure can we help you with?</h3>
-        <SelectButton
-          unselectable={false}
-          value={procedure}
-          onChange={(e) => handleProcedureChange(e)}
-          optionLabel="name"
-          options={procedures}
-        />
-      </div>
-      <div className={`${styles.detailsContainer}`}>
-        <div>
-          <TeethSelector
-            selectedSites={selectedSites}
-            onSiteChange={handleSiteChange}
+    <div
+      className="flex justify-content-center mt-6"
+    >
+      <div className="flex flex-column col-12 md:col-8 p-5 border-round bg-white shadow-1">
+        <h3 className="mt-0 mb-3 text-center">
+          What part of the All-on-X procedure can we help you with?
+        </h3>
+        <div className="mt-0 mb-5 text-center">
+          <SelectButton
+            unselectable={false}
+            value={procedure}
+            onChange={(e) => handleProcedureChange(e)}
+            optionLabel="name"
+            options={procedures}
           />
         </div>
-        {selectedSites.length > 0 && (
-          <div className="card">
-            <TabView renderActiveOnly={false}>
-              <TabPanel header="Input Details">
-                <InputDetails
-                  procedure={procedure}
-                  selectedSites={selectedSites}
-                  sitesData={sitesData}
-                  onInputSelect={handleInputSelect}
-                />
-              </TabPanel>
-              <TabPanel header="Component Details">
-                <ComponentDetails
-                  selectedSites={selectedSites}
-                  sitesData={sitesData}
-                />
-              </TabPanel>
-            </TabView>
+        <div className="grid border-top-1 surface-border">
+          <div className="flex flex-column col-12">
+            <TeethSelector
+              selectedSites={selectedSites}
+              onSiteChange={handleSiteChange}
+            />
+            {selectedSites.length > 0 && (
+              <div className="mt-3">
+                <TabView renderActiveOnly={false}>
+                  <TabPanel header="Input Details">
+                    <InputDetails
+                      procedure={procedure}
+                      selectedSites={selectedSites}
+                      sitesData={sitesData}
+                      onInputSelect={handleInputSelect}
+                    />
+                  </TabPanel>
+                  <TabPanel header="Component Details">
+                    <ComponentDetails
+                      selectedSites={selectedSites}
+                      sitesData={sitesData}
+                    />
+                  </TabPanel>
+                </TabView>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
