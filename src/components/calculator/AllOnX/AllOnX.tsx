@@ -4,7 +4,6 @@ import { TabView, TabPanel } from "primereact/tabview";
 import {
   AutoPopulateData,
   InputDetail,
-  InputOutputValues,
   PROCEDURES,
   procedures,
   Site,
@@ -13,6 +12,7 @@ import {
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
+import { cloneDeep } from "lodash";
 
 /*
  * Name : AllOnXCalculator.
@@ -63,8 +63,8 @@ const AllOnXCalculator: React.FC = () => {
   };
 
   const handleInputSelect = (site: Site, question: string, answer: string) => {
-    let data: SiteData = { ...sitesData };
-    const inputDetails: InputDetail[] = [...data[site.name].inputDetails];
+    let data: SiteData = cloneDeep(sitesData);
+    const inputDetails: InputDetail[] = cloneDeep(data[site.name].inputDetails);
     const indexOfQuestion: number = inputDetails.findIndex(
       (input) => input.question === question
     );
@@ -74,32 +74,30 @@ const AllOnXCalculator: React.FC = () => {
     } else {
       inputDetails.push({ question, answer });
     }
-    data = {
+    const updatedData = {
       ...data,
       [site.name]: {
         inputDetails,
         componentDetails: data[site.name].componentDetails,
       },
     };
-    setSitesData(data);
+    console.log("data next", data);
+    setSitesData(updatedData);
   };
 
-  const handleAutopopulate = (
-    questions: InputOutputValues[],
-    answerOptions: string[][],
-    answers: string[]
-  ) => {
-    setAutoPopulateData({ questions, answerOptions, answers });
-    let _sitesData: SiteData = sitesData;
-    const data = { ...sitesData[selectedSites[0].name] };
-    Object.keys(sitesData).map(
-      (siteName: string) =>
-        (_sitesData = {
-          ..._sitesData,
-          [siteName]: data,
-        })
-    );
-    setSitesData(_sitesData);
+  const handleAutopopulate = (dataToPopulate: AutoPopulateData | null) => {
+    setAutoPopulateData(dataToPopulate);
+    if (dataToPopulate) {
+      let _sitesData: SiteData = cloneDeep(sitesData);
+      const key: string = dataToPopulate.site.name;
+      const data = { ..._sitesData[key] };
+      Object.keys(_sitesData).map((siteName: string) => {
+        if (siteName !== key) {
+          _sitesData[siteName] = data;
+        }
+      });
+      setSitesData(_sitesData);
+    }
   };
 
   return (

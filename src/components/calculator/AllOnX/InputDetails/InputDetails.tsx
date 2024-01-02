@@ -6,7 +6,7 @@ import {
   PROCEDURES,
   ALLONX_REQUEST_PARAMS,
   ProcedureRequest,
-  InputOutputValues,
+  AutoPopulateData,
 } from "../constants";
 import React from "react";
 import Questionnaire from "./Questionnaire";
@@ -16,9 +16,9 @@ interface InputDetailsProps {
   procedure: PROCEDURES;
   selectedSites: Site[];
   sitesData: SiteData;
+  autoPopulateData: AutoPopulateData | null
   onInputSelect: (site: Site, question: string, answer: string) => void;
-  onAutopopulate: (questions: InputOutputValues[], answerOptions:string[][], answers:string[]) => void;
-  autoPopulateData: any
+  onAutopopulate: (dataToPopulate: AutoPopulateData | null) => void;  
 }
 
 /**
@@ -29,7 +29,9 @@ interface InputDetailsProps {
  * @param {object} procedure
  * @param {array} selectedSites
  * @param {object} sitesData
+ * @param {object} autoPopulateData
  * @param {func} onInputSelect
+ * @param {func} onAutopopulate
  */
 const InputDetails: React.FC<InputDetailsProps> = ({
   procedure,

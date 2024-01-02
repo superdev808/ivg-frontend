@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { InputOutputValues, Site } from "../../constants";
+import { AutoPopulateData, InputOutputValues, Site } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Quiz from "@/components/calculator/quiz";
@@ -10,9 +10,9 @@ interface InputProps {
   input: InputOutputValues[];
   option: string;
   showAutopopulatePrompt: boolean,
+  autoPopulateData: AutoPopulateData | null
   onInputSelect: (site: Site, question: string, answer: string) => void,
-  onAutopopulate: (questions: InputOutputValues[], answerOptions: string[][], answers: string[]) => void
-  autoPopulateData: any
+  onAutopopulate: (dataToPopulate: AutoPopulateData | null) => void  
 }
 
 /**
@@ -23,7 +23,10 @@ interface InputProps {
  * @param {object} site
  * @param {array} input
  * @param {string} option
+ * @param {boolean} showAutopopulatePrompt
+ * @param {object} autoPopulateData
  * @param {func} onInputSelect
+ * @param {func} onAutopopulate
  */
 const Questionnaire: React.FC<InputProps> = ({
   site,
@@ -37,7 +40,7 @@ const Questionnaire: React.FC<InputProps> = ({
   const [level, setLevel] = useState(0);
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
   const [answers, setAnswers] = useState<string[]>([]);  
-  const [autoQuestions, setAutoQuestions] = useState<any>(null);
+  const [autoQuestions, setAutoQuestions] = useState<InputOutputValues[]|null>(null);
 
   useEffect(()=>{
     if(autoPopulateData){
@@ -45,13 +48,16 @@ const Questionnaire: React.FC<InputProps> = ({
       setAnswerOptions(answerOptions);
       setAnswers(answers)
       setAutoQuestions(questions);
+      setTimeout(() => {
+        onAutopopulate(null)
+      }, 1000);      
     }    
   }, [autoPopulateData])
 
   const { isLoading } = useQuery(
-    [input, level, option],
+    [input, level, answers, option],
     async () => {
-      if (level > input.length) {
+      if (level > input.length || autoPopulateData !== null) {
         return;
       }
 
@@ -110,7 +116,7 @@ const Questionnaire: React.FC<InputProps> = ({
     const value = e.value;
     setAutopopulate(value);
     if(value === "Yes"){
-      onAutopopulate(questions, answerOptions, answers);
+      onAutopopulate({site, questions, answerOptions, answers});
     }
   };
 
@@ -144,7 +150,7 @@ const Questionnaire: React.FC<InputProps> = ({
           );
         })}
         {(showAutopopulatePrompt && !input[level]) && (
-          <>
+          <div className="flex flex-column border-top-1 surface-border mt-3 w-12">
             <p>Auto-populate these answers for all other sites?</p>
             <div className="flex flex-wrap gap-3">
               <div className="flex align-items-center">
@@ -172,7 +178,7 @@ const Questionnaire: React.FC<InputProps> = ({
                 </label>
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
       <div className="w-12 flex justify-content-center">

@@ -66,6 +66,7 @@ export interface InputOutputValues {
 }
 
 export interface AutoPopulateData {
+  site: Site,
   questions: InputOutputValues[],
   answerOptions: string[][], 
   answers: string[]
