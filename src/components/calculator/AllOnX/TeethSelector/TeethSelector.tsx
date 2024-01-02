@@ -8,9 +8,17 @@ interface TeethSelectorProps {
   onSiteChange: (teeth: number) => void;
 }
 
-const TeethSelector = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
-
-  const selectedSitesKeys: number[] = selectedSites.map((site:Site) => site.key)
+/**
+ * Name : TeethSelector.
+ * Desc : The `TeethSelector` component is a React component that renders a teeth selector interface, allowing
+ * users to select sites where implants will be placed.
+ * @param {array} selectedSites
+ * @param {func} onSiteChange
+ */
+const TeethSelector: React.FC<TeethSelectorProps> = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
+  const selectedSitesKeys: number[] = selectedSites.map(
+    (site: Site) => site.key
+  );
 
   return (
     <div className={styles.teethSelector}>
@@ -30,7 +38,7 @@ const TeethSelector = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
                   <Tooth
                     name={`tooth${item.key}`}
                     value={item.key}
-                    isSelected = {selectedSitesKeys.includes(item.key)}
+                    isSelected={selectedSitesKeys.includes(item.key)}
                     onClickHandler={onSiteChange}
                   />
                 </React.Fragment>
@@ -54,7 +62,7 @@ const TeethSelector = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
                   <Tooth
                     name={`tooth${item.key}`}
                     value={item.key}
-                    isSelected = {selectedSitesKeys.includes(item.key)}
+                    isSelected={selectedSitesKeys.includes(item.key)}
                     onClickHandler={onSiteChange}
                   />
                 </React.Fragment>

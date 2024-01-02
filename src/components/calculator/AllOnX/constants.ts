@@ -1,7 +1,7 @@
 export enum PROCEDURES {
-  SURGERY = "surgery",
-  RESTORATIVE = "restorative",
-  SURGERY_AND_RESTORATIVE = "both",
+  SURGERY = "Surgery",
+  RESTORATIVE = "Restorative",
+  SURGERY_AND_RESTORATIVE = "SurgeryAndRestorative",
 }
 export interface Procedure {
   name: string;
@@ -21,11 +21,16 @@ export interface Site {
   key: number;
 }
 const SITE_COUNT: number = 32;
+// Create an array of Site objects representing different sites.
+// The array is initialized with SITE_COUNT number of elements and then mapped to generate Site objects.
 const SITES: Site[] = Array(SITE_COUNT)
   .fill(null)
   .map((v, i) => {
     return { name: `Site ${i + 1}`, key: i + 1 };
   });
+
+// Create two subsets of sites: UPPER_SITES and LOWER_SITES.
+// UPPER_SITES contains the first 16 sites, and LOWER_SITES contains the next 16 sites.
 export const UPPER_SITES: Site[] = SITES.slice(0, 16);
 export const LOWER_SITES: Site[] = SITES.slice(16, 32);
 
@@ -53,22 +58,22 @@ export interface SiteData {
   };
 }
 
-export interface AutoPopulateData {
-  questions: InputOutputValues[],
-  answerOptions: string[][], 
-  answers: string[]
-}
-
 export interface InputOutputValues {
   name: string;
   text: string;
   calculator: string;
   outputFrom?: string;
 }
+
+export interface AutoPopulateData {
+  questions: InputOutputValues[],
+  answerOptions: string[][], 
+  answers: string[]
+}
+
 export interface ProcedureRequest {
   type: PROCEDURES;
   input: InputOutputValues[];
-  output: InputOutputValues[];
 }
 interface RequestParams {
   [key: string]: ProcedureRequest;
@@ -80,45 +85,85 @@ export const ALLONX_REQUEST_PARAMS: RequestParams = {
       {
         name: "Implant Brand",
         text: "Implant Brand",
-        calculator: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "DrillKitAndSequence",
       },
       {
         name: "Implant Model",
         text: "Implant Model",
-        calculator: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "DrillKitAndSequence",
       },
       {
         name: "Implant Diameter",
         text: "Implant Diameter",
-        calculator: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "DrillKitAndSequence",
       },
       {
         name: "Implant Platform",
         text: "Implant Platform",
-        calculator: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "DrillKitAndSequence",
       },
       {
         name: "Implant Length",
         text: "Implant Length",
-        calculator: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "DrillKitAndSequence",
       },
       {
         name: "Implant Surface Treatment",
         text: "Implant Surface Treatment",
-        calculator: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "DrillKitAndSequence",
       },
       {
         name: "Select Drill Kit",
         text: "Select Drill Kit",
-        calculator: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "DrillKitAndSequence",
       },
       {
         name: "Will you perform bone reduction?",
         text: "Will you perform bone reduction?",
-        calculator: "Bone-Reduction-Calculator",
-        outputFrom: "Drill-Kit-and-Sequence-Calculator",
+        calculator: "BoneReduction",
+        outputFrom: "DrillKitAndSequence",
       },
-    ],
-    output: [],
+      {
+        name: "Authentic or Generic?",
+        text: "Authentic or Generic?",
+        calculator: "MasterImplantDriver",
+        outputFrom: "BoneReduction",
+      },
+      {
+        name: "Abutment Type",
+        text: "Abutment Type",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "Driver Length",
+        text: "Driver Length",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "Machine or Manual?",
+        text: "Machine or Manual?",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "Do you need to purchase materials for chairside pick-up?",
+        text: "Do you need to purchase materials for chairside pick-up?",
+        calculator: "ChairSidePickUp",
+        outputFrom: "MasterImplantDriver"
+      },
+      {
+        name: "Do you need to purchase an implant?",
+        text: "Do you need to purchase an implant?",
+        calculator: "ImplantPurchase",
+        outputFrom: "ChairSidePickUp"
+      },
+    ]
+  },
+  [PROCEDURES.RESTORATIVE]: {
+    type: PROCEDURES.RESTORATIVE,
+    input: [],
+  },
+  [PROCEDURES.SURGERY_AND_RESTORATIVE]: {
+    type: PROCEDURES.SURGERY_AND_RESTORATIVE,
+    input: [],
   },
 };

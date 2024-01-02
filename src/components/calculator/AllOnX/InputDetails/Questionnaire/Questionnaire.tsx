@@ -1,15 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
-import { InputOutputValues, PROCEDURES, Site } from "../../constants";
+import { InputOutputValues, Site } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Quiz from "@/components/calculator/quiz";
 import { RadioButton, RadioButtonChangeEvent } from "primereact/radiobutton";
 
 interface InputProps {
-  procedure: PROCEDURES
   site: Site;
   input: InputOutputValues[];
-  output: InputOutputValues[];
   option: string;
   showAutopopulatePrompt: boolean,
   onInputSelect: (site: Site, question: string, answer: string) => void,
@@ -17,11 +15,19 @@ interface InputProps {
   autoPopulateData: any
 }
 
-const Inputs: React.FC<InputProps> = ({
-  procedure,
+/**
+ * Name : Questionnaire.
+ * Desc : The `Questionnaire` component is a React functional component that renders a series of quiz
+ * questions based on the provided `input` and `option` props. It manages the state of the quiz level,
+ * answer options, selected answers, and item information.
+ * @param {object} site
+ * @param {array} input
+ * @param {string} option
+ * @param {func} onInputSelect
+ */
+const Questionnaire: React.FC<InputProps> = ({
   site,
   input,
-  output,
   option,
   showAutopopulatePrompt,
   onInputSelect,
@@ -56,7 +62,7 @@ const Inputs: React.FC<InputProps> = ({
         quiz[input[index].name] = answer;
       });
 
-      const response = await fetch(
+      const response: Response = await fetch(
         `/api/calculators/operations/all-on-x`,
         {
           method: "POST",
@@ -64,14 +70,12 @@ const Inputs: React.FC<InputProps> = ({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            type: option,
-            procedure,
-            calculator: input[level]?.calculator,
+            type: input[level]?.calculator,
             output: input[level]?.outputFrom,
             quiz,
             fields: input[level]?.name
               ? [input[level]?.name]
-              : output.map((item: InputOutputValues) => item.name),
+              : [],
           }),
         }
       );
@@ -91,7 +95,7 @@ const Inputs: React.FC<InputProps> = ({
     { refetchOnWindowFocus: false }
   );
 
-  const questions = useMemo(() => {
+  const questions: InputOutputValues[] = useMemo(() => {
     return autoQuestions ? autoQuestions : input.slice(0, level + 1);
   }, [input, level, autoQuestions]);
 
@@ -114,8 +118,8 @@ const Inputs: React.FC<InputProps> = ({
   };
 
   return (
-    <>
-      <div className="">
+    <div className="mt-3 mb-3">
+      <div className="grid">
         {questions.map((quiz: any, index: number) => {
           if (
             answerOptions[index] &&
@@ -142,14 +146,14 @@ const Inputs: React.FC<InputProps> = ({
             />
           );
         })}
-        {/* {(showAutopopulatePrompt && !input[level]) && (
+        {(showAutopopulatePrompt && !input[level]) && (
           <>
             <p>Auto-populate these answers for all other sites?</p>
             <div className="flex flex-wrap gap-3">
               <div className="flex align-items-center">
                 <RadioButton
                   inputId="Autopopulate1"
-                  name="pizza"
+                  name="autopopulate"
                   value="Yes"
                   onChange={(e) => autoPopulateResponse(e)}
                   checked={autopopulate === "Yes"}
@@ -161,7 +165,7 @@ const Inputs: React.FC<InputProps> = ({
               <div className="flex align-items-center">
                 <RadioButton
                   inputId="Autopopulate2"
-                  name="pizza"
+                  name="autopopulate"
                   value="No"
                   onChange={(e) => autoPopulateResponse(e)}
                   checked={autopopulate === "No"}
@@ -172,13 +176,13 @@ const Inputs: React.FC<InputProps> = ({
               </div>
             </div>
           </>
-        )} */}
+        )}
       </div>
       <div className="w-12 flex justify-content-center">
         {isLoading && <ProgressSpinner className="w-1" />}
       </div>
-    </>
+    </div>
   );
 };
 
-export default Inputs;
+export default Questionnaire;

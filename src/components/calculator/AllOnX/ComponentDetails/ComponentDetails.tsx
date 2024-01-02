@@ -6,7 +6,14 @@ interface ComponentDetailProps {
   sitesData: SiteData;
 }
 
-const ComponentDetails = ({ selectedSites }: ComponentDetailProps) => {
+/**
+ * Name : ComponentDetails.
+ * Desc : The `ComponentDetails` function is a React functional component that renders a TabView component
+ * with multiple TabPanels based on the `selectedSites` prop, and a final TabPanel for the summary.
+ * @param {array} selectedSites
+ * @param {object} sitesData
+ */
+const ComponentDetails: React.FC<ComponentDetailProps> = ({ selectedSites }: ComponentDetailProps) => {
   return (
     <TabView scrollable>
       {selectedSites.map((site: Site) => {
@@ -18,25 +25,6 @@ const ComponentDetails = ({ selectedSites }: ComponentDetailProps) => {
       })}
       <TabPanel header="Summary">
         <p className="m-0">Component Summary here</p>
-
-        {/* {selectedSites.map((site: Site) => {
-          const questionnaire: InputDetails[] =
-            sitesData[site.name]?.inputDetails || [];
-          return (
-            <React.Fragment key={site.key}>
-              <h3>{site.name}</h3>
-              {questionnaire.map((data: InputDetails) => {
-                return (
-                  <div className="flex my-2" key={data.id}>
-                    <span className="flex-1">{data.question}</span>
-                    <span className="flex-1">{data.answer}</span>
-                  </div>
-                );
-              })}
-            </React.Fragment>
-          );
-        })} */}
-
       </TabPanel>
     </TabView>
   );
