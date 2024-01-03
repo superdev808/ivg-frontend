@@ -1,0 +1,48 @@
+.teethSelector {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text {
+    transform: scale(1);
+  }
+
+  .containerFlex {
+    path {
+      transform: scale(1);
+    }
+
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .columnFlex {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    width: 300px;
+    height: 200px;
+
+    &.bottomTeeth {
+      position: relative;
+
+      svg {
+        g {
+          transform: translate(0, -185px);
+        }
+      }
+    }
+
+    svg {
+      g {
+        cursor: pointer;
+      }
+    }
+  }
+
+}
