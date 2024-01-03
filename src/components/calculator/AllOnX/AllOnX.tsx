@@ -3,9 +3,11 @@ import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
 import {
   AutoPopulateData,
+  ComponentDetail,
   InputDetail,
   PROCEDURES,
   procedures,
+  QuizResponse,
   Site,
   SiteData,
 } from "./constants";
@@ -13,6 +15,7 @@ import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
 import { cloneDeep } from "lodash";
+import { isValidUrl } from "./AllOnXUtills";
 
 /*
  * Name : AllOnXCalculator.
@@ -39,7 +42,6 @@ const AllOnXCalculator: React.FC = () => {
     if (isSelected.length === 0) {
       const newSite: Site = { name: `Site ${tooth}`, key: tooth };
       _selectedSites.push(newSite);
-
       //Add new site data
       const newSiteData = {
         [`Site ${tooth}`]: { inputDetails: [], componentDetails: [] },
@@ -47,13 +49,11 @@ const AllOnXCalculator: React.FC = () => {
       setSitesData((prev) => {
         return { ...prev, ...newSiteData };
       });
-
       _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
     } else {
       _selectedSites = _selectedSites.filter(
         (site: Site) => site.key !== tooth
       );
-
       // remove site data
       let _sitesData = { ...sitesData };
       delete _sitesData[`Site ${tooth}`];
@@ -81,7 +81,38 @@ const AllOnXCalculator: React.FC = () => {
         componentDetails: data[site.name].componentDetails,
       },
     };
-    console.log("data next", data);
+    setSitesData(updatedData);
+  };
+
+  const handleQuizResponse = (site: Site, response: QuizResponse) => {
+    let data: SiteData = cloneDeep(sitesData);
+    const componentDetails: ComponentDetail[] = cloneDeep(
+      data[site.name].componentDetails
+    );
+    Object.keys(response).map((key: string) => {
+      const value: string | number = response[key];
+      const indexOfAnswer: number = componentDetails.findIndex(
+        (answer) => answer.label === key
+      );
+      if (indexOfAnswer > -1) {
+        componentDetails[indexOfAnswer].value = value;
+        componentDetails.splice(indexOfAnswer + 1);
+      } else {
+        const component: ComponentDetail = {
+          label: key,
+          value,
+          quantity: isValidUrl(value as string) ? 1 : undefined,
+        };
+        componentDetails.push(component);
+      }
+    });
+    const updatedData = {
+      ...data,
+      [site.name]: {
+        inputDetails: data[site.name].inputDetails,
+        componentDetails,
+      },
+    };
     setSitesData(updatedData);
   };
 
@@ -132,6 +163,7 @@ const AllOnXCalculator: React.FC = () => {
                       onInputSelect={handleInputSelect}
                       onAutopopulate={handleAutopopulate}
                       autoPopulateData={autoPopulateData}
+                      onQuizResponse={handleQuizResponse}
                     />
                   </TabPanel>
                   <TabPanel header="Component Details">

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { AutoPopulateData, InputOutputValues, Site } from "../../constants";
+import { AutoPopulateData, InputOutputValues, QuizResponse, Site } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Quiz from "@/components/calculator/quiz";
@@ -12,7 +12,8 @@ interface InputProps {
   showAutopopulatePrompt: boolean,
   autoPopulateData: AutoPopulateData | null
   onInputSelect: (site: Site, question: string, answer: string) => void,
-  onAutopopulate: (dataToPopulate: AutoPopulateData | null) => void  
+  onAutopopulate: (dataToPopulate: AutoPopulateData | null) => void ,
+  onQuizResponse: (site: Site, response: QuizResponse) => void
 }
 
 /**
@@ -35,7 +36,8 @@ const Questionnaire: React.FC<InputProps> = ({
   showAutopopulatePrompt,
   onInputSelect,
   onAutopopulate,
-  autoPopulateData
+  autoPopulateData,
+  onQuizResponse
 }: InputProps) => {
   const [level, setLevel] = useState(0);
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
@@ -84,7 +86,7 @@ const Questionnaire: React.FC<InputProps> = ({
       );
 
       const {
-        data: { result: newAnswerOptions },
+        data: { result: newAnswerOptions, quizResponse = null },
       } = await response.json();
 
       const originalAnswerOptions: string[][] = answerOptions.slice(0, level);
@@ -93,6 +95,9 @@ const Questionnaire: React.FC<InputProps> = ({
       }
       if (newAnswerOptions.length) {
         setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
+      }
+      if(quizResponse) {
+        onQuizResponse(site, quizResponse)
       }
     },
     { refetchOnWindowFocus: false }

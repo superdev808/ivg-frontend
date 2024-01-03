@@ -34,27 +34,27 @@ const SITES: Site[] = Array(SITE_COUNT)
 export const UPPER_SITES: Site[] = SITES.slice(0, 16);
 export const LOWER_SITES: Site[] = SITES.slice(16, 32);
 
+export interface QuizResponse {
+  [key: string]: string | number
+}
+
 export interface InputDetail {
   id?: string;
   question: string;
   answer: string;
 }
 
-export interface Component {
-  name: string;
-  purchaseLink?: string;
-  quantity?: number;
-}
 
 export interface ComponentDetail {
   label: string;
-  component: Component[];
+  value: string | number;
+  quantity?: number;
 }
 
 export interface SiteData {
   [key: string]: {
     inputDetails: InputDetail[];
-    componentDetails?: ComponentDetail[];
+    componentDetails: ComponentDetail[];
   };
 }
 
