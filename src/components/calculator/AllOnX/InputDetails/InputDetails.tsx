@@ -10,7 +10,7 @@ import {
 } from "../constants";
 import React from "react";
 import Questionnaire from "./Questionnaire";
-import { LABEL_ALL_ON_X_CALCULATOR } from "@/app/calculators/constants";
+import { CALCULATOR_MAPPINGS } from "@/app/calculators/constants";
 
 interface InputDetailsProps {
   procedure: PROCEDURES;
@@ -51,7 +51,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
             <Questionnaire
               site={site}
               input={requestParams.input}
-              option={LABEL_ALL_ON_X_CALCULATOR}
+              option={CALCULATOR_MAPPINGS.ALL_ON_X_CALCULATOR}
               onInputSelect={onInputSelect}
               showAutopopulatePrompt={index === 0}
               onAutopopulate={onAutopopulate}

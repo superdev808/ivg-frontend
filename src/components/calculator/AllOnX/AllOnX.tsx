@@ -81,7 +81,6 @@ const AllOnXCalculator: React.FC = () => {
         componentDetails: data[site.name].componentDetails,
       },
     };
-    console.log("data next", data);
     setSitesData(updatedData);
   };
 

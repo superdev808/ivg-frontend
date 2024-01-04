@@ -8,7 +8,6 @@ const cx = classNames.bind(styles);
 import CalculatorProduct from "./product";
 import { useAppSelector } from "@/redux/hooks";
 import SearchBox from "@/components/searchbox";
-import { LABEL_ALL_ON_X_CALCULATOR } from './constants';
 
 export default function CalculatorsPage() {
   const { authenticated } = useAppSelector((state) => state.auth);
@@ -28,7 +27,7 @@ export default function CalculatorsPage() {
     },
     {
       label: "All-on-X Implant Surgery",
-      subItems: [{ label: "Surgery" }, { label: "Restorative" }],
+      subItems: [{ label: "All-on-X Implant Surgery" }],
     },
     {
       label: "Product Material Selection",
@@ -113,11 +112,7 @@ export default function CalculatorsPage() {
                 key={`groupItem-${index}`}
                 style={{ width: "100%" }}
                 label={groupItem.label}
-                onClick={() => {
-									groupItem.label === LABEL_ALL_ON_X_CALCULATOR
-									  ? router.push("/calculators/" + groupItem.label)
-									  : setSelectedGroup(index);
-								}}
+                onClick={() => { setSelectedGroup(index);	}}
               />
             ))}
           </div>

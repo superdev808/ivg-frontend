@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { AutoPopulateData, InputOutputValues, Site } from "../../constants";
+import React, { useEffect, useMemo, useState } from "react";
+import { AUTO_POPULATE_OPTIONS, AutoPopulateData, RadioButtonOption, InputOutputValues, Site, DEFAULT_AUTO_POPULATE_OPTION } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Quiz from "@/components/calculator/quiz";
@@ -41,6 +41,7 @@ const Questionnaire: React.FC<InputProps> = ({
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
   const [answers, setAnswers] = useState<string[]>([]);  
   const [autoQuestions, setAutoQuestions] = useState<InputOutputValues[]|null>(null);
+  const [autopopulate, setAutopopulate] = useState<string>(DEFAULT_AUTO_POPULATE_OPTION.value);
 
   useEffect(()=>{
     if(autoPopulateData){
@@ -110,8 +111,7 @@ const Questionnaire: React.FC<InputProps> = ({
     setAnswers(newAnswers);
     onInputSelect(site, questions[index].text, newAnswers[index]);
   };
-
-  const [autopopulate, setAutopopulate] = useState("");
+  
   const autoPopulateResponse = (e: RadioButtonChangeEvent) => {
     const value = e.value;
     setAutopopulate(value);
@@ -124,59 +124,53 @@ const Questionnaire: React.FC<InputProps> = ({
     <div className="mt-3 mb-3">
       <div className="grid">
         {questions.map((quiz: any, index: number) => {
-          if (
-            answerOptions[index] &&
-            answerOptions[index].length === 1 &&
-            answerOptions[index][0] === ""
-          ) {
+          if (!!(quiz.text && quiz.name)) {
             if (
-              index <= level &&
-              level < input.length &&
-              answers[index] !== ""
+              answerOptions[index] &&
+              answerOptions[index].length === 1 &&
+              answerOptions[index][0] === ""
             ) {
-              handleSelectAnswer(index)({ value: "" });
+              if (
+                index <= level &&
+                level < input.length &&
+                answers[index] !== ""
+              ) {
+                handleSelectAnswer(index)({ value: "" });
+              }
+              return null;
             }
-            return null;
+            return (
+              <Quiz
+                key={`quiz-${index}`}
+                question={quiz.text}
+                answers={answerOptions[index]}
+                selectedAnswer={answers[index] || null}
+                handleSelectAnswer={handleSelectAnswer(index)}
+                disabled={isLoading}
+              />
+            );
           }
-          return (
-            <Quiz
-              key={`quiz-${index}`}
-              question={quiz.text}
-              answers={answerOptions[index]}
-              selectedAnswer={answers[index] || null}
-              handleSelectAnswer={handleSelectAnswer(index)}
-              disabled={isLoading}
-            />
-          );
         })}
-        {(showAutopopulatePrompt && !input[level]) && (
+        {showAutopopulatePrompt && !input[level + 1] && (
           <div className="flex flex-column border-top-1 surface-border mt-3 w-12">
             <p>Auto-populate these answers for all other sites?</p>
             <div className="flex flex-wrap gap-3">
-              <div className="flex align-items-center">
-                <RadioButton
-                  inputId="Autopopulate1"
-                  name="autopopulate"
-                  value="Yes"
-                  onChange={(e) => autoPopulateResponse(e)}
-                  checked={autopopulate === "Yes"}
-                />
-                <label htmlFor="Autopopulate1" className="ml-2">
-                  Yes
-                </label>
-              </div>
-              <div className="flex align-items-center">
-                <RadioButton
-                  inputId="Autopopulate2"
-                  name="autopopulate"
-                  value="No"
-                  onChange={(e) => autoPopulateResponse(e)}
-                  checked={autopopulate === "No"}
-                />
-                <label htmlFor="Autopopulate2" className="ml-2">
-                  No
-                </label>
-              </div>
+              <>
+                {AUTO_POPULATE_OPTIONS.map((option: RadioButtonOption) => (
+                  <div className="flex align-items-center" key={option.id}>
+                    <RadioButton                      
+                      inputId={option.id}
+                      name={option.name}
+                      value={option.value}
+                      onChange={(e) => autoPopulateResponse(e)}
+                      checked={autopopulate === option.value}
+                    />
+                    <label htmlFor={option.id} className="ml-2">
+                      {option.value}
+                    </label>
+                  </div>
+                ))}
+              </>
             </div>
           </div>
         )}
