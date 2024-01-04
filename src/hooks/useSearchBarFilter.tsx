@@ -11,7 +11,7 @@ export default function useSearchBarFilter(initialDataPromise: any, suggestions:
 	}, [initialDataPromise]);
 
 	const filterSuggestions = () => {
-		console.log(suggestions)
+
 		// let _filteredArray = array.filter(item => suggestions.includes(item.id));
   
 		// setFilteredArray(_filteredArray);

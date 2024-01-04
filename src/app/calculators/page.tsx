@@ -7,7 +7,7 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 import CalculatorProduct from "./product";
 import { useAppSelector } from "@/redux/hooks";
-import SearchBox from "@/components/searchbox";
+import SearchBox from "@/components/ui/searchbox";
 
 export default function CalculatorsPage() {
   const { authenticated } = useAppSelector((state) => state.auth);
@@ -82,8 +82,8 @@ export default function CalculatorsPage() {
   };
 
   return authenticated ? (
-    <div className={"flex justify-content-center mt-6"}>
-      <div className="flex flex-column col-12 md:col-8 p-5 border-round bg-white shadow-1">
+    <div className={"container nav-offset  flex justify-content-center"}>
+      <div className="flex flex-column col-12 md:col-8 mt-6 p-5 border-round bg-white shadow-1">
         <h2 className="mt-0 mb-5 text-center">Calculators</h2>
         <div className="mt-0 mb-4">
           <SearchBox handleSearch={handleSearch} loading={loading} />

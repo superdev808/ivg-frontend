@@ -1,0 +1,14 @@
+.section-container {
+	margin: 2rem 0;
+}
+
+@media screen and (min-width: 768px) {
+	.section-container {
+		margin: 8rem 0;
+	}
+    
+}
+
+.help-section-container {
+	background-color: rgba(var(--primary-color-rgb), 0.1);
+}

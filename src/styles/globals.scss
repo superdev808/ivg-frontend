@@ -1,6 +1,9 @@
+@import 'primeflex/primeflex.scss';
 @import '~video-react/styles/scss/video-react';
-@import "@/styles/variables.scss";
 @import "@/styles/theme.scss";
+
+
+@import '@/styles/public.scss';
 
 html,
 body {
@@ -11,7 +14,7 @@ body {
 	padding: 0;
 	font-family: mundial, sans-serif;
 	background-color: var(--surface-0);
-	color: $ps-green-dark;
+	color: var(--secondary-color);
 }
 
 
@@ -36,5 +39,76 @@ body {
 	border-radius: 0px;
 	border: 0px solid #ffffff;
 }
+
+
+
+
+//GLOBAL
+.background-gradient {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 120vh;
+	width:100%;
+	background-image: linear-gradient(to right,#02393230 , white);
+	z-index: 0;
+  
+}
+
+
+.nav-offset {
+    padding-top: 5rem;
+}
+
+// CONTAINERS
+
+
+.container {
+	width: 100%;
+	height: calc(100vh - 5rem);
+	z-index: 1;
+	
+	.wrapper {
+		width: 100%;
+		display: flex;
+		padding: 0 20px;
+		position: relative;
+	}
+}
+
+@media screen and (min-width: 768px) {
+		.wrapper {
+			margin: 0 auto;
+			max-width: 1200px;
+			padding: 0 !important;
+    }
+	.background-gradient {
+
+		height: 100vh;
+
+	  
+	}
+}
+
+
+
+
+
+
+//BUTTONS
+
+.btn-primary {
+	@include styleclass('hover:text-white hover:bg-primary focus:bg-primary justify-content-center text-secondary');
+}
+
+.btn-secondary {
+	@include styleclass('bg-secondary focus:bg-primary justify-content-center');
+	&:hover {
+		background: rgba(var(--secondary-color-rgb),0.85) !important;
+
+	}
+}
+
+
 
 

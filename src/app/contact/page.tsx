@@ -1,18 +1,21 @@
 'use client';
 
 import React from "react";
-import styles from "./page.module.scss";
-import { ContactComponent } from "@/components/shared/Contact";
+import { ContactComponent } from "@/components/public/contact/ContactForm";
+import { ContactHeroSection } from "@/components/public/contact/ContactHeroSection";
+import { ContactInfoSection } from "@/components/public/contact/ContactInfoSection";
+import { ContactCTASection } from "@/components/public/contact/ContactCTASection";
+import FooterExtended from "@/components/layout/footer/FooterExtended";
 
 
 export default function ContactPage() {
 
     return <>
-        <div  className="flex flex-column ">
-            
+            <ContactHeroSection />
+            <ContactInfoSection />
             <ContactComponent  />
-
-        </div>
+            <ContactCTASection />
+            <FooterExtended />
 
   
     </>
