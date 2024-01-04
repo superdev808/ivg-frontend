@@ -23,7 +23,7 @@ const TeethSelector: React.FC<TeethSelectorProps> = ({ selectedSites, onSiteChan
   return (
     <div className={styles.teethSelector}>
       <h3>Select the sites where implants will be placed:</h3>
-      <div className={styles.containerFlex}>
+      <div className={`${styles.containerFlex} sm:flex-row`}>
         <div className={styles.columnFlex}>
           <svg
             version="1.1"
