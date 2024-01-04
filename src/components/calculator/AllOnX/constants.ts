@@ -64,6 +64,33 @@ export interface InputOutputValues {
   calculator: string;
   outputFrom?: string;
 }
+
+export interface AutoPopulateData {
+  site: Site,
+  questions: InputOutputValues[],
+  answerOptions: string[][], 
+  answers: string[]
+}
+
+export interface RadioButtonOption {
+  id: string;
+  name: string;
+  value: string;
+}
+
+export const AUTO_POPULATE_OPTIONS: RadioButtonOption[] = [
+  {
+    id: "Autopopulate1",
+    name: "autopopulate",
+    value: "Yes",
+  },
+  {
+    id: "Autopopulate2",
+    name: "autopopulate",
+    value: "No",
+  },
+];
+
 export interface ProcedureRequest {
   type: PROCEDURES;
   input: InputOutputValues[];
@@ -148,6 +175,12 @@ export const ALLONX_REQUEST_PARAMS: RequestParams = {
         text: "Do you need to purchase an implant?",
         calculator: "ImplantPurchase",
         outputFrom: "ChairSidePickUp"
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "ImplantPurchase",
+        outputFrom: "ImplantPurchase"
       },
     ]
   },

@@ -6,16 +6,19 @@ import {
   PROCEDURES,
   ALLONX_REQUEST_PARAMS,
   ProcedureRequest,
+  AutoPopulateData,
 } from "../constants";
 import React from "react";
 import Questionnaire from "./Questionnaire";
-import { LABEL_ALL_ON_X_CALCULATOR } from "@/app/calculators/constants";
+import { CALCULATOR_MAPPINGS } from "@/app/calculators/constants";
 
 interface InputDetailsProps {
   procedure: PROCEDURES;
   selectedSites: Site[];
   sitesData: SiteData;
+  autoPopulateData: AutoPopulateData | null
   onInputSelect: (site: Site, question: string, answer: string) => void;
+  onAutopopulate: (dataToPopulate: AutoPopulateData | null) => void;  
 }
 
 /**
@@ -26,13 +29,17 @@ interface InputDetailsProps {
  * @param {object} procedure
  * @param {array} selectedSites
  * @param {object} sitesData
+ * @param {object} autoPopulateData
  * @param {func} onInputSelect
+ * @param {func} onAutopopulate
  */
 const InputDetails: React.FC<InputDetailsProps> = ({
   procedure,
   selectedSites,
   sitesData,
-  onInputSelect
+  onInputSelect,
+  onAutopopulate,
+  autoPopulateData
 }: InputDetailsProps) => {
   const requestParams: ProcedureRequest = ALLONX_REQUEST_PARAMS[procedure];  
 
@@ -44,8 +51,11 @@ const InputDetails: React.FC<InputDetailsProps> = ({
             <Questionnaire
               site={site}
               input={requestParams.input}
-              option={LABEL_ALL_ON_X_CALCULATOR}
+              option={CALCULATOR_MAPPINGS.ALL_ON_X_CALCULATOR}
               onInputSelect={onInputSelect}
+              showAutopopulatePrompt={index === 0}
+              onAutopopulate={onAutopopulate}
+              autoPopulateData={autoPopulateData}
             />
           </TabPanel>
         );

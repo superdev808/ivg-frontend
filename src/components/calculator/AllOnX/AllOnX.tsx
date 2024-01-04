@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
 import {
+  AutoPopulateData,
   InputDetail,
   PROCEDURES,
   procedures,
@@ -11,6 +12,7 @@ import {
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
+import { cloneDeep } from "lodash";
 
 /*
  * Name : AllOnXCalculator.
@@ -20,6 +22,8 @@ const AllOnXCalculator: React.FC = () => {
   const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
+  const [autoPopulateData, setAutoPopulateData] =
+    useState<AutoPopulateData | null>(null);
 
   const handleProcedureChange = (e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
@@ -59,8 +63,8 @@ const AllOnXCalculator: React.FC = () => {
   };
 
   const handleInputSelect = (site: Site, question: string, answer: string) => {
-    let data: SiteData = { ...sitesData };
-    const inputDetails: InputDetail[] = [...data[site.name].inputDetails];
+    let data: SiteData = cloneDeep(sitesData);
+    const inputDetails: InputDetail[] = cloneDeep(data[site.name].inputDetails);
     const indexOfQuestion: number = inputDetails.findIndex(
       (input) => input.question === question
     );
@@ -70,20 +74,33 @@ const AllOnXCalculator: React.FC = () => {
     } else {
       inputDetails.push({ question, answer });
     }
-    data = {
+    const updatedData = {
       ...data,
       [site.name]: {
         inputDetails,
         componentDetails: data[site.name].componentDetails,
       },
     };
-    setSitesData(data);
+    setSitesData(updatedData);
+  };
+
+  const handleAutopopulate = (dataToPopulate: AutoPopulateData | null) => {
+    setAutoPopulateData(dataToPopulate);
+    if (dataToPopulate) {
+      let _sitesData: SiteData = cloneDeep(sitesData);
+      const key: string = dataToPopulate.site.name;
+      const data = { ..._sitesData[key] };
+      Object.keys(_sitesData).map((siteName: string) => {
+        if (siteName !== key) {
+          _sitesData[siteName] = data;
+        }
+      });
+      setSitesData(_sitesData);
+    }
   };
 
   return (
-    <div
-      className="flex justify-content-center mt-6"
-    >
+    <div className="flex justify-content-center mt-6">
       <div className="flex flex-column col-12 md:col-8 p-5 border-round bg-white shadow-1">
         <h3 className="mt-0 mb-3 text-center">
           What part of the All-on-X procedure can we help you with?
@@ -112,6 +129,8 @@ const AllOnXCalculator: React.FC = () => {
                       selectedSites={selectedSites}
                       sitesData={sitesData}
                       onInputSelect={handleInputSelect}
+                      onAutopopulate={handleAutopopulate}
+                      autoPopulateData={autoPopulateData}
                     />
                   </TabPanel>
                   <TabPanel header="Component Details">
