@@ -3,7 +3,8 @@ import { AUTO_POPULATE_OPTIONS, AutoPopulateData, RadioButtonOption, InputOutput
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Quiz from "@/components/calculator/quiz";
-import { RadioButton, RadioButtonChangeEvent } from "primereact/radiobutton";
+import { RadioButtonChangeEvent } from "primereact/radiobutton";
+import AutoPopulatePromt from "./AutoPopulatePromt";
 
 interface InputProps {
   site: Site;
@@ -41,7 +42,7 @@ const Questionnaire: React.FC<InputProps> = ({
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
   const [answers, setAnswers] = useState<string[]>([]);  
   const [autoQuestions, setAutoQuestions] = useState<InputOutputValues[]|null>(null);
-  const [autopopulate, setAutopopulate] = useState<string>(AUTO_POPULATE_OPTIONS[1].value);
+  const [autoPopulate, setAutoPopulate] = useState<string>(AUTO_POPULATE_OPTIONS[1].value);
 
   useEffect(()=>{
     if(autoPopulateData){
@@ -112,9 +113,9 @@ const Questionnaire: React.FC<InputProps> = ({
     onInputSelect(site, questions[index].text, newAnswers[index]);
   };
   
-  const autoPopulateResponse = (e: RadioButtonChangeEvent) => {
+  const handlePopulateResponse = (e: RadioButtonChangeEvent) => {
     const value = e.value;
-    setAutopopulate(value);
+    setAutoPopulate(value);
     if(value === AUTO_POPULATE_OPTIONS[0].value){
       onAutopopulate({site, questions, answerOptions, answers});
     }
@@ -152,27 +153,7 @@ const Questionnaire: React.FC<InputProps> = ({
           }
         })}
         {showAutopopulatePrompt && !input[level + 1] && (
-          <div className="flex flex-column border-top-1 surface-border mt-3 w-12">
-            <p>Auto-populate these answers for all other sites?</p>
-            <div className="flex flex-wrap gap-3">
-              <>
-                {AUTO_POPULATE_OPTIONS.map((option: RadioButtonOption) => (
-                  <div className="flex align-items-center" key={option.id}>
-                    <RadioButton                      
-                      inputId={option.id}
-                      name={option.name}
-                      value={option.value}
-                      onChange={(e) => autoPopulateResponse(e)}
-                      checked={autopopulate === option.value}
-                    />
-                    <label htmlFor={option.id} className="ml-2">
-                      {option.value}
-                    </label>
-                  </div>
-                ))}
-              </>
-            </div>
-          </div>
+          <AutoPopulatePromt autoPopulate={autoPopulate} onPopulateResponse={handlePopulateResponse} />
         )}
       </div>
       <div className="w-12 flex justify-content-center">
