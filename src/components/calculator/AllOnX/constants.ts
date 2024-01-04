@@ -90,7 +90,6 @@ export const AUTO_POPULATE_OPTIONS: RadioButtonOption[] = [
     value: "No",
   },
 ];
-export const DEFAULT_AUTO_POPULATE_OPTION = AUTO_POPULATE_OPTIONS[1];
 
 export interface ProcedureRequest {
   type: PROCEDURES;

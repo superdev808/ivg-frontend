@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { AUTO_POPULATE_OPTIONS, AutoPopulateData, RadioButtonOption, InputOutputValues, Site, DEFAULT_AUTO_POPULATE_OPTION } from "../../constants";
+import { AUTO_POPULATE_OPTIONS, AutoPopulateData, RadioButtonOption, InputOutputValues, Site } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import Quiz from "@/components/calculator/quiz";
@@ -41,7 +41,7 @@ const Questionnaire: React.FC<InputProps> = ({
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
   const [answers, setAnswers] = useState<string[]>([]);  
   const [autoQuestions, setAutoQuestions] = useState<InputOutputValues[]|null>(null);
-  const [autopopulate, setAutopopulate] = useState<string>(DEFAULT_AUTO_POPULATE_OPTION.value);
+  const [autopopulate, setAutopopulate] = useState<string>(AUTO_POPULATE_OPTIONS[1].value);
 
   useEffect(()=>{
     if(autoPopulateData){
@@ -115,7 +115,7 @@ const Questionnaire: React.FC<InputProps> = ({
   const autoPopulateResponse = (e: RadioButtonChangeEvent) => {
     const value = e.value;
     setAutopopulate(value);
-    if(value === "Yes"){
+    if(value === AUTO_POPULATE_OPTIONS[0].value){
       onAutopopulate({site, questions, answerOptions, answers});
     }
   };
