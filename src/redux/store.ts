@@ -17,9 +17,11 @@ import { workflowMenuItemsApi } from './services/workflowsMenuItemsApi';
 import { workflowMenuQuestionsApi } from './services/workflowsMenuQuestionsApi';
 
 import route from './slices/shared/routeSlice';
+import ui from './slices/shared/uiSlice';
 
 export const store = configureStore({
 	reducer: {
+		ui,
 		route,
 		flow: flowReducer,
 		editor: editorReducer,

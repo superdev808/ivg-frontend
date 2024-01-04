@@ -1,0 +1,49 @@
+// CONTAINERS
+.public-content-container {
+	width: 100%;
+	.public-content-wrapper {
+		width: 100%;
+		display: flex;
+		padding: 0 20px;
+	}
+}
+
+@media screen and (min-width: 768px) {
+		.public-content-wrapper {
+			margin: 0 auto;
+			max-width: 1200px;
+			padding: 0 !important;
+    }
+}
+
+
+
+
+// EFFECTS
+
+.public-blur-shadow {
+	border-radius: 30%;
+	background: #F1FCF5;
+	box-shadow: 0 0 10px #F1FCF5, 0 0 20px #F1FCF5, 0 0 30px #F1FCF5;
+}
+
+// TYPOGRAPHY
+$public-section-text: 'text-lg text-left md:text-center line-height-3';
+
+.public-section-title {
+	@include styleclass('text-4xl md:text-6xl font-bold');
+}
+
+.public-section-content {
+	@include styleclass($public-section-text);
+	&-xl {
+		@include styleclass($public-section-text + ' md:text-xl');
+	}
+	&-2xl {
+		@include styleclass($public-section-text + ' md:text-2xl');
+	}
+
+	
+}
+
+
