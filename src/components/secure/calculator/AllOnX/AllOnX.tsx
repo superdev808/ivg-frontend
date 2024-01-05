@@ -100,8 +100,9 @@ const AllOnXCalculator: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-content-center mt-6">
-      <div className="flex flex-column col-12 md:col-8 p-5 border-round bg-white shadow-1">
+    <div className={' nav-offset flex-grow-1'}>
+    <div className="wrapper my-8">
+      <div className="flex flex-column p-5 border-round bg-white shadow-1">
         <h3 className="mt-0 mb-3 text-center">
           What part of the All-on-X procedure can we help you with?
         </h3>
@@ -145,6 +146,7 @@ const AllOnXCalculator: React.FC = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

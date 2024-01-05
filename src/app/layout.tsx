@@ -3,7 +3,7 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import Navigation from '@/components/layout/navigation';
 import { Providers } from '@/redux/provider';
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { useAppSelector } from '@/redux/hooks';
 
 import '../styles/globals.scss';
@@ -31,9 +31,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 					<AuthProvider>
 						<QueryClientProvider client={queryClient}>
 							{['/login/', '/signup/'].includes(activePath) ? null : <Navigation />}
-			
-								{children}
-							
+							{children}
 							<Footer />
 						</QueryClientProvider>
 					</AuthProvider>
