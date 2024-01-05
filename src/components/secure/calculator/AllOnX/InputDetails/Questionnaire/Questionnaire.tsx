@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { AUTO_POPULATE_OPTIONS, AutoPopulateData, RadioButtonOption, InputOutputValues, Site } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
-import Quiz from "@/components/calculator/quiz";
+import Quiz from "../../../quiz";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import AutoPopulatePromt from "./AutoPopulatePromt";
 

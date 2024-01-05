@@ -6,10 +6,9 @@ import { useMemo, useState } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { Card } from "primereact/card";
 import { ProgressSpinner } from "primereact/progressspinner";
-import CalculatorContainer from "@/components/calculator";
+import CalculatorContainer from "@/components/secure/calculator";
 import { CALCULATOR_MAPPINGS } from "../constants";
-import AllOnXCalculator from "@/components/calculator/AllOnX";
-
+import AllOnXCalculator from "@/components/secure/calculator/AllOnX/AllOnX";
 const tabItems = [
   {
     type: "Scanbodies",

@@ -72,8 +72,8 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
   };
 
   return (
-    <div className="w-12 md:w-8 flex justify-content-center mt-6 mb-8">
-      <Card className="w-12 flex px-4 py-2 border-round bg-white flex-column">
+    <div className="container flex justify-content-center mt-6 mb-8">
+      <Card className="w-12 flex px-4 py-2 border-round bg-white flex-column ">
         <div className="grid">
           {questions.map((quiz, index) => {
             if (answerOptions[index] && answerOptions[index].length === 1 && answerOptions[index][0] === '') {
