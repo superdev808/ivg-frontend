@@ -72,7 +72,7 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
   };
 
   return (
-    <div className="container flex justify-content-center mt-6 mb-8">
+    <div className="wrapper flex justify-content-center mt-6 mb-8">
       <Card className="w-12 flex px-4 py-2 border-round bg-white flex-column ">
         <div className="grid">
           {questions.map((quiz, index) => {
@@ -92,6 +92,7 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
             />
           })}
         </div>
+        
         {itemInfo.length > 0 && <h2>Compatible {decodeURI(props.option)}</h2>}
         {itemInfo.map((item, index) => (
           <DetailView
@@ -103,6 +104,7 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
         <div className="w-12 flex justify-content-center">
           {isLoading && <ProgressSpinner className="w-1" />}
         </div>
+        
       </Card>
     </div>
   );
