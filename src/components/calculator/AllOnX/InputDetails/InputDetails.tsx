@@ -7,7 +7,8 @@ import {
   ALLONX_REQUEST_PARAMS,
   ProcedureRequest,
   AutoPopulateData,
-  QuizResponse,
+  InputOutputValues,
+  ItemData,
 } from "../constants";
 import React from "react";
 import Questionnaire from "./Questionnaire";
@@ -18,9 +19,9 @@ interface InputDetailsProps {
   selectedSites: Site[];
   sitesData: SiteData;
   autoPopulateData: AutoPopulateData | null
-  onInputSelect: (site: Site, question: string, answer: string) => void;
+  onInputSelect: (site: Site, question: InputOutputValues, answer: string) => void;
   onAutopopulate: (dataToPopulate: AutoPopulateData | null) => void;
-  onQuizResponse: (site: Site, response: QuizResponse) => void;
+  onQuizResponse: (site: Site, response: ItemData[], collection: string) => void;
 }
 
 /**
@@ -60,6 +61,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               onAutopopulate={onAutopopulate}
               autoPopulateData={autoPopulateData}
               onQuizResponse={onQuizResponse}
+              sitesData={sitesData}
             />
           </TabPanel>
         );

@@ -5,9 +5,11 @@ import {
   AutoPopulateData,
   ComponentDetail,
   InputDetail,
+  InputOutputValues,
+  ItemData,
   PROCEDURES,
   procedures,
-  QuizResponse,
+  responseOrderSurgery,
   Site,
   SiteData,
 } from "./constants";
@@ -15,7 +17,6 @@ import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
 import { cloneDeep } from "lodash";
-import { isValidUrl } from "./AllOnXUtills";
 
 /*
  * Name : AllOnXCalculator.
@@ -44,7 +45,7 @@ const AllOnXCalculator: React.FC = () => {
       _selectedSites.push(newSite);
       //Add new site data
       const newSiteData = {
-        [`Site ${tooth}`]: { inputDetails: [], componentDetails: [] },
+        [`Site ${tooth}`]: { inputDetails: [], componentDetails: {} },
       };
       setSitesData((prev) => {
         return { ...prev, ...newSiteData };
@@ -62,50 +63,58 @@ const AllOnXCalculator: React.FC = () => {
     setSelectedSites(_selectedSites);
   };
 
-  const handleInputSelect = (site: Site, question: string, answer: string) => {
+  const handleInputSelect = (
+    site: Site,
+    question: InputOutputValues,
+    answer: string
+  ) => {
     let data: SiteData = cloneDeep(sitesData);
     const inputDetails: InputDetail[] = cloneDeep(data[site.name].inputDetails);
     const indexOfQuestion: number = inputDetails.findIndex(
-      (input) => input.question === question
+      (input) => input.question === question.text
     );
     if (indexOfQuestion > -1) {
       inputDetails[indexOfQuestion].answer = answer;
       inputDetails.splice(indexOfQuestion + 1);
     } else {
-      inputDetails.push({ question, answer });
+      inputDetails.push({ question: question.text, answer });
     }
+
+    //remove next collection responses
+    const componentDetails: ComponentDetail = cloneDeep(
+      data[site.name].componentDetails
+    );
+    const indexOfCollection: number = responseOrderSurgery.indexOf(
+      question.calculator
+    );
+    if (indexOfCollection !== -1) {
+      const keysToRemove: string[] =
+        responseOrderSurgery.slice(indexOfCollection);
+      keysToRemove.map((col: string) => {
+        delete componentDetails[col];
+      });
+    }
+
     const updatedData = {
       ...data,
       [site.name]: {
         inputDetails,
-        componentDetails: data[site.name].componentDetails,
+        componentDetails,
       },
     };
     setSitesData(updatedData);
   };
 
-  const handleQuizResponse = (site: Site, response: QuizResponse) => {
+  const handleQuizResponse = (
+    site: Site,
+    response: ItemData[],
+    collection: string
+  ) => {
     let data: SiteData = cloneDeep(sitesData);
-    const componentDetails: ComponentDetail[] = cloneDeep(
+    let componentDetails: ComponentDetail = cloneDeep(
       data[site.name].componentDetails
     );
-    Object.keys(response).map((key: string) => {
-      const value: string | number = response[key];
-      const indexOfAnswer: number = componentDetails.findIndex(
-        (answer) => answer.label === key
-      );
-      if (indexOfAnswer > -1) {
-        componentDetails[indexOfAnswer].value = value;
-        componentDetails.splice(indexOfAnswer + 1);
-      } else {
-        const component: ComponentDetail = {
-          label: key,
-          value,
-          quantity: isValidUrl(value as string) ? 1 : undefined,
-        };
-        componentDetails.push(component);
-      }
-    });
+    componentDetails = { ...componentDetails, [collection]: response };
     const updatedData = {
       ...data,
       [site.name]: {
@@ -133,7 +142,7 @@ const AllOnXCalculator: React.FC = () => {
 
   return (
     <div className="flex justify-content-center mt-6">
-      <div className="flex flex-column col-12 md:col-8 p-5 border-round bg-white shadow-1">
+      <div className="flex flex-column col-12 md:col-10 p-5 border-round bg-white shadow-1">
         <h3 className="mt-0 mb-3 text-center">
           What part of the All-on-X procedure can we help you with?
         </h3>

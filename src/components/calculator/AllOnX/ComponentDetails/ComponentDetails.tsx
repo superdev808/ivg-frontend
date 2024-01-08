@@ -1,7 +1,12 @@
 import { TabPanel, TabView } from "primereact/tabview";
-import { ComponentDetail, Site, SiteData } from "../constants";
+import {
+  ItemData,
+  QUANTITY_VISIBILITY_STATE,
+  Site,
+  SiteData,
+} from "../constants";
 import React from "react";
-import { isValidUrl } from "../AllOnXUtills";
+import Item from "../Item";
 
 interface ComponentDetailProps {
   selectedSites: Site[];
@@ -22,29 +27,25 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
   return (
     <TabView scrollable>
       {selectedSites.map((site: Site) => {
-        const componentDetails: ComponentDetail[] =
-          sitesData[site.name]?.componentDetails || [];
         return (
           <TabPanel key={site.name} header={site.name}>
             <React.Fragment key={site.key}>
-              {componentDetails.map((data: ComponentDetail, index: number) => {
-                const { label, value, quantity } = data;
-                return (
-                  <div className="flex my-2" key={`${site.key}-${index}`}>
-                    <span className="flex-1">{label}</span>
-                    <span className="flex-1 text-left">
-                      {isValidUrl(value as string) ? (
-                        <a href={value as string}>{value}</a>
-                      ) : (
-                        value
-                      )}
-                    </span>
-                    <span className="text-right pl-5">
-                      {quantity && quantity}
-                    </span>
-                  </div>
-                );
-              })}
+              <>
+                {Object.keys(sitesData[site.name]?.componentDetails).map(
+                  (collection: string) => {
+                    const componentDetails: ItemData[] =
+                      sitesData[site.name]?.componentDetails[collection] || [];
+                    return componentDetails.map((data: ItemData, i: number) => (
+                      <Item
+                        key={`${data.label}-${i}`}
+                        label={data.label}
+                        info={data.info}
+                        quantityVisibilityState={QUANTITY_VISIBILITY_STATE.SHOW}
+                      />
+                    ));
+                  }
+                )}
+              </>
             </React.Fragment>
           </TabPanel>
         );

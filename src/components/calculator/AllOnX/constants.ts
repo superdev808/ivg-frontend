@@ -34,27 +34,32 @@ const SITES: Site[] = Array(SITE_COUNT)
 export const UPPER_SITES: Site[] = SITES.slice(0, 16);
 export const LOWER_SITES: Site[] = SITES.slice(16, 32);
 
-export interface QuizResponse {
-  [key: string]: string | number
-}
-
 export interface InputDetail {
   id?: string;
   question: string;
   answer: string;
 }
 
-
-export interface ComponentDetail {
-  label: string;
-  value: string | number;
+export interface ItemInsights {
+  id?: string;
+  itemName: string;
+  itemNumber?: string;
+  link: string;
   quantity?: number;
+}
+export interface ItemData {
+  id?: string;
+  label: string;
+  info: ItemInsights[];
+}
+export interface ComponentDetail {
+  [key: string]: ItemData[];
 }
 
 export interface SiteData {
   [key: string]: {
     inputDetails: InputDetail[];
-    componentDetails: ComponentDetail[];
+    componentDetails: ComponentDetail;
   };
 }
 
@@ -66,16 +71,22 @@ export interface InputOutputValues {
 }
 
 export interface AutoPopulateData {
-  site: Site,
-  questions: InputOutputValues[],
-  answerOptions: string[][], 
-  answers: string[]
+  site: Site;
+  questions: InputOutputValues[];
+  answerOptions: string[][];
+  answers: string[];
 }
 
 export interface RadioButtonOption {
   id: string;
   name: string;
   value: string;
+}
+
+export enum QUANTITY_VISIBILITY_STATE {
+  HIDE,
+  SHOW,
+  EDITABLE,
 }
 
 export const AUTO_POPULATE_OPTIONS: RadioButtonOption[] = [
@@ -168,21 +179,21 @@ export const ALLONX_REQUEST_PARAMS: RequestParams = {
         name: "Do you need to purchase materials for chairside pick-up?",
         text: "Do you need to purchase materials for chairside pick-up?",
         calculator: "ChairSidePickUp",
-        outputFrom: "MasterImplantDriver"
+        outputFrom: "MasterImplantDriver",
       },
       {
         name: "Do you need to purchase an implant?",
         text: "Do you need to purchase an implant?",
         calculator: "ImplantPurchase",
-        outputFrom: "ChairSidePickUp"
+        outputFrom: "ChairSidePickUp",
       },
       {
         name: "",
         text: "",
         calculator: "ImplantPurchase",
-        outputFrom: "ImplantPurchase"
+        outputFrom: "ImplantPurchase",
       },
-    ]
+    ],
   },
   [PROCEDURES.RESTORATIVE]: {
     type: PROCEDURES.RESTORATIVE,
@@ -193,3 +204,11 @@ export const ALLONX_REQUEST_PARAMS: RequestParams = {
     input: [],
   },
 };
+
+export const responseOrderSurgery: string[] = [
+  "DrillKitAndSequence",
+  "BoneReduction",
+  "MasterImplantDriver",
+  "ChairSidePickUp",
+  "ImplantPurchase",
+];
