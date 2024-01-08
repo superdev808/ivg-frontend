@@ -1,3 +1,4 @@
+import { InputNumber } from "primereact/inputnumber";
 import { isValidUrl } from "../AllOnXUtills";
 import {
   ItemData,
@@ -37,6 +38,17 @@ const Item: React.FC<ItemDataParams> = ({
                   {quantityVisibilityState ===
                     QUANTITY_VISIBILITY_STATE.SHOW && (
                     <span className="w-1 text-right">{quantity}</span>
+                  )}
+                  {quantityVisibilityState ===
+                    QUANTITY_VISIBILITY_STATE.EDITABLE && (
+                    <div className="w-1 text-center">
+                      <InputNumber
+                        inputStyle={{ width: "4rem", textAlign: "center" }}
+                        className="w-1 text-right"
+                        maxLength={3}
+                        value={quantity}
+                      />
+                    </div>
                   )}
                 </div>
               );
