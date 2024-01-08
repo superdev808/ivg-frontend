@@ -9,7 +9,7 @@ import {
   ItemData,
   PROCEDURES,
   procedures,
-  responseOrderSurgery,
+  responseOrder,
   Site,
   SiteData,
 } from "./constants";
@@ -84,12 +84,11 @@ const AllOnXCalculator: React.FC = () => {
     const componentDetails: ComponentDetail = cloneDeep(
       data[site.name].componentDetails
     );
-    const indexOfCollection: number = responseOrderSurgery.indexOf(
+    const indexOfCollection: number = responseOrder.indexOf(
       question.calculator
     );
     if (indexOfCollection !== -1) {
-      const keysToRemove: string[] =
-        responseOrderSurgery.slice(indexOfCollection);
+      const keysToRemove: string[] = responseOrder.slice(indexOfCollection);
       keysToRemove.map((col: string) => {
         delete componentDetails[col];
       });

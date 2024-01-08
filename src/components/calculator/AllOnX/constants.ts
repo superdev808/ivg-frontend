@@ -205,7 +205,8 @@ export const ALLONX_REQUEST_PARAMS: RequestParams = {
   },
 };
 
-export const responseOrderSurgery: string[] = [
+//TODO: Will be replaced by a function call to handle other colletions as well.
+export const responseOrder: string[] = [
   "DrillKitAndSequence",
   "BoneReduction",
   "MasterImplantDriver",
