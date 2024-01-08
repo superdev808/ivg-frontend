@@ -152,7 +152,7 @@ const Questionnaire: React.FC<InputProps> = ({
 
   return (
     <div className="mt-3 mb-3">
-      <div className="grid">
+      <React.Fragment>
         {questions.map((quiz: any, index: number) => {
           if (
             answerOptions[index] &&
@@ -211,7 +211,7 @@ const Questionnaire: React.FC<InputProps> = ({
             onPopulateResponse={handlePopulateResponse}
           />
         )}
-      </div>
+      </React.Fragment>
       <div className="w-12 flex justify-content-center">
         {isLoading && <ProgressSpinner className="w-1" />}
       </div>
