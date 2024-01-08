@@ -34,7 +34,7 @@ const Logo = () => {
   }, []);
 
   return (
-    <Link href="/" style={{ display: showButton ? "none" : "block", textDecoration: "none", alignSelf: "center" }}>
+    <Link href="/calculators" style={{ display: showButton ? "none" : "block", textDecoration: "none", alignSelf: "center" }}>
       <Image
         src="/images/logo/Ivory-Guide-Horizontal-Logo-White.png"
         alt="Logo"

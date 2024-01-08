@@ -72,7 +72,7 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
   };
 
   return (
-    <div className="wrapper flex justify-content-center mt-6 mb-8">
+    <div className="flex w-full justify-content-center mt-6 mb-8 ">
       <Card className="w-12 flex px-4 py-2 border-round bg-white flex-column ">
         <div className="grid">
           {questions.map((quiz, index) => {

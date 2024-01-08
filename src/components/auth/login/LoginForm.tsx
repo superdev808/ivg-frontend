@@ -86,7 +86,7 @@ export const LoginForm = () => {
 			setCookie("email", data.user.email);
 			dispatch({ type: 'auth/setAuth', payload: { authenticated: true } });
 
-			router.push('/search');
+			router.push('/calculators');
 			setLoading(false);
 		} catch (error: any) {
 			addError(error?.message ?? '');
