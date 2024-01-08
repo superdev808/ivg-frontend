@@ -1,6 +1,6 @@
 'use client';
 import { use, useEffect, useState } from 'react';
-import WorkflowsComponent from '@/components/workflow';
+import WorkflowsComponent from '@/components/secure/workflow'
 import { useAppSelector } from '@/redux/hooks';
 import WorkflowProduct from '../product';
 import { setRoute } from '@/redux/slices/shared/routeSlice';
