@@ -155,7 +155,7 @@ export default function CalculatorPage() {
   return (
     componentMapping[tabId] || (
 
-      <div className="nav-offset">
+      <div className="nav-offset flex-grow-1">
         <div className="wrapper">
 
       <div className="flex flex-column align-items-center justify-content-center mt-6">
