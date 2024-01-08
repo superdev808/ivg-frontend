@@ -1,0 +1,7 @@
+.socialButton {
+	color: var(--secondary-color);
+    font-size: 32px;
+	&:hover {
+		color: 1px solid var(--primary-color) !important;
+	}
+}

@@ -1,9 +1,9 @@
 'use client';
 
 import React, { PropsWithChildren, useEffect } from 'react';
-import Navigation from '@/components/navigation';
+import Navigation from '@/components/layout/navigation';
 import { Providers } from '@/redux/provider';
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { useAppSelector } from '@/redux/hooks';
 
 import '../styles/globals.scss';
@@ -12,7 +12,7 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 
 import { usePathname } from 'next/navigation';
-import Footer from '@/components/footer';
+import Footer from '@/components/layout/footer';
 import { useDispatch } from 'react-redux';
 import { getCookie } from '@/helpers/cookie';
 import AuthProvider from './provider';
@@ -31,11 +31,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 					<AuthProvider>
 						<QueryClientProvider client={queryClient}>
 							{['/login/', '/signup/'].includes(activePath) ? null : <Navigation />}
-							<div
-								className={'z-1 w-full flex-grow-1 '}
-								style={{ paddingTop: '5rem'}}>
-								{children}
-							</div>
+							{children}
 							<Footer />
 						</QueryClientProvider>
 					</AuthProvider>

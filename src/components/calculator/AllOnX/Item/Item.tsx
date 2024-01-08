@@ -1,9 +1,9 @@
-import { isValidUrl } from "../AllOnXUtills";
 import {
   ItemData,
   ItemInsights,
   QUANTITY_VISIBILITY_STATE,
-} from "../constants";
+} from "@/components/secure/calculator/AllOnX/constants";
+import { isValidUrl } from "../AllOnXUtills";
 
 interface ItemDataParams extends ItemData {
   quantityVisibilityState: QUANTITY_VISIBILITY_STATE;

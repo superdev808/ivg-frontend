@@ -1,15 +1,14 @@
-@import "@/styles/variables.scss";
 
 .calculatorCard {
   box-sizing: border-box;
-  background-color: $ps-green-light;
+  background-color:var(--primary-color);
 
   & div:first-child {
     padding: 0px !important;
   }
 
   &:hover {
-    background-color: $ps-green-dark;
+    background-color: var(--secondary-color);
   }
 }
 
@@ -31,10 +30,10 @@
   color: #023932 !important;
   border: 1px solid #E0E0E0;
   &:hover {
-    border: 1px solid $ps-green-light !important;
+    border: 1px solid var(--primary-color) !important;
   }
 
   &--highlighted {
-    border: 1px solid $ps-green-dark !important;
+    border: 1px solid var(--secondary-color) !important;
   }
 }
