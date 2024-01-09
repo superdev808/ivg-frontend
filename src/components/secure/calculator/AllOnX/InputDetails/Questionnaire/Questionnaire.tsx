@@ -46,8 +46,10 @@ interface InputProps {
  * @param {string} option
  * @param {boolean} showAutopopulatePrompt
  * @param {object} autoPopulateData
+ * @param {object} sitesData
  * @param {func} onInputSelect
  * @param {func} onAutopopulate
+ * @param {func} onQuizResponse
  */
 const Questionnaire: React.FC<InputProps> = ({
   site,

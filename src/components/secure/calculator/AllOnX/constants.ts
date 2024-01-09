@@ -213,3 +213,14 @@ export const responseOrder: string[] = [
   "ChairSidePickUp",
   "ImplantPurchase",
 ];
+
+export const ignoreListForMultiples: string[] = [
+  "implant drill kit name",
+  "drill sequence",
+  "implant driver",
+  "bur kit name (bone reduction)",
+  "mua driver",
+  "luting agent",
+  "teflon tape",
+  "material to close screw access hole",
+];

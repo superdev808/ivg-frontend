@@ -2,15 +2,16 @@ import { TabPanel, TabView } from "primereact/tabview";
 import {
   ComponentDetail,
   ItemData,
-  ItemInsights,
   PROCEDURES,
   QUANTITY_VISIBILITY_STATE,
   Site,
   SiteData,
+  ignoreListForMultiples,
 } from "../constants";
 import React, { useEffect, useState } from "react";
 import Item from "@/components/calculator/AllOnX/Item";
 import { getResponseOrder } from "@/components/calculator/AllOnX/AllOnXUtills";
+import _, { cloneDeep } from "lodash";
 
 interface ComponentDetailProps {
   procedure: PROCEDURES;
@@ -34,27 +35,44 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
   const [componentSummary, setComponentSummary] = useState<any[]>([]);
 
   useEffect(() => {
-    console.log("prepare summary", sitesData);
-    let total: ItemData[] = [];
+    let items: ItemData[] = [];
     const responseOrder: string[] = getResponseOrder(procedure);
     Object.keys(sitesData).map((siteName: string) => {
-      const componentDetail: ComponentDetail =
-        sitesData[siteName].componentDetails;
+      let data: SiteData = cloneDeep(sitesData);
+      const componentDetail: ComponentDetail = cloneDeep(
+        data[siteName].componentDetails
+      );
       responseOrder.map((key: string) => {
         componentDetail[key]?.map((response: ItemData) => {
-          response.info.map((info: ItemInsights) => {
-            const res = {
-              label: response.label,
-              info,
-            };
+          const indexOfItem: number = _.findIndex(items, (item: ItemData) => {
+            return (
+              item.label == response.label &&
+              item.info?.every(
+                (infoItem, index) =>
+                  infoItem?.itemName == response.info[index]?.itemName
+              )
+            );
           });
-          total.push(response);
+          if (indexOfItem > -1) {
+            items[indexOfItem].info.map((_, i) => {
+              if (
+                !ignoreListForMultiples.includes(
+                  response.label.toLocaleLowerCase()
+                ) &&
+                items[indexOfItem].info[i].quantity
+              ) {
+                items[indexOfItem].info[i].quantity =
+                  (items[indexOfItem].info[i].quantity as number) + 1;
+              }
+            });
+          } else {
+            items.push(response);
+          }
         });
-        //console.log("componentDetail[key]", componentDetail[key]);
       });
     });
-    console.log("total", total);
-    setComponentSummary(total);
+
+    setComponentSummary(items);
   }, [sitesData]);
 
   return (
@@ -84,9 +102,7 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
         );
       })}
       <TabPanel header="Summary">
-        {/* <p className="m-0">Component Summary here</p> */}
         <>
-          {JSON.stringify(sitesData)}
           {componentSummary.map((data: ItemData, i: number) => (
             <Item
               key={`${data.label}-${i}`}

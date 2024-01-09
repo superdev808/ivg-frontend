@@ -1,4 +1,7 @@
-import { PROCEDURES, responseOrderSurgery } from "./constants";
+import {
+  PROCEDURES,
+  responseOrder,
+} from "@/components/secure/calculator/AllOnX/constants";
 
 export const isValidUrl = (urlString: string) => {
   var urlPattern = new RegExp(
@@ -17,7 +20,7 @@ export const getResponseOrder = (procedure: PROCEDURES) => {
   let order: string[] = [];
   switch (procedure) {
     case PROCEDURES.SURGERY:
-      order = responseOrderSurgery;
+      order = responseOrder;
       break;
 
     default:
