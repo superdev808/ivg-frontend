@@ -31,6 +31,7 @@ const Item: React.FC<ItemDataParams> = ({
                       className="w-6"
                       style={{ wordBreak: "break-all" }}
                       href={link}
+                      target="_blank"
                     >
                       {link}
                     </a>
