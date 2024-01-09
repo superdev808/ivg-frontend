@@ -18,7 +18,7 @@ const AutoPopulatePromt: React.FC<AutoPopulatePromtParams> = ({
   onPopulateResponse,
 }: AutoPopulatePromtParams) => {
   return (
-    <div className="flex flex-column border-top-1 surface-border mt-3 w-12">
+    <div className="flex flex-column w-12">
       <p>Auto-populate these answers for all other sites?</p>
       <div className="flex flex-wrap gap-3">
         <>

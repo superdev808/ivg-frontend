@@ -1,5 +1,12 @@
 import { TabPanel, TabView } from "primereact/tabview";
-import { Site, SiteData } from "../constants";
+import {
+  ItemData,
+  QUANTITY_VISIBILITY_STATE,
+  Site,
+  SiteData,
+} from "../constants";
+import React from "react";
+import Item from "@/components/calculator/AllOnX/Item";
 
 interface ComponentDetailProps {
   selectedSites: Site[];
@@ -13,13 +20,33 @@ interface ComponentDetailProps {
  * @param {array} selectedSites
  * @param {object} sitesData
  */
-const ComponentDetails: React.FC<ComponentDetailProps> = ({ selectedSites }: ComponentDetailProps) => {
+const ComponentDetails: React.FC<ComponentDetailProps> = ({
+  selectedSites,
+  sitesData,
+}: ComponentDetailProps) => {
   return (
     <TabView scrollable>
       {selectedSites.map((site: Site) => {
         return (
           <TabPanel key={site.name} header={site.name}>
-            <p className="m-0">{site.name} component answers here</p>
+            <React.Fragment key={site.key}>
+              <>
+                {Object.keys(sitesData[site.name]?.componentDetails).map(
+                  (collection: string) => {
+                    const componentDetails: ItemData[] =
+                      sitesData[site.name]?.componentDetails[collection] || [];
+                    return componentDetails.map((data: ItemData, i: number) => (
+                      <Item
+                        key={`${data.label}-${i}`}
+                        label={data.label}
+                        info={data.info}
+                        quantityVisibilityState={QUANTITY_VISIBILITY_STATE.SHOW}
+                      />
+                    ));
+                  }
+                )}
+              </>
+            </React.Fragment>
           </TabPanel>
         );
       })}

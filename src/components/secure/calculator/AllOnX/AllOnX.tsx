@@ -3,9 +3,13 @@ import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
 import {
   AutoPopulateData,
+  ComponentDetail,
   InputDetail,
+  InputOutputValues,
+  ItemData,
   PROCEDURES,
   procedures,
+  responseOrder,
   Site,
   SiteData,
 } from "./constants";
@@ -39,21 +43,18 @@ const AllOnXCalculator: React.FC = () => {
     if (isSelected.length === 0) {
       const newSite: Site = { name: `Site ${tooth}`, key: tooth };
       _selectedSites.push(newSite);
-
       //Add new site data
       const newSiteData = {
-        [`Site ${tooth}`]: { inputDetails: [], componentDetails: [] },
+        [`Site ${tooth}`]: { inputDetails: [], componentDetails: {} },
       };
       setSitesData((prev) => {
         return { ...prev, ...newSiteData };
       });
-
       _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
     } else {
       _selectedSites = _selectedSites.filter(
         (site: Site) => site.key !== tooth
       );
-
       // remove site data
       let _sitesData = { ...sitesData };
       delete _sitesData[`Site ${tooth}`];
@@ -62,23 +63,62 @@ const AllOnXCalculator: React.FC = () => {
     setSelectedSites(_selectedSites);
   };
 
-  const handleInputSelect = (site: Site, question: string, answer: string) => {
+  const handleInputSelect = (
+    site: Site,
+    question: InputOutputValues,
+    answer: string
+  ) => {
     let data: SiteData = cloneDeep(sitesData);
     const inputDetails: InputDetail[] = cloneDeep(data[site.name].inputDetails);
     const indexOfQuestion: number = inputDetails.findIndex(
-      (input) => input.question === question
+      (input) => input.question === question.text
     );
     if (indexOfQuestion > -1) {
       inputDetails[indexOfQuestion].answer = answer;
       inputDetails.splice(indexOfQuestion + 1);
     } else {
-      inputDetails.push({ question, answer });
+      inputDetails.push({ question: question.text, answer });
     }
+
+    //remove next collection responses
+    const componentDetails: ComponentDetail = cloneDeep(
+      data[site.name].componentDetails
+    );
+    const indexOfCollection: number = responseOrder.indexOf(
+      question.calculator
+    );
+    if (indexOfCollection !== -1) {
+      const keysToRemove: string[] = responseOrder.slice(indexOfCollection);
+      keysToRemove.map((col: string) => {
+        delete componentDetails[col];
+      });
+    }
+
     const updatedData = {
       ...data,
       [site.name]: {
         inputDetails,
-        componentDetails: data[site.name].componentDetails,
+        componentDetails,
+      },
+    };
+    setSitesData(updatedData);
+  };
+
+  const handleQuizResponse = (
+    site: Site,
+    response: ItemData[],
+    collection: string
+  ) => {
+    let data: SiteData = cloneDeep(sitesData);
+    let componentDetails: ComponentDetail = cloneDeep(
+      data[site.name].componentDetails
+    );
+    componentDetails = { ...componentDetails, [collection]: response };
+    const updatedData = {
+      ...data,
+      [site.name]: {
+        inputDetails: data[site.name].inputDetails,
+        componentDetails,
       },
     };
     setSitesData(updatedData);
@@ -100,53 +140,54 @@ const AllOnXCalculator: React.FC = () => {
   };
 
   return (
-    <div className={' nav-offset flex-grow-1'}>
-    <div className="wrapper my-8">
-      <div className="flex flex-column p-5 border-round bg-white shadow-1">
-        <h3 className="mt-0 mb-3 text-center">
-          What part of the All-on-X procedure can we help you with?
-        </h3>
-        <div className="mt-0 mb-5 text-center">
-          <SelectButton
-            unselectable={false}
-            value={procedure}
-            onChange={(e) => handleProcedureChange(e)}
-            optionLabel="name"
-            options={procedures}
-          />
-        </div>
-        <div className="grid border-top-1 surface-border">
-          <div className="flex flex-column col-12">
-            <TeethSelector
-              selectedSites={selectedSites}
-              onSiteChange={handleSiteChange}
+    <div className={" nav-offset flex-grow-1"}>
+      <div className="wrapper my-8">
+        <div className="flex flex-column p-5 border-round bg-white shadow-1">
+          <h3 className="mt-0 mb-3 text-center">
+            What part of the All-on-X procedure can we help you with?
+          </h3>
+          <div className="mt-0 mb-5 text-center">
+            <SelectButton
+              unselectable={false}
+              value={procedure}
+              onChange={(e) => handleProcedureChange(e)}
+              optionLabel="name"
+              options={procedures}
             />
-            {selectedSites.length > 0 && (
-              <div className="mt-3">
-                <TabView renderActiveOnly={false}>
-                  <TabPanel header="Input Details">
-                    <InputDetails
-                      procedure={procedure}
-                      selectedSites={selectedSites}
-                      sitesData={sitesData}
-                      onInputSelect={handleInputSelect}
-                      onAutopopulate={handleAutopopulate}
-                      autoPopulateData={autoPopulateData}
-                    />
-                  </TabPanel>
-                  <TabPanel header="Component Details">
-                    <ComponentDetails
-                      selectedSites={selectedSites}
-                      sitesData={sitesData}
-                    />
-                  </TabPanel>
-                </TabView>
-              </div>
-            )}
+          </div>
+          <div className="grid border-top-1 surface-border">
+            <div className="flex flex-column col-12">
+              <TeethSelector
+                selectedSites={selectedSites}
+                onSiteChange={handleSiteChange}
+              />
+              {selectedSites.length > 0 && (
+                <div className="mt-3">
+                  <TabView renderActiveOnly={false}>
+                    <TabPanel header="Input Details">
+                      <InputDetails
+                        procedure={procedure}
+                        selectedSites={selectedSites}
+                        sitesData={sitesData}
+                        onInputSelect={handleInputSelect}
+                        onAutopopulate={handleAutopopulate}
+                        autoPopulateData={autoPopulateData}
+                        onQuizResponse={handleQuizResponse}
+                      />
+                    </TabPanel>
+                    <TabPanel header="Component Details">
+                      <ComponentDetails
+                        selectedSites={selectedSites}
+                        sitesData={sitesData}
+                      />
+                    </TabPanel>
+                  </TabView>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
