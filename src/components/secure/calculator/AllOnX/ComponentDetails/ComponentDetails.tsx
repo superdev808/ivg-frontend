@@ -46,10 +46,10 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
         componentDetail[key]?.map((response: ItemData) => {
           const indexOfItem: number = _.findIndex(items, (item: ItemData) => {
             return (
-              item.label == response.label &&
+              item.label === response.label &&
               item.info?.every(
                 (infoItem, index) =>
-                  infoItem?.itemName == response.info[index]?.itemName
+                  infoItem?.itemName === response.info[index]?.itemName
               )
             );
           });
