@@ -2,6 +2,7 @@ import { TabPanel, TabView } from "primereact/tabview";
 import {
   ComponentDetail,
   ItemData,
+  ItemInsights,
   PROCEDURES,
   QUANTITY_VISIBILITY_STATE,
   Site,
@@ -45,24 +46,30 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
       responseOrder.map((key: string) => {
         componentDetail[key]?.map((response: ItemData) => {
           const indexOfItem: number = _.findIndex(items, (item: ItemData) => {
-            return (
-              item.label === response.label &&
-              item.info?.every(
-                (infoItem, index) =>
-                  infoItem?.itemName === response.info[index]?.itemName
-              )
-            );
+            return item.label === response.label;
           });
           if (indexOfItem > -1) {
-            items[indexOfItem].info.map((_, i) => {
-              if (
-                !ignoreListForMultiples.includes(
-                  response.label.toLocaleLowerCase()
-                ) &&
-                items[indexOfItem].info[i].quantity
-              ) {
-                items[indexOfItem].info[i].quantity =
-                  (items[indexOfItem].info[i].quantity as number) + 1;
+            items[indexOfItem].info.map((info: ItemInsights, i: number) => {
+              const indexOfInfo: number = response.info.findIndex(
+                (res: ItemInsights) => {
+                  return info.itemName === res.itemName;
+                }
+              );
+              if (indexOfInfo > -1) {
+                if (
+                  !ignoreListForMultiples.includes(
+                    response.label.toLowerCase()
+                  ) &&
+                  items[indexOfItem].info[i].quantity
+                ) {
+                  items[indexOfItem].info[i].quantity =
+                    (items[indexOfItem].info[i].quantity as number) + 1;
+                }
+              } else {
+                items[indexOfItem].info = _.uniqBy(
+                  [...items[indexOfItem].info, ...response.info],
+                  "itemName"
+                );
               }
             });
           } else {
