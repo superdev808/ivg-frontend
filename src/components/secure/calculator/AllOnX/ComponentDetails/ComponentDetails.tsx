@@ -1,14 +1,21 @@
 import { TabPanel, TabView } from "primereact/tabview";
 import {
+  ComponentDetail,
   ItemData,
+  ItemInsights,
+  PROCEDURES,
   QUANTITY_VISIBILITY_STATE,
   Site,
   SiteData,
+  ignoreListForMultiples,
 } from "../constants";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Item from "@/components/calculator/AllOnX/Item";
+import { getResponseOrder } from "@/components/calculator/AllOnX/AllOnXUtills";
+import _, { cloneDeep } from "lodash";
 
 interface ComponentDetailProps {
+  procedure: PROCEDURES;
   selectedSites: Site[];
   sitesData: SiteData;
 }
@@ -17,13 +24,66 @@ interface ComponentDetailProps {
  * Name : ComponentDetails.
  * Desc : The `ComponentDetails` function is a React functional component that renders a TabView component
  * with multiple TabPanels based on the `selectedSites` prop, and a final TabPanel for the summary.
+ * @param {object} procedure
  * @param {array} selectedSites
  * @param {object} sitesData
  */
 const ComponentDetails: React.FC<ComponentDetailProps> = ({
+  procedure,
   selectedSites,
   sitesData,
 }: ComponentDetailProps) => {
+  const [componentSummary, setComponentSummary] = useState<any[]>([]);
+
+  useEffect(() => {
+    let items: ItemData[] = [];
+    const responseOrder: string[] = getResponseOrder(procedure);
+    Object.keys(sitesData).map((siteName: string) => {
+      let data: SiteData = cloneDeep(sitesData);
+      const componentDetail: ComponentDetail = cloneDeep(
+        data[siteName].componentDetails
+      );
+      responseOrder.map((key: string) => {
+        componentDetail[key]?.map((response: ItemData) => {
+          const indexOfItem: number = _.findIndex(items, (item: ItemData) => {
+            return item.label === response.label;
+          });
+          if (indexOfItem > -1) {
+            items[indexOfItem].info.map((info: ItemInsights, i: number) => {
+              const indexOfInfo: number = response.info.findIndex(
+                (res: ItemInsights) => {
+                  return (
+                    info.itemName === res.itemName && info.link === res.link
+                  );
+                }
+              );
+              if (indexOfInfo > -1) {
+                if (
+                  !ignoreListForMultiples.includes(
+                    response.label.toLowerCase()
+                  ) &&
+                  items[indexOfItem].info[i].quantity
+                ) {
+                  items[indexOfItem].info[i].quantity =
+                    (items[indexOfItem].info[i].quantity as number) + 1;
+                }
+              } else {
+                items[indexOfItem].info = _.uniqBy(
+                  [...items[indexOfItem].info, ...response.info],
+                  "itemName"
+                );
+              }
+            });
+          } else {
+            items.push(response);
+          }
+        });
+      });
+    });
+
+    setComponentSummary(items);
+  }, [sitesData]);
+
   return (
     <TabView scrollable>
       {selectedSites.map((site: Site) => {
@@ -51,7 +111,16 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
         );
       })}
       <TabPanel header="Summary">
-        <p className="m-0">Component Summary here</p>
+        <>
+          {componentSummary.map((data: ItemData, i: number) => (
+            <Item
+              key={`${data.label}-${i}`}
+              label={data.label}
+              info={data.info}
+              quantityVisibilityState={QUANTITY_VISIBILITY_STATE.EDITABLE}
+            />
+          ))}
+        </>
       </TabPanel>
     </TabView>
   );

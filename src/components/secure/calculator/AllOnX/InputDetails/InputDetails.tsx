@@ -18,10 +18,18 @@ interface InputDetailsProps {
   procedure: PROCEDURES;
   selectedSites: Site[];
   sitesData: SiteData;
-  autoPopulateData: AutoPopulateData | null
-  onInputSelect: (site: Site, question: InputOutputValues, answer: string) => void;
+  autoPopulateData: AutoPopulateData | null;
+  onInputSelect: (
+    site: Site,
+    question: InputOutputValues,
+    answer: string
+  ) => void;
   onAutopopulate: (dataToPopulate: AutoPopulateData | null) => void;
-  onQuizResponse: (site: Site, response: ItemData[], collection: string) => void;
+  onQuizResponse: (
+    site: Site,
+    response: ItemData[],
+    collection: string
+  ) => void;
 }
 
 /**
@@ -35,6 +43,7 @@ interface InputDetailsProps {
  * @param {object} autoPopulateData
  * @param {func} onInputSelect
  * @param {func} onAutopopulate
+ * @param {func} onQuizResponse
  */
 const InputDetails: React.FC<InputDetailsProps> = ({
   procedure,
@@ -43,9 +52,9 @@ const InputDetails: React.FC<InputDetailsProps> = ({
   onInputSelect,
   onAutopopulate,
   autoPopulateData,
-  onQuizResponse
+  onQuizResponse,
 }: InputDetailsProps) => {
-  const requestParams: ProcedureRequest = ALLONX_REQUEST_PARAMS[procedure];  
+  const requestParams: ProcedureRequest = ALLONX_REQUEST_PARAMS[procedure];
 
   return (
     <TabView renderActiveOnly={false} scrollable>

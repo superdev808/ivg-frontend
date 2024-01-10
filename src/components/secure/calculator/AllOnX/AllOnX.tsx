@@ -177,6 +177,7 @@ const AllOnXCalculator: React.FC = () => {
                     </TabPanel>
                     <TabPanel header="Component Details">
                       <ComponentDetails
+                        procedure={procedure}
                         selectedSites={selectedSites}
                         sitesData={sitesData}
                       />
