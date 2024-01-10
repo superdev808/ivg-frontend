@@ -52,7 +52,9 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
             items[indexOfItem].info.map((info: ItemInsights, i: number) => {
               const indexOfInfo: number = response.info.findIndex(
                 (res: ItemInsights) => {
-                  return info.itemName === res.itemName;
+                  return (
+                    info.itemName === res.itemName && info.link === res.link
+                  );
                 }
               );
               if (indexOfInfo > -1) {
