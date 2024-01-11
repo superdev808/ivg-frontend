@@ -102,6 +102,32 @@ export const AUTO_POPULATE_OPTIONS: RadioButtonOption[] = [
   },
 ];
 
+export const DENTAL_IMPLANT_PROCEDURE_OPTIONS: RadioButtonOption[] = [
+  {
+    id: "DirectToImplant",
+    name: "dentalImplantProcedure",
+    value: "Direct to implant",
+  },
+  {
+    id: "MUAs",
+    name: "dentalImplantProcedure",
+    value: "MUAs",
+  },
+];
+
+export const MUA_OPTIONS: RadioButtonOption[] = [
+  {
+    id: "MUA1",
+    name: "MUA",
+    value: "Yes",
+  },
+  {
+    id: "MUA2",
+    name: "MUA",
+    value: "No",
+  },
+];
+
 export const ignoreListForMultiples: string[] = [
   "implant drill kit name",
   "drill sequence",

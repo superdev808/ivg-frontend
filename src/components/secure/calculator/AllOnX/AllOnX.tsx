@@ -4,9 +4,11 @@ import { TabView, TabPanel } from "primereact/tabview";
 import {
   AutoPopulateData,
   ComponentDetail,
+  DENTAL_IMPLANT_PROCEDURE_OPTIONS,
   InputDetail,
   InputOutputValues,
   ItemData,
+  MUA_OPTIONS,
   PROCEDURES,
   procedures,
   Site,
@@ -18,6 +20,7 @@ import TeethSelector from "./TeethSelector";
 import { cloneDeep } from "lodash";
 import { getProcedureInputsAndResponse } from "@/components/calculator/AllOnX/AllOnXUtills";
 import { InputAndResponse } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
+import AdditionalInputs from "./AdditionalInputs";
 
 /*
  * Name : AllOnXCalculator.
@@ -27,20 +30,32 @@ const AllOnXCalculator: React.FC = () => {
   const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
+  const [additionalInputs, setAdditionalInputs] = useState<{
+    [key: string]: string;
+  }>({});
   const [autoPopulateData, setAutoPopulateData] =
     useState<AutoPopulateData | null>(null);
   const [procedureInputsAndResponse, setProcedureInputsAndResponse] =
     useState<InputAndResponse | null>(null);
 
   useEffect(() => {
-    const procedureInputsAndResponse = getProcedureInputsAndResponse(procedure);
+    const procedureInputsAndResponse = getProcedureInputsAndResponse(
+      procedure,
+      additionalInputs
+    );
     setProcedureInputsAndResponse(procedureInputsAndResponse);
-  }, [procedure]);
+  }, [procedure, additionalInputs]);
 
   const handleProcedureChange = (e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
     setSelectedSites([]);
     setSitesData({});
+    if (e.value === PROCEDURES.RESTORATIVE) {
+      handleAdditionalInputs(
+        DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value,
+        DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name
+      );
+    }
   };
 
   const handleSiteChange = (tooth: number): void => {
@@ -149,6 +164,25 @@ const AllOnXCalculator: React.FC = () => {
     }
   };
 
+  const handleAdditionalInputs = (value: string, target: string) => {
+    setAdditionalInputs((prev: { [key: string]: string }) => {
+      let state = { ...prev };
+      if (
+        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
+        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value
+      ) {
+        delete state[MUA_OPTIONS[0].name];
+      }
+      if (
+        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
+        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
+      ) {
+        state = { ...state, [MUA_OPTIONS[0].name]: MUA_OPTIONS[0].value };
+      }
+      return { ...state, [target]: value };
+    });
+  };
+
   return (
     <div className={" nav-offset flex-grow-1"}>
       <div className="wrapper my-8">
@@ -171,6 +205,12 @@ const AllOnXCalculator: React.FC = () => {
                 selectedSites={selectedSites}
                 onSiteChange={handleSiteChange}
               />
+              {procedure === PROCEDURES.RESTORATIVE && (
+                <AdditionalInputs
+                  additionalInputs={additionalInputs}
+                  onInputChange={handleAdditionalInputs}
+                />
+              )}
               {selectedSites.length > 0 && (
                 <div className="mt-3">
                   <TabView renderActiveOnly={false}>
