@@ -74,6 +74,13 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
                 );
               }
             });
+            // check and add new items which are not in the list
+            if (items[indexOfItem].info.length != response.info.length) {
+              items[indexOfItem].info = _.uniqBy(
+                [...items[indexOfItem].info, ...response.info],
+                "itemName"
+              );
+            }
           } else {
             items.push(response);
           }
