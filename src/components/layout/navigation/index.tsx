@@ -1,17 +1,29 @@
 'use client';
-import { useState, useRef, useEffect} from "react";
+import { useState, useRef} from "react";
+import { usePathname } from 'next/navigation';
+
+// STYLES
+import classNames from "classnames/bind";
+import styles from "./Navigation.module.scss";
+const cx = classNames.bind(styles);
+
 import Navbar from "./navbar";
+
+// HOOKS & HELPERS
 import useOutsideClick from "@/hooks/useOutsideClick";
 import useCheckMobileScreen from "@/hooks/useCheckMobileScreen";
-import { PrimeIcons } from 'primereact/api';
-import styles from "./Navigation.module.scss";
-import classNames from "classnames/bind";
-
-import { usePathname } from 'next/navigation';
-import { useAppSelector } from "@/redux/hooks";
 import { deleteCookie } from "@/helpers/cookie";
+
+import { PrimeIcons } from 'primereact/api';
+
+//REDUX
+import { useAppSelector } from "@/redux/hooks";
 import { useDispatch } from "react-redux";
-const cx = classNames.bind(styles);
+import { setAuth } from "@/redux/slices/authSlice";
+
+
+
+
 
 const Navigation = () => {
   const {authenticated} = useAppSelector((state) => state.auth);
@@ -26,10 +38,10 @@ const Navigation = () => {
 		try {
       deleteCookie('appToken', '/');
       deleteCookie('email', '/');
-      dispatch({ type: 'auth/setAuth', payload: { authenticated: false } });
+      dispatch(setAuth(false));
 
-      // router.push( '/login' );
-			window.location.href = "/";
+      // router.push( '/' );
+			// window.location.href = "/";
 		} catch (error: any) {
 		
 		}
