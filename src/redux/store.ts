@@ -7,7 +7,7 @@ import flowReducer from './features/flowSlice';
 
 import calculatorReducer from './features/calculatorSlice';
 import editorReducer from './features/editorSlice';
-import authSliceReducer from './features/authSlice';
+import authSliceReducer from './slices/authSlice';
 
 import { workflowsApi } from './services/workflowsApi';
 import { workflowEdgesApi } from './services/workflowEdgesApi';
@@ -16,8 +16,8 @@ import { calculatorsApi } from './services/calculatorsApi';
 import { workflowMenuItemsApi } from './services/workflowsMenuItemsApi';
 import { workflowMenuQuestionsApi } from './services/workflowsMenuQuestionsApi';
 
-import route from './slices/shared/routeSlice';
-import ui from './slices/shared/uiSlice';
+import route from './slices/routeSlice';
+import ui from './slices/uiSlice';
 
 export const store = configureStore({
 	reducer: {

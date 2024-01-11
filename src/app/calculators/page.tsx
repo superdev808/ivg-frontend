@@ -5,12 +5,32 @@ import { Button } from 'primereact/button';
 import styles from './page.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
-import CalculatorProduct from './product';
+
 import { useAppSelector } from '@/redux/hooks';
+
+import CalculatorProduct from './product';
+
 import SearchBox from '@/components/ui/searchbox';
+import Loading from '@/components/layout/loading';
+
 
 export default function CalculatorsPage() {
-	const { authenticated } = useAppSelector((state) => state.auth);
+	const { authenticated, isLoading } = useAppSelector((state) => state.auth);
+
+	if (isLoading) {
+		return <Loading />
+	
+	}
+
+	return authenticated  ? (
+		<Calculators />
+	) : (
+		<CalculatorProduct />
+	);
+}
+
+
+export const Calculators = () => {
 	const router = useRouter();
 	const [selectedGroup, setSelectedGroup] = useState<number>(-1);
 	const [loading, setLoading] = useState<boolean>(false);
@@ -71,67 +91,63 @@ export default function CalculatorsPage() {
 			});
 	};
 
-	return authenticated ? (
-		<div className={' nav-offset flex-grow-1'}>
-			<div className="wrapper my-8">
-				<div className=" p-5 border-round bg-white shadow-1">
-					<h2 className="mt-0 mb-5 text-center">Calculators</h2>
-					<div className="mt-0 mb-4">
-						<SearchBox
-							handleSearch={handleSearch}
-							loading={loading}
+	return <div className={' nav-offset flex-grow-1'}>
+	<div className="wrapper my-8">
+		<div className=" p-5 border-round bg-white shadow-1">
+			<h2 className="mt-0 mb-5 text-center">Calculators</h2>
+			<div className="mt-0 mb-4">
+				<SearchBox
+					handleSearch={handleSearch}
+					loading={loading}
+				/>
+			</div>
+			{searchResult.length > 0 && (
+				<div className="mb-4">
+					{searchResult.map((searchLabel, index) => (
+						<Button
+							className={cx('calculatorButton', 'p-3 m-2')}
+							key={`searched-calc-${index}`}
+							label={searchLabel}
+							onClick={() => {
+								router.push('/calculators/' + searchLabel);
+							}}
 						/>
-					</div>
-					{searchResult.length > 0 && (
-						<div className="mb-4">
-							{searchResult.map((searchLabel, index) => (
-								<Button
-									className={cx('calculatorButton', 'p-3 m-2')}
-									key={`searched-calc-${index}`}
-									label={searchLabel}
-									onClick={() => {
-										router.push('/calculators/' + searchLabel);
-									}}
-								/>
-							))}
-						</div>
-					)}
-					<div className="grid border-top-1 surface-border">
-						<div className="col-6 border-right-1 p-4 surface-border">
-							{groupItems.map((groupItem, index) => (
-								<Button
-									className={cx('calculatorButton', 'p-4 mb-2', {
-										'calculatorButton--highlighted': index === selectedGroup,
-									})}
-									key={`groupItem-${index}`}
-									style={{ width: '100%' }}
-									label={groupItem.label}
-									onClick={() => {
-										setSelectedGroup(index);
-									}}
-								/>
-							))}
-						</div>
-						{selectedGroup >= 0 && (
-							<div className="col-6 p-4">
-								{groupItems[selectedGroup].subItems.map((calcItem, index) => (
-									<Button
-										className={cx('calculatorButton', 'p-4 mb-2')}
-										key={`calcItem-${index}`}
-										style={{ width: '100%' }}
-										label={calcItem.label}
-										onClick={() => {
-											router.push('/calculators/' + calcItem.label);
-										}}
-									/>
-								))}
-							</div>
-						)}
-					</div>
+					))}
 				</div>
+			)}
+			<div className="grid border-top-1 surface-border">
+				<div className="col-6 border-right-1 p-4 surface-border">
+					{groupItems.map((groupItem, index) => (
+						<Button
+							className={cx('calculatorButton', 'p-4 mb-2', {
+								'calculatorButton--highlighted': index === selectedGroup,
+							})}
+							key={`groupItem-${index}`}
+							style={{ width: '100%' }}
+							label={groupItem.label}
+							onClick={() => {
+								setSelectedGroup(index);
+							}}
+						/>
+					))}
+				</div>
+				{selectedGroup >= 0 && (
+					<div className="col-6 p-4">
+						{groupItems[selectedGroup].subItems.map((calcItem, index) => (
+							<Button
+								className={cx('calculatorButton', 'p-4 mb-2')}
+								key={`calcItem-${index}`}
+								style={{ width: '100%' }}
+								label={calcItem.label}
+								onClick={() => {
+									router.push('/calculators/' + calcItem.label);
+								}}
+							/>
+						))}
+					</div>
+				)}
 			</div>
 		</div>
-	) : (
-		<CalculatorProduct />
-	);
-}
+	</div>
+</div>;
+  };
