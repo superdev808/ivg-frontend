@@ -176,8 +176,7 @@ const Questionnaire: React.FC<InputProps> = ({
           return (
             <React.Fragment key={`quiz-${index}`}>
               {componentDetails.length > 0 && (
-                <>
-                  <Divider />
+                <div className="py-4">
                   {componentDetails.map((data: ItemData, i: number) => {
                     return (
                       <Item
@@ -185,15 +184,15 @@ const Questionnaire: React.FC<InputProps> = ({
                         label={data.label}
                         info={data.info}
                         quantityVisibilityState={QUANTITY_VISIBILITY_STATE.HIDE}
+                        isFirst={i === 0}
                       />
                     );
                   })}
-                  <Divider />
-                </>
+                </div>
               )}
 
               {!!(quiz.text && quiz.name) && (
-                <div className="col-12 flex">
+                <div className="col-12 flex p-0">
                   <Quiz
                     key={`quiz-${index}`}
                     question={quiz.text}
