@@ -11,33 +11,31 @@ import {
 } from "../constants";
 import React, { useEffect, useState } from "react";
 import Item from "@/components/calculator/AllOnX/Item";
-import { getResponseOrder } from "@/components/calculator/AllOnX/AllOnXUtills";
 import _, { cloneDeep } from "lodash";
 
 interface ComponentDetailProps {
-  procedure: PROCEDURES;
   selectedSites: Site[];
   sitesData: SiteData;
+  responseOrder: string[];
 }
 
 /**
  * Name : ComponentDetails.
  * Desc : The `ComponentDetails` function is a React functional component that renders a TabView component
  * with multiple TabPanels based on the `selectedSites` prop, and a final TabPanel for the summary.
- * @param {object} procedure
  * @param {array} selectedSites
  * @param {object} sitesData
+ * @param {array} responseOrder
  */
 const ComponentDetails: React.FC<ComponentDetailProps> = ({
-  procedure,
   selectedSites,
   sitesData,
+  responseOrder,
 }: ComponentDetailProps) => {
   const [componentSummary, setComponentSummary] = useState<any[]>([]);
 
   useEffect(() => {
     let items: ItemData[] = [];
-    const responseOrder: string[] = getResponseOrder(procedure);
     Object.keys(sitesData).map((siteName: string) => {
       let data: SiteData = cloneDeep(sitesData);
       const componentDetail: ComponentDetail = cloneDeep(

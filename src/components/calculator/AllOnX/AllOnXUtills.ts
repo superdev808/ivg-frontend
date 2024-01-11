@@ -1,7 +1,5 @@
-import {
-  PROCEDURES,
-  responseOrder,
-} from "@/components/secure/calculator/AllOnX/constants";
+import { PROCEDURES } from "@/components/secure/calculator/AllOnX/constants";
+import { PROCEDURE_INPUTS_AND_RESPONSE } from "./ProcedureInputsAndResponse";
 
 export const isValidUrl = (urlString: string) => {
   var urlPattern = new RegExp(
@@ -16,15 +14,15 @@ export const isValidUrl = (urlString: string) => {
   return !!urlPattern.test(urlString);
 };
 
-export const getResponseOrder = (procedure: PROCEDURES) => {
-  let order: string[] = [];
+export const getProcedureInputsAndResponse = (procedure: PROCEDURES) => {
   switch (procedure) {
     case PROCEDURES.SURGERY:
-      order = responseOrder;
-      break;
+      return PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
+
+    case PROCEDURES.RESTORATIVE:
+      return PROCEDURE_INPUTS_AND_RESPONSE.RESTORATIVE_DIRECT_TO_IMPLANT;
 
     default:
-      break;
+      return { input: [], responseOrder: [] };
   }
-  return order;
 };

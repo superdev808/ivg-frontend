@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
 import {
@@ -9,7 +9,6 @@ import {
   ItemData,
   PROCEDURES,
   procedures,
-  responseOrder,
   Site,
   SiteData,
 } from "./constants";
@@ -17,6 +16,8 @@ import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
 import { cloneDeep } from "lodash";
+import { getProcedureInputsAndResponse } from "@/components/calculator/AllOnX/AllOnXUtills";
+import { InputAndResponse } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 
 /*
  * Name : AllOnXCalculator.
@@ -28,6 +29,13 @@ const AllOnXCalculator: React.FC = () => {
   const [sitesData, setSitesData] = useState<SiteData>({});
   const [autoPopulateData, setAutoPopulateData] =
     useState<AutoPopulateData | null>(null);
+  const [procedureInputsAndResponse, setProcedureInputsAndResponse] =
+    useState<InputAndResponse | null>(null);
+
+  useEffect(() => {
+    const procedureInputsAndResponse = getProcedureInputsAndResponse(procedure);
+    setProcedureInputsAndResponse(procedureInputsAndResponse);
+  }, [procedure]);
 
   const handleProcedureChange = (e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
@@ -81,6 +89,8 @@ const AllOnXCalculator: React.FC = () => {
     }
 
     //remove next collection responses
+    const responseOrder: string[] =
+      procedureInputsAndResponse?.responseOrder || [];
     const componentDetails: ComponentDetail = cloneDeep(
       data[site.name].componentDetails
     );
@@ -172,14 +182,19 @@ const AllOnXCalculator: React.FC = () => {
                         onInputSelect={handleInputSelect}
                         onAutopopulate={handleAutopopulate}
                         autoPopulateData={autoPopulateData}
+                        procedureInputs={
+                          procedureInputsAndResponse?.input || []
+                        }
                         onQuizResponse={handleQuizResponse}
                       />
                     </TabPanel>
                     <TabPanel header="Component Details">
                       <ComponentDetails
-                        procedure={procedure}
                         selectedSites={selectedSites}
                         sitesData={sitesData}
+                        responseOrder={
+                          procedureInputsAndResponse?.responseOrder || []
+                        }
                       />
                     </TabPanel>
                   </TabView>

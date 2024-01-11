@@ -4,8 +4,6 @@ import {
   SiteData,
   InputDetail,
   PROCEDURES,
-  ALLONX_REQUEST_PARAMS,
-  ProcedureRequest,
   AutoPopulateData,
   InputOutputValues,
   ItemData,
@@ -19,6 +17,7 @@ interface InputDetailsProps {
   selectedSites: Site[];
   sitesData: SiteData;
   autoPopulateData: AutoPopulateData | null;
+  procedureInputs: InputOutputValues[];
   onInputSelect: (
     site: Site,
     question: InputOutputValues,
@@ -44,6 +43,7 @@ interface InputDetailsProps {
  * @param {func} onInputSelect
  * @param {func} onAutopopulate
  * @param {func} onQuizResponse
+ * @param {array} procedureInputs
  */
 const InputDetails: React.FC<InputDetailsProps> = ({
   procedure,
@@ -52,10 +52,9 @@ const InputDetails: React.FC<InputDetailsProps> = ({
   onInputSelect,
   onAutopopulate,
   autoPopulateData,
+  procedureInputs,
   onQuizResponse,
 }: InputDetailsProps) => {
-  const requestParams: ProcedureRequest = ALLONX_REQUEST_PARAMS[procedure];
-
   return (
     <TabView renderActiveOnly={false} scrollable>
       {selectedSites.map((site: Site, index: number) => {
@@ -63,7 +62,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
           <TabPanel key={site.name} header={site.name}>
             <Questionnaire
               site={site}
-              input={requestParams.input}
+              input={procedureInputs}
               option={CALCULATOR_MAPPINGS.ALL_ON_X_CALCULATOR}
               onInputSelect={onInputSelect}
               showAutopopulatePrompt={index === 0}
