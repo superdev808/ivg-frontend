@@ -109,7 +109,79 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
     ],
   },
   [PROCEDURE_COMBINATIONS.RESTORATIVE_DIRECT_TO_IMPLANT]: {
-    input: [],
+    input: [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "MasterScanbody_DirToImplant",
+      },
+      {
+        name: "Implant System",
+        text: "Implant System",
+        calculator: "MasterScanbody_DirToImplant",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "MasterScanbody_DirToImplant",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "MasterScanbody_DirToImplant",
+      },
+      {
+        name: "Authentic or Generic?",
+        text: "Authentic or Generic?",
+        calculator: "MasterScanbody_DirToImplant",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "ScanbodyDrivers",
+        outputFrom: "MasterScanbody_DirToImplant",
+      },
+      {
+        name: "Driver Length",
+        text: "Driver Length",
+        calculator: "ScanbodyDrivers",
+      },
+      {
+        name: "Select Impression Copings",
+        text: "Select Impression Copings",
+        calculator: "ImpressionCopings",
+        outputFrom: "ScanbodyDrivers",
+      },
+      {
+        name: "Engaging or Non Engaging",
+        text: "Engaging or Non Engaging",
+        calculator: "TemporaryCopings",
+        outputFrom: "ImpressionCopings",
+      },
+      {
+        name: "Collar Height",
+        text: "Collar Height",
+        calculator: "TiBases",
+        outputFrom: "TemporaryCopings",
+      },
+      {
+        name: "Abutment Type",
+        text: "Abutment Type",
+        calculator: "ImplantDrivers",
+        outputFrom: "TiBases",
+      },
+      {
+        name: "Machine or Manual",
+        text: "Machine or Manual",
+        calculator: "ImplantDrivers",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "ImplantDrivers",
+        outputFrom: "ImplantDrivers",
+      },
+    ],
     responseOrder: [],
   },
   [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_NOT_PLACED]: {

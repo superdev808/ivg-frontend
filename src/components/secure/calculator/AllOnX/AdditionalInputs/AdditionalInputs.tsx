@@ -18,9 +18,12 @@ const AdditionalInputs: React.FC<AdditionalInputsParams> = ({
   onInputChange,
 }: AdditionalInputsParams) => {
   return (
-    <>
-      <div className="flex flex-column w-12 border-top-1 surface-border">
-        <p>Are you restoring direct to implant or on MUAs?</p>
+    <div className="border-top-1 border-bottom-1 surface-border mt-3 pb-4 pt-3">
+      <div className="flex flex-column w-12 surface-border mb-2">
+        <p>
+          Are you restoring with multi-unit abutments (MUAs) or directly to the
+          implant?
+        </p>
         <div className="flex flex-wrap gap-3">
           <>
             {DENTAL_IMPLANT_PROCEDURE_OPTIONS.map(
@@ -45,7 +48,7 @@ const AdditionalInputs: React.FC<AdditionalInputsParams> = ({
       {additionalInputs[DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name] ===
         DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value && (
         <div className="flex flex-column w-12">
-          <p>Are the abutments already placed?</p>
+          <p>Are the multi-unit abutments already connected to the implants?</p>
           <div className="flex flex-wrap gap-3">
             <>
               {MUA_OPTIONS.map((option: RadioButtonOption) => (
@@ -66,7 +69,7 @@ const AdditionalInputs: React.FC<AdditionalInputsParams> = ({
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

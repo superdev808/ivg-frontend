@@ -205,12 +205,13 @@ const AllOnXCalculator: React.FC = () => {
                 selectedSites={selectedSites}
                 onSiteChange={handleSiteChange}
               />
-              {procedure === PROCEDURES.RESTORATIVE && (
-                <AdditionalInputs
-                  additionalInputs={additionalInputs}
-                  onInputChange={handleAdditionalInputs}
-                />
-              )}
+              {procedure === PROCEDURES.RESTORATIVE &&
+                selectedSites.length > 0 && (
+                  <AdditionalInputs
+                    additionalInputs={additionalInputs}
+                    onInputChange={handleAdditionalInputs}
+                  />
+                )}
               {selectedSites.length > 0 && (
                 <div className="mt-3">
                   <TabView renderActiveOnly={false}>
