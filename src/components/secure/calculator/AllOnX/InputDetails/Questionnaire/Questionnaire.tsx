@@ -206,7 +206,7 @@ const Questionnaire: React.FC<InputProps> = ({
             </React.Fragment>
           );
         })}
-        {showAutopopulatePrompt && !input[level + 1] && (
+        {showAutopopulatePrompt && input.length > 0 && !input[level + 1] && (
           <AutoPopulatePromt
             autoPopulate={autoPopulate}
             onPopulateResponse={handlePopulateResponse}
