@@ -45,13 +45,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         calculator: "DrillKitAndSequence",
       },
       {
-        name: "Implant Surface Treatment",
-        text: "Implant Surface Treatment",
-        calculator: "DrillKitAndSequence",
-      },
-      {
-        name: "Select Drill Kit",
-        text: "Select Drill Kit",
+        name: "Drill Kit Type",
+        text: "Drill Kit Type",
         calculator: "DrillKitAndSequence",
       },
       {
@@ -61,8 +56,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         outputFrom: "DrillKitAndSequence",
       },
       {
-        name: "Authentic or Generic?",
-        text: "Authentic or Generic?",
+        name: "Authentic or Generic",
+        text: "Authentic or Generic",
         calculator: "MasterImplantDriver",
         outputFrom: "BoneReduction",
       },
@@ -86,6 +81,11 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         text: "Do you need to purchase materials for chairside pick-up?",
         calculator: "ChairSidePickUp",
         outputFrom: "MasterImplantDriver",
+      },
+      {
+        name: "Implant Surface Treatment",
+        text: "Implant Surface Treatment",
+        calculator: "DrillKitAndSequence",
       },
       {
         name: "Do you need to purchase an implant?",
