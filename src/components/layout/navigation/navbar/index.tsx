@@ -10,35 +10,58 @@ import classNames from 'classnames/bind';
 import 'primeicons/primeicons.css';
 import { Button } from 'primereact/button';
 import { Sidebar } from 'primereact/sidebar';
+import { NavLink } from '@/types/Layout';
 
 let cx = classNames.bind(styles);
 
 const Navbar = ({
-	toggle,
-	isOpen,
+
 	navLinks,
 	rightNavLinks,
+	secure
 }: {
-	toggle: () => void;
-	isOpen: boolean;
-	navLinks: { id: string; link: string; title: string; icon: string; auth: boolean; onClick?: any }[];
-	rightNavLinks: { id: string; link?: string; title: string; icon: string; onClick?: any; auth: boolean }[];
+	navLinks: NavLink[];
+	rightNavLinks: NavLink[];
+	secure?: boolean;
 }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const pathName = usePathname();
 
-	return (<div className="px-3 md:px-6 w-full  top-0 mt-1 mb-1">
+
+	const onClick = (item:NavLink) => {
+		if (item.onClick){
+
+			item.onClick();
+		}
+		setShowSidebar(false)
+		
+	};
+	const renderHambuger = () => {
+		return (
+			<div
+				className={cx('hamburger', { open: showSidebar }, 'md:hidden')}
+				onClick={() => setShowSidebar(!showSidebar)}>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		);
+	};
+
+	return (
+		<div className="px-3 md:px-8 w-full  top-0 mt-1 mb-1">
 			<div className="flex items-center justify-content-between">
 				<div className="flex align-items-center">
 					<Logo />
 					<div className={cx('navbarNav', 'hidden md:flex gap-x-6 ml-3')}>
 						{navLinks
-							.filter((li) => li.auth)
+							.filter((li) => li.secure === secure)
 							.map((item) => {
 								return (
 									<div key={item.id + '_full'}>
-										<Link href={item.link}>
-											<p className={cx({"underline": pathName.includes(item.link)})}>{item.title}</p>
+										<Link href={item.link || ''}>
+											<p className={cx({ active: pathName.includes(item.link || 'unknown') })}>{item.title}</p>
 										</Link>
 									</div>
 								);
@@ -48,24 +71,13 @@ const Navbar = ({
 				<div className="flex align-items-center">
 					<div className={cx('navbarNav', 'hidden md:flex gap-x-6 ml-3')}>
 						{rightNavLinks
-							.filter((li) => li.auth)
+							.filter((li) => li.secure === secure)
 							.map((item) => {
-								if (item.onClick) {
-									return (
-										<div
-											onClick={() => item.onClick()}
-											key={item.id + '_full'}
-											className="text-white cursor-pointer hover:text-primary">
-											<p>
-												<i className={cx(item.icon, 'px-2 ')} /> {item.title}
-											</p>
-										</div>
-									);
-								}
+					
 								return (
 									<div key={item.id + '_full'}>
-										<Link href={item.link || '/'}>
-											<p>
+										<Link href={item.link || '/'} onClick={()=>onClick(item)}>
+											<p className={cx({ active: pathName.includes(item.link || 'unknown') })}>
 												<i className={cx(item.icon, 'px-2')} /> {item.title}
 											</p>
 										</Link>
@@ -73,48 +85,38 @@ const Navbar = ({
 								);
 							})}
 					</div>
-
-					<Button
-						className="md:hidden h-2rem w-2rem"
-						icon="pi pi-bars"
-						onClick={() => setShowSidebar(true)}
-					/>
+					{renderHambuger()}
+				
 				</div>
 			</div>
 			<Sidebar
 				visible={showSidebar}
 				position="right"
 				onHide={() => setShowSidebar(false)}
-				className={cx('navbarNav', 'align-items-end')}>
-				<div className={cx('navbarNav', 'flex flex-column gap-x-3 align-items-start')}>
+				className={cx('sidebar', 'align-items-end')}>
+				<div className={cx('navbarNav', ' flex flex-column gap-x-3 align-items-start')}>
+			
 					{[...navLinks, ...rightNavLinks]
-						.filter((li) => li.auth)
+						.filter((li) => li.secure === secure)
 						.map((item, index) => {
-							if (item.onClick) {
-								return (
-									<div
-										onClick={() => item.onClick()}
-										key={item.id}
-										className="text-white cursor-pointer hover:text-primary">
-										<p>
-											<i className={cx(item.icon, 'px-2 ')} /> {item.title}
-										</p>
-									</div>
-								);
-							}
+							
 							return (
 								<Link
 									href={item.link || ''}
-									key={item.id}>
+									key={item.id}
+									onClick={() => onClick(item)}
+									>
 									<p>
-										<i className={cx(item.icon, 'px-2')} /> {item.title}
+										{/* <i className={cx(item.icon, 'px-2')} /> */}
+										 {item.title}
 									</p>
 								</Link>
 							);
 						})}
 				</div>
 			</Sidebar>
-		</div>);
+		</div>
+	);
 };
 
 export default Navbar;

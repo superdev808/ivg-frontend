@@ -1,6 +1,6 @@
 'use client';
 import { useState, useRef} from "react";
-import { usePathname } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 
 // STYLES
 import classNames from "classnames/bind";
@@ -20,13 +20,19 @@ import { PrimeIcons } from 'primereact/api';
 import { useAppSelector } from "@/redux/hooks";
 import { useDispatch } from "react-redux";
 import { setAuth } from "@/redux/slices/authSlice";
+import { useRouter } from "next/navigation";
+import { NavLink } from "@/types/Layout";
 
 
 
+export interface NavigationProps {
+  secure?: boolean;
+  transparentBg?: boolean;
 
+}
 
-const Navigation = () => {
-  const {authenticated} = useAppSelector((state) => state.auth);
+const Navigation = ({secure, transparentBg}: NavigationProps ) => {
+  const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
 
@@ -40,8 +46,7 @@ const Navigation = () => {
       deleteCookie('email', '/');
       dispatch(setAuth(false));
 
-      // router.push( '/' );
-			// window.location.href = "/";
+      redirect( '/login' );
 		} catch (error: any) {
 		
 		}
@@ -49,16 +54,24 @@ const Navigation = () => {
 
   
 
-  const navLinks = [
-      {id:'calculators',title: 'Calculators', link: '/calculators', icon: PrimeIcons.QRCODE, auth: true},
+  const navLinks:NavLink[] = [
+    
+      {id:'product',title: 'Product', link: '/product'},
+      {id:'about',title: 'About', link: '/about'},
+
+
+    // Protected Links
+    {id:'calculators',title: 'Calculators', link: '/calculators', secure: true},
       // {id: 'workflows',title: 'Workflows', link: '/workflows', icon: PrimeIcons.SITEMAP, auth: true},
   ]
 
-  const rightNavLinks = [
+  const rightNavLinks:NavLink[] = [
     // {id: 'register', title: 'Register', link: '/signup', icon: PrimeIcons.USER},
-    {id: 'contact', title: 'Contact Us', link: '/contact', icon: PrimeIcons.PHONE, auth: true},
-    {id: 'login', title: 'Login', link: '/login', icon: PrimeIcons.SIGN_IN,auth: !authenticated},
-    {id: 'signout', title: 'Sign Out', onClick:onSignOut,  icon: PrimeIcons.SIGN_OUT, auth: authenticated}
+    {id: 'contact', title: 'Contact Us', link: '/contact', icon: PrimeIcons.PHONE},
+    {id: 'login', title: 'Login', link: '/login', icon: PrimeIcons.SIGN_IN},
+
+    // Protected Links
+    {id: 'signout', title: 'Sign Out', onClick:onSignOut,  icon: PrimeIcons.SIGN_OUT, secure: true}
   ]
 
 
@@ -74,11 +87,9 @@ const Navigation = () => {
   useOutsideClick(boxRef, closeMenu);
   useCheckMobileScreen(closeMenu);
 
-  const transparentNavBar = useAppSelector((state) => state.ui.transparentNavBar);
-
   return (
-    <div ref={boxRef} className={cx(["z-2 w-full py-2 absolute top-1",{'nav-background': !transparentNavBar}])} >
-      <Navbar isOpen={isOpen} toggle={toggle} navLinks={navLinks} rightNavLinks={rightNavLinks} />
+    <div ref={boxRef} className={cx(["z-2 w-full py-2 absolute top-1",{'nav-background': !transparentBg}])} >
+      <Navbar navLinks={navLinks} rightNavLinks={rightNavLinks} secure={secure} />
     </div>
   );
 };
