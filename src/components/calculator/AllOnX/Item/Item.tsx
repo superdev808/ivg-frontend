@@ -3,6 +3,7 @@ import {
   ItemInsights,
   QUANTITY_VISIBILITY_STATE,
 } from "@/components/secure/calculator/AllOnX/constants";
+//import { isValidUrl } from "../AllOnXUtills";
 import { InputNumber } from "primereact/inputnumber";
 
 interface ItemDataParams extends ItemData {
@@ -25,6 +26,16 @@ const Item: React.FC<ItemDataParams> = ({
               return (
                 <div key={`${itemName}-${i}`} className="flex mb-2">
                   <span className="w-5">{itemName}</span>
+                  {/* {isValidUrl(link) && (
+                    <a
+                      className="w-6"
+                      style={{ wordBreak: "break-all" }}
+                      href={link}
+                      target="_blank"
+                    >
+                      {link}
+                    </a>
+                  )} */}
                   {link && (
                     <a
                       className="w-6"
