@@ -97,6 +97,10 @@ const Questionnaire: React.FC<InputProps> = ({
         quiz[input[index].name] = answer;
       });
 
+      if (!input[level]) {
+        return;
+      }
+
       const response: Response = await fetch(
         `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/allOnXCalculator`,
         {
@@ -118,9 +122,7 @@ const Questionnaire: React.FC<InputProps> = ({
       } = await response.json();
 
       const originalAnswerOptions: string[][] = answerOptions.slice(0, level);
-      if (!input[level]) {
-        return;
-      }
+
       if (newAnswerOptions.length) {
         setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
       }
