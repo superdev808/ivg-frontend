@@ -167,7 +167,7 @@ const Questionnaire: React.FC<InputProps> = ({
     <div className="mt-3 mb-3">
       <React.Fragment>
         {questions.map((quiz: any, index: number) => {
-          let noAvailableOptions: boolean = false;
+          let noAvailableOptions: boolean = true;
           if (
             answerOptions[index] &&
             answerOptions[index].length === 1 &&
@@ -180,7 +180,8 @@ const Questionnaire: React.FC<InputProps> = ({
             ) {
               handleSelectAnswer(index)({ value: "" });
             }
-            noAvailableOptions = true;
+          } else {
+            noAvailableOptions = false;
           }
           const outputCollection: string = questions[index]?.outputFrom || "";
           const componentDetails: ItemData[] =
