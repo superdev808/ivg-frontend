@@ -6,7 +6,7 @@ const useCheckMobileScreen = (handler: () => void) => {
 
     useEffect(() => {
         const handleWindowSizeChange = () => {
-            if(window.innerWidth >= 768) {
+            if(window.innerWidth >= 1024) {
                 handler();
                 return;
             }
