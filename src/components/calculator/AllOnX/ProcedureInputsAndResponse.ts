@@ -72,8 +72,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         calculator: "MasterImplantDriver",
       },
       {
-        name: "Machine or Manual?",
-        text: "Machine or Manual?",
+        name: "Machine or Manual",
+        text: "Machine or Manual",
         calculator: "MasterImplantDriver",
       },
       {
@@ -85,13 +85,13 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
       {
         name: "Implant Surface Treatment",
         text: "Implant Surface Treatment",
-        calculator: "DrillKitAndSequence",
+        calculator: "ImplantPurchase",
+        outputFrom: "ChairSidePickUp",
       },
       {
         name: "Do you need to purchase an implant?",
         text: "Do you need to purchase an implant?",
         calculator: "ImplantPurchase",
-        outputFrom: "ChairSidePickUp",
       },
       {
         name: "",
