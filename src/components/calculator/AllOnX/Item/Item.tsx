@@ -67,10 +67,10 @@ const Item: React.FC<ItemDataParams> = ({
             isFirst && "border-top-1"
           } surface-border`}
         >
-          <div className="w-3 border-left-1 border-right-1 surface-border p-2 flex align-items-center">
+          <div className="w-4 border-left-1 border-right-1 surface-border p-2 flex align-items-center">
             {label}
           </div>
-          <div className="w-9">
+          <div className="w-8">
             {info.map((item: ItemInsights, i: number) => {
               const { itemName, itemNumber, link, quantity } = item;
               return (
