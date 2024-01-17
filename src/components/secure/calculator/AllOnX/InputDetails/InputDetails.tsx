@@ -18,6 +18,7 @@ interface InputDetailsProps {
   sitesData: SiteData;
   autoPopulateData: AutoPopulateData | null;
   procedureInputs: InputOutputValues[];
+  additionalInputs: { [key: string]: string };
   onInputSelect: (
     site: Site,
     question: InputOutputValues,
@@ -44,6 +45,7 @@ interface InputDetailsProps {
  * @param {func} onAutopopulate
  * @param {func} onQuizResponse
  * @param {array} procedureInputs
+ * @param {object} additionalInputs
  */
 const InputDetails: React.FC<InputDetailsProps> = ({
   procedure,
@@ -54,6 +56,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
   autoPopulateData,
   procedureInputs,
   onQuizResponse,
+  additionalInputs,
 }: InputDetailsProps) => {
   return (
     <TabView renderActiveOnly={false} scrollable>
@@ -70,6 +73,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               autoPopulateData={autoPopulateData}
               onQuizResponse={onQuizResponse}
               sitesData={sitesData}
+              additionalInputs={additionalInputs}
             />
           </TabPanel>
         );

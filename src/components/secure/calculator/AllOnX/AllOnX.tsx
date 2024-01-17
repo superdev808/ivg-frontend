@@ -181,6 +181,15 @@ const AllOnXCalculator: React.FC = () => {
       }
       return { ...state, [target]: value };
     });
+    setSitesData((state) => {
+      selectedSites?.map((site) => {
+        if (state[site.name]) {
+          state[site.name].componentDetails = {};
+          state[site.name].inputDetails = [];
+        }
+      });
+      return state;
+    });
   };
 
   return (
@@ -226,6 +235,7 @@ const AllOnXCalculator: React.FC = () => {
                         procedureInputs={
                           procedureInputsAndResponse?.input || []
                         }
+                        additionalInputs={additionalInputs}
                         onQuizResponse={handleQuizResponse}
                       />
                     </TabPanel>

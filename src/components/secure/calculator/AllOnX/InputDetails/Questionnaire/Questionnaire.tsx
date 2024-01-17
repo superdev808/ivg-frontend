@@ -14,7 +14,6 @@ import { Toast } from "primereact/toast";
 import Quiz from "../../../quiz";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import AutoPopulatePromt from "./AutoPopulatePromt";
-import { Divider } from "primereact/divider";
 import Item from "@/components/calculator/AllOnX/Item";
 
 interface InputProps {
@@ -24,6 +23,7 @@ interface InputProps {
   showAutopopulatePrompt: boolean;
   autoPopulateData: AutoPopulateData | null;
   sitesData: SiteData;
+  additionalInputs: { [key: string]: string };
   onInputSelect: (
     site: Site,
     question: InputOutputValues,
@@ -51,6 +51,7 @@ interface InputProps {
  * @param {func} onInputSelect
  * @param {func} onAutopopulate
  * @param {func} onQuizResponse
+ * @param {object} additionalInputs
  */
 const Questionnaire: React.FC<InputProps> = ({
   site,
@@ -62,6 +63,7 @@ const Questionnaire: React.FC<InputProps> = ({
   onInputSelect,
   onAutopopulate,
   onQuizResponse,
+  additionalInputs,
 }: InputProps) => {
   const [level, setLevel] = useState(0);
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
@@ -85,6 +87,12 @@ const Questionnaire: React.FC<InputProps> = ({
       }, 1000);
     }
   }, [autoPopulateData]);
+
+  useEffect(() => {
+    setAnswerOptions([]);
+    setAnswers([]);
+    setLevel(0);
+  }, [additionalInputs]);
 
   const { isLoading } = useQuery(
     [input, level, answers, option],
