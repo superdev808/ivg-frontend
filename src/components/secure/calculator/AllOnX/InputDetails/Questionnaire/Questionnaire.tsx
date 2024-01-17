@@ -189,7 +189,7 @@ const Questionnaire: React.FC<InputProps> = ({
     <div className="mt-3 mb-3">
       <React.Fragment>
         {questions.map((quiz: any, index: number) => {
-          let noAvailableOptions: boolean = true;
+          let noAvailableOptions: boolean = false;
           if (
             answerOptions[index] &&
             answerOptions[index].length === 1 &&
@@ -202,8 +202,7 @@ const Questionnaire: React.FC<InputProps> = ({
             ) {
               handleSelectAnswer(index)({ value: "" });
             }
-          } else {
-            noAvailableOptions = false;
+            noAvailableOptions = true;
           }
           const outputCollection: string = questions[index]?.outputFrom || "";
           const componentDetails: ItemData[] =
@@ -226,18 +225,20 @@ const Questionnaire: React.FC<InputProps> = ({
                 </div>
               )}
 
-              {!!(quiz.text && quiz.name) && !noAvailableOptions && (
-                <div className="col-12 flex p-0">
-                  <Quiz
-                    key={`quiz-${index}`}
-                    question={quiz.text}
-                    answers={answerOptions[index]}
-                    selectedAnswer={answers[index] || null}
-                    handleSelectAnswer={handleSelectAnswer(index)}
-                    disabled={isLoading}
-                  />
-                </div>
-              )}
+              {!!(quiz.text && quiz.name) &&
+                !!answerOptions[index] &&
+                !noAvailableOptions && (
+                  <div className="col-12 flex p-0">
+                    <Quiz
+                      key={`quiz-${index}`}
+                      question={quiz.text}
+                      answers={answerOptions[index]}
+                      selectedAnswer={answers[index] || null}
+                      handleSelectAnswer={handleSelectAnswer(index)}
+                      disabled={isLoading}
+                    />
+                  </div>
+                )}
             </React.Fragment>
           );
         })}

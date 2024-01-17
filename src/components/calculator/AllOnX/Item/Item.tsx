@@ -5,6 +5,7 @@ import {
 } from "@/components/secure/calculator/AllOnX/constants";
 import { isValidUrl } from "../AllOnXUtills";
 import { InputNumber } from "primereact/inputnumber";
+import React from "react";
 
 interface ItemDataParams extends ItemData {
   quantityVisibilityState: QUANTITY_VISIBILITY_STATE;
@@ -27,6 +28,37 @@ const Item: React.FC<ItemDataParams> = ({
   quantityVisibilityState = QUANTITY_VISIBILITY_STATE.HIDE,
   isFirst,
 }: ItemDataParams) => {
+  const renderQuantity = React.useCallback(
+    (quantity: number) => {
+      switch (quantityVisibilityState) {
+        case QUANTITY_VISIBILITY_STATE.SHOW:
+          return (
+            <span className="flex align-items-center justify-content-center">
+              {quantity}
+            </span>
+          );
+
+        case QUANTITY_VISIBILITY_STATE.EDITABLE:
+          return (
+            <InputNumber
+              inputStyle={{
+                width: "3rem",
+                padding: 8,
+                textAlign: "center",
+              }}
+              className="w-1"
+              maxLength={3}
+              value={quantity}
+            />
+          );
+
+        default:
+          return null;
+      }
+    },
+    [quantityVisibilityState]
+  );
+
   return (
     <>
       {info.length > 0 && (
@@ -66,30 +98,11 @@ const Item: React.FC<ItemDataParams> = ({
                       </a>
                     )}
                   </span>
-                  {quantity && (
-                    <>
-                      {quantityVisibilityState ===
-                        QUANTITY_VISIBILITY_STATE.SHOW && (
-                        <span className="w-1 p-2 border-right-1 surface-border flex align-items-center justify-content-center">
-                          {quantity}
-                        </span>
-                      )}
-                      {quantityVisibilityState ===
-                        QUANTITY_VISIBILITY_STATE.EDITABLE && (
-                        <div className="w-1 p-2 border-right-1 surface-border">
-                          <InputNumber
-                            inputStyle={{
-                              width: "3rem",
-                              padding: 8,
-                              textAlign: "center",
-                            }}
-                            className="w-1"
-                            maxLength={3}
-                            value={quantity}
-                          />
-                        </div>
-                      )}
-                    </>
+                  {quantityVisibilityState !==
+                    QUANTITY_VISIBILITY_STATE.HIDE && (
+                    <div className="w-1 p-2 border-right-1 surface-border">
+                      {quantity && renderQuantity(quantity)}
+                    </div>
                   )}
                 </div>
               );
