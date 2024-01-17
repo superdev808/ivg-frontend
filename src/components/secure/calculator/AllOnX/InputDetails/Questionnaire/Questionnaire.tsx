@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   AUTO_POPULATE_OPTIONS,
   AutoPopulateData,
@@ -10,6 +10,7 @@ import {
 } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { Toast } from "primereact/toast";
 import Quiz from "../../../quiz";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import AutoPopulatePromt from "./AutoPopulatePromt";
@@ -71,6 +72,7 @@ const Questionnaire: React.FC<InputProps> = ({
   const [autoPopulate, setAutoPopulate] = useState<string>(
     AUTO_POPULATE_OPTIONS[1].value
   );
+  const toastRef = useRef(null);
 
   useEffect(() => {
     if (autoPopulateData) {
@@ -117,6 +119,18 @@ const Questionnaire: React.FC<InputProps> = ({
         }
       );
 
+      if (!response.ok && toastRef.current) {
+        response.json().then((res: any) => {
+          (toastRef.current as any).show({
+            severity: "error",
+            summary: res.status,
+            detail: res.message,
+            life: 5000,
+          });
+        });
+        return;
+      }
+
       const {
         data: { result: newAnswerOptions, quizResponse = null },
       } = await response.json();
@@ -130,7 +144,7 @@ const Questionnaire: React.FC<InputProps> = ({
         onQuizResponse(site, quizResponse, input[level]?.outputFrom ?? "");
       }
     },
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false, retry: false }
   );
 
   const questions: InputOutputValues[] = useMemo(() => {
@@ -229,6 +243,7 @@ const Questionnaire: React.FC<InputProps> = ({
       <div className="w-12 flex justify-content-center">
         {isLoading && <ProgressSpinner className="w-1" />}
       </div>
+      <Toast ref={toastRef} position="top-right" />
     </div>
   );
 };

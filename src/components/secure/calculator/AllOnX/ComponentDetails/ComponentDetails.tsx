@@ -96,30 +96,32 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
           <TabPanel key={site.name} header={site.name}>
             <React.Fragment key={site.key}>
               <>
-                {Object.keys(sitesData[site.name]?.componentDetails).map(
-                  (collection: string, collectionIndex: number) => {
-                    const componentDetails: ItemData[] =
-                      sitesData[site.name]?.componentDetails[collection] || [];
-                    return componentDetails.map(
-                      (data: ItemData, itemIndex: number) => {
-                        const isFirst: boolean =
-                          collectionIndex === 0 && itemIndex === 0;
+                {sitesData[site.name] &&
+                  Object.keys(sitesData[site.name]?.componentDetails).map(
+                    (collection: string, collectionIndex: number) => {
+                      const componentDetails: ItemData[] =
+                        sitesData[site.name]?.componentDetails[collection] ||
+                        [];
+                      return componentDetails.map(
+                        (data: ItemData, itemIndex: number) => {
+                          const isFirst: boolean =
+                            collectionIndex === 0 && itemIndex === 0;
 
-                        return (
-                          <Item
-                            key={`${data.label}-${itemIndex}`}
-                            label={data.label}
-                            info={data.info}
-                            quantityVisibilityState={
-                              QUANTITY_VISIBILITY_STATE.SHOW
-                            }
-                            isFirst={isFirst}
-                          />
-                        );
-                      }
-                    );
-                  }
-                )}
+                          return (
+                            <Item
+                              key={`${data.label}-${itemIndex}`}
+                              label={data.label}
+                              info={data.info}
+                              quantityVisibilityState={
+                                QUANTITY_VISIBILITY_STATE.SHOW
+                              }
+                              isFirst={isFirst}
+                            />
+                          );
+                        }
+                      );
+                    }
+                  )}
               </>
             </React.Fragment>
           </TabPanel>
