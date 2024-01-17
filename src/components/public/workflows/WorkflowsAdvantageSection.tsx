@@ -1,5 +1,5 @@
 
-import { ThreeColSection } from '../shared/ThreeColSection';
+import { ThreeColSection } from '../shared/ColItemsSection';
 
 
 

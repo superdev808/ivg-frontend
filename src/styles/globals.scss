@@ -1,7 +1,7 @@
 @import 'primeflex/primeflex.scss';
 @import '~video-react/styles/scss/video-react';
-@import "@/styles/theme.scss";
 
+@import '@/styles/theme.scss';
 
 @import '@/styles/public.scss';
 
@@ -12,11 +12,12 @@ body {
 	min-height: 100vh;
 	margin: 0;
 	padding: 0;
-	font-family: mundial, sans-serif;
+	font-family: var(--font-family);
+	font-weight: normal;
+	font-style: normal;
 	background-color: var(--surface-0);
 	color: var(--secondary-color);
 }
-
 
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
@@ -40,34 +41,39 @@ body {
 	border: 0px solid #ffffff;
 }
 
-
-
-
 //GLOBAL
 .background-gradient {
 	position: absolute;
 	top: 0;
 	left: 0;
 	height: 120vh;
-	width:100%;
-	background-image: linear-gradient(to right,#02393230 , white);
+	width: 100%;
+	background-image: linear-gradient(to right, #02393230, white);
 	z-index: 0;
-  
 }
 
-
 .nav-offset {
-    padding-top: 5rem;
+	padding-top: 5rem;
+}
+
+.radial-gradient {
+	position: absolute;
+	bottom: -400px;
+	width: 800px;
+	height: 800px;
+	background: radial-gradient(circle, #a6c7b470 0%, rgba(131, 184, 153, 0) 75%);
+	left: 50%;
+	transform: translateX(-50%);
+	// transform: translateY(-50%);
 }
 
 // CONTAINERS
-
 
 .container {
 	width: 100%;
 	height: calc(100vh - 5rem);
 	z-index: 1;
-	
+
 	.wrapper {
 		width: 100%;
 		display: flex;
@@ -77,23 +83,15 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-		.wrapper {
-			margin: 0 auto;
-			max-width: 1200px;
-			padding: 0 !important;
-    }
+	.wrapper {
+		margin: 0 auto;
+		max-width: 1200px;
+		padding: 0 !important;
+	}
 	.background-gradient {
-
 		height: 100vh;
-
-	  
 	}
 }
-
-
-
-
-
 
 //BUTTONS
 
@@ -104,11 +102,9 @@ body {
 .btn-secondary {
 	@include styleclass('bg-secondary focus:bg-primary justify-content-center');
 	&:hover {
-		background: rgba(var(--secondary-color-rgb),0.85) !important;
-
+		background: rgba(var(--secondary-color-rgb), 0.85) !important;
 	}
 }
-
 
 
 

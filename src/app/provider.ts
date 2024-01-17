@@ -1,16 +1,18 @@
 'use client';
-import { useEffect } from 'react';
-
-import { useRouter } from 'next/navigation';
+import { useEffect, PropsWithChildren } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { getCookie } from '@/helpers/cookie';
 
 import { setAuth } from '@/redux/slices/authSlice';
 import { verifyAuth } from '@/helpers/verifyAuth';
 
-const AuthProvider = ({ children }) => {
+import Loading from '@/components/layout/loading';
+
+const AuthProvider = ({ children }: PropsWithChildren) => {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
+	const pathname = usePathname();
 
 	useEffect(() => {
 		const checkAuth = async () => {
@@ -26,7 +28,7 @@ const AuthProvider = ({ children }) => {
 		};
 
 		checkAuth();
-	}, [dispatch, router]);
+	}, [dispatch, router, pathname]);
 
 	return children;
 };

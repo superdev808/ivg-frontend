@@ -25,7 +25,7 @@ interface Practice {
 export const ContactComponent = () => {
 	const [visible, setVisible] = useState(false);
 	const [sendStatus, setSendStatus] = useState(''); // 'sending', 'sent', 'error'
-	
+
 	const practices: Practice[] = [
 		{ label: 'Dental Practice', value: 'Dental Practice' },
 		{ label: 'Dental Labatory', value: 'Dental Labatory' },
@@ -74,30 +74,27 @@ export const ContactComponent = () => {
 			if (response.ok) {
 				setSendStatus('sending');
 				const values = getValues();
-					const response = await fetch('/api/contactus', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-						},
-						body: JSON.stringify(values),
-					});
+				const response = await fetch('/api/contactus', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(values),
+				});
 
-					if (response.ok) {
-						console.log('Email sent successfully');
-						setVisible(true);
-						setSendStatus('sent');
-						reset(); // Reset the form fields after successful submission
-					} else {
-						console.log('Email not sent');
-					}
+				if (response.ok) {
+					console.log('Email sent successfully');
+					setVisible(true);
+					setSendStatus('sent');
+					reset(); // Reset the form fields after successful submission
+				} else {
+					console.log('Email not sent');
+				}
 			} else {
 				setSendStatus('error');
 			}
 
-	
-			
 			// setIsSending(true);
-		
 		} catch (error) {
 			console.error('Failed to send email:', error);
 			setSendStatus('error');
@@ -113,18 +110,20 @@ export const ContactComponent = () => {
 	};
 	return (
 		<>
-			<div className={cx(['public-content-container', 'section-container', 'mt-2'])}>
-				<div className={cx(['public-content-wrapper'])}>
+			<div className={cx(['section-container', 'mt-2'])}>
+				<div
+					className={cx()}
+					style={{ maxWidth: '800px' }}>
 					<form
 						className="w-full p-4"
 						onSubmit={handleSubmit(onSubmit)}>
-						<div className="flex justify-content-between mb-4">
+						<div className="grid justify-content-between mb-3">
 							<Controller
 								name="firstName"
 								control={control}
 								rules={{ required: 'First name is required.' }}
 								render={({ field, fieldState }) => (
-									<div className="flex flex-column w-full  mr-2">
+									<div className="flex flex-column col-12 md:col-6 pr-2">
 										<label
 											htmlFor={field.name}
 											className={cx({ 'p-error': errors.value })}></label>
@@ -142,37 +141,36 @@ export const ContactComponent = () => {
 								)}
 							/>
 
-								<Controller
-							name="email"
-							control={control}
-							rules={{ required: 'An email is required.', pattern: emailPattern }}
-							render={({ field, fieldState }) => (
-								<div className="flex flex-column w-full  ml-2">
-									<label
-										htmlFor={field.name}
-										className={cx({ 'p-error': errors.value })}></label>
-									<span className="p-float-label w-full mb-2">
-										<InputText
-											id={field.name}
-											value={field.value}
-											className={cx([{ 'p-invalid': fieldState.error }, 'w-full'])}
-											onChange={(e) => field.onChange(e.target.value)}
-										/>
-										<label htmlFor={field.name}>Email</label>
-									</span>
-									{getFormErrorMessage(field.name)}
-								</div>
-							)}
-						/>
+							<Controller
+								name="email"
+								control={control}
+								rules={{ required: 'An email is required.', pattern: emailPattern }}
+								render={({ field, fieldState }) => (
+									<div className="flex flex-column col-12 md:col-6  pl-2">
+										<label
+											htmlFor={field.name}
+											className={cx({ 'p-error': errors.value })}></label>
+										<span className="p-float-label w-full mb-2">
+											<InputText
+												id={field.name}
+												value={field.value}
+												className={cx([{ 'p-invalid': fieldState.error }, 'w-full'])}
+												onChange={(e) => field.onChange(e.target.value)}
+											/>
+											<label htmlFor={field.name}>Email</label>
+										</span>
+										{getFormErrorMessage(field.name)}
+									</div>
+								)}
+							/>
 						</div>
-						<div className="flex justify-content-between mb-3">
-						
+						<div className="grid justify-content-between mb-3">
 							<Controller
 								name="phone"
 								control={control}
 								rules={{ required: 'A phone number is required.' }}
 								render={({ field, fieldState }) => (
-									<div className="flex flex-column w-full  mr-2">
+									<div className="flex flex-column  col-12 md:col-6 pr-2">
 										<label
 											htmlFor={field.name}
 											className={cx({ 'p-error': errors.value })}></label>
@@ -190,12 +188,12 @@ export const ContactComponent = () => {
 									</div>
 								)}
 							/>
-								<Controller
+							<Controller
 								name="zipCode"
 								control={control}
 								rules={{ required: 'Zip Code is required.' }}
 								render={({ field, fieldState }) => (
-									<div className="flex flex-column w-12 ml-2">
+									<div className="flex flex-column  col-12 md:col-6 pl-2">
 										<label
 											htmlFor={field.name}
 											className={cx({ 'p-error': errors.value })}></label>
@@ -213,33 +211,37 @@ export const ContactComponent = () => {
 								)}
 							/>
 						</div>
-						<div className="flex justify-content-center mb-4">
-						
+						<div className="flex justify-content-center mb-3">
 							<Controller
 								name="type"
 								control={control}
 								rules={{ required: 'Role is required.' }}
 								render={({ field, fieldState }) => (
-									<div className='flex flex-column px-2 align-content-center '>
-									 <span className='mb-3 text-600 text-sm text-center'>Please choose your role.</span>
-                                    <div className="flex justify-content-center w-full">
-                                        <div className="flex align-items-center">
-										{practices.map((practice, index) => {
-											return  <div key={`practice_${index}`}>
-											
-											<RadioButton inputId="`f${index}`" {...field} inputRef={field.ref} value={ practice.value} checked={field.value === practice.value} />
-                                            <label htmlFor="f5" className="ml-1 mr-3">
-                                                { practice.label}
-                                            </label>
-											</div> 
-										})}
-                                        </div>
-                                    </div>
-									<span className='my-2 flex justify-content-center'>
-
-{getFormErrorMessage(field.name)}
-
-									</span>
+									<div className="flex flex-column px-2 align-content-center ">
+										<span className="mb-3 text-600 text-sm text-center">Please choose your role.</span>
+										<div className="flex justify-content-center w-full">
+											<div className="flex flex-column md:flex-row w-full p-0">
+												{practices.map((practice, index) => {
+													return (
+														<div className='mb-2' key={`practice_${index}`}>
+															<RadioButton
+																inputId="`f${index}`"
+																{...field}
+																inputRef={field.ref}
+																value={practice.value}
+																checked={field.value === practice.value}
+															/>
+															<label
+																htmlFor="f5"
+																className="ml-1 mr-3">
+																{practice.label}
+															</label>
+														</div>
+													);
+												})}
+											</div>
+										</div>
+										<span className="my-2 flex justify-content-center">{getFormErrorMessage(field.name)}</span>
 									</div>
 								)}
 							/>
@@ -270,24 +272,26 @@ export const ContactComponent = () => {
 								)}
 							/>
 						</div>
-						{sendStatus !== 'sent' && <div className="flex justify-content-center mb-4">
-							<Controller
-								name="recaptcha"
-								control={control}
-								rules={{ required: 'You must verify the reCAPTCHA.' }}
-								render={({ field, fieldState }) => (
-									<div className="flex flex-column align-items-center justify-content-center">
-										<span className="mb-2">
-											<ReCAPTCHA
-												sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
-												onChange={onChange}
-											/>
-										</span>
-										{getFormErrorMessage(field.name)}
-									</div>
-								)}
-							/>
-						</div>}
+						{sendStatus !== 'sent' && (
+							<div className="flex justify-content-center mb-4">
+								<Controller
+									name="recaptcha"
+									control={control}
+									rules={{ required: 'You must verify the reCAPTCHA.' }}
+									render={({ field, fieldState }) => (
+										<div className="flex flex-column align-items-center justify-content-center">
+											<span className="mb-2">
+												<ReCAPTCHA
+													sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+													onChange={onChange}
+												/>
+											</span>
+											{getFormErrorMessage(field.name)}
+										</div>
+									)}
+								/>
+							</div>
+						)}
 						<div className="flex flex-column align-items-center justify-content-center">
 							<Button
 								type="submit"
@@ -301,7 +305,7 @@ export const ContactComponent = () => {
 											style={{ fontSize: '2rem', marginRight: '1rem' }}></i>{' '}
 										<span>Sending...</span>
 									</>
-								) :  sendStatus === 'sent' ? (
+								) : sendStatus === 'sent' ? (
 									'Sent!'
 								) : (
 									'Submit'
