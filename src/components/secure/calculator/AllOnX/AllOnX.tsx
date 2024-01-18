@@ -50,7 +50,10 @@ const AllOnXCalculator: React.FC = () => {
     setProcedure(e.value);
     setSelectedSites([]);
     setSitesData({});
-    if (e.value === PROCEDURES.RESTORATIVE) {
+    if (
+      e.value === PROCEDURES.RESTORATIVE ||
+      e.value === PROCEDURES.SURGERY_AND_RESTORATIVE
+    ) {
       handleAdditionalInputs(
         DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value,
         DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name
@@ -214,7 +217,8 @@ const AllOnXCalculator: React.FC = () => {
                 selectedSites={selectedSites}
                 onSiteChange={handleSiteChange}
               />
-              {procedure === PROCEDURES.RESTORATIVE &&
+              {(procedure === PROCEDURES.RESTORATIVE ||
+                procedure === PROCEDURES.SURGERY_AND_RESTORATIVE) &&
                 selectedSites.length > 0 && (
                   <AdditionalInputs
                     additionalInputs={additionalInputs}

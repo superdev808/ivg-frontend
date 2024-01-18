@@ -116,8 +116,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         calculator: "MasterScanbody",
       },
       {
-        name: "Implant System",
-        text: "Implant System",
+        name: "Implant Model",
+        text: "Implant Model",
         calculator: "MasterScanbody",
       },
       {
@@ -136,15 +136,10 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         calculator: "MasterScanbody",
       },
       {
-        name: "Implant Model",
-        text: "Implant Model",
-        calculator: "ScanbodyDriver",
-        outputFrom: "MasterScanbody",
-      },
-      {
         name: "Scanbody Driver Length",
         text: "Scanbody Driver Length",
         calculator: "ScanbodyDriver",
+        outputFrom: "MasterScanbody",
       },
       {
         name: "Open or Closed Tray",
@@ -214,8 +209,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         calculator: "MasterMUAScanbody",
       },
       {
-        name: "Implant System",
-        text: "Implant System",
+        name: "Implant Model",
+        text: "Implant Model",
         calculator: "MasterMUAScanbody",
       },
       {
@@ -239,15 +234,10 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         calculator: "MasterMUAScanbody",
       },
       {
-        name: "Implant Model",
-        text: "Implant Model",
-        calculator: "ScanbodyDriversMUA",
-        outputFrom: "MasterMUAScanbody",
-      },
-      {
         name: "Scanbody Driver Length",
         text: "Scanbody Driver Length",
         calculator: "ScanbodyDriversMUA",
+        outputFrom: "MasterMUAScanbody",
       },
       {
         name: "Select Impression Copings",
@@ -335,8 +325,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         calculator: "MasterMUAScanbody",
       },
       {
-        name: "Implant System",
-        text: "Implant System",
+        name: "Implant Model",
+        text: "Implant Model",
         calculator: "MasterMUAScanbody",
       },
       {
@@ -360,15 +350,10 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         calculator: "MasterMUAScanbody",
       },
       {
-        name: "Implant Model",
-        text: "Implant Model",
-        calculator: "ScanbodyDriversMUA",
-        outputFrom: "MasterMUAScanbody",
-      },
-      {
         name: "Scanbody Driver Length",
         text: "Scanbody Driver Length",
         calculator: "ScanbodyDriversMUA",
+        outputFrom: "MasterMUAScanbody",
       },
       {
         name: "Select Impression Copings",
