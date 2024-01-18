@@ -17,11 +17,11 @@ export default function CalculatorPage() {
 
   const componentMapping: { [key: string]: JSX.Element } = {
     [CALCULATOR_MAPPINGS.ALL_ON_X_CALCULATOR]: <AllOnXCalculator />,
+    [CALCULATOR_MAPPINGS.ALL_ON_X_CUSTOM_COMBINATION]: <AllOnXCalculator />,
   };
 
   return (
     componentMapping[tabId] || (
-
       <div className="nav-offset flex flex-grow-1">
         <div className="wrapper">
           <div className="flex flex-column align-items-center justify-content-center mt-6">

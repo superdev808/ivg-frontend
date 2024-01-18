@@ -16,8 +16,214 @@ export type ProcedureInputsAndResponse = {
   [key in PROCEDURE_COMBINATIONS]: InputAndResponse;
 };
 
-export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
+export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
   [PROCEDURE_COMBINATIONS.SURGERY]: {
+    "Drill Kits / Sequences": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "DrillKitAndSequence",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "DrillKitAndSequence",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "DrillKitAndSequence",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "DrillKitAndSequence",
+      },
+      {
+        name: "Implant Length",
+        text: "Implant Length",
+        calculator: "DrillKitAndSequence",
+      },
+      {
+        name: "Drill Kit Type",
+        text: "Drill Kit Type",
+        calculator: "DrillKitAndSequence",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "DrillKitAndSequence",
+        outputFrom: "DrillKitAndSequence",
+      },
+    ],
+    "Bone Reduction Instruments": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "BoneReduction",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "BoneReduction",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "BoneReduction",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "BoneReduction",
+      },
+      {
+        name: "Will you perform bone reduction?",
+        text: "Will you perform bone reduction?",
+        calculator: "BoneReduction",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "BoneReduction",
+        outputFrom: "BoneReduction",
+      },
+    ],
+    "Implant Drivers": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "Implant Length",
+        text: "Implant Length",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "Authentic or Generic",
+        text: "Authentic or Generic",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "Driver Length",
+        text: "Driver Length",
+        calculator: "MasterImplantDriver",
+      },
+
+      {
+        name: "One Piece or Torque Attachment",
+        text: "One Piece or Torque Attachment",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "Abutment Angulation",
+        text: "Abutment Angulation",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "Machine or Manual",
+        text: "Machine or Manual",
+        calculator: "MasterImplantDriver",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "MasterImplantDriver",
+        outputFrom: "MasterImplantDriver",
+      },
+    ],
+    "Chairside Pick-Up Materials": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "ChairSidePickUp",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "ChairSidePickUp",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "ChairSidePickUp",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "ChairSidePickUp",
+      },
+      {
+        name: "Do you need to purchase materials for chairside pick-up?",
+        text: "Do you need to purchase materials for chairside pick-up?",
+        calculator: "ChairSidePickUp",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "ChairSidePickUp",
+        outputFrom: "ChairSidePickUp",
+      },
+    ],
+    "Implants for Purchase": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "ImplantPurchase",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "ImplantPurchase",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "ImplantPurchase",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "ImplantPurchase",
+      },
+      {
+        name: "Implant Length",
+        text: "Implant Length",
+        calculator: "ImplantPurchase",
+      },
+      {
+        name: "Implant Surface Treatment",
+        text: "Implant Surface Treatment",
+        calculator: "ImplantPurchase",
+      },
+      {
+        name: "Do you need to purchase an implant?",
+        text: "Do you need to purchase an implant?",
+        calculator: "ImplantPurchase",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "ImplantPurchase",
+        outputFrom: "ImplantPurchase",
+      },
+    ],
     input: [
       {
         name: "Implant Brand",

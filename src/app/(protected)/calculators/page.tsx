@@ -12,10 +12,7 @@ import SearchBox from "@/components/ui/searchbox";
 import Loading from "@/components/layout/loading";
 
 export default function CalculatorsPage() {
-
-
-	return <Calculators />
-	
+  return <Calculators />;
 }
 
 export const Calculators = () => {
@@ -34,11 +31,20 @@ export const Calculators = () => {
         { label: "BoneReduction", text: "Bone Reduction Instruments" },
         { label: "ChairSidePickUp", text: "Chairside Pick-Up Materials" },
         { label: "Cover Screws" },
-        { label: "DrillKitAndSequence", text: "Drill Kits and Drill Sequences" },
-        { label: "RestroativeDirectToImplant", text: "Drivers (Restorative, Direct to Implant)" },
-        { label: "RestorativeMultiUnitAbutments", text: "Drivers (Restorative, on Multi-Unit Abutments)" },
+        {
+          label: "DrillKitAndSequence",
+          text: "Drill Kits and Drill Sequences",
+        },
+        {
+          label: "RestroativeDirectToImplant",
+          text: "Drivers (Restorative, Direct to Implant)",
+        },
+        {
+          label: "RestorativeMultiUnitAbutments",
+          text: "Drivers (Restorative, on Multi-Unit Abutments)",
+        },
         { label: "HealingAbutments", text: "Healing Abutments" },
-		{ label: "Implants", text: "Implants" },
+        { label: "Implants", text: "Implants" },
         { label: "ImplantScrews", text: "Implant Screws" },
         { label: "ImplantAnalogs", text: "Implant Analogs" },
         { label: "Impression Copings (Direct to Implant)" },
@@ -57,7 +63,10 @@ export const Calculators = () => {
     },
     {
       label: "All-on-X Implant Surgery",
-      subItems: [{ label: "All-on-X Implant Surgery" }],
+      subItems: [
+        { label: "All-on-X Implant Surgery" },
+        { label: "Custom Combinations" },
+      ],
     },
     {
       label: "Product Material Selection",

@@ -18,9 +18,13 @@ import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
 import { cloneDeep } from "lodash";
-import { getProcedureInputsAndResponse } from "@/components/calculator/AllOnX/AllOnXUtills";
+import {
+  getProcedureCollections,
+  getProcedureInputsAndResponse,
+} from "@/components/calculator/AllOnX/AllOnXUtills";
 import { InputAndResponse } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 import AdditionalInputs from "./AdditionalInputs";
+import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
 
 /*
  * Name : AllOnXCalculator.
@@ -37,14 +41,27 @@ const AllOnXCalculator: React.FC = () => {
     useState<AutoPopulateData | null>(null);
   const [procedureInputsAndResponse, setProcedureInputsAndResponse] =
     useState<InputAndResponse | null>(null);
+  const [collections, setCollections] = useState<string[]>([]);
+
+  useEffect(() => {
+    // const procedureInputsAndResponse = getProcedureInputsAndResponse(
+    //   procedure,
+    //   additionalInputs
+    // );
+    // setProcedureInputsAndResponse(procedureInputsAndResponse);
+    const _collections = getProcedureCollections(procedure);
+    setCollections(_collections);
+  }, [procedure, additionalInputs]);
 
   useEffect(() => {
     const procedureInputsAndResponse = getProcedureInputsAndResponse(
       procedure,
-      additionalInputs
+      additionalInputs,
+      selectedCollections
     );
+    console.log("procedureInputsAndResponse", procedureInputsAndResponse);
     setProcedureInputsAndResponse(procedureInputsAndResponse);
-  }, [procedure, additionalInputs]);
+  }, [collections]);
 
   const handleProcedureChange = (e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
@@ -195,6 +212,20 @@ const AllOnXCalculator: React.FC = () => {
     });
   };
 
+  const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
+
+  const onCollectionChange = (e: CheckboxChangeEvent) => {
+    let _selectedCollections: string[] = [...selectedCollections];
+
+    if (e.checked) _selectedCollections.push(e.value);
+    else
+      _selectedCollections = _selectedCollections.filter(
+        (collection) => collection !== e.value
+      );
+
+    setSelectedCollections(_selectedCollections);
+  };
+
   return (
     <div className={" nav-offset flex-grow-1"}>
       <div className="wrapper my-8">
@@ -211,6 +242,35 @@ const AllOnXCalculator: React.FC = () => {
               options={procedures}
             />
           </div>
+
+          <div className="card flex justify-content-center">
+            <div className="flex flex-column gap-3">
+              <p>
+                Select the calculators you would like to combine to create a
+                custom report
+              </p>
+              {collections.map((collection: string, index: number) => {
+                return (
+                  <div
+                    key={`${collection}-${index}`}
+                    className="flex align-items-center"
+                  >
+                    <Checkbox
+                      inputId={`${collection}-${index}`}
+                      name="collection"
+                      value={collection}
+                      onChange={onCollectionChange}
+                      checked={selectedCollections.includes(collection)}
+                    />
+                    <label htmlFor={collection} className="ml-2">
+                      {collection}
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
           <div className="grid border-top-1 surface-border">
             <div className="flex flex-column col-12">
               <TeethSelector

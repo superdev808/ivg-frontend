@@ -54,15 +54,35 @@ const getRestorativeInputsAndResponse = (additionalInputs: {
   }
 };
 
+export const getProcedureCollections = (procedure: PROCEDURES) => {
+  switch (procedure) {
+    case PROCEDURES.SURGERY:
+      return Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY);
+  }
+  return [];
+};
+
 export const getProcedureInputsAndResponse = (
   procedure: PROCEDURES,
   additionalInputs: {
     [key: string]: string;
-  }
+  },
+  selectedCollections: string[]
 ) => {
+  let inputs: any = [];
+  let responseOrder: string[] = [];
   switch (procedure) {
     case PROCEDURES.SURGERY:
-      return PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
+      Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY).map((key: string) => {
+        if (selectedCollections.includes(key)) {
+          inputs = _.uniqBy(
+            [...inputs, ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY[key]],
+            "name"
+          );
+          responseOrder.push(key);
+        }
+      });
+      return { input: inputs, responseOrder };
 
     case PROCEDURES.RESTORATIVE:
       const response = getRestorativeInputsAndResponse(additionalInputs);
