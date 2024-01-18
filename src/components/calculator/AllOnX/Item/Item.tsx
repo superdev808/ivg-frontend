@@ -99,7 +99,6 @@ const Item: React.FC<ItemDataParams> = ({
                     )} */}
                     {link && (
                       <a
-                        className="w-6"
                         style={{ wordBreak: "break-all" }}
                         href={link}
                         target="_blank"
