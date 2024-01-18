@@ -702,5 +702,628 @@ export const calculatorIO = [
                 text: "Link to Purchase"
             }
         ]
+    },
+    {
+        type: "ImpressingCopingsDirectToImplants",
+        label: "Impression Copings (Direct to Implant)",
+        description: "This calculator displays impression copings for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
+        input: [
+            {
+                name: "Implant Brand",
+                text: "Implant Brand"
+            },
+            {
+                name: "Implant Model",
+                text: "Implant Model"
+            },
+            {
+                name: "Implant Diameter",
+                text: "Implant Diameter"
+            },
+            {
+                name: "Implant Platform",
+                text: "Implant Platform"
+            },
+            {
+                name: "Open or Closed Tray",
+                text: "Open or Closed Tray"
+            },
+            {
+                name: "Angulation",
+                text: "Angulation"
+            },
+            {
+                name: "Engaging or Non-Engaging",
+                text: "Engaging or Non-Engaging"
+            },
+            {
+                name: "Impression Coping Length",
+                text: "Impression Coping Length"
+            }
+        ],
+        output: [
+            {
+                name: "Item Name",
+                text: "Item Name"
+            },
+            {
+                name: "Item Number",
+                text: "Item Number"
+            },
+            {
+                name: "Link to Purchase",
+                text: "Link to Purchase"
+            }
+        ]
+    },
+    {
+        type: "ImpressingCopingsMUAs",
+        label: "Impression Copings (Multi-Unit Abutments)",
+        description: "This calculator displays impression copings for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
+        input: [
+            {
+                name: "Implant Brand",
+                text: "Implant Brand"
+            },
+            {
+                name: "Implant Model",
+                text: "Implant Model"
+            },
+            {
+                name: "Implant Diameter",
+                text: "Implant Diameter"
+            },
+            {
+                name: "Implant Platform",
+                text: "Implant Platform"
+            },
+            {
+                name: "Open or Closed Tray",
+                text: "Open or Closed Tray"
+            },
+            {
+                name: "Impression Coping Length",
+                text: "Impression Coping Length"
+            },
+            {
+                name: "Hexed or Non-Hexed",
+                text: "Hexed or Non-Hexed"
+            },
+            {
+                name: "Engaging or Non-Engaging",
+                text: "Engaging or Non-Engaging"
+            },
+            {
+                name: "Abutment Type",
+                text: "Abutment Type"
+            }
+        ],
+        output: [
+            {
+                name: "Item Name",
+                text: "Item Name"
+            },
+            {
+                name: "Item Number",
+                text: "Item Number"
+            },
+            {
+                name: "Link to Purchase",
+                text: "Link to Purchase"
+            }
+        ]
+    },
+    {
+        type: "MUAs",
+        label: "Multi-Unit Abutments",
+        description: "This calculator displays multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
+        input: [
+            {
+                name: "Implant Brand",
+                text: "Implant Brand"
+            },
+            {
+                name: "Implant Model",
+                text: "Implant Model"
+            },
+            {
+                name: "Implant Diameter",
+                text: "Implant Diameter"
+            },
+            {
+                name: "Implant Platform",
+                text: "Implant Platform"
+            },
+            {
+                name: "Abutment Angulation",
+                text: "Abutment Angulation"
+            },
+            {
+                name: "Abutment Engaging Type",
+                text: "Abutment Engaging Type"
+            },
+            {
+                name: "Abutment Diameter",
+                text: "Abutment Diameter"
+            },
+            {
+                name: "Abutment Height",
+                text: "Abutment Height"
+            },
+            {
+                name: "Collar Height",
+                text: "Collar Height"
+            }
+        ],
+        output: [
+            {
+                name: "Item Name",
+                text: "Item Name"
+            },
+            {
+                name: "Item Number",
+                text: "Item Number"
+            },
+            {
+                name: "Link to Purchase",
+                text: "Link to Purchase"
+            }
+        ]
+    },
+    {
+        type: "ScanbodyMUAs",
+        label: "Scanbodies (Mult-Unit Abutments)",
+        description: "This calculator displays scanbodies for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
+        input: [
+            {
+                name: "Implant Brand",
+                text: "Implant Brand"
+            },
+            {
+                name: "Implant Model",
+                text: "Implant Model"
+            },
+            {
+                name: "Implant Diameter",
+                text: "Implant Diameter"
+            },
+            {
+                name: "Implant Platform",
+                text: "Implant Platform"
+            },
+            {
+                name: "Authentic or Generic",
+                text: "Authentic or Generic"
+            },
+            {
+                name: "Manufacturer Name",
+                text: "Manufacturer Name"
+            }
+        ],
+        output: [
+            {
+                name: "Item Name",
+                text: "Item Name"
+            },
+            {
+                name: "Item Number",
+                text: "Item Number"
+            },
+            {
+                name: "Link to Purchase",
+                text: "Link to Purchase"
+            }
+        ]
+    },
+    {
+        type: "ScanbodyDriversDirectToImplants",
+        label: "Scanbody Drivers (Direct to Implant)",
+        description: "This calculator displays scanbody drivers for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
+        input: [
+            {
+                name: "Implant Brand",
+                text: "Implant Brand"
+            },
+            {
+                name: "Implant Model",
+                text: "Implant Model"
+            },
+            {
+                name: "Implant Diameter",
+                text: "Implant Diameter"
+            },
+            {
+                name: "Implant Platform",
+                text: "Implant Platform"
+            },
+            {
+                name: "Driver Length",
+                text: "Driver Length"
+            }
+        ],
+        output: [
+            {
+                name: "Item Name",
+                text: "Item Name"
+            },
+            {
+                name: "Item Number",
+                text: "Item Number"
+            },
+            {
+                name: "Link to Purchase",
+                text: "Link to Purchase"
+            }
+        ]
+    },
+    {
+        type: "ScanbodyDriversMUAs",
+        label: "Scanbody Drivers (MUAs)",
+        description: "This calculator displays scanbody drivers for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
+        input: [
+            {
+                name: "Implant Brand",
+                text: "Implant Brand"
+            },
+            {
+                name: "Implant Model",
+                text: "Implant Model"
+            },
+            {
+                name: "Implant Diameter",
+                text: "Implant Diameter"
+            },
+            {
+                name: "Implant Platform",
+                text: "Implant Platform"
+            },
+            {
+                name: "Driver Length",
+                text: "Driver Length"
+            }
+        ],
+        output: [
+            {
+                name: "Item Name",
+                text: "Item Name"
+            },
+            {
+                name: "Item Number",
+                text: "Item Number"
+            },
+            {
+                name: "Link to Purchase",
+                text: "Link to Purchase"
+            }
+        ]
+    },
+    {
+        type: "StockAbutments",
+        label: "Stock Abutments",
+        description: "This calculator displays stock abutments based on desired implant brand and size, as well as links to purchase this equipment.",
+        input: [
+            {
+                name: "Implant Brand",
+                text: "Implant Brand"
+            },
+            {
+                name: "Implant Model",
+                text: "Implant Model"
+            },
+            {
+                name: "Implant Diameter",
+                text: "Implant Diameter"
+            },
+            {
+                name: "Implant Platform",
+                text: "Implant Platform"
+            },
+            {
+                name: "Material",
+                text: "Material"
+            },
+            {
+                name: "Impression Type",
+                text: "Impression Type",
+            },
+            {
+                name: "Fixation",
+                text: "Fixation",
+            },
+            {
+                name: "Restoration Type",
+                text: "Restoration Type"
+            },
+            {
+                name: "Hexed or Non-Hexed",
+                text: "Hexed or Non-Hexed"
+            },
+            {
+                name: "Angulation",
+                text: "Angulation"
+            },
+            {
+                name: "Abutment Diameter",
+                text: "Abutment Diameter"
+            },
+            {
+                name: "Collar Height",
+                text: "Collar Height"
+            },
+            {
+                name: "Emergence Profile",
+                text: "Emergence Profile"
+            }
+        ],
+        output: [
+            {
+                name: "Item Name",
+                text: "Item Name"
+            },
+            {
+                name: "Item Number",
+                text: "Item Number"
+            },
+            {
+                name: "Link to Purchase",
+                text: "Link to Purchase"
+            }
+        ]
+    },
+    {
+        type: "TemporaryCopingsDirectToImplants",
+        label: "Temporary Copings (Direct to Implant)",
+        description: "This calculator displays stock abutments based on desired implant brand and size, as well as links to purchase this equipment.",
+        input: [
+            {
+                name: "Implant Brand",
+                text: "Implant Brand"
+            },
+            {
+                name: "Implant Model",
+                text: "Implant Model"
+            },
+            {
+                name: "Implant Diameter",
+                text: "Implant Diameter"
+            },
+            {
+                name: "Implant Platform",
+                text: "Implant Platform"
+            },
+            {
+                name: "Engaging or Non Engaging",
+                text: "Engaging or Non Engaging"
+            },
+            {
+                name: "Abutment Angulation",
+                text: "Abutment Angulation",
+            },
+            {
+                name: "Connection Type",
+                text: "Connection Type",
+            },
+            {
+                name: "Hexed or Non-Hexed",
+                text: "Hexed or Non-Hexed"
+            },
+            {
+                name: "Collar Height",
+                text: "Collar Height"
+            },
+            {
+                name: "Restoration Type",
+                text: "Restoration Type"
+            },
+            {
+                name: "Restoration Material",
+                text: "Restoration Material"
+            },
+            {
+                name: "Temporary Coping Height",
+                text: "Temporary Coping Height"
+            }
+        ],
+        output: [
+            {
+                name: "Item Name",
+                text: "Item Name"
+            },
+            {
+                name: "Item Number",
+                text: "Item Number"
+            },
+            {
+                name: "Link to Purchase",
+                text: "Link to Purchase"
+            }
+        ]
+    },
+    {
+        type: "TemporaryCopingsMUAs",
+        label: "Temporary Copings (Multi-Unit Abutments)",
+        description: "This calculator displays temporary copings for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
+        input: [
+            {
+                name: "Implant Brand",
+                text: "Implant Brand"
+            },
+            {
+                name: "Implant Model",
+                text: "Implant Model"
+            },
+            {
+                name: "Implant Diameter",
+                text: "Implant Diameter"
+            },
+            {
+                name: "Implant Platform",
+                text: "Implant Platform"
+            },
+            {
+                name: "Abutment Diameter",
+                text: "Abutment Diameter"
+            },
+            {
+                name: "Abutment Type",
+                text: "Abutment Type",
+            },
+            {
+                name: "Restoration Type",
+                text: "Restoration Type",
+            },
+            {
+                name: "Material",
+                text: "Material"
+            },
+            {
+                name: "Length",
+                text: "Length"
+            },
+            {
+                name: "Diameter",
+                text: "Diameter"
+            },
+            {
+                name: "Hexed or Non Hexed",
+                text: "Hexed or Non Hexed"
+            }
+        ],
+        output: [
+            {
+                name: "Item Name",
+                text: "Item Name"
+            },
+            {
+                name: "Item Number",
+                text: "Item Number"
+            },
+            {
+                name: "Link to Purchase",
+                text: "Link to Purchase"
+            }
+        ]
+    },
+    {
+        type: "TiBasesDirectToImplants",
+        label: "Ti Bases (Direct to Implant)",
+        description: "This calculator displays Ti Bases for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
+        input: [
+            {
+                name: "Implant Brand",
+                text: "Implant Brand"
+            },
+            {
+                name: "Implant Model",
+                text: "Implant Model"
+            },
+            {
+                name: "Implant Diameter",
+                text: "Implant Diameter"
+            },
+            {
+                name: "Implant Platform",
+                text: "Implant Platform"
+            },
+            {
+                name: "Engaging or Non-Engaging",
+                text: "Engaging or Non-Engaging"
+            },
+            {
+                name: "Abutment Diameter",
+                text: "Abutment Diameter",
+            },
+            {
+                name: "Angulation",
+                text: "Angulation",
+            },
+            {
+                name: "Abutment Height",
+                text: "Abutment Height"
+            },
+            {
+                name: "Cementable Area",
+                text: "Cementable Area"
+            },
+            {
+                name: "Collar Height",
+                text: "Collar Height"
+            }
+        ],
+        output: [
+            {
+                name: "Item Name",
+                text: "Item Name"
+            },
+            {
+                name: "Item Number",
+                text: "Item Number"
+            },
+            {
+                name: "Link to Purchase",
+                text: "Link to Purchase"
+            }
+        ]
+    },
+    {
+        type: "TiBasesMUAs",
+        label: "Ti Bases (Direct to Implant)",
+        description: "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
+        input: [
+            {
+                name: "Implant Brand",
+                text: "Implant Brand"
+            },
+            {
+                name: "Implant Model",
+                text: "Implant Model"
+            },
+            {
+                name: "Implant Diameter",
+                text: "Implant Diameter"
+            },
+            {
+                name: "Implant Platform",
+                text: "Implant Platform"
+            },
+            {
+                name: "Engaging or Non-Engaging",
+                text: "Engaging or Non-Engaging"
+            },
+            {
+                name: "MUA Type",
+                text: "MUA Type"
+            },
+            {
+                name: "Abutment Diameter",
+                text: "Abutment Diameter"
+            },
+            {
+                name: "Abutment Height",
+                text: "Abutment Height"
+            },
+            {
+                name: "Collar Height",
+                text: "Collar Height"
+            },
+            {
+                name: "Angulation",
+                text: "Angulation"
+            }
+        ],
+        output: [
+            {
+                name: "Item Name",
+                text: "Item Name"
+            },
+            {
+                name: "Item Number",
+                text: "Item Number"
+            },
+            {
+                name: "Link to Purchase",
+                text: "Link to Purchase"
+            }
+        ]
     }
 ];
