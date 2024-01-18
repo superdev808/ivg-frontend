@@ -40,7 +40,7 @@ export default function DetailView(props: DetailViewProps) {
             </div>
           ) : null
         )}
-        {data.image && <div className="grid">
+        {data?.image && <div className="grid">
             <div className="col-offset-4 col-8">
                 <Image src={data.image} alt="output image" width="200px" />
             </div>
