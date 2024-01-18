@@ -3,7 +3,7 @@ import {
   ItemInsights,
   QUANTITY_VISIBILITY_STATE,
 } from "@/components/secure/calculator/AllOnX/constants";
-import { isValidUrl } from "../AllOnXUtills";
+//import { isValidUrl } from "../AllOnXUtills";
 import { InputNumber } from "primereact/inputnumber";
 import React from "react";
 
@@ -88,13 +88,23 @@ const Item: React.FC<ItemDataParams> = ({
                     {itemNumber || "-"}
                   </span>
                   <span className="w-4 border-right-1 surface-border p-2 flex align-items-center">
-                    {isValidUrl(link) && (
+                    {/* {isValidUrl(link) && (
                       <a
                         style={{ wordBreak: "break-all" }}
                         href={link}
                         target="_blank"
                       >
                         Link to Purchase
+                      </a>
+                    )} */}
+                    {link && (
+                      <a
+                        className="w-6"
+                        style={{ wordBreak: "break-all" }}
+                        href={link}
+                        target="_blank"
+                      >
+                        {link}
                       </a>
                     )}
                   </span>

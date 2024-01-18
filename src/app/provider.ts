@@ -1,29 +1,34 @@
 'use client';
-
-import { createContext, useEffect } from 'react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { useRouter } from 'next/navigation';
+import { useEffect, PropsWithChildren } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { getCookie } from '@/helpers/cookie';
 
-// export const AuthContext = createContext();
+import { setAuth } from '@/redux/slices/authSlice';
+import { verifyAuth } from '@/helpers/verifyAuth';
 
-const AuthProvider = ({ children }) => {
+import Loading from '@/components/layout/loading';
+
+const AuthProvider = ({ children }: PropsWithChildren) => {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
-
-	const { authenticated } = useAppSelector((state) => state.auth);
+	const pathname = usePathname();
 
 	useEffect(() => {
-		const appToken = getCookie('appToken');
-		if (!authenticated) {
-			if (appToken) {
-				dispatch({ type: 'auth/setAuth', payload: { authenticated: true } });
-			} else {
-				router.push("/");
+		const checkAuth = async () => {
+			try {
+				const token = getCookie('appToken');
+				const isAuthenticated = await verifyAuth(token);
+				dispatch(setAuth(isAuthenticated));
+	
+			} catch (error) {
+				console.error('Authentication check failed:', error);
+				router.push('/');
 			}
-		}
-	}, [authenticated]);
+		};
+
+		checkAuth();
+	}, [dispatch, router, pathname]);
 
 	return children;
 };

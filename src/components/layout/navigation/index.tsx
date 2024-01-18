@@ -1,20 +1,38 @@
 'use client';
-import { useState, useRef, useEffect} from "react";
-import Navbar from "./navbar";
-import useOutsideClick from "@/hooks/useOutsideClick";
-import useCheckMobileScreen from "@/hooks/useCheckMobileScreen";
-import { PrimeIcons } from 'primereact/api';
-import styles from "./Navigation.module.scss";
-import classNames from "classnames/bind";
+import { useState, useRef} from "react";
+import { redirect, usePathname } from 'next/navigation';
 
-import { usePathname } from 'next/navigation';
-import { useAppSelector } from "@/redux/hooks";
-import { deleteCookie } from "@/helpers/cookie";
-import { useDispatch } from "react-redux";
+// STYLES
+import classNames from "classnames/bind";
+import styles from "./Navigation.module.scss";
 const cx = classNames.bind(styles);
 
-const Navigation = () => {
-  const {authenticated} = useAppSelector((state) => state.auth);
+import Navbar from "./navbar";
+
+// HOOKS & HELPERS
+import useOutsideClick from "@/hooks/useOutsideClick";
+import useCheckMobileScreen from "@/hooks/useCheckMobileScreen";
+import { deleteCookie } from "@/helpers/cookie";
+
+import { PrimeIcons } from 'primereact/api';
+
+//REDUX
+import { useAppSelector } from "@/redux/hooks";
+import { useDispatch } from "react-redux";
+import { setAuth } from "@/redux/slices/authSlice";
+import { useRouter } from "next/navigation";
+import { NavLink } from "@/types/Layout";
+
+
+
+export interface NavigationProps {
+  secure?: boolean;
+  transparentBg?: boolean;
+
+}
+
+const Navigation = ({secure, transparentBg}: NavigationProps ) => {
+  const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
 
@@ -26,10 +44,9 @@ const Navigation = () => {
 		try {
       deleteCookie('appToken', '/');
       deleteCookie('email', '/');
-      dispatch({ type: 'auth/setAuth', payload: { authenticated: false } });
+      dispatch(setAuth(false));
 
-      // router.push( '/login' );
-			window.location.href = "/";
+      redirect( '/login' );
 		} catch (error: any) {
 		
 		}
@@ -37,16 +54,24 @@ const Navigation = () => {
 
   
 
-  const navLinks = [
-      {id:'calculators',title: 'Calculators', link: '/calculators', icon: PrimeIcons.QRCODE, auth: true},
-      {id: 'workflows',title: 'Workflows', link: '/workflows', icon: PrimeIcons.SITEMAP, auth: true},
+  const navLinks:NavLink[] = [
+    
+      {id:'product',title: 'Product', link: '/product'},
+      {id:'about',title: 'About', link: '/about'},
+
+
+    // Protected Links
+    {id:'calculators',title: 'Calculators', link: '/calculators', secure: true},
+      // {id: 'workflows',title: 'Workflows', link: '/workflows', icon: PrimeIcons.SITEMAP, auth: true},
   ]
 
-  const rightNavLinks = [
+  const rightNavLinks:NavLink[] = [
     // {id: 'register', title: 'Register', link: '/signup', icon: PrimeIcons.USER},
-    {id: 'contact', title: 'Contact Us', link: '/contact', icon: PrimeIcons.PHONE, auth: true},
-    {id: 'login', title: 'Login', link: '/login', icon: PrimeIcons.SIGN_IN,auth: !authenticated},
-    {id: 'signout', title: 'Sign Out', onClick:onSignOut,  icon: PrimeIcons.SIGN_OUT, auth: authenticated}
+    {id: 'contact', title: 'Contact Us', link: '/contact', icon: PrimeIcons.PHONE},
+    {id: 'login', title: 'Login', link: '/login', icon: PrimeIcons.SIGN_IN},
+
+    // Protected Links
+    {id: 'signout', title: 'Sign Out', onClick:onSignOut,  icon: PrimeIcons.SIGN_OUT, secure: true}
   ]
 
 
@@ -62,11 +87,9 @@ const Navigation = () => {
   useOutsideClick(boxRef, closeMenu);
   useCheckMobileScreen(closeMenu);
 
-  const transparentNavBar = useAppSelector((state) => state.ui.transparentNavBar);
-
   return (
-    <div ref={boxRef} className={cx(["z-2 w-full py-2 absolute top-1",{'nav-background': !transparentNavBar}])} >
-      <Navbar isOpen={isOpen} toggle={toggle} navLinks={navLinks} rightNavLinks={rightNavLinks} />
+    <div ref={boxRef} className={cx(["z-2 w-full py-2 absolute top-1",{'nav-background': !transparentBg}])} >
+      <Navbar navLinks={navLinks} rightNavLinks={rightNavLinks} secure={secure} />
     </div>
   );
 };

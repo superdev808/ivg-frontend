@@ -10,7 +10,7 @@ import {
 } from "../constants";
 import React from "react";
 import Questionnaire from "./Questionnaire";
-import { CALCULATOR_MAPPINGS } from "@/app/calculators/constants";
+import { CALCULATOR_MAPPINGS } from "@/app/(protected)/calculators/constants";
 
 interface InputDetailsProps {
   procedure: PROCEDURES;

@@ -18,7 +18,7 @@ const FooterExtended = () => {
 
 
 	return (
-		<div className={cx(['px-3 md:px-6',"flex"])}>
+		<div className={cx(['px-3 md:px-8',"flex"])}>
 			<div className="grid w-full justify-content-between align-content-center my-4 py-4 border-bottom-1">
 				<div className="col-12 md:col-4 flex justify-content-center md:justify-content-start">
 					<Image
@@ -29,8 +29,8 @@ const FooterExtended = () => {
 						className="relative"
 					/>
 				</div>
-				<div className={cx(['public-blur-shadow', 'col-12 md:col-4 flex justify-content-center md:justify-content-center align-self-center'])}>
-					
+				<div className={cx([  'col-12 md:col-4 flex justify-content-center md:justify-content-center align-self-center'])}>
+				
 					{socialButtons.map((button, index) => {
 						return <Button
 						key={index}
