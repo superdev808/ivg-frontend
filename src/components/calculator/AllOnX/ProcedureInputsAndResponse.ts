@@ -95,19 +95,19 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
       {
         name: "Implant Surface Treatment",
         text: "Implant Surface Treatment",
-        calculator: "ImplantPurchase",
+        calculator: "Implants",
         outputFrom: "ChairSidePickUp",
       },
       {
         name: "Do you need to purchase an implant?",
         text: "Do you need to purchase an implant?",
-        calculator: "ImplantPurchase",
+        calculator: "Implants",
       },
       {
         name: "",
         text: "",
-        calculator: "ImplantPurchase",
-        outputFrom: "ImplantPurchase",
+        calculator: "Implants",
+        outputFrom: "Implants",
       },
     ],
     responseOrder: [
@@ -115,7 +115,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
       "BoneReduction",
       "MasterImplantDriver",
       "ChairSidePickUp",
-      "ImplantPurchase",
+      "Implants",
     ],
   },
   [PROCEDURE_COMBINATIONS.RESTORATIVE_DIRECT_TO_IMPLANT]: {
