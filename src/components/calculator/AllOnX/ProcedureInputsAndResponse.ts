@@ -113,7 +113,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
     responseOrder: [
       "DrillKitAndSequence",
       "BoneReduction",
-      "MasterImplantDriver",
+      "RestroativeDirectToImplant",
       "ChairSidePickUp",
       "Implants",
     ],
