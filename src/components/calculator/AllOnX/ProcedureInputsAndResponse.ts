@@ -58,29 +58,39 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
       {
         name: "Authentic or Generic",
         text: "Authentic or Generic",
-        calculator: "MasterImplantDriver",
+        calculator: "RestroativeDirectToImplant",
         outputFrom: "BoneReduction",
-      },
-      {
-        name: "Abutment Type",
-        text: "Abutment Type",
-        calculator: "MasterImplantDriver",
       },
       {
         name: "Driver Length",
         text: "Driver Length",
-        calculator: "MasterImplantDriver",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "One Piece or Torque Attachment",
+        text: "One Piece or Torque Attachment",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "Driver Size",
+        text: "Driver Size",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "Abutment Angulation",
+        text: "Abutment Angulation",
+        calculator: "RestroativeDirectToImplant",
       },
       {
         name: "Machine or Manual",
         text: "Machine or Manual",
-        calculator: "MasterImplantDriver",
+        calculator: "RestroativeDirectToImplant",
       },
       {
         name: "Do you need to purchase materials for chairside pick-up?",
         text: "Do you need to purchase materials for chairside pick-up?",
         calculator: "ChairSidePickUp",
-        outputFrom: "MasterImplantDriver",
+        outputFrom: "RestroativeDirectToImplant",
       },
       {
         name: "Implant Surface Treatment",
