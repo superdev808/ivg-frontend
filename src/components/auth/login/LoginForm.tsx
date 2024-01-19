@@ -23,6 +23,7 @@ type FormValues = {
 export const LoginForm = () => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
+	const[error, setError] = useState(null);
 	const [rememberMe, setRememberMe] = useState<boolean>(false);
 	const errorMsgs = useRef(null);
 	const dispatch = useDispatch();
@@ -79,11 +80,13 @@ export const LoginForm = () => {
 			});
 			const data = await response.json();
 			if (!response.ok) {
-				throw new Error(data.error);
+				throw new Error(data.message);
 			}
 
 			setCookie("appToken", data.token);
 			setCookie("email", data.user.email);
+			setCookie("name", data.user.firstName + ' ' + data.user.lastName);
+
 			dispatch({ type: 'auth/setAuth', payload: { authenticated: true } });
 
 			setLoading(false);
@@ -95,6 +98,16 @@ export const LoginForm = () => {
 			return null;
 		}
 	};
+	useEffect(
+        () => {
+			if (error) {
+
+			console.log(error);
+			
+			}
+        },
+        [error]
+    );
 
     const addError = (error:string) => {
 		(errorMsgs.current as any).show([

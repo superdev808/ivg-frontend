@@ -1,6 +1,6 @@
 
 'use client';
-import { useGetCalculatorsQuery } from "@/redux/services/calculatorsApi";
+
 import { useRouter, useParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { Dropdown } from "primereact/dropdown";

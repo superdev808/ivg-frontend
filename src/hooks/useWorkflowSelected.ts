@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Node,Edge, Workflow } from '@/types/Workflow';
 
-import { reset, setSelectedData, setSelectedPathIds, setLoading, setHeader } from '@/redux/features/workflowSelectionSlice';
+import { reset, setSelectedData, setSelectedPathIds, setLoading, setHeader } from '@/redux/slices/workflows/workflowSelectionSlice';
 
-import { selectWorkflows } from '@/redux/features/workflowsSlice';
+import { selectWorkflows } from '@/redux/slices/workflows/workflowsSlice';
 
 import { nestNodesEdges } from '@/helpers/nestNodesEdges';
 import { unpackNodesEdges } from '@/helpers/unpackNodesEdges';

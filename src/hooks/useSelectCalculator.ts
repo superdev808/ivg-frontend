@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
-import { setSelectedCalculator, setCalculatorData, resetCalc, setSelectedCalStart } from '@/redux/features/calculatorSlice';
+import { setSelectedCalculator, setCalculatorData, resetCalc, setSelectedCalStart } from '@/redux/slices/calculators/calculatorSlice';
 
 import { useGetCalculatorsQuery } from '@/redux/services/calculatorsApi';
 import { useGetCalcNodesQuery } from '@/redux/services/calcNodesApi';

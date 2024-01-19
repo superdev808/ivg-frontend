@@ -6,7 +6,7 @@ import styles from './page.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-import { useAppSelector } from '@/redux/hooks';
+import { useAppSelector } from '@/redux/hooks/hooks';
 
 
 

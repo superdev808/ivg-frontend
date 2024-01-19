@@ -4,7 +4,7 @@ import React, { PropsWithChildren, use, useEffect } from 'react';
 import Navigation from '@/components/layout/navigation';
 import { ReduxProvider } from '@/redux/provider';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { useAppSelector } from '@/redux/hooks';
+import { useAppSelector } from '@/redux/hooks/hooks';
 
 import { redirect, usePathname } from 'next/navigation';
 import Footer from '@/components/layout/footer';

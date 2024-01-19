@@ -6,8 +6,8 @@ import { Button } from 'primereact/button';
 import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup';
 
 import { Edge, PathIds } from '@/types/Workflow';
-import { setSelectedPathIds } from '@/redux/features/workflowSelectionSlice';
-import { selectWorkflowSelection } from '@/redux/features/workflowSelectionSlice';
+import { setSelectedPathIds } from '@/redux/slices/workflows/workflowSelectionSlice';
+import { selectWorkflowSelection } from '@/redux/slices/workflows/workflowSelectionSlice';
 
 
 

@@ -8,7 +8,7 @@ import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
 
 import styles from './Workflow.module.scss';
-import { useAppSelector } from '@/redux/hooks';
+import { useAppSelector } from '@/redux/hooks/hooks';
 import { classNames } from 'primereact/utils';
 import { MenuItem } from '@/types/Workflow';
 import { Divider } from 'primereact/divider';
