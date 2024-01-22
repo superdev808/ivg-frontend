@@ -81,10 +81,7 @@ export const getProcedureInputsAndResponse = (
         PROCEDURE_INPUTS_AND_RESPONSE.SURGERY[selectedCollection].map(
           (input: InputOutputValues) => {
             const filteredInputs: [] = inputs.filter(
-              (item: InputOutputValues) =>
-                item.name === input.name &&
-                item.calculator === input.calculator &&
-                !input.isCommon
+              (item: InputOutputValues) => item.name && item.name === input.name
             );
             if (filteredInputs.length <= 0) {
               inputs = [...inputs, input];
