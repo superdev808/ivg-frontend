@@ -73,6 +73,9 @@ export const getProcedureInputsAndResponse = (
   let responseOrder: string[] = [];
   switch (procedure) {
     case PROCEDURES.SURGERY:
+      selectedCollections.map((selectedCollection: string) => {
+        PROCEDURE_INPUTS_AND_RESPONSE.SURGERY[selectedCollection];
+      });
       Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY).map((key: string) => {
         if (selectedCollections.includes(key)) {
           inputs = _.uniqBy(

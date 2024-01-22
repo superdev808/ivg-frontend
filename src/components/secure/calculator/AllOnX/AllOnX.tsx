@@ -26,11 +26,17 @@ import { InputAndResponse } from "@/components/calculator/AllOnX/ProcedureInputs
 import AdditionalInputs from "./AdditionalInputs";
 import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
 
+interface AllOnXCalculatorProps {
+  isCustom?: boolean;
+}
+
 /*
  * Name : AllOnXCalculator.
  * Desc : The code defines a functional component called `AllOnXCalculator` which is a           * calculator for the All-on-X dental procedure.
  */
-const AllOnXCalculator: React.FC = () => {
+const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
+  isCustom,
+}: AllOnXCalculatorProps) => {
   const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
@@ -42,6 +48,7 @@ const AllOnXCalculator: React.FC = () => {
   const [procedureInputsAndResponse, setProcedureInputsAndResponse] =
     useState<InputAndResponse | null>(null);
   const [collections, setCollections] = useState<string[]>([]);
+  const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
 
   useEffect(() => {
     // const procedureInputsAndResponse = getProcedureInputsAndResponse(
@@ -61,7 +68,7 @@ const AllOnXCalculator: React.FC = () => {
     );
     console.log("procedureInputsAndResponse", procedureInputsAndResponse);
     setProcedureInputsAndResponse(procedureInputsAndResponse);
-  }, [collections]);
+  }, [selectedCollections]);
 
   const handleProcedureChange = (e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
@@ -212,8 +219,6 @@ const AllOnXCalculator: React.FC = () => {
     });
   };
 
-  const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
-
   const onCollectionChange = (e: CheckboxChangeEvent) => {
     let _selectedCollections: string[] = [...selectedCollections];
 
@@ -243,33 +248,35 @@ const AllOnXCalculator: React.FC = () => {
             />
           </div>
 
-          <div className="card flex justify-content-center">
-            <div className="flex flex-column gap-3">
-              <p>
-                Select the calculators you would like to combine to create a
-                custom report
-              </p>
-              {collections.map((collection: string, index: number) => {
-                return (
-                  <div
-                    key={`${collection}-${index}`}
-                    className="flex align-items-center"
-                  >
-                    <Checkbox
-                      inputId={`${collection}-${index}`}
-                      name="collection"
-                      value={collection}
-                      onChange={onCollectionChange}
-                      checked={selectedCollections.includes(collection)}
-                    />
-                    <label htmlFor={collection} className="ml-2">
-                      {collection}
-                    </label>
-                  </div>
-                );
-              })}
+          {isCustom && (
+            <div className="card flex justify-content-center">
+              <div className="flex flex-column gap-3">
+                <p>
+                  Select the calculators you would like to combine to create a
+                  custom report
+                </p>
+                {collections.map((collection: string, index: number) => {
+                  return (
+                    <div
+                      key={`${collection}-${index}`}
+                      className="flex align-items-center"
+                    >
+                      <Checkbox
+                        inputId={`${collection}-${index}`}
+                        name="collection"
+                        value={collection}
+                        onChange={onCollectionChange}
+                        checked={selectedCollections.includes(collection)}
+                      />
+                      <label htmlFor={collection} className="ml-2">
+                        {collection}
+                      </label>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="grid border-top-1 surface-border">
             <div className="flex flex-column col-12">
