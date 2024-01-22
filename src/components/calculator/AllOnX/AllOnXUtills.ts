@@ -1,9 +1,13 @@
 import {
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
+  InputOutputValues,
   MUA_OPTIONS,
   PROCEDURES,
 } from "@/components/secure/calculator/AllOnX/constants";
-import { PROCEDURE_INPUTS_AND_RESPONSE } from "./ProcedureInputsAndResponse";
+import {
+  InputAndResponse,
+  PROCEDURE_INPUTS_AND_RESPONSE,
+} from "./ProcedureInputsAndResponse";
 import _ from "lodash";
 
 export const isValidUrl = (urlString: string) => {
@@ -74,17 +78,30 @@ export const getProcedureInputsAndResponse = (
   switch (procedure) {
     case PROCEDURES.SURGERY:
       selectedCollections.map((selectedCollection: string) => {
-        PROCEDURE_INPUTS_AND_RESPONSE.SURGERY[selectedCollection];
+        PROCEDURE_INPUTS_AND_RESPONSE.SURGERY[selectedCollection].map(
+          (input: InputOutputValues) => {
+            const filteredInputs: [] = inputs.filter(
+              (item: InputOutputValues) =>
+                item.name === input.name &&
+                item.calculator === input.calculator &&
+                !input.isCommon
+            );
+            if (filteredInputs.length <= 0) {
+              inputs = [...inputs, input];
+            }
+          }
+        );
+        responseOrder.push(selectedCollection);
       });
-      Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY).map((key: string) => {
-        if (selectedCollections.includes(key)) {
-          inputs = _.uniqBy(
-            [...inputs, ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY[key]],
-            "name"
-          );
-          responseOrder.push(key);
-        }
-      });
+      // Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY).map((key: string) => {
+      //   if (selectedCollections.includes(key)) {
+      //     inputs = _.uniqBy(
+      //       [...inputs, ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY[key]],
+      //       "name"
+      //     );
+      //     responseOrder.push(key);
+      //   }
+      // });
       return { input: inputs, responseOrder };
 
     case PROCEDURES.RESTORATIVE:

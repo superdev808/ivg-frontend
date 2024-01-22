@@ -68,6 +68,7 @@ export interface InputOutputValues {
   text: string;
   calculator: string;
   outputFrom?: string;
+  isCommon?: boolean;
 }
 
 export interface AutoPopulateData {
