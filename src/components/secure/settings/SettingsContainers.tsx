@@ -5,6 +5,7 @@ import SettingsMenu from './SettingsMenu';
 import SettingsUserInfoForm from './SettingsUserInfoForm';
 import { useState } from 'react';
 import SettingsUserSecurityForm from './SettingsUserSecurityForm';
+import SettingsUserOrgForm from './SettingsUserOrgForm';
 const cx = classNames.bind(styles);
 
 export default function SettingsContainers() {
@@ -33,6 +34,7 @@ export default function SettingsContainers() {
 					</div>
 					<div className="col ml-6 p-4  bg-white border-round-xl	">
 						{currentSetting === menuItems[0].id && <SettingsUserInfoForm />}
+						{currentSetting === menuItems[1].id && <SettingsUserOrgForm />}
 						{currentSetting === menuItems[2].id && <SettingsUserSecurityForm />}
 					</div>
 				</div>
