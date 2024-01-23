@@ -249,8 +249,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         calculator: "ScanbodyMUAs",
       },
       {
-        name: "Scanbody Driver Length",
-        text: "Scanbody Driver Length",
+        name: "Driver Length",
+        text: "Driver Length",
         calculator: "ScanbodyDriversMUAs",
         outputFrom: "ScanbodyMUAs",
       },
@@ -466,8 +466,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
         calculator: "ScanbodyMUAs",
       },
       {
-        name: "Scanbody Driver Length",
-        text: "Scanbody Driver Length",
+        name: "Driver Length",
+        text: "Driver Length",
         calculator: "ScanbodyDriversMUAs",
         outputFrom: "ScanbodyMUAs",
       },
