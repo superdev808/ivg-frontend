@@ -126,9 +126,11 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 												style={{ width: '100%' }}>
 												<InputText
 													id={field.name}
-													value={field.value}
+												
 													className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
-													placeholder="Please specify"></InputText>
+													placeholder="Please specify"
+													{...field}
+													></InputText>
 											</div>
 										)}
 									/>
@@ -296,9 +298,10 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 									style={{ width: '100%' }}>
 									<InputText
 										id={field.name}
-										value={field.value}
+										
 										className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
-										placeholder="Please specify"></InputText>
+										placeholder="Please specify"
+										{...field}></InputText>
 								</div>
 							)}
 						/>
