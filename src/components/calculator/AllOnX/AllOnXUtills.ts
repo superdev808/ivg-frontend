@@ -23,7 +23,7 @@ export const isValidUrl = (urlString: string) => {
   return !!urlPattern.test(urlString);
 };
 
-const getRestorativeInputsAndResponse = (additionalInputs: {
+const getRestorativeCollections = (additionalInputs: {
   [key: string]: string;
 }) => {
   // Restorative (Direct to Implant)
@@ -51,17 +51,23 @@ const getRestorativeInputsAndResponse = (additionalInputs: {
   }
   // No match found
   else {
-    return {
-      input: [],
-      responseOrder: [],
-    };
+    return {};
   }
 };
 
-export const getProcedureCollections = (procedure: PROCEDURES) => {
+export const getProcedureCollections = (
+  procedure: PROCEDURES,
+  additionalInputs: {
+    [key: string]: string;
+  }
+) => {
   switch (procedure) {
     case PROCEDURES.SURGERY:
       return Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY);
+
+    case PROCEDURES.RESTORATIVE:
+      const response = getRestorativeCollections(additionalInputs);
+      return Object.keys(response);
   }
   return [];
 };
@@ -73,58 +79,66 @@ export const getProcedureInputsAndResponse = (
   },
   selectedCollections: string[]
 ) => {
-  let inputs: any = [];
+  let inputs: InputOutputValues[] = [];
   let responseOrder: string[] = [];
   switch (procedure) {
     case PROCEDURES.SURGERY:
       selectedCollections.map((selectedCollection: string) => {
         PROCEDURE_INPUTS_AND_RESPONSE.SURGERY[selectedCollection].map(
           (input: InputOutputValues) => {
-            const filteredInputs: [] = inputs.filter(
+            const filteredInputs: InputOutputValues[] = inputs.filter(
               (item: InputOutputValues) => item.name && item.name === input.name
             );
-            if (filteredInputs.length <= 0) {
+            if (
+              filteredInputs.length <= 0 ||
+              (filteredInputs.length && !filteredInputs[0].isCommon)
+            ) {
               inputs = [...inputs, input];
             }
           }
         );
         responseOrder.push(selectedCollection);
       });
-      // Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY).map((key: string) => {
-      //   if (selectedCollections.includes(key)) {
-      //     inputs = _.uniqBy(
-      //       [...inputs, ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY[key]],
-      //       "name"
-      //     );
-      //     responseOrder.push(key);
-      //   }
-      // });
       return { input: inputs, responseOrder };
 
     case PROCEDURES.RESTORATIVE:
-      const response = getRestorativeInputsAndResponse(additionalInputs);
-      return response;
+      const collections = getRestorativeCollections(additionalInputs);
+      selectedCollections.map((selectedCollection: string) => {
+        collections[selectedCollection].map((input: InputOutputValues) => {
+          const filteredInputs: InputOutputValues[] = inputs.filter(
+            (item: InputOutputValues) => item.name && item.name === input.name
+          );
+          if (
+            filteredInputs.length <= 0 ||
+            (filteredInputs.length && !filteredInputs[0].isCommon)
+          ) {
+            inputs = [...inputs, input];
+          }
+        });
+        responseOrder.push(selectedCollection);
+      });
+      return { input: inputs, responseOrder };
 
-    case PROCEDURES.SURGERY_AND_RESTORATIVE:
-      const resorativeInputs =
-        getRestorativeInputsAndResponse(additionalInputs);
-      const combineInputs = {
-        input: _.uniqBy(
-          [
-            ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY.input,
-            ...resorativeInputs.input,
-          ],
-          "name"
-        ),
-        responseOrder: _.uniqBy(
-          [
-            ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY.responseOrder,
-            ...resorativeInputs.responseOrder,
-          ],
-          "name"
-        ),
-      };
-      return combineInputs;
+    // case PROCEDURES.SURGERY_AND_RESTORATIVE:
+    //   const resorativeInputs =
+    //     getRestorativeInputsAndResponse(additionalInputs);
+    //   const combineInputs = {
+    //     input: _.uniqBy(
+    //       [
+    //         ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY.input,
+    //         ...resorativeInputs.input,
+    //       ],
+    //       "name"
+    //     ),
+    //     responseOrder: _.uniqBy(
+    //       [
+    //         ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY.responseOrder,
+    //         ...resorativeInputs.responseOrder,
+    //       ],
+    //       "name"
+    //     ),
+    //   };
+    //   return combineInputs;
 
     default:
       return { input: [], responseOrder: [] };

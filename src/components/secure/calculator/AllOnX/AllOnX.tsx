@@ -51,13 +51,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
 
   useEffect(() => {
-    // const procedureInputsAndResponse = getProcedureInputsAndResponse(
-    //   procedure,
-    //   additionalInputs
-    // );
-    // setProcedureInputsAndResponse(procedureInputsAndResponse);
-    const _collections = getProcedureCollections(procedure);
-    console.log("_collections", _collections);
+    const _collections = getProcedureCollections(procedure, additionalInputs);
     setCollections(_collections);
     if (!isCustom) {
       setSelectedCollections(_collections);
@@ -70,7 +64,6 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       additionalInputs,
       selectedCollections
     );
-    console.log("procedureInputsAndResponse", procedureInputsAndResponse);
     setProcedureInputsAndResponse(procedureInputsAndResponse);
   }, [selectedCollections]);
 
