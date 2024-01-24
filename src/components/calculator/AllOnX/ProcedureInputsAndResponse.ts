@@ -1346,3 +1346,23 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
     ],
   },
 };
+
+export const CALCULATOR_NAME_COLLECTION_MAPPINGS: { [key: string]: string } = {
+  "Drill Kits / Sequences": "DrillKitAndSequence",
+  "Bone Reduction Instruments": "BoneReduction",
+  "Implant Drivers": "RestroativeDirectToImplant",
+  "Chairside Pick-Up Materials": "ChairSidePickUp",
+  "Implants for Purchase": "Implants",
+  "Master Scanbody": "MasterScanbody",
+  "Scanbody Driver": "ScanbodyDriversDirectToImplants",
+  "Impression Copings": "ImpressingCopingsDirectToImplants",
+  "Temporary Copings": "TemporaryCopingsDirectToImplants",
+  "Ti Base": "TiBasesDirectToImplants",
+  "Master MUA Scanbody": "ScanbodyMUAs",
+  "MUA Scanbody Driver": "ScanbodyDriversMUAs",
+  "MUA Impression Copings": "ImpressingCopingsMUAs",
+  "MUA Temporary Copings": "TemporaryCopingsMUAs",
+  "Ti Base (MUA)": "TiBasesMUAs",
+  MUA: "MUAs",
+  "MUA Driver": "RestorativeMultiUnitAbutments",
+};
