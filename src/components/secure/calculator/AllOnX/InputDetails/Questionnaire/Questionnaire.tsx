@@ -104,6 +104,9 @@ const Questionnaire: React.FC<InputProps> = ({
       const quiz = {} as any;
 
       answers.forEach((answer, index) => {
+        if (quiz[input[level]?.name]) {
+          delete quiz[input[level]?.name];
+        }
         quiz[input[index].name] = answer;
       });
 
