@@ -63,6 +63,10 @@ export interface SiteData {
   };
 }
 
+export interface KeyValuePair {
+  [key: string]: string;
+}
+
 export interface InputOutputValues {
   name: string;
   text: string;

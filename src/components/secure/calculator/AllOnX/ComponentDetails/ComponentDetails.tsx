@@ -90,7 +90,7 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
     });
 
     setComponentSummary(items);
-  }, [sitesData]);
+  }, [sitesData, responseOrder]);
 
   return (
     <TabView scrollable>

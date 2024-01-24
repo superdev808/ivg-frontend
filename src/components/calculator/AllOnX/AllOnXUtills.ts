@@ -3,11 +3,9 @@ import {
   InputOutputValues,
   MUA_OPTIONS,
   PROCEDURES,
+  KeyValuePair,
 } from "@/components/secure/calculator/AllOnX/constants";
-import {
-  InputAndResponse,
-  PROCEDURE_INPUTS_AND_RESPONSE,
-} from "./ProcedureInputsAndResponse";
+import { PROCEDURE_INPUTS_AND_RESPONSE } from "./ProcedureInputsAndResponse";
 import _ from "lodash";
 
 export const isValidUrl = (urlString: string) => {
@@ -23,9 +21,7 @@ export const isValidUrl = (urlString: string) => {
   return !!urlPattern.test(urlString);
 };
 
-const getRestorativeCollections = (additionalInputs: {
-  [key: string]: string;
-}) => {
+const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
   // Restorative (Direct to Implant)
   if (
     additionalInputs[DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name] ===
@@ -57,9 +53,7 @@ const getRestorativeCollections = (additionalInputs: {
 
 export const getProcedureCollections = (
   procedure: PROCEDURES,
-  additionalInputs: {
-    [key: string]: string;
-  }
+  additionalInputs: KeyValuePair
 ) => {
   switch (procedure) {
     case PROCEDURES.SURGERY:
@@ -68,15 +62,24 @@ export const getProcedureCollections = (
     case PROCEDURES.RESTORATIVE:
       const response = getRestorativeCollections(additionalInputs);
       return Object.keys(response);
+
+    case PROCEDURES.SURGERY_AND_RESTORATIVE:
+      const surgeryCollections = PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
+      const restorativeCollections =
+        getRestorativeCollections(additionalInputs);
+      return _.union([
+        ...Object.keys(surgeryCollections),
+        ...Object.keys(restorativeCollections),
+      ]);
+
+    default:
+      return [];
   }
-  return [];
 };
 
 export const getProcedureInputsAndResponse = (
   procedure: PROCEDURES,
-  additionalInputs: {
-    [key: string]: string;
-  },
+  additionalInputs: KeyValuePair,
   selectedCollections: string[]
 ) => {
   let inputs: InputOutputValues[] = [];
@@ -119,26 +122,30 @@ export const getProcedureInputsAndResponse = (
       });
       return { input: inputs, responseOrder };
 
-    // case PROCEDURES.SURGERY_AND_RESTORATIVE:
-    //   const resorativeInputs =
-    //     getRestorativeInputsAndResponse(additionalInputs);
-    //   const combineInputs = {
-    //     input: _.uniqBy(
-    //       [
-    //         ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY.input,
-    //         ...resorativeInputs.input,
-    //       ],
-    //       "name"
-    //     ),
-    //     responseOrder: _.uniqBy(
-    //       [
-    //         ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY.responseOrder,
-    //         ...resorativeInputs.responseOrder,
-    //       ],
-    //       "name"
-    //     ),
-    //   };
-    //   return combineInputs;
+    case PROCEDURES.SURGERY_AND_RESTORATIVE:
+      const restorativeCollections =
+        getRestorativeCollections(additionalInputs);
+      const combineCollections = {
+        ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY,
+        ...restorativeCollections,
+      };
+      selectedCollections.map((selectedCollection: string) => {
+        combineCollections[selectedCollection].map(
+          (input: InputOutputValues) => {
+            const filteredInputs: InputOutputValues[] = inputs.filter(
+              (item: InputOutputValues) => item.name && item.name === input.name
+            );
+            if (
+              filteredInputs.length <= 0 ||
+              (filteredInputs.length && !filteredInputs[0].isCommon)
+            ) {
+              inputs = [...inputs, input];
+            }
+          }
+        );
+        responseOrder.push(selectedCollection);
+      });
+      return { input: inputs, responseOrder };
 
     default:
       return { input: [], responseOrder: [] };

@@ -7,6 +7,7 @@ import {
   SiteData,
   ItemData,
   QUANTITY_VISIBILITY_STATE,
+  KeyValuePair,
 } from "../../constants";
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
@@ -23,7 +24,7 @@ interface InputProps {
   showAutopopulatePrompt: boolean;
   autoPopulateData: AutoPopulateData | null;
   sitesData: SiteData;
-  additionalInputs: { [key: string]: string };
+  additionalInputs: KeyValuePair;
   onInputSelect: (
     site: Site,
     question: InputOutputValues,
