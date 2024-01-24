@@ -12,6 +12,7 @@ import {
 import React, { useEffect, useState } from "react";
 import Item from "@/components/calculator/AllOnX/Item";
 import _, { cloneDeep } from "lodash";
+import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 
 interface ComponentDetailProps {
   selectedSites: Site[];
@@ -42,47 +43,49 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
         data[siteName].componentDetails
       );
       responseOrder.map((key: string) => {
-        componentDetail[key]?.map((response: ItemData) => {
-          const indexOfItem: number = _.findIndex(items, (item: ItemData) => {
-            return item.label === response.label;
-          });
-          if (indexOfItem > -1) {
-            items[indexOfItem].info.map((info: ItemInsights, i: number) => {
-              const indexOfInfo: number = response.info.findIndex(
-                (res: ItemInsights) => {
-                  return (
-                    info.itemName === res.itemName && info.link === res.link
+        componentDetail[CALCULATOR_NAME_COLLECTION_MAPPINGS[key]]?.map(
+          (response: ItemData) => {
+            const indexOfItem: number = _.findIndex(items, (item: ItemData) => {
+              return item.label === response.label;
+            });
+            if (indexOfItem > -1) {
+              items[indexOfItem].info.map((info: ItemInsights, i: number) => {
+                const indexOfInfo: number = response.info.findIndex(
+                  (res: ItemInsights) => {
+                    return (
+                      info.itemName === res.itemName && info.link === res.link
+                    );
+                  }
+                );
+                if (indexOfInfo > -1) {
+                  if (
+                    !ignoreListForMultiples.includes(
+                      response.label.toLowerCase()
+                    ) &&
+                    items[indexOfItem].info[i].quantity
+                  ) {
+                    items[indexOfItem].info[i].quantity =
+                      (items[indexOfItem].info[i].quantity as number) + 1;
+                  }
+                } else {
+                  items[indexOfItem].info = _.uniqBy(
+                    [...items[indexOfItem].info, ...response.info],
+                    "itemName"
                   );
                 }
-              );
-              if (indexOfInfo > -1) {
-                if (
-                  !ignoreListForMultiples.includes(
-                    response.label.toLowerCase()
-                  ) &&
-                  items[indexOfItem].info[i].quantity
-                ) {
-                  items[indexOfItem].info[i].quantity =
-                    (items[indexOfItem].info[i].quantity as number) + 1;
-                }
-              } else {
+              });
+              // check and add new items which are not in the list
+              if (items[indexOfItem].info.length != response.info.length) {
                 items[indexOfItem].info = _.uniqBy(
                   [...items[indexOfItem].info, ...response.info],
                   "itemName"
                 );
               }
-            });
-            // check and add new items which are not in the list
-            if (items[indexOfItem].info.length != response.info.length) {
-              items[indexOfItem].info = _.uniqBy(
-                [...items[indexOfItem].info, ...response.info],
-                "itemName"
-              );
+            } else {
+              items.push(response);
             }
-          } else {
-            items.push(response);
           }
-        });
+        );
       });
     });
 
