@@ -164,11 +164,13 @@ const Questionnaire: React.FC<InputProps> = ({
     if (e.value !== "") {
       setLevel(index + 1);
     } else {
-      //TODO: Need to find a better way to do this...
-      setLevel(index);
-      setTimeout(() => {
+      const promise = new Promise((resolve) => {
+        setLevel(index);
+        setTimeout(() => resolve(true), 1000);
+      });
+      promise.then(() => {
         setLevel(index + 1);
-      }, 500);
+      });
     }
 
     const newAnswers = answers.slice(0, index);
