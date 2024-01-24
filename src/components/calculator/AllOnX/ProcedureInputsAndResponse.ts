@@ -389,79 +389,166 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
         text: "Implant Platform",
         calculator: "TemporaryCopingsDirectToImplants",
       },
+      {
+        name: "Engaging or Non Engaging",
+        text: "Engaging or Non Engaging",
+        calculator: "TemporaryCopingsDirectToImplants",
+      },
+      {
+        name: "Abutment Angulation",
+        text: "Abutment Angulation",
+        calculator: "TemporaryCopingsDirectToImplants",
+      },
+      {
+        name: "Connection Type",
+        text: "Connection Type",
+        calculator: "TemporaryCopingsDirectToImplants",
+      },
+      {
+        name: "Hexed or Non-Hexed",
+        text: "Hexed or Non-Hexed",
+        calculator: "TemporaryCopingsDirectToImplants",
+      },
+      {
+        name: "Collar Height",
+        text: "Collar Height",
+        calculator: "TemporaryCopingsDirectToImplants",
+      },
+      {
+        name: "Restoration Type",
+        text: "Restoration Type",
+        calculator: "TemporaryCopingsDirectToImplants",
+      },
+      {
+        name: "Restoration Material",
+        text: "Restoration Material",
+        calculator: "TemporaryCopingsDirectToImplants",
+      },
+      {
+        name: "Temporary Coping Height",
+        text: "Temporary Coping Height",
+        calculator: "TemporaryCopingsDirectToImplants",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "TemporaryCopingsDirectToImplants",
+        outputFrom: "TemporaryCopingsDirectToImplants",
+      },
     ],
-  },
-  [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_NOT_PLACED]: {},
-  [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_PLACED]: {
-    input: [
+    "Ti Base": [
       {
         name: "Implant Brand",
         text: "Implant Brand",
-        calculator: "MasterMUAScanbody",
+        calculator: "TiBasesDirectToImplants",
       },
       {
         name: "Implant Model",
         text: "Implant Model",
-        calculator: "MasterMUAScanbody",
+        calculator: "TiBasesDirectToImplants",
       },
       {
         name: "Implant Diameter",
         text: "Implant Diameter",
-        calculator: "MasterMUAScanbody",
+        calculator: "TiBasesDirectToImplants",
       },
       {
         name: "Implant Platform",
         text: "Implant Platform",
-        calculator: "MasterMUAScanbody",
+        calculator: "TiBasesDirectToImplants",
       },
       {
-        name: "MUA Angle",
-        text: "MUA Angle",
-        calculator: "MasterMUAScanbody",
+        name: "Engaging or Non-Engaging",
+        text: "Engaging or Non-Engaging",
+        calculator: "TiBasesDirectToImplants",
       },
       {
-        name: "Authentic or Generic",
-        text: "Authentic or Generic",
-        calculator: "MasterMUAScanbody",
+        name: "Abutment Diameter",
+        text: "Abutment Diameter",
+        calculator: "TiBasesDirectToImplants",
       },
       {
-        name: "Scanbody Driver Length",
-        text: "Scanbody Driver Length",
-        calculator: "ScanbodyDriversMUA",
-        outputFrom: "MasterMUAScanbody",
+        name: "Angulation",
+        text: "Angulation",
+        calculator: "TiBasesDirectToImplants",
       },
       {
-        name: "Select Impression Copings",
-        text: "Select Impression Copings",
-        calculator: "ImpressionCoping",
-        outputFrom: "ScanbodyDriversMUA",
+        name: "Abutment Height",
+        text: "Abutment Height",
+        calculator: "TiBasesDirectToImplants",
       },
       {
-        name: "Engaging or Non Engaging",
-        text: "Engaging or Non Engaging",
-        calculator: "TiBaseMUA",
-        outputFrom: "ImpressionCoping",
+        name: "Cementable Area",
+        text: "Cementable Area",
+        calculator: "TiBasesDirectToImplants",
+      },
+      {
+        name: "Collar Height",
+        text: "Collar Height",
+        calculator: "TiBasesDirectToImplants",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "TiBasesDirectToImplants",
+        outputFrom: "TiBasesDirectToImplants",
+      },
+    ],
+    "Implant Drivers": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
       },
       {
         name: "Implant Length",
         text: "Implant Length",
         calculator: "RestroativeDirectToImplant",
-        outputFrom: "TemporaryCoping",
+        isCommon: true,
       },
       {
         name: "Authentic or Generic",
         text: "Authentic or Generic",
         calculator: "RestroativeDirectToImplant",
-        outputFrom: "TiBaseMUA",
       },
       {
-        name: "Abutment Type",
-        text: "Abutment Type",
+        name: "Driver Length",
+        text: "Driver Length",
+        calculator: "RestroativeDirectToImplant",
+      },
+
+      {
+        name: "One Piece or Torque Attachment",
+        text: "One Piece or Torque Attachment",
         calculator: "RestroativeDirectToImplant",
       },
       {
-        name: "Implant Driver Length",
-        text: "Implant Driver Length",
+        name: "Driver Size",
+        text: "Driver Size",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "Abutment Angulation",
+        text: "Abutment Angulation",
         calculator: "RestroativeDirectToImplant",
       },
       {
@@ -476,13 +563,718 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
         outputFrom: "RestroativeDirectToImplant",
       },
     ],
-    responseOrder: [
-      "MasterMUAScanbody",
-      "ScanbodyDriverMUA",
-      "ImpressionCoping",
-      "TemporaryCoping",
-      "TiBaseMUA",
-      "RestroativeDirectToImplant",
+  },
+  [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_NOT_PLACED]: {
+    "Master MUA Scanbody": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "ScanbodyMUAs",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "ScanbodyMUAs",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "ScanbodyMUAs",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "ScanbodyMUAs",
+      },
+      {
+        name: "Authentic or Generic",
+        text: "Authentic or Generic",
+        calculator: "ScanbodyMUAs",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "ScanbodyMUAs",
+        outputFrom: "ScanbodyMUAs",
+      },
+    ],
+    "MUA Scanbody Driver": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "ScanbodyDriversMUAs",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "ScanbodyDriversMUAs",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "ScanbodyDriversMUAs",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "ScanbodyDriversMUAs",
+      },
+      {
+        name: "Driver Length",
+        text: "Driver Length",
+        calculator: "ScanbodyDriversMUAs",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "ScanbodyDriversMUAs",
+        outputFrom: "ScanbodyDriversMUAs",
+      },
+    ],
+    "MUA Impression Copings": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Open or Closed Tray",
+        text: "Open or Closed Tray",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Impression Coping Length",
+        text: "Impression Coping Length",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Hexed or Non-Hexed",
+        text: "Hexed or Non-Hexed",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Engaging or Non Engaging",
+        text: "Engaging or Non Engaging",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Abutment Type",
+        text: "Abutment Type",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "ImpressingCopingsMUAs",
+        outputFrom: "ImpressingCopingsMUAs",
+      },
+    ],
+    "MUA Temporary Copings": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Abutment Diameter",
+        text: "Abutment Diameter",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Abutment Type",
+        text: "Abutment Type",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Restoration Type",
+        text: "Restoration Type",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Material",
+        text: "Material",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Length",
+        text: "Length",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Diameter",
+        text: "Diameter",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Hexed or Non Hexed",
+        text: "Hexed or Non Hexed",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "TemporaryCopingsMUAs",
+        outputFrom: "TemporaryCopingsMUAs",
+      },
+    ],
+    "Ti Base (MUA)": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Engaging or Non-Engaging",
+        text: "Engaging or Non-Engaging",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "MUA Type",
+        text: "MUA Type",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Abutment Diameter",
+        text: "Abutment Diameter",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Abutment Height",
+        text: "Abutment Height",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Collar Height",
+        text: "Collar Height",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Angulation",
+        text: "Angulation",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "TiBasesMUAs",
+        outputFrom: "TiBasesMUAs",
+      },
+    ],
+    MUA: [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "MUAs",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "MUAs",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "MUAs",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "MUAs",
+      },
+      {
+        name: "Abutment Angulation",
+        text: "Abutment Angulation",
+        calculator: "MUAs",
+      },
+      {
+        name: "Abutment Engaging Type",
+        text: "Abutment Engaging Type",
+        calculator: "MUAs",
+      },
+      {
+        name: "Abutment Diameter",
+        text: "Abutment Diameter",
+        calculator: "MUAs",
+      },
+      {
+        name: "Abutment Height",
+        text: "Abutment Height",
+        calculator: "MUAs",
+      },
+      {
+        name: "Collar Height",
+        text: "Collar Height",
+        calculator: "MUAs",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "MUAs",
+        outputFrom: "MUAs",
+      },
+    ],
+    "MUA Driver": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "RestorativeMultiUnitAbutments",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "RestorativeMultiUnitAbutments",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "RestorativeMultiUnitAbutments",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "RestorativeMultiUnitAbutments",
+      },
+      {
+        name: "Machine or Manual",
+        text: "Machine or Manual",
+        calculator: "RestorativeMultiUnitAbutments",
+      },
+      {
+        name: "Driver Length",
+        text: "Driver Length",
+        calculator: "RestorativeMultiUnitAbutments",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "RestorativeMultiUnitAbutments",
+        outputFrom: "RestorativeMultiUnitAbutments",
+      },
+    ],
+    "Implant Drivers": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Implant Length",
+        text: "Implant Length",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Authentic or Generic",
+        text: "Authentic or Generic",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "Driver Length",
+        text: "Driver Length",
+        calculator: "RestroativeDirectToImplant",
+      },
+
+      {
+        name: "One Piece or Torque Attachment",
+        text: "One Piece or Torque Attachment",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "Driver Size",
+        text: "Driver Size",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "Abutment Angulation",
+        text: "Abutment Angulation",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "Machine or Manual",
+        text: "Machine or Manual",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "RestroativeDirectToImplant",
+        outputFrom: "RestroativeDirectToImplant",
+      },
+    ],
+  },
+  [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_PLACED]: {
+    "Master MUA Scanbody": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "ScanbodyMUAs",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "ScanbodyMUAs",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "ScanbodyMUAs",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "ScanbodyMUAs",
+      },
+      {
+        name: "Authentic or Generic",
+        text: "Authentic or Generic",
+        calculator: "ScanbodyMUAs",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "ScanbodyMUAs",
+        outputFrom: "ScanbodyMUAs",
+      },
+    ],
+    "MUA Scanbody Driver": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "ScanbodyDriversMUAs",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "ScanbodyDriversMUAs",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "ScanbodyDriversMUAs",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "ScanbodyDriversMUAs",
+      },
+      {
+        name: "Driver Length",
+        text: "Driver Length",
+        calculator: "ScanbodyDriversMUAs",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "ScanbodyDriversMUAs",
+        outputFrom: "ScanbodyDriversMUAs",
+      },
+    ],
+    "MUA Impression Copings": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Open or Closed Tray",
+        text: "Open or Closed Tray",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Impression Coping Length",
+        text: "Impression Coping Length",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Hexed or Non-Hexed",
+        text: "Hexed or Non-Hexed",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Engaging or Non Engaging",
+        text: "Engaging or Non Engaging",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "Abutment Type",
+        text: "Abutment Type",
+        calculator: "ImpressingCopingsMUAs",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "ImpressingCopingsMUAs",
+        outputFrom: "ImpressingCopingsMUAs",
+      },
+    ],
+    "MUA Temporary Copings": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Abutment Diameter",
+        text: "Abutment Diameter",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Abutment Type",
+        text: "Abutment Type",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Restoration Type",
+        text: "Restoration Type",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Material",
+        text: "Material",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Length",
+        text: "Length",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Diameter",
+        text: "Diameter",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "Hexed or Non Hexed",
+        text: "Hexed or Non Hexed",
+        calculator: "TemporaryCopingsMUAs",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "TemporaryCopingsMUAs",
+        outputFrom: "TemporaryCopingsMUAs",
+      },
+    ],
+    "Ti Base (MUA)": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Engaging or Non-Engaging",
+        text: "Engaging or Non-Engaging",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "MUA Type",
+        text: "MUA Type",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Abutment Diameter",
+        text: "Abutment Diameter",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Abutment Height",
+        text: "Abutment Height",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Collar Height",
+        text: "Collar Height",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "Angulation",
+        text: "Angulation",
+        calculator: "TiBasesMUAs",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "TiBasesMUAs",
+        outputFrom: "TiBasesMUAs",
+      },
+    ],
+    "Implant Drivers": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Implant Length",
+        text: "Implant Length",
+        calculator: "RestroativeDirectToImplant",
+        isCommon: true,
+      },
+      {
+        name: "Authentic or Generic",
+        text: "Authentic or Generic",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "Driver Length",
+        text: "Driver Length",
+        calculator: "RestroativeDirectToImplant",
+      },
+
+      {
+        name: "One Piece or Torque Attachment",
+        text: "One Piece or Torque Attachment",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "Driver Size",
+        text: "Driver Size",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "Abutment Angulation",
+        text: "Abutment Angulation",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "Machine or Manual",
+        text: "Machine or Manual",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "RestroativeDirectToImplant",
+        outputFrom: "RestroativeDirectToImplant",
+      },
     ],
   },
 };
