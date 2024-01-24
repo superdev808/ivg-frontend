@@ -107,7 +107,9 @@ const Questionnaire: React.FC<InputProps> = ({
         if (quiz[input[level]?.name]) {
           delete quiz[input[level]?.name];
         }
-        quiz[input[index].name] = answer;
+        if (answer) {
+          quiz[input[index].name] = answer;
+        }
       });
 
       if (!input[level]) {
@@ -240,7 +242,7 @@ const Questionnaire: React.FC<InputProps> = ({
                       answers={answerOptions[index]}
                       selectedAnswer={answers[index] || null}
                       handleSelectAnswer={handleSelectAnswer(index)}
-                      disabled={isLoading}
+                      disabled={isLoading || answers[level] === ""}
                     />
                   </div>
                 )}
@@ -255,7 +257,9 @@ const Questionnaire: React.FC<InputProps> = ({
         )}
       </React.Fragment>
       <div className="w-12 flex justify-content-center">
-        {isLoading && <ProgressSpinner className="w-1" />}
+        {(isLoading || answers[level] === "") && (
+          <ProgressSpinner className="w-1" />
+        )}
       </div>
       <Toast ref={toastRef} position="top-right" />
     </div>
