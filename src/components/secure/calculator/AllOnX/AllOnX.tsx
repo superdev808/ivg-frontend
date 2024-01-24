@@ -13,6 +13,7 @@ import {
   procedures,
   Site,
   SiteData,
+  KeyValuePair,
 } from "./constants";
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
@@ -40,9 +41,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
-  const [additionalInputs, setAdditionalInputs] = useState<{
-    [key: string]: string;
-  }>({});
+  const [additionalInputs, setAdditionalInputs] = useState<KeyValuePair>({});
   const [autoPopulateData, setAutoPopulateData] =
     useState<AutoPopulateData | null>(null);
   const [procedureInputsAndResponse, setProcedureInputsAndResponse] =
@@ -124,7 +123,10 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       inputDetails[indexOfQuestion].answer = answer;
       inputDetails.splice(indexOfQuestion + 1);
     } else {
-      inputDetails.push({ question: question.text, answer });
+      inputDetails.push({
+        question: `${question.calculator}-${question.text}`,
+        answer,
+      });
     }
 
     //remove next collection responses
@@ -189,7 +191,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   };
 
   const handleAdditionalInputs = (value: string, target: string) => {
-    setAdditionalInputs((prev: { [key: string]: string }) => {
+    setAdditionalInputs((prev: KeyValuePair) => {
       let state = { ...prev };
       if (
         target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&

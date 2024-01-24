@@ -7,6 +7,7 @@ import {
   AutoPopulateData,
   InputOutputValues,
   ItemData,
+  KeyValuePair,
 } from "../constants";
 import React from "react";
 import Questionnaire from "./Questionnaire";
@@ -18,7 +19,7 @@ interface InputDetailsProps {
   sitesData: SiteData;
   autoPopulateData: AutoPopulateData | null;
   procedureInputs: InputOutputValues[];
-  additionalInputs: { [key: string]: string };
+  additionalInputs: KeyValuePair;
   onInputSelect: (
     site: Site,
     question: InputOutputValues,
@@ -88,7 +89,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               {questionnaire.map((data: InputDetail, index: number) => {
                 return (
                   <>
-                    {data.answer && (
+                    {true && (
                       <div
                         className={`flex ${
                           index === 0 && "border-top-1"
