@@ -146,6 +146,11 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
         calculator: "RestroativeDirectToImplant",
       },
       {
+        name: "Driver Size",
+        text: "Driver Size",
+        calculator: "RestroativeDirectToImplant",
+      },
+      {
         name: "Abutment Angulation",
         text: "Abutment Angulation",
         calculator: "RestroativeDirectToImplant",
@@ -279,6 +284,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
         name: "",
         text: "",
         calculator: "MasterScanbody",
+        outputFrom: "MasterScanbody",
       },
     ],
     "Scanbody Driver": [
@@ -334,6 +340,54 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
         name: "Implant Platform",
         text: "Implant Platform",
         calculator: "ImpressingCopingsDirectToImplants",
+      },
+      {
+        name: "Open or Closed Tray",
+        text: "Open or Closed Tray",
+        calculator: "ImpressingCopingsDirectToImplants",
+      },
+      {
+        name: "Angulation",
+        text: "Angulation",
+        calculator: "ImpressingCopingsDirectToImplants",
+      },
+      {
+        name: "Engaging or Non-Engaging",
+        text: "Engaging or Non-Engaging",
+        calculator: "ImpressingCopingsDirectToImplants",
+      },
+      {
+        name: "Impression Coping Length",
+        text: "Impression Coping Length",
+        calculator: "ImpressingCopingsDirectToImplants",
+      },
+      {
+        name: "",
+        text: "",
+        calculator: "ImpressingCopingsDirectToImplants",
+        outputFrom: "ImpressingCopingsDirectToImplants",
+      },
+    ],
+    "Temporary Copings": [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+        calculator: "TemporaryCopingsDirectToImplants",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+        calculator: "TemporaryCopingsDirectToImplants",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+        calculator: "TemporaryCopingsDirectToImplants",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+        calculator: "TemporaryCopingsDirectToImplants",
       },
     ],
   },
