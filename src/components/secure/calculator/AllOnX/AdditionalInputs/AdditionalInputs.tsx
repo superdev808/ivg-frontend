@@ -12,12 +12,18 @@ interface AdditionalInputsParams {
   onInputChange: (value: string, target: string) => void;
 }
 
+/**
+ * Name : AllOnXCalculator.
+ * Desc : Renders additional inputs for a dental implant procedure.
+ * @param {object} additionalInputs
+ * @param {func} onInputChange
+ */
 const AdditionalInputs: React.FC<AdditionalInputsParams> = ({
   additionalInputs,
   onInputChange,
 }: AdditionalInputsParams) => {
   return (
-    <div className="border-top-1 border-bottom-1 surface-border mt-3 pb-4 pt-3">
+    <div className="border-top-1 surface-border mt-3 pb-4 pt-3">
       <div className="flex flex-column w-12 surface-border mb-2">
         <p>
           Are you restoring with multi-unit abutments (MUAs) or directly to the

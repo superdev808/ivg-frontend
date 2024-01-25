@@ -6,8 +6,6 @@ import styles from "./page.module.scss";
 import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
-import { useAppSelector } from "@/redux/hooks";
-
 import SearchBox from "@/components/ui/searchbox";
 import Loading from "@/components/layout/loading";
 
@@ -25,9 +23,6 @@ export const Calculators = () => {
     {
       label: "Implant Component Selection",
       subItems: [
-        { label: "Scanbodies" },
-        { label: "Implant Screws" },
-        { label: "Implant Drivers" },
         { label: "BoneReduction", text: "Bone Reduction Instruments" },
         { label: "ChairSidePickUp", text: "Chairside Pick-Up Materials" },
         { label: "Cover Screws" },
@@ -47,23 +42,44 @@ export const Calculators = () => {
         { label: "Implants", text: "Implants" },
         { label: "ImplantScrews", text: "Implant Screws" },
         { label: "ImplantAnalogs", text: "Implant Analogs" },
-        { label: "Impression Copings (Direct to Implant)" },
-        { label: "Impression Copings (Multi-Unit Abutments)" },
-        { label: "Multi-Unit Abutments" },
-        { label: "Scanbodies (Mult-Unit Abutments)" },
-        { label: "Scanbodies (Single Unit)" },
-        { label: "Scanbody Drivers (Direct to Implant)" },
-        { label: "Scanbody Drivers (MUAs)" },
-        { label: "Stock Abutments" },
-        { label: "Temporary Copings (Direct to Implant)" },
-        { label: "Temporary Copings (Multi-Unit Abutments)" },
-        { label: "Ti Bases (Direct to Implant)" },
-        { label: "Ti Bases (Multi-Unit Abutments)" },
+        {
+          label: "ImpressingCopingsDirectToImplants",
+          text: "Impression Copings (Direct to Implant)",
+        },
+        {
+          label: "ImpressingCopingsMUAs",
+          text: "Impression Copings (Multi-Unit Abutments)",
+        },
+        { label: "MUAs", text: "Multi-Unit Abutments" },
+        { label: "Scanbodies", text: "Scanbodies (Direct to Implant)" },
+        { label: "ScanbodyMUAs", text: "Scanbodies (Mult-Unit Abutments)" },
+        {
+          label: "ScanbodyDriversDirectToImplants",
+          text: "Scanbody Drivers (Direct to Implant)",
+        },
+        { label: "ScanbodyDriversMUAs", text: "Scanbody Drivers (MUAs)" },
+        { label: "StockAbutments", text: "Stock Abutments" },
+        {
+          label: "TemporaryCopingsDirectToImplants",
+          text: "Temporary Copings (Direct to Implant)",
+        },
+        {
+          label: "TemporaryCopingsMUAs",
+          text: "Temporary Copings (Multi-Unit Abutments)",
+        },
+        {
+          label: "TiBasesDirectToImplants",
+          text: "Ti Bases (Direct to Implant)",
+        },
+        { label: "TiBasesMUAs", text: "Ti Bases (Multi-Unit Abutments)" },
       ],
     },
     {
       label: "All-on-X Implant Surgery",
-      subItems: [{ label: "All-on-X Implant Surgery" }],
+      subItems: [
+        { label: "All-on-X Implant Surgery" },
+        { label: "Custom Combinations" },
+      ],
     },
     {
       label: "Product Material Selection",

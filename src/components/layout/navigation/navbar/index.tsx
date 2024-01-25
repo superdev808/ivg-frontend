@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import Logo from './Logo';
 
@@ -8,33 +8,26 @@ import { usePathname } from 'next/navigation';
 import styles from './styles.module.scss';
 import classNames from 'classnames/bind';
 import 'primeicons/primeicons.css';
-import { Button } from 'primereact/button';
 import { Sidebar } from 'primereact/sidebar';
 import { NavLink } from '@/types/Layout';
+import { Menu } from 'primereact/menu';
+import { MenuItem } from 'primereact/menuitem';
 
 let cx = classNames.bind(styles);
 
-const Navbar = ({
-
-	navLinks,
-	rightNavLinks,
-	secure
-}: {
-	navLinks: NavLink[];
-	rightNavLinks: NavLink[];
-	secure?: boolean;
-}) => {
+const Navbar = ({ navLinks, rightNavLinks,avatarLinks, avatar, secure }: { navLinks: NavLink[]; rightNavLinks: NavLink[];avatarLinks:MenuItem[]; avatar:JSX.Element; secure?: boolean }) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const pathName = usePathname();
 
 
-	const onClick = (item:NavLink) => {
-		if (item.onClick){
+	const avatarMenu = useRef<Menu>(null);
 
+
+	const onClick = (item: NavLink) => {
+		if (item.onClick) {
 			item.onClick();
 		}
-		setShowSidebar(false)
-		
+		setShowSidebar(false);
 	};
 	const renderHambuger = () => {
 		return (
@@ -50,7 +43,7 @@ const Navbar = ({
 	};
 
 	return (
-		<div className="px-3 md:px-8 w-full  top-0 mt-1 mb-1">
+		<div className={cx({'md:px-8': !secure},"px-4  w-full  top-0 mt-1 mb-1")}>
 			<div className="flex items-center justify-content-between">
 				<div className="flex align-items-center">
 					<Logo />
@@ -73,20 +66,39 @@ const Navbar = ({
 						{rightNavLinks
 							.filter((li) => li.secure === secure)
 							.map((item) => {
-					
 								return (
-									<div key={item.id + '_full'}>
-										<Link href={item.link || '/'} onClick={()=>onClick(item)}>
+									<div key={item.id + '_full'} className={cx(item.className)}>
+										<Link
+											href={item.link || '/'}
+											onClick={() => onClick(item)}
+											
+											>
 											<p className={cx({ active: pathName.includes(item.link || 'unknown') })}>
-												<i className={cx(item.icon, 'px-2')} /> {item.title}
+												<i className={cx(item.icon, 'px-2')} /> 
+												{item.title}
 											</p>
 										</Link>
 									</div>
 								);
 							})}
 					</div>
-					{renderHambuger()}
+					<Menu
+						model={avatarLinks}
+						popup
+						ref={avatarMenu}
+						id="popup_menu_right"
+						popupAlignment="right"
+						className="mt-2 w-full md:w-15rem"
+					/>
+					{secure && <div className={cx('avatar')} onClick={(event) => {avatarMenu.current?.toggle(event)} }>
+						
+						{avatar}
+
+					
+					</div>}
+
 				
+					{renderHambuger()}
 				</div>
 			</div>
 			<Sidebar
@@ -95,20 +107,17 @@ const Navbar = ({
 				onHide={() => setShowSidebar(false)}
 				className={cx('sidebar', 'align-items-end')}>
 				<div className={cx('navbarNav', ' flex flex-column gap-x-3 align-items-start')}>
-			
 					{[...navLinks, ...rightNavLinks]
 						.filter((li) => li.secure === secure)
 						.map((item, index) => {
-							
 							return (
 								<Link
 									href={item.link || ''}
 									key={item.id}
-									onClick={() => onClick(item)}
-									>
+									onClick={() => onClick(item)}>
 									<p>
 										{/* <i className={cx(item.icon, 'px-2')} /> */}
-										 {item.title}
+										{item.title}
 									</p>
 								</Link>
 							);

@@ -4,7 +4,7 @@ import { EdgeProps } from 'reactflow';
 import { Dialog } from 'primereact/dialog';
 import Image from 'next/image';
 import styles from '@/components/secure/workflow/Workflow.module.scss';
-import { useAppSelector } from '@/redux/hooks';
+import { useAppSelector } from '@/redux/hooks/hooks';
 
 const nodeStyles: { [key: string]: any } = {
 	active: {

@@ -111,3 +111,17 @@
 	width: 0%;
 	left: 50%;
 }
+
+
+.avatar {
+	&:hover {
+		cursor: pointer;
+		box-shadow: 0 0  10px  rgba(var(--primary-color-rgb), $alpha: 1);
+		border-radius:50%;
+
+
+	}
+	&:focus {
+		box-shadow: 0 0  15px  rgba(var(--primary-color-rgb), $alpha: 1);
+	}
+}

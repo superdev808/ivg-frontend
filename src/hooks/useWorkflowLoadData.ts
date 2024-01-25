@@ -1,13 +1,13 @@
 import { use, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAppDispatch } from '@/redux/hooks';
-import { setWorkflowsData, setMenuItems, setMenuQuestions } from '@/redux/features/workflowsSlice';
+import { useAppDispatch } from '@/redux/hooks/hooks';
+import { setWorkflowsData, setMenuItems, setMenuQuestions } from '@/redux/slices/workflows/workflowsSlice';
 
-import { useGetWorkflowsQuery } from '@/redux/services/workflowsApi';
-import { useGetWorkflowNodesQuery } from '@/redux/services/workflowNodesApi';
-import { useGetWorkflowEdgesQuery } from '@/redux/services/workflowEdgesApi';
-import { useGetWorkflowMenuItemsQuery } from '@/redux/services/workflowsMenuItemsApi';
-import { useGetWorkflowMenuQuestionsQuery } from '@/redux/services/workflowsMenuQuestionsApi';
+import { useGetWorkflowsQuery } from '@/redux/slices/api/workflowsApi';
+import { useGetWorkflowNodesQuery } from '@/redux/slices/api/workflowNodesApi';
+import { useGetWorkflowEdgesQuery } from '@/redux/slices/api/workflowEdgesApi';
+import { useGetWorkflowMenuItemsQuery } from '@/redux/slices/api/workflowsMenuItemsApi';
+import { useGetWorkflowMenuQuestionsQuery } from '@/redux/slices/api/workflowsMenuQuestionsApi';
 
 function useWorkflowLoadData() {
 	const dispatch = useAppDispatch();

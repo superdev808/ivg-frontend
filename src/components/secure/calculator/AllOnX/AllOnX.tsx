@@ -14,6 +14,7 @@ import {
   Site,
   SiteData,
   KeyValuePair,
+  SITE_SPECIFIC_REPORT_OPTIONS,
 } from "./constants";
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
@@ -29,14 +30,16 @@ import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
 import { Button } from "primereact/button";
 import PDFExport from "./PdfExport/PdfExport";
 import PdfContent from "./PdfExport/PdfContent";
+import CustomCombinationsInputs from "./CustomCombinationsInputs";
 
 interface AllOnXCalculatorProps {
   isCustom?: boolean;
 }
 
-/*
+/**
  * Name : AllOnXCalculator.
  * Desc : The code defines a functional component called `AllOnXCalculator` which is a           * calculator for the All-on-X dental procedure.
+ * @param {boolean} isCustom
  */
 const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   isCustom,
@@ -49,6 +52,9 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     useState<AutoPopulateData | null>(null);
   const [procedureInputsAndResponse, setProcedureInputsAndResponse] =
     useState<InputAndResponse | null>(null);
+  const [siteSpecificReport, setSiteSpecificReport] = useState<string>(
+    SITE_SPECIFIC_REPORT_OPTIONS[0].value
+  );
   const [collections, setCollections] = useState<string[]>([]);
   const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
 
@@ -84,22 +90,31 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     }
   };
 
-  const handleSiteChange = (tooth: number): void => {
-    let _selectedSites: Site[] = [...selectedSites];
+  const handleSiteChange = (tooth: number, isAnonymous?: boolean): void => {
+    let _selectedSites: Site[] = isAnonymous ? [] : [...selectedSites];
     const isSelected: Site[] = _selectedSites.filter(
       (site: Site) => site.key === tooth
     );
     if (isSelected.length === 0) {
-      const newSite: Site = { name: `Site ${tooth}`, key: tooth };
+      const newSite: Site = isAnonymous
+        ? { name: `Site Anonymous`, key: tooth }
+        : { name: `Site ${tooth}`, key: tooth };
       _selectedSites.push(newSite);
       //Add new site data
-      const newSiteData = {
-        [`Site ${tooth}`]: { inputDetails: [], componentDetails: {} },
-      };
-      setSitesData((prev) => {
-        return { ...prev, ...newSiteData };
-      });
-      _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
+      if (!isAnonymous) {
+        const newSiteData = {
+          [`Site ${tooth}`]: { inputDetails: [], componentDetails: {} },
+        };
+        setSitesData((prev) => {
+          return { ...prev, ...newSiteData };
+        });
+        _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
+      } else {
+        const newSiteData = {
+          [`Site Anonymous`]: { inputDetails: [], componentDetails: {} },
+        };
+        setSitesData(newSiteData);
+      }
     } else {
       _selectedSites = _selectedSites.filter(
         (site: Site) => site.key !== tooth
@@ -221,7 +236,17 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     });
   };
 
-  const onCollectionChange = (e: CheckboxChangeEvent) => {
+  const handleSiteSpecificReport = (value: string) => {
+    setSiteSpecificReport(value);
+    if (value === SITE_SPECIFIC_REPORT_OPTIONS[1].value) {
+      handleSiteChange(1, true);
+    } else {
+      setSelectedSites([]);
+      setSitesData({});
+    }
+  };
+
+  const handleCollectionChange = (e: CheckboxChangeEvent) => {
     let _selectedCollections: string[] = [...selectedCollections];
 
     if (e.checked) _selectedCollections.push(e.value);
@@ -250,50 +275,36 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
             />
           </div>
 
+          {(procedure === PROCEDURES.RESTORATIVE ||
+            procedure === PROCEDURES.SURGERY_AND_RESTORATIVE) && (
+            <AdditionalInputs
+              additionalInputs={additionalInputs}
+              onInputChange={handleAdditionalInputs}
+            />
+          )}
+
           {isCustom && (
-            <div className="card flex justify-content-center">
-              <div className="flex flex-column gap-3">
-                <p>
-                  Select the calculators you would like to combine to create a
-                  custom report
-                </p>
-                {collections.map((collection: string, index: number) => {
-                  return (
-                    <div
-                      key={`${collection}-${index}`}
-                      className="flex align-items-center"
-                    >
-                      <Checkbox
-                        inputId={`${collection}-${index}`}
-                        name="collection"
-                        value={collection}
-                        onChange={onCollectionChange}
-                        checked={selectedCollections.includes(collection)}
-                      />
-                      <label htmlFor={collection} className="ml-2">
-                        {collection}
-                      </label>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            <CustomCombinationsInputs
+              collections={collections}
+              selectedCollections={selectedCollections}
+              onCollectionChange={handleCollectionChange}
+              siteSpecificReport={siteSpecificReport}
+              onChangeSiteSpecificReport={handleSiteSpecificReport}
+            />
           )}
 
           <div className="grid border-top-1 surface-border">
             <div className="flex flex-column col-12">
-              <TeethSelector
-                selectedSites={selectedSites}
-                onSiteChange={handleSiteChange}
-              />
-              {(procedure === PROCEDURES.RESTORATIVE ||
-                procedure === PROCEDURES.SURGERY_AND_RESTORATIVE) &&
-                selectedSites.length > 0 && (
-                  <AdditionalInputs
-                    additionalInputs={additionalInputs}
-                    onInputChange={handleAdditionalInputs}
-                  />
-                )}
+              {(!isCustom ||
+                (isCustom &&
+                  siteSpecificReport ===
+                    SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
+                <TeethSelector
+                  selectedSites={selectedSites}
+                  onSiteChange={handleSiteChange}
+                />
+              )}
+
               {selectedSites.length > 0 && (
                 <div className="mt-3">
                   <TabView renderActiveOnly={false}>
