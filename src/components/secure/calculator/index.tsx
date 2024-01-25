@@ -5,6 +5,7 @@ import _ from "lodash";
 import Quiz from "./quiz";
 import DetailView from "./detail";
 import { useQuery } from "react-query";
+import { calculatorIO } from "@/helpers/util";
 
 interface QuizOption {
   name: string;
@@ -23,6 +24,12 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
   const [answerOptions, setAnswerOptions] = useState<any[]>([]);
   const [answers, setAnswers] = useState<any[]>([]);
   const [itemInfo, setItemInfo] = useState<any[]>([]);
+  const calculatorType = decodeURI(props.option);
+
+  const calculatorLabel = useMemo(() => {
+    const selectedCalculator = calculatorIO.find((item) => item.type === calculatorType);
+    return selectedCalculator?.label || calculatorType;
+  }, [calculatorType]);
 
   const { isLoading } = useQuery([input, level, answers, option], async () => {
     if (level > input.length) {
@@ -93,7 +100,7 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
           })}
         </div>
         
-        {itemInfo.length > 0 && <h2>Compatible {decodeURI(props.option)}</h2>}
+        {itemInfo.length > 0 && <h2>Compatible {calculatorLabel}</h2>}
         {itemInfo.map((item, index) => (
           <DetailView
             key={`result-item-${index}`}
