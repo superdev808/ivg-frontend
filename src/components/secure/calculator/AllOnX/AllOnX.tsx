@@ -26,6 +26,9 @@ import {
 import { InputAndResponse } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 import AdditionalInputs from "./AdditionalInputs";
 import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
+import { Button } from "primereact/button";
+import PDFExport from "./PdfExport/PdfExport";
+import PdfContent from "./PdfExport/PdfContent";
 
 interface AllOnXCalculatorProps {
   isCustom?: boolean;
@@ -319,6 +322,10 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                       />
                     </TabPanel>
                   </TabView>
+                  {/* <PDFExport /> */}
+                  <PdfContent selectedSites={selectedSites} sitesData={sitesData} responseOrder={
+                          procedureInputsAndResponse?.responseOrder || []
+                        }/>
                 </div>
               )}
             </div>
