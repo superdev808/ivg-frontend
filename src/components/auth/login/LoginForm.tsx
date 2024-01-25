@@ -77,6 +77,7 @@ export const LoginForm = () => {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({ email: d.email, password: d.password }),
+				credentials: 'include'
 			});
 			const data = await response.json();
 			if (!response.ok) {
