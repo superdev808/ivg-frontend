@@ -167,9 +167,7 @@ const Questionnaire: React.FC<InputProps> = ({
 
   const handleSelectAnswer = (index: number) => (e: any) => {
     setAutoQuestions(null);
-    if (e.value !== "") {
-      setLevel(index + 1);
-    } else {
+    if (e.value === "" && questions[index].name === "") {
       const promise = new Promise((resolve) => {
         setLevel(index);
         setTimeout(() => resolve(true), 1000);
@@ -177,6 +175,8 @@ const Questionnaire: React.FC<InputProps> = ({
       promise.then(() => {
         setLevel(index + 1);
       });
+    } else {
+      setLevel(index + 1);
     }
 
     const newAnswers = answers.slice(0, index);
