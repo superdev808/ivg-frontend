@@ -89,7 +89,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               {questionnaire.map((data: InputDetail, index: number) => {
                 return (
                   <>
-                    {true && (
+                    {data.answer && (
                       <div
                         className={`flex ${
                           index === 0 && "border-top-1"

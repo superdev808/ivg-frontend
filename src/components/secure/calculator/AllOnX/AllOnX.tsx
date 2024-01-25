@@ -124,7 +124,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       inputDetails.splice(indexOfQuestion + 1);
     } else {
       inputDetails.push({
-        question: `${question.calculator}-${question.text}`,
+        question: question.text,
         answer,
       });
     }
