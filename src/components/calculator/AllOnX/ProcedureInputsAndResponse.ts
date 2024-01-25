@@ -281,7 +281,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Authentic or Generic",
-        text: "Authentic or Generic",
+        text: "Scanbody Authentic or Generic",
         calculator: "Scanbodies",
       },
       {
@@ -318,7 +318,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Driver Length",
-        text: "Driver Length",
+        text: "Scanbody Driver Length",
         calculator: "ScanbodyDriversDirectToImplants",
       },
       {
@@ -360,12 +360,12 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Angulation",
-        text: "Angulation",
+        text: "Impressing Copings Angulation",
         calculator: "ImpressingCopingsDirectToImplants",
       },
       {
         name: "Engaging or Non-Engaging",
-        text: "Engaging or Non-Engaging",
+        text: "Impressing Copings Engaging or Non-Engaging",
         calculator: "ImpressingCopingsDirectToImplants",
       },
       {
@@ -407,12 +407,12 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Engaging or Non Engaging",
-        text: "Engaging or Non Engaging",
+        text: "Temporary Copings Engaging or Non Engaging",
         calculator: "TemporaryCopingsDirectToImplants",
       },
       {
         name: "Abutment Angulation",
-        text: "Abutment Angulation",
+        text: "Temporary Copings Abutment Angulation",
         calculator: "TemporaryCopingsDirectToImplants",
       },
       {
@@ -427,7 +427,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Collar Height",
-        text: "Collar Height",
+        text: "Temporary Copings Collar Height",
         calculator: "TemporaryCopingsDirectToImplants",
       },
       {
@@ -479,7 +479,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Engaging or Non-Engaging",
-        text: "Engaging or Non-Engaging",
+        text: "TiBases Engaging or Non-Engaging",
         calculator: "TiBasesDirectToImplants",
       },
       {
@@ -489,7 +489,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Angulation",
-        text: "Angulation",
+        text: "TiBases Angulation",
         calculator: "TiBasesDirectToImplants",
       },
       {
@@ -504,7 +504,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Collar Height",
-        text: "Collar Height",
+        text: "TiBases Collar Height",
         calculator: "TiBasesDirectToImplants",
       },
       {
@@ -547,15 +547,14 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Authentic or Generic",
-        text: "Authentic or Generic",
+        text: "Implant Authentic or Generic",
         calculator: "RestroativeDirectToImplant",
       },
       {
         name: "Driver Length",
-        text: "Driver Length",
+        text: "Implant Driver Length",
         calculator: "RestroativeDirectToImplant",
       },
-
       {
         name: "One Piece or Torque Attachment",
         text: "One Piece or Torque Attachment",
@@ -568,7 +567,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Abutment Angulation",
-        text: "Abutment Angulation",
+        text: "Implant Abutment Angulation",
         calculator: "RestroativeDirectToImplant",
       },
       {
@@ -612,7 +611,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Authentic or Generic",
-        text: "Authentic or Generic",
+        text: "Scanbody MUAs Authentic or Generic",
         calculator: "ScanbodyMUAs",
       },
       {
@@ -649,7 +648,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Driver Length",
-        text: "Driver Length",
+        text: "Scanbody Drivers MUAs Driver Length",
         calculator: "ScanbodyDriversMUAs",
       },
       {
@@ -706,7 +705,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Abutment Type",
-        text: "Abutment Type",
+        text: "Impressing Copings MUAs Abutment Type",
         calculator: "ImpressingCopingsMUAs",
       },
       {
@@ -743,12 +742,12 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Abutment Diameter",
-        text: "Abutment Diameter",
+        text: "Temporary Copings MUAs Abutment Diameter",
         calculator: "TemporaryCopingsMUAs",
       },
       {
         name: "Abutment Type",
-        text: "Abutment Type",
+        text: "Temporary Copings MUAs Abutment Type",
         calculator: "TemporaryCopingsMUAs",
       },
       {
@@ -820,17 +819,17 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Abutment Diameter",
-        text: "Abutment Diameter",
+        text: "TiBases MUAs Abutment Diameter",
         calculator: "TiBasesMUAs",
       },
       {
         name: "Abutment Height",
-        text: "Abutment Height",
+        text: "TiBases MUAs Abutment Height",
         calculator: "TiBasesMUAs",
       },
       {
         name: "Collar Height",
-        text: "Collar Height",
+        text: "TiBases MUAs Collar Height",
         calculator: "TiBasesMUAs",
       },
       {
@@ -872,7 +871,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Abutment Angulation",
-        text: "Abutment Angulation",
+        text: "MUAs Abutment Angulation",
         calculator: "MUAs",
       },
       {
@@ -882,17 +881,17 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Abutment Diameter",
-        text: "Abutment Diameter",
+        text: "MUAs Abutment Diameter",
         calculator: "MUAs",
       },
       {
         name: "Abutment Height",
-        text: "Abutment Height",
+        text: "MUAs Abutment Height",
         calculator: "MUAs",
       },
       {
         name: "Collar Height",
-        text: "Collar Height",
+        text: "MUAs Collar Height",
         calculator: "MUAs",
       },
       {
@@ -929,12 +928,12 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Machine or Manual",
-        text: "Machine or Manual",
+        text: "Restorative MUAs Machine or Manual",
         calculator: "RestorativeMultiUnitAbutments",
       },
       {
         name: "Driver Length",
-        text: "Driver Length",
+        text: "Restorative MUAs Driver Length",
         calculator: "RestorativeMultiUnitAbutments",
       },
       {
@@ -977,12 +976,12 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Authentic or Generic",
-        text: "Authentic or Generic",
+        text: "Implant Authentic or Generic",
         calculator: "RestroativeDirectToImplant",
       },
       {
         name: "Driver Length",
-        text: "Driver Length",
+        text: "Implant Driver Length",
         calculator: "RestroativeDirectToImplant",
       },
 
@@ -998,12 +997,12 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Abutment Angulation",
-        text: "Abutment Angulation",
+        text: "Implant Abutment Angulation",
         calculator: "RestroativeDirectToImplant",
       },
       {
         name: "Machine or Manual",
-        text: "Machine or Manual",
+        text: "Implant Machine or Manual",
         calculator: "RestroativeDirectToImplant",
       },
       {
@@ -1042,7 +1041,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Authentic or Generic",
-        text: "Authentic or Generic",
+        text: "Scanbody MUAs Authentic or Generic",
         calculator: "ScanbodyMUAs",
       },
       {
@@ -1079,7 +1078,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Driver Length",
-        text: "Driver Length",
+        text: "Scanbody Drivers MUAs Driver Length",
         calculator: "ScanbodyDriversMUAs",
       },
       {
@@ -1136,7 +1135,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Abutment Type",
-        text: "Abutment Type",
+        text: "Impressing Copings MUAs Abutment Type",
         calculator: "ImpressingCopingsMUAs",
       },
       {
@@ -1173,12 +1172,12 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Abutment Diameter",
-        text: "Abutment Diameter",
+        text: "Temporary Copings MUAs Abutment Diameter",
         calculator: "TemporaryCopingsMUAs",
       },
       {
         name: "Abutment Type",
-        text: "Abutment Type",
+        text: "Temporary Copings MUAs Abutment Type",
         calculator: "TemporaryCopingsMUAs",
       },
       {
@@ -1240,7 +1239,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Engaging or Non-Engaging",
-        text: "Engaging or Non-Engaging",
+        text: "TiBases MUAs Engaging or Non-Engaging",
         calculator: "TiBasesMUAs",
       },
       {
@@ -1250,7 +1249,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Abutment Diameter",
-        text: "Abutment Diameter",
+        text: "TiBases MUAs Abutment Diameter",
         calculator: "TiBasesMUAs",
       },
       {
@@ -1308,12 +1307,12 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
       },
       {
         name: "Authentic or Generic",
-        text: "Authentic or Generic",
+        text: "Implant Authentic or Generic",
         calculator: "RestroativeDirectToImplant",
       },
       {
         name: "Driver Length",
-        text: "Driver Length",
+        text: "Implant Driver Length",
         calculator: "RestroativeDirectToImplant",
       },
 
