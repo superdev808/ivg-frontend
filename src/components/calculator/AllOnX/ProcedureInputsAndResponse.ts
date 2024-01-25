@@ -1353,7 +1353,7 @@ export const CALCULATOR_NAME_COLLECTION_MAPPINGS: { [key: string]: string } = {
   "Implant Drivers": "RestroativeDirectToImplant",
   "Chairside Pick-Up Materials": "ChairSidePickUp",
   "Implants for Purchase": "Implants",
-  "Master Scanbody": "MasterScanbody",
+  "Master Scanbody": "Scanbodies",
   "Scanbody Driver": "ScanbodyDriversDirectToImplants",
   "Impression Copings": "ImpressingCopingsDirectToImplants",
   "Temporary Copings": "TemporaryCopingsDirectToImplants",
