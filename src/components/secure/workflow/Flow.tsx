@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, use } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedPathIds } from '@/redux/features/workflowSelectionSlice';
+import { setSelectedPathIds } from '@/redux/slices/workflows/workflowSelectionSlice';
 import ReactFlow, {
 	ConnectionLineType,
 	useNodesState,
@@ -19,7 +19,7 @@ import dagre from '@dagrejs/dagre';
 import CustomNode from './CustomNode';
 import CustomEdge from './CustomEdge';
 import { PathIds } from '@/types/Workflow';
-import { selectWorkflowSelection } from '@/redux/features/workflowSelectionSlice';
+import { selectWorkflowSelection } from '@/redux/slices/workflows/workflowSelectionSlice';
 interface NodeData {
 	id: number;
 	flowId: number;

@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, PropsWithChildren } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks';
 import { getCookie } from '@/helpers/cookie';
 
-import { setAuth } from '@/redux/slices/authSlice';
+import { setAuth } from '@/redux/slices/auth/authSlice';
 import { verifyAuth } from '@/helpers/verifyAuth';
 
 import Loading from '@/components/layout/loading';

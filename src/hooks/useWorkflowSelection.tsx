@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useGetWorkflowMenuItemsQuery } from '@/redux/services/workflowsMenuItemsApi';
-import { useGetWorkflowMenuQuestionsQuery } from '@/redux/services/workflowsMenuQuestionsApi';
+import { useGetWorkflowMenuItemsQuery } from '@/redux/slices/api/workflowsMenuItemsApi';
+import { useGetWorkflowMenuQuestionsQuery } from '@/redux/slices/api/workflowsMenuQuestionsApi';
 
 type MenuItem = {
 	id: number;

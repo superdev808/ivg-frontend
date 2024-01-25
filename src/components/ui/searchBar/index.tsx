@@ -3,7 +3,7 @@ import { useRef,useState  } from 'react';
 import { useRouter } from 'next/navigation';
 import { AutoComplete, AutoCompleteSelectEvent, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from 'primereact/autocomplete';
 
-import { useGetWorkflowsQuery } from '@/redux/services/workflowsApi';
+import { useGetWorkflowsQuery } from '@/redux/slices/api/workflowsApi';
 
 export default function SearchBar( {hideIcon=false}:{hideIcon?:boolean}) {
 	const { isLoading, isFetching, data:workflows, error } = useGetWorkflowsQuery(null);

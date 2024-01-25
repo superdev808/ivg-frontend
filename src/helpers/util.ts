@@ -3,6 +3,13 @@ export function isUrl(str: string) {
     return urlRegex.test(str);
 }
 
+export function getInitials(name: string) {
+	return name
+		.split(' ')
+		.map((word) => word.charAt(0).toUpperCase())[0]
+		;
+}
+
 export const calculatorIO = [
     {
       type: "Scanbodies",

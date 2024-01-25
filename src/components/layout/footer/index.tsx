@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/redux/hooks';
+import { useAppSelector } from '@/redux/hooks/hooks';
 import FooterExtended from './FooterExtended';
 import { usePathname } from 'next/navigation';
 import { use, useEffect, useState } from 'react';

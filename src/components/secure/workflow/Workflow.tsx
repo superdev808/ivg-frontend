@@ -9,8 +9,8 @@ import WorkflowFlow from './Flow';
 import useWorkflowSelected from '@/hooks/useWorkflowSelected';
 
 import { Splitter, SplitterPanel } from 'primereact/splitter';
-import { useAppSelector } from '@/redux/hooks';
-import { selectWorkflowSelection } from '@/redux/features/workflowSelectionSlice';
+import { useAppSelector } from '@/redux/hooks/hooks';
+import { selectWorkflowSelection } from '@/redux/slices/workflows/workflowSelectionSlice';
 
 export default function WorkflowComponent() {
 	useWorkflowSelected();

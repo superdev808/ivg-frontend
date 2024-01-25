@@ -1,21 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
-import workflowsReducer from './features/workflowsSlice';
-import workflowSelectionReducer from './features/workflowSelectionSlice';
-import flowReducer from './features/flowSlice';
+import workflowsReducer from './slices/workflows/workflowsSlice';
+import workflowSelectionReducer from './slices/workflows/workflowSelectionSlice';
+import flowReducer from './slices/workflows/flowSlice';
 
-import calculatorReducer from './features/calculatorSlice';
-import editorReducer from './features/editorSlice';
-import authSliceReducer from './slices/authSlice';
 
-import { workflowsApi } from './services/workflowsApi';
-import { workflowEdgesApi } from './services/workflowEdgesApi';
-import { workflowNodesApi } from './services/workflowNodesApi';
-import { calculatorsApi } from './services/calculatorsApi';
-import { workflowMenuItemsApi } from './services/workflowsMenuItemsApi';
-import { workflowMenuQuestionsApi } from './services/workflowsMenuQuestionsApi';
+import editorReducer from './slices/workflows/editorSlice';
+import authSliceReducer from './slices/auth/authSlice';
 
+import { workflowsApi } from './slices/api/workflowsApi';
+import { workflowEdgesApi } from './slices/api/workflowEdgesApi';
+import { workflowNodesApi } from './slices/api/workflowNodesApi';
+
+import { workflowMenuItemsApi } from './slices/api/workflowsMenuItemsApi';
+import { workflowMenuQuestionsApi } from './slices/api/workflowsMenuQuestionsApi';
+import { apiSlice } from './slices/api/apiSlice';
 import route from './slices/routeSlice';
 import ui from './slices/uiSlice';
 
@@ -27,23 +27,25 @@ export const store = configureStore({
 		editor: editorReducer,
 		workflowSelection: workflowSelectionReducer,
 		workflows: workflowsReducer,
-		calculator: calculatorReducer,
+
 		auth: authSliceReducer,
 		[workflowsApi.reducerPath]: workflowsApi.reducer,
 		[workflowEdgesApi.reducerPath]: workflowEdgesApi.reducer,
 		[workflowNodesApi.reducerPath]: workflowNodesApi.reducer,
 		[workflowMenuItemsApi.reducerPath]: workflowMenuItemsApi.reducer,
 		[workflowMenuQuestionsApi.reducerPath]: workflowMenuQuestionsApi.reducer,
-		[calculatorsApi.reducerPath]: calculatorsApi.reducer,
+
+		[apiSlice.reducerPath]: apiSlice.reducer,
 	},
 	middleware: (getDefaultMiddleware) => {
 		return getDefaultMiddleware().concat(
-			calculatorsApi.middleware,
+			apiSlice.middleware,
 			workflowsApi.middleware,
 			workflowEdgesApi.middleware,
 			workflowNodesApi.middleware,
 			workflowMenuQuestionsApi.middleware,
 			workflowMenuItemsApi.middleware
+			
 		);
 	},
 });
