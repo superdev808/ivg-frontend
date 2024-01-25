@@ -12,11 +12,14 @@ export interface InputAndResponse {
   responseOrder: string[];
 }
 
-export type ProcedureInputsAndResponse = {
-  [key in PROCEDURE_COMBINATIONS]: InputAndResponse;
-};
+export interface CollectionsIO {
+  [key: string]: InputOutputValues[];
+}
 
-export const PROCEDURE_INPUTS_AND_RESPONSE: any = {
+export interface ProcedureInputsAndResponse {
+  [key: string]: CollectionsIO;
+}
+export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
   [PROCEDURE_COMBINATIONS.SURGERY]: {
     "Drill Kits / Sequences": [
       {

@@ -33,9 +33,10 @@ interface AllOnXCalculatorProps {
   isCustom?: boolean;
 }
 
-/*
+/**
  * Name : AllOnXCalculator.
  * Desc : The code defines a functional component called `AllOnXCalculator` which is a           * calculator for the All-on-X dental procedure.
+ * @param {boolean} isCustom
  */
 const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   isCustom,
@@ -271,6 +272,14 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
             />
           </div>
 
+          {(procedure === PROCEDURES.RESTORATIVE ||
+            procedure === PROCEDURES.SURGERY_AND_RESTORATIVE) && (
+            <AdditionalInputs
+              additionalInputs={additionalInputs}
+              onInputChange={handleAdditionalInputs}
+            />
+          )}
+
           {isCustom && (
             <CustomCombinationsInputs
               collections={collections}
@@ -292,14 +301,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   onSiteChange={handleSiteChange}
                 />
               )}
-              {(procedure === PROCEDURES.RESTORATIVE ||
-                procedure === PROCEDURES.SURGERY_AND_RESTORATIVE) &&
-                selectedSites.length > 0 && (
-                  <AdditionalInputs
-                    additionalInputs={additionalInputs}
-                    onInputChange={handleAdditionalInputs}
-                  />
-                )}
+
               {selectedSites.length > 0 && (
                 <div className="mt-3">
                   <TabView renderActiveOnly={false}>
