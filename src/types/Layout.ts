@@ -5,4 +5,5 @@ export interface NavLink {
 	icon?: string;
 	secure?: boolean;
 	onClick?: any;
+	className?: string;
 }

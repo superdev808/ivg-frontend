@@ -4,9 +4,9 @@ import WorkflowSelectionMenuComponent from './SelectionMenu';
 
 import WorkflowComponent from './Workflow';
 import useWorkflowLoadData from '@/hooks/useWorkflowLoadData';
-import { useAppSelector } from '@/redux/hooks';
+import { useAppSelector } from '@/redux/hooks/hooks';
 import { useDispatch } from 'react-redux';
-import { setSelectedId, setLoading } from '@/redux/features/workflowSelectionSlice';
+import { setSelectedId, setLoading } from '@/redux/slices/workflows/workflowSelectionSlice';
 
 const WorkflowsComponent = () => {
 	const { route } = useAppSelector((state) => state.route);	

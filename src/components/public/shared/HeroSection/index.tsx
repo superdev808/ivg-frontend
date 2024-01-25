@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch } from '@/redux/hooks/hooks';
 import { Button } from 'primereact/button';
 import { Image } from 'primereact/image';
 

@@ -4,7 +4,7 @@ import React, { PropsWithChildren, use, useEffect } from 'react';
 import Navigation from '@/components/layout/navigation';
 import { ReduxProvider } from '@/redux/provider';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { useAppSelector } from '@/redux/hooks';
+import { useAppSelector } from '@/redux/hooks/hooks';
 
 import { usePathname, useRouter } from 'next/navigation';
 import Footer from '@/components/layout/footer';
@@ -18,6 +18,8 @@ export default function PublicLayout({ children }: PropsWithChildren) {
 	const router = useRouter();
 	const [isLoading, setIsLoading] = React.useState(true);
 	const [simpleLayout, setSimpleLayout] = React.useState(false);
+	const [hideLayout, setHideLayout] = React.useState(false);
+
 	const {isLoading:authLoading, authenticated} = useAppSelector((state) => state.auth);
 	useEffect(() => {
 		if (authLoading) return
@@ -27,11 +29,13 @@ export default function PublicLayout({ children }: PropsWithChildren) {
 		}
 
 
-		if (['/login/', '/signup/'].includes(activePath)) {
+		if (['/login/', '/register/','/verify/'].includes(activePath)) {
 			setSimpleLayout(true);
 		}else {
 			setSimpleLayout(false);
 		}
+
+		
 		setIsLoading(false);
 	}, [activePath, authLoading]);
 
@@ -44,7 +48,8 @@ export default function PublicLayout({ children }: PropsWithChildren) {
 		<>
 			{simpleLayout ? null : <Navigation transparentBg />}
 			{children}
-			<Footer extendFooter={simpleLayout} />
+			{simpleLayout ? null : <Footer extendFooter={simpleLayout} />}
+		
 		</>
 	);
 }
