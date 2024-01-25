@@ -4,12 +4,11 @@ import {
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
   MUA_OPTIONS,
   RadioButtonOption,
+  KeyValuePair,
 } from "../constants";
 
 interface AdditionalInputsParams {
-  additionalInputs: {
-    [key: string]: string;
-  };
+  additionalInputs: KeyValuePair;
   onInputChange: (value: string, target: string) => void;
 }
 

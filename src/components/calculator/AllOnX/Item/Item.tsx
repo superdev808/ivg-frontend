@@ -109,7 +109,7 @@ const Item: React.FC<ItemDataParams> = ({
                   </span>
                   {quantityVisibilityState !==
                     QUANTITY_VISIBILITY_STATE.HIDE && (
-                    <div className="w-1 p-2 border-right-1 surface-border">
+                    <div className="w-1 py-2 px-1 border-right-1 surface-border">
                       {quantity && renderQuantity(quantity)}
                     </div>
                   )}
