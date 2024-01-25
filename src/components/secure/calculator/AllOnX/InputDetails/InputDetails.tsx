@@ -69,7 +69,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               input={procedureInputs}
               option={CALCULATOR_MAPPINGS.ALL_ON_X_CALCULATOR}
               onInputSelect={onInputSelect}
-              showAutopopulatePrompt={index === 0}
+              showAutopopulatePrompt={selectedSites.length > 1 && index === 0}
               onAutopopulate={onAutopopulate}
               autoPopulateData={autoPopulateData}
               onQuizResponse={onQuizResponse}

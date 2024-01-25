@@ -63,7 +63,10 @@ export const Calculators = () => {
     },
     {
       label: "All-on-X Implant Surgery",
-      subItems: [{ label: "All-on-X Implant Surgery" }],
+      subItems: [
+        { label: "All-on-X Implant Surgery" },
+        { label: "Custom Combinations" },
+      ],
     },
     {
       label: "Product Material Selection",

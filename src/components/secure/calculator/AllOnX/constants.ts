@@ -133,6 +133,19 @@ export const MUA_OPTIONS: RadioButtonOption[] = [
   },
 ];
 
+export const SITE_SPECIFIC_REPORT_OPTIONS: RadioButtonOption[] = [
+  {
+    id: "customReportOption1",
+    name: "customReportOption",
+    value: "Yes",
+  },
+  {
+    id: "customReportOption2",
+    name: "customReportOption",
+    value: "No",
+  },
+];
+
 export const ignoreListForMultiples: string[] = [
   "implant drill kit name",
   "drill sequence",
