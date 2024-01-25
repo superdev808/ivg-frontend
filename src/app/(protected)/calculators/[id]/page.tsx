@@ -5,7 +5,7 @@ import { Card } from "primereact/card";
 import CalculatorContainer from "@/components/secure/calculator";
 import { CALCULATOR_MAPPINGS } from "../constants";
 import AllOnXCalculator from "@/components/secure/calculator/AllOnX/AllOnX";
-import { calculatorIO as tabItems } from "./helper";
+import { calculatorIO as tabItems } from "@/helpers/util";
 
 export default function CalculatorPage() {
   // const router = useRouter();
