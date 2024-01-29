@@ -1,12 +1,12 @@
 
-import styles from './Login.module.scss';
+import styles from './Reset.module.scss';
 import classNames from 'classnames/bind';
 import { Image } from 'primereact/image';
 import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
-export const LoginHeader = () => {
+export const ResetHeader = () => {
 	return (
 		<>
 			<div className="">
@@ -22,13 +22,10 @@ export const LoginHeader = () => {
 							className="relative mb-3"
 						/>
 					</Link>
-					<div className="text-900 text-3xl font-medium mb-3">Welcome Back</div>
-					<span className="text-600 font-medium line-height-3">{"Don't have an account?"}</span>
-					<Link
-						href="/register"
-						className="font-medium no-underline ml-2 text-secondary cursor-pointer">
-						Get Started!
-					</Link>
+					<div className="text-900 text-3xl font-medium mb-3">Reset new password
+</div>
+					<span className="text-600 font-medium line-height-3">Password must be at least 8 characters and include an uppercase letter, a lowercase letter, a number, and a symbol.</span>
+				
 				</div>
 			</div>
 		</>

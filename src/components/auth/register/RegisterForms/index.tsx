@@ -19,7 +19,7 @@ export const RegisterFormComponent = () => {
 	const [formStep, setFormStep] = useState(0);
 
 	const [registerValues, setRegisterValues] = useState<RegisterForm>(registerForm);
-	const [isSubmitting, setIsSubmitting] = useState(false);
+
 	const [postRegisterUser, { isLoading, isSuccess, isError, data }] = usePostRegisterUserMutation();
 
 	const getFormClass = (formNumber: number) => {

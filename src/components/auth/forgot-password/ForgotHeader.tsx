@@ -1,12 +1,11 @@
-
-import styles from './Login.module.scss';
+import styles from './Forgot.module.scss';
 import classNames from 'classnames/bind';
 import { Image } from 'primereact/image';
 import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
-export const LoginHeader = () => {
+export const ForgotHeader = () => {
 	return (
 		<>
 			<div className="">
@@ -22,13 +21,8 @@ export const LoginHeader = () => {
 							className="relative mb-3"
 						/>
 					</Link>
-					<div className="text-900 text-3xl font-medium mb-3">Welcome Back</div>
-					<span className="text-600 font-medium line-height-3">{"Don't have an account?"}</span>
-					<Link
-						href="/register"
-						className="font-medium no-underline ml-2 text-secondary cursor-pointer">
-						Get Started!
-					</Link>
+					<div className="text-900 text-3xl font-medium mb-3">Forgot your password?</div>
+					<span className="text-600 font-medium line-height-3">Enter your email below and we will send you a reset link.</span>
 				</div>
 			</div>
 		</>

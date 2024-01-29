@@ -45,8 +45,46 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return baseQueryReturnValue;
       },
     }),
+    postRequestPasswordReset: builder.mutation<any, {email: string}>({
+      query: (email) => ({
+        url: '/request-password-reset',
+        method: 'POST',
+        body: email,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+    }),
+    postResetPassword: builder.mutation<any, {token: string, password:string}>({
+      query: (body) => ({
+        url: '/reset-password',
+        method: 'POST',
+        body: body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+    }),
 
-
+    postValidateToken: builder.mutation<any, {token: string}>({
+      query: (body) => ({
+        url: '/validate-reset-token',
+        method: 'POST',
+        body: body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+    }),
 
 	}),
 	overrideExisting: true
