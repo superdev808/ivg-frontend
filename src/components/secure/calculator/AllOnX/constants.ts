@@ -156,3 +156,9 @@ export const ignoreListForMultiples: string[] = [
   "teflon tape",
   "material to close screw access hole",
 ];
+
+export const TEXT_DENTAL_IMPLANT_PROCEDURE =
+  "Are you restoring with multi-unit abutments (MUAs) or directly to the implant?";
+
+export const TEXT_MUA_STATUS =
+  "Are the multi-unit abutments already connected to the implants?";
