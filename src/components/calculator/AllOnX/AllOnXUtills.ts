@@ -90,7 +90,7 @@ const prepareInputsAndResponse = (
   let inputs: InputOutputValues[] = [];
   let responseOrder: string[] = [];
   selectedCollections.map((selectedCollection: string) => {
-    collections[selectedCollection].map((input: InputOutputValues) => {
+    collections[selectedCollection]?.map((input: InputOutputValues) => {
       const filteredInputs: InputOutputValues[] = inputs.filter(
         (item: InputOutputValues) => item.name && item.name === input.name
       );
