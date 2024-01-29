@@ -1,20 +1,60 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import  ResetForm  from './ResetForm';
+import ResetForm from './ResetForm';
+import { ResetHeader } from './ResetHeader';
+import { usePostValidateTokenMutation } from '@/redux/hooks/apiHooks';
+import { useSearchParams } from 'next/navigation';
+
+import { ResetInvalid } from './ResetInvalid';
+import { set } from 'lodash';
+import { ResetSuccess } from './ResetSuccess';
 
 export const ResetComponent = () => {
+	const searchParams = useSearchParams();
+	const [token, setToken] = useState<string | null>(null);
+	const [postValidateToken, result] = usePostValidateTokenMutation();
+	const [success, setSuccess] = useState(false);
+
+	useEffect(() => {
+		const token = searchParams.get('token') || '';
+
+		postValidateToken({ token: token })
+			.unwrap()
+			.then((res) => {
+				if (res.valid) {
+					setToken(token);
+				} else {
+					setToken('');
+				}
+			})
+			.catch((err) => {
+				setToken('');
+			});
+	}, []);
+
+	const currentDisplay = () => {
+		
+		if (success) return <ResetSuccess />;
+		if (token === '') return <><ResetInvalid /></>
+		return (
+			<>
+				<ResetHeader />
+				<ResetForm token={token} setSuccess={setSuccess} />
+			</>
+		);
+
+	}
+
+	if (token === null) return <></>;
+
 	return (
 		<>
-			<div className="flex align-items-center justify-content-center h-full pb-8">
-				<div className="p-4  border-round w-full lg:w-5">
-					<div className="text-center mb-5">
-						
-						{/* <span className="text-600 font-medium line-height-3">Don't have an account?</span> */}
-						{/* <a className="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</a> */}
-					</div>
-					<ResetForm />
+			<div className="background-gradient"></div>
+			<div className="container ">
+				<div className="wrapper h-full flex flex-column align-items-center justify-content-center">
+				{currentDisplay()}
 				</div>
 			</div>
 		</>

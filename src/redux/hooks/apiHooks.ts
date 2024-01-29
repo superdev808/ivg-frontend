@@ -7,5 +7,8 @@ export const {
 
     usePostCheckEmailMutation,
     usePostRegisterUserMutation,
-    useGetVerifyUserQuery
+    useGetVerifyUserQuery,
+    usePostRequestPasswordResetMutation,
+    usePostValidateTokenMutation,
+    usePostResetPasswordMutation,
 } = userApiSlice

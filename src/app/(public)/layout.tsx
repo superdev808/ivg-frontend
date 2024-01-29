@@ -29,7 +29,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
 		}
 
 
-		if (['/login/', '/register/','/verify/'].includes(activePath)) {
+		if (['/login/', '/register/','/verify/','/reset-password/','/forgot-password/'].includes(activePath)) {
 			setSimpleLayout(true);
 		}else {
 			setSimpleLayout(false);

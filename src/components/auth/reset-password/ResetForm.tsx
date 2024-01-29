@@ -1,212 +1,135 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase-browser';
-import { FormEvent } from 'primereact/ts-helpers';
+import { useState, useEffect, useRef } from 'react';
 
 import { redirect, useSearchParams, useRouter } from 'next/navigation';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
-import { classNames } from 'primereact/utils';
 
-import { Controller, useForm } from 'react-hook-form';
-import { NextResponse } from 'next/server';
+import { Controller, Form, useForm } from 'react-hook-form';
+
+import { Messages } from 'primereact/messages';
+import { FormErrorMessage } from '@/components/shared/FormErrorMessage';
+import { usePostResetPasswordMutation } from '@/redux/hooks/apiHooks';
+
+import styles from './Reset.module.scss';
+
+import classNames from 'classnames/bind';
 import { set } from 'lodash';
+const cx = classNames.bind(styles);
 
 type FormValues = {
 	password: string;
 	confirm: string;
 };
-export default function ResetForm() {
-	const router = useRouter();
-	const [accessToken, setAccessToken] = useState('');
-	const [refreshToken, setRefreshToken] = useState('');
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState('');
+export default function ResetForm({token, setSuccess}: {token: string | null, setSuccess: React.Dispatch<React.SetStateAction<boolean>>}) {
+	
+	const [postResetPassword, {isLoading}] = usePostResetPasswordMutation();
+	const errorMsgs = useRef(null);
+
+	const [showPassword, setShowPassword] = useState(false);
+   
 
 	const defaultValues: FormValues = {
 		password: '',
 		confirm: '',
 	};
-	const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-
 	const {
 		control,
 		formState: { errors },
 		handleSubmit,
-		getValues,
+		watch,
 		reset,
 	} = useForm({ defaultValues });
+	const password = watch("password");
 
-	useEffect(() => {
-		setLoading(true);
-		// Get the access token and refresh token from the URL
-		if (typeof window !== 'undefined') {
-			const hashParams = new URLSearchParams(window.location.hash.substring(1));
-			setAccessToken(hashParams.get('access_token') || '');
-			setRefreshToken(hashParams.get('refresh_token') || '');
-			setLoading(false);
-		}
-	}, []);
-
-	useEffect(() => {
-		// Authenticate the user using the access token and refresh token
-		const getSessionWithTokens = async () => {
-			if (accessToken && refreshToken) {
-				const { data, error } = await supabase.auth.setSession({
-					access_token: accessToken,
-					refresh_token: refreshToken,
-				});
-
-				if (error) {
-					alert(`Error signing in: ${error.message}`);
-				}
-			}
-		};
-
-		// Call this function only when accessToken and refreshToken are available.
-		if (accessToken && refreshToken) {
-			getSessionWithTokens();
-		}
-	}, [accessToken, refreshToken]);
-
-	const getFormErrorMessage = (name: string) => {
-		type errors = { [key: string]: { message: string } };
-		return (errors as errors)[name] ? (
-			<small className="p-error">{(errors as errors)[name].message}</small>
-		) : (
-			<small className="p-error">&nbsp;</small>
-		);
-	};
-
-	const handlePasswordUpdate = async (d: FormValues) => {
+	const handlePasswordUpdate = async (data: FormValues) => {
 		try {
-			setLoading(true);
-			if (!passwordRegex.test(d.password)) {
-				setError(
-					'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one symbol.'
-				);
-				setLoading(false);
-				return;
-			}
-
-			if (d.password !== d.confirm) {
-				setError('Passwords do not match.');
-				setLoading(false);
-				return;
-			}
-
-			const response = await fetch('/api/auth/reset-password', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ password: d.password }),
-			});
-			const data = await response.json();
-			if (!response.ok) {
-				throw new Error(data.error);
-			}
-
-			setError('Success');
-			setLoading(false);
-			router.push('/workflows');
-			window.location.reload();
+			await postResetPassword({ token: token || '', password: data.password });
+			setSuccess(true);
 		} catch (error: any) {
-			setError(error?.message ?? '');
-
-			setLoading(false);
-			return null;
+			addError(error.data.message);
 		}
 	};
-	const expiredLink = () => { 
-
-		return <div className='text-center w-full'>
-			<i className="pi pi-times-circle text-red-400" style={{ fontSize: '5rem' }}></i>
-
-			<h1>Expired Link</h1>
-			<p>
-
-				Your request to reset your password has expired. Please try again.
-			</p>
-
-		</div>
-
-	}
-	if (!loading && (!accessToken || !refreshToken)) {
-		return expiredLink();
-	}
+	const addError = (error: string) => {
+		(errorMsgs.current as any).show([{ severity: 'error', detail: error, sticky: false, closable: true, unstyled: true }]);
+	};
 	return (
-		<><div className="text-900 text-3xl font-medium mb-3">Reset your password</div>
-		<div className='mb-4'>
+		<>
+			<div className="w-25rem my-4">{<Messages ref={errorMsgs} />}</div>
 
-		<small >Password must be at least 8 characters and include an uppercase letter, a lowercase letter, a number, and a symbol.</small>
-
-		</div>
-			
-			
-			
-			<form onSubmit={handleSubmit(handlePasswordUpdate)}>
-				<div className='mb-2'>
+			<form
+				className="w-full md:w-4"
+				onSubmit={handleSubmit(handlePasswordUpdate)}>
+				<div className="mb-2">
 					<Controller
 						name="password"
 						control={control}
-						rules={{ required: 'Password is required.' }}
+						rules={{ required: 'Password is required.', pattern: {
+							value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+							message: 'Password must be at least 8 characters long, including at least 1 letter, 1 number, and 1 special character',
+						}, }}
 						render={({ field, fieldState }) => (
-							<>
+							<div className='mb-4'>
 								<label
 									htmlFor={field.name}
-									className={classNames({ 'p-error': errors[field.name] })}></label>
-								<span className="p-float-label">
-									<InputText
-										id={field.name}
-										type="password"
-										value={field.value}
-										className={classNames({ 'p-invalid': fieldState.error, 'w-full': true })}
-										onChange={(e) => field.onChange(e.target.value)}
-									/>
+									className={cx({ 'p-error': errors[field.name] })}></label>
+								<span className="p-float-label p-input-icon-right w-full">
+								<i
+									onClick={() => setShowPassword(!showPassword)}
+									className={cx({ 'pi pi-eye': !showPassword }, { 'pi pi-eye-slash': showPassword })}
+								/>
+
+								<InputText
+									type={!showPassword ? 'password' : 'text'}
+									id={field.name}
+									className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
+									{...field}
+								/>
 									<label htmlFor={field.name}>Password</label>
 								</span>
-								{getFormErrorMessage(field.name)}
-							</>
+								{FormErrorMessage({ message: errors[field.name]?.message })}
+						
+							</div>
 						)}
 					/>
-					</div>
-					<div className='mb-2'>
+				</div>
+				<div className="mb-4">
 					<Controller
 						name="confirm"
 						control={control}
-						rules={{ required: 'Confirm your password.' }}
+						rules={{ required: 'Confirm your password.', validate: value =>
+                        value === password || "The passwords do not match" }}
 						render={({ field, fieldState }) => (
 							<>
 								<label
 									htmlFor={field.name}
-									className={classNames({ 'p-error': errors[field.name] })}></label>
+									className={cx({ 'p-error': errors[field.name] })}></label>
 								<span className="p-float-label">
-									<InputText
-										id={field.name}
-										type="password"
-										value={field.value}
-										className={classNames({ 'p-invalid': fieldState.error, 'w-full': true })}
-										onChange={(e) => field.onChange(e.target.value)}
-									/>
+								
+								<InputText
+									type={!showPassword ? 'password' : 'text'}
+									id={field.name}
+									className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
+									{...field}
+								/>
 									<label htmlFor={field.name}>Confirm Password</label>
 								</span>
-								{getFormErrorMessage(field.name)}
+								{FormErrorMessage({ message: errors[field.name]?.message })}
 							</>
 						)}
 					/>
 
-					<div className="mb-2"></div>
-					<div className="w-full mb-1 text-center text-sm text-red-600">{error}</div>
-
-					<Button
-						disabled={loading}
-						label={loading ? 'loading...' : 'Reset Password'}
-						
-						className="my-5 w-full"
-					/>
 				</div>
+					<div className="flex w-full justify-content-center">
+						<Button
+							disabled={isLoading}
+							type="submit"
+							icon={isLoading ? 'pi pi-spin pi-spinner' : ''}
+							label={'Reset'}
+							className=" p-button-rounded bg-secondary w-full"
+						/>
+					</div>
 			</form>
 		</>
 	);

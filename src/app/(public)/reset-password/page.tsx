@@ -1,6 +1,8 @@
-// import { ResetComponent } from "@/components/authenticated/reset-password";
+import { ResetComponent } from "@/components/auth/reset-password";
 
 export default function ResetPasswordPage() {
 
-	return <></>;
+	return <>
+		<ResetComponent />
+	</>;
 }
