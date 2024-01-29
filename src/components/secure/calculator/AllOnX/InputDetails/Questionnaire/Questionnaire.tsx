@@ -83,8 +83,10 @@ const Questionnaire: React.FC<InputProps> = ({
       setAnswerOptions(answerOptions);
       setAnswers(answers);
       setAutoQuestions(questions);
+      setLevel(questions.length);
       setTimeout(() => {
         onAutopopulate(null);
+        setAutoQuestions(null);
       }, 1000);
     }
   }, [autoPopulateData]);
