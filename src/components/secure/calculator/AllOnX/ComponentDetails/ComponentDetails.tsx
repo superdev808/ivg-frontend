@@ -74,6 +74,13 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
                 );
               }
             });
+            // check and add new items which are not in the list
+            if (items[indexOfItem].info.length != response.info.length) {
+              items[indexOfItem].info = _.uniqBy(
+                [...items[indexOfItem].info, ...response.info],
+                "itemName"
+              );
+            }
           } else {
             items.push(response);
           }
@@ -92,17 +99,27 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
             <React.Fragment key={site.key}>
               <>
                 {Object.keys(sitesData[site.name]?.componentDetails).map(
-                  (collection: string) => {
+                  (collection: string, collectionIndex: number) => {
                     const componentDetails: ItemData[] =
                       sitesData[site.name]?.componentDetails[collection] || [];
-                    return componentDetails.map((data: ItemData, i: number) => (
-                      <Item
-                        key={`${data.label}-${i}`}
-                        label={data.label}
-                        info={data.info}
-                        quantityVisibilityState={QUANTITY_VISIBILITY_STATE.SHOW}
-                      />
-                    ));
+                    return componentDetails.map(
+                      (data: ItemData, itemIndex: number) => {
+                        const isFirst: boolean =
+                          collectionIndex === 0 && itemIndex === 0;
+
+                        return (
+                          <Item
+                            key={`${data.label}-${itemIndex}`}
+                            label={data.label}
+                            info={data.info}
+                            quantityVisibilityState={
+                              QUANTITY_VISIBILITY_STATE.SHOW
+                            }
+                            isFirst={isFirst}
+                          />
+                        );
+                      }
+                    );
                   }
                 )}
               </>
@@ -118,6 +135,7 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
               label={data.label}
               info={data.info}
               quantityVisibilityState={QUANTITY_VISIBILITY_STATE.EDITABLE}
+              isFirst={i === 0}
             />
           ))}
         </>
