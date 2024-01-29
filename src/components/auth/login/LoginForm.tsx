@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { useEffect, useState, useRef } from 'react';
-import { classNames } from 'primereact/utils';
 
 import { Controller, useForm } from 'react-hook-form';
 import { NextResponse } from 'next/server';
@@ -15,6 +14,9 @@ import { Checkbox } from 'primereact/checkbox';
 import { Messages } from 'primereact/messages';
 import { setCookie } from '@/helpers/cookie';
 import { useDispatch } from 'react-redux';
+import styles from './Login.module.scss';
+import classNames from 'classnames/bind';
+const cx = classNames.bind(styles);
 
 type FormValues = {
 	email: string;
@@ -23,8 +25,9 @@ type FormValues = {
 export const LoginForm = () => {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
-	const[error, setError] = useState(null);
+	const [error, setError] = useState(null);
 	const [rememberMe, setRememberMe] = useState<boolean>(false);
+	const [showPassword, setShowPassword] = useState(false);
 	const errorMsgs = useRef(null);
 	const dispatch = useDispatch();
 
@@ -57,8 +60,6 @@ export const LoginForm = () => {
 		);
 	};
 
-
-
 	const onSubmit = async (d: FormValues) => {
 		try {
 			setLoading(true);
@@ -84,9 +85,9 @@ export const LoginForm = () => {
 				throw new Error(data.message);
 			}
 
-			setCookie("appToken", data.token);
-			setCookie("email", data.user.email);
-			setCookie("name", data.user.firstName + ' ' + data.user.lastName);
+			setCookie('appToken', data.token);
+			setCookie('email', data.user.email);
+			setCookie('name', data.user.firstName + ' ' + data.user.lastName);
 
 			dispatch({ type: 'auth/setAuth', payload: { authenticated: true } });
 
@@ -99,83 +100,73 @@ export const LoginForm = () => {
 			return null;
 		}
 	};
-	useEffect(
-        () => {
-			if (error) {
-
+	useEffect(() => {
+		if (error) {
 			console.log(error);
-			
-			}
-        },
-        [error]
-    );
+		}
+	}, [error]);
 
-    const addError = (error:string) => {
-		(errorMsgs.current as any).show([
-            { severity: 'error',  detail: error, sticky: false, closable: true, unstyled:true},
-        ]);
-    };
+	const addError = (error: string) => {
+		(errorMsgs.current as any).show([{ severity: 'error', detail: error, sticky: false, closable: true, unstyled: true }]);
+	};
 	return (
 		<>
+			<div className="w-25rem my-4">{<Messages ref={errorMsgs} />}</div>
 
-			<div className='w-20rem my-4'>
-			{ <Messages ref={errorMsgs}/>}
-
-			</div>
-
-			<form  onSubmit={handleSubmit(onSubmit)}>
-				<div className='mb-3'>
-
-				<Controller
-					name="email"
-					control={control}
-					rules={{ required: 'Email is required.' }}
-					render={({ field, fieldState }) => (
-						<>
-							<label
-								htmlFor={field.name}
-								className={classNames({ 'p-error': errors[field.name] })}></label>
-							<span className="p-float-label">
-								<InputText
-									id={field.name}
-									value={field.value}
-									className={classNames({ 'p-invalid': fieldState.error, 'w-full': true })}
-									onChange={(e) => field.onChange(e.target.value)}
-								/>
-								<label htmlFor={field.name}>Email</label>
-							</span>
-							{getFormErrorMessage(field.name)}
-						</>
-					)}
-				/>
+			<form  className='w-full md:w-4' onSubmit={handleSubmit(onSubmit)}>
+				<div className="mb-3">
+					<Controller
+						name="email"
+						control={control}
+						rules={{ required: 'Email is required.' }}
+						render={({ field, fieldState }) => (
+							<>
+								<label
+									htmlFor={field.name}
+									className={cx({ 'p-error': errors[field.name] })}></label>
+								<span className="p-float-label">
+									<InputText
+										id={field.name}
+										value={field.value}
+										className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
+										onChange={(e) => field.onChange(e.target.value)}
+									/>
+									<label htmlFor={field.name}>Email</label>
+								</span>
+								{getFormErrorMessage(field.name)}
+							</>
+						)}
+					/>
 				</div>
-				
-				<div className='mb-3'>
 
-				
-				<Controller
-					name="password"
-					control={control}
-					rules={{ required: 'Password is required.' }}
-					render={({ field, fieldState }) => (
-						<>
-							<label
-								htmlFor={field.name}
-								className={classNames({ 'p-error': errors[field.name] })}></label>
-							<span className="p-float-label">
-								<InputText
-									id={field.name}
-									type="password"
-									value={field.value}
-									className={classNames({ 'p-invalid': fieldState.error, 'w-full': true })}
-									onChange={(e) => field.onChange(e.target.value)}
+				<div className="mb-3">
+					<Controller
+						name="password"
+						control={control}
+						rules={{ required: 'Password is required.' }}
+						render={({ field, fieldState }) => (
+							<>
+								<label
+									htmlFor={field.name}
+									className={cx({ 'p-error': errors[field.name] })}></label>
+								<span className="p-float-label p-input-icon-right w-full">
+								<i
+									onClick={() => setShowPassword(!showPassword)}
+									className={cx({ 'pi pi-eye': !showPassword }, { 'pi pi-eye-slash': showPassword })}
 								/>
-								<label htmlFor={field.name}>Password</label>
-							</span>
-							{getFormErrorMessage(field.name)}
-						</>
-					)}
-				/>
+
+								<InputText
+									type={!showPassword ? 'password' : 'text'}
+									id={field.name}
+									className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
+									{...field}
+								/>
+									<label htmlFor={field.name}>Password</label>
+								</span>
+								{getFormErrorMessage(field.name)}
+							</>
+						)}
+					/>
 				</div>
 				<div className="flex align-items-center justify-content-between mb-6 mt-2">
 					<div className="flex align-items-center">
@@ -187,23 +178,19 @@ export const LoginForm = () => {
 						/>
 						<label htmlFor="rememberme">Remember me</label>
 					</div>
-					<a className="font-medium no-underline ml-2 text-primary-500 text-right cursor-pointer">Forgot your password?</a>
+					<span className="font-medium no-underline ml-2 text-secondary text-right cursor-pointer">
+						
+						<Link className='text-secondary no-underline' href="/forgot-password">Forgot your password?</Link></span>
 				</div>
-				
+
 				<div className="flex w-full justify-content-center">
 					<Button
-					disabled={loading}
-						className="w-full lg:w-8  justify-content-center">
-						{loading ? (
-							<i
-								className="pi pi-spin pi-spinner"
-								style={{ fontSize: '2rem' }}></i>
-						) : (
-							<>
-							<span className="mx-4">Sign In</span>
-							</>
-						)}
-					</Button>
+						disabled={loading}
+						type="submit"
+						icon={loading ? 'pi pi-spin pi-spinner' : ''}
+						label={'Sign In'}
+						className=" p-button-rounded bg-secondary w-full"
+					/>
 				</div>
 			</form>
 		</>

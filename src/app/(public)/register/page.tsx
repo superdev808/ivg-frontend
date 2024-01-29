@@ -9,7 +9,7 @@ import { classNames } from 'primereact/utils';
 import { Dropdown } from 'primereact/dropdown';
 import { Messages } from 'primereact/messages';
 import { Toast } from 'primereact/toast';
-import { RegisterContent } from '@/components/public/register/RegisterContent';
+import { RegisterContent } from '@/components/auth/register/RegisterContent';
 
 
 
