@@ -96,7 +96,7 @@ const Questionnaire: React.FC<InputProps> = ({
   }, [additionalInputs]);
 
   const { isLoading } = useQuery(
-    [input, level, answers, option],
+    [input, level, answers, option, site],
     async () => {
       if (level > input.length || autoPopulateData !== null) {
         return;
