@@ -83,8 +83,10 @@ const Questionnaire: React.FC<InputProps> = ({
       setAnswerOptions(answerOptions);
       setAnswers(answers);
       setAutoQuestions(questions);
+      setLevel(questions.length);
       setTimeout(() => {
         onAutopopulate(null);
+        setAutoQuestions(null);
       }, 1000);
     }
   }, [autoPopulateData]);
@@ -96,7 +98,7 @@ const Questionnaire: React.FC<InputProps> = ({
   }, [additionalInputs]);
 
   const { isLoading } = useQuery(
-    [input, level, answers, option],
+    [input, level, answers, option, site],
     async () => {
       if (level > input.length || autoPopulateData !== null) {
         return;
