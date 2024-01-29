@@ -4,11 +4,10 @@ import {
   SiteData,
   InputDetail,
   PROCEDURES,
-  ALLONX_REQUEST_PARAMS,
-  ProcedureRequest,
   AutoPopulateData,
   InputOutputValues,
   ItemData,
+  KeyValuePair,
 } from "../constants";
 import React from "react";
 import Questionnaire from "./Questionnaire";
@@ -19,6 +18,8 @@ interface InputDetailsProps {
   selectedSites: Site[];
   sitesData: SiteData;
   autoPopulateData: AutoPopulateData | null;
+  procedureInputs: InputOutputValues[];
+  additionalInputs: KeyValuePair;
   onInputSelect: (
     site: Site,
     question: InputOutputValues,
@@ -44,6 +45,8 @@ interface InputDetailsProps {
  * @param {func} onInputSelect
  * @param {func} onAutopopulate
  * @param {func} onQuizResponse
+ * @param {array} procedureInputs
+ * @param {object} additionalInputs
  */
 const InputDetails: React.FC<InputDetailsProps> = ({
   procedure,
@@ -52,10 +55,10 @@ const InputDetails: React.FC<InputDetailsProps> = ({
   onInputSelect,
   onAutopopulate,
   autoPopulateData,
+  procedureInputs,
   onQuizResponse,
+  additionalInputs,
 }: InputDetailsProps) => {
-  const requestParams: ProcedureRequest = ALLONX_REQUEST_PARAMS[procedure];
-
   return (
     <TabView renderActiveOnly={false} scrollable>
       {selectedSites.map((site: Site, index: number) => {
@@ -63,14 +66,15 @@ const InputDetails: React.FC<InputDetailsProps> = ({
           <TabPanel key={site.name} header={site.name}>
             <Questionnaire
               site={site}
-              input={requestParams.input}
+              input={procedureInputs}
               option={CALCULATOR_MAPPINGS.ALL_ON_X_CALCULATOR}
               onInputSelect={onInputSelect}
-              showAutopopulatePrompt={index === 0}
+              showAutopopulatePrompt={selectedSites.length > 1 && index === 0}
               onAutopopulate={onAutopopulate}
               autoPopulateData={autoPopulateData}
               onQuizResponse={onQuizResponse}
               sitesData={sitesData}
+              additionalInputs={additionalInputs}
             />
           </TabPanel>
         );
@@ -84,19 +88,23 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               <h3>{site.name}</h3>
               {questionnaire.map((data: InputDetail, index: number) => {
                 return (
-                  <div
-                    className={`flex ${
-                      index === 0 && "border-top-1"
-                    } border-bottom-1 surface-border`}
-                    key={`${site.key}-${index}`}
-                  >
-                    <span className="flex-1 border-left-1 border-right-1 surface-border p-2">
-                      {data.question}
-                    </span>
-                    <span className="flex-1 border-right-1 surface-border p-2">
-                      {data.answer}
-                    </span>
-                  </div>
+                  <>
+                    {data.answer && (
+                      <div
+                        className={`flex ${
+                          index === 0 && "border-top-1"
+                        } border-bottom-1 surface-border`}
+                        key={`${site.key}-${index}`}
+                      >
+                        <span className="flex-1 border-left-1 border-right-1 surface-border p-2">
+                          {data.question}
+                        </span>
+                        <span className="flex-1 border-right-1 surface-border p-2">
+                          {data.answer}
+                        </span>
+                      </div>
+                    )}
+                  </>
                 );
               })}
             </React.Fragment>

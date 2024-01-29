@@ -1,56 +1,119 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
 import {
   AutoPopulateData,
   ComponentDetail,
+  DENTAL_IMPLANT_PROCEDURE_OPTIONS,
   InputDetail,
   InputOutputValues,
   ItemData,
+  MUA_OPTIONS,
   PROCEDURES,
   procedures,
-  responseOrder,
   Site,
   SiteData,
+  KeyValuePair,
+  SITE_SPECIFIC_REPORT_OPTIONS,
+  TEXT_DENTAL_IMPLANT_PROCEDURE,
+  TEXT_MUA_STATUS,
 } from "./constants";
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
 import TeethSelector from "./TeethSelector";
 import { cloneDeep } from "lodash";
+import {
+  getProcedureCollections,
+  getProcedureInputsAndResponse,
+} from "@/components/calculator/AllOnX/AllOnXUtills";
+import { InputAndResponse } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
+import AdditionalInputs from "./AdditionalInputs";
+import { CheckboxChangeEvent } from "primereact/checkbox";
+import CustomCombinationsInputs from "./CustomCombinationsInputs";
 
-/*
+interface AllOnXCalculatorProps {
+  isCustom?: boolean;
+}
+
+/**
  * Name : AllOnXCalculator.
  * Desc : The code defines a functional component called `AllOnXCalculator` which is a           * calculator for the All-on-X dental procedure.
+ * @param {boolean} isCustom
  */
-const AllOnXCalculator: React.FC = () => {
+const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
+  isCustom,
+}: AllOnXCalculatorProps) => {
   const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
+  const [additionalInputs, setAdditionalInputs] = useState<KeyValuePair>({});
   const [autoPopulateData, setAutoPopulateData] =
     useState<AutoPopulateData | null>(null);
+  const [procedureInputsAndResponse, setProcedureInputsAndResponse] =
+    useState<InputAndResponse | null>(null);
+  const [siteSpecificReport, setSiteSpecificReport] = useState<string>(
+    SITE_SPECIFIC_REPORT_OPTIONS[0].value
+  );
+  const [collections, setCollections] = useState<string[]>([]);
+  const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
+
+  useEffect(() => {
+    const _collections = getProcedureCollections(procedure, additionalInputs);
+    setCollections(_collections);
+    if (!isCustom) {
+      setSelectedCollections(_collections);
+    }
+  }, [procedure, additionalInputs]);
+
+  useEffect(() => {
+    const procedureInputsAndResponse = getProcedureInputsAndResponse(
+      procedure,
+      additionalInputs,
+      selectedCollections
+    );
+    setProcedureInputsAndResponse(procedureInputsAndResponse);
+  }, [selectedCollections]);
 
   const handleProcedureChange = (e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
     setSelectedSites([]);
     setSitesData({});
+    if (
+      e.value === PROCEDURES.RESTORATIVE ||
+      e.value === PROCEDURES.SURGERY_AND_RESTORATIVE
+    ) {
+      handleAdditionalInputs(
+        DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value,
+        DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name
+      );
+    }
   };
 
-  const handleSiteChange = (tooth: number): void => {
-    let _selectedSites: Site[] = [...selectedSites];
+  const handleSiteChange = (tooth: number, isAnonymous?: boolean): void => {
+    let _selectedSites: Site[] = isAnonymous ? [] : [...selectedSites];
     const isSelected: Site[] = _selectedSites.filter(
       (site: Site) => site.key === tooth
     );
     if (isSelected.length === 0) {
-      const newSite: Site = { name: `Site ${tooth}`, key: tooth };
+      const newSite: Site = isAnonymous
+        ? { name: `Site Anonymous`, key: tooth }
+        : { name: `Site ${tooth}`, key: tooth };
       _selectedSites.push(newSite);
       //Add new site data
-      const newSiteData = {
-        [`Site ${tooth}`]: { inputDetails: [], componentDetails: {} },
-      };
-      setSitesData((prev) => {
-        return { ...prev, ...newSiteData };
-      });
-      _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
+      if (!isAnonymous) {
+        const newSiteData = {
+          [`Site ${tooth}`]: { inputDetails: [], componentDetails: {} },
+        };
+        setSitesData((prev) => {
+          return { ...prev, ...newSiteData };
+        });
+        _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
+      } else {
+        const newSiteData = {
+          [`Site Anonymous`]: { inputDetails: [], componentDetails: {} },
+        };
+        setSitesData(newSiteData);
+      }
     } else {
       _selectedSites = _selectedSites.filter(
         (site: Site) => site.key !== tooth
@@ -77,10 +140,15 @@ const AllOnXCalculator: React.FC = () => {
       inputDetails[indexOfQuestion].answer = answer;
       inputDetails.splice(indexOfQuestion + 1);
     } else {
-      inputDetails.push({ question: question.text, answer });
+      inputDetails.push({
+        question: question.text,
+        answer,
+      });
     }
 
     //remove next collection responses
+    const responseOrder: string[] =
+      procedureInputsAndResponse?.responseOrder || [];
     const componentDetails: ComponentDetail = cloneDeep(
       data[site.name].componentDetails
     );
@@ -139,6 +207,56 @@ const AllOnXCalculator: React.FC = () => {
     }
   };
 
+  const handleAdditionalInputs = (value: string, target: string) => {
+    setAdditionalInputs((prev: KeyValuePair) => {
+      let state = { ...prev };
+      if (
+        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
+        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value
+      ) {
+        delete state[MUA_OPTIONS[0].name];
+      }
+      if (
+        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
+        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
+      ) {
+        state = { ...state, [MUA_OPTIONS[0].name]: MUA_OPTIONS[0].value };
+      }
+      return { ...state, [target]: value };
+    });
+    setSitesData((state) => {
+      selectedSites?.map((site) => {
+        if (state[site.name]) {
+          state[site.name].componentDetails = {};
+          state[site.name].inputDetails = [];
+        }
+      });
+      return state;
+    });
+  };
+
+  const handleSiteSpecificReport = (value: string) => {
+    setSiteSpecificReport(value);
+    if (value === SITE_SPECIFIC_REPORT_OPTIONS[1].value) {
+      handleSiteChange(1, true);
+    } else {
+      setSelectedSites([]);
+      setSitesData({});
+    }
+  };
+
+  const handleCollectionChange = (e: CheckboxChangeEvent) => {
+    let _selectedCollections: string[] = [...selectedCollections];
+
+    if (e.checked) _selectedCollections.push(e.value);
+    else
+      _selectedCollections = _selectedCollections.filter(
+        (collection) => collection !== e.value
+      );
+
+    setSelectedCollections(_selectedCollections);
+  };
+
   return (
     <div className={" nav-offset flex-grow-1"}>
       <div className="wrapper my-8">
@@ -155,12 +273,43 @@ const AllOnXCalculator: React.FC = () => {
               options={procedures}
             />
           </div>
+
+          {(procedure === PROCEDURES.RESTORATIVE ||
+            procedure === PROCEDURES.SURGERY_AND_RESTORATIVE) && (
+            <AdditionalInputs
+              textDentalImplantProcedure={TEXT_DENTAL_IMPLANT_PROCEDURE}
+              textMUAStatus={TEXT_MUA_STATUS}
+              showMUAOptions={
+                additionalInputs[DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name] ===
+                DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
+              }
+              additionalInputs={additionalInputs}
+              onInputChange={handleAdditionalInputs}
+            />
+          )}
+
+          {isCustom && (
+            <CustomCombinationsInputs
+              collections={collections}
+              selectedCollections={selectedCollections}
+              onCollectionChange={handleCollectionChange}
+              siteSpecificReport={siteSpecificReport}
+              onChangeSiteSpecificReport={handleSiteSpecificReport}
+            />
+          )}
+
           <div className="grid border-top-1 surface-border">
             <div className="flex flex-column col-12">
-              <TeethSelector
-                selectedSites={selectedSites}
-                onSiteChange={handleSiteChange}
-              />
+              {(!isCustom ||
+                (isCustom &&
+                  siteSpecificReport ===
+                    SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
+                <TeethSelector
+                  selectedSites={selectedSites}
+                  onSiteChange={handleSiteChange}
+                />
+              )}
+
               {selectedSites.length > 0 && (
                 <div className="mt-3">
                   <TabView renderActiveOnly={false}>
@@ -172,14 +321,20 @@ const AllOnXCalculator: React.FC = () => {
                         onInputSelect={handleInputSelect}
                         onAutopopulate={handleAutopopulate}
                         autoPopulateData={autoPopulateData}
+                        procedureInputs={
+                          procedureInputsAndResponse?.input || []
+                        }
+                        additionalInputs={additionalInputs}
                         onQuizResponse={handleQuizResponse}
                       />
                     </TabPanel>
                     <TabPanel header="Component Details">
                       <ComponentDetails
-                        procedure={procedure}
                         selectedSites={selectedSites}
                         sitesData={sitesData}
+                        responseOrder={
+                          procedureInputsAndResponse?.responseOrder || []
+                        }
                       />
                     </TabPanel>
                   </TabView>
