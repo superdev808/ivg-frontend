@@ -15,6 +15,8 @@ import {
   SiteData,
   KeyValuePair,
   SITE_SPECIFIC_REPORT_OPTIONS,
+  TEXT_DENTAL_IMPLANT_PROCEDURE,
+  TEXT_MUA_STATUS,
 } from "./constants";
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
@@ -278,6 +280,12 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
           {(procedure === PROCEDURES.RESTORATIVE ||
             procedure === PROCEDURES.SURGERY_AND_RESTORATIVE) && (
             <AdditionalInputs
+              textDentalImplantProcedure={TEXT_DENTAL_IMPLANT_PROCEDURE}
+              textMUAStatus={TEXT_MUA_STATUS}
+              showMUAOptions={
+                additionalInputs[DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name] ===
+                DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
+              }
               additionalInputs={additionalInputs}
               onInputChange={handleAdditionalInputs}
             />
