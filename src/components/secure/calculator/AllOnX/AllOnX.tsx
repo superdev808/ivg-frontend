@@ -26,7 +26,10 @@ import {
   getProcedureCollections,
   getProcedureInputsAndResponse,
 } from "@/components/calculator/AllOnX/AllOnXUtills";
-import { InputAndResponse } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
+import {
+  CALCULATOR_NAME_COLLECTION_MAPPINGS,
+  InputAndResponse,
+} from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 import AdditionalInputs from "./AdditionalInputs";
 import { CheckboxChangeEvent } from "primereact/checkbox";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
@@ -149,14 +152,15 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     //remove next collection responses
     const responseOrder: string[] =
       procedureInputsAndResponse?.responseOrder || [];
+    const calculators: string[] = responseOrder.map(
+      (key: string) => CALCULATOR_NAME_COLLECTION_MAPPINGS[key]
+    );
     const componentDetails: ComponentDetail = cloneDeep(
       data[site.name].componentDetails
     );
-    const indexOfCollection: number = responseOrder.indexOf(
-      question.calculator
-    );
+    const indexOfCollection: number = calculators.indexOf(question.calculator);
     if (indexOfCollection !== -1) {
-      const keysToRemove: string[] = responseOrder.slice(indexOfCollection);
+      const keysToRemove: string[] = calculators.slice(indexOfCollection);
       keysToRemove.map((col: string) => {
         delete componentDetails[col];
       });

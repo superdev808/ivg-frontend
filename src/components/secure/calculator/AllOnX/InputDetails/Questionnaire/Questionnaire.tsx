@@ -75,6 +75,8 @@ const Questionnaire: React.FC<InputProps> = ({
   const [autoPopulate, setAutoPopulate] = useState<string>(
     AUTO_POPULATE_OPTIONS[1].value
   );
+  const [isAutoPopulatedAnswersChanged, setIsAutoPopulatedAnswersChanged] =
+    useState<boolean>(false);
   const toastRef = useRef(null);
 
   useEffect(() => {
@@ -169,6 +171,9 @@ const Questionnaire: React.FC<InputProps> = ({
 
   const handleSelectAnswer = (index: number) => (e: any) => {
     setAutoQuestions(null);
+    if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value) {
+      setIsAutoPopulatedAnswersChanged(true);
+    }
     if (e.value === "" && questions[index].name === "") {
       const promise = new Promise((resolve) => {
         setLevel(index);
@@ -187,9 +192,9 @@ const Questionnaire: React.FC<InputProps> = ({
     onInputSelect(site, questions[index], newAnswers[index]);
   };
 
-  const handlePopulateResponse = (e: RadioButtonChangeEvent) => {
-    const value = e.value;
+  const handlePopulateResponse = (value: string) => {
     setAutoPopulate(value);
+    setIsAutoPopulatedAnswersChanged(false);
     if (value === AUTO_POPULATE_OPTIONS[0].value) {
       onAutopopulate({ site, questions, answerOptions, answers });
     }
@@ -256,6 +261,7 @@ const Questionnaire: React.FC<InputProps> = ({
           <AutoPopulatePromt
             autoPopulate={autoPopulate}
             onPopulateResponse={handlePopulateResponse}
+            showRefreshButton={isAutoPopulatedAnswersChanged}
           />
         )}
       </React.Fragment>
