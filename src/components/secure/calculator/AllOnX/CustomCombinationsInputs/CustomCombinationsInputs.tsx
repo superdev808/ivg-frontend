@@ -28,7 +28,7 @@ const CustomCombinationsInputs: React.FC<CustomCombinationsInputsParams> = ({
   onChangeSiteSpecificReport,
 }: CustomCombinationsInputsParams) => {
   return (
-    <div className="border-top-1 surface-border mt-3 pb-4 pt-3">
+    <div className="pb-4">
       <div className="flex flex-column w-12 mb-3">
         <p>
           Select the calculators you would like to combine to create a custom

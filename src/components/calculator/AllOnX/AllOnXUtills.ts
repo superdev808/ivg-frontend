@@ -6,6 +6,7 @@ import {
   KeyValuePair,
 } from "@/components/secure/calculator/AllOnX/constants";
 import {
+  CALCULATORS,
   CollectionsIO,
   InputAndResponse,
   PROCEDURE_INPUTS_AND_RESPONSE,
@@ -57,29 +58,34 @@ const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
 
 export const getProcedureCollections = (
   procedure: PROCEDURES,
-  additionalInputs: KeyValuePair
+  additionalInputs: KeyValuePair,
+  isCustom: boolean
 ) => {
-  switch (procedure) {
-    case PROCEDURES.SURGERY:
-      return Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY);
+  if (!isCustom) {
+    switch (procedure) {
+      case PROCEDURES.SURGERY:
+        return Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY);
 
-    case PROCEDURES.RESTORATIVE:
-      const response: CollectionsIO =
-        getRestorativeCollections(additionalInputs);
-      return Object.keys(response);
+      case PROCEDURES.RESTORATIVE:
+        const response: CollectionsIO =
+          getRestorativeCollections(additionalInputs);
+        return Object.keys(response);
 
-    case PROCEDURES.SURGERY_AND_RESTORATIVE:
-      const surgeryCollections: CollectionsIO =
-        PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
-      const restorativeCollections: CollectionsIO =
-        getRestorativeCollections(additionalInputs);
-      return _.union([
-        ...Object.keys(surgeryCollections),
-        ...Object.keys(restorativeCollections),
-      ]);
+      case PROCEDURES.SURGERY_AND_RESTORATIVE:
+        const surgeryCollections: CollectionsIO =
+          PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
+        const restorativeCollections: CollectionsIO =
+          getRestorativeCollections(additionalInputs);
+        return _.union([
+          ...Object.keys(surgeryCollections),
+          ...Object.keys(restorativeCollections),
+        ]);
 
-    default:
-      return [];
+      default:
+        return [];
+    }
+  } else {
+    return Object.keys(CALCULATORS);
   }
 };
 
@@ -109,37 +115,46 @@ const prepareInputsAndResponse = (
 export const getProcedureInputsAndResponse = (
   procedure: PROCEDURES,
   additionalInputs: KeyValuePair,
-  selectedCollections: string[]
+  selectedCollections: string[],
+  isCustom: boolean
 ) => {
-  switch (procedure) {
-    case PROCEDURES.SURGERY:
-      const surgeryResults: InputAndResponse = prepareInputsAndResponse(
-        selectedCollections,
-        PROCEDURE_INPUTS_AND_RESPONSE.SURGERY
-      );
-      return surgeryResults;
+  if (!isCustom) {
+    switch (procedure) {
+      case PROCEDURES.SURGERY:
+        const surgeryResults: InputAndResponse = prepareInputsAndResponse(
+          selectedCollections,
+          PROCEDURE_INPUTS_AND_RESPONSE.SURGERY
+        );
+        return surgeryResults;
 
-    case PROCEDURES.RESTORATIVE:
-      const collections: CollectionsIO =
-        getRestorativeCollections(additionalInputs);
-      const restorativeResults: InputAndResponse = prepareInputsAndResponse(
-        selectedCollections,
-        collections
-      );
-      return restorativeResults;
+      case PROCEDURES.RESTORATIVE:
+        const collections: CollectionsIO =
+          getRestorativeCollections(additionalInputs);
+        const restorativeResults: InputAndResponse = prepareInputsAndResponse(
+          selectedCollections,
+          collections
+        );
+        return restorativeResults;
 
-    case PROCEDURES.SURGERY_AND_RESTORATIVE:
-      const restorativeCollections: CollectionsIO =
-        getRestorativeCollections(additionalInputs);
-      const combineCollections: CollectionsIO = {
-        ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY,
-        ...restorativeCollections,
-      };
-      const combineProcedureResults: InputAndResponse =
-        prepareInputsAndResponse(selectedCollections, combineCollections);
-      return combineProcedureResults;
+      case PROCEDURES.SURGERY_AND_RESTORATIVE:
+        const restorativeCollections: CollectionsIO =
+          getRestorativeCollections(additionalInputs);
+        const combineCollections: CollectionsIO = {
+          ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY,
+          ...restorativeCollections,
+        };
+        const combineProcedureResults: InputAndResponse =
+          prepareInputsAndResponse(selectedCollections, combineCollections);
+        return combineProcedureResults;
 
-    default:
-      return { input: [], responseOrder: [] };
+      default:
+        return { input: [], responseOrder: [] };
+    }
+  } else {
+    const customResults: InputAndResponse = prepareInputsAndResponse(
+      selectedCollections,
+      CALCULATORS
+    );
+    return customResults;
   }
 };
