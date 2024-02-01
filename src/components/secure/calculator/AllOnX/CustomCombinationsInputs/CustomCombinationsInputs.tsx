@@ -27,14 +27,21 @@ const CustomCombinationsInputs: React.FC<CustomCombinationsInputsParams> = ({
   siteSpecificReport,
   onChangeSiteSpecificReport,
 }: CustomCombinationsInputsParams) => {
+  const collectionsWrapper = {
+    display: "grid",
+    gap: "20px",
+    gridTemplateColumns: "repeat(3, 1fr)",
+  };
+
   return (
     <div className="pb-4">
       <div className="flex flex-column w-12 mb-3">
+        <h2 className="mt-0 mb-3 text-center">Custom Combinations</h2>
         <p>
           Select the calculators you would like to combine to create a custom
           report
         </p>
-        <div className="flex flex-column gap-3">
+        <div style={collectionsWrapper}>
           {collections.map((collection: string, index: number) => {
             return (
               <div
@@ -48,7 +55,7 @@ const CustomCombinationsInputs: React.FC<CustomCombinationsInputsParams> = ({
                   onChange={onCollectionChange}
                   checked={selectedCollections.includes(collection)}
                 />
-                <label htmlFor={collection} className="ml-2">
+                <label htmlFor={`${collection}-${index}`} className="ml-2">
                   {collection}
                 </label>
               </div>
