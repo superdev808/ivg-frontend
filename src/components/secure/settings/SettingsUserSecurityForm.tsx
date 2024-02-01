@@ -25,7 +25,7 @@ export default function SettingsUserSecurityForm() {
 
 
 
-	const onSubmit = async (e) => {
+	const onSubmit = async (e:any) => {
 		e.preventDefault();
 		try {
 			await postSendResetPassword({}).unwrap();
