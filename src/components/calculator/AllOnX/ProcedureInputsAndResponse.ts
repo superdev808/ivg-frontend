@@ -48,9 +48,8 @@ export const CALCULATORS = {
     },
     {
       name: "Implant Length",
-      text: "Implant Length",
+      text: "Drill Kit Implant Length",
       calculator: "DrillKitAndSequence",
-      isCommon: true,
     },
     {
       name: "Drill Kit Type",
@@ -130,7 +129,6 @@ export const CALCULATORS = {
       name: "Implant Length",
       text: "Implant Length",
       calculator: "RestroativeDirectToImplant",
-      isCommon: true,
     },
     {
       name: "Authentic or Generic",
@@ -233,9 +231,8 @@ export const CALCULATORS = {
     },
     {
       name: "Implant Length",
-      text: "Implant Length",
+      text: "Implant Purchase Implant Length",
       calculator: "Implants",
-      isCommon: true,
     },
     {
       name: "Implant Surface Treatment",

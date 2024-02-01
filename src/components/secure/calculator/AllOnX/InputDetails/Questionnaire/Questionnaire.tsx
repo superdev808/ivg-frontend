@@ -16,6 +16,7 @@ import Quiz from "../../../quiz";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import AutoPopulatePromt from "./AutoPopulatePromt";
 import Item from "@/components/calculator/AllOnX/Item";
+import { Divider } from "primereact/divider";
 
 interface InputProps {
   site: Site;
@@ -238,6 +239,15 @@ const Questionnaire: React.FC<InputProps> = ({
                     );
                   })}
                 </div>
+              )}
+
+              {quiz.displayCalculatorName && (
+                <Divider align="left">
+                  <div className="inline-flex align-items-center">
+                    <i className="pi pi-calculator mr-2"></i>
+                    <b>{quiz.displayCalculatorName}</b>
+                  </div>
+                </Divider>
               )}
 
               {!!(quiz.text && quiz.name) &&

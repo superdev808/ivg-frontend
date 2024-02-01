@@ -96,6 +96,7 @@ const prepareInputsAndResponse = (
   let inputs: InputOutputValues[] = [];
   let responseOrder: string[] = [];
   selectedCollections.map((selectedCollection: string) => {
+    let isDisplayNameAssigned: boolean = false;
     collections[selectedCollection]?.map((input: InputOutputValues) => {
       const filteredInputs: InputOutputValues[] = inputs.filter(
         (item: InputOutputValues) => item.name && item.name === input.name
@@ -104,6 +105,10 @@ const prepareInputsAndResponse = (
         filteredInputs.length <= 0 ||
         (filteredInputs.length && !filteredInputs[0].isCommon)
       ) {
+        if (!isDisplayNameAssigned) {
+          input = { ...input, displayCalculatorName: selectedCollection };
+          isDisplayNameAssigned = true;
+        }
         inputs = [...inputs, input];
       }
     });
