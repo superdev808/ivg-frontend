@@ -1,8 +1,11 @@
 import React, { useRef } from "react";
 // @ts-ignore
 import html2pdf from "html2pdf.js";
+import { Button } from "primereact/button";
+import { getCookie } from "@/helpers/cookie";
+import { Toast } from "primereact/toast";
 
-const PDFExport: React.FC<any> = ({ pdfContent }) => {
+const PDFExport: React.FC<any> = ({ children }) => {
   const contentRef = useRef(null);
   const toastRef = useRef(null);
 
@@ -11,17 +14,25 @@ const PDFExport: React.FC<any> = ({ pdfContent }) => {
     if (element) {
       try {
         const options = {
-          margin: 10,
           filename: "exported-document.pdf",
-          image: { type: "jpeg", quality: 0.98 },
+          image: { type: "jpeg", quality: 0.9 },
           html2canvas: { scale: 2 },
           jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+          pagebreak: { before: ".page-break", avoid: ["table", "thead", "tr"] },
         };
         // Create an html2pdf instance
         if (type === "download") {
           const pdfInstance = html2pdf(element, options);
-          await pdfInstance.output('blob');
+          await pdfInstance.output();
+          (toastRef.current as any).show({
+            severity: "success",
+            summary: "Success",
+            detail: "Pdf downloaded successfully.",
+            life: 5000,
+          });
         } else if (type === "export") {
+          const name = getCookie("name");
+          const email = getCookie("email");
           const blob = await html2pdf()
             .set(options)
             .from(element)
@@ -29,7 +40,8 @@ const PDFExport: React.FC<any> = ({ pdfContent }) => {
 
           const formData = new FormData();
           formData.append("attachment", blob, "exported-document.pdf");
-
+          formData.append("name", name);
+          formData.append("email", email);
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/sendAllOnXInfo`,
             {
@@ -38,20 +50,29 @@ const PDFExport: React.FC<any> = ({ pdfContent }) => {
             }
           );
 
-          if (!response.ok && toastRef.current) {
-            response.json().then((res: any) => {
+          if (toastRef.current) {
+            if (!response.ok) {
+              response.json().then((res: any) => {
+                (toastRef.current as any).show({
+                  severity: "error",
+                  summary: res.status,
+                  detail: res.message,
+                  life: 5000,
+                });
+              });
+              return;
+            } else {
+              const { data, status } = await response.json();
               (toastRef.current as any).show({
-                severity: "error",
-                summary: res.status,
-                detail: res.message,
+                severity: "success",
+                summary: status,
+                detail: data,
                 life: 5000,
               });
-            });
-            return;
+              return;
+            }
           }
         }
-
-        
       } catch (error) {
         console.error("Error exporting to PDF or sending email:", error);
       }
@@ -60,30 +81,34 @@ const PDFExport: React.FC<any> = ({ pdfContent }) => {
 
   return (
     <>
-      <div ref={contentRef}>{pdfContent}</div>
+      <div style={{ display: "block" }}>
+        <div ref={contentRef}>{children}</div>
+      </div>
       <div
         style={{
-          width: "21vh",
-          padding: "8px",
-          background: "#fff",
-          borderRadius: "8px",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          position: "absolute",
+          top: "3px",
+          right: "0",
         }}
+        className="p-buttonset"
       >
-        <button
-          style={{
-            background: "#3490dc",
-            color: "#fff",
-            padding: "8px 16px",
-            borderRadius: "4px",
-            cursor: "pointer",
-            border: "none",
-          }}
+        <Button
+          onClick={() => ExportAndSendPDF("download")}
+          size="small"
+          tooltip="Download"
+          tooltipOptions={{ position: "top" }}
+          icon="pi pi-download"
+        />
+
+        <Button
           onClick={() => ExportAndSendPDF("export")}
-        >
-          Download PDF
-        </button>
+          size="small"
+          tooltip="Mail"
+          tooltipOptions={{ position: "top" }}
+          icon="pi pi-envelope"
+        />
       </div>
+      <Toast ref={toastRef} position="top-right" />
     </>
   );
 };

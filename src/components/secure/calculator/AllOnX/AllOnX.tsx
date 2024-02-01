@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
 import {
@@ -308,13 +308,14 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   siteSpecificReport ===
                     SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
                 <TeethSelector
+                  showLabel={true}
                   selectedSites={selectedSites}
                   onSiteChange={handleSiteChange}
                 />
               )}
 
               {selectedSites.length > 0 && (
-                <div className="mt-3">
+                <div className="mt-3 relative">
                   <TabView renderActiveOnly={false}>
                     <TabPanel header="Input Details">
                       <InputDetails
@@ -341,10 +342,15 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                       />
                     </TabPanel>
                   </TabView>
-                  {/* <PDFExport /> */}
-                  <PdfContent selectedSites={selectedSites} sitesData={sitesData} responseOrder={
+                  <PDFExport>
+                      <PdfContent
+                        selectedSites={selectedSites}
+                        sitesData={sitesData}
+                        responseOrder={
                           procedureInputsAndResponse?.responseOrder || []
-                        }/>
+                        }
+                      />
+                  </PDFExport>
                 </div>
               )}
             </div>

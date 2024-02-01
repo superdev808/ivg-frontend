@@ -1,8 +1,5 @@
-import React, { CSSProperties, FC, useEffect, useRef, useState } from "react";
-import { Panel } from "primereact/panel";
-import { InputText } from "primereact/inputtext";
+import React, { useEffect, useState } from "react";
 import TeethSelector from "../TeethSelector";
-import PDFExport from "./PdfExport";
 import Image from "next/image";
 import {
   ComponentDetail,
@@ -15,11 +12,13 @@ import {
 import { cloneDeep } from "lodash";
 import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 import _ from "lodash";
-import Item from "@/components/calculator/AllOnX/Item";
-
+import InputSummary from "./InputSummary/InputSummary";
+import styles from "./InputSummary/InputSummary.module.scss";
+import classNames from "classnames/bind";
+import { getCookie } from "@/helpers/cookie";
+const cx = classNames.bind(styles);
 export interface InputDetail {
   id?: string;
-  question: string;
   answer: string;
 }
 
@@ -33,7 +32,6 @@ const PdfContent: React.FC<any> = ({
   selectedSites,
   sitesData,
 }) => {
-  //const pdfRef = useRef(null);
   const [componentSummary, setComponentSummary] = useState<any[]>([]);
   useEffect(() => {
     let items: ItemData[] = [];
@@ -88,146 +86,124 @@ const PdfContent: React.FC<any> = ({
         );
       });
     });
-
-    setComponentSummary(items);
+    const summaryData = items.flatMap((category: ItemData) => {
+      return category.info.map((item: ItemInsights) => {
+        return {
+          description: category.label,
+          name: item.itemName,
+          amount: item.quantity,
+          link: item.link,
+        };
+      });
+    });
+    setComponentSummary(summaryData);
   }, [sitesData, responseOrder]);
 
-  interface FormFieldProps {
-    label: string;
-    style?: CSSProperties;
-    labelStyle?: CSSProperties;
-  }
-  
-  const FormField: FC<FormFieldProps> = ({ label, style, labelStyle }) => (
-    <div style={{ marginBottom: "0.5rem", display: "flex", flexDirection: "row", ...style }}>
-      <label style={{ fontSize: "16px", marginRight: "0.5rem", minWidth: "120px", marginBottom: 0, ...labelStyle }}>{label}:</label>
-      <div style={{ border: "none", borderBottom: "1px solid #000", flex: 1 }}></div>
-    </div>
-  );
-  const dynamicContent = (
+  const currentDate = new Date().toLocaleDateString();
+  const currentDateTime = new Date().toLocaleTimeString("en-US", {
+    hour12: true,
+    hour: "numeric",
+    minute: "numeric",
+  });
+  const calculatorType = `All-On-X`;
+  const name = getCookie('name');
+	const email = getCookie('email');
+  return (
     <>
-      {/* <div style={{ padding: "20px" }}> */}
-        <div style={{ backgroundColor: "#023932", padding: "0.8rem 0" }}>
-          <Image
-            src="/images/logo/Ivory-Guide-Horizontal-Logo-White.png"
-            alt="Logo"
-            width={"210"}
-            height={"35"}
-            className="relative"
+      <div style={{ backgroundColor: "#023932", padding: "1rem 0" }}></div>
+      <div className="flex ml-4 mr-4 mt-3 mb-3 justify-content-between">
+        <Image
+          src="/images/logo/Ivory-Guide-PDF-Logo.png"
+          alt="Logo"
+          width={"360"}
+          height={"63"}
+          className="relative"
+        />
+        <div className="flex flex-column font-semibold">
+          <div>{name}</div>
+          {/* <div>User Address</div>
+          <div className="mt-2">phone</div> */}
+          <div>{email}</div>
+        </div>
+      </div>
+
+      <div className="flex ml-4 mr-4 justify-content-between">
+        <div>
+          <div>Patient Name</div>
+          <div>Patient Address</div>
+        </div>
+        <div>Date: {currentDate}</div>
+      </div>
+
+      <div
+        style={{ borderTop: "2px solid #023932" }}
+        className="flex mx-4 my-2 justify-content-between"
+      >
+        <div className="flex flex-column py-2">
+          <div className="absolute pt-2 pb-2">
+            Please see summary for{" "}
+            <span className="font-semibold">{calculatorType}</span> calculator.
+            <p className="my-2">
+              exported on{" "}
+              <span className="font-semibold">
+                {currentDate} {currentDateTime}
+              </span>
+              .
+            </p>
+          </div>
+        </div>
+        <div className="mt-7">
+          <TeethSelector
+            showLabel={false}
+            selectedSites={selectedSites}
+            onSiteChange={() => {}}
           />
         </div>
+      </div>
 
-        <div style={{ display: "grid", padding: "1rem" }}>
-          <div style={{ marginLeft: "20rem" }}>
-            <FormField label="Name" />
-            <FormField label="Address" />
-            <FormField label="City, State, Zip" />
-            <FormField label="Phone" />
-            <FormField label="Email" />
-            <FormField label="Date" />
-          </div>
-          <div style={{ marginTop: "2rem", marginRight: "20rem" }}>
-            <FormField label="Recipient Name"/>
-            <FormField label="Address" />
-            <FormField label="City, State, Zip" />
-          </div>
-        </div>
+      <div style={{ display: "grid", padding: "1rem" }}>
+        <InputSummary selectedSites={selectedSites} sitesData={sitesData} />
+      </div>
 
-        <div style={{ display: "grid", padding: "1rem" }}>
-          <div style={{ width: "33.3%" }}>
-            <FormField label="Dear" labelStyle={{minWidth: "50px"}} />
-          </div>
-          <TeethSelector
-              selectedSites={selectedSites}
-              onSiteChange={() => {}}
-            />
-          <p>
-            Thank you for referring patient
-              <input
-                type="text"
-                style={{
-                  border: "none",
-                  borderBottom: "1px solid #000",
-                  outline: "none",
-                }}
-              />
-            and using our services.
-          </p>
-
-          {selectedSites.map((site: Site) => {
-            const questionnaire: InputDetail[] =
-              sitesData[site.name]?.inputDetails || [];
-            return (
-              <React.Fragment key={site.key}>
-                <h3>{site.name}</h3>
-                {questionnaire.map((data: InputDetail, index: number) => {
-                  return (
-                    <>
-                      {data.answer && (
-                        <div
-                          className={`flex ${
-                            index === 0 && "border-top-1"
-                          } border-bottom-1 surface-border`}
-                          key={`${site.key}-${index}`}
-                        >
-                          <span className="flex-1 border-left-1 border-right-1 surface-border p-2">
-                            {data.question}
-                          </span>
-                          <span className="flex-1 border-right-1 surface-border p-2">
-                            {data.answer}
-                          </span>
-                        </div>
-                      )}
-                    </>
-                  );
-                })}
-              </React.Fragment>
-            );
-          })}
-
-          <label style={{ paddingTop: "0.5rem" }}>Implant Placed:</label>
-          <label style={{ paddingTop: "0.5rem" }}>Selected Items:</label>
-        </div>
-      {/* </div> */}
-
-      {/* <div style={{ padding: "20px" }}> */}
-        <div style={{ display: "grid", padding: "1rem" }}>
-          <>
-            {componentSummary.map((data: ItemData, i: number) => (
-              <Item
-                key={`${data.label}-${i}`}
-                label={data.label}
-                info={data.info}
-                quantityVisibilityState={QUANTITY_VISIBILITY_STATE.SHOW}
-                isFirst={i === 0}
-              />
+      <div style={{ display: "grid", padding: "1rem" }}>
+        { (componentSummary && componentSummary.length) ? <table className={cx("striped-table")}>
+          <thead>
+            <tr>
+              <h3>Summary:</h3>
+            </tr>
+            <tr>
+              {["Description", "Name", "Amount"].map(
+                (columnName: string, index: number) => (
+                  <th key={index}>{columnName}</th>
+                )
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {componentSummary.map((data: any, summaryidx: number) => (
+              <tr
+                key={`${data.description}-${summaryidx}`}
+                className={cx(summaryidx % 2 === 0 ? "even" : "odd")}
+              >
+                <td>{data.description}</td>
+                <td>
+                  <a href={data.link} target="_blank">
+                    {data.name}
+                  </a>
+                </td>
+                <td>{data.amount}</td>
+              </tr>
             ))}
-          </>
+          </tbody>
+        </table> : null}
 
-          <p style={{ paddingTop: "0.5rem" }}>
-            Notes: There was bone reduction performed in this case. No MUA’s
-            were placed. Other:
-          </p>
-          <p style={{ paddingTop: "0.5rem" }}>
-            Please do not hesitate to reach out to our office with further
-            questions. Our contact information is at the top of this form.
-          </p>
-          <label style={{ paddingTop: "0.5rem" }}>
-            Sincerely,
-            <input
-              type="text"
-              style={{
-                border: "none",
-                borderBottom: "1px solid #000",
-                outline: "none",
-              }}
-            />
-          </label>
+        <div className="flex flex-column mt-5">
+          <div>Thank You,</div>
+          <div className="mt-5">{name}</div>
         </div>
-      {/* </div> */}
+      </div>
     </>
   );
-  return <PDFExport pdfContent={dynamicContent} />;
 };
 
 export default PdfContent;
