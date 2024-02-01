@@ -85,7 +85,41 @@ export const userApiSlice = apiSlice.injectEndpoints({
 				return res.status === 'Success' ? res.data : res.status;
 			},
     }),
-
+    getUserInfo: builder.query({
+      query: () => ({
+        url: `/user-info`,
+        method: 'GET',
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+    }),
+    putUpdateUserInfo: builder.mutation({
+      query: (body) => ({
+        url: '/update-user-info',
+        method: 'PUT',
+        body: body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+    }),
+    postSendResetPassword: builder.mutation({
+      query: () => ({
+        url: '/send-reset-password',
+        method: 'POST',
+        
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+    }),
 	}),
 	overrideExisting: true
 });

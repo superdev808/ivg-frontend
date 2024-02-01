@@ -2,8 +2,9 @@
 import styles from '@/components/secure/settings/Settings.module.scss';
 import classNames from 'classnames/bind';
 import SettingsMenu from './SettingsMenu';
-import SettingsForm from './SettingsForm';
+import SettingsUserInfoForm from './SettingsUserInfoForm';
 import { useState } from 'react';
+import SettingsUserSecurityForm from './SettingsUserSecurityForm';
 const cx = classNames.bind(styles);
 
 export default function SettingsContainers() {
@@ -12,11 +13,11 @@ export default function SettingsContainers() {
 		{id:'organization',  label: 'Organization', icon: 'pi pi-fw pi-globe' },
 		{id:'password',  label: 'Password & Security', icon: 'pi pi-fw pi-lock' },
 	];
-	const [currentSetting, setCurrentSetting] = useState(menuItems[0]);
+	const [currentSetting, setCurrentSetting] = useState(menuItems[0].id);
 
 	const onSelect = (item) => {
-		console.log(item)
-		setCurrentSetting(item);
+		
+		setCurrentSetting(item.id);
 	}
 
 	return (
@@ -31,7 +32,8 @@ export default function SettingsContainers() {
 						<SettingsMenu active={currentSetting} menuItems={menuItems} onSelect={onSelect}/>
 					</div>
 					<div className="col ml-6 p-4  bg-white border-round-xl	">
-						<SettingsForm currentSetting={currentSetting} />
+						{currentSetting === menuItems[0].id && <SettingsUserInfoForm />}
+						{currentSetting === menuItems[2].id && <SettingsUserSecurityForm />}
 					</div>
 				</div>
 			</div>
