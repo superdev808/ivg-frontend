@@ -63,7 +63,7 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 	];
 
 	const rightNavLinks: NavLink[] = [
-		// {id: 'register', title: 'Register', link: '/signup', icon: PrimeIcons.USER},
+		{ id: 'faq', title: 'FAQ', link: '/faq', icon: PrimeIcons.QUESTION_CIRCLE },
 		{ id: 'contact', title: 'Contact Us', link: '/contact', icon: PrimeIcons.PHONE },
 		{ id: 'register', title: 'Register', link: '/register',icon: PrimeIcons.USER },
 		{ id: 'login', title: 'Login', link: '/login',icon: PrimeIcons.SIGN_IN },
