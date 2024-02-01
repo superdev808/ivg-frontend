@@ -63,11 +63,16 @@ export interface SiteData {
   };
 }
 
+export interface KeyValuePair {
+  [key: string]: string;
+}
+
 export interface InputOutputValues {
   name: string;
   text: string;
   calculator: string;
   outputFrom?: string;
+  isCommon?: boolean;
 }
 
 export interface AutoPopulateData {
@@ -102,116 +107,43 @@ export const AUTO_POPULATE_OPTIONS: RadioButtonOption[] = [
   },
 ];
 
-export interface ProcedureRequest {
-  type: PROCEDURES;
-  input: InputOutputValues[];
-}
-interface RequestParams {
-  [key: string]: ProcedureRequest;
-}
-export const ALLONX_REQUEST_PARAMS: RequestParams = {
-  [PROCEDURES.SURGERY]: {
-    type: PROCEDURES.SURGERY,
-    input: [
-      {
-        name: "Implant Brand",
-        text: "Implant Brand",
-        calculator: "DrillKitAndSequence",
-      },
-      {
-        name: "Implant Model",
-        text: "Implant Model",
-        calculator: "DrillKitAndSequence",
-      },
-      {
-        name: "Implant Diameter",
-        text: "Implant Diameter",
-        calculator: "DrillKitAndSequence",
-      },
-      {
-        name: "Implant Platform",
-        text: "Implant Platform",
-        calculator: "DrillKitAndSequence",
-      },
-      {
-        name: "Implant Length",
-        text: "Implant Length",
-        calculator: "DrillKitAndSequence",
-      },
-      {
-        name: "Implant Surface Treatment",
-        text: "Implant Surface Treatment",
-        calculator: "DrillKitAndSequence",
-      },
-      {
-        name: "Select Drill Kit",
-        text: "Select Drill Kit",
-        calculator: "DrillKitAndSequence",
-      },
-      {
-        name: "Will you perform bone reduction?",
-        text: "Will you perform bone reduction?",
-        calculator: "BoneReduction",
-        outputFrom: "DrillKitAndSequence",
-      },
-      {
-        name: "Authentic or Generic?",
-        text: "Authentic or Generic?",
-        calculator: "MasterImplantDriver",
-        outputFrom: "BoneReduction",
-      },
-      {
-        name: "Abutment Type",
-        text: "Abutment Type",
-        calculator: "MasterImplantDriver",
-      },
-      {
-        name: "Driver Length",
-        text: "Driver Length",
-        calculator: "MasterImplantDriver",
-      },
-      {
-        name: "Machine or Manual?",
-        text: "Machine or Manual?",
-        calculator: "MasterImplantDriver",
-      },
-      {
-        name: "Do you need to purchase materials for chairside pick-up?",
-        text: "Do you need to purchase materials for chairside pick-up?",
-        calculator: "ChairSidePickUp",
-        outputFrom: "MasterImplantDriver",
-      },
-      {
-        name: "Do you need to purchase an implant?",
-        text: "Do you need to purchase an implant?",
-        calculator: "ImplantPurchase",
-        outputFrom: "ChairSidePickUp",
-      },
-      {
-        name: "",
-        text: "",
-        calculator: "ImplantPurchase",
-        outputFrom: "ImplantPurchase",
-      },
-    ],
+export const DENTAL_IMPLANT_PROCEDURE_OPTIONS: RadioButtonOption[] = [
+  {
+    id: "DirectToImplant",
+    name: "dentalImplantProcedure",
+    value: "Direct to implant",
   },
-  [PROCEDURES.RESTORATIVE]: {
-    type: PROCEDURES.RESTORATIVE,
-    input: [],
+  {
+    id: "MUAs",
+    name: "dentalImplantProcedure",
+    value: "MUAs",
   },
-  [PROCEDURES.SURGERY_AND_RESTORATIVE]: {
-    type: PROCEDURES.SURGERY_AND_RESTORATIVE,
-    input: [],
-  },
-};
+];
 
-//TODO: Will be replaced by a function call to handle other colletions as well.
-export const responseOrder: string[] = [
-  "DrillKitAndSequence",
-  "BoneReduction",
-  "MasterImplantDriver",
-  "ChairSidePickUp",
-  "ImplantPurchase",
+export const MUA_OPTIONS: RadioButtonOption[] = [
+  {
+    id: "MUA1",
+    name: "MUA",
+    value: "Yes",
+  },
+  {
+    id: "MUA2",
+    name: "MUA",
+    value: "No",
+  },
+];
+
+export const SITE_SPECIFIC_REPORT_OPTIONS: RadioButtonOption[] = [
+  {
+    id: "customReportOption1",
+    name: "customReportOption",
+    value: "Yes",
+  },
+  {
+    id: "customReportOption2",
+    name: "customReportOption",
+    value: "No",
+  },
 ];
 
 export const ignoreListForMultiples: string[] = [
@@ -224,3 +156,9 @@ export const ignoreListForMultiples: string[] = [
   "teflon tape",
   "material to close screw access hole",
 ];
+
+export const TEXT_DENTAL_IMPLANT_PROCEDURE =
+  "Are you restoring with multi-unit abutments (MUAs) or directly to the implant?";
+
+export const TEXT_MUA_STATUS =
+  "Are the multi-unit abutments already connected to the implants?";
