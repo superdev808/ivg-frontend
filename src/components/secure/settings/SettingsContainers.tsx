@@ -25,18 +25,12 @@ export default function SettingsContainers() {
 		<>
 			<div
 				id="container"
-				className="nav-offset container flex justify-content-center">
+				className="nav-offset container flex justify-content-center overflow-auto">
 				<div
 					id="wrapper"
-					className={cx('settings', 'wrapper grid m-0 my-4')}>
-					<div className={cx('col-3 p-4 bg-white  border-right-1		')}>
-						<SettingsMenu active={currentSetting} menuItems={menuItems} onSelect={onSelect}/>
-					</div>
-					<div className="col ml-6 p-4  bg-white border-round-xl	">
-						{currentSetting === menuItems[0].id && <SettingsUserInfoForm />}
-						{currentSetting === menuItems[1].id && <SettingsUserOrgForm />}
-						{currentSetting === menuItems[2].id && <SettingsUserSecurityForm />}
-					</div>
+					className={cx('settings', 'wrapper grid m-0 my-4 p-0 justify-content-center ')}>
+<SettingsUserInfoForm />
+
 				</div>
 			</div>
 		</>

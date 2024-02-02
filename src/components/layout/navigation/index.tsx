@@ -63,13 +63,15 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 	];
 
 	const rightNavLinks: NavLink[] = [
-		{ id: 'faq', title: 'FAQ', link: '/faq', icon: PrimeIcons.QUESTION_CIRCLE },
+		
 		{ id: 'contact', title: 'Contact Us', link: '/contact', icon: PrimeIcons.PHONE },
 		{ id: 'register', title: 'Register', link: '/register',icon: PrimeIcons.USER },
 		{ id: 'login', title: 'Login', link: '/login',icon: PrimeIcons.SIGN_IN },
 
 		// Protected Links
-		// {id: 'signout', title: 'Sign Out', onClick:onSignOut,  icon: PrimeIcons.SIGN_OUT, secure: true}
+		{ id: 'help', title: 'Help', link: '/help', icon: PrimeIcons.QUESTION_CIRCLE, secure: true },
+		{id:'settings', title: 'Settings', link: '/settings', icon: PrimeIcons.USER, secure: true},
+		{id: 'signout', title: 'Sign Out', onClick:onSignOut,  icon: PrimeIcons.SIGN_OUT, secure: true}
 	];
 
 	const avatar = (

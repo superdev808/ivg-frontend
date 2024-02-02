@@ -40,6 +40,7 @@ $title-font-size: 1.5rem;
     .form-header{
         display: flex;
         flex-direction: column;
+        // padding: 0 1rem;
         .form-title {
             font-size: $title-font-size;
             font-weight:semi-bold;
