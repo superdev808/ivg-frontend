@@ -49,28 +49,25 @@ const PDFExport: React.FC<any> = ({ children }) => {
               body: formData,
             }
           );
-
-          if (toastRef.current) {
-            if (!response.ok) {
-              response.json().then((res: any) => {
-                (toastRef.current as any).show({
-                  severity: "error",
-                  summary: res.status,
-                  detail: res.message,
-                  life: 5000,
-                });
-              });
-              return;
-            } else {
-              const { data, status } = await response.json();
+          if (!response.ok) {
+            response.json().then((res: any) => {
               (toastRef.current as any).show({
-                severity: "success",
-                summary: status,
-                detail: data,
+                severity: "error",
+                summary: res.status,
+                detail: res.message,
                 life: 5000,
               });
-              return;
-            }
+            });
+            return;
+          } else {
+            const { data, status } = await response.json();
+            (toastRef.current as any).show({
+              severity: "success",
+              summary: status,
+              detail: data,
+              life: 5000,
+            });
+            return;
           }
         }
       } catch (error) {
@@ -81,7 +78,7 @@ const PDFExport: React.FC<any> = ({ children }) => {
 
   return (
     <>
-      <div style={{ display: "block" }}>
+      <div style={{ display: "none" }}>
         <div ref={contentRef}>{children}</div>
       </div>
       <div

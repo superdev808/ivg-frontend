@@ -169,7 +169,7 @@ const PdfContent: React.FC<any> = ({
         { (componentSummary && componentSummary.length) ? <table className={cx("striped-table")}>
           <thead>
             <tr>
-              <h3>Summary:</h3>
+              <h3 className="my-0 pb-1">Summary:</h3>
             </tr>
             <tr>
               {["Description", "Name", "Amount"].map(
