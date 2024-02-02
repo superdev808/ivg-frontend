@@ -61,7 +61,7 @@ export const RegisterFormComponent = () => {
 			<div className={cx(getFormClass(2), 'formComponent')}>
 				<RegisterComplete/>
 			</div>
-			<div className={cx(getFormClass(0), 'formComponent')}>
+			<div className={cx(getFormClass(3), 'formComponent')}>
 				<RegisterError />
 			</div>
 		</div>
