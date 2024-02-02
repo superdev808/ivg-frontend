@@ -36,7 +36,7 @@ export const ResetSuccess = () => {
 				<div className="flex justify-content-center mt-8">
 					
 						<Button
-						onClick={() =>logout}
+						onClick={() =>logout()}
 							label="Return to login"
 							className=" p-button-rounded bg-secondary "
 						/>
