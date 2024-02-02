@@ -162,3 +162,160 @@ export const TEXT_DENTAL_IMPLANT_PROCEDURE =
 
 export const TEXT_MUA_STATUS =
   "Are the multi-unit abutments already connected to the implants?";
+
+export const BRAND_IMAGES = {
+  "AB Dental":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/AB+Dental.png",
+  "Ace Southern":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Ace+Southern.jpeg",
+  Adin: "",
+  AlfaGate:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/AlfaGate.png",
+  "Alpha Bio Tec":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Alpha+Bio+Tec.png",
+  "American Dental Implant":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/American+Dental+Implant.jpeg",
+  Argon:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Argon.jpeg",
+  "Avia Biomed":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Avia+Biomed.png",
+  "B&W Implant System":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/B%26W+Implant+System.jpeg",
+  BHI: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/BHI.webp",
+  Bicon:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Bicon.png",
+  BioHorizons:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/BioHorizons.png",
+  Biomedical: "",
+  "Biotech Dental USA": "",
+  "Blue Sky Bio":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Blue+Sky+Bio.png",
+  Camlog:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Camlog.png",
+  Cortex:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Cortex.jpeg",
+  "Cowellmedi Co. LTD":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Cowellmedi+Co.+LTD.jpeg",
+  DSI: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/DSI.jpeg",
+  "DSP Biomedical":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/DSP+Biomedical.jpeg",
+  "Dental-Pro":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Dental-Pro.png",
+  Dentis:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Dentis.jpg",
+  Dentium:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Dentium.png",
+  "Dentsply Sirona":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Dentsply+Sirona.svg",
+  "Dio Implant":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Dio+Implant.png",
+  "Ditron Dental":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Ditron+Dental.jpeg",
+  Euroteknika:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Euroteknika.webp",
+  "GDT Dental Implants":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/GDT+Dental+Implants.png",
+  GMI: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/GMI.png",
+  Glidewell:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Glidewell.png",
+  "Hi-Tec":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Hi-Tec.jpeg",
+  "Hiossen (Osstem)":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Hiossen+(Osstem).png",
+  "I Do Biotech":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/I+Do+Biotech.png",
+  "IBS Implant (Innobiosurg)":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/IBS+Implant+(Innobiosurg).png",
+  "Implant Club":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Implant+Club.png",
+  "Implant Direct":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Implant+Direct.png",
+  "Implant Logistics":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Implant+Logistics.jpeg",
+  "Implant Part": "",
+  "Implant Vision": "",
+  JDentalCare:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/JDentalCare.jpeg",
+  "Keystone Dental":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Keystone+Dental.jpeg",
+  "Little Implant Company":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Little+Implant+Company.jpeg",
+  MIS: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/MIS.png",
+  MegaGen:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/MegaGen.jpeg",
+  NeoBiotech:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/NeoBiotech.png",
+  Neodent:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Neodent.jpeg",
+  Neoss:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Neoss.jpeg",
+  "Nobel Biocare":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Nobel+Biocare.png",
+  "Noris Medical":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Noris+Medical.png",
+  Nova: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Nova.png",
+  "Oco Biomedical":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Oco+Biomedical.png",
+  OsseoDent:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/OsseoDent.webp",
+  Osstem:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Osstem.jpeg",
+  "OsteoReady LLC":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/OsteoReady+LLC.jpeg",
+  "Paragon Implant Company":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Paragon+Implant+Company.webp",
+  "Park Dental Implants":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Park+Dental+Implants.png",
+  Ritter:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Ritter.png",
+  "S.I.N.":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/S.I.N..jpeg",
+  "SGS Dental":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/SGS+Dental.png",
+  "SIS (Shinhung Implant System)":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/SIS+(Shinhung+Implant+System).png",
+  "Sewon Medix":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Sewon+Medix.jpeg",
+  "Sigma Impants":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Sigma+Impants.webp",
+  "Southern Implants":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Southern+Implants.jpg",
+  "Steri-Oss":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Steri-Oss.png",
+  Sterngold:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Sterngold.png",
+  Straumann:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Straumann.png",
+  Surgikor:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Surgikor.jpeg",
+  "Sweden & Martina":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Sweden+%26+Martina.png",
+  "Swiss Medical":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Swiss+Medical.png",
+  Sydent:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Sydent.jpeg",
+  "TAG Dental":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/TAG+Dental.png",
+  "Tatum Surgical":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Tatum+Surgical.jpeg",
+  "Thommen Medical":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Thommen+Medical.jpeg",
+  "Trinon Titanium":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Trinon+Titanium.jpg",
+  Uris: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Uris.png",
+  ZimVie:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/ZimVie.png",
+  "ZimVie (Biomet 3i)":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/ZimVie.png",
+  "ZimVie (Biomet)":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/ZimVie.png",
+  "ZimVie (Calcitek)":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/ZimVie.png",
+  "ZimVie (Zimmer)":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/ZimVie.png",
+  "Zimmer Dental":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/ZimVie.png",
+  "Zimmer Dental (Biomet 3i)":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/ZimVie.png",
+  msdi: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/msdi.png",
+};
