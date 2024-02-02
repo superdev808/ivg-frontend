@@ -11,28 +11,24 @@ import Footer from '@/components/layout/footer';
 import Loading from '@/components/layout/loading';
 export const dynamic = 'force-dynamic';
 import { redirect } from "next/navigation";
+import { BYPASS_ROUTES, PUBLIC_ROUTES } from '@/contants/routes';
 
 
 export default function PublicLayout({ children }: PropsWithChildren) {
 	const activePath = usePathname();
 	const [isLoading, setIsLoading] = React.useState(true);
 	const [simpleLayout, setSimpleLayout] = React.useState(false);
-	const [hideLayout, setHideLayout] = React.useState(false);
 
 	const {isLoading:authLoading, authenticated} = useAppSelector((state) => state.auth);
 	const bypassAuth = ['/reset-password/'];
 	useEffect(() => {
-		
-		
 		if (authLoading) return
 
-
-
-		if (authenticated && !bypassAuth.includes(activePath)) {
+		if (authenticated && !BYPASS_ROUTES.includes(activePath)) {
 			return redirect("/calculators");
 
 		}
-		if (['/login/', '/register/','/verify/','/reset-password/','/forgot-password/'].includes(activePath)) {
+		if (PUBLIC_ROUTES.includes(activePath)) {
 			setSimpleLayout(true);
 		}else {
 			setSimpleLayout(false);
@@ -40,7 +36,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
 
 		
 		setIsLoading(false);
-	}, [activePath, authLoading]);
+	}, [activePath, authLoading]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
 	if (isLoading || authLoading) {
