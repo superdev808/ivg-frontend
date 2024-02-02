@@ -3,10 +3,12 @@ import classNames from 'classnames/bind';
 import { Image } from 'primereact/image';
 import Link from 'next/link';
 import { Button } from 'primereact/button';
+import useLogout from '@/hooks/useLogout';
 
 const cx = classNames.bind(styles);
 
 export const ResetInvalid = () => {
+	const logout = useLogout();
 	return (
 		<>
 			<div className="flex flex-column w-full md:w-6 text-center">
@@ -38,12 +40,13 @@ export const ResetInvalid = () => {
 				</span>
 
 				<div className="flex justify-content-center mt-8">
-					<Link href={`/login`}>
+				
 						<Button
+						onClick={() =>logout()}
 							label="Return to login"
 							className=" p-button-rounded bg-secondary "
 						/>
-					</Link>
+				
 				</div>
 			</div>
 		</>

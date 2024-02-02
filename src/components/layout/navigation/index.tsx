@@ -120,7 +120,7 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 		{
 			label: 'Help',
 			icon: 'pi pi-question',
-			url: '#',
+			url: '/help',
 		},
 		{
 			separator: true,
