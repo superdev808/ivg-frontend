@@ -20,7 +20,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
 	const [simpleLayout, setSimpleLayout] = React.useState(false);
 
 	const {isLoading:authLoading, authenticated} = useAppSelector((state) => state.auth);
-	const bypassAuth = ['/reset-password/'];
+
 	useEffect(() => {
 		if (authLoading) return
 
@@ -34,7 +34,6 @@ export default function PublicLayout({ children }: PropsWithChildren) {
 			setSimpleLayout(false);
 		}
 
-		
 		setIsLoading(false);
 	}, [activePath, authLoading]); // eslint-disable-line react-hooks/exhaustive-deps
 
