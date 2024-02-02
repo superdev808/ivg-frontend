@@ -16,6 +16,7 @@ import Quiz from "../../../quiz";
 import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import AutoPopulatePromt from "./AutoPopulatePromt";
 import Item from "@/components/calculator/AllOnX/Item";
+import { Divider } from "primereact/divider";
 
 interface InputProps {
   site: Site;
@@ -75,6 +76,8 @@ const Questionnaire: React.FC<InputProps> = ({
   const [autoPopulate, setAutoPopulate] = useState<string>(
     AUTO_POPULATE_OPTIONS[1].value
   );
+  const [isAutoPopulatedAnswersChanged, setIsAutoPopulatedAnswersChanged] =
+    useState<boolean>(false);
   const toastRef = useRef(null);
 
   useEffect(() => {
@@ -169,6 +172,9 @@ const Questionnaire: React.FC<InputProps> = ({
 
   const handleSelectAnswer = (index: number) => (e: any) => {
     setAutoQuestions(null);
+    if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value) {
+      setIsAutoPopulatedAnswersChanged(true);
+    }
     if (e.value === "" && questions[index].name === "") {
       const promise = new Promise((resolve) => {
         setLevel(index);
@@ -187,9 +193,9 @@ const Questionnaire: React.FC<InputProps> = ({
     onInputSelect(site, questions[index], newAnswers[index]);
   };
 
-  const handlePopulateResponse = (e: RadioButtonChangeEvent) => {
-    const value = e.value;
+  const handlePopulateResponse = (value: string) => {
     setAutoPopulate(value);
+    setIsAutoPopulatedAnswersChanged(false);
     if (value === AUTO_POPULATE_OPTIONS[0].value) {
       onAutopopulate({ site, questions, answerOptions, answers });
     }
@@ -235,6 +241,15 @@ const Questionnaire: React.FC<InputProps> = ({
                 </div>
               )}
 
+              {quiz.displayCalculatorName && (
+                <Divider align="left">
+                  <div className="inline-flex align-items-center">
+                    <i className="pi pi-calculator mr-2"></i>
+                    <b>{quiz.displayCalculatorName}</b>
+                  </div>
+                </Divider>
+              )}
+
               {!!(quiz.text && quiz.name) &&
                 !!answerOptions[index] &&
                 !noAvailableOptions && (
@@ -256,6 +271,7 @@ const Questionnaire: React.FC<InputProps> = ({
           <AutoPopulatePromt
             autoPopulate={autoPopulate}
             onPopulateResponse={handlePopulateResponse}
+            showRefreshButton={isAutoPopulatedAnswersChanged}
           />
         )}
       </React.Fragment>

@@ -26,7 +26,10 @@ import {
   getProcedureCollections,
   getProcedureInputsAndResponse,
 } from "@/components/calculator/AllOnX/AllOnXUtills";
-import { InputAndResponse } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
+import {
+  CALCULATOR_NAME_COLLECTION_MAPPINGS,
+  InputAndResponse,
+} from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 import AdditionalInputs from "./AdditionalInputs";
 import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
 import { Button } from "primereact/button";
@@ -61,7 +64,11 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
 
   useEffect(() => {
-    const _collections = getProcedureCollections(procedure, additionalInputs);
+    const _collections = getProcedureCollections(
+      procedure,
+      additionalInputs,
+      !!isCustom
+    );
     setCollections(_collections);
     if (!isCustom) {
       setSelectedCollections(_collections);
@@ -72,7 +79,8 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     const procedureInputsAndResponse = getProcedureInputsAndResponse(
       procedure,
       additionalInputs,
-      selectedCollections
+      selectedCollections,
+      !!isCustom
     );
     setProcedureInputsAndResponse(procedureInputsAndResponse);
   }, [selectedCollections]);
@@ -152,14 +160,15 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     //remove next collection responses
     const responseOrder: string[] =
       procedureInputsAndResponse?.responseOrder || [];
+    const calculators: string[] = responseOrder.map(
+      (key: string) => CALCULATOR_NAME_COLLECTION_MAPPINGS[key]
+    );
     const componentDetails: ComponentDetail = cloneDeep(
       data[site.name].componentDetails
     );
-    const indexOfCollection: number = responseOrder.indexOf(
-      question.calculator
-    );
+    const indexOfCollection: number = calculators.indexOf(question.calculator);
     if (indexOfCollection !== -1) {
-      const keysToRemove: string[] = responseOrder.slice(indexOfCollection);
+      const keysToRemove: string[] = calculators.slice(indexOfCollection);
       keysToRemove.map((col: string) => {
         delete componentDetails[col];
       });
@@ -264,32 +273,37 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     <div className={" nav-offset flex-grow-1"}>
       <div className="wrapper my-8">
         <div className="flex flex-column p-5 border-round bg-white shadow-1">
-          <h3 className="mt-0 mb-3 text-center">
-            What part of the All-on-X procedure can we help you with?
-          </h3>
-          <div className="mt-0 mb-5 text-center">
-            <SelectButton
-              unselectable={false}
-              value={procedure}
-              onChange={(e) => handleProcedureChange(e)}
-              optionLabel="name"
-              options={procedures}
-            />
-          </div>
-
-          {(procedure === PROCEDURES.RESTORATIVE ||
-            procedure === PROCEDURES.SURGERY_AND_RESTORATIVE) && (
-            <AdditionalInputs
-              textDentalImplantProcedure={TEXT_DENTAL_IMPLANT_PROCEDURE}
-              textMUAStatus={TEXT_MUA_STATUS}
-              showMUAOptions={
-                additionalInputs[DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name] ===
-                DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
-              }
-              additionalInputs={additionalInputs}
-              onInputChange={handleAdditionalInputs}
-            />
+          {!isCustom && (
+            <>
+              <h3 className="mt-0 mb-3 text-center">
+                What part of the All-on-X procedure can we help you with?
+              </h3>
+              <div className="mt-0 mb-5 text-center">
+                <SelectButton
+                  unselectable={false}
+                  value={procedure}
+                  onChange={(e) => handleProcedureChange(e)}
+                  optionLabel="name"
+                  options={procedures}
+                />
+              </div>
+            </>
           )}
+
+          {!isCustom &&
+            (procedure === PROCEDURES.RESTORATIVE ||
+              procedure === PROCEDURES.SURGERY_AND_RESTORATIVE) && (
+              <AdditionalInputs
+                textDentalImplantProcedure={TEXT_DENTAL_IMPLANT_PROCEDURE}
+                textMUAStatus={TEXT_MUA_STATUS}
+                showMUAOptions={
+                  additionalInputs[DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name] ===
+                  DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
+                }
+                additionalInputs={additionalInputs}
+                onInputChange={handleAdditionalInputs}
+              />
+            )}
 
           {isCustom && (
             <CustomCombinationsInputs
