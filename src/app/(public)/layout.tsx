@@ -15,20 +15,23 @@ import { redirect } from "next/navigation";
 
 export default function PublicLayout({ children }: PropsWithChildren) {
 	const activePath = usePathname();
-	const router = useRouter();
 	const [isLoading, setIsLoading] = React.useState(true);
 	const [simpleLayout, setSimpleLayout] = React.useState(false);
 	const [hideLayout, setHideLayout] = React.useState(false);
 
 	const {isLoading:authLoading, authenticated} = useAppSelector((state) => state.auth);
+	const bypassAuth = ['/reset-password/'];
 	useEffect(() => {
+		
+		
 		if (authLoading) return
-		if (authenticated) {
+
+
+
+		if (authenticated && !bypassAuth.includes(activePath)) {
 			return redirect("/calculators");
 
 		}
-
-
 		if (['/login/', '/register/','/verify/','/reset-password/','/forgot-password/'].includes(activePath)) {
 			setSimpleLayout(true);
 		}else {
