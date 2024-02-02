@@ -28,15 +28,13 @@ export const RegisterFormComponent = () => {
 	};
 
 	const onSubmit = (data: any) => {
-
 		if (formStep === 0) {
 			setFormStep(1);
 			setRegisterValues({ ...registerValues, ...data });
 		}
 		if (formStep === 1) {
 			setRegisterValues({ ...registerValues, ...data });
-			postRegisterUser({...registerValues, ...data});
-			
+			postRegisterUser({ ...registerValues, ...data });
 		}
 	};
 
@@ -47,49 +45,25 @@ export const RegisterFormComponent = () => {
 		if (isError) {
 			setFormStep(3);
 		}
-
-
 	}, [isSuccess, isError]);
 
 	return (
-		<>
-			<div className={cx('form-container', 'grid  flex-column justify-content-end')}>
-				<div className={cx(getFormClass(0), 'formComponent', 'col-6 flex justify-content-center')}>
-					<div className="col-9">
-						<FirstForm onSubmit={onSubmit}></FirstForm>
-					</div>
-				</div>
-				<div className={cx(getFormClass(1), 'formComponent', 'col-6 flex justify-content-center')}>
-					<div className="col-9 flex">
-						<SecondForm
-							onSubmit={onSubmit}
-							back={() => setFormStep(0)}
-							isSubmitting={isLoading}></SecondForm>
-					</div>
-				</div>
-				<div className={cx(getFormClass(2), 'formComponent', 'col-6 flex justify-content-center')}>
-					<div className="col-9">
-						<RegisterComplete></RegisterComplete>
-					</div>
-				</div>
-				<div className={cx(getFormClass(3), 'formComponent', 'col-6 flex justify-content-center')}>
-					<div className="col-9">
-						<RegisterError/>
-					</div>
-				</div>
-				<div className="col-12 grid m-0  justify-content-center mb-3 z-2">
-					{formStep === 0 && (
-						<span className="text-center p-0 text-gray-600">
-							Already have an account?{' '}
-							<Link
-								href={'/login'}
-								className="no-underline text-secondary">
-								Sign In
-							</Link>
-						</span>
-					)}
-				</div>
+		<div className='h-full'>
+			<div className={cx(getFormClass(0), 'formComponent')}>
+				<FirstForm onSubmit={onSubmit}></FirstForm>
 			</div>
-		</>
+			<div className={cx(getFormClass(1), 'formComponent')}>
+				<SecondForm
+					onSubmit={onSubmit}
+					back={() => setFormStep(0)}
+					isSubmitting={isLoading}></SecondForm>
+			</div>
+			<div className={cx(getFormClass(2), 'formComponent')}>
+				<RegisterComplete/>
+			</div>
+			<div className={cx(getFormClass(0), 'formComponent')}>
+				<RegisterError />
+			</div>
+		</div>
 	);
 };

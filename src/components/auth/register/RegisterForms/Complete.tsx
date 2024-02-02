@@ -8,9 +8,9 @@ const cx = classNames.bind(styles);
 export const RegisterComplete = () => {
 	return (
 		<>
-			<div className="grid h-full  flex-column  align-items-center m-0 p-0 justify-content-center mt-6 ">
-				<span className="text-6xl mb-6">Thanks for the registration!</span>
-				<span className=''>
+			<div className="grid flex-column justify-content-center h-full align-content-center">
+				<span className="text-6xl mb-6 text-center">Thank you for registering!</span>
+				<span className='text-center'>
 					<i className="pi pi-check-circle text-8xl"></i>
 				</span>
 				<div className="text-2xl text-center my-6">
@@ -19,7 +19,7 @@ export const RegisterComplete = () => {
 						in the email to activate your account.
 					</span>
 				</div>
-				<div className="">
+				<div className="text-center">
                     <Link
                     href={`/login`}
                     >
