@@ -163,7 +163,7 @@ export default function SettingsUserInfoForm() {
 									<span className="text-gray-600">Organization Name:</span> {user.organizationName}
 								</span>
 								<span className="mb-2">
-									<span className="text-gray-600">Location:</span> {user.organizationName}
+									<span className="text-gray-600">Location:</span> {user.organizationState}
 								</span>
 								<span className="mb-4">
 									<span className="text-gray-600">ID #:</span> {user.organizationNumber}
