@@ -92,7 +92,7 @@ const Questionnaire: React.FC<InputProps> = ({
         setAutoQuestions(null);
       }, 1000);
     }
-  }, [autoPopulateData]);
+  }, [autoPopulateData, onAutopopulate]);
 
   useEffect(() => {
     setAnswerOptions([]);

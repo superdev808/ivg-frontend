@@ -73,7 +73,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     if (!isCustom) {
       setSelectedCollections(_collections);
     }
-  }, [procedure, additionalInputs]);
+  }, [procedure, additionalInputs, isCustom]);
 
   useEffect(() => {
     const procedureInputsAndResponse = getProcedureInputsAndResponse(
@@ -83,7 +83,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       !!isCustom
     );
     setProcedureInputsAndResponse(procedureInputsAndResponse);
-  }, [selectedCollections]);
+  }, [additionalInputs, isCustom, procedure, selectedCollections]);
 
   const handleProcedureChange = (e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
