@@ -21,7 +21,7 @@ export interface ProcedureInputsAndResponse {
 }
 
 export const CALCULATORS = {
-  "Drill Kits / Sequences": [
+  "Drill Kits and Drill Sequences": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -100,7 +100,7 @@ export const CALCULATORS = {
       outputFrom: "BoneReduction",
     },
   ],
-  "Implant Drivers": [
+  "Drivers (Restorative, Direct to Implant)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -127,7 +127,7 @@ export const CALCULATORS = {
     },
     {
       name: "Implant Length",
-      text: "Implant Length",
+      text: "Drivers Implant Length",
       calculator: "RestroativeDirectToImplant",
     },
     {
@@ -204,7 +204,7 @@ export const CALCULATORS = {
       outputFrom: "ChairSidePickUp",
     },
   ],
-  "Implants for Purchase": [
+  Implants: [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -231,7 +231,7 @@ export const CALCULATORS = {
     },
     {
       name: "Implant Length",
-      text: "Implant Purchase Implant Length",
+      text: "Implant Length",
       calculator: "Implants",
     },
     {
@@ -251,7 +251,7 @@ export const CALCULATORS = {
       outputFrom: "Implants",
     },
   ],
-  "Master Scanbody": [
+  "Scanbodies (Single Unit)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -288,7 +288,7 @@ export const CALCULATORS = {
       outputFrom: "Scanbodies",
     },
   ],
-  "Scanbody Driver": [
+  "Scanbody Drivers (Direct to Implant)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -325,7 +325,7 @@ export const CALCULATORS = {
       outputFrom: "ScanbodyDriversDirectToImplants",
     },
   ],
-  "Impression Copings": [
+  "Impression Copings (Direct to Implant)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -377,7 +377,7 @@ export const CALCULATORS = {
       outputFrom: "ImpressingCopingsDirectToImplants",
     },
   ],
-  "Temporary Copings": [
+  "Temporary Copings (Direct to Implant)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -449,7 +449,7 @@ export const CALCULATORS = {
       outputFrom: "TemporaryCopingsDirectToImplants",
     },
   ],
-  "Ti Base": [
+  "Ti Bases (Direct to Implant)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -511,7 +511,7 @@ export const CALCULATORS = {
       outputFrom: "TiBasesDirectToImplants",
     },
   ],
-  "Master MUA Scanbody": [
+  "Scanbodies (Mult-Unit Abutments)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -548,7 +548,7 @@ export const CALCULATORS = {
       outputFrom: "ScanbodyMUAs",
     },
   ],
-  "MUA Scanbody Driver": [
+  "Scanbody Drivers (MUAs)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -585,7 +585,7 @@ export const CALCULATORS = {
       outputFrom: "ScanbodyDriversMUAs",
     },
   ],
-  "MUA Impression Copings": [
+  "Impression Copings (Multi-Unit Abutments)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -642,7 +642,7 @@ export const CALCULATORS = {
       outputFrom: "ImpressingCopingsMUAs",
     },
   ],
-  "MUA Temporary Copings": [
+  "Temporary Copings (Multi-Unit Abutments)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -709,7 +709,7 @@ export const CALCULATORS = {
       outputFrom: "TemporaryCopingsMUAs",
     },
   ],
-  "Ti Base (MUA)": [
+  "Ti Bases (Multi-Unit Abutments)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -771,7 +771,7 @@ export const CALCULATORS = {
       outputFrom: "TiBasesMUAs",
     },
   ],
-  MUA: [
+  "Multi-Unit Abutments": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -828,7 +828,7 @@ export const CALCULATORS = {
       outputFrom: "MUAs",
     },
   ],
-  "MUA Driver": [
+  "Drivers (Restorative, on Multi-Unit Abutments)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -874,56 +874,74 @@ export const CALCULATORS = {
 
 export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
   [PROCEDURE_COMBINATIONS.SURGERY]: {
-    "Drill Kits / Sequences": CALCULATORS["Drill Kits / Sequences"],
+    "Drill Kits and Drill Sequences":
+      CALCULATORS["Drill Kits and Drill Sequences"],
     "Bone Reduction Instruments": CALCULATORS["Bone Reduction Instruments"],
-    "Implant Drivers": CALCULATORS["Implant Drivers"],
+    "Drivers (Restorative, Direct to Implant)":
+      CALCULATORS["Drivers (Restorative, Direct to Implant)"],
     "Chairside Pick-Up Materials": CALCULATORS["Chairside Pick-Up Materials"],
-    "Implants for Purchase": CALCULATORS["Implants for Purchase"],
+    Implants: CALCULATORS["Implants"],
   },
   [PROCEDURE_COMBINATIONS.RESTORATIVE_DIRECT_TO_IMPLANT]: {
-    "Master Scanbody": CALCULATORS["Master Scanbody"],
-    "Scanbody Driver": CALCULATORS["Scanbody Driver"],
-    "Impression Copings": CALCULATORS["Impression Copings"],
-    "Temporary Copings": CALCULATORS["Temporary Copings"],
-    "Ti Base": CALCULATORS["Ti Base"],
-    "Implant Drivers": CALCULATORS["Implant Drivers"],
+    "Scanbodies (Single Unit)": CALCULATORS["Scanbodies (Single Unit)"],
+    "Scanbody Drivers (Direct to Implant)":
+      CALCULATORS["Scanbody Drivers (Direct to Implant)"],
+    "Impression Copings (Direct to Implant)":
+      CALCULATORS["Impression Copings (Direct to Implant)"],
+    "Temporary Copings (Direct to Implant)":
+      CALCULATORS["Temporary Copings (Direct to Implant)"],
+    "Ti Bases (Direct to Implant)": CALCULATORS["Ti Bases (Direct to Implant)"],
+    "Drivers (Restorative, Direct to Implant)":
+      CALCULATORS["Drivers (Restorative, Direct to Implant)"],
   },
   [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_NOT_PLACED]: {
-    "Master MUA Scanbody": CALCULATORS["Master MUA Scanbody"],
-    "MUA Scanbody Driver": CALCULATORS["MUA Scanbody Driver"],
-    "MUA Impression Copings": CALCULATORS["MUA Impression Copings"],
-    "MUA Temporary Copings": CALCULATORS["MUA Temporary Copings"],
-    "Ti Base (MUA)": CALCULATORS["Ti Base (MUA)"],
-    MUA: CALCULATORS["MUA"],
-    "MUA Driver": CALCULATORS["MUA Driver"],
-    "Implant Drivers": CALCULATORS["Implant Drivers"],
+    "Scanbodies (Mult-Unit Abutments)":
+      CALCULATORS["Scanbodies (Mult-Unit Abutments)"],
+    "Scanbody Drivers (MUAs)": CALCULATORS["Scanbody Drivers (MUAs)"],
+    "Impression Copings (Multi-Unit Abutments)":
+      CALCULATORS["Impression Copings (Multi-Unit Abutments)"],
+    "Temporary Copings (Multi-Unit Abutments)":
+      CALCULATORS["Temporary Copings (Multi-Unit Abutments)"],
+    "Ti Bases (Multi-Unit Abutments)":
+      CALCULATORS["Ti Bases (Multi-Unit Abutments)"],
+    "Multi-Unit Abutments": CALCULATORS["Multi-Unit Abutments"],
+    "Drivers (Restorative, on Multi-Unit Abutments)":
+      CALCULATORS["Drivers (Restorative, on Multi-Unit Abutments)"],
+    "Drivers (Restorative, Direct to Implant)":
+      CALCULATORS["Drivers (Restorative, Direct to Implant)"],
   },
   [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_PLACED]: {
-    "Master MUA Scanbody": CALCULATORS["Master MUA Scanbody"],
-    "MUA Scanbody Driver": CALCULATORS["MUA Scanbody Driver"],
-    "MUA Impression Copings": CALCULATORS["MUA Impression Copings"],
-    "MUA Temporary Copings": CALCULATORS["MUA Temporary Copings"],
-    "Ti Base (MUA)": CALCULATORS["Ti Base (MUA)"],
-    "Implant Drivers": CALCULATORS["Implant Drivers"],
+    "Scanbodies (Mult-Unit Abutments)":
+      CALCULATORS["Scanbodies (Mult-Unit Abutments)"],
+    "Scanbody Drivers (MUAs)": CALCULATORS["Scanbody Drivers (MUAs)"],
+    "Impression Copings (Multi-Unit Abutments)":
+      CALCULATORS["Impression Copings (Multi-Unit Abutments)"],
+    "Temporary Copings (Multi-Unit Abutments)":
+      CALCULATORS["Temporary Copings (Multi-Unit Abutments)"],
+    "Ti Bases (Multi-Unit Abutments)":
+      CALCULATORS["Ti Bases (Multi-Unit Abutments)"],
+    "Drivers (Restorative, Direct to Implant)":
+      CALCULATORS["Drivers (Restorative, Direct to Implant)"],
   },
 };
 
 export const CALCULATOR_NAME_COLLECTION_MAPPINGS: { [key: string]: string } = {
-  "Drill Kits / Sequences": "DrillKitAndSequence",
+  "Drill Kits and Drill Sequences": "DrillKitAndSequence",
   "Bone Reduction Instruments": "BoneReduction",
-  "Implant Drivers": "RestroativeDirectToImplant",
+  "Drivers (Restorative, Direct to Implant)": "RestroativeDirectToImplant",
   "Chairside Pick-Up Materials": "ChairSidePickUp",
-  "Implants for Purchase": "Implants",
-  "Master Scanbody": "Scanbodies",
-  "Scanbody Driver": "ScanbodyDriversDirectToImplants",
-  "Impression Copings": "ImpressingCopingsDirectToImplants",
-  "Temporary Copings": "TemporaryCopingsDirectToImplants",
-  "Ti Base": "TiBasesDirectToImplants",
-  "Master MUA Scanbody": "ScanbodyMUAs",
-  "MUA Scanbody Driver": "ScanbodyDriversMUAs",
-  "MUA Impression Copings": "ImpressingCopingsMUAs",
-  "MUA Temporary Copings": "TemporaryCopingsMUAs",
-  "Ti Base (MUA)": "TiBasesMUAs",
-  MUA: "MUAs",
-  "MUA Driver": "RestorativeMultiUnitAbutments",
+  Implants: "Implants",
+  "Scanbodies (Single Unit)": "Scanbodies",
+  "Scanbody Drivers (Direct to Implant)": "ScanbodyDriversDirectToImplants",
+  "Impression Copings (Direct to Implant)": "ImpressingCopingsDirectToImplants",
+  "Temporary Copings (Direct to Implant)": "TemporaryCopingsDirectToImplants",
+  "Ti Bases (Direct to Implant)": "TiBasesDirectToImplants",
+  "Scanbodies (Mult-Unit Abutments)": "ScanbodyMUAs",
+  "Scanbody Drivers (MUAs)": "ScanbodyDriversMUAs",
+  "Impression Copings (Multi-Unit Abutments)": "ImpressingCopingsMUAs",
+  "Temporary Copings (Multi-Unit Abutments)": "TemporaryCopingsMUAs",
+  "Ti Bases (Multi-Unit Abutments)": "TiBasesMUAs",
+  "Multi-Unit Abutments": "MUAs",
+  "Drivers (Restorative, on Multi-Unit Abutments)":
+    "RestorativeMultiUnitAbutments",
 };
