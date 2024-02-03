@@ -71,18 +71,27 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
     return input.slice(0, level + 1);
   }, [input, level]);
 
-  const handleSelectAnswer = (index: number) => (e: any) => {
+  const handleSelectAnswer = (index: number) => (value: any) => {
     setLevel(index + 1);
     const newAnswers = answers.slice(0, index);
-    newAnswers[index] = e.value;
+    newAnswers[index] = value;
     setAnswers(newAnswers);
   };
 
+  const handleBack = (index: number) => () => {
+    setLevel(index - 1);
+    const newAnswers = answers.slice(0, index - 1);
+    setAnswers(newAnswers);
+  }
+
   return (
-    <div className="flex w-full justify-content-center mt-6 mb-8 ">
-      <Card className="w-12 flex px-4 py-2 border-round bg-white flex-column ">
+    <div className="flex w-full justify-content-center mb-8 ">
+      <div className="w-12 flex px-4 py-2 border-round bg-white flex-column ">
         <div className="grid">
           {questions.map((quiz, index) => {
+            if (index !== level) {
+              return null;
+            }
             if (answerOptions[index] && answerOptions[index].length === 1 && answerOptions[index][0] === '') {
               if (index <= level && level < input.length && answers[index] !== '') {
                 handleSelectAnswer(index)({ value: '' });
@@ -95,11 +104,12 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
               answers={answerOptions[index]}
               selectedAnswer={answers[index] || null}
               handleSelectAnswer={handleSelectAnswer(index)}
+              handleBack={index > 0 ? handleBack(index): undefined}
               disabled={isLoading}
             />
           })}
         </div>
-        
+
         {itemInfo.length > 0 && <h2>Compatible {calculatorLabel}</h2>}
         {itemInfo.map((item, index) => (
           <DetailView
@@ -111,8 +121,8 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
         <div className="w-12 flex justify-content-center">
           {isLoading && <ProgressSpinner className="w-1" />}
         </div>
-        
-      </Card>
+
+      </div>
     </div>
   );
 }

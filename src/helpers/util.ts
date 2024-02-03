@@ -22,19 +22,19 @@ export const calculatorIO = [
           text: "Implant Brand"
         },
         {
-          name: "Implant System",
-          text: "Implant System"
+          name: "Implant Model",
+          text: "Implant Model"
         },
         {
-          name: "External Diameter",
-          text: "External Diameter"
+          name: "Implant Diameter",
+          text: "Implant Diameter"
         },
         {
-          name: "Platform",
-          text: "Platform"
+          name: "Implant Platform",
+          text: "Implant Platform"
         },
         {
-          name: "Authentic or Generic?",
+          name: "Authentic or Generic",
           text: "Authentic or Generic"
         }
       ],
@@ -42,6 +42,10 @@ export const calculatorIO = [
         {
           name: "Manufacturer",
           text: "Manufacturer"
+        },
+        {
+          name: "Item Name",
+          text: "Item Name"
         },
         {
           name: "Scanbody Item Number",
