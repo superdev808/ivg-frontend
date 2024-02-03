@@ -16,6 +16,13 @@ export interface User {
 	referralSourceOther?: string;
 }
 
+export interface UserInfo {
+	firstName: string;
+	lastName: string;
+	phone: string;
+	email: string;
+}
+
 
 export interface CheckEmail {
     message: string;
