@@ -57,6 +57,11 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "DrillKitAndSequence",
     },
     {
+      name: "Drill Sequence Option",
+      text: "Drill Sequence Option",
+      calculator: "DrillKitAndSequence",
+    },
+    {
       name: "",
       text: "",
       calculator: "DrillKitAndSequence",
@@ -232,6 +237,16 @@ export const CALCULATORS: CollectionsIO = {
     {
       name: "Implant Length",
       text: "Implant Length",
+      calculator: "Implants",
+    },
+    {
+      name: "Implant Form",
+      text: "Implant Form",
+      calculator: "Implants",
+    },
+    {
+      name: "Mount Option",
+      text: "Mount Option",
       calculator: "Implants",
     },
     {
@@ -861,6 +876,31 @@ export const CALCULATORS: CollectionsIO = {
     {
       name: "Driver Length",
       text: "Restorative MUAs Driver Length",
+      calculator: "RestorativeMultiUnitAbutments",
+    },
+    {
+      name: "Design",
+      text: "Restorative MUAs Design",
+      calculator: "RestorativeMultiUnitAbutments",
+    },
+    {
+      name: "MUA Type",
+      text: "Restorative MUAs MUA Type",
+      calculator: "RestorativeMultiUnitAbutments",
+    },
+    {
+      name: "Abutment Angulation",
+      text: "Restorative MUAs Abutment Angulation",
+      calculator: "RestorativeMultiUnitAbutments",
+    },
+    {
+      name: "Diameter",
+      text: "Restorative MUAs Diameter",
+      calculator: "RestorativeMultiUnitAbutments",
+    },
+    {
+      name: "One Piece or Torque Attachment",
+      text: "Restorative MUAs One Piece or Torque Attachment",
       calculator: "RestorativeMultiUnitAbutments",
     },
     {
