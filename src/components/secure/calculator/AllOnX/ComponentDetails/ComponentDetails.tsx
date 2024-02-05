@@ -33,7 +33,7 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
   sitesData,
   responseOrder,
 }: ComponentDetailProps) => {
-  const [componentSummary, setComponentSummary] = useState<any[]>([]);
+  const [componentSummary, setComponentSummary] = useState<ItemData[]>([]);
 
   useEffect(() => {
     let items: ItemData[] = [];

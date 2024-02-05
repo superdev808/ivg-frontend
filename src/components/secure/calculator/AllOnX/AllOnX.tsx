@@ -356,15 +356,13 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                       />
                     </TabPanel>
                   </TabView>
-                  <PDFExport>
-                      <PdfContent
-                        selectedSites={selectedSites}
-                        sitesData={sitesData}
-                        responseOrder={
-                          procedureInputsAndResponse?.responseOrder || []
-                        }
-                      />
-                  </PDFExport>
+                  <PDFExport
+                    selectedSites={selectedSites}
+                    sitesData={sitesData}
+                    responseOrder={
+                      procedureInputsAndResponse?.responseOrder || []
+                    }
+                  ></PDFExport>
                 </div>
               )}
             </div>

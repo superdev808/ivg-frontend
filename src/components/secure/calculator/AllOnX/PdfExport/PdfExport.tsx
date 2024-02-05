@@ -1,13 +1,26 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 // @ts-ignore
 import html2pdf from "html2pdf.js";
 import { Button } from "primereact/button";
 import { getCookie } from "@/helpers/cookie";
 import { Toast } from "primereact/toast";
+import PdfContent, { Site } from "./PdfContent";
+import { SiteData } from "../constants";
 
-const PDFExport: React.FC<any> = ({ children }) => {
+interface PDFExportProps {
+  selectedSites: Site[];
+  sitesData: SiteData;
+  responseOrder: string[];
+}
+
+const PDFExport: React.FC<PDFExportProps> = ({
+  responseOrder,
+  selectedSites,
+  sitesData,
+}) => {
   const contentRef = useRef(null);
   const toastRef = useRef(null);
+  const [time, setTime] = useState<Date | undefined>(undefined);
 
   const ExportAndSendPDF = async (type: "download" | "export" = "download") => {
     const element = contentRef.current;
@@ -24,6 +37,7 @@ const PDFExport: React.FC<any> = ({ children }) => {
         if (type === "download") {
           const pdfInstance = html2pdf(element, options);
           await pdfInstance.output();
+          setTime(new Date());
           (toastRef.current as any).show({
             severity: "success",
             summary: "Success",
@@ -49,6 +63,7 @@ const PDFExport: React.FC<any> = ({ children }) => {
               body: formData,
             }
           );
+          setTime(new Date());
           if (!response.ok) {
             response.json().then((res: any) => {
               (toastRef.current as any).show({
@@ -79,7 +94,14 @@ const PDFExport: React.FC<any> = ({ children }) => {
   return (
     <>
       <div style={{ display: "none" }}>
-        <div ref={contentRef}>{children}</div>
+        <div ref={contentRef}>
+          <PdfContent
+            time={time}
+            selectedSites={selectedSites}
+            sitesData={sitesData}
+            responseOrder={responseOrder}
+          />
+        </div>
       </div>
       <div
         style={{

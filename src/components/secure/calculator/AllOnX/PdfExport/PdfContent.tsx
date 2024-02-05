@@ -27,7 +27,15 @@ export interface Site {
   key: number;
 }
 
-const PdfContent: React.FC<any> = ({
+interface PdfContentProps {
+  time: Date | undefined;
+  selectedSites: Site[];
+  sitesData: SiteData;
+  responseOrder: string[];
+}
+
+const PdfContent: React.FC<PdfContentProps> = ({
+  time,
   responseOrder,
   selectedSites,
   sitesData,
@@ -99,15 +107,15 @@ const PdfContent: React.FC<any> = ({
     setComponentSummary(summaryData);
   }, [sitesData, responseOrder]);
 
-  const currentDate = new Date().toLocaleDateString();
-  const currentDateTime = new Date().toLocaleTimeString("en-US", {
+  const currentDate = time?.toLocaleDateString();
+  const currentDateTime = time?.toLocaleTimeString("en-US", {
     hour12: true,
     hour: "numeric",
     minute: "numeric",
   });
   const calculatorType = `All-On-X`;
-  const name = getCookie('name');
-	const email = getCookie('email');
+  const name = getCookie("name");
+  const email = getCookie("email");
   return (
     <>
       <div style={{ backgroundColor: "#023932", padding: "1rem 0" }}></div>
@@ -166,36 +174,38 @@ const PdfContent: React.FC<any> = ({
       </div>
 
       <div style={{ display: "grid", padding: "1rem" }}>
-        { (componentSummary && componentSummary.length) ? <table className={cx("striped-table")}>
-          <thead>
-            <tr>
-              <h3 className="my-0 pb-1">Summary:</h3>
-            </tr>
-            <tr>
-              {["Description", "Name", "Amount"].map(
-                (columnName: string, index: number) => (
-                  <th key={index}>{columnName}</th>
-                )
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {componentSummary.map((data: any, summaryidx: number) => (
-              <tr
-                key={`${data.description}-${summaryidx}`}
-                className={cx(summaryidx % 2 === 0 ? "even" : "odd")}
-              >
-                <td>{data.description}</td>
-                <td>
-                  <a href={data.link} target="_blank">
-                    {data.name}
-                  </a>
-                </td>
-                <td>{data.amount}</td>
+        {componentSummary && componentSummary.length ? (
+          <table className={cx("striped-table")}>
+            <thead>
+              <tr>
+                <h3 className="my-0 pb-1">Summary:</h3>
               </tr>
-            ))}
-          </tbody>
-        </table> : null}
+              <tr>
+                {["Description", "Name", "Amount"].map(
+                  (columnName: string, index: number) => (
+                    <th key={index}>{columnName}</th>
+                  )
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {componentSummary.map((data: any, summaryidx: number) => (
+                <tr
+                  key={`${data.description}-${summaryidx}`}
+                  className={cx(summaryidx % 2 === 0 ? "even" : "odd")}
+                >
+                  <td>{data.description}</td>
+                  <td>
+                    <a href={data.link} target="_blank">
+                      {data.name}
+                    </a>
+                  </td>
+                  <td>{data.amount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : null}
 
         <div className="flex flex-column mt-5">
           <div>Thank You,</div>
