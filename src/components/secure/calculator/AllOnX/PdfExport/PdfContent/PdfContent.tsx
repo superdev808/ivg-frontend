@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
-import TeethSelector from "../TeethSelector";
 import Image from "next/image";
 import {
   ComponentDetail,
   ItemData,
   ItemInsights,
-  QUANTITY_VISIBILITY_STATE,
   SiteData,
   ignoreListForMultiples,
-} from "../constants";
+} from "../../constants";
 import { cloneDeep } from "lodash";
 import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 import _ from "lodash";
-import InputSummary from "./InputSummary/InputSummary";
-import styles from "./InputSummary/InputSummary.module.scss";
+import styles from "./PdfContent.module.scss";
 import classNames from "classnames/bind";
 import { getCookie } from "@/helpers/cookie";
+import { Divider } from "primereact/divider";
+import TeethSelector from "../../TeethSelector";
+import InputSummary from "../InputSummary/InputSummary";
+import ComponentSummary, { summary } from "../ComponentSummary/ComponentSummary";
 const cx = classNames.bind(styles);
 export interface InputDetail {
   id?: string;
@@ -28,19 +29,21 @@ export interface Site {
 }
 
 interface PdfContentProps {
-  time: Date | undefined;
+  date: Date | undefined;
   selectedSites: Site[];
   sitesData: SiteData;
   responseOrder: string[];
+  isCustomReport: boolean;
 }
 
 const PdfContent: React.FC<PdfContentProps> = ({
-  time,
+  date,
   responseOrder,
   selectedSites,
   sitesData,
+  isCustomReport,
 }) => {
-  const [componentSummary, setComponentSummary] = useState<any[]>([]);
+  const [componentSummary, setComponentSummary] = useState<summary[]>([]);
   useEffect(() => {
     let items: ItemData[] = [];
     Object.keys(sitesData).map((siteName: string) => {
@@ -94,7 +97,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
         );
       });
     });
-    const summaryData = items.flatMap((category: ItemData) => {
+    const summaryData: summary[] = items.flatMap((category: ItemData) => {
       return category.info.map((item: ItemInsights) => {
         return {
           description: category.label,
@@ -107,18 +110,22 @@ const PdfContent: React.FC<PdfContentProps> = ({
     setComponentSummary(summaryData);
   }, [sitesData, responseOrder]);
 
-  const currentDate = time?.toLocaleDateString();
-  const currentDateTime = time?.toLocaleTimeString("en-US", {
+  const currentDate = date?.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const currentDateTime = date?.toLocaleTimeString("en-US", {
     hour12: true,
     hour: "numeric",
     minute: "numeric",
   });
-  const calculatorType = `All-On-X`;
+  const calculatorType = isCustomReport ? `Custom` : `All-On-X`;
   const name = getCookie("name");
   const email = getCookie("email");
   return (
     <>
-      <div style={{ backgroundColor: "#023932", padding: "1rem 0" }}></div>
+      <div  className={cx("bg-color", "px-0 py-3")}></div>
       <div className="flex ml-4 mr-4 mt-3 mb-3 justify-content-between">
         <Image
           src="/images/logo/Ivory-Guide-PDF-Logo.png"
@@ -142,9 +149,9 @@ const PdfContent: React.FC<PdfContentProps> = ({
         </div>
         <div>Date: {currentDate}</div>
       </div>
-
+      <Divider className="bg-color" />
       <div
-        style={{ borderTop: "2px solid #023932" }}
+
         className="flex mx-4 my-2 justify-content-between"
       >
         <div className="flex flex-column py-2">
@@ -169,45 +176,14 @@ const PdfContent: React.FC<PdfContentProps> = ({
         </div>
       </div>
 
-      <div style={{ display: "grid", padding: "1rem" }}>
+      <div className="p-3">
         <InputSummary selectedSites={selectedSites} sitesData={sitesData} />
       </div>
 
-      <div style={{ display: "grid", padding: "1rem" }}>
-        {componentSummary && componentSummary.length ? (
-          <table className={cx("striped-table")}>
-            <thead>
-              <tr>
-                <h3 className="my-0 pb-1">Summary:</h3>
-              </tr>
-              <tr>
-                {["Description", "Name", "Amount"].map(
-                  (columnName: string, index: number) => (
-                    <th key={index}>{columnName}</th>
-                  )
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {componentSummary.map((data: any, summaryidx: number) => (
-                <tr
-                  key={`${data.description}-${summaryidx}`}
-                  className={cx(summaryidx % 2 === 0 ? "even" : "odd")}
-                >
-                  <td>{data.description}</td>
-                  <td>
-                    <a href={data.link} target="_blank">
-                      {data.name}
-                    </a>
-                  </td>
-                  <td>{data.amount}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : null}
+      <div className="p-3">
+        <ComponentSummary summary={componentSummary} />
 
-        <div className="flex flex-column mt-5">
+        <div className="flex flex-column pt-5">
           <div>Thank You,</div>
           <div className="mt-5">{name}</div>
         </div>

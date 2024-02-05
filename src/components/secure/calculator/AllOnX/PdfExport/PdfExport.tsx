@@ -4,40 +4,47 @@ import html2pdf from "html2pdf.js";
 import { Button } from "primereact/button";
 import { getCookie } from "@/helpers/cookie";
 import { Toast } from "primereact/toast";
-import PdfContent, { Site } from "./PdfContent";
+import PdfContent, { Site } from "./PdfContent/PdfContent";
 import { SiteData } from "../constants";
 
 interface PDFExportProps {
   selectedSites: Site[];
   sitesData: SiteData;
   responseOrder: string[];
+  isCustomReport: boolean | undefined;
 }
 
 const PDFExport: React.FC<PDFExportProps> = ({
   responseOrder,
   selectedSites,
   sitesData,
+  isCustomReport,
 }) => {
   const contentRef = useRef(null);
   const toastRef = useRef(null);
-  const [time, setTime] = useState<Date | undefined>(undefined);
+  const [date, setDate] = useState<Date | undefined>(undefined);
 
   const ExportAndSendPDF = async (type: "download" | "export" = "download") => {
     const element = contentRef.current;
     if (element) {
       try {
+        const name = getCookie("name");
+        const email = getCookie("email");
+        const calculatorType = isCustomReport ? `Custom` : `All-On-X`;
+        const filename: string = `${name}-${calculatorType
+        }-Summary`;
         const options = {
-          filename: "exported-document.pdf",
+          filename,
           image: { type: "jpeg", quality: 0.9 },
           html2canvas: { scale: 2 },
           jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
           pagebreak: { before: ".page-break", avoid: ["table", "thead", "tr"] },
         };
+        setDate(new Date());
         // Create an html2pdf instance
         if (type === "download") {
           const pdfInstance = html2pdf(element, options);
           await pdfInstance.output();
-          setTime(new Date());
           (toastRef.current as any).show({
             severity: "success",
             summary: "Success",
@@ -45,17 +52,16 @@ const PDFExport: React.FC<PDFExportProps> = ({
             life: 5000,
           });
         } else if (type === "export") {
-          const name = getCookie("name");
-          const email = getCookie("email");
           const blob = await html2pdf()
             .set(options)
             .from(element)
-            .outputPdf("blob", "my-invoice.pdf");
+            .outputPdf("blob", filename);
 
           const formData = new FormData();
           formData.append("attachment", blob, "exported-document.pdf");
           formData.append("name", name);
           formData.append("email", email);
+          formData.append("calculatorType", calculatorType);
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/sendAllOnXInfo`,
             {
@@ -63,7 +69,6 @@ const PDFExport: React.FC<PDFExportProps> = ({
               body: formData,
             }
           );
-          setTime(new Date());
           if (!response.ok) {
             response.json().then((res: any) => {
               (toastRef.current as any).show({
@@ -93,13 +98,14 @@ const PDFExport: React.FC<PDFExportProps> = ({
 
   return (
     <>
-      <div style={{ display: "none" }}>
+      <div style={{ display: "block" }}>
         <div ref={contentRef}>
           <PdfContent
-            time={time}
+            date={date}
             selectedSites={selectedSites}
             sitesData={sitesData}
             responseOrder={responseOrder}
+            isCustomReport={isCustomReport}
           />
         </div>
       </div>

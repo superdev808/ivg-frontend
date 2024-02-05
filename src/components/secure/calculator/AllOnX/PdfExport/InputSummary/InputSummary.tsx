@@ -37,7 +37,11 @@ const InputSummary: React.FC<InputSummaryProps> = ({
         return (
           <table className={cx("striped-table")} key={`uniqueQuestions-${idx}`}>
             <thead>
-              {idx === 0 && <tr><h3 className="my-0 pb-1">Inputs:</h3></tr>}
+              {idx === 0 && (
+                <tr>
+                  <h3 className="my-0 pb-1">Inputs:</h3>
+                </tr>
+              )}
               <tr>
                 <th>Site Number</th>
                 {questions.map((question: string, index: number) => (
@@ -51,7 +55,7 @@ const InputSummary: React.FC<InputSummaryProps> = ({
                   key={site}
                   className={cx(siteIdx % 2 === 0 ? "even" : "odd")}
                 >
-                  <td>{site.replace("Site","").trim()}</td>
+                  <td>{site.replace("Site", "").trim()}</td>
                   {questions.map((question: string, index: number) => {
                     const item =
                       sitesObj[site].filter(
@@ -64,7 +68,7 @@ const InputSummary: React.FC<InputSummaryProps> = ({
               ))}
             </tbody>
           </table>
-        )
+        );
       })}
     </>
   );

@@ -34,7 +34,6 @@ import AdditionalInputs from "./AdditionalInputs";
 import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
 import { Button } from "primereact/button";
 import PDFExport from "./PdfExport/PdfExport";
-import PdfContent from "./PdfExport/PdfContent";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
 
 interface AllOnXCalculatorProps {
@@ -359,6 +358,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   <PDFExport
                     selectedSites={selectedSites}
                     sitesData={sitesData}
+                    isCustomReport={isCustom}
                     responseOrder={
                       procedureInputsAndResponse?.responseOrder || []
                     }
