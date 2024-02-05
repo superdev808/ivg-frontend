@@ -20,7 +20,7 @@ export interface ProcedureInputsAndResponse {
   [key: string]: CollectionsIO;
 }
 
-export const CALCULATORS = {
+export const CALCULATORS: CollectionsIO = {
   "Drill Kits and Drill Sequences": [
     {
       name: "Implant Brand",
@@ -870,6 +870,208 @@ export const CALCULATORS = {
       outputFrom: "RestorativeMultiUnitAbutments",
     },
   ],
+  "Implant Analogs": [
+    {
+      name: "Implant Brand",
+      text: "Implant Brand",
+      calculator: "ImplantAnalogs",
+      isCommon: true,
+    },
+    {
+      name: "Implant Model",
+      text: "Implant Model",
+      calculator: "ImplantAnalogs",
+      isCommon: true,
+    },
+    {
+      name: "Implant Diameter",
+      text: "Implant Diameter",
+      calculator: "ImplantAnalogs",
+      isCommon: true,
+    },
+    {
+      name: "Implant Platform",
+      text: "Implant Platform",
+      calculator: "ImplantAnalogs",
+      isCommon: true,
+    },
+    {
+      name: "Authentic or Generic",
+      text: "Implant Analogs Authentic or Generic",
+      calculator: "ImplantAnalogs",
+    },
+    {
+      name: "Digital or Lab Analog",
+      text: "Digital or Lab Analog",
+      calculator: "ImplantAnalogs",
+    },
+    {
+      name: "Abutment Height",
+      text: "Implant Analogs Abutment Height",
+      calculator: "ImplantAnalogs",
+    },
+    {
+      name: "",
+      text: "",
+      calculator: "ImplantAnalogs",
+      outputFrom: "ImplantAnalogs",
+    },
+  ],
+  "Implant Screws": [
+    {
+      name: "Implant Brand",
+      text: "Implant Brand",
+      calculator: "ImplantScrews",
+      isCommon: true,
+    },
+    {
+      name: "Implant Model",
+      text: "Implant Model",
+      calculator: "ImplantScrews",
+      isCommon: true,
+    },
+    {
+      name: "Implant Diameter",
+      text: "Implant Diameter",
+      calculator: "ImplantScrews",
+      isCommon: true,
+    },
+    {
+      name: "Implant Platform",
+      text: "Implant Platform",
+      calculator: "ImplantScrews",
+      isCommon: true,
+    },
+    {
+      name: "Authentic or Generic",
+      text: "Implant Screws Authentic or Generic",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "Abutment Type",
+      text: "Implant Screws Abutment Type",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "Design",
+      text: "Implant Screws Design",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "Restoration Connection Type",
+      text: "Restoration Connection Type",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "Restoration Type",
+      text: "Restoration Type",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "Anterior or Posterior",
+      text: "Anterior or Posterior",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "Screw Length",
+      text: "Screw Length",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "Screw Material",
+      text: "Screw Material",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "Abutment Angulation",
+      text: "Implant Screws Abutment Angulation",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "Open or Closed Tray",
+      text: "Implant Screws Open or Closed Tray",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "Collar Height",
+      text: "Implant Screws Collar Height",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "Type of Head",
+      text: "Type of Head",
+      calculator: "ImplantScrews",
+    },
+    {
+      name: "",
+      text: "",
+      calculator: "ImplantScrews",
+      outputFrom: "ImplantScrews",
+    },
+  ],
+  "Healing Abutments": [
+    {
+      name: "Implant Brand",
+      text: "Implant Brand",
+      calculator: "HealingAbutments",
+      isCommon: true,
+    },
+    {
+      name: "Implant Model",
+      text: "Implant Model",
+      calculator: "HealingAbutments",
+      isCommon: true,
+    },
+    {
+      name: "Implant Diameter",
+      text: "Implant Diameter",
+      calculator: "HealingAbutments",
+      isCommon: true,
+    },
+    {
+      name: "Implant Platform",
+      text: "Implant Platform",
+      calculator: "HealingAbutments",
+      isCommon: true,
+    },
+    {
+      name: "Authentic or Generic",
+      text: "Healing Abutments Authentic or Generic",
+      calculator: "HealingAbutments",
+    },
+    {
+      name: "Abutment Height",
+      text: "Healing Abutments Abutment Height",
+      calculator: "HealingAbutments",
+    },
+    {
+      name: "Collar Height",
+      text: "Healing Abutments Collar Height",
+      calculator: "HealingAbutments",
+    },
+    {
+      name: "Emergence Profile",
+      text: "Emergence Profile",
+      calculator: "HealingAbutments",
+    },
+    {
+      name: "Abutment Material",
+      text: "Abutment Material",
+      calculator: "HealingAbutments",
+    },
+    {
+      name: "Abutment Diameter",
+      text: "Healing Abutments Abutment Diameter",
+      calculator: "HealingAbutments",
+    },
+    {
+      name: "",
+      text: "",
+      calculator: "HealingAbutments",
+      outputFrom: "HealingAbutments",
+    },
+  ],
+  "Stock Abutments": [],
 };
 
 export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
