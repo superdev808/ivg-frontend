@@ -1352,7 +1352,7 @@ export const calculatorIO = [
     }
 ];
 
-export const brandImages = {
+export const calculatorImages: any = {
     "ab dental": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/AB+Dental.png",
     "ace southern": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Ace+Southern.jpeg",
     "adin": "",

@@ -106,6 +106,7 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
               handleSelectAnswer={handleSelectAnswer(index)}
               handleBack={index > 0 ? handleBack(index): undefined}
               disabled={isLoading}
+              progress={Math.floor(index / input.length * 100)}
             />
           })}
         </div>
