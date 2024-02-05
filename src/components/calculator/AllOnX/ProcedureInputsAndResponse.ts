@@ -1071,7 +1071,88 @@ export const CALCULATORS: CollectionsIO = {
       outputFrom: "HealingAbutments",
     },
   ],
-  "Stock Abutments": [],
+  "Stock Abutments": [
+    {
+      name: "Implant Brand",
+      text: "Implant Brand",
+      calculator: "StockAbutments",
+      isCommon: true,
+    },
+    {
+      name: "Implant Model",
+      text: "Implant Model",
+      calculator: "StockAbutments",
+      isCommon: true,
+    },
+    {
+      name: "Implant Diameter",
+      text: "Implant Diameter",
+      calculator: "StockAbutments",
+      isCommon: true,
+    },
+    {
+      name: "Implant Platform",
+      text: "Implant Platform",
+      calculator: "StockAbutments",
+      isCommon: true,
+    },
+    {
+      name: "Material",
+      text: "Stock Abutments Material",
+      calculator: "StockAbutments",
+    },
+    {
+      name: "Impression Type",
+      text: "Impression Type",
+      calculator: "StockAbutments",
+    },
+    {
+      name: "Fixation",
+      text: "Fixation",
+      calculator: "StockAbutments",
+    },
+    {
+      name: "Restoration Type",
+      text: "Stock Abutments Restoration Type",
+      calculator: "StockAbutments",
+    },
+    {
+      name: "Hexed or Non-Hexed",
+      text: "Stock Abutments Hexed or Non-Hexed",
+      calculator: "StockAbutments",
+    },
+    {
+      name: "Angulation",
+      text: "Stock Abutments Angulation",
+      calculator: "StockAbutments",
+    },
+    {
+      name: "Abutment Diameter",
+      text: "Stock Abutments Abutment Diameter",
+      calculator: "StockAbutments",
+    },
+    {
+      name: "Collar Height",
+      text: "Stock Abutments Collar Height",
+      calculator: "StockAbutments",
+    },
+    {
+      name: "Abutment Height",
+      text: "Stock Abutments Abutment Height",
+      calculator: "StockAbutments",
+    },
+    {
+      name: "Emergence Profile",
+      text: "Stock Abutments Emergence Profile",
+      calculator: "StockAbutments",
+    },
+    {
+      name: "",
+      text: "",
+      calculator: "StockAbutments",
+      outputFrom: "StockAbutments",
+    },
+  ],
 };
 
 export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
@@ -1146,4 +1227,8 @@ export const CALCULATOR_NAME_COLLECTION_MAPPINGS: { [key: string]: string } = {
   "Multi-Unit Abutments": "MUAs",
   "Drivers (Restorative, on Multi-Unit Abutments)":
     "RestorativeMultiUnitAbutments",
+  "Implant Analogs": "ImplantAnalogs",
+  "Implant Screws": "ImplantScrews",
+  "Healing Abutments": "HealingAbutments",
+  "Stock Abutments": "StockAbutments",
 };
