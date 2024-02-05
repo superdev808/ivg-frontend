@@ -257,12 +257,18 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   const handleCollectionChange = (e: CheckboxChangeEvent) => {
     let _selectedCollections: string[] = [...selectedCollections];
 
-    if (e.checked) _selectedCollections.push(e.value);
-    else
+    if (e.checked) {
+      _selectedCollections.push(e.value);
+    } else {
       _selectedCollections = _selectedCollections.filter(
         (collection) => collection !== e.value
       );
+    }
 
+    if (_selectedCollections.length === 0) {
+      setSelectedSites([]);
+      setSitesData({});
+    }
     setSelectedCollections(_selectedCollections);
   };
 
@@ -316,6 +322,8 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
             <div className="flex flex-column col-12">
               {(!isCustom ||
                 (isCustom &&
+                  procedureInputsAndResponse?.input &&
+                  procedureInputsAndResponse?.input.length > 0 &&
                   siteSpecificReport ===
                     SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
                 <TeethSelector
