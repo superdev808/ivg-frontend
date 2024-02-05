@@ -1,43 +1,22 @@
 'use client';
 
-import React, { PropsWithChildren, use, useEffect } from 'react';
+import React, { PropsWithChildren, use, useEffect, useState } from 'react';
 import Navigation from '@/components/layout/navigation';
-import { useAppSelector } from '@/redux/hooks/hooks';
-
-import { redirect, usePathname } from 'next/navigation';
 import Footer from '@/components/layout/footer';
 import Loading from '@/components/layout/loading';
-export const dynamic = 'force-dynamic';
+import useAuthRedirect from '@/hooks/useAuthRedirect';
 
-export default function PublicLayout({ children }: PropsWithChildren) {
-	const activePath = usePathname();
-	const [isLoading, setIsLoading] = React.useState(true);
-	const {isLoading:authLoading, authenticated} = useAppSelector((state) => state.auth);
-	const [transparentBg, setTransparentBg] = React.useState(false);
-
-	useEffect(() => {
-		if (authLoading) return;
-		if(!authenticated) {
-			return redirect("/login");
-		}
-		if (activePath === '/home/'){
-			setTransparentBg(true);
-		} else {
-			setTransparentBg(false);
-		}
-		setIsLoading(false);
-	}, [activePath,authLoading]); // eslint-disable-line react-hooks/exhaustive-deps
-
-
+export default function ProtectedLayout({ children }: PropsWithChildren) {
+	const {isLoading, layoutStyle} = useAuthRedirect();
 
 	if (isLoading) {
 		return <Loading />;
 	}
 	return (
 		<>
-			<Navigation secure  transparentBg={transparentBg}/>
+			<Navigation secure transparentBg={layoutStyle.transparentBg}/>
 			{children}
-			<Footer extendFooter={true} />
+			<Footer extendFooter={layoutStyle.extendFooter}/>
 		</>
 	);
 }
