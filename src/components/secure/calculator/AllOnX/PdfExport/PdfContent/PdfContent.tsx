@@ -33,7 +33,7 @@ interface PdfContentProps {
   selectedSites: Site[];
   sitesData: SiteData;
   responseOrder: string[];
-  isCustomReport: boolean;
+  isCustomReport: boolean | undefined;
 }
 
 const PdfContent: React.FC<PdfContentProps> = ({

@@ -358,7 +358,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   <PDFExport
                     selectedSites={selectedSites}
                     sitesData={sitesData}
-                    isCustomReport={isCustom}
+                    isCustomReport={!!isCustom}
                     responseOrder={
                       procedureInputsAndResponse?.responseOrder || []
                     }

@@ -98,7 +98,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
 
   return (
     <>
-      <div style={{ display: "block" }}>
+      <div className="hidden">
         <div ref={contentRef}>
           <PdfContent
             date={date}
@@ -110,12 +110,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
         </div>
       </div>
       <div
-        style={{
-          position: "absolute",
-          top: "3px",
-          right: "0",
-        }}
-        className="p-buttonset"
+        className="p-buttonset absolute pt-2 top-0 right-0"
       >
         <Button
           onClick={() => ExportAndSendPDF("download")}
