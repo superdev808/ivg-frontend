@@ -1,19 +1,20 @@
-import { userApiSlice } from '../slices/api/userApiSlice'
+import { publicApiSlice } from '../slices/api/publicApiSlice';
+import { userApiSlice } from '../slices/api/userApiSlice';
 
 // RTK Query Hooks
 
-
 export const {
+	usePostCheckEmailMutation,
+	usePostRegisterUserMutation,
+	useGetVerifyUserQuery,
+	usePostRequestPasswordResetMutation,
+	usePostValidateTokenMutation,
+	usePostResetPasswordMutation,
+	useGetUserInfoQuery,
+	useGetUserInfoAdditionalQuery,
+	usePutUpdateUserInfoMutation,
+	usePostSendResetPasswordMutation,
+	usePostUploadLogoMutation,
+} = userApiSlice;
 
-    usePostCheckEmailMutation,
-    usePostRegisterUserMutation,
-    useGetVerifyUserQuery,
-    usePostRequestPasswordResetMutation,
-    usePostValidateTokenMutation,
-    usePostResetPasswordMutation,
-    useGetUserInfoQuery,
-    useGetUserInfoAdditionalQuery,
-    usePutUpdateUserInfoMutation,
-    usePostSendResetPasswordMutation,
-    usePostUploadLogoMutation
-} = userApiSlice
+export const { usePostSubmitContactFormMutation } = publicApiSlice;
