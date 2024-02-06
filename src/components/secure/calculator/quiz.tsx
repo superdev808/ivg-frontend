@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Button } from "primereact/Button";
+import { Button } from "primereact/button";
 import { AutoComplete } from "primereact/autocomplete";
 import { Dropdown } from "primereact/dropdown";
 import { Image } from "primereact/image";
 import { calculatorImages } from "@/helpers/util";
-import PieChartProgressBar from "@/components/shared/PiechartProgressbar";
+import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
 
 interface QuizProps {
   question: string;
@@ -119,10 +119,11 @@ export default function Quiz(props: QuizProps) {
                     className="w-full text-3xl text-center"
                     style={{ height: "200px" }}
                   >
+                    {answer}
                   </div>
                 )}
               </div>
-              <p className="w-full text-3xl text-center m-2">{answer}</p>
+              {image && <p className="w-full text-3xl text-center m-2">{answer}</p>}
             </div>
           );
         })}
