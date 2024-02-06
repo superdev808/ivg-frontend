@@ -59,7 +59,7 @@ export const HomeContentSection = () => {
 
 	return (
 		<>
-			<div className={cx(['section-container', 'mb-4 relative overflow-hidden'])}>
+			<div className={cx(['section-container', 'relative overflow-hidden'])}>
 				{/* BACKGROUND */}
 				<div
 					className={cx('background-radial-gradient', 'hidden lg:block')}
@@ -100,7 +100,7 @@ export const HomeContentSection = () => {
 				</div>
 
 				{/* Advantages */}
-				<div className="p-2 md:p-4 border-round z-1 relative ">
+				<div className="p-2 md:p-4 border-round  relative ">
 					<ColItemsSection
 						reverse
 						items={advantageItems}

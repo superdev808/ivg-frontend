@@ -13,7 +13,7 @@ const Footer = ({extendFooter}) => {
 			{extendFooter ? null : <FooterExtended />}
 			<div className={cx(['px-3 md:px-8', 'flex'])}>
 				<div className={cx({ 'radial-gradient': !extendFooter })}></div>
-				<div className={'grid bg-tranparent m-0 z-2 h-5rem w-full'}>
+				<div className={'grid bg-tranparent m-0  h-5rem w-full'}>
 					<div className="col-12  md:col-4 flex flex-column align-items-start">
 						<p className="text-center md:text-left">© 2023 Ivory Guide, LLC and its subsidiaries. All rights reserved.</p>
 					</div>

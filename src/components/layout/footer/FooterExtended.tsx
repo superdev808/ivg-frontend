@@ -5,7 +5,7 @@ import { Button } from 'primereact/button';
 import { Image } from 'primereact/image';
 
 import styles from './Footer.module.scss';
-import { link } from 'fs';
+
 const cx = classNames.bind(styles);
 
 const FooterExtended = () => {
