@@ -39,7 +39,7 @@ const useAuthRedirect = () => {
 			} else if (
 				authenticated &&
 				!BYPASS_AUTH_ROUTES.includes(activePath as PUBLIC_AUTH_ROUTES) &&
-				!Object.values(PRIVATE_ROUTES).includes(activePath as PRIVATE_ROUTES)
+				!Object.values(PRIVATE_ROUTES).filter(route => activePath.includes(route)).length
 			) {
 				return router.replace(REDIRECT_TO_AUTH);
 			}

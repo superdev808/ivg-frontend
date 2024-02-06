@@ -96,7 +96,7 @@ export default function Quiz(props: QuizProps) {
       <div className="relative md:absolute flex align-items-center justify-content-center w-full md:w-2 md:col-offset-10">
         <PieChartProgressBar percentage={props.progress || 0} />
       </div>
-      <div className="flex align-items-center justify-content-around flex-wrap w-12">
+      <div className="flex align-items-start justify-content-around flex-wrap w-12">
         {firstOptions.map((answer, index) => {
           const image = calculatorImages[`${answer}`.toLowerCase()];
           return (
@@ -116,14 +116,14 @@ export default function Quiz(props: QuizProps) {
                   />
                 ) : (
                   <div
-                    className="w-full text-3xl text-center"
+                    className="w-full m-1 text-3xl flex align-items-center justify-content-center"
                     style={{ height: "200px" }}
                   >
                     {answer}
                   </div>
                 )}
               </div>
-              {image && <p className="w-full text-3xl text-center m-2">{answer}</p>}
+              {image && <p className="w-full text-3xl text-center">{answer}</p>}
             </div>
           );
         })}
