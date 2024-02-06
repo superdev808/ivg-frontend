@@ -297,6 +297,11 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "Scanbodies",
     },
     {
+      name: "Scanbody Length",
+      text: "Scanbody Length",
+      calculator: "Scanbodies",
+    },
+    {
       name: "",
       text: "",
       calculator: "Scanbodies",
@@ -325,6 +330,18 @@ export const CALCULATORS: CollectionsIO = {
     {
       name: "Implant Platform",
       text: "Implant Platform",
+      calculator: "ScanbodyDriversDirectToImplants",
+      isCommon: true,
+    },
+    {
+      name: "Implant Form",
+      text: "Scanbody Implant Form",
+      calculator: "ScanbodyDriversDirectToImplants",
+      isCommon: true,
+    },
+    {
+      name: "Design",
+      text: "Scanbody Design",
       calculator: "ScanbodyDriversDirectToImplants",
       isCommon: true,
     },
@@ -367,7 +384,7 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Open or Closed Tray",
-      text: "Open or Closed Tray",
+      text: "Impressing Copings Open or Closed Tray",
       calculator: "ImpressingCopingsDirectToImplants",
     },
     {
@@ -376,13 +393,33 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "ImpressingCopingsDirectToImplants",
     },
     {
-      name: "Engaging or Non-Engaging",
-      text: "Impressing Copings Engaging or Non-Engaging",
+      name: "Impression Coping Diameter",
+      text: "Impression Coping Diameter",
+      calculator: "ImpressingCopingsDirectToImplants",
+    },
+    {
+      name: "Impression Coping Design",
+      text: "Impression Coping Design",
       calculator: "ImpressingCopingsDirectToImplants",
     },
     {
       name: "Impression Coping Length",
       text: "Impression Coping Length",
+      calculator: "ImpressingCopingsDirectToImplants",
+    },
+    {
+      name: "Cementable Area",
+      text: "Impression Coping Cementable Area",
+      calculator: "ImpressingCopingsDirectToImplants",
+    },
+    {
+      name: "Engaging or Non-Engaging",
+      text: "Impressing Copings Engaging or Non-Engaging",
+      calculator: "ImpressingCopingsDirectToImplants",
+    },
+    {
+      name: "Emergence Profile",
+      text: "Impressing Copings Emergence Profile",
       calculator: "ImpressingCopingsDirectToImplants",
     },
     {
@@ -557,6 +594,26 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "ScanbodyMUAs",
     },
     {
+      name: "Abutment Diameter",
+      text: "Scanbody MUAs Abutment Diameter",
+      calculator: "ScanbodyMUAs",
+    },
+    {
+      name: "Abutment Height",
+      text: "Scanbody MUAs Abutment Height",
+      calculator: "ScanbodyMUAs",
+    },
+    {
+      name: "Abutment Type",
+      text: "Scanbody MUAs Abutment Type",
+      calculator: "ScanbodyMUAs",
+    },
+    {
+      name: "Angulation",
+      text: "Scanbody MUAs Angulation",
+      calculator: "ScanbodyMUAs",
+    },
+    {
       name: "",
       text: "",
       calculator: "ScanbodyMUAs",
@@ -627,7 +684,7 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Open or Closed Tray",
-      text: "Open or Closed Tray",
+      text: "Impression Coping Open or Closed Tray",
       calculator: "ImpressingCopingsMUAs",
     },
     {
@@ -636,18 +693,38 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "ImpressingCopingsMUAs",
     },
     {
-      name: "Hexed or Non-Hexed",
-      text: "Hexed or Non-Hexed",
+      name: "Angulation",
+      text: "Impression Angulation",
       calculator: "ImpressingCopingsMUAs",
     },
     {
-      name: "Engaging or Non Engaging",
-      text: "Engaging or Non Engaging",
+      name: "Fixation",
+      text: "Impression Coping Fixation",
+      calculator: "ImpressingCopingsMUAs",
+    },
+    {
+      name: "Hexed or Non-Hexed",
+      text: "Impression Coping Hexed or Non-Hexed",
+      calculator: "ImpressingCopingsMUAs",
+    },
+    {
+      name: "Engaging or Non-Engaging",
+      text: "Impression Coping Engaging or Non-Engaging",
+      calculator: "ImpressingCopingsMUAs",
+    },
+    {
+      name: "Cementable Area",
+      text: "Impression Coping Cementable Area",
       calculator: "ImpressingCopingsMUAs",
     },
     {
       name: "Abutment Type",
-      text: "Impressing Copings MUAs Abutment Type",
+      text: "Impressing Copings Abutment Type",
+      calculator: "ImpressingCopingsMUAs",
+    },
+    {
+      name: "Abutment Diameter",
+      text: "Impressing Copings Abutment Diameter",
       calculator: "ImpressingCopingsMUAs",
     },
     {
@@ -817,6 +894,11 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "MUAs",
     },
     {
+      name: "Connection Type",
+      text: "MUAs Connection Type",
+      calculator: "MUAs",
+    },
+    {
       name: "Abutment Engaging Type",
       text: "Abutment Engaging Type",
       calculator: "MUAs",
@@ -827,8 +909,18 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "MUAs",
     },
     {
+      name: "Abutment Type",
+      text: "MUAs Abutment Type",
+      calculator: "MUAs",
+    },
+    {
       name: "Abutment Height",
       text: "MUAs Abutment Height",
+      calculator: "MUAs",
+    },
+    {
+      name: "Implant or Abutment Level",
+      text: "Implant or Abutment Level",
       calculator: "MUAs",
     },
     {

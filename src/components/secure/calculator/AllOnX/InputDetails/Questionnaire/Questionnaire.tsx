@@ -256,7 +256,7 @@ const Questionnaire: React.FC<InputProps> = ({
                   <div className="col-12 flex p-0">
                     <Quiz
                       key={`quiz-${index}`}
-                      question={quiz.text}
+                      question={quiz.name}
                       answers={answerOptions[index]}
                       selectedAnswer={answers[index] || null}
                       handleSelectAnswer={handleSelectAnswer(index)}
