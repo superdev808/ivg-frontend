@@ -17,7 +17,7 @@ export default function CalculatorPage() {
 
   const componentMapping: { [key: string]: JSX.Element } = {
     [CALCULATOR_MAPPINGS.ALL_ON_X_CALCULATOR]: <AllOnXCalculator />,
-    [CALCULATOR_MAPPINGS.ALL_ON_X_CUSTOM_COMBINATION]: (
+    [CALCULATOR_MAPPINGS.CUSTOM_COMBINATION]: (
       <AllOnXCalculator isCustom={true} />
     ),
   };

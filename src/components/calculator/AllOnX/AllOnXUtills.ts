@@ -6,6 +6,7 @@ import {
   KeyValuePair,
 } from "@/components/secure/calculator/AllOnX/constants";
 import {
+  CALCULATORS,
   CollectionsIO,
   InputAndResponse,
   PROCEDURE_INPUTS_AND_RESPONSE,
@@ -13,7 +14,7 @@ import {
 import _ from "lodash";
 
 export const isValidUrl = (urlString: string) => {
-  var urlPattern = new RegExp(
+  const urlPattern = new RegExp(
     "^(https?:\\/\\/)?" + // validate protocol
       "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
       "((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
@@ -22,6 +23,7 @@ export const isValidUrl = (urlString: string) => {
       "(\\#[-a-z\\d_]*)?$",
     "i"
   ); // validate fragment locator
+  urlString = !!urlString ? urlString.trim() : "";
   return !!urlPattern.test(urlString);
 };
 
@@ -57,29 +59,34 @@ const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
 
 export const getProcedureCollections = (
   procedure: PROCEDURES,
-  additionalInputs: KeyValuePair
+  additionalInputs: KeyValuePair,
+  isCustom: boolean
 ) => {
-  switch (procedure) {
-    case PROCEDURES.SURGERY:
-      return Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY);
+  if (!isCustom) {
+    switch (procedure) {
+      case PROCEDURES.SURGERY:
+        return Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY);
 
-    case PROCEDURES.RESTORATIVE:
-      const response: CollectionsIO =
-        getRestorativeCollections(additionalInputs);
-      return Object.keys(response);
+      case PROCEDURES.RESTORATIVE:
+        const response: CollectionsIO =
+          getRestorativeCollections(additionalInputs);
+        return Object.keys(response);
 
-    case PROCEDURES.SURGERY_AND_RESTORATIVE:
-      const surgeryCollections: CollectionsIO =
-        PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
-      const restorativeCollections: CollectionsIO =
-        getRestorativeCollections(additionalInputs);
-      return _.union([
-        ...Object.keys(surgeryCollections),
-        ...Object.keys(restorativeCollections),
-      ]);
+      case PROCEDURES.SURGERY_AND_RESTORATIVE:
+        const surgeryCollections: CollectionsIO =
+          PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
+        const restorativeCollections: CollectionsIO =
+          getRestorativeCollections(additionalInputs);
+        return _.union([
+          ...Object.keys(surgeryCollections),
+          ...Object.keys(restorativeCollections),
+        ]);
 
-    default:
-      return [];
+      default:
+        return [];
+    }
+  } else {
+    return Object.keys(CALCULATORS);
   }
 };
 
@@ -90,6 +97,7 @@ const prepareInputsAndResponse = (
   let inputs: InputOutputValues[] = [];
   let responseOrder: string[] = [];
   selectedCollections.map((selectedCollection: string) => {
+    let isDisplayNameAssigned: boolean = false;
     collections[selectedCollection]?.map((input: InputOutputValues) => {
       const filteredInputs: InputOutputValues[] = inputs.filter(
         (item: InputOutputValues) => item.name && item.name === input.name
@@ -98,6 +106,10 @@ const prepareInputsAndResponse = (
         filteredInputs.length <= 0 ||
         (filteredInputs.length && !filteredInputs[0].isCommon)
       ) {
+        if (!isDisplayNameAssigned) {
+          input = { ...input, displayCalculatorName: selectedCollection };
+          isDisplayNameAssigned = true;
+        }
         inputs = [...inputs, input];
       }
     });
@@ -109,37 +121,46 @@ const prepareInputsAndResponse = (
 export const getProcedureInputsAndResponse = (
   procedure: PROCEDURES,
   additionalInputs: KeyValuePair,
-  selectedCollections: string[]
+  selectedCollections: string[],
+  isCustom: boolean
 ) => {
-  switch (procedure) {
-    case PROCEDURES.SURGERY:
-      const surgeryResults: InputAndResponse = prepareInputsAndResponse(
-        selectedCollections,
-        PROCEDURE_INPUTS_AND_RESPONSE.SURGERY
-      );
-      return surgeryResults;
+  if (!isCustom) {
+    switch (procedure) {
+      case PROCEDURES.SURGERY:
+        const surgeryResults: InputAndResponse = prepareInputsAndResponse(
+          selectedCollections,
+          PROCEDURE_INPUTS_AND_RESPONSE.SURGERY
+        );
+        return surgeryResults;
 
-    case PROCEDURES.RESTORATIVE:
-      const collections: CollectionsIO =
-        getRestorativeCollections(additionalInputs);
-      const restorativeResults: InputAndResponse = prepareInputsAndResponse(
-        selectedCollections,
-        collections
-      );
-      return restorativeResults;
+      case PROCEDURES.RESTORATIVE:
+        const collections: CollectionsIO =
+          getRestorativeCollections(additionalInputs);
+        const restorativeResults: InputAndResponse = prepareInputsAndResponse(
+          selectedCollections,
+          collections
+        );
+        return restorativeResults;
 
-    case PROCEDURES.SURGERY_AND_RESTORATIVE:
-      const restorativeCollections: CollectionsIO =
-        getRestorativeCollections(additionalInputs);
-      const combineCollections: CollectionsIO = {
-        ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY,
-        ...restorativeCollections,
-      };
-      const combineProcedureResults: InputAndResponse =
-        prepareInputsAndResponse(selectedCollections, combineCollections);
-      return combineProcedureResults;
+      case PROCEDURES.SURGERY_AND_RESTORATIVE:
+        const restorativeCollections: CollectionsIO =
+          getRestorativeCollections(additionalInputs);
+        const combineCollections: CollectionsIO = {
+          ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY,
+          ...restorativeCollections,
+        };
+        const combineProcedureResults: InputAndResponse =
+          prepareInputsAndResponse(selectedCollections, combineCollections);
+        return combineProcedureResults;
 
-    default:
-      return { input: [], responseOrder: [] };
+      default:
+        return { input: [], responseOrder: [] };
+    }
+  } else {
+    const customResults: InputAndResponse = prepareInputsAndResponse(
+      selectedCollections,
+      CALCULATORS
+    );
+    return customResults;
   }
 };
