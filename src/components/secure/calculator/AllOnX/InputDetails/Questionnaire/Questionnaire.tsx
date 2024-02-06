@@ -122,45 +122,56 @@ const Questionnaire: React.FC<InputProps> = ({
         return;
       }
 
-      const response: Response = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/allOnXCalculator`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            type: input[level]?.calculator,
-            output: input[level]?.outputFrom,
-            quiz,
-            fields: input[level]?.name ? [input[level]?.name] : [],
-          }),
-        }
-      );
+      try {
+        const response: Response = await fetch(
+          `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/allOnXCalculator`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              type: input[level]?.calculator,
+              output: input[level]?.outputFrom,
+              quiz,
+              fields: input[level]?.name ? [input[level]?.name] : [],
+            }),
+          }
+        );
 
-      if (!response.ok && toastRef.current) {
-        response.json().then((res: any) => {
-          (toastRef.current as any).show({
-            severity: "error",
-            summary: res.status,
-            detail: res.message,
-            life: 5000,
+        if (!response.ok && toastRef.current) {
+          response.json().then((res: any) => {
+            const msg: string =
+              res?.message?.message || res?.message || "Something went wrong";
+            (toastRef.current as any).show({
+              severity: "error",
+              summary: res?.status,
+              detail: msg,
+              life: 5000,
+            });
           });
+          return;
+        }
+
+        const {
+          data: { result: newAnswerOptions, quizResponse = null },
+        } = await response.json();
+
+        const originalAnswerOptions: string[][] = answerOptions.slice(0, level);
+
+        if (newAnswerOptions.length) {
+          setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
+        }
+        if (quizResponse) {
+          onQuizResponse(site, quizResponse, input[level]?.outputFrom ?? "");
+        }
+      } catch (error: any) {
+        (toastRef.current as any).show({
+          severity: "error",
+          summary: error?.status,
+          detail: error?.message,
+          life: 5000,
         });
-        return;
-      }
-
-      const {
-        data: { result: newAnswerOptions, quizResponse = null },
-      } = await response.json();
-
-      const originalAnswerOptions: string[][] = answerOptions.slice(0, level);
-
-      if (newAnswerOptions.length) {
-        setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
-      }
-      if (quizResponse) {
-        onQuizResponse(site, quizResponse, input[level]?.outputFrom ?? "");
       }
     },
     { refetchOnWindowFocus: false, retry: false }
