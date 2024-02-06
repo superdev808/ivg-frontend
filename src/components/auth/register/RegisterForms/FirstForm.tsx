@@ -39,30 +39,29 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 	const [showPassword, setShowPassword] = useState(false);
 	const [emailNotTaken, setEmailNotTaken] = useState<boolean | null>(null);
 	const [postCheckEmail] = usePostCheckEmailMutation();
-    const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-	const handleCheckEmail = async (data:FormValues) => {
-        setIsLoading(true);
+	const handleCheckEmail = async (data: FormValues) => {
+		setIsLoading(true);
 		try {
 			const res = await postCheckEmail(data.email).unwrap();
-            if (res.available === true){
-                setEmailNotTaken(true);
-                onSubmit(data);
-            }
-            setIsLoading(false);
-		
+			if (res.available === true) {
+				setEmailNotTaken(true);
+				onSubmit(data);
+			}
+			setIsLoading(false);
 		} catch (err: any) {
-            if (err.data?.message.available === false){
-                setEmailNotTaken(false);
-            }
-            setIsLoading(false);
+			if (err.data?.message.available === false) {
+				setEmailNotTaken(false);
+			}
+			setIsLoading(false);
 		}
 	};
 
 	useEffect(() => {
 		if (emailNotTaken === null) return;
 		trigger('email');
-	}, [emailNotTaken ]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [emailNotTaken]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const {
 		control,
@@ -74,9 +73,6 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 		trigger,
 		clearErrors,
 	} = useForm<FormValues>({ defaultValues });
-
-
-
 
 	return (
 		<form
@@ -273,20 +269,25 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 							<span className="text-center text-600 text-sm align-self-center">
 								I accept the{' '}
 								<Link
-									href={'#'}
+									href={'/agreement'}
 									className="text-600 font-bold"
+									target="_blank"
 									style={{ textDecorationColor: 'var(--gray-600)' }}>
-									Terms of Service
+									
+										Terms of Use
+								
 								</Link>{' '}
 								and have read the{' '}
 								<Link
-									href={'#'}
+									href={'/privacy-policy'}
+									target="_blank"
 									className="text-600 font-bold"
 									style={{ textDecorationColor: 'var(--gray-600)' }}>
-									Privacy Notice
+								
+										Privacy Notice
+								
 								</Link>
 							</span>
-							{/* <FormErrorMessage message={errors[field.name]?.message} /> */}
 						</>
 					)}
 				/>
@@ -294,14 +295,13 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 			<div className="grid mt-6">
 				<div>
 					<Button
-					
 						type="submit"
 						outlined
-                        disabled={isLoading}
-                        icon={isLoading ? "pi pi-spin pi-spinner" : "" }
+						disabled={isLoading}
+						icon={isLoading ? 'pi pi-spin pi-spinner' : ''}
 						label="Continue"
 						className="p-button-rounded bg-secondary"
-                        style={{width: '200px'}}
+						style={{ width: '200px' }}
 					/>
 				</div>
 			</div>
