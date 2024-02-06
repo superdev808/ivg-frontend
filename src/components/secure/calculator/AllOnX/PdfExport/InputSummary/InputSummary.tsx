@@ -62,7 +62,7 @@ const InputSummary: React.FC<InputSummaryProps> = ({
                         (obj: InputDetail) => obj.question === question
                       ) || [];
 
-                    return <td key={index}>{item[0]?.answer}</td>;
+                    return <td key={index}>{item[0]?.answer || "-"}</td>;
                   })}
                 </tr>
               ))}

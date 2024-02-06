@@ -16,7 +16,10 @@ import { getCookie } from "@/helpers/cookie";
 import { Divider } from "primereact/divider";
 import TeethSelector from "../../TeethSelector";
 import InputSummary from "../InputSummary/InputSummary";
-import ComponentSummary, { summary } from "../ComponentSummary/ComponentSummary";
+import ComponentSummary, {
+  summary,
+} from "../ComponentSummary/ComponentSummary";
+import { Patient } from "../PdfExport";
 const cx = classNames.bind(styles);
 export interface InputDetail {
   id?: string;
@@ -29,11 +32,12 @@ export interface Site {
 }
 
 interface PdfContentProps {
-  date: Date | undefined;
+  date?: Date | undefined;
   selectedSites: Site[];
   sitesData: SiteData;
   responseOrder: string[];
   isCustomReport: boolean | undefined;
+  patientInfo?: Patient | null;
 }
 
 const PdfContent: React.FC<PdfContentProps> = ({
@@ -42,6 +46,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
   selectedSites,
   sitesData,
   isCustomReport,
+  patientInfo,
 }) => {
   const [componentSummary, setComponentSummary] = useState<summary[]>([]);
   useEffect(() => {
@@ -110,23 +115,23 @@ const PdfContent: React.FC<PdfContentProps> = ({
     setComponentSummary(summaryData);
   }, [sitesData, responseOrder]);
 
-  const currentDate = date?.toLocaleDateString("en-US", {
+  const currentDate = patientInfo?.date?.toLocaleDateString("en-US", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
   });
-  const currentDateTime = date?.toLocaleTimeString("en-US", {
+  const currentDateTime = patientInfo?.date?.toLocaleTimeString("en-US", {
     hour12: true,
-    hour: "numeric",
-    minute: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
   });
   const calculatorType = isCustomReport ? `Custom` : `All-On-X`;
   const name = getCookie("name");
   const email = getCookie("email");
   return (
     <>
-      <div  className={cx("bg-color", "px-0 py-3")}></div>
-      <div className="flex ml-4 mr-4 mt-3 mb-3 justify-content-between">
+      <div className={cx("bg-color", "px-0 py-3")}></div>
+      <div className="flex mx-4 mt-3 mb-3 justify-content-between">
         <Image
           src="/images/logo/Ivory-Guide-PDF-Logo.png"
           alt="Logo"
@@ -142,29 +147,27 @@ const PdfContent: React.FC<PdfContentProps> = ({
         </div>
       </div>
 
-      <div className="flex ml-4 mr-4 justify-content-between">
-        <div>
-          <div>Patient Name</div>
-          <div>Patient Address</div>
+      <div className={cx("separator","flex pb-2 mx-4 justify-content-between")}>
+        <div className="col-4 p-0">
+          <div className="pb-2">{patientInfo?.name}</div>
+          <div>{patientInfo?.address}</div>
         </div>
-        <div>Date: {currentDate}</div>
+        <div>
+          Date:{currentDate} {currentDateTime}
+        </div>
       </div>
-      <Divider className="bg-color" />
-      <div
-
-        className="flex mx-4 my-2 justify-content-between"
-      >
-        <div className="flex flex-column py-2">
+      <div className="flex mx-4 my-1 justify-content-between">
+        <div className="flex flex-column">
           <div className="absolute pt-2 pb-2">
             Please see summary for{" "}
             <span className="font-semibold">{calculatorType}</span> calculator.
-            <p className="my-2">
+            {/* <p className="my-2">
               exported on{" "}
               <span className="font-semibold">
                 {currentDate} {currentDateTime}
               </span>
               .
-            </p>
+            </p> */}
           </div>
         </div>
         <div className="mt-7">
@@ -183,7 +186,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
       <div className="p-3">
         <ComponentSummary summary={componentSummary} />
 
-        <div className="flex flex-column pt-5">
+        <div className="flex flex-column pt-5 greet">
           <div>Thank You,</div>
           <div className="mt-5">{name}</div>
         </div>
