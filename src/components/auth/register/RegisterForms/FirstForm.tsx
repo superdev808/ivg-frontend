@@ -8,10 +8,9 @@ import classNames from 'classnames/bind';
 import { InputText } from 'primereact/inputtext';
 import { Controller } from 'react-hook-form';
 import { InputMask } from 'primereact/inputmask';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePostCheckEmailMutation } from '@/redux/hooks/apiHooks';
-import { set } from 'lodash';
 
 const cx = classNames.bind(styles);
 
@@ -266,16 +265,14 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 								className={cx({ 'p-invalid': fieldState.error }, 'mr-2')}
 								onChange={(e) => field.onChange(e.checked)}
 							/>
-							<span className="text-center text-600 text-sm align-self-center">
+							<span className="text-center text-600 text-sm">
 								I accept the{' '}
 								<Link
 									href={'/agreement'}
 									className="text-600 font-bold"
 									target="_blank"
 									style={{ textDecorationColor: 'var(--gray-600)' }}>
-									
-										Terms of Use
-								
+									Terms of Use
 								</Link>{' '}
 								and have read the{' '}
 								<Link
@@ -283,9 +280,7 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 									target="_blank"
 									className="text-600 font-bold"
 									style={{ textDecorationColor: 'var(--gray-600)' }}>
-								
-										Privacy Notice
-								
+									Privacy Notice
 								</Link>
 							</span>
 						</>
