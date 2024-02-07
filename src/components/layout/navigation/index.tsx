@@ -27,6 +27,7 @@ import { getInitials } from '@/helpers/util';
 import { Avatar } from 'primereact/avatar';
 import { USER_ROLES } from '@/constants/users';
 import { getUserRole } from '@/helpers/getUserRole';
+import { set } from 'lodash';
 
 export interface NavigationProps {
 	secure?: boolean;
@@ -40,20 +41,9 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 	const userEmail = getCookie('email');
 
 	const { role } = useAppSelector((state) => state.auth);
-
 	// toggle sidebar
 	const [isOpen, setIsOpen] = useState(false);
 	const boxRef = useRef(null);
-
-	useEffect(() => {
-		if (role === USER_ROLES.ADMIN) {
-			avatarLinks.splice(3, 0, {
-				label: 'Administaration',
-				icon: 'pi pi-cog',
-				url: '/admin',
-			});
-		}
-	}, [role]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const onSignOut = async () => {
 		try {
@@ -125,6 +115,12 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 			label: 'Help',
 			icon: 'pi pi-question',
 			url: '/help',
+		},
+		{
+			label: 'Administration',
+			icon: 'pi pi-cog',
+			url: '/admin',
+			visible: role === USER_ROLES.ADMIN,
 		},
 		{
 			separator: true,

@@ -1,7 +1,4 @@
-import { useAppSelector } from '@/redux/hooks/hooks';
 import FooterExtended from './FooterExtended';
-import { usePathname } from 'next/navigation';
-import { use, useEffect, useState } from 'react';
 
 const cx = require('classnames/bind');
 const devMode = process.env.NEXT_PUBLIC_DEV_MODE;
