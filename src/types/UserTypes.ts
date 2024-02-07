@@ -35,6 +35,16 @@ export interface UserInfo {
 
 
 export interface CheckEmail {
-    message: string;
-    available: boolean;
+	message: string;
+	available: boolean;
+}
+
+export interface EditUser {
+	_id: string;
+	firstName: string;
+	lastName: string;
+	email: string;
+	role: string;
+	verified: boolean;
+
 }

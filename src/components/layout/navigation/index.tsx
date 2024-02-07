@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, use, useEffect } from 'react';
 import { redirect, usePathname } from 'next/navigation';
 
 // STYLES
@@ -25,6 +25,8 @@ import { NavLink } from '@/types/Layout';
 import { MenuItem } from 'primereact/menuitem';
 import { getInitials } from '@/helpers/util';
 import { Avatar } from 'primereact/avatar';
+import { USER_ROLES } from '@/constants/users';
+import { getUserRole } from '@/helpers/getUserRole';
 
 export interface NavigationProps {
 	secure?: boolean;
@@ -40,6 +42,17 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 	// toggle sidebar
 	const [isOpen, setIsOpen] = useState(false);
 	const boxRef = useRef(null);
+
+	useEffect(() => {
+		const userRole = getUserRole();
+		if (userRole === USER_ROLES.ADMIN) {
+			avatarLinks.splice(3, 0, {
+				label: 'Administaration',
+				icon: 'pi pi-cog',
+				url: '/admin',
+			});
+		}
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const onSignOut = async () => {
 		try {
@@ -82,7 +95,6 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 		/>
 	);
 
-
 	let avatarLinks: MenuItem[] = [
 		{
 			template: (item, options) => {
@@ -123,10 +135,6 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 			command: onSignOut,
 		},
 	];
-
-	const toggle = () => {
-		setIsOpen(!isOpen);
-	};
 
 	const closeMenu: () => void = () => {
 		setIsOpen(false);

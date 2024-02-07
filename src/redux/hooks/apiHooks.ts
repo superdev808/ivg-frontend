@@ -1,10 +1,9 @@
-import { userApiSlice } from '../slices/api/userApiSlice'
+import { use } from 'react';
+import { userApiSlice } from '../slices/api/userApiSlice';
 
 // RTK Query Hooks
 
-
 export const {
-
     usePostCheckEmailMutation,
     usePostRegisterUserMutation,
     useGetVerifyUserQuery,
@@ -12,8 +11,12 @@ export const {
     usePostValidateTokenMutation,
     usePostResetPasswordMutation,
     useGetUserInfoQuery,
-    useGetUserInfoAdditionalQuery,
     usePutUpdateUserInfoMutation,
+    usePutUpdateUserMutation,
     usePostSendResetPasswordMutation,
-    usePostUploadLogoMutation
-} = userApiSlice
+    usePostUploadLogoMutation,
+    useGetUsersListQuery,
+    usePostSendVerificationEmailMutation,
+    usePostDeactivateUserMutation,
+    usePostVerifyTokenMutation
+} = userApiSlice;
