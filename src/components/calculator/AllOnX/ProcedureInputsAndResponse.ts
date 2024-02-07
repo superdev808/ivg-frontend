@@ -48,7 +48,7 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Implant Length",
-      text: "Drill Kit Implant Length",
+      text: "Implant Length [Drill Kits and Drill Sequences]",
       calculator: "DrillKitAndSequence",
     },
     {
@@ -132,37 +132,37 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Implant Length",
-      text: "Drivers Implant Length",
+      text: "Implant Length [Drivers (Restorative, Direct to Implant)]",
       calculator: "RestroativeDirectToImplant",
     },
     {
       name: "Authentic or Generic",
-      text: "Authentic or Generic",
+      text: "Authentic or Generic [Drivers (Restorative, Direct to Implant)]",
       calculator: "RestroativeDirectToImplant",
     },
     {
       name: "Driver Length",
-      text: "Driver Length",
+      text: "Driver Length [Drivers (Restorative, Direct to Implant)]",
       calculator: "RestroativeDirectToImplant",
     },
     {
       name: "One Piece or Torque Attachment",
-      text: "One Piece or Torque Attachment",
+      text: "One Piece or Torque Attachment [Drivers (Restorative, Direct to Implant)]",
       calculator: "RestroativeDirectToImplant",
     },
     {
       name: "Driver Size",
-      text: "Driver Size",
+      text: "Driver Size [Drivers (Restorative, Direct to Implant)]",
       calculator: "RestroativeDirectToImplant",
     },
     {
       name: "Abutment Angulation",
-      text: "Abutment Angulation",
+      text: "Abutment Angulation [Drivers (Restorative, Direct to Implant)]",
       calculator: "RestroativeDirectToImplant",
     },
     {
       name: "Machine or Manual",
-      text: "Machine or Manual",
+      text: "Machine or Manual [Drivers (Restorative, Direct to Implant)]",
       calculator: "RestroativeDirectToImplant",
     },
     {
@@ -236,12 +236,12 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Implant Length",
-      text: "Implant Length",
+      text: "Implant Length [Implants]",
       calculator: "Implants",
     },
     {
       name: "Implant Form",
-      text: "Implant Form",
+      text: "Implant Form [Implants]",
       calculator: "Implants",
     },
     {
@@ -384,12 +384,12 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Open or Closed Tray",
-      text: "Impressing Copings Open or Closed Tray",
+      text: "Open or Closed Tray [Impression Copings (Direct to Implant)]",
       calculator: "ImpressingCopingsDirectToImplants",
     },
     {
       name: "Angulation",
-      text: "Impressing Copings Angulation",
+      text: "Angulation [Impression Copings (Direct to Implant)]",
       calculator: "ImpressingCopingsDirectToImplants",
     },
     {
@@ -404,22 +404,22 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Impression Coping Length",
-      text: "Impression Coping Length",
+      text: "Impression Coping Length [Impression Copings (Direct to Implant)]",
       calculator: "ImpressingCopingsDirectToImplants",
     },
     {
       name: "Cementable Area",
-      text: "Impression Coping Cementable Area",
+      text: "Cementable Area [Impression Copings (Direct to Implant)]",
       calculator: "ImpressingCopingsDirectToImplants",
     },
     {
       name: "Engaging or Non-Engaging",
-      text: "Impressing Copings Engaging or Non-Engaging",
+      text: "Engaging or Non-Engaging [Impression Copings (Direct to Implant)]",
       calculator: "ImpressingCopingsDirectToImplants",
     },
     {
       name: "Emergence Profile",
-      text: "Impressing Copings Emergence Profile",
+      text: "Emergence Profile [Impression Copings (Direct to Implant)]",
       calculator: "ImpressingCopingsDirectToImplants",
     },
     {
@@ -962,37 +962,37 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Machine or Manual",
-      text: "Restorative MUAs Machine or Manual",
+      text: "Machine or Manual [Drivers (Restorative, on Multi-Unit Abutments)]",
       calculator: "RestorativeMultiUnitAbutments",
     },
     {
       name: "Driver Length",
-      text: "Restorative MUAs Driver Length",
+      text: "Driver Length [Drivers (Restorative, on Multi-Unit Abutments)]",
       calculator: "RestorativeMultiUnitAbutments",
     },
     {
       name: "Design",
-      text: "Restorative MUAs Design",
+      text: "Design [Drivers (Restorative, on Multi-Unit Abutments)]",
       calculator: "RestorativeMultiUnitAbutments",
     },
     {
       name: "MUA Type",
-      text: "Restorative MUAs MUA Type",
+      text: "MUA Type [Drivers (Restorative, on Multi-Unit Abutments)]",
       calculator: "RestorativeMultiUnitAbutments",
     },
     {
       name: "Abutment Angulation",
-      text: "Restorative MUAs Abutment Angulation",
+      text: "Abutment Angulation [Drivers (Restorative, on Multi-Unit Abutments)]",
       calculator: "RestorativeMultiUnitAbutments",
     },
     {
       name: "Diameter",
-      text: "Restorative MUAs Diameter",
+      text: "Diameter [Drivers (Restorative, on Multi-Unit Abutments)]",
       calculator: "RestorativeMultiUnitAbutments",
     },
     {
       name: "One Piece or Torque Attachment",
-      text: "Restorative MUAs One Piece or Torque Attachment",
+      text: "One Piece or Torque Attachment [Drivers (Restorative, on Multi-Unit Abutments)]",
       calculator: "RestorativeMultiUnitAbutments",
     },
     {
@@ -1029,7 +1029,7 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Authentic or Generic",
-      text: "Implant Analogs Authentic or Generic",
+      text: "Authentic or Generic [Implant Analogs]",
       calculator: "ImplantAnalogs",
     },
     {
@@ -1039,7 +1039,7 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Abutment Height",
-      text: "Implant Analogs Abutment Height",
+      text: "Abutment Height [Implant Analogs]",
       calculator: "ImplantAnalogs",
     },
     {
@@ -1076,17 +1076,17 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Authentic or Generic",
-      text: "Implant Screws Authentic or Generic",
+      text: "Authentic or Generic [Implant Screws]",
       calculator: "ImplantScrews",
     },
     {
       name: "Abutment Type",
-      text: "Implant Screws Abutment Type",
+      text: "Abutment Type [Implant Screws]",
       calculator: "ImplantScrews",
     },
     {
       name: "Design",
-      text: "Implant Screws Design",
+      text: "Design [Implant Screws]",
       calculator: "ImplantScrews",
     },
     {
@@ -1096,7 +1096,7 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Restoration Type",
-      text: "Restoration Type",
+      text: "Restoration Type [Implant Screws]",
       calculator: "ImplantScrews",
     },
     {
@@ -1116,17 +1116,17 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Abutment Angulation",
-      text: "Implant Screws Abutment Angulation",
+      text: "Abutment Angulation [Implant Screws]",
       calculator: "ImplantScrews",
     },
     {
       name: "Open or Closed Tray",
-      text: "Implant Screws Open or Closed Tray",
+      text: "Open or Closed Tray [Implant Screws]",
       calculator: "ImplantScrews",
     },
     {
       name: "Collar Height",
-      text: "Implant Screws Collar Height",
+      text: "Collar Height [Implant Screws]",
       calculator: "ImplantScrews",
     },
     {
@@ -1168,22 +1168,22 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Authentic or Generic",
-      text: "Healing Abutments Authentic or Generic",
+      text: "Authentic or Generic [Healing Abutments]",
       calculator: "HealingAbutments",
     },
     {
       name: "Abutment Height",
-      text: "Healing Abutments Abutment Height",
+      text: "Abutment Height [Healing Abutments]",
       calculator: "HealingAbutments",
     },
     {
       name: "Collar Height",
-      text: "Healing Abutments Collar Height",
+      text: "Collar Height [Healing Abutments]",
       calculator: "HealingAbutments",
     },
     {
       name: "Emergence Profile",
-      text: "Emergence Profile",
+      text: "Emergence Profile [Healing Abutments]",
       calculator: "HealingAbutments",
     },
     {
@@ -1193,7 +1193,7 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Abutment Diameter",
-      text: "Healing Abutments Abutment Diameter",
+      text: "Abutment Diameter [Healing Abutments]",
       calculator: "HealingAbutments",
     },
     {
