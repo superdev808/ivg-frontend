@@ -8,6 +8,7 @@ const cx = classNames.bind(styles);
 
 import SearchBox from "@/components/ui/searchbox";
 import Loading from "@/components/layout/loading";
+import { CALCULATOR_MAPPINGS } from "./constants";
 
 export default function CalculatorsPage() {
   return <Calculators />;
@@ -76,14 +77,15 @@ export const Calculators = () => {
     },
     {
       label: "All-on-X Implant Surgery",
-      subItems: [
-        { label: "All-on-X Implant Surgery" },
-        { label: "Custom Combinations" },
-      ],
+      subItems: [{ label: "All-on-X Implant Surgery" }],
     },
     {
       label: "Product Material Selection",
       subItems: [{ label: "Crown Materials" }],
+    },
+    {
+      label: "Custom Combinations",
+      subItems: [],
     },
   ];
 
@@ -166,7 +168,9 @@ export const Calculators = () => {
                   style={{ width: "100%" }}
                   label={groupItem.label}
                   onClick={() => {
-                    setSelectedGroup(index);
+                    groupItem.label === CALCULATOR_MAPPINGS.CUSTOM_COMBINATION
+                      ? router.push("/calculators/" + groupItem.label)
+                      : setSelectedGroup(index);
                   }}
                 />
               ))}

@@ -6,14 +6,13 @@ import { use, useEffect, useState } from 'react';
 const cx = require('classnames/bind');
 const devMode = process.env.NEXT_PUBLIC_DEV_MODE;
 
-const Footer = ({extendFooter}) => {
-
+const Footer = ({ extendFooter }: { extendFooter?: boolean }) => {
 	return (
 		<div className="relative overflow-hidden ">
-			{extendFooter ? null : <FooterExtended />}
+			{!extendFooter ? null : <FooterExtended />}
 			<div className={cx(['px-3 md:px-8', 'flex'])}>
-				<div className={cx({ 'radial-gradient': !extendFooter })}></div>
-				<div className={'grid bg-tranparent m-0  h-5rem w-full'}>
+				<div className={cx({ 'radial-gradient': extendFooter })}></div>
+				<div className={'grid bg-tranparent m-0 z-2 h-5rem w-full'}>
 					<div className="col-12  md:col-4 flex flex-column align-items-start">
 						<p className="text-center md:text-left">© 2023 Ivory Guide, LLC and its subsidiaries. All rights reserved.</p>
 					</div>

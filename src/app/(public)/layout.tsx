@@ -1,54 +1,24 @@
 'use client';
 
-import React, { PropsWithChildren, use, useEffect } from 'react';
+import React, { PropsWithChildren, useEffect, useState, } from 'react';
 import Navigation from '@/components/layout/navigation';
-import { ReduxProvider } from '@/redux/provider';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { useAppSelector } from '@/redux/hooks/hooks';
-
-import { usePathname, useRouter } from 'next/navigation';
 import Footer from '@/components/layout/footer';
 import Loading from '@/components/layout/loading';
-export const dynamic = 'force-dynamic';
-import { redirect } from "next/navigation";
 
+import useAuthRedirect from '@/hooks/useAuthRedirect';
 
 export default function PublicLayout({ children }: PropsWithChildren) {
-	const activePath = usePathname();
-	const router = useRouter();
-	const [isLoading, setIsLoading] = React.useState(true);
-	const [simpleLayout, setSimpleLayout] = React.useState(false);
-	const [hideLayout, setHideLayout] = React.useState(false);
+	const {isLoading, layoutStyle} = useAuthRedirect();
 
-	const {isLoading:authLoading, authenticated} = useAppSelector((state) => state.auth);
-	useEffect(() => {
-		if (authLoading) return
-		if (authenticated) {
-			return redirect("/calculators");
-
-		}
-
-
-		if (['/login/', '/register/','/verify/','/reset-password/','/forgot-password/'].includes(activePath)) {
-			setSimpleLayout(true);
-		}else {
-			setSimpleLayout(false);
-		}
-
-		
-		setIsLoading(false);
-	}, [activePath, authLoading]);
-
-
-	if (isLoading || authLoading) {
+	if (isLoading) {
 		return <Loading />;
 	}
 
 	return (
 		<>
-			{simpleLayout ? null : <Navigation transparentBg />}
+			{layoutStyle.hidden ? null : <Navigation transparentBg={layoutStyle.transparentBg} />}
 			{children}
-			{simpleLayout ? null : <Footer extendFooter={simpleLayout} />}
+			{layoutStyle.hidden ? null : <Footer extendFooter={layoutStyle.extendFooter} />}
 		
 		</>
 	);
