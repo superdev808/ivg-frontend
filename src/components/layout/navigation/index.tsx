@@ -39,20 +39,21 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 	const userName = getCookie('name');
 	const userEmail = getCookie('email');
 
+	const { role } = useAppSelector((state) => state.auth);
+
 	// toggle sidebar
 	const [isOpen, setIsOpen] = useState(false);
 	const boxRef = useRef(null);
 
 	useEffect(() => {
-		const userRole = getUserRole();
-		if (userRole === USER_ROLES.ADMIN) {
+		if (role === USER_ROLES.ADMIN) {
 			avatarLinks.splice(3, 0, {
 				label: 'Administaration',
 				icon: 'pi pi-cog',
 				url: '/admin',
 			});
 		}
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [role]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const onSignOut = async () => {
 		try {
