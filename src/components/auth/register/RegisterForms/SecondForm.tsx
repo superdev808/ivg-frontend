@@ -10,7 +10,6 @@ import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { RadioButton } from 'primereact/radiobutton';
 
-import { FormErrorMessage } from '@/components/shared/FormErrorMessage';
 import RegisterFooter from './Footer';
 const cx = classNames.bind(styles);
 
@@ -38,7 +37,7 @@ const defaultValues: FormValues = {
 	referralSourceOther: '',
 };
 
-export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: FormValues) => void; back: () => void, isSubmitting:boolean }) => {
+export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: FormValues) => void; back: () => void; isSubmitting: boolean }) => {
 	const [selectedOrgRole, setSelectedOrgRole] = useState<string>('');
 	const [selectedReferralSource, setSelectedReferralSource] = useState<string>('');
 
@@ -71,12 +70,11 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 
 	return (
 		<form
-			className="grid  m-0 p-0  align-items-between h-full"
+			className="grid m-0 p-0 align-items-between h-full"
 			onSubmit={handleSubmit(onSubmit)}>
 			<div className="col-12 m-0 p-0 grid flex-column">
 				<span className="col-12 text-center text-2xl text-secondary">A few more questions</span>
 				<span className="col-12 text-center p-0 text-gray-600 mb-4">To get started, tell me a little about yourself.</span>
-				{/* <span className="col-12 p-0 mb-2 font-semibold">Enter your name</span> */}
 				<div className="grid m-0 p-0 col-12">
 					<span className="col-12 m-0 p-0 mb-2 font-semibold">What is your role?</span>
 					<Controller
@@ -86,7 +84,7 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 						render={({ field: { onChange, ...field } }) => (
 							<>
 								<div className="col-12 grid m-0 mb-2">
-									<div className={cx( 'col-12 grid justify-content-between p-0')}>
+									<div className={cx('col-12 grid justify-content-between p-0')}>
 										{organizationRole.map((role) => {
 											return (
 												<div
@@ -127,11 +125,9 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 												style={{ width: '100%' }}>
 												<InputText
 													id={field.name}
-												
 													className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
 													placeholder="Please specify"
-													{...field}
-													></InputText>
+													{...field}></InputText>
 											</div>
 										)}
 									/>
@@ -274,7 +270,7 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 													}}
 													value={source.value}
 													checked={field.value === source.value}
-													className={cx({ 'p-invalid': errors[field.name] },'mb-2')}
+													className={cx({ 'p-invalid': errors[field.name] }, 'mb-2')}
 												/>
 												<label
 													htmlFor={`referral_${source.value.toString()}`}
@@ -299,7 +295,6 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 									style={{ width: '100%' }}>
 									<InputText
 										id={field.name}
-										
 										className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
 										placeholder="Please specify"
 										{...field}></InputText>
@@ -309,8 +304,8 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 					) : null}
 				</div>
 			</div>
-			<div className={cx("col-12 grid justify-content-between p-0 m-0 mb-4")}>
-				<div className="col-6">
+			<div className={cx('col-12 grid justify-content-between p-0 m-0 mb-4')}>
+				<div className="col-12 md:col-6">
 					<Button
 						onClick={(e) => {
 							e.preventDefault();
@@ -321,26 +316,23 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 						}}
 						outlined
 						label="Back"
-						className="p-button-rounded text-secondary"
+						className="p-button-rounded text-secondary w-full md:w-min"
 					/>
 				</div>
-				<div className="col-6 flex justify-content-end">
-					<div>
-					<Button
-					disabled={isSubmitting}
-						type="submit"
-						icon={isSubmitting ? "pi pi-spin pi-spinner" : "" }
-						label={"Register"}
-						className=" p-button-rounded bg-secondary text-center"
-					/>
+				<div className="col-12 md:col-6">
+					<div className="text-right">
+						<Button
+							disabled={isSubmitting}
+							type="submit"
+							icon={isSubmitting ? 'pi pi-spin pi-spinner' : ''}
+							label={'Register'}
+							className=" p-button-rounded bg-secondary w-full md:w-min"
+						/>
 					</div>
-					
 				</div>
 			</div>
-			<div className='col-12 flex-grow-1 flex align-items-end justify-content-center'>
-						<RegisterFooter />
-
-
+			<div className="col-12 flex-grow-1 flex align-items-end justify-content-center">
+				<RegisterFooter />
 			</div>
 		</form>
 	);

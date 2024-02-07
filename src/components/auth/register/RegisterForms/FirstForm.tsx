@@ -8,7 +8,7 @@ import classNames from 'classnames/bind';
 import { InputText } from 'primereact/inputtext';
 import { Controller } from 'react-hook-form';
 import { InputMask } from 'primereact/inputmask';
-import {  useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePostCheckEmailMutation } from '@/redux/hooks/apiHooks';
 import RegisterFooter from './Footer';
@@ -77,7 +77,7 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 
 	return (
 		<form
-			className={cx("grid justify-content-center h-full")}
+			className={cx('grid m-0 p-0 justify-content-center h-full')}
 			onSubmit={handleSubmit((e) => handleCheckEmail(e))}>
 			<span className="col-12 text-center text-2xl text-secondary">Create your account</span>
 			<span className="col-12 text-center p-0 text-gray-600 mb-6">Please fill the form below to create an account.</span>
@@ -306,12 +306,9 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 					</Link>
 				</span>
 			</div>
-			<div className='col-12 flex-grow-1 flex align-items-end justify-content-center'>
-						<RegisterFooter />
-
-
+			<div className="col-12 flex-grow-1 flex align-items-end justify-content-center">
+				<RegisterFooter />
 			</div>
-		
 		</form>
 	);
 };
