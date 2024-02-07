@@ -7,7 +7,7 @@ export const PrivacyContentSection = () => {
 		<div>
 			<div className={cx('bg-secondary', 'h-5rem ')}></div>
 
-			<div className={cx('section-header')}>
+			<div className={cx('section-header', 'p-4 md:p-6')}>
 				<span className="text-2xl md:text-5xl font-bold z-1">IVORY GUIDE PRIVACY AND COOKIE NOTICE</span>
 			</div>
 			<div className="flex justify-content-center">
@@ -427,7 +427,7 @@ export const PrivacyContentSection = () => {
 					</h2>
 					<p>
 						<span>
-							In addition to the information provided in this privacy policy, additional information for California residents can be found at {' '}
+							In addition to the information provided in this privacy policy, additional information for California residents can be found at{' '}
 							<a href="https://www.ivoryguide.com/privacy-policy-ca">https://www.ivoryguide.com/privacy-policy-ca</a>.
 						</span>
 					</p>
@@ -441,7 +441,9 @@ export const PrivacyContentSection = () => {
 						</span>
 					</p>
 					<p>
-						<span>Email: <a href="mailto:support@ivoryguide.com">support@ivoryguide.com</a> </span>
+						<span>
+							Email: <a href="mailto:support@ivoryguide.com">support@ivoryguide.com</a>{' '}
+						</span>
 					</p>
 					<p>
 						<span>

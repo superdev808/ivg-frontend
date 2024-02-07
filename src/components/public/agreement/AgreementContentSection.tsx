@@ -1,4 +1,3 @@
-
 import styles from './Agreement.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -6,9 +5,9 @@ const cx = classNames.bind(styles);
 export const AgreementContentSection = () => {
 	return (
 		<div>
-			<div className={cx('bg-secondary', 'h-5rem ')}></div>
+			<div className={cx('bg-secondary', 'h-5rem')}></div>
 
-			<div className={cx('section-header')}>
+			<div className={cx('section-header', 'p-4 md:p-6')}>
 				<span className="text-2xl md:text-5xl font-bold z-1">TERMS OF USE AGREEMENT FOR IVORY GUIDE, LLC</span>
 			</div>
 			<div className="flex justify-content-center">
@@ -23,7 +22,7 @@ export const AgreementContentSection = () => {
 							THE LICENSED CONTENT.**
 						</span>
 					</p>
-					
+
 					<p>
 						<span>
 							In this Agreement, the term &ldquo;you&rdquo; refers to: (i) an entity entering into this Agreement for use of its employees, (ii) an
@@ -36,7 +35,7 @@ export const AgreementContentSection = () => {
 							conditions in the Master Agreement.**
 						</span>
 					</p>
-				
+
 					<ol>
 						<li>
 							<span>

@@ -66,11 +66,7 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 		control,
 		formState: { errors },
 		handleSubmit,
-		getValues,
-		reset,
-		setValue,
 		trigger,
-		clearErrors,
 	} = useForm<FormValues>({ defaultValues });
 
 	return (
@@ -80,9 +76,6 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 			<span className="col-12 text-center text-2xl text-secondary">Create your account</span>
 			<span className="col-12 text-center p-0 text-gray-600 mb-6">Please fill the form below to create an account.</span>
 			<div className="col-12 p-0 grid m-0">
-				{/* <span className="col-12 p-0 mb-2 font-semibold">Enter your name</span> */}
-
-				{/* <span className="col-12 p-0 mb-2  font-semibold">Enter contact information</span> */}
 				<Controller
 					name="firstName"
 					control={control}
@@ -159,7 +152,6 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 									<FormErrorMessage message={errors[field.name]?.message} />
 								</div>
 							) : null}
-							{/* <FormErrorMessage message={errors[field.name]?.message} /> */}
 						</div>
 					)}
 				/>
@@ -181,7 +173,6 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 								className={cx({ 'p-error': errors[field.name] })}></label>
 							<span className="p-float-label">
 								<InputText
-									// type="email"
 									id={field.name}
 									onChange={(e) => {
 										onChange(e);
@@ -241,14 +232,11 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 							) : (
 								<span className="mt-2 mb-4  text-gray-500 text-sm">Min. 8 characters, 1 letter, 1 number and 1 special character</span>
 							)}
-							{/* <FormErrorMessage message={errors[field.name]?.message} /> */}
 						</div>
 					)}
 				/>
 			</div>
 			<div className="col-12 grid m-0 p-0  mt-4 justify-content-center">
-				{/* onChange={e => setChecked(e.checked)} checked={checked} */}
-
 				<Controller
 					name="agree"
 					control={control}

@@ -1,7 +1,6 @@
 .section-header {
-	padding: 4rem;
 	position: relative;
-	background-color: #f3f8f5  ;
+	background-color: #f3f8f5;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -9,20 +8,15 @@
 	text-align: center;
 	z-index: 0;
 }
-@media screen and (max-width: 768px) {
-	.section-header {
-		padding: 2rem;
-	}
-	
-}
 
 .wrapper {
 	max-width: 1200px;
 	padding: 5rem 2rem;
 }
 
-.table, .th, .td {
+.table,
+.th,
+.td {
 	border: 1px solid black;
 	border-collapse: collapse;
 }
-
