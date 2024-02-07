@@ -24,7 +24,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
           <table className={cx("striped-table")}>
             <thead>
               <tr>
-                <h3 className="my-0 pb-1">Summary:</h3>
+                <div className="font-bold my-0 pb-1">Options:</div>
               </tr>
               <tr>
                 {["Description", "Name", "Amount"].map(

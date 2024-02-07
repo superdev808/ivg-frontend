@@ -32,21 +32,21 @@ export interface Site {
 }
 
 interface PdfContentProps {
-  date?: Date | undefined;
   selectedSites: Site[];
   sitesData: SiteData;
   responseOrder: string[];
   isCustomReport: boolean | undefined;
   patientInfo?: Patient | null;
+  showTeethSelection: boolean;
 }
 
 const PdfContent: React.FC<PdfContentProps> = ({
-  date,
   responseOrder,
   selectedSites,
   sitesData,
   isCustomReport,
   patientInfo,
+  showTeethSelection
 }) => {
   const [componentSummary, setComponentSummary] = useState<summary[]>([]);
   useEffect(() => {
@@ -166,21 +166,21 @@ const PdfContent: React.FC<PdfContentProps> = ({
             <span className="font-semibold">{calculatorType}</span> calculator.
           </div>
         </div>
-        <div className="mt-2 pr-5">
+        {showTeethSelection && <div className="mt-2 pr-5">
           <TeethSelector
             showLabel={false}
             selectedSites={selectedSites}
             onSiteChange={() => {}}
             variant={TeethSelectorVariant.SMALL}
           />
-        </div>
+        </div>}
       </div>
 
-      <div className="px-3 py-1">
+      <div className="px-4 py-1">
         <InputSummary selectedSites={selectedSites} sitesData={sitesData} />
       </div>
 
-      <div className="p-3">
+      <div className="p-4">
         <ComponentSummary summary={componentSummary} />
 
         <div className="flex flex-column pt-5 greet">

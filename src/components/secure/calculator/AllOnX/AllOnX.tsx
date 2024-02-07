@@ -367,6 +367,9 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                     selectedSites={selectedSites}
                     sitesData={sitesData}
                     isCustomReport={!!isCustom}
+                    showTeethSelection={ (
+                      siteSpecificReport ===
+                        SITE_SPECIFIC_REPORT_OPTIONS[0].value) }
                     responseOrder={
                       procedureInputsAndResponse?.responseOrder || []
                     }

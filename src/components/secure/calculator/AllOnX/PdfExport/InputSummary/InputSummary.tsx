@@ -39,7 +39,7 @@ const InputSummary: React.FC<InputSummaryProps> = ({
             <thead>
               {idx === 0 && (
                 <tr>
-                  <h3 className="my-0 pb-1">Inputs:</h3>
+                  <div className="font-bold my-0 pb-1">Inputs:</div>
                 </tr>
               )}
               <tr>

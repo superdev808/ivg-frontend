@@ -14,6 +14,7 @@ interface PDFExportProps {
   sitesData: SiteData;
   responseOrder: string[];
   isCustomReport: boolean | undefined;
+  showTeethSelection: boolean;
 }
 
 export interface Patient {
@@ -28,6 +29,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
   selectedSites,
   sitesData,
   isCustomReport,
+  showTeethSelection
 }) => {
   const contentRef = useRef(null);
   const toastRef = useRef(null);
@@ -120,7 +122,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
   };
   return (
     <>
-      <div className="hidden">
+      <div className="block">
         <div ref={contentRef}>
           {patientInfo && (
             <PdfContent
@@ -129,6 +131,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
               responseOrder={responseOrder}
               isCustomReport={isCustomReport}
               patientInfo={patientInfo}
+              showTeethSelection={showTeethSelection}
             />
           )}
         </div>
