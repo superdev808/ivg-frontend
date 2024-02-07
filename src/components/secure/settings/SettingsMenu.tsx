@@ -7,16 +7,13 @@ const cx = classNames.bind(styles);
 
 
 export interface SettingsMenuProps {
-	active?: {id:string,label:string, icon:string};
+	active?: string;
 	menuItems: {id:string,label:string, icon:string}[];
 	onSelect?: (item) => void;
 }
 
 export default function SettingsMenu({active, menuItems, onSelect}:SettingsMenuProps = {menuItems:[]} as SettingsMenuProps) {
-	useEffect(() => {
-		console.log(active);
 
-	},[active]);
 
 	return (
 		<div className={cx('menu')}>
@@ -28,7 +25,7 @@ export default function SettingsMenu({active, menuItems, onSelect}:SettingsMenuP
 					return (
 						<div
 							key={`${item.id}_${index}`}
-							className={cx('menu-item',{'active': active?.id === item.id})}
+							className={cx('menu-item',{'active': active === item.id})}
 							onClick={() => onSelect && onSelect(item)}
 							>
 							<i className={cx('icon', `${item.icon}`, ' mr-2 text-gray-900')}></i>

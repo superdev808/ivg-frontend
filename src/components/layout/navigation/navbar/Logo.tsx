@@ -3,8 +3,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "../Navigation.module.scss"
+import { useAppSelector } from "@/redux/hooks/hooks";
 
 const Logo = () => {
+  const {isLoading:authLoading, authenticated} = useAppSelector((state) => state.auth);
   //update the size of the logo when the size of the screen changes
   const [width, setWidth] = useState(0);
 
@@ -34,7 +36,7 @@ const Logo = () => {
   }, []);
 
   return (
-    <Link href="/">
+    <Link href={authenticated ? "/home" : "/"}>
       <Image
         src="/images/logo/Ivory-Guide-Horizontal-Logo-White.png"
         alt="Logo"
