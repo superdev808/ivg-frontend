@@ -12,11 +12,10 @@ import {
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from "primereact/toast";
-import Quiz from "../../../quiz";
-import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import AutoPopulatePromt from "./AutoPopulatePromt";
 import Item from "@/components/calculator/AllOnX/Item";
 import { Divider } from "primereact/divider";
+import { Dropdown } from "primereact/dropdown";
 
 interface InputProps {
   site: Site;
@@ -254,14 +253,19 @@ const Questionnaire: React.FC<InputProps> = ({
                 !!answerOptions[index] &&
                 !noAvailableOptions && (
                   <div className="col-12 flex p-0">
-                    <Quiz
-                      key={`quiz-${index}`}
-                      question={quiz.text}
-                      answers={answerOptions[index]}
-                      selectedAnswer={answers[index] || null}
-                      handleSelectAnswer={handleSelectAnswer(index)}
-                      disabled={isLoading || answers[level] === ""}
-                    />
+                    <div className="col-3 flex align-items-center">
+                      {quiz.name}
+                    </div>
+                    <div className="col-9">
+                      <Dropdown
+                        value={answers[index] || null}
+                        onChange={handleSelectAnswer(index)}
+                        options={answerOptions[index]}
+                        placeholder="Select"
+                        className="w-full"
+                        disabled={isLoading || answers[level] === ""}
+                      />
+                    </div>
                   </div>
                 )}
             </React.Fragment>
