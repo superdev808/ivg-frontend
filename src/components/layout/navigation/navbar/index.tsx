@@ -15,13 +15,23 @@ import { MenuItem } from 'primereact/menuitem';
 
 let cx = classNames.bind(styles);
 
-const Navbar = ({ navLinks, rightNavLinks,avatarLinks, avatar, secure }: { navLinks: NavLink[]; rightNavLinks: NavLink[];avatarLinks:MenuItem[]; avatar:JSX.Element; secure?: boolean }) => {
+const Navbar = ({
+	navLinks,
+	rightNavLinks,
+	avatarLinks,
+	avatar,
+	secure,
+}: {
+	navLinks: NavLink[];
+	rightNavLinks: NavLink[];
+	avatarLinks: MenuItem[];
+	avatar: JSX.Element;
+	secure?: boolean;
+}) => {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const pathName = usePathname();
 
-
 	const avatarMenu = useRef<Menu>(null);
-
 
 	const onClick = (item: NavLink) => {
 		if (item.onClick) {
@@ -43,7 +53,7 @@ const Navbar = ({ navLinks, rightNavLinks,avatarLinks, avatar, secure }: { navLi
 	};
 
 	return (
-		<div className={cx({'md:px-8': !secure},"px-4  w-full  top-0 mt-1 mb-1")}>
+		<div className={cx({ 'md:px-8': !secure }, 'px-4  w-full  top-0 mt-1 mb-1')}>
 			<div className="flex items-center justify-content-between">
 				<div className="flex align-items-center">
 					<Logo />
@@ -61,20 +71,20 @@ const Navbar = ({ navLinks, rightNavLinks,avatarLinks, avatar, secure }: { navLi
 							})}
 					</div>
 				</div>
-				<div className="flex align-items-center">
+				<div className="flex align-items-center ">
 					<div className={cx('navbarNav', 'hidden md:flex gap-x-6 ml-3')}>
 						{rightNavLinks
-							.filter((li) => li.secure === secure)
+							.filter((li) => li.secure === secure && secure === undefined || secure === false)
 							.map((item) => {
 								return (
-									<div key={item.id + '_full'} className={cx(item.className)}>
+									<div
+										key={item.id + '_full'}
+										className={cx(item.className)}>
 										<Link
 											href={item.link || '/'}
-											onClick={() => onClick(item)}
-											
-											>
+											onClick={() => onClick(item)}>
 											<p className={cx({ active: pathName.includes(item.link || 'unknown') })}>
-												<i className={cx(item.icon, 'px-2')} /> 
+												<i className={cx(item.icon, 'px-2')} />
 												{item.title}
 											</p>
 										</Link>
@@ -82,22 +92,26 @@ const Navbar = ({ navLinks, rightNavLinks,avatarLinks, avatar, secure }: { navLi
 								);
 							})}
 					</div>
-					<Menu
-						model={avatarLinks}
-						popup
-						ref={avatarMenu}
-						id="popup_menu_right"
-						popupAlignment="right"
-						className="mt-2 w-full md:w-15rem"
-					/>
-					{secure && <div className={cx('avatar')} onClick={(event) => {avatarMenu.current?.toggle(event)} }>
-						
-						{avatar}
+					<div className="hidden md:flex ">
+						<Menu
+							model={avatarLinks}
+							popup
+							ref={avatarMenu}
+							id="popup_menu_right"
+							popupAlignment="right"
+							className="mt-2 w-full md:w-15rem"
+						/>
+						{secure && (
+							<div
+								className={cx('avatar')}
+								onClick={(event) => {
+									avatarMenu.current?.toggle(event);
+								}}>
+								{avatar}
+							</div>
+						)}
+					</div>
 
-					
-					</div>}
-
-				
 					{renderHambuger()}
 				</div>
 			</div>

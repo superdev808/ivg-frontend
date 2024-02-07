@@ -11,4 +11,9 @@ export const {
     usePostRequestPasswordResetMutation,
     usePostValidateTokenMutation,
     usePostResetPasswordMutation,
+    useGetUserInfoQuery,
+    useGetUserInfoAdditionalQuery,
+    usePutUpdateUserInfoMutation,
+    usePostSendResetPasswordMutation,
+    usePostUploadLogoMutation
 } = userApiSlice

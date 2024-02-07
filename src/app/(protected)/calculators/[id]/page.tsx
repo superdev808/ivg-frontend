@@ -25,12 +25,8 @@ export default function CalculatorPage() {
   return (
     componentMapping[tabId] || (
       <div className="nav-offset flex flex-grow-1">
-        <div className="wrapper">
-          <div className="flex flex-column align-items-center justify-content-center mt-6">
-            <Card
-              className="w-12 md:w-8 flex px-4 py-2 border-round bg-white flex-column"
-              title={selectedType?.description}
-            />
+        <div className="w-full">
+          <div className="flex flex-column align-items-center justify-content-center">
             <CalculatorContainer
               option={searchParams.id as string}
               input={selectedType?.input || []}

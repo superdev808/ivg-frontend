@@ -7,15 +7,15 @@ import { InputText } from 'primereact/inputtext';
 import { useEffect, useState, useRef } from 'react';
 
 import { Controller, useForm } from 'react-hook-form';
-import { NextResponse } from 'next/server';
+
 import Link from 'next/link';
-import Image from 'next/image';
 import { Checkbox } from 'primereact/checkbox';
 import { Messages } from 'primereact/messages';
 import { setCookie } from '@/helpers/cookie';
 import { useDispatch } from 'react-redux';
 import styles from './Login.module.scss';
 import classNames from 'classnames/bind';
+import { REDIRECT_TO_AUTH } from '@/constants/routes';
 const cx = classNames.bind(styles);
 
 type FormValues = {
@@ -78,7 +78,7 @@ export const LoginForm = () => {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({ email: d.email, password: d.password }),
-				credentials: 'include'
+				credentials: 'include',
 			});
 			const data = await response.json();
 			if (!response.ok) {
@@ -92,7 +92,7 @@ export const LoginForm = () => {
 			dispatch({ type: 'auth/setAuth', payload: { authenticated: true } });
 
 			setLoading(false);
-			router.push('/');
+			router.push(REDIRECT_TO_AUTH);
 		} catch (error: any) {
 			addError(error?.message ?? '');
 
@@ -113,7 +113,9 @@ export const LoginForm = () => {
 		<>
 			<div className="w-25rem my-4">{<Messages ref={errorMsgs} />}</div>
 
-			<form  className='w-full md:w-4' onSubmit={handleSubmit(onSubmit)}>
+			<form
+				className="w-full md:w-4"
+				onSubmit={handleSubmit(onSubmit)}>
 				<div className="mb-3">
 					<Controller
 						name="email"
@@ -150,17 +152,17 @@ export const LoginForm = () => {
 									htmlFor={field.name}
 									className={cx({ 'p-error': errors[field.name] })}></label>
 								<span className="p-float-label p-input-icon-right w-full">
-								<i
-									onClick={() => setShowPassword(!showPassword)}
-									className={cx({ 'pi pi-eye': !showPassword }, { 'pi pi-eye-slash': showPassword })}
-								/>
+									<i
+										onClick={() => setShowPassword(!showPassword)}
+										className={cx({ 'pi pi-eye': !showPassword }, { 'pi pi-eye-slash': showPassword })}
+									/>
 
-								<InputText
-									type={!showPassword ? 'password' : 'text'}
-									id={field.name}
-									className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
-									{...field}
-								/>
+									<InputText
+										type={!showPassword ? 'password' : 'text'}
+										id={field.name}
+										className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
+										{...field}
+									/>
 									<label htmlFor={field.name}>Password</label>
 								</span>
 								{getFormErrorMessage(field.name)}
@@ -179,8 +181,12 @@ export const LoginForm = () => {
 						<label htmlFor="rememberme">Remember me</label>
 					</div>
 					<span className="font-medium no-underline ml-2 text-secondary text-right cursor-pointer">
-						
-						<Link className='text-secondary no-underline' href="/forgot-password">Forgot your password?</Link></span>
+						<Link
+							className="text-secondary no-underline"
+							href="/forgot-password">
+							Forgot your password?
+						</Link>
+					</span>
 				</div>
 
 				<div className="flex w-full justify-content-center">
