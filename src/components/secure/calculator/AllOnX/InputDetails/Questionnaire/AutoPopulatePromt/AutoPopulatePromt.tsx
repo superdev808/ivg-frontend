@@ -1,20 +1,24 @@
 import React from "react";
-import { RadioButton, RadioButtonChangeEvent } from "primereact/radiobutton";
+import { RadioButton } from "primereact/radiobutton";
 import { AUTO_POPULATE_OPTIONS, RadioButtonOption } from "../../../constants";
+import { Button } from "primereact/button";
 
 interface AutoPopulatePromtParams {
   autoPopulate: string;
-  onPopulateResponse: (e: RadioButtonChangeEvent) => void;
+  showRefreshButton: boolean;
+  onPopulateResponse: (value: string) => void;
 }
 
 /**
  * Name : AutoPopulatePromt.
  * Desc : Renders a set of radio buttons with options for auto-populating answers.
  * @param {string} autoPopulate
+ * @param {bool} showRefreshButton
  * @param {func} onPopulateResponse
  */
 const AutoPopulatePromt: React.FC<AutoPopulatePromtParams> = ({
   autoPopulate,
+  showRefreshButton,
   onPopulateResponse,
 }: AutoPopulatePromtParams) => {
   return (
@@ -28,7 +32,7 @@ const AutoPopulatePromt: React.FC<AutoPopulatePromtParams> = ({
                 inputId={option.id}
                 name={option.name}
                 value={option.value}
-                onChange={(e) => onPopulateResponse(e)}
+                onChange={(e) => onPopulateResponse(e.value)}
                 checked={autoPopulate === option.value}
               />
               <label htmlFor={option.id} className="ml-2">
@@ -36,6 +40,13 @@ const AutoPopulatePromt: React.FC<AutoPopulatePromtParams> = ({
               </label>
             </div>
           ))}
+          {showRefreshButton && (
+            <Button
+              label="Refresh"
+              size="small"
+              onClick={() => onPopulateResponse(AUTO_POPULATE_OPTIONS[0].value)}
+            />
+          )}
         </>
       </div>
     </div>
