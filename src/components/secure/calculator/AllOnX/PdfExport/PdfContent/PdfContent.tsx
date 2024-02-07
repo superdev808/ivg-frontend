@@ -13,13 +13,13 @@ import _ from "lodash";
 import styles from "./PdfContent.module.scss";
 import classNames from "classnames/bind";
 import { getCookie } from "@/helpers/cookie";
-import { Divider } from "primereact/divider";
 import TeethSelector from "../../TeethSelector";
 import InputSummary from "../InputSummary/InputSummary";
 import ComponentSummary, {
   summary,
 } from "../ComponentSummary/ComponentSummary";
 import { Patient } from "../PdfExport";
+import { TeethSelectorVariant } from "../../TeethSelector/TeethSelector";
 const cx = classNames.bind(styles);
 export interface InputDetail {
   id?: string;
@@ -141,16 +141,19 @@ const PdfContent: React.FC<PdfContentProps> = ({
         />
         <div className="flex flex-column font-semibold">
           <div>{name}</div>
+          {/* TODO: Need to add dynamic values when available */}
           {/* <div>User Address</div>
           <div className="mt-2">phone</div> */}
           <div>{email}</div>
         </div>
       </div>
 
-      <div className={cx("separator","flex pb-2 mx-4 justify-content-between")}>
+      <div
+        className={cx("separator", "flex pb-2 mx-4 justify-content-between")}
+      >
         <div className="col-4 p-0">
-          <div className="pb-2">{patientInfo?.name}</div>
-          <div>{patientInfo?.address}</div>
+          <div className={cx("break-all", "pb-2")}>{patientInfo?.name}</div>
+          <div className={cx("break-all")}>{patientInfo?.address}</div>
         </div>
         <div>
           Date:{currentDate} {currentDateTime}
@@ -158,28 +161,22 @@ const PdfContent: React.FC<PdfContentProps> = ({
       </div>
       <div className="flex mx-4 my-1 justify-content-between">
         <div className="flex flex-column">
-          <div className="absolute pt-2 pb-2">
+          <div className="py-2">
             Please see summary for{" "}
             <span className="font-semibold">{calculatorType}</span> calculator.
-            {/* <p className="my-2">
-              exported on{" "}
-              <span className="font-semibold">
-                {currentDate} {currentDateTime}
-              </span>
-              .
-            </p> */}
           </div>
         </div>
-        <div className="mt-7">
+        <div className="mt-2 pr-5">
           <TeethSelector
             showLabel={false}
             selectedSites={selectedSites}
             onSiteChange={() => {}}
+            variant={TeethSelectorVariant.SMALL}
           />
         </div>
       </div>
 
-      <div className="p-3">
+      <div className="px-3 py-1">
         <InputSummary selectedSites={selectedSites} sitesData={sitesData} />
       </div>
 

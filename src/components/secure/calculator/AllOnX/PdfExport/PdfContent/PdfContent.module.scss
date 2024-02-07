@@ -2,6 +2,9 @@
   background-color: var(--secondary-color);
 }
 .separator {
-  border-color: var(--secondary-color);
-  border-bottom: 1px solid;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.break-all {
+  word-wrap: break-word;
 }
