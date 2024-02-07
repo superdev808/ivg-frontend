@@ -1,26 +1,34 @@
 'use client';
 import { useEffect, PropsWithChildren } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks';
-import { getCookie } from '@/helpers/cookie';
+import { useAppDispatch } from '@/redux/hooks/hooks';
 
 import { setAuth } from '@/redux/slices/auth/authSlice';
-import { verifyAuth } from '@/helpers/verifyAuth';
-
-import Loading from '@/components/layout/loading';
+import { PRIVATE_ROUTES } from '@/constants/routes';
+import { usePostVerifyTokenMutation } from '@/redux/hooks/apiHooks';
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
 	const pathname = usePathname();
+	const [postVerifyToken] = usePostVerifyTokenMutation();
+	const verifyAuth = async () => {
+		try {
+			const response: any = await postVerifyToken({}).unwrap();
 
+			if (response.error) {
+				return false;
+			}
+			return true;
+		} catch (error) {
+			return false;
+		}
+	};
 	useEffect(() => {
 		const checkAuth = async () => {
 			try {
-				const token = getCookie('appToken');
-				const isAuthenticated = await verifyAuth(token);
+				const isAuthenticated = await verifyAuth();
 				dispatch(setAuth(isAuthenticated));
-	
 			} catch (error) {
 				console.error('Authentication check failed:', error);
 				router.push('/');
@@ -28,7 +36,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 		};
 
 		checkAuth();
-	}, [dispatch, router, pathname]);
+	}, [dispatch, router, pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return children;
 };
