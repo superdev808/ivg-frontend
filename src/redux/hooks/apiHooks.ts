@@ -15,4 +15,5 @@ export const {
   usePostSendResetPasswordMutation,
   usePostUploadLogoMutation,
   useSaveResultMutation,
+  useDeleteSavedResultMutation,
 } = userApiSlice;
