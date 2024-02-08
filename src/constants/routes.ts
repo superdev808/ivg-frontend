@@ -1,27 +1,27 @@
 export enum PUBLIC_ROUTES {
-	HOME = '/',
-	CONTACT = '/contact/',
-	ABOUT = '/about/',
-	PRODUCT = '/product/',
-	PRIVACY = '/privacy-policy/',
-	PRIVACYCA = '/privacy-policy-ca/',
-	AGREEMENT = '/agreement/',
+  HOME = '/',
+  CONTACT = '/contact/',
+  ABOUT = '/about/',
+  PRODUCT = '/product/',
+  PRIVACY = '/privacy-policy/',
+  PRIVACYCA = '/privacy-policy-ca/',
+  AGREEMENT = '/agreement/',
 }
 
 export enum PUBLIC_AUTH_ROUTES {
-	LOGIN = '/login/',
-	REGISTER = '/register/',
-	VERIFY = '/verify/',
-	RESET_PASSWORD = '/reset-password/',
-	FORGOT_PASSWORD = '/forgot-password/',
+  LOGIN = "/login/",
+  REGISTER = "/register/",
+  VERIFY = "/verify/",
+  RESET_PASSWORD = "/reset-password/",
+  FORGOT_PASSWORD = "/forgot-password/",
 }
 
 export enum PRIVATE_ROUTES {
-	HOME = '/home/',
-	DASHBOARD = '/dashboard/',
-	CALCULATORS = '/calculators/',
-	SETTINGS = '/settings/',
-	HELP = '/help/',
+  HOME = '/home/',
+  DASHBOARD = '/dashboard/',
+  CALCULATORS = '/calculators/',
+  SETTINGS = '/settings/',
+  HELP = '/help/',
 }
 
 export const REDIRECT_TO_AUTH = PRIVATE_ROUTES.CALCULATORS;

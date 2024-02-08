@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Button } from "primereact/button";
 import { AutoComplete } from "primereact/autocomplete";
 import { Dropdown } from "primereact/dropdown";
@@ -105,7 +105,7 @@ export default function Quiz(props: QuizProps) {
               className="m-2 w-12 md:w-3 flex flex-column"
               onClick={() => props.handleSelectAnswer(answer)}
             >
-              <div className="border-3 border-300 w-full p-0 flex justify-content-center">
+              <div className="border-3 border-300 w-full p-0 flex justify-content-center cursor-pointer">
                 {image ? (
                   <Image
                     src={image}
@@ -116,7 +116,7 @@ export default function Quiz(props: QuizProps) {
                   />
                 ) : (
                   <div
-                    className="w-full m-1 text-3xl flex align-items-center justify-content-center"
+                    className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center"
                     style={{ height: "200px" }}
                   >
                     {answer}
