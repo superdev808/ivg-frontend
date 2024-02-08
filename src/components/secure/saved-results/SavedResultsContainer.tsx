@@ -54,29 +54,33 @@ const SavedResultsContainer: React.FC = () => {
         <h1>Saved Results</h1>
 
         <div className="mt-2 w-12 mx-auto flex flex-column align-items-center xl:w-6">
-          <span className="p-input-icon-left w-full">
-            <i className="pi pi-search" />
-            <InputText
-              placeholder="Search"
-              className="w-full"
-              value={search}
-              disabled={isLoading}
-              onChange={(evt) => setSearch(evt.target.value)}
-            />
-          </span>
-
           {isLoading && <ProgressSpinner className="w-1" />}
           {!isLoading && userInfo && (
-            <div className="w-full mt-4">
+            <div>
               {userInfo.savedResults.length === 0 ? (
-                <p>You have not saved any results yet.</p>
+                <p className="text-center">
+                  You have not saved any results yet.
+                </p>
               ) : (
-                <SavedResultsList
-                  savedResults={userInfo.savedResults}
-                  search={search}
-                  isLoading={isDeletingSavedResult}
-                  onDelete={handleDelete}
-                />
+                <>
+                  <span className="p-input-icon-left w-full">
+                    <i className="pi pi-search" />
+                    <InputText
+                      placeholder="Search"
+                      className="w-full"
+                      value={search}
+                      disabled={isLoading}
+                      onChange={(evt) => setSearch(evt.target.value)}
+                    />
+                  </span>
+
+                  <SavedResultsList
+                    savedResults={userInfo.savedResults}
+                    search={search}
+                    isLoading={isDeletingSavedResult}
+                    onDelete={handleDelete}
+                  />
+                </>
               )}
             </div>
           )}

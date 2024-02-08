@@ -114,9 +114,9 @@ const Slide: React.FC<SlideProps> = ({ itemInfo, quiz }) => {
                     {text}
                   </div>
                   <div className="flex-1 text-right">
-                    {isUrl(itemInfo[text]) ? (
+                    {isUrl(details[text].trim()) ? (
                       <Link
-                        href={itemInfo[text]}
+                        href={details[text]}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{ wordBreak: "break-word" }}
@@ -129,7 +129,7 @@ const Slide: React.FC<SlideProps> = ({ itemInfo, quiz }) => {
                         />
                       </Link>
                     ) : (
-                      itemInfo[text]
+                      details[text]
                     )}
                   </div>
                 </div>
