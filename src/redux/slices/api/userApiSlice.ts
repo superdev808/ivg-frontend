@@ -54,19 +54,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
 				return res.status === 'Success' ? res.data : res.status;
 			},
 		}),
-		postSendVerificationEmail: builder.mutation<any, { email: string }>({
-			query: (email) => ({
-				url: '/send-verification-email',
-				method: 'POST',
-				body: email,
-			}),
-			transformErrorResponse(baseQueryReturnValue) {
-				return baseQueryReturnValue;
-			},
-			transformResponse: (res: Response) => {
-				return res.status === 'Success' ? res.data : res.status;
-			},
-		}),
 		postResetPassword: builder.mutation<any, { token: string; password: string }>({
 			query: (body) => ({
 				url: '/reset-password',
@@ -80,11 +67,109 @@ export const userApiSlice = apiSlice.injectEndpoints({
 				return res.status === 'Success' ? res.data : res.status;
 			},
 		}),
+		getUserInfo: builder.query({
+			query: () => ({
+				url: `/user-info`,
+				method: 'GET',
+			}),
+			transformErrorResponse(baseQueryReturnValue) {
+				return baseQueryReturnValue;
+			},
+		}),
+		putUpdateUserInfo: builder.mutation({
+			query: (body) => ({
+				url: '/update-user-info',
+				method: 'PUT',
+				body: body,
+			}),
+			transformErrorResponse(baseQueryReturnValue) {
+				return baseQueryReturnValue;
+			},
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+		}),
+		postSendResetPassword: builder.mutation({
+			query: () => ({
+				url: '/send-reset-password',
+				method: 'POST',
+			}),
+			transformErrorResponse(baseQueryReturnValue) {
+				return baseQueryReturnValue;
+			},
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+		}),
+		postUploadLogo: builder.mutation({
+			query: (imageData) => ({
+				url: '/upload-logo',
+				method: 'POST',
+				body: imageData,
+			}),
+			transformErrorResponse(baseQueryReturnValue) {
+				return baseQueryReturnValue;
+			},
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+		}),
+		saveResult: builder.mutation({
+			query: (resultData) => ({
+				url: '/saveResult',
+				method: 'POST',
+				body: resultData,
+			}),
+			transformErrorResponse(baseQueryReturnValue) {
+				return baseQueryReturnValue;
+			},
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+		}),
+		deleteSavedResult: builder.mutation({
+			query: (resultId) => ({
+				url: `/savedResult/${resultId}`,
+				method: 'DELETE',
+			}),
+			transformErrorResponse(baseQueryReturnValue) {
+				return baseQueryReturnValue;
+			},
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+		}),
+		postVerifyToken: builder.mutation({
+			query: (body) => ({
+				url: '/verify-token',
+				method: 'POST',
+				body,
+			}),
+			transformErrorResponse(baseQueryReturnValue) {
+				return baseQueryReturnValue;
+			},
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+		}),
 		postDeactivateUser: builder.mutation<any, { id: string }>({
 			query: (body) => ({
 				url: '/deactivate-user',
 				method: 'POST',
 				body,
+			}),
+			transformErrorResponse(baseQueryReturnValue) {
+				return baseQueryReturnValue;
+			},
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+		}),
+		postSendVerificationEmail: builder.mutation<any, { email: string }>({
+			query: (email) => ({
+				url: '/send-verification-email',
+				method: 'POST',
+				body: email,
 			}),
 			transformErrorResponse(baseQueryReturnValue) {
 				return baseQueryReturnValue;
@@ -119,15 +204,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
 				return res.status === 'Success' ? res.data : res.status;
 			},
 		}),
-		getUserInfo: builder.query({
-			query: () => ({
-				url: `/user-info`,
-				method: 'GET',
-			}),
-			transformErrorResponse(baseQueryReturnValue) {
-				return baseQueryReturnValue;
-			},
-		}),
 		getUsersList: builder.query({
 			query: () => ({
 				url: `/users-list`,
@@ -142,58 +218,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
 				url: '/update-user',
 				method: 'PUT',
 				body: body,
-			}),
-			transformErrorResponse(baseQueryReturnValue) {
-				return baseQueryReturnValue;
-			},
-			transformResponse: (res: Response) => {
-				return res.status === 'Success' ? res.data : res.status;
-			},
-		}),
-		putUpdateUserInfo: builder.mutation({
-			query: (body) => ({
-				url: '/update-user-info',
-				method: 'PUT',
-				body: body,
-			}),
-			transformErrorResponse(baseQueryReturnValue) {
-				return baseQueryReturnValue;
-			},
-			transformResponse: (res: Response) => {
-				return res.status === 'Success' ? res.data : res.status;
-			},
-		}),
-		postSendResetPassword: builder.mutation({
-			query: (body) => ({
-				url: '/send-reset-password',
-				method: 'POST',
-				body,
-			}),
-			transformErrorResponse(baseQueryReturnValue) {
-				return baseQueryReturnValue;
-			},
-			transformResponse: (res: Response) => {
-				return res.status === 'Success' ? res.data : res.status;
-			},
-		}),
-		postUploadLogo: builder.mutation({
-			query: (imageData) => ({
-				url: '/upload-logo',
-				method: 'POST',
-				body: imageData,
-			}),
-			transformErrorResponse(baseQueryReturnValue) {
-				return baseQueryReturnValue;
-			},
-			transformResponse: (res: Response) => {
-				return res.status === 'Success' ? res.data : res.status;
-			},
-		}),
-		postVerifyToken: builder.mutation({
-			query: (body) => ({
-				url: '/verify-token',
-				method: 'POST',
-				body,
 			}),
 			transformErrorResponse(baseQueryReturnValue) {
 				return baseQueryReturnValue;
