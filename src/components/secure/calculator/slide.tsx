@@ -18,10 +18,10 @@ const cx = classNames.bind(styles);
 
 interface SlideProps {
   itemInfo: Record<string, string>;
-  questionsAnswers: Record<string, string>;
+  quiz: Record<string, string>;
 }
 
-const Slide: React.FC<SlideProps> = ({ itemInfo, questionsAnswers }) => {
+const Slide: React.FC<SlideProps> = ({ itemInfo, quiz }) => {
   const { refetch } = useGetUserInfoQuery({});
   const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
 
@@ -47,7 +47,7 @@ const Slide: React.FC<SlideProps> = ({ itemInfo, questionsAnswers }) => {
         "Item Image": itemImage,
         "Link to Purchase": purchaseLink,
       },
-      questionsAnswers,
+      quiz,
       details,
     };
 
@@ -90,12 +90,12 @@ const Slide: React.FC<SlideProps> = ({ itemInfo, questionsAnswers }) => {
             "answers"
           )}
         >
-          {Object.keys(questionsAnswers).map((text) => (
+          {Object.keys(quiz).map((text) => (
             <div key={text} className="flex gap-1">
               <div className="text-left" style={{ maxWidth: "50%" }}>
                 {text}
               </div>
-              <div className="flex-1 text-right">{questionsAnswers[text]}</div>
+              <div className="flex-1 text-right">{quiz[text]}</div>
             </div>
           ))}
         </div>

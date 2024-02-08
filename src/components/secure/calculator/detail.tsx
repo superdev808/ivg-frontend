@@ -30,7 +30,7 @@ const DetailView: React.FC<DetailViewProps> = ({
     }, {} as Record<string, string>);
   }, [fields, activeItem]);
 
-  const questionsAnswers = useMemo(() => {
+  const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
       if (answers[idx]) {
         acc[question.text] = answers[idx];
@@ -46,7 +46,7 @@ const DetailView: React.FC<DetailViewProps> = ({
 
   return (
     <div className="flex flex-column align-items-center justify-content-center pt-4 md:pt-8">
-      <Slide itemInfo={itemInfo} questionsAnswers={questionsAnswers} />
+      <Slide itemInfo={itemInfo} quiz={quiz} />
 
       {items.length > 1 && (
         <div className="flex gap-4 mt-6">
