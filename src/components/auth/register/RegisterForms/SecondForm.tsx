@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { dentalPracticeRole, organizationRole, referralSource, states } from './constants';
+import { ORGANIZATION_ROLE, dentalPracticeRole, organizationRole, referralSource, states } from './constants';
 import styles from '../Register.module.scss';
 import classNames from 'classnames/bind';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -37,7 +37,7 @@ const defaultValues: FormValues = {
 	referralSourceOther: '',
 };
 
-export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: FormValues) => void; back: () => void, isSubmitting:boolean }) => {
+export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: FormValues) => void; back: () => void; isSubmitting: boolean }) => {
 	const [selectedOrgRole, setSelectedOrgRole] = useState<string>('');
 	const [selectedReferralSource, setSelectedReferralSource] = useState<string>('');
 
@@ -45,10 +45,12 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 		control,
 		formState: { errors },
 		handleSubmit,
-		clearErrors,
+		watch,
 		resetField,
 		reset,
 	} = useForm<FormValues>({ defaultValues });
+
+	const currentOrgRole = watch('organizationRole', '');
 
 	const onOrgRoleChange = (role: string) => {
 		if (role !== 'other') {
@@ -74,8 +76,8 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 			onSubmit={handleSubmit(onSubmit)}>
 			<div className="col-12 p-0 grid flex-column">
 				<span className="col-12 text-center text-2xl text-secondary">A few more questions</span>
-				<span className="col-12 text-center p-0 text-gray-600 mb-4">To get started, tell me a little about yourself.</span>
-				{/* <span className="col-12 p-0 mb-2 font-semibold">Enter your name</span> */}
+				<span className="col-12 text-center p-0 text-gray-600 mb-4">To get started, tell us a little about yourself.</span>
+
 				<div className="grid m-0 p-0 col-12">
 					<span className="col-12 m-0 p-0 mb-2 font-semibold">What is your role?</span>
 					<Controller
@@ -85,7 +87,7 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 						render={({ field: { onChange, ...field } }) => (
 							<>
 								<div className="col-12 grid m-0 mb-2">
-									<div className={cx( 'col-12 grid justify-content-between p-0')}>
+									<div className={cx('col-12 grid justify-content-between p-0')}>
 										{organizationRole.map((role) => {
 											return (
 												<div
@@ -126,11 +128,9 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 												style={{ width: '100%' }}>
 												<InputText
 													id={field.name}
-												
 													className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
 													placeholder="Please specify"
-													{...field}
-													></InputText>
+													{...field}></InputText>
 											</div>
 										)}
 									/>
@@ -229,7 +229,12 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 					<Controller
 						name="organizationNumber"
 						control={control}
-						rules={{ required: `License or School number is required.` }}
+						rules={{
+							required:
+								currentOrgRole !== ORGANIZATION_ROLE.OTHER && currentOrgRole !== ORGANIZATION_ROLE.DENTAL_LABORATORY
+									? `License or School number is required.`
+									: false,
+						}}
 						render={({ field, fieldState }) => (
 							<div className="flex flex-column  col-6 p-0 pl-2">
 								<label
@@ -298,7 +303,6 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 									style={{ width: '100%' }}>
 									<InputText
 										id={field.name}
-										
 										className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
 										placeholder="Please specify"
 										{...field}></InputText>
@@ -308,7 +312,7 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 					) : null}
 				</div>
 			</div>
-			<div className={cx("col-12 grid justify-content-between absolute bottom-0 p-0 m-0 mb-6")}>
+			<div className={cx('col-12 grid justify-content-between absolute bottom-0 p-0 m-0 mb-6')}>
 				<div className="col-6">
 					<Button
 						onClick={(e) => {
@@ -325,10 +329,10 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 				</div>
 				<div className="col-6 flex justify-content-end">
 					<Button
-					disabled={isSubmitting}
+						disabled={isSubmitting}
 						type="submit"
-						icon={isSubmitting ? "pi pi-spin pi-spinner" : "" }
-						label={"Register"}
+						icon={isSubmitting ? 'pi pi-spin pi-spinner' : ''}
+						label={'Register'}
 						className=" p-button-rounded bg-secondary "
 					/>
 				</div>
