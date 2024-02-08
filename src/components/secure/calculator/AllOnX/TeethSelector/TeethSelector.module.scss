@@ -1,5 +1,4 @@
 .teethSelector {
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,5 +43,26 @@
       }
     }
   }
+  &.smTeethSelector {
+    text {
+      transform: scale(0.6);
+    }
+    .containerFlex {
+      path {
+        transform: scale(0.6);
+      }
+    }
+    .columnFlex {
+      width: 180px;
+      height: 120px;
 
+      &.bottomTeeth {
+        svg {
+          g {
+            transform: translate(0, -105px);
+          }
+        }
+      }
+    }
+  }
 }

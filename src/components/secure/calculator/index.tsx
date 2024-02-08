@@ -105,7 +105,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
                 level < input.length &&
                 answers[index] !== ""
               ) {
-                handleSelectAnswer(index)({ value: "" });
+                handleSelectAnswer(index)("");
               }
               return null;
             }

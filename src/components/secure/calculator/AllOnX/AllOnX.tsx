@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
 import {
@@ -31,7 +31,9 @@ import {
   InputAndResponse,
 } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 import AdditionalInputs from "./AdditionalInputs";
-import { CheckboxChangeEvent } from "primereact/checkbox";
+import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
+import { Button } from "primereact/button";
+import PDFExport from "./PdfExport/PdfExport";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
 
 interface AllOnXCalculatorProps {
@@ -70,7 +72,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     if (!isCustom) {
       setSelectedCollections(_collections);
     }
-  }, [procedure, additionalInputs]);
+  }, [procedure, additionalInputs, isCustom]);
 
   useEffect(() => {
     const procedureInputsAndResponse = getProcedureInputsAndResponse(
@@ -80,7 +82,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       !!isCustom
     );
     setProcedureInputsAndResponse(procedureInputsAndResponse);
-  }, [selectedCollections]);
+  }, [additionalInputs, isCustom, procedure, selectedCollections]);
 
   const handleProcedureChange = (e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
@@ -327,13 +329,14 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   siteSpecificReport ===
                     SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
                 <TeethSelector
+                  showLabel={true}
                   selectedSites={selectedSites}
                   onSiteChange={handleSiteChange}
                 />
               )}
 
               {selectedSites.length > 0 && (
-                <div className="mt-3">
+                <div className="mt-3 relative">
                   <TabView renderActiveOnly={false}>
                     <TabPanel header="Input Details">
                       <InputDetails
@@ -360,6 +363,17 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                       />
                     </TabPanel>
                   </TabView>
+                  <PDFExport
+                    selectedSites={selectedSites}
+                    sitesData={sitesData}
+                    calculatorName={!!isCustom ? `Custom` : `All-On-X`}
+                    showTeethSelection={ (
+                      siteSpecificReport ===
+                        SITE_SPECIFIC_REPORT_OPTIONS[0].value) }
+                    responseOrder={
+                      procedureInputsAndResponse?.responseOrder || []
+                    }
+                  ></PDFExport>
                 </div>
               )}
             </div>
