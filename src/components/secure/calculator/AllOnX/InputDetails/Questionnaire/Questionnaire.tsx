@@ -12,10 +12,10 @@ import {
 import { useQuery } from "react-query";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from "primereact/toast";
-import Quiz from "../../../quiz";
-import { RadioButtonChangeEvent } from "primereact/radiobutton";
 import AutoPopulatePromt from "./AutoPopulatePromt";
 import Item from "@/components/calculator/AllOnX/Item";
+import { Divider } from "primereact/divider";
+import { Dropdown } from "primereact/dropdown";
 
 interface InputProps {
   site: Site;
@@ -75,6 +75,8 @@ const Questionnaire: React.FC<InputProps> = ({
   const [autoPopulate, setAutoPopulate] = useState<string>(
     AUTO_POPULATE_OPTIONS[1].value
   );
+  const [isAutoPopulatedAnswersChanged, setIsAutoPopulatedAnswersChanged] =
+    useState<boolean>(false);
   const toastRef = useRef(null);
 
   useEffect(() => {
@@ -89,7 +91,7 @@ const Questionnaire: React.FC<InputProps> = ({
         setAutoQuestions(null);
       }, 1000);
     }
-  }, [autoPopulateData]);
+  }, [autoPopulateData, onAutopopulate]);
 
   useEffect(() => {
     setAnswerOptions([]);
@@ -119,45 +121,56 @@ const Questionnaire: React.FC<InputProps> = ({
         return;
       }
 
-      const response: Response = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/allOnXCalculator`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            type: input[level]?.calculator,
-            output: input[level]?.outputFrom,
-            quiz,
-            fields: input[level]?.name ? [input[level]?.name] : [],
-          }),
-        }
-      );
+      try {
+        const response: Response = await fetch(
+          `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/allOnXCalculator`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              type: input[level]?.calculator,
+              output: input[level]?.outputFrom,
+              quiz,
+              fields: input[level]?.name ? [input[level]?.name] : [],
+            }),
+          }
+        );
 
-      if (!response.ok && toastRef.current) {
-        response.json().then((res: any) => {
-          (toastRef.current as any).show({
-            severity: "error",
-            summary: res.status,
-            detail: res.message,
-            life: 5000,
+        if (!response.ok && toastRef.current) {
+          response.json().then((res: any) => {
+            const msg: string =
+              res?.message?.message || res?.message || "Something went wrong";
+            (toastRef.current as any).show({
+              severity: "error",
+              summary: res?.status,
+              detail: msg,
+              life: 5000,
+            });
           });
+          return;
+        }
+
+        const {
+          data: { result: newAnswerOptions, quizResponse = null },
+        } = await response.json();
+
+        const originalAnswerOptions: string[][] = answerOptions.slice(0, level);
+
+        if (newAnswerOptions.length) {
+          setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
+        }
+        if (quizResponse) {
+          onQuizResponse(site, quizResponse, input[level]?.outputFrom ?? "");
+        }
+      } catch (error: any) {
+        (toastRef.current as any).show({
+          severity: "error",
+          summary: error?.status,
+          detail: error?.message,
+          life: 5000,
         });
-        return;
-      }
-
-      const {
-        data: { result: newAnswerOptions, quizResponse = null },
-      } = await response.json();
-
-      const originalAnswerOptions: string[][] = answerOptions.slice(0, level);
-
-      if (newAnswerOptions.length) {
-        setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
-      }
-      if (quizResponse) {
-        onQuizResponse(site, quizResponse, input[level]?.outputFrom ?? "");
       }
     },
     { refetchOnWindowFocus: false, retry: false }
@@ -169,6 +182,9 @@ const Questionnaire: React.FC<InputProps> = ({
 
   const handleSelectAnswer = (index: number) => (e: any) => {
     setAutoQuestions(null);
+    if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value) {
+      setIsAutoPopulatedAnswersChanged(true);
+    }
     if (e.value === "" && questions[index].name === "") {
       const promise = new Promise((resolve) => {
         setLevel(index);
@@ -187,9 +203,9 @@ const Questionnaire: React.FC<InputProps> = ({
     onInputSelect(site, questions[index], newAnswers[index]);
   };
 
-  const handlePopulateResponse = (e: RadioButtonChangeEvent) => {
-    const value = e.value;
+  const handlePopulateResponse = (value: string) => {
     setAutoPopulate(value);
+    setIsAutoPopulatedAnswersChanged(false);
     if (value === AUTO_POPULATE_OPTIONS[0].value) {
       onAutopopulate({ site, questions, answerOptions, answers });
     }
@@ -235,18 +251,32 @@ const Questionnaire: React.FC<InputProps> = ({
                 </div>
               )}
 
+              {quiz.displayCalculatorName && (
+                <Divider align="left">
+                  <div className="inline-flex align-items-center">
+                    <i className="pi pi-calculator mr-2"></i>
+                    <b>{quiz.displayCalculatorName}</b>
+                  </div>
+                </Divider>
+              )}
+
               {!!(quiz.text && quiz.name) &&
                 !!answerOptions[index] &&
                 !noAvailableOptions && (
                   <div className="col-12 flex p-0">
-                    <Quiz
-                      key={`quiz-${index}`}
-                      question={quiz.text}
-                      answers={answerOptions[index]}
-                      selectedAnswer={answers[index] || null}
-                      handleSelectAnswer={handleSelectAnswer(index)}
-                      disabled={isLoading || answers[level] === ""}
-                    />
+                    <div className="col-3 flex align-items-center">
+                      {quiz.name}
+                    </div>
+                    <div className="col-9">
+                      <Dropdown
+                        value={answers[index] || null}
+                        onChange={handleSelectAnswer(index)}
+                        options={answerOptions[index]}
+                        placeholder="Select"
+                        className="w-full"
+                        disabled={isLoading || answers[level] === ""}
+                      />
+                    </div>
                   </div>
                 )}
             </React.Fragment>
@@ -256,6 +286,7 @@ const Questionnaire: React.FC<InputProps> = ({
           <AutoPopulatePromt
             autoPopulate={autoPopulate}
             onPopulateResponse={handlePopulateResponse}
+            showRefreshButton={isAutoPopulatedAnswersChanged}
           />
         )}
       </React.Fragment>

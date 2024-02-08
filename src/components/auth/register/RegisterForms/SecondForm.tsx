@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { dentalPracticeRole, organizationRole, referralSource, states } from './constants';
+import { ORGANIZATION_ROLE, dentalPracticeRole, organizationRole, referralSource, states } from './constants';
 import styles from '../Register.module.scss';
 import classNames from 'classnames/bind';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -45,10 +45,12 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 		control,
 		formState: { errors },
 		handleSubmit,
-		clearErrors,
+		watch,
 		resetField,
 		reset,
 	} = useForm<FormValues>({ defaultValues });
+
+	const currentOrgRole = watch('organizationRole', '');
 
 	const onOrgRoleChange = (role: string) => {
 		if (role !== 'other') {
@@ -226,7 +228,12 @@ export const SecondForm = ({ onSubmit, back, isSubmitting }: { onSubmit: (data: 
 					<Controller
 						name="organizationNumber"
 						control={control}
-						rules={{ required: `License or School number is required.` }}
+						rules={{
+							required:
+								currentOrgRole !== ORGANIZATION_ROLE.OTHER && currentOrgRole !== ORGANIZATION_ROLE.DENTAL_LABORATORY
+									? `License or School number is required.`
+									: false,
+						}}
 						render={({ field, fieldState }) => (
 							<div className="flex flex-column  col-12 md:col-6 p-0 md:pl-2 mb-4 ">
 								<label

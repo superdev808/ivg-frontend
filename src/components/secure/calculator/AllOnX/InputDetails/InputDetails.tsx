@@ -88,13 +88,12 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               <h3>{site.name}</h3>
               {questionnaire.map((data: InputDetail, index: number) => {
                 return (
-                  <>
+                  <React.Fragment key={`${site.key}-${index}`}>
                     {data.answer && (
                       <div
                         className={`flex ${
                           index === 0 && "border-top-1"
                         } border-bottom-1 surface-border`}
-                        key={`${site.key}-${index}`}
                       >
                         <span className="flex-1 border-left-1 border-right-1 surface-border p-2">
                           {data.question}
@@ -104,7 +103,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
                         </span>
                       </div>
                     )}
-                  </>
+                  </React.Fragment>
                 );
               })}
             </React.Fragment>

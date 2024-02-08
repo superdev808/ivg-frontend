@@ -15,7 +15,7 @@ export const RegisterComplete = () => {
 				</span>
 				<div className="text-2xl text-center my-6">
 					<span>
-						Your account has been created and a verification email has been sent to your registered email address. Please verification link included
+						Your account has been created and a verification email has been sent to your registered email address. Please click the verification link included
 						in the email to activate your account.
 					</span>
 				</div>
