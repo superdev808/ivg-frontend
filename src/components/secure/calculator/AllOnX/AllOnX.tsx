@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
 import {
@@ -31,8 +31,7 @@ import {
   InputAndResponse,
 } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 import AdditionalInputs from "./AdditionalInputs";
-import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
-import { Button } from "primereact/button";
+import { CheckboxChangeEvent } from "primereact/checkbox";
 import PDFExport from "./PdfExport/PdfExport";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
 
