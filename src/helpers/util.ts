@@ -2653,3 +2653,10 @@ export const calculatorImages: any = {
     "zimmer dental (biomet 3i)": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/ZimVie.png",
     "msdi": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/msdi.png"
 };
+
+export const formatDate = (date: string) =>
+    new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    }).format(new Date(date))

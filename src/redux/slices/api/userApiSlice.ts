@@ -153,6 +153,18 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
+    deleteSavedResult: builder.mutation({
+      query: (resultId) => ({
+        url: `/savedResult/${resultId}`,
+        method: "DELETE",
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+      transformResponse: (res: Response) => {
+        return res.status === "Success" ? res.data : res.status;
+      },
+    }),
   }),
   overrideExisting: true,
 });
