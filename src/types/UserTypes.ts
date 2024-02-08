@@ -33,7 +33,6 @@ export interface UserInfo {
 	referralSourceOther?: string;
 }
 
-
 export interface CheckEmail {
 	message: string;
 	available: boolean;
@@ -46,5 +45,5 @@ export interface EditUser {
 	email: string;
 	role: string;
 	verified: boolean;
-
+	active: boolean;
 }

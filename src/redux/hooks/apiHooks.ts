@@ -18,5 +18,6 @@ export const {
     useGetUsersListQuery,
     usePostSendVerificationEmailMutation,
     usePostDeactivateUserMutation,
-    usePostVerifyTokenMutation
+    usePostVerifyTokenMutation,
+    usePostActivateUserMutation
 } = userApiSlice;

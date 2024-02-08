@@ -6,13 +6,16 @@ import {
 	usePostDeactivateUserMutation,
 	usePostSendResetPasswordMutation,
 	usePostSendVerificationEmailMutation,
+	usePostActivateUserMutation,
 } from '@/redux/hooks/apiHooks';
 
 import AdminEditUser from './AdminForms/AdminEditUser';
 import { EditUser } from '@/types/UserTypes';
 
+import { USER_ROLES_OPTIONS } from '@/constants/users';
+
 import { DataTable, DataTableFilterMeta } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+import { Column, ColumnFilterElementTemplateOptions } from 'primereact/column';
 import { FilterMatchMode } from 'primereact/api';
 import { OverlayPanel } from 'primereact/overlaypanel';
 import { Button } from 'primereact/button';
@@ -20,6 +23,8 @@ import { Dialog } from 'primereact/dialog';
 import { Toast, ToastMessage } from 'primereact/toast';
 import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
 import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
+import { TriStateCheckbox, TriStateCheckboxChangeEvent } from 'primereact/tristatecheckbox';
 
 const cx = classNames.bind(styles);
 
@@ -28,6 +33,7 @@ const AdminUserManagement = () => {
 	const [postSendResetPassword] = usePostSendResetPasswordMutation();
 	const [postSendVerificationEmail] = usePostSendVerificationEmailMutation();
 	const [postDeactivateUser] = usePostDeactivateUserMutation();
+	const [postActivateUser] = usePostActivateUserMutation();
 	const toast = useRef(null);
 
 	const [visibleEditUser, setVisibleEditUser] = useState(false);
@@ -35,10 +41,13 @@ const AdminUserManagement = () => {
 
 	const menuPanel = useRef<OverlayPanel>(null);
 
-	const [globalFilterValue, setGlobalFilterValue] = useState<string>('');
-
 	const [filters, setFilters] = useState<DataTableFilterMeta>({
-		global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+		firstName: { value: null, matchMode: FilterMatchMode.CONTAINS },
+		lastName: { value: null, matchMode: FilterMatchMode.CONTAINS },
+		email: { value: null, matchMode: FilterMatchMode.CONTAINS },
+		role: { value: null, matchMode: FilterMatchMode.CONTAINS },
+		verified: { value: null, matchMode: FilterMatchMode.EQUALS },
+		active: { value: null, matchMode: FilterMatchMode.EQUALS },
 	});
 
 	const onEditUser = () => {
@@ -108,36 +117,36 @@ const AdminUserManagement = () => {
 			},
 		});
 	};
+	const onActivateUser = async (user: EditUser) => {
+		confirmDialog({
+			message: 'Are you sure you want to proceed?',
+			header: 'Confirmation',
+			icon: 'pi pi-exclamation-triangle',
 
-	const onGlobalFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value;
-		let _filters = { ...filters };
-
-		// @ts-ignore
-		_filters['global'].value = value;
-
-		setFilters(_filters);
-		setGlobalFilterValue(value);
+			accept: async () => {
+				try {
+					const response: any = await postActivateUser({ id: user._id });
+					if (response.error) {
+						throw new Error('An error occurred while activating user.');
+					}
+					showToast({ label: 'Success', message: 'User activated successfully.' }, toast, 'success');
+					refetch();
+				} catch (error) {
+					showToast({ label: 'Error', message: 'An error occurred while activating user.' }, toast, 'error');
+				}
+			},
+		});
 	};
 
 	const showToast = (response: { label: string; message: string }, ref: React.RefObject<Toast>, severity: ToastMessage['severity']) => {
 		ref.current?.show({ severity: severity, summary: response.label, detail: response.message, life: 3000 });
 	};
 
-	const columns = [
-		{ field: 'firstName', header: 'First Name', body: (row: EditUser) => <span>{row.firstName}</span>, sortable: true },
-		{ field: 'lastName', header: 'Last Name', body: (row: EditUser) => <span>{row.lastName}</span>, sortable: true },
-		{ field: 'email', header: 'Email', body: (row: EditUser) => <span>{row.email}</span>, sortable: true },
-		{ field: 'role', header: 'Role', body: (row: EditUser) => <span>{row.role}</span>, sortable: true },
-		{ field: 'verified', header: 'Verified?', body: (row: EditUser) => verifiedBodyTemplate(row), sortable: true },
-		{ field: 'actions', body: (row: EditUser) => actionsBodyTemplate(row), sortable: false },
-	];
-	const verifiedBodyTemplate = (row: EditUser) => {
+	const checkBodyTemplate = (value: boolean) => {
 		return (
-			<div className="flex justify-content-center">
-				<div className={cx({ 'text-green-400': row.verified }, 'border-round  w-5 font-bold p-1')}>
-					{' '}
-					{row.verified ? <i className="pi pi-check-circle"></i> : ''}
+			<div className="px-4">
+				<div className={cx({ 'text-green-400': value, 'text-red-400': !value }, 'border-round  w-5 font-bold p-1')}>
+					{value ? <i className="pi pi-check-circle"></i> : <i className="pi pi-times-circle"></i>}
 				</div>
 			</div>
 		);
@@ -184,41 +193,107 @@ const AdminUserManagement = () => {
 						Reset Password
 					</p>
 					<p
-						className="cursor-pointer text-red-500 hover:text-red-600"
+						className={cx(
+							'cursor-pointer',
+							{ 'text-red-500 hover:text-red-600': selectedUser?.active },
+							{ 'text-green-500 hover:text-green-600': !selectedUser?.active },
+							'hover:text-gray-600'
+						)}
 						onClick={() => {
-							onDeactivateUser(selectedUser as EditUser);
+							if (selectedUser?.active === true) {
+								onDeactivateUser(selectedUser as EditUser);
+							} else {
+								onActivateUser(selectedUser as EditUser);
+							}
 						}}>
-						Delete
+						{selectedUser?.active ? 'Deactivate' : 'Activate'}
 					</p>
 				</OverlayPanel>
 			</>
 		);
 	};
 
+	const defaultFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
+		return (
+			<InputText
+				className="p-inputtext-sm"
+				value={options.value}
+				onChange={(e) => options.filterApplyCallback(e.target.value)}
+			/>
+		);
+	};
+	const triStateFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
+		return (
+			<div className="flex justify-content-center">
+				<TriStateCheckbox
+					value={options.value}
+					onChange={(e: TriStateCheckboxChangeEvent) => options.filterApplyCallback(e.value)}
+				/>
+			</div>
+		);
+	};
+	const roleFilterTemplate = (options: ColumnFilterElementTemplateOptions) => {
+		return (
+			<Dropdown
+				value={options.value}
+				options={USER_ROLES_OPTIONS}
+				onChange={(e) => options.filterApplyCallback(e.value)}
+				optionLabel="label"
+				optionValue="value"
+				placeholder="Any"
+				className="p-column-filter border-round-xl"
+			/>
+		);
+	};
+
+	const columns = [
+		{ field: 'firstName', header: 'First Name', body: (row: EditUser) => <span>{row.firstName}</span>, sortable: true, filter: true },
+		{ field: 'lastName', header: 'Last Name', body: (row: EditUser) => <span>{row.lastName}</span>, sortable: true, filter: true },
+		{ field: 'email', header: 'Email', body: (row: EditUser) => <span>{row.email}</span>, sortable: true, filter: true },
+		{
+			field: 'role',
+			header: 'Role',
+			body: (row: EditUser) => <span>{row.role}</span>,
+			sortable: true,
+			filter: true,
+			filterElement: roleFilterTemplate,
+		},
+		{
+			field: 'verified',
+			header: 'Verified?',
+			body: (row: EditUser) => checkBodyTemplate(row.verified),
+			sortable: true,
+			filter: true,
+			filterElement: triStateFilterTemplate,
+		},
+		{
+			field: 'active',
+			header: 'Active?',
+			body: (row: EditUser) => checkBodyTemplate(row.active),
+			sortable: true,
+			filter: true,
+			filterElement: triStateFilterTemplate,
+		},
+		{ field: 'actions', body: (row: EditUser) => actionsBodyTemplate(row), sortable: false },
+	];
 	return (
 		<>
 			<div className={cx('form-header')}>
 				<span className={cx('form-title')}>User Management</span>
-				<span className="p-input-icon-left">
-					<i className="pi pi-search" />
-					<InputText
-						value={globalFilterValue}
-						onChange={onGlobalFilterChange}
-						placeholder="Search..."
-					/>
-				</span>
 			</div>
 			<div>
 				<DataTable
 					stripedRows
-					size={'small'}
+					size="small"
 					value={data}
 					tableStyle={{ minWidth: '50rem' }}
 					paginator
 					rows={10}
 					rowsPerPageOptions={[10, 25, 50]}
 					globalFilterFields={['firstName', 'lastName', 'email', 'role']}
-					filters={filters}>
+					filters={filters}
+					filterDisplay="row"
+					pt={{ wrapper: { className: 'h-auto	' } }}>
 					{columns.map((col, i) => (
 						<Column
 							sortable={col.sortable}
@@ -227,7 +302,11 @@ const AdminUserManagement = () => {
 							header={<div className="flex justify-content-between font-bold">{col.header}</div>}
 							body={col.body}
 							bodyStyle={{ textAlign: 'start' }}
-							pt={{ headerCell: { className: ' py-2 ' }, headerContent: { className: '' } }}
+							filterField={col.field}
+							filter={col.filter}
+							filterElement={col.filterElement ? col.filterElement : defaultFilterTemplate}
+							showFilterMenu={false}
+							pt={{ headerCell: { className: ' py-2 ' } }}
 						/>
 					))}
 				</DataTable>

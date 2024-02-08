@@ -1,9 +1,7 @@
 import { User } from '@/types/UserTypes';
-import { ErrorResponse, Response } from '@/types/ApiResponseTypes';
+import { Response } from '@/types/ApiResponseTypes';
 import { CheckEmail } from '@/types/UserTypes';
 import { apiSlice } from './apiSlice';
-import { updateUser, addUser } from '../auth/userSlice';
-import { get } from 'lodash';
 
 export const userApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
@@ -85,6 +83,19 @@ export const userApiSlice = apiSlice.injectEndpoints({
 		postDeactivateUser: builder.mutation<any, { id: string }>({
 			query: (body) => ({
 				url: '/deactivate-user',
+				method: 'POST',
+				body,
+			}),
+			transformErrorResponse(baseQueryReturnValue) {
+				return baseQueryReturnValue;
+			},
+			transformResponse: (res: Response) => {
+				return res.status === 'Success' ? res.data : res.status;
+			},
+		}),
+		postActivateUser: builder.mutation<any, { id: string }>({
+			query: (body) => ({
+				url: '/activate-user',
 				method: 'POST',
 				body,
 			}),

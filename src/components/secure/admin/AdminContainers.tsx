@@ -32,7 +32,7 @@ export default function AdminContainers() {
 				className="nav-offset flex flex-column justify-content-center flex-grow-1">
 				<div
 					id="wrapper"
-					className={cx('grid m-0 flex-grow-1 p-4')}>
+					className={cx('grid m-0 flex-grow-1 p-3')}>
 					<div className={cx('col-3 p-2 bg-white border-right-1')}>
 						<AdminMenu
 							active={currentSetting}
