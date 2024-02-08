@@ -366,7 +366,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   <PDFExport
                     selectedSites={selectedSites}
                     sitesData={sitesData}
-                    isCustomReport={!!isCustom}
+                    calculatorName={!!isCustom ? `Custom` : `All-On-X`}
                     showTeethSelection={ (
                       siteSpecificReport ===
                         SITE_SPECIFIC_REPORT_OPTIONS[0].value) }

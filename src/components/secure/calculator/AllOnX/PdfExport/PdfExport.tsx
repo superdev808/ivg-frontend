@@ -13,7 +13,7 @@ interface PDFExportProps {
   selectedSites: Site[];
   sitesData: SiteData;
   responseOrder: string[];
-  isCustomReport: boolean | undefined;
+  calculatorName: string;
   showTeethSelection: boolean;
 }
 
@@ -28,8 +28,8 @@ const PDFExport: React.FC<PDFExportProps> = ({
   responseOrder,
   selectedSites,
   sitesData,
-  isCustomReport,
-  showTeethSelection
+  calculatorName,
+  showTeethSelection,
 }) => {
   const contentRef = useRef(null);
   const toastRef = useRef(null);
@@ -37,8 +37,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
   const [visible, setVisible] = useState<boolean>(false);
   const name = getCookie("name");
   const email = getCookie("email");
-  const calculatorType = isCustomReport ? `Custom` : `All-On-X`;
-  const filename: string = patientInfo?.filename || `${calculatorType}-Summary`;
+  const filename: string = patientInfo?.filename || `${calculatorName}-Summary`;
   const ExportAndSendPDF = async (info: Patient) => {
     const element = contentRef.current;
     if (element) {
@@ -72,7 +71,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
           formData.append("attachment", blob, "exported-document.pdf");
           formData.append("name", name);
           formData.append("email", email);
-          formData.append("calculatorType", calculatorType);
+          formData.append("calculatorName", calculatorName);
           formData.append("filename", options.filename);
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/sendAllOnXInfo`,
@@ -129,7 +128,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
               selectedSites={selectedSites}
               sitesData={sitesData}
               responseOrder={responseOrder}
-              isCustomReport={isCustomReport}
+              calculatorName={calculatorName}
               patientInfo={patientInfo}
               showTeethSelection={showTeethSelection}
             />

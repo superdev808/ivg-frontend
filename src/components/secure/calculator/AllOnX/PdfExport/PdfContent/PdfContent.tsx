@@ -35,7 +35,7 @@ interface PdfContentProps {
   selectedSites: Site[];
   sitesData: SiteData;
   responseOrder: string[];
-  isCustomReport: boolean | undefined;
+  calculatorName: string;
   patientInfo?: Patient | null;
   showTeethSelection: boolean;
 }
@@ -44,9 +44,9 @@ const PdfContent: React.FC<PdfContentProps> = ({
   responseOrder,
   selectedSites,
   sitesData,
-  isCustomReport,
+  calculatorName,
   patientInfo,
-  showTeethSelection
+  showTeethSelection,
 }) => {
   const [componentSummary, setComponentSummary] = useState<summary[]>([]);
   useEffect(() => {
@@ -125,7 +125,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
     hour: "2-digit",
     minute: "2-digit",
   });
-  const calculatorType = isCustomReport ? `Custom` : `All-On-X`;
+
   const name = getCookie("name");
   const email = getCookie("email");
   return (
@@ -163,17 +163,19 @@ const PdfContent: React.FC<PdfContentProps> = ({
         <div className="flex flex-column">
           <div className="py-2">
             Please see summary for{" "}
-            <span className="font-semibold">{calculatorType}</span> calculator.
+            <span className="font-semibold">{calculatorName}</span> calculator.
           </div>
         </div>
-        {showTeethSelection && <div className="mt-2 pr-5">
-          <TeethSelector
-            showLabel={false}
-            selectedSites={selectedSites}
-            onSiteChange={() => {}}
-            variant={TeethSelectorVariant.SMALL}
-          />
-        </div>}
+        {showTeethSelection && (
+          <div className="mt-2 pr-5">
+            <TeethSelector
+              showLabel={false}
+              selectedSites={selectedSites}
+              onSiteChange={() => {}}
+              variant={TeethSelectorVariant.SMALL}
+            />
+          </div>
+        )}
       </div>
 
       <div className="px-4 py-1">
