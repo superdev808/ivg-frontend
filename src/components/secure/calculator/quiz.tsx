@@ -116,7 +116,7 @@ export default function Quiz(props: QuizProps) {
                   />
                 ) : (
                   <div
-                    className="w-full m-1 text-3xl flex align-items-center justify-content-center"
+                    className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center"
                     style={{ height: "200px" }}
                   >
                     {answer}

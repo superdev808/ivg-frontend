@@ -94,7 +94,7 @@ export default function CalculatorContainer(props: CalculatorContainerProps) {
             }
             if (answerOptions[index] && answerOptions[index].length === 1 && answerOptions[index][0] === '') {
               if (index <= level && level < input.length && answers[index] !== '') {
-                handleSelectAnswer(index)({ value: '' });
+                handleSelectAnswer(index)('');
               }
               return null;
             }
