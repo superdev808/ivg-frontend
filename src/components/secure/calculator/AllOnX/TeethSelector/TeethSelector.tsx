@@ -3,9 +3,15 @@ import { Tooth } from "./Tooth/Tooth";
 import styles from "./TeethSelector.module.scss";
 import { LOWER_SITES, Site, UPPER_SITES } from "../constants";
 
+export enum TeethSelectorVariant {
+  SMALL,
+  DEFAULT,
+}
 interface TeethSelectorProps {
   selectedSites: Site[];
   onSiteChange: (teeth: number) => void;
+  showLabel: boolean;
+  variant?: TeethSelectorVariant;
 }
 
 /**
@@ -14,22 +20,33 @@ interface TeethSelectorProps {
  * users to select sites where implants will be placed.
  * @param {array} selectedSites
  * @param {func} onSiteChange
+ * @param {boolean} showLabel
+ * @param {string} variant
  */
-const TeethSelector: React.FC<TeethSelectorProps> = ({ selectedSites, onSiteChange }: TeethSelectorProps) => {
+const TeethSelector: React.FC<TeethSelectorProps> = ({
+  selectedSites,
+  onSiteChange,
+  showLabel = true,
+  variant = TeethSelectorVariant.DEFAULT,
+}: TeethSelectorProps) => {
   const selectedSitesKeys: number[] = selectedSites.map(
     (site: Site) => site.key
   );
 
   return (
-    <div className={styles.teethSelector}>
-      <h3>Select the sites where implants will be placed:</h3>
+    <div
+      className={`${styles.teethSelector} ${
+        variant === TeethSelectorVariant.SMALL && styles.smTeethSelector
+      }`}
+    >
+      {showLabel && <h3>Select the sites where implants will be placed:</h3>}
       <div className={`${styles.containerFlex} sm:flex-row`}>
         <div className={styles.columnFlex}>
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            width="300"
-            height="200"
+            width={`${variant === TeethSelectorVariant.SMALL ? "180" : "300"}`}
+            height={`${variant === TeethSelectorVariant.SMALL ? "120" : "200"}`}
           >
             {/* upper teeth */}
             {UPPER_SITES.map((item: Site) => {
@@ -51,8 +68,8 @@ const TeethSelector: React.FC<TeethSelectorProps> = ({ selectedSites, onSiteChan
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            width="300"
-            height="200"
+            width={`${variant === TeethSelectorVariant.SMALL ? "180" : "300"}`}
+            height={`${variant === TeethSelectorVariant.SMALL ? "120" : "200"}`}
           >
             {/* lower teeth */}
 

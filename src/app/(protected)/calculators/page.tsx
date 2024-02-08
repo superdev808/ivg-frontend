@@ -52,7 +52,7 @@ export const Calculators = () => {
           text: "Impression Copings (Multi-Unit Abutments)",
         },
         { label: "MUAs", text: "Multi-Unit Abutments" },
-        { label: "Scanbodies", text: "Scanbodies (Direct to Implant)" },
+        { label: "Scanbodies", text: "Scanbodies (Single Unit)" },
         { label: "ScanbodyMUAs", text: "Scanbodies (Mult-Unit Abutments)" },
         {
           label: "ScanbodyDriversDirectToImplants",
