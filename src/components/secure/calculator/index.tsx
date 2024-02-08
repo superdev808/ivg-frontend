@@ -1,8 +1,11 @@
-import React, { useMemo, useState } from "react";
 import { ProgressSpinner } from "primereact/progressspinner";
-import Quiz from "./quiz";
-import DetailView from "./detail";
+import React, { useMemo, useState } from "react";
 import { useQuery } from "react-query";
+
+import { calculatorIO } from "@/helpers/util";
+
+import DetailView from "./detail";
+import Quiz from "./quiz";
 
 interface QuizOption {
   name: string;
@@ -23,6 +26,15 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   const [answerOptions, setAnswerOptions] = useState<any[]>([]);
   const [answers, setAnswers] = useState<any[]>([]);
   const [items, setItems] = useState<any[]>([]);
+
+  const calculatorType = decodeURI(option);
+
+  const calculatorName = useMemo(() => {
+    const selectedCalculator = calculatorIO.find(
+      (item) => item.type === calculatorType
+    );
+    return selectedCalculator?.label || calculatorType;
+  }, [calculatorType]);
 
   const { isLoading } = useQuery(
     [input, level, answers, option],
@@ -127,6 +139,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
 
         {items.length > 0 && (
           <DetailView
+            calculatorName={calculatorName}
             items={items}
             fields={output}
             questions={input}

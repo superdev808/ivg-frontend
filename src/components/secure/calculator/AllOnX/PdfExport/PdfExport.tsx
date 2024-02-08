@@ -74,7 +74,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
           formData.append("calculatorName", calculatorName);
           formData.append("filename", options.filename);
           const response = await fetch(
-            `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/sendAllOnXInfo`,
+            `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/sendCalculatorSummary`,
             {
               method: "POST",
               body: formData,
