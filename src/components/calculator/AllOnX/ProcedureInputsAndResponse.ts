@@ -293,7 +293,7 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Authentic or Generic",
-      text: "Scanbody Authentic or Generic",
+      text: "Authentic or Generic [Scanbodies (Single Unit)]",
       calculator: "Scanbodies",
     },
     {
@@ -335,19 +335,19 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Implant Form",
-      text: "Scanbody Implant Form",
+      text: "Implant Form [Scanbody Drivers (Direct to Implant)]",
       calculator: "ScanbodyDriversDirectToImplants",
       isCommon: true,
     },
     {
       name: "Design",
-      text: "Scanbody Design",
+      text: "Design [Scanbody Drivers (Direct to Implant)]",
       calculator: "ScanbodyDriversDirectToImplants",
       isCommon: true,
     },
     {
       name: "Driver Length",
-      text: "Scanbody Driver Length",
+      text: "Driver Length [Scanbody Drivers (Direct to Implant)]",
       calculator: "ScanbodyDriversDirectToImplants",
     },
     {
@@ -456,32 +456,47 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Engaging or Non Engaging",
-      text: "Temporary Copings Engaging or Non Engaging",
+      text: "Engaging or Non Engaging [Temporary Copings (Direct to Implant)]",
       calculator: "TemporaryCopingsDirectToImplants",
     },
     {
       name: "Abutment Angulation",
-      text: "Temporary Copings Abutment Angulation",
+      text: "Abutment Angulation [Temporary Copings (Direct to Implant)]",
+      calculator: "TemporaryCopingsDirectToImplants",
+    },
+    {
+      name: "Abutment Diameter",
+      text: "Abutment Diameter [Temporary Copings (Direct to Implant)]",
+      calculator: "TemporaryCopingsDirectToImplants",
+    },
+    {
+      name: "Abutment Type",
+      text: "Abutment Type [Temporary Copings (Direct to Implant)]",
       calculator: "TemporaryCopingsDirectToImplants",
     },
     {
       name: "Connection Type",
-      text: "Connection Type",
+      text: "Connection Type [Temporary Copings (Direct to Implant)]",
+      calculator: "TemporaryCopingsDirectToImplants",
+    },
+    {
+      name: "Cementable Area",
+      text: "Cementable Area [Temporary Copings (Direct to Implant)]",
       calculator: "TemporaryCopingsDirectToImplants",
     },
     {
       name: "Hexed or Non-Hexed",
-      text: "Hexed or Non-Hexed",
+      text: "Hexed or Non-Hexed [Temporary Copings (Direct to Implant)]",
       calculator: "TemporaryCopingsDirectToImplants",
     },
     {
       name: "Collar Height",
-      text: "Temporary Copings Collar Height",
+      text: "Collar Height [Temporary Copings (Direct to Implant)]",
       calculator: "TemporaryCopingsDirectToImplants",
     },
     {
       name: "Restoration Type",
-      text: "Restoration Type",
+      text: "Restoration Type [Temporary Copings (Direct to Implant)]",
       calculator: "TemporaryCopingsDirectToImplants",
     },
     {
@@ -528,32 +543,47 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Engaging or Non-Engaging",
-      text: "TiBases Engaging or Non-Engaging",
+      text: "Engaging or Non-Engaging [Ti Bases (Direct to Implant)]",
       calculator: "TiBasesDirectToImplants",
     },
     {
       name: "Abutment Diameter",
-      text: "Abutment Diameter",
+      text: "Abutment Diameter [Ti Bases (Direct to Implant)]",
+      calculator: "TiBasesDirectToImplants",
+    },
+    {
+      name: "Connection Type",
+      text: "Connection Type [Ti Bases (Direct to Implant)]",
       calculator: "TiBasesDirectToImplants",
     },
     {
       name: "Angulation",
-      text: "TiBases Angulation",
+      text: "Angulation [Ti Bases (Direct to Implant)]",
+      calculator: "TiBasesDirectToImplants",
+    },
+    {
+      name: "Abutment Type",
+      text: "Abutment Type [Ti Bases (Direct to Implant)]",
       calculator: "TiBasesDirectToImplants",
     },
     {
       name: "Abutment Height",
-      text: "Abutment Height",
+      text: "Abutment Height [Ti Bases (Direct to Implant)]",
       calculator: "TiBasesDirectToImplants",
     },
     {
       name: "Cementable Area",
-      text: "Cementable Area",
+      text: "Cementable Area [Ti Bases (Direct to Implant)]",
+      calculator: "TiBasesDirectToImplants",
+    },
+    {
+      name: "Material",
+      text: "Material [Ti Bases (Direct to Implant)]",
       calculator: "TiBasesDirectToImplants",
     },
     {
       name: "Collar Height",
-      text: "TiBases Collar Height",
+      text: "Collar Height [Ti Bases (Direct to Implant)]",
       calculator: "TiBasesDirectToImplants",
     },
     {
@@ -590,27 +620,27 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Authentic or Generic",
-      text: "Scanbody MUAs Authentic or Generic",
+      text: "Authentic or Generic [Scanbodies (Mult-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
       name: "Abutment Diameter",
-      text: "Scanbody MUAs Abutment Diameter",
+      text: "Abutment Diameter [Scanbodies (Mult-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
       name: "Abutment Height",
-      text: "Scanbody MUAs Abutment Height",
+      text: "Abutment Height [Scanbodies (Mult-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
       name: "Abutment Type",
-      text: "Scanbody MUAs Abutment Type",
+      text: "Abutment Type [Scanbodies (Mult-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
       name: "Angulation",
-      text: "Scanbody MUAs Angulation",
+      text: "Angulation [Scanbodies (Mult-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
@@ -646,8 +676,18 @@ export const CALCULATORS: CollectionsIO = {
       isCommon: true,
     },
     {
+      name: "Implant Form",
+      text: "Implant Form [Scanbody Drivers (MUAs)]",
+      calculator: "ScanbodyDriversMUAs",
+    },
+    {
+      name: "Design",
+      text: "Design [Scanbody Drivers (MUAs)]",
+      calculator: "ScanbodyDriversMUAs",
+    },
+    {
       name: "Driver Length",
-      text: "Scanbody Drivers MUAs Driver Length",
+      text: "Driver Length [Scanbody Drivers (MUAs)]",
       calculator: "ScanbodyDriversMUAs",
     },
     {
@@ -684,47 +724,47 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Open or Closed Tray",
-      text: "Impression Coping Open or Closed Tray",
+      text: "Open or Closed Tray [Impression Copings (Multi-Unit Abutments)]",
       calculator: "ImpressingCopingsMUAs",
     },
     {
       name: "Impression Coping Length",
-      text: "Impression Coping Length",
+      text: "Impression Coping Length [Impression Copings (Multi-Unit Abutments)]",
       calculator: "ImpressingCopingsMUAs",
     },
     {
       name: "Angulation",
-      text: "Impression Angulation",
+      text: "Angulation [Impression Copings (Multi-Unit Abutments)]",
       calculator: "ImpressingCopingsMUAs",
     },
     {
       name: "Fixation",
-      text: "Impression Coping Fixation",
+      text: "Fixation [Impression Copings (Multi-Unit Abutments)]",
       calculator: "ImpressingCopingsMUAs",
     },
     {
       name: "Hexed or Non-Hexed",
-      text: "Impression Coping Hexed or Non-Hexed",
+      text: "Hexed or Non-Hexed [Impression Copings (Multi-Unit Abutments)]",
       calculator: "ImpressingCopingsMUAs",
     },
     {
       name: "Engaging or Non-Engaging",
-      text: "Impression Coping Engaging or Non-Engaging",
+      text: "Engaging or Non-Engaging [Impression Copings (Multi-Unit Abutments)]",
       calculator: "ImpressingCopingsMUAs",
     },
     {
       name: "Cementable Area",
-      text: "Impression Coping Cementable Area",
+      text: "Cementable Area [Impression Copings (Multi-Unit Abutments)]",
       calculator: "ImpressingCopingsMUAs",
     },
     {
       name: "Abutment Type",
-      text: "Impressing Copings Abutment Type",
+      text: "Abutment Type [Impression Copings (Multi-Unit Abutments)]",
       calculator: "ImpressingCopingsMUAs",
     },
     {
       name: "Abutment Diameter",
-      text: "Impressing Copings Abutment Diameter",
+      text: "Abutment Diameter [Impression Copings (Multi-Unit Abutments)]",
       calculator: "ImpressingCopingsMUAs",
     },
     {
@@ -761,37 +801,42 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Abutment Diameter",
-      text: "Temporary Copings MUAs Abutment Diameter",
+      text: "Abutment Diameter [Temporary Copings (Multi-Unit Abutments)]",
+      calculator: "TemporaryCopingsMUAs",
+    },    
+    {
+      name: "Abutment Type",
+      text: "Abutment Type [Temporary Copings (Multi-Unit Abutments)]",
       calculator: "TemporaryCopingsMUAs",
     },
     {
-      name: "Abutment Type",
-      text: "Temporary Copings MUAs Abutment Type",
+      name: "Angulation",
+      text: "Angulation [Temporary Copings (Multi-Unit Abutments)]",
       calculator: "TemporaryCopingsMUAs",
     },
     {
       name: "Restoration Type",
-      text: "Restoration Type",
+      text: "Restoration Type [Temporary Copings (Multi-Unit Abutments)]",
       calculator: "TemporaryCopingsMUAs",
     },
     {
       name: "Material",
-      text: "Material",
+      text: "Material [Temporary Copings (Multi-Unit Abutments)]",
       calculator: "TemporaryCopingsMUAs",
     },
     {
       name: "Length",
-      text: "Length",
+      text: "Length [Temporary Copings (Multi-Unit Abutments)]",
       calculator: "TemporaryCopingsMUAs",
     },
     {
       name: "Diameter",
-      text: "Diameter",
+      text: "Diameter [Temporary Copings (Multi-Unit Abutments)]",
       calculator: "TemporaryCopingsMUAs",
     },
     {
-      name: "Hexed or Non Hexed",
-      text: "Hexed or Non Hexed",
+      name: "Hexed or Non-Hexed",
+      text: "Hexed or Non-Hexed [Temporary Copings (Multi-Unit Abutments)]",
       calculator: "TemporaryCopingsMUAs",
     },
     {
@@ -828,32 +873,37 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Engaging or Non-Engaging",
-      text: "Engaging or Non-Engaging",
+      text: "Engaging or Non-Engaging [Ti Bases (Multi-Unit Abutments)]",
       calculator: "TiBasesMUAs",
     },
     {
       name: "MUA Type",
-      text: "MUA Type",
+      text: "MUA Type [Ti Bases (Multi-Unit Abutments)]",
       calculator: "TiBasesMUAs",
     },
     {
       name: "Abutment Diameter",
-      text: "TiBases MUAs Abutment Diameter",
+      text: "Abutment Diameter [Ti Bases (Multi-Unit Abutments)]",
       calculator: "TiBasesMUAs",
     },
     {
       name: "Abutment Height",
-      text: "TiBases MUAs Abutment Height",
+      text: "Abutment Height [Ti Bases (Multi-Unit Abutments)]",
       calculator: "TiBasesMUAs",
     },
     {
       name: "Collar Height",
-      text: "TiBases MUAs Collar Height",
+      text: "Collar Height [Ti Bases (Multi-Unit Abutments)]",
       calculator: "TiBasesMUAs",
     },
     {
       name: "Angulation",
-      text: "Angulation",
+      text: "Angulation [Ti Bases (Multi-Unit Abutments)]",
+      calculator: "TiBasesMUAs",
+    },
+    {
+      name: "Material",
+      text: "Material [Ti Bases (Multi-Unit Abutments)]",
       calculator: "TiBasesMUAs",
     },
     {
@@ -890,12 +940,12 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Abutment Angulation",
-      text: "MUAs Abutment Angulation",
+      text: "Abutment Angulation [Multi-Unit Abutments]",
       calculator: "MUAs",
     },
     {
       name: "Connection Type",
-      text: "MUAs Connection Type",
+      text: "Connection Type [Multi-Unit Abutments]",
       calculator: "MUAs",
     },
     {
@@ -905,17 +955,17 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Abutment Diameter",
-      text: "MUAs Abutment Diameter",
+      text: "Abutment Diameter [Multi-Unit Abutments]",
       calculator: "MUAs",
     },
     {
       name: "Abutment Type",
-      text: "MUAs Abutment Type",
+      text: "Abutment Type [Multi-Unit Abutments]",
       calculator: "MUAs",
     },
     {
       name: "Abutment Height",
-      text: "MUAs Abutment Height",
+      text: "Abutment Height [Multi-Unit Abutments]",
       calculator: "MUAs",
     },
     {
@@ -925,7 +975,7 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Collar Height",
-      text: "MUAs Collar Height",
+      text: "Collar Height [Multi-Unit Abutments]",
       calculator: "MUAs",
     },
     {
@@ -1230,7 +1280,7 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Material",
-      text: "Stock Abutments Material",
+      text: "Material [Stock Abutments]",
       calculator: "StockAbutments",
     },
     {
@@ -1245,37 +1295,37 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Restoration Type",
-      text: "Stock Abutments Restoration Type",
+      text: "Restoration Type [Stock Abutments]",
       calculator: "StockAbutments",
     },
     {
       name: "Hexed or Non-Hexed",
-      text: "Stock Abutments Hexed or Non-Hexed",
+      text: "Hexed or Non-Hexed [Stock Abutments]",
       calculator: "StockAbutments",
     },
     {
       name: "Angulation",
-      text: "Stock Abutments Angulation",
+      text: "Angulation [Stock Abutments]",
       calculator: "StockAbutments",
     },
     {
       name: "Abutment Diameter",
-      text: "Stock Abutments Abutment Diameter",
+      text: "Abutment Diameter [Stock Abutments]",
       calculator: "StockAbutments",
     },
     {
       name: "Collar Height",
-      text: "Stock Abutments Collar Height",
+      text: "Collar Height [Stock Abutments]",
       calculator: "StockAbutments",
     },
     {
       name: "Abutment Height",
-      text: "Stock Abutments Abutment Height",
+      text: "Abutment Height [Stock Abutments]",
       calculator: "StockAbutments",
     },
     {
       name: "Emergence Profile",
-      text: "Stock Abutments Emergence Profile",
+      text: "Emergence Profile [Stock Abutments]",
       calculator: "StockAbutments",
     },
     {
