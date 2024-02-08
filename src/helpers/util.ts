@@ -36,6 +36,10 @@ export const calculatorIO = [
         {
           name: "Authentic or Generic",
           text: "Authentic or Generic"
+        },
+        {
+          name: "Scanbody Length",
+          text: "Scanbody Length"
         }
       ],
       output: [
@@ -163,10 +167,6 @@ export const calculatorIO = [
                 name: "Implant Platform",
                 text: "Implant Platform"
             },
-            {
-                name: "Do you need to purchase materials for chairside pick-up?",
-                text: "Do you need to purchase materials for chairside pick-up?"
-            }
         ],
         output: [
             {
@@ -186,12 +186,12 @@ export const calculatorIO = [
                 text: "Teflon Tape Link to Purchase"
             },
             {
-                name: "Material to close screw access hole Name",
-                text: "Material to close screw access hole Name"
+                name: "Material to Close Screw Access Hole Name",
+                text: "Material to Close Screw Access Hole Name"
             },
             {
-                name: "Material to close screw access hole link to purchase",
-                text: "Material to close screw access hole link to purchase"
+                name: "Material to Close Screw Access Hole Link to Purchase",
+                text: "Material to Close Screw Access Hole Link to Purchase"
             }
         ]
     },
@@ -223,6 +223,10 @@ export const calculatorIO = [
             {
                 name: "Drill Kit Type",
                 text: "Drill Kit Type"
+            },
+            {
+                name: "Drill Sequence Option",
+                text: "Drill Sequence Option"
             }
         ],
         output: [
@@ -239,116 +243,1164 @@ export const calculatorIO = [
                 text: "Drill Kit Link to Purchase"
             },
             {
-                name: "Drill 1 Name",
-                text: "Drill 1 Name"
+                name: "Drill 1 (Extra Short) Name",
+                text: "Drill 1 (Extra Short) Name"
             },
             {
-                name: "Drill 1 Item Number",
-                text: "Drill 1 Item Number"
+                name: "Drill 1 (Extra Short) Item Number",
+                text: "Drill 1 (Extra Short) Item Number"
             },
             {
-                name: "Drill 1 Link to Purchase",
-                text: "Drill 1 Link to Purchase"
+                name: "Drill 1 (Extra Short) Link to Purchase",
+                text: "Drill 1 (Extra Short) Link to Purchase"
             },
             {
-                name: "Manufacturer Recommendations",
-                text: "Manufacturer Recommendations"
+                name: "Drill 1 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 1 (Extra Short) Manufacturer Recommendations"
             },
             {
-                name: "Drill 2 Name",
-                text: "Drill 2 Name"
+                name: "Drill 1 (Short) Name",
+                text: "Drill 1 (Short) Name"
             },
             {
-                name: "Drill 2 Item Number",
-                text: "Drill 2 Item Number"
+                name: "Drill 1 (Short) Item Number",
+                text: "Drill 1 (Short) Item Number"
             },
             {
-                name: "Drill 2 Link to Purchase",
-                text: "Drill 2 Link to Purchase"
+                name: "Drill 1 (Short) Link to Purchase",
+                text: "Drill 1 (Short) Link to Purchase"
             },
             {
-                name: "Drill 3 Name",
-                text: "Drill 3 Name"
+                name: "Drill 1 (Short) Manufacturer Recommendations",
+                text: "Drill 1 (Short) Manufacturer Recommendations"
             },
             {
-                name: "Drill 3 Item Number",
-                text: "Drill 3 Item Number"
+                name: "Drill 1 (Standard / Medium) Name",
+                text: "Drill 1 (Standard / Medium) Name"
             },
             {
-                name: "Drill 3 Link to Purchase",
-                text: "Drill 3 Link to Purchase"
+                name: "Drill 1 (Standard / Medium) Item Number",
+                text: "Drill 1 (Standard / Medium) Item Number"
             },
             {
-                name: "Drill 4 Name",
-                text: "Drill 4 Name"
+                name: "Drill 1 (Standard / Medium) Link to Purchase",
+                text: "Drill 1 (Standard / Medium) Link to Purchase"
             },
             {
-                name: "Drill 4 Item Number",
-                text: "Drill 4 Item Number"
+                name: "Drill 1 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 1 (Standard / Medium) Manufacturer Recommendations"
             },
             {
-                name: "Drill 4 Link to Purchase",
-                text: "Drill 4 Link to Purchase"
+                name: "Drill 1 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 1 (Standard / Medium) Manufacturer Recommendations"
             },
             {
-                name: "Drill 5 Name",
-                text: "Drill 5 Name"
+                name: "Drill 1 (Long) Name",
+                text: "Drill 1 (Long) Name"
             },
             {
-                name: "Drill 5 Item Number",
-                text: "Drill 5 Item Number"
+                name: "Drill 1 (Long) Item Number",
+                text: "Drill 1 (Long) Item Number"
             },
             {
-                name: "Drill 5 Link to Purchase",
-                text: "Drill 5 Link to Purchase"
+                name: "Drill 1 (Long) Link to Purchase",
+                text: "Drill 1 (Long) Link to Purchase"
             },
             {
-                name: "Drill 6 Name",
-                text: "Drill 6 Name"
+                name: "Drill 1 (Long) Manufacturer Recommendations",
+                text: "Drill 1 (Long) Manufacturer Recommendations"
             },
             {
-                name: "Drill 6 Item Number",
-                text: "Drill 6 Item Number"
+                name: "Drill 2 (Extra Short) Name",
+                text: "Drill 2 (Extra Short) Name"
             },
             {
-                name: "Drill 6 Link to Purchase",
-                text: "Drill 6 Link to Purchase"
+                name: "Drill 2 (Extra Short) Item Number",
+                text: "Drill 2 (Extra Short) Item Number"
             },
             {
-                name: "Drill 7 Name",
-                text: "Drill 7 Name"
+                name: "Drill 2 (Extra Short) Link to Purchase",
+                text: "Drill 2 (Extra Short) Link to Purchase"
             },
             {
-                name: "Drill 7 Item Number",
-                text: "Drill 7 Item Number"
+                name: "Drill 2 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 2 (Extra Short) Manufacturer Recommendations"
             },
             {
-                name: "Drill 7 Link to Purchase",
-                text: "Drill 7 Link to Purchase"
+                name: "Drill 2 (Short) Name",
+                text: "Drill 2 (Short) Name"
             },
             {
-                name: "Drill 8 Name",
-                text: "Drill 8 Name"
+                name: "Drill 2 (Short) Item Number",
+                text: "Drill 2 (Short) Item Number"
             },
             {
-                name: "Drill 8 Item Number",
-                text: "Drill 8 Item Number"
+                name: "Drill 2 (Short) Link to Purchase",
+                text: "Drill 2 (Short) Link to Purchase"
             },
             {
-                name: "Drill 8 Link to Purchase",
-                text: "Drill 8 Link to Purchase"
+                name: "Drill 2 (Short) Manufacturer Recommendations",
+                text: "Drill 2 (Short) Manufacturer Recommendations"
             },
             {
-                name: "Drill 9 Name",
-                text: "Drill 9 Name"
+                name: "Drill 2 (Standard / Medium) Name",
+                text: "Drill 2 (Standard / Medium) Name"
             },
             {
-                name: "Drill 9 Item Number",
-                text: "Drill 9 Item Number"
+                name: "Drill 2 (Standard / Medium) Item Number",
+                text: "Drill 2 (Standard / Medium) Item Number"
             },
             {
-                name: "Drill 9 Link to Purchase",
-                text: "Drill 9 Link to Purchase"
+                name: "Drill 2 (Standard / Medium) Link to Purchase",
+                text: "Drill 2 (Standard / Medium) Link to Purchase"
+            },
+            {
+                name: "Drill 2 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 2 (Standard / Medium) Manufacturer Recommendations"
+            },
+            {
+                name: "Drill 2 (Long) Name",
+                text: "Drill 2 (Long) Name"
+            },
+            {
+                name: "Drill 2 (Long) Item Number",
+                text: "Drill 2 (Long) Item Number"
+            },
+            {
+                name: "Drill 2 (Long) Link to Purchase",
+                text: "Drill 2 (Long) Link to Purchase"
+            },
+            {
+                name: "Drill 2 (Long) Manufacturer Recommendations",
+                text: "Drill 2 (Long) Manufacturer Recommendations"
+            },
+            {
+                name: "Drill 3 (Extra Short) Name",
+                text: "Drill 3 (Extra Short) Name"
+            },
+            {
+                name: "Drill 3 (Extra Short) Item Number",
+                text: "Drill 3 (Extra Short) Item Number"
+            },
+            {
+                name: "Drill 3 (Extra Short) Link to Purchase",
+                text: "Drill 3 (Extra Short) Link to Purchase"
+            },
+            {
+                name: "Drill 3 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 3 (Extra Short) Manufacturer Recommendations"
+            },
+            {
+                name: "Drill 3 (Short) Name",
+                text: "Drill 3 (Short) Name"
+            },
+            {
+                name: "Drill 3 (Short) Item Number",
+                text: "Drill 3 (Short) Item Number"
+            },
+            {
+                name: "Drill 3 (Short) Link to Purchase",
+                text: "Drill 3 (Short) Link to Purchase"
+            },
+            {
+                name: "Drill 3 (Short) Manufacturer Recommendations",
+                text: "Drill 3 (Short) Manufacturer Recommendations"
+            },
+            {
+                name: "Drill 3 (Standard / Medium) Name",
+                text: "Drill 3 (Standard / Medium) Name"
+            },
+            {
+                name: "Drill 3 (Standard / Medium) Item Number",
+                text: "Drill 3 (Standard / Medium) Item Number"
+            },
+            {
+                name: "Drill 3 (Standard / Medium) Link to Purchase",
+                text: "Drill 3 (Standard / Medium) Link to Purchase"
+            },
+            {
+                name: "Drill 3 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 3 (Standard / Medium) Manufacturer Recommendations"
+            },
+            {
+                name: "Drill 3 (Long) Name",
+                text: "Drill 3 (Long) Name"
+            },
+            {
+                name: "Drill 3 (Long) Name",
+                text: "Drill 3 (Long) Name"
+            },
+            {
+                name: "Drill 3 (Long) Item Number",
+                text: "Drill 3 (Long) Item Number"
+            },
+            {
+                name: "Drill 3 (Long) Link to Purchase",
+                text: "Drill 3 (Long) Link to Purchase"
+            },
+            {
+                name: "Drill 3 (Long) Manufacturer Recommendations",
+                text: "Drill 3 (Long) Manufacturer Recommendations"
+            },
+            {
+                name: "Drill 4 (Extra Short) Name",
+                text: "Drill 4 (Extra Short) Name"
+            },
+            {
+                name: "Drill 4 (Extra Short) Item Number",
+                text: "Drill 4 (Extra Short) Item Number"
+            },
+            {
+                name: "Drill 4 (Extra Short) Link to Purchase",
+                text: "Drill 4 (Extra Short) Link to Purchase"
+            },
+            {
+                name: "Drill 4 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 4 (Extra Short) Manufacturer Recommendations"
+            },
+            {
+                name: "Drill 4 (Short) Name",
+                text: "Drill 4 (Short) Name"
+            },
+            {
+                name: "Drill 4 (Short) Item Number",
+                text: "Drill 4 (Short) Item Number"
+            },
+            {
+                name: "Drill 4 (Short) Link to Purchase",
+                text: "Drill 4 (Short) Link to Purchase"
+            },
+            {
+                name: "Drill 4 (Short) Manufacturer Recommendations",
+                text: "Drill 4 (Short) Manufacturer Recommendations"
+            },
+            {
+                name: "Drill 4 (Standard / Medium) Name",
+                text: "Drill 4 (Standard / Medium) Name"
+            },
+            {
+                name: "Drill 4 (Standard / Medium) Item Number",
+                text: "Drill 4 (Standard / Medium) Item Number"
+            },
+            {
+                name: "Drill 4 (Standard / Medium) Link to Purchase",
+                text: "Drill 4 (Standard / Medium) Link to Purchase"
+            },
+            {
+                name: "Drill 4 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 4 (Standard / Medium) Manufacturer Recommendations"
+            },
+            {
+                name: "Drill 4 (Long) Name",
+                text: "Drill 4 (Long) Name"
+            },
+            {
+                name: "Drill 4 (Long) Item Number",
+                text: "Drill 4 (Long) Item Number"
+            },
+            {
+                name: "Drill 4 (Long) Link to Purchase",
+                text: "Drill 4 (Long) Link to Purchase"
+            },
+            {
+                name: "Drill 4 (Long) Manufacturer Recommendations",
+                text: "Drill 4 (Long) Manufacturer Recommendations"
+            },
+            {
+                name: "Drill 5 (Extra Short) Name",
+                text: "Drill 5 (Extra Short) Name"
+            },
+            {
+                name: "Drill 5 (Extra Short) Item Number",
+                text: "Drill 5 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 5 (Extra Short) Link to Purchase",
+                text: "Drill 5 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 5 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 5 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 5 (Short) Name",
+                text: "Drill 5 (Short) Name",
+            },
+            {
+                name: "Drill 5 (Short) Item Number",
+                text: "Drill 5 (Short) Item Number",
+            },
+            {
+                name: "Drill 5 (Short) Link to Purchase",
+                text: "Drill 5 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 5 (Short) Manufacturer Recommendations",
+                text: "Drill 5 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 5 (Standard / Medium) Name",
+                text: "Drill 5 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 5 (Standard / Medium) Item Number",
+                text: "Drill 5 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 5 (Standard / Medium) Link to Purchase",
+                text: "Drill 5 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 5 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 5 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 5 (Long) Name",
+                text: "Drill 5 (Long) Name",
+            },
+            {
+                name: "Drill 5 (Long) Item Number",
+                text: "Drill 5 (Long) Item Number",
+            },
+            {
+                name: "Drill 5 (Long) Link to Purchase",
+                text: "Drill 5 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 5 (Long) Manufacturer Recommendations",
+                text: "Drill 5 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 6 (Extra Short) Name",
+                text: "Drill 6 (Extra Short) Name",
+            },
+            {
+                name: "Drill 6 (Extra Short) Item Number",
+                text: "Drill 6 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 6 (Extra Short) Link to Purchase",
+                text: "Drill 6 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 6 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 6 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 6 (Short) Name",
+                text: "Drill 6 (Short) Name",
+            },
+            {
+                name: "Drill 6 (Short) Item Number",
+                text: "Drill 6 (Short) Item Number",
+            },
+            {
+                name: "Drill 6 (Short) Link to Purchase",
+                text: "Drill 6 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 6 (Short) Manufacturer Recommendations",
+                text: "Drill 6 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 6 (Standard / Medium) Name",
+                text: "Drill 6 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 6 (Standard / Medium) Item Number",
+                text: "Drill 6 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 6 (Standard / Medium) Link to Purchase",
+                text: "Drill 6 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 6 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 6 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 6 (Long) Name",
+                text: "Drill 6 (Long) Name",
+            },
+            {
+                name: "Drill 6 (Long) Item Number",
+                text: "Drill 6 (Long) Item Number",
+            },
+            {
+                name: "Drill 6 (Long) Link to Purchase",
+                text: "Drill 6 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 6 (Long) Manufacturer Recommendations",
+                text: "Drill 6 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 7 (Extra Short) Name",
+                text: "Drill 7 (Extra Short) Name",
+            },
+            {
+                name: "Drill 7 (Extra Short) Item Number",
+                text: "Drill 7 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 7 (Extra Short) Link to Purchase",
+                text: "Drill 7 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 7 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 7 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 7 (Short) Name",
+                text: "Drill 7 (Short) Name",
+            },
+            {
+                name: "Drill 7 (Short) Item Number",
+                text: "Drill 7 (Short) Item Number",
+            },
+            {
+                name: "Drill 7 (Short) Link to Purchase",
+                text: "Drill 7 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 7 (Short) Manufacturer Recommendations",
+                text: "Drill 7 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 7 (Standard / Medium) Name",
+                text: "Drill 7 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 7 (Standard / Medium) Item Number",
+                text: "Drill 7 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 7 (Standard / Medium) Link to Purchase",
+                text: "Drill 7 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 7 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 7 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 7 (Long) Name",
+                text: "Drill 7 (Long) Name",
+            },
+            {
+                name: "Drill 7 (Long) Item Number",
+                text: "Drill 7 (Long) Item Number",
+            },
+            {
+                name: "Drill 7 (Long) Link to Purchase",
+                text: "Drill 7 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 7 (Long) Manufacturer Recommendations",
+                text: "Drill 7 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 8 (Extra Short) Name",
+                text: "Drill 8 (Extra Short) Name",
+            },
+            {
+                name: "Drill 8 (Extra Short) Item Number",
+                text: "Drill 8 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 8 (Extra Short) Link to Purchase",
+                text: "Drill 8 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 8 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 8 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 8 (Short) Name",
+                text: "Drill 8 (Short) Name",
+            },
+            {
+                name: "Drill 8 (Short) Item Number",
+                text: "Drill 8 (Short) Item Number",
+            },
+            {
+                name: "Drill 8 (Short) Link to Purchase",
+                text: "Drill 8 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 8 (Short) Manufacturer Recommendations",
+                text: "Drill 8 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 8 (Standard / Medium) Name",
+                text: "Drill 8 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 8 (Standard / Medium) Item Number",
+                text: "Drill 8 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 8 (Standard / Medium) Link to Purchase",
+                text: "Drill 8 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 8 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 8 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 8 (Long) Name",
+                text: "Drill 8 (Long) Name",
+            },
+            {
+                name: "Drill 8 (Long) Item Number",
+                text: "Drill 8 (Long) Item Number",
+            },
+            {
+                name: "Drill 8 (Long) Link to Purchase",
+                text: "Drill 8 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 8 (Long) Manufacturer Recommendations",
+                text: "Drill 8 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 9 (Extra Short) Name",
+                text: "Drill 9 (Extra Short) Name",
+            },
+            {
+                name: "Drill 9 (Extra Short) Item Number",
+                text: "Drill 9 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 9 (Extra Short) Link to Purchase",
+                text: "Drill 9 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 9 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 9 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 9 (Short) Name",
+                text: "Drill 9 (Short) Name",
+            },
+            {
+                name: "Drill 9 (Short) Item Number",
+                text: "Drill 9 (Short) Item Number",
+            },
+            {
+                name: "Drill 9 (Short) Link to Purchase",
+                text: "Drill 9 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 9 (Short) Manufacturer Recommendations",
+                text: "Drill 9 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 9 (Standard / Medium) Name",
+                text: "Drill 9 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 9 (Standard / Medium) Item Number",
+                text: "Drill 9 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 9 (Standard / Medium) Link to Purchase",
+                text: "Drill 9 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 9 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 9 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 9 (Long) Name",
+                text: "Drill 9 (Long) Name",
+            },
+            {
+                name: "Drill 9 (Long) Item Number",
+                text: "Drill 9 (Long) Item Number",
+            },
+            {
+                name: "Drill 9 (Long) Link to Purchase",
+                text: "Drill 9 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 9 (Long) Manufacturer Recommendations",
+                text: "Drill 9 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 10 (Extra Short) Name",
+                text: "Drill 10 (Extra Short) Name",
+            },
+            {
+                name: "Drill 10 (Extra Short) Item Number",
+                text: "Drill 10 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 10 (Extra Short) Link to Purchase",
+                text: "Drill 10 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 10 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 10 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 10 (Short) Name",
+                text: "Drill 10 (Short) Name",
+            },
+            {
+                name: "Drill 10 (Short) Item Number",
+                text: "Drill 10 (Short) Item Number",
+            },
+            {
+                name: "Drill 10 (Short) Link to Purchase",
+                text: "Drill 10 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 10 (Short) Manufacturer Recommendations",
+                text: "Drill 10 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 10 (Standard / Medium) Name",
+                text: "Drill 10 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 10 (Standard / Medium) Item Number",
+                text: "Drill 10 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 10 (Standard / Medium) Link to Purchase",
+                text: "Drill 10 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 10 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 10 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 10 (Long) Name",
+                text: "Drill 10 (Long) Name",
+            },
+            {
+                name: "Drill 10 (Long) Item Number",
+                text: "Drill 10 (Long) Item Number",
+            },
+            {
+                name: "Drill 10 (Long) Link to Purchase",
+                text: "Drill 10 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 10 (Long) Manufacturer Recommendations",
+                text: "Drill 10 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 11 (Extra Short) Name",
+                text: "Drill 11 (Extra Short) Name",
+            },
+            {
+                name: "Drill 11 (Extra Short) Item Number",
+                text: "Drill 11 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 11 (Extra Short) Link to Purchase",
+                text: "Drill 11 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 11 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 11 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 11 (Short) Name",
+                text: "Drill 11 (Short) Name",
+            },
+            {
+                name: "Drill 11 (Short) Item Number",
+                text: "Drill 11 (Short) Item Number",
+            },
+            {
+                name: "Drill 11 (Short) Link to Purchase",
+                text: "Drill 11 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 11 (Short) Manufacturer Recommendations",
+                text: "Drill 11 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 11 (Standard / Medium) Name",
+                text: "Drill 11 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 11 (Standard / Medium) Item Number",
+                text: "Drill 11 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 11 (Standard / Medium) Link to Purchase",
+                text: "Drill 11 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 11 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 11 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 11 (Long) Name",
+                text: "Drill 11 (Long) Name",
+            },
+            {
+                name: "Drill 11 (Long) Item Number",
+                text: "Drill 11 (Long) Item Number",
+            },
+            {
+                name: "Drill 11 (Long) Link to Purchase",
+                text: "Drill 11 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 11 (Long) Manufacturer Recommendations",
+                text: "Drill 11 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 12 (Extra Short) Name",
+                text: "Drill 12 (Extra Short) Name",
+            },
+            {
+                name: "Drill 12 (Extra Short) Item Number",
+                text: "Drill 12 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 12 (Extra Short) Link to Purchase",
+                text: "Drill 12 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 12 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 12 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 12 (Short) Name",
+                text: "Drill 12 (Short) Name",
+            },
+            {
+                name: "Drill 12 (Short) Item Number",
+                text: "Drill 12 (Short) Item Number",
+            },
+            {
+                name: "Drill 12 (Short) Link to Purchase",
+                text: "Drill 12 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 12 (Short) Manufacturer Recommendations",
+                text: "Drill 12 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 12 (Standard / Medium) Name",
+                text: "Drill 12 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 12 (Standard / Medium) Item Number",
+                text: "Drill 12 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 12 (Standard / Medium) Link to Purchase",
+                text: "Drill 12 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 12 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 12 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 12 (Long) Name",
+                text: "Drill 12 (Long) Name",
+            },
+            {
+                name: "Drill 12 (Long) Item Number",
+                text: "Drill 12 (Long) Item Number",
+            },
+            {
+                name: "Drill 12 (Long) Link to Purchase",
+                text: "Drill 12 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 12 (Long) Manufacturer Recommendations",
+                text: "Drill 12 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 13 Name (Extra Short)",
+                text: "Drill 13 Name (Extra Short)",
+            },
+            {
+                name: "Drill 13 (Extra Short) Item Number",
+                text: "Drill 13 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 13 (Extra Short) Link to Purchase",
+                text: "Drill 13 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 13 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 13 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 13 (Short) Name",
+                text: "Drill 13 (Short) Name",
+            },
+            {
+                name: "Drill 13 (Short) Item Number",
+                text: "Drill 13 (Short) Item Number",
+            },
+            {
+                name: "Drill 13 (Short) Link to Purchase",
+                text: "Drill 13 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 13 (Short) Manufacturer Recommendations",
+                text: "Drill 13 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 13 (Standard / Medium) Name",
+                text: "Drill 13 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 13 (Standard / Medium) Item Number",
+                text: "Drill 13 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 13 (Standard / Medium) Link to Purchase",
+                text: "Drill 13 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 13 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 13 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 13 (Long) Name",
+                text: "Drill 13 (Long) Name",
+            },
+            {
+                name: "Drill 13 (Long) Item Number",
+                text: "Drill 13 (Long) Item Number",
+            },
+            {
+                name: "Drill 13 (Long) Link to Purchase",
+                text: "Drill 13 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 13 (Long) Manufacturer Recommendations",
+                text: "Drill 13 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 14 (Extra Short) Name",
+                text: "Drill 14 (Extra Short) Name",
+            },
+            {
+                name: "Drill 14 (Extra Short) Item Number",
+                text: "Drill 14 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 14 (Extra Short) Link to Purchase",
+                text: "Drill 14 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 14 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 14 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 14 (Short) Name",
+                text: "Drill 14 (Short) Name",
+            },
+            {
+                name: "Drill 14 (Short) Item Number",
+                text: "Drill 14 (Short) Item Number",
+            },
+            {
+                name: "Drill 14 (Short) Link to Purchase",
+                text: "Drill 14 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 14 (Short) Manufacturer Recommendations",
+                text: "Drill 14 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 14 (Standard / Medium) Name",
+                text: "Drill 14 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 14 (Standard / Medium) Item Number",
+                text: "Drill 14 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 14 (Standard / Medium) Link to Purchase",
+                text: "Drill 14 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 14 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 14 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 14 (Long) Name",
+                text: "Drill 14 (Long) Name",
+            },
+            {
+                name: "Drill 14 (Long) Item Number",
+                text: "Drill 14 (Long) Item Number",
+            },
+            {
+                name: "Drill 14 (Long) Link to Purchase",
+                text: "Drill 14 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 14 (Long) Manufacturer Recommendations",
+                text: "Drill 14 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 15 (Extra Short) Name",
+                text: "Drill 15 (Extra Short) Name",
+            },
+            {
+                name: "Drill 15 (Extra Short) Item Number",
+                text: "Drill 15 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 15 (Extra Short) Link to Purchase",
+                text: "Drill 15 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 15 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 15 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 15 (Short) Name",
+                text: "Drill 15 (Short) Name",
+            },
+            {
+                name: "Drill 15 (Short) Item Number",
+                text: "Drill 15 (Short) Item Number",
+            },
+            {
+                name: "Drill 15 (Short) Link to Purchase",
+                text: "Drill 15 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 15 (Short) Manufacturer Recommendations",
+                text: "Drill 15 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 15 (Standard / Medium) Name",
+                text: "Drill 15 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 15 (Standard / Medium) Item Number",
+                text: "Drill 15 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 15 (Standard / Medium) Link to Purchase",
+                text: "Drill 15 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 15 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 15 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 15 (Long) Name",
+                text: "Drill 15 (Long) Name",
+            },
+            {
+                name: "Drill 15 (Long) Item Number",
+                text: "Drill 15 (Long) Item Number",
+            },
+            {
+                name: "Drill 15 (Long) Link to Purchase",
+                text: "Drill 15 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 15 (Long) Manufacturer Recommendations",
+                text: "Drill 15 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 16 (Extra Short) Name",
+                text: "Drill 16 (Extra Short) Name",
+            },
+            {
+                name: "Drill 16 (Extra Short) Item Number",
+                text: "Drill 16 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 16 (Extra Short) Link to Purchase",
+                text: "Drill 16 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 16 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 16 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 16 (Short) Name",
+                text: "Drill 16 (Short) Name",
+            },
+            {
+                name: "Drill 16 (Short) Item Number",
+                text: "Drill 16 (Short) Item Number",
+            },
+            {
+                name: "Drill 16 (Short) Link to Purchase",
+                text: "Drill 16 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 16 (Short) Manufacturer Recommendations",
+                text: "Drill 16 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 16 (Standard / Medium) Name",
+                text: "Drill 16 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 16 (Standard / Medium) Item Number",
+                text: "Drill 16 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 16 (Standard / Medium) Link to Purchase",
+                text: "Drill 16 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 16 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 16 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 16 (Long) Name",
+                text: "Drill 16 (Long) Name",
+            },
+            {
+                name: "Drill 16 (Long) Item Number",
+                text: "Drill 16 (Long) Item Number",
+            },
+            {
+                name: "Drill 16 (Long) Link to Purchase",
+                text: "Drill 16 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 16 (Long) Manufacturer Recommendations",
+                text: "Drill 16 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 17 (Extra Short) Name",
+                text: "Drill 17 (Extra Short) Name",
+            },
+            {
+                name: "Drill 17 (Extra Short) Item Number",
+                text: "Drill 17 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 17 (Extra Short) Link to Purchase",
+                text: "Drill 17 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 17 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 17 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 17 (Short) Name",
+                text: "Drill 17 (Short) Name",
+            },
+            {
+                name: "Drill 17 (Short) Item Number",
+                text: "Drill 17 (Short) Item Number",
+            },
+            {
+                name: "Drill 17 (Short) Link to Purchase",
+                text: "Drill 17 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 17 (Short) Manufacturer Recommendations",
+                text: "Drill 17 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 17 (Standard / Medium) Name",
+                text: "Drill 17 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 17 (Standard / Medium) Item Number",
+                text: "Drill 17 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 17 (Standard / Medium) Link to Purchase",
+                text: "Drill 17 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 17 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 17 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 17 (Long) Name",
+                text: "Drill 17 (Long) Name",
+            },
+            {
+                name: "Drill 17 (Long) Item Number",
+                text: "Drill 17 (Long) Item Number",
+            },
+            {
+                name: "Drill 17 (Long) Link to Purchase",
+                text: "Drill 17 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 17 (Long) Manufacturer Recommendations",
+                text: "Drill 17 (Long) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 18 (Extra Short) Name",
+                text: "Drill 18 (Extra Short) Name",
+            },
+            {
+                name: "Drill 18 (Extra Short) Item Number",
+                text: "Drill 18 (Extra Short) Item Number",
+            },
+            {
+                name: "Drill 18 (Extra Short) Link to Purchase",
+                text: "Drill 18 (Extra Short) Link to Purchase",
+            },
+            {
+                name: "Drill 18 (Extra Short) Manufacturer Recommendations",
+                text: "Drill 18 (Extra Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 18 (Short) Name",
+                text: "Drill 18 (Short) Name",
+            },
+            {
+                name: "Drill 18 (Short) Item Number",
+                text: "Drill 18 (Short) Item Number",
+            },
+            {
+                name: "Drill 18 (Short) Link to Purchase",
+                text: "Drill 18 (Short) Link to Purchase",
+            },
+            {
+                name: "Drill 18 (Short) Manufacturer Recommendations",
+                text: "Drill 18 (Short) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 18 (Standard / Medium) Name",
+                text: "Drill 18 (Standard / Medium) Name",
+            },
+            {
+                name: "Drill 18 (Standard / Medium) Item Number",
+                text: "Drill 18 (Standard / Medium) Item Number",
+            },
+            {
+                name: "Drill 18 (Standard / Medium) Link to Purchase",
+                text: "Drill 18 (Standard / Medium) Link to Purchase",
+            },
+            {
+                name: "Drill 18 (Standard / Medium) Manufacturer Recommendations",
+                text: "Drill 18 (Standard / Medium) Manufacturer Recommendations",
+            },
+            {
+                name: "Drill 18 (Long) Name",
+                text: "Drill 18 (Long) Name",
+            },
+            {
+                name: "Drill 18 (Long) Item Number",
+                text: "Drill 18 (Long) Item Number",
+            },
+            {
+                name: "Drill 18 (Long) Link to Purchase",
+                text: "Drill 18 (Long) Link to Purchase",
+            },
+            {
+                name: "Drill 18 (Long) Manufacturer Recommendations",
+                text: "Drill 18 (Long) Manufacturer Recommendations",
             }
         ]
     },
@@ -373,10 +1425,6 @@ export const calculatorIO = [
                 name: "Implant Platform",
                 text: "Implant Platform"
             },
-            {
-                name: "Will you perform bone reduction?",
-                text: "Will you perform bone reduction?"
-            }
         ],
         output: [
             {
@@ -388,16 +1436,16 @@ export const calculatorIO = [
                 text: "Item Number"
             },
             {
-                name: "Link to Purchase",
-                text: "Link to Purchase"
+                name: "Bur Kit (Bone Reduction) Link to Purchase",
+                text: "Bur Kit (Bone Reduction) Link to Purchase"
             },
             {
                 name: "Bur Kit (Denture Conversion) Name",
                 text: "Bur Kit (Denture Conversion) Name"
             },
             {
-                name: "Bur Link to Purchase",
-                text: "Bur Link to Purchase"
+                name: "Bur Kit (Denture Conversion) Link to Purchase",
+                text: "Bur Kit (Denture Conversion) Link to Purchase"
             }
         ]
     },
@@ -494,7 +1542,27 @@ export const calculatorIO = [
             {
                 name: "Driver Length",
                 text: "Driver Length"
-            }
+            },
+            {
+                name: "Design",
+                text: "Design"
+            },
+            {
+                name: "MUA Type",
+                text: "MUA Type"
+            },
+            {
+                name: "Abutment Angulation",
+                text: "Abutment Angulation"
+            },
+            {
+                name: "Diameter",
+                text: "Diameter"
+            },
+            {
+                name: "One Piece or Torque Attachment",
+                text: "One Piece or Torque Attachment"
+            },
         ],
         output: [
             {
@@ -521,8 +1589,8 @@ export const calculatorIO = [
                 text: "Implant Brand"
             },
             {
-                name: "Implant System",
-                text: "Implant System"
+                name: "Implant Model",
+                text: "Implant Model"
             },
             {
                 name: "Implant Diameter",
@@ -547,6 +1615,14 @@ export const calculatorIO = [
             {
                 name: "Emergence Profile",
                 text: "Emergence Profile"
+            },
+            {
+                name: "Abutment Material",
+                text: "Abutment Material"
+            },
+            {
+                name: "Abutment Diameter",
+                text: "Abutment Diameter"
             }
         ],
         output: [
@@ -592,6 +1668,10 @@ export const calculatorIO = [
             {
                 name: "Digital or Lab Analog",
                 text: "Digital or Lab Analog"
+            },
+            {
+                name: "Abutment Height",
+                text: "Abutment Height"
             }
         ],
         output: [
@@ -639,8 +1719,20 @@ export const calculatorIO = [
                 text: "Abutment Type"
             },
             {
+                name: "Design",
+                text: "Design"
+            },
+            {
+                name: "Restoration Connection Type",
+                text: "Restoration Connection Type"
+            },
+            {
                 name: "Restoration Type",
                 text: "Restoration Type"
+            },
+            {
+                name: "Anterior or Posterior",
+                text: "Anterior or Posterior"
             },
             {
                 name: "Screw Length",
@@ -657,6 +1749,10 @@ export const calculatorIO = [
             {
                 name: "Open or Closed Tray",
                 text: "Open or Closed Tray"
+            },
+            {
+                name: "Collar Height",
+                text: "Collar Height"
             },
             {
                 name: "Type of Head",
@@ -704,12 +1800,16 @@ export const calculatorIO = [
                 text: "Implant Length"
             },
             {
-                name: "Implant Surface Treatment",
-                text: "Implant Surface Treatment"
+                name: "Implant Form",
+                text: "Implant Form"
             },
             {
-                name: "Do you need to purchase an implant?",
-                text: "Do you need to purchase an implant?"
+                name: "Mount Option",
+                text: "Mount Option"
+            },
+            {
+                name: "Implant Surface Treatment",
+                text: "Implant Surface Treatment"
             }
         ],
         output: [
@@ -757,12 +1857,28 @@ export const calculatorIO = [
                 text: "Angulation"
             },
             {
-                name: "Engaging or Non-Engaging",
-                text: "Engaging or Non-Engaging"
+                name: "Impression Coping Diameter",
+                text: "Impression Coping Diameter"
+            },
+            {
+                name: "Impression Coping Design",
+                text: "Impression Coping Design"
             },
             {
                 name: "Impression Coping Length",
                 text: "Impression Coping Length"
+            },
+            {
+                name: "Cementable Area",
+                text: "Cementable Area"
+            },
+            {
+                name: "Engaging or Non-Engaging",
+                text: "Engaging or Non-Engaging"
+            },
+            {
+                name: "Emergence Profile",
+                text: "Emergence Profile"
             }
         ],
         output: [
@@ -810,6 +1926,14 @@ export const calculatorIO = [
                 text: "Impression Coping Length"
             },
             {
+                name: "Angulation",
+                text: "Angulation"
+            },
+            {
+                name: "Fixation",
+                text: "Fixation"
+            },
+            {
                 name: "Hexed or Non-Hexed",
                 text: "Hexed or Non-Hexed"
             },
@@ -818,8 +1942,16 @@ export const calculatorIO = [
                 text: "Engaging or Non-Engaging"
             },
             {
+                name: "Cementable Area",
+                text: "Cementable Area"
+            },
+            {
                 name: "Abutment Type",
                 text: "Abutment Type"
+            },
+            {
+                name: "Abutment Diameter",
+                text: "Abutment Diameter"
             }
         ],
         output: [
@@ -863,6 +1995,10 @@ export const calculatorIO = [
                 text: "Abutment Angulation"
             },
             {
+                name: "Connection Type",
+                text: "Connection Type"
+            },
+            {
                 name: "Abutment Engaging Type",
                 text: "Abutment Engaging Type"
             },
@@ -871,8 +2007,16 @@ export const calculatorIO = [
                 text: "Abutment Diameter"
             },
             {
+                name: "Abutment Type",
+                text: "Abutment Type"
+            },
+            {
                 name: "Abutment Height",
                 text: "Abutment Height"
+            },
+            {
+                name: "Implant or Abutment Level",
+                text: "Implant or Abutment Level"
             },
             {
                 name: "Collar Height",
@@ -920,11 +2064,27 @@ export const calculatorIO = [
                 text: "Authentic or Generic"
             },
             {
-                name: "Manufacturer Name",
-                text: "Manufacturer Name"
+                name: "Abutment Diameter",
+                text: "Abutment Diameter"
+            },
+            {
+                name: "Abutment Height",
+                text: "Abutment Height"
+            },
+            {
+                name: "Abutment Type",
+                text: "Abutment Type"
+            },
+            {
+                name: "Angulation",
+                text: "Angulation"
             }
         ],
         output: [
+            {
+                name: "Manufacturer Name",
+                text: "Manufacturer Name"
+            },
             {
                 name: "Item Name",
                 text: "Item Name"
@@ -959,6 +2119,14 @@ export const calculatorIO = [
             {
                 name: "Implant Platform",
                 text: "Implant Platform"
+            },
+            {
+                name: "Implant Form",
+                text: "Implant Form"
+            },
+            {
+                name: "Design",
+                text: "Design"
             },
             {
                 name: "Driver Length",
@@ -1000,6 +2168,14 @@ export const calculatorIO = [
             {
                 name: "Implant Platform",
                 text: "Implant Platform"
+            },
+            {
+                name: "Implant Form",
+                text: "Implant Form"
+            },
+            {
+                name: "Design",
+                text: "Design"
             },
             {
                 name: "Driver Length",
@@ -1075,6 +2251,10 @@ export const calculatorIO = [
                 text: "Collar Height"
             },
             {
+                name: "Abutment Height",
+                text: "Abutment Height"
+            },
+            {
                 name: "Emergence Profile",
                 text: "Emergence Profile"
             }
@@ -1116,16 +2296,28 @@ export const calculatorIO = [
                 text: "Implant Platform"
             },
             {
-                name: "Engaging or Non Engaging",
-                text: "Engaging or Non Engaging"
+                name: "Engaging or Non-Engaging",
+                text: "Engaging or Non-Engaging"
             },
             {
                 name: "Abutment Angulation",
                 text: "Abutment Angulation",
             },
             {
+                name: "Abutment Diameter",
+                text: "Abutment Diameter",
+            },
+            {
+                name: "Abutment Type",
+                text: "Abutment Type",
+            },
+            {
                 name: "Connection Type",
                 text: "Connection Type",
+            },
+            {
+                name: "Cementable Area",
+                text: "Cementable Area",
             },
             {
                 name: "Hexed or Non-Hexed",
@@ -1193,6 +2385,10 @@ export const calculatorIO = [
                 text: "Abutment Type",
             },
             {
+                name: "Angulation",
+                text: "Angulation",
+            },
+            {
                 name: "Restoration Type",
                 text: "Restoration Type",
             },
@@ -1209,8 +2405,8 @@ export const calculatorIO = [
                 text: "Diameter"
             },
             {
-                name: "Hexed or Non Hexed",
-                text: "Hexed or Non Hexed"
+                name: "Hexed or Non-Hexed",
+                text: "Hexed or Non-Hexed"
             }
         ],
         output: [
@@ -1258,8 +2454,16 @@ export const calculatorIO = [
                 text: "Abutment Diameter",
             },
             {
+                name: "Connection Type",
+                text: "Connection Type",
+            },
+            {
                 name: "Angulation",
                 text: "Angulation",
+            },
+            {
+                name: "Abutment Type",
+                text: "Abutment Type",
             },
             {
                 name: "Abutment Height",
@@ -1268,6 +2472,10 @@ export const calculatorIO = [
             {
                 name: "Cementable Area",
                 text: "Cementable Area"
+            },
+            {
+                name: "Material",
+                text: "Material"
             },
             {
                 name: "Collar Height",
@@ -1319,6 +2527,10 @@ export const calculatorIO = [
                 text: "MUA Type"
             },
             {
+                name: "Connection",
+                text: "Connection"
+            },
+            {
                 name: "Abutment Diameter",
                 text: "Abutment Diameter"
             },
@@ -1333,6 +2545,10 @@ export const calculatorIO = [
             {
                 name: "Angulation",
                 text: "Angulation"
+            },
+            {
+                name: "Material",
+                text: "Material"
             }
         ],
         output: [
