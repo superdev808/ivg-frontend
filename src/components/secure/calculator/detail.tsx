@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Slide from "./slide";
 
 interface DetailViewProps {
+  calculatorName: string;
   items: Array<Record<string, string>>;
   fields: Array<{ name: string; text: string }>;
   questions: Array<{ name: string; text: string }>;
@@ -11,6 +12,7 @@ interface DetailViewProps {
 }
 
 const DetailView: React.FC<DetailViewProps> = ({
+  calculatorName,
   items,
   fields,
   questions,
@@ -45,8 +47,8 @@ const DetailView: React.FC<DetailViewProps> = ({
   const handleGoNext = () => setActiveIndex((prevState) => prevState + 1);
 
   return (
-    <div className="flex flex-column align-items-center justify-content-center pt-4 md:pt-8">
-      <Slide itemInfo={itemInfo} quiz={quiz} />
+    <div className="flex flex-column align-items-center justify-content-center px-3 pt-4 md:pt-8">
+      <Slide calculatorName={calculatorName} itemInfo={itemInfo} quiz={quiz} />
 
       {items.length > 1 && (
         <div className="flex gap-4 mt-6">

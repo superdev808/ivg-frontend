@@ -71,7 +71,7 @@ const SavedResultsDetailContainer: React.FC = () => {
 
   return (
     <>
-      <Toast ref={toastRef} />
+      <Toast ref={toastRef} position="top-right" />
       <div className="nav-offset container flex flex-column align-items-center overflow-auto px-4 pb-4">
         {id && (
           <>
@@ -80,6 +80,7 @@ const SavedResultsDetailContainer: React.FC = () => {
               <SavedResultDetail
                 savedResult={savedResult}
                 isDeleting={isDeletingSavedResult}
+                toastRef={toastRef}
                 onDelete={handleDelete}
               />
             )}

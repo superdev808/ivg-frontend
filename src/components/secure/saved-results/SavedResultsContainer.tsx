@@ -49,7 +49,7 @@ const SavedResultsContainer: React.FC = () => {
 
   return (
     <>
-      <Toast ref={toastRef} />
+      <Toast ref={toastRef} position="top-right" />
       <div className="nav-offset container flex flex-column align-items-center overflow-auto px-4 pb-4">
         <h1>Saved Results</h1>
 
