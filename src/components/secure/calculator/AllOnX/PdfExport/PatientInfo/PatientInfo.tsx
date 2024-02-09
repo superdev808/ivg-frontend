@@ -37,7 +37,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
               : "p-float p-label-always"
           }
         >
-          Name
+          Patient Name
         </label>
         <InputText
           id="name"
@@ -48,7 +48,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
           })}
           className={errors.name ? "p-invalid" : ""}
         />
-        {errors.name && <small className="p-error">Name is required.</small>}
+        {errors.name && <small className="p-error">Patient Name is required.</small>}
       </div>
 
       <div className="p-field mb-3">
@@ -60,7 +60,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
               : "p-float p-label-always"
           }
         >
-          Address
+         Street Address
         </label>
         <InputText
           id="address"
@@ -72,7 +72,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
           className={errors.address ? "p-invalid" : ""}
         />
         {errors.address && (
-          <small className="p-error">Address is required.</small>
+          <small className="p-error">Street Address is required.</small>
         )}
       </div>
 
@@ -85,7 +85,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
               : "p-float p-label-always"
           }
         >
-          Filename
+          File Name
         </label>
         <InputText
           id="filename"
@@ -97,7 +97,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
           className={errors.filename ? "p-invalid" : ""}
         />
         {errors.filename && (
-          <small className="p-error">Filename is required.</small>
+          <small className="p-error">File Name is required.</small>
         )}
       </div>
 

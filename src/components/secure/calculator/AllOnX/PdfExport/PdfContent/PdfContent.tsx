@@ -156,7 +156,8 @@ const PdfContent: React.FC<PdfContentProps> = ({
           <div className={cx("break-all")}>{patientInfo?.address}</div>
         </div>
         <div>
-          Date:{currentDate} {currentDateTime}
+          <div className="pb-2"><span>Date: </span>{currentDate}</div>
+          <div><span>Time: </span>{currentDateTime}</div>
         </div>
       </div>
       <div className="flex mx-4 my-1 justify-content-between">

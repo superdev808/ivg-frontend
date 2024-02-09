@@ -2,6 +2,7 @@ import React from "react";
 import _ from "lodash";
 import styles from "../InputSummary/InputSummary.module.scss";
 import classNames from "classnames/bind";
+import { isValidUrl } from "@/components/calculator/AllOnX/AllOnXUtills";
 
 const cx = classNames.bind(styles);
 export interface summary {
@@ -42,9 +43,13 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
                 >
                   <td>{data.description}</td>
                   <td>
-                    <a href={data.link} target="_blank">
-                      {data.name}
-                    </a>
+                    {isValidUrl(data.link) ? (
+                      <a href={data.link} target="_blank">
+                        {data.link}
+                      </a>
+                    ) : (
+                      data.link
+                    )}
                   </td>
                   <td>{data.amount}</td>
                 </tr>
