@@ -33,9 +33,9 @@ const InputSummary: React.FC<InputSummaryProps> = ({
 
   return (
     <>
-      {_.chunk(uniqueQuestions, 10).map((questions: string[], idx: number) => {
+      {_.chunk(uniqueQuestions, 9).map((questions: string[], idx: number) => {
         return (
-          <table className={cx("striped-table")} key={`uniqueQuestions-${idx}`}>
+          <table className={cx("striped-table", {"mt-4": idx !== 0})} key={`uniqueQuestions-${idx}`}>
             <thead>
               {idx === 0 && (
                 <tr>

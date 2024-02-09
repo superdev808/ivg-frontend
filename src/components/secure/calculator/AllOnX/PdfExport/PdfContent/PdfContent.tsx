@@ -183,7 +183,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
         <InputSummary selectedSites={selectedSites} sitesData={sitesData} />
       </div>
 
-      <div className="p-4">
+      <div className="px-4">
         <ComponentSummary summary={componentSummary} />
 
         <div className="flex flex-column pt-5 greet">

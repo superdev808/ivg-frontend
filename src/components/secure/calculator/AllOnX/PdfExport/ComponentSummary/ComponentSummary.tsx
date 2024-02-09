@@ -22,7 +22,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
   return (
     <>
       {summary && summary.length ? (
-          <table className={cx("striped-table")}>
+          <table className={cx("striped-table", "mt-4")}>
             <thead>
               <tr>
                 <div className="font-bold my-0 pb-1">Options:</div>
