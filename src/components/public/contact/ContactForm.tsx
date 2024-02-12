@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames/bind';
 import { InputText } from 'primereact/inputtext';
 import { InputMask } from 'primereact/inputmask';
-import { Dropdown } from 'primereact/dropdown';
 
 import { Button } from 'primereact/button';
 import styles from './Contact.module.scss';
@@ -14,6 +13,11 @@ import { InputTextarea } from 'primereact/inputtextarea';
 
 import ReCAPTCHA from 'react-google-recaptcha';
 import { RadioButton } from 'primereact/radiobutton';
+import { Image } from 'primereact/image';
+import { FormErrorMessage } from '@/components/shared/FormErrorMessage';
+import { usePostSubmitContactFormMutation } from '@/redux/hooks/apiHooks';
+import { ContactForm } from '@/types/PublicTypes';
+import { Response } from '@/types/ApiResponseTypes';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +30,8 @@ export const ContactComponent = () => {
 	const [visible, setVisible] = useState(false);
 	const [sendStatus, setSendStatus] = useState(''); // 'sending', 'sent', 'error'
 
+	const [postSubmitContactForm] = usePostSubmitContactFormMutation();
+
 	const practices: Practice[] = [
 		{ label: 'Dental Practice', value: 'Dental Practice' },
 		{ label: 'Dental Labatory', value: 'Dental Labatory' },
@@ -34,14 +40,13 @@ export const ContactComponent = () => {
 		{ label: 'Other', value: 'other' },
 	];
 	const defaultValues = {
-		firstName: '',
-		lastName: '',
+		name: '',
 		phone: '',
 		email: '',
-		zipCode: '',
-		type: '',
+		zip: '',
+		role: '',
 		message: '',
-		recaptcha: '',
+		token: '',
 	};
 
 	const {
@@ -52,58 +57,31 @@ export const ContactComponent = () => {
 		reset,
 		setValue,
 		trigger,
-		register,
 	} = useForm({ defaultValues });
 
-	const onChange = (value) => {
-		setValue('recaptcha', value);
-		trigger('recaptcha');
+	const onVerifyRecaptcha = (token: string | null) => {
+		setValue('token', token || '');
+		trigger('token');
 	};
 
-	const onSubmit = async (data) => {
+	const onSubmit = async () => {
 		try {
-			const response = await fetch('/api/auth/recaptcha', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ token: data.recaptcha }),
-			});
+			setSendStatus('sending');
+			const data: ContactForm = getValues();
+			const response = await postSubmitContactForm(data);
 
-			const responseData = await response.json();
-			if (response.ok) {
-				setSendStatus('sending');
-				const values = getValues();
-				const response = await fetch('/api/contactus', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(values),
-				});
-
-				if (response.ok) {
-					console.log('Email sent successfully');
-					setVisible(true);
-					setSendStatus('sent');
-					reset(); // Reset the form fields after successful submission
-				} else {
-					console.log('Email not sent');
-				}
+			if ((response as Response).data.status === 'Success') {
+				setVisible(true);
+				setSendStatus('sent');
+				reset();
 			} else {
 				setSendStatus('error');
 			}
-
-			// setIsSending(true);
 		} catch (error) {
-			console.error('Failed to send email:', error);
 			setSendStatus('error');
 		}
 	};
 
-	const getFormErrorMessage = (name) => {
-		return errors[name] ? <small className="p-error">{errors[name].message}</small> : <small className="p-error">&nbsp;</small>;
-	};
 	const emailPattern = {
 		value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
 		message: 'Invalid email address',
@@ -119,14 +97,14 @@ export const ContactComponent = () => {
 						onSubmit={handleSubmit(onSubmit)}>
 						<div className="grid justify-content-between mb-3">
 							<Controller
-								name="firstName"
+								name="name"
 								control={control}
-								rules={{ required: 'First name is required.' }}
+								rules={{ required: 'Name is required.' }}
 								render={({ field, fieldState }) => (
 									<div className="flex flex-column col-12 md:col-6 pr-2">
 										<label
 											htmlFor={field.name}
-											className={cx({ 'p-error': errors.value })}></label>
+											className={cx({ 'p-error': errors.name })}></label>
 										<span className="p-float-label w-full mb-2">
 											<InputText
 												id={field.name}
@@ -136,7 +114,7 @@ export const ContactComponent = () => {
 											/>
 											<label htmlFor={field.name}>Name</label>
 										</span>
-										{getFormErrorMessage(field.name)}
+										<FormErrorMessage message={errors[field.name]?.message} />
 									</div>
 								)}
 							/>
@@ -149,7 +127,7 @@ export const ContactComponent = () => {
 									<div className="flex flex-column col-12 md:col-6  pl-2">
 										<label
 											htmlFor={field.name}
-											className={cx({ 'p-error': errors.value })}></label>
+											className={cx({ 'p-error': errors.email })}></label>
 										<span className="p-float-label w-full mb-2">
 											<InputText
 												id={field.name}
@@ -159,7 +137,7 @@ export const ContactComponent = () => {
 											/>
 											<label htmlFor={field.name}>Email</label>
 										</span>
-										{getFormErrorMessage(field.name)}
+										<FormErrorMessage message={errors[field.name]?.message} />
 									</div>
 								)}
 							/>
@@ -173,7 +151,7 @@ export const ContactComponent = () => {
 									<div className="flex flex-column  col-12 md:col-6 pr-2">
 										<label
 											htmlFor={field.name}
-											className={cx({ 'p-error': errors.value })}></label>
+											className={cx({ 'p-error': errors.phone })}></label>
 										<span className="p-float-label w-full mb-2">
 											<InputMask
 												id={field.name}
@@ -184,19 +162,19 @@ export const ContactComponent = () => {
 
 											<label htmlFor={field.name}>Phone Number</label>
 										</span>
-										{getFormErrorMessage(field.name)}
+										<FormErrorMessage message={errors[field.name]?.message} />
 									</div>
 								)}
 							/>
 							<Controller
-								name="zipCode"
+								name="zip"
 								control={control}
 								rules={{ required: 'Zip Code is required.' }}
 								render={({ field, fieldState }) => (
 									<div className="flex flex-column  col-12 md:col-6 pl-2">
 										<label
 											htmlFor={field.name}
-											className={cx({ 'p-error': errors.value })}></label>
+											className={cx({ 'p-error': errors.zip })}></label>
 										<span className="p-float-label w-full mb-2">
 											<InputMask
 												id={field.name}
@@ -206,14 +184,14 @@ export const ContactComponent = () => {
 												onChange={(e) => field.onChange(e.target.value)}></InputMask>
 											<label htmlFor={field.name}>Zip Code</label>
 										</span>
-										{getFormErrorMessage(field.name)}
+										<FormErrorMessage message={errors[field.name]?.message} />
 									</div>
 								)}
 							/>
 						</div>
 						<div className="flex justify-content-center mb-3">
 							<Controller
-								name="type"
+								name="role"
 								control={control}
 								rules={{ required: 'Role is required.' }}
 								render={({ field, fieldState }) => (
@@ -223,7 +201,9 @@ export const ContactComponent = () => {
 											<div className="flex flex-column md:flex-row w-full p-0">
 												{practices.map((practice, index) => {
 													return (
-														<div className='mb-2' key={`practice_${index}`}>
+														<div
+															className="mb-2"
+															key={`practice_${index}`}>
 															<RadioButton
 																inputId="`f${index}`"
 																{...field}
@@ -241,7 +221,9 @@ export const ContactComponent = () => {
 												})}
 											</div>
 										</div>
-										<span className="my-2 flex justify-content-center">{getFormErrorMessage(field.name)}</span>
+										<span className="my-2 flex justify-content-center">
+											<FormErrorMessage message={errors[field.name]?.message} />
+										</span>
 									</div>
 								)}
 							/>
@@ -250,13 +232,13 @@ export const ContactComponent = () => {
 							<Controller
 								name="message"
 								control={control}
-								rules={{}}
+								rules={{ required: 'A message is required.' }}
 								render={({ field, fieldState }) => (
-									<div className="flex flex-column w-12 ml-2">
+									<div className="flex flex-column w-12 ml-2 mb-2">
 										<label
 											htmlFor={field.name}
-											className={cx({ 'p-error': errors.value })}></label>
-										<span className="p-float-label w-full mb-2">
+											className={cx({ 'p-error': errors.message })}></label>
+										<span className="p-float-label w-full ">
 											<InputTextarea
 												id={field.name}
 												{...field}
@@ -264,10 +246,10 @@ export const ContactComponent = () => {
 												cols={30}
 												className={cx([{ 'p-invalid': fieldState.error }, 'w-full'])}
 											/>
-											{getFormErrorMessage(field.name)}
+
 											<label htmlFor={field.name}>Message</label>
 										</span>
-										{getFormErrorMessage(field.name)}
+										<FormErrorMessage message={errors[field.name]?.message} />
 									</div>
 								)}
 							/>
@@ -275,7 +257,7 @@ export const ContactComponent = () => {
 						{sendStatus !== 'sent' && (
 							<div className="flex justify-content-center mb-4">
 								<Controller
-									name="recaptcha"
+									name="token"
 									control={control}
 									rules={{ required: 'You must verify the reCAPTCHA.' }}
 									render={({ field, fieldState }) => (
@@ -283,10 +265,10 @@ export const ContactComponent = () => {
 											<span className="mb-2">
 												<ReCAPTCHA
 													sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
-													onChange={onChange}
+													onChange={onVerifyRecaptcha}
 												/>
 											</span>
-											{getFormErrorMessage(field.name)}
+											<FormErrorMessage message={errors[field.name]?.message} />
 										</div>
 									)}
 								/>
@@ -296,7 +278,7 @@ export const ContactComponent = () => {
 							<Button
 								type="submit"
 								disabled={sendStatus === 'sending' || sendStatus === 'sent'}
-								className={cx(['btn-secondary', 'xl:w-2 w-12 text-xl hover:text-secondary'])}>
+								className={cx(['btn-secondary', 'xl:w-3 w-12 text-xl hover:text-secondary'])}>
 								{sendStatus === 'sending' ? (
 									<>
 										{' '}
@@ -336,10 +318,10 @@ export const ContactComponent = () => {
 							className={'border-0 mt-2 '}></Button>
 					</div>
 					<div className="flex justify-content-center">
-						<img
+						<Image
 							src="/images/common/sent.png"
 							alt="sent"
-							width={250}
+							width="175"
 						/>
 					</div>
 					<h2>Thank you for contacting us!</h2>

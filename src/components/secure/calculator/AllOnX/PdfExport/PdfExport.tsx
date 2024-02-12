@@ -121,7 +121,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
   };
   return (
     <>
-      <div className="block">
+      <div className="hidden">
         <div ref={contentRef}>
           {patientInfo && (
             <PdfContent

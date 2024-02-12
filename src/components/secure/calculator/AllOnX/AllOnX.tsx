@@ -258,8 +258,11 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   const handleCollectionChange = (e: CheckboxChangeEvent) => {
     let _selectedCollections: string[] = [...selectedCollections];
 
+    if(siteSpecificReport === SITE_SPECIFIC_REPORT_OPTIONS[1].value && !selectedCollections.length){
+      handleSiteChange(1, true);
+    }
     if (e.checked) {
-      _selectedCollections.push(e.value);
+      _selectedCollections.push(e.value);      
     } else {
       _selectedCollections = _selectedCollections.filter(
         (collection) => collection !== e.value

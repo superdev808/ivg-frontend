@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 // @ts-ignore
 import html2pdf from "html2pdf.js";
+import trim from "lodash/trim";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
@@ -232,7 +233,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
                     {text}
                   </div>
                   <div className="flex-1 text-right">
-                    {savedResult.quiz[text]}
+                    {trim(savedResult.quiz[text])}
                   </div>
                 </div>
               ))}
@@ -245,27 +246,35 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
                   "details"
                 )}
               >
-                {Object.keys(savedResult.details).map((text) => (
-                  <div key={text} className="flex align-items-center gap-4">
-                    <div className="text-left" style={{ maxWidth: "50%" }}>
-                      {text}
+                {Object.keys(savedResult.details).map((text) => {
+                  const value = trim(savedResult.details[text]);
+
+                  return (
+                    <div key={text} className="flex align-items-center gap-4">
+                      <div className="text-left" style={{ maxWidth: "50%" }}>
+                        {text}
+                      </div>
+                      <div className="flex-1 text-right">
+                        {isUrl(value) ? (
+                          <Link
+                            href={value}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ wordBreak: "break-word" }}
+                          >
+                            <Button
+                              className="px-0"
+                              link
+                              label="Click to Purchase"
+                            />
+                          </Link>
+                        ) : (
+                          value
+                        )}
+                      </div>
                     </div>
-                    <div className="flex-1 text-right">
-                      {isUrl(savedResult.details[text].trim()) ? (
-                        <Link
-                          href={savedResult.details[text]}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ wordBreak: "break-word" }}
-                        >
-                          {savedResult.details[text].trim()}
-                        </Link>
-                      ) : (
-                        savedResult.details[text].trim()
-                      )}
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
 
