@@ -1,5 +1,5 @@
-import { publicApiSlice } from '../slices/api/publicApiSlice';
-import { userApiSlice } from '../slices/api/userApiSlice';
+import { publicApiSlice } from "../slices/api/publicApiSlice";
+import { userApiSlice } from "../slices/api/userApiSlice";
 
 export const {
   usePostCheckEmailMutation,
@@ -17,7 +17,9 @@ export const {
   usePostSendVerificationEmailMutation,
   usePostDeactivateUserMutation,
   usePostVerifyTokenMutation,
-  usePostActivateUserMutation
+  usePostActivateUserMutation,
+  useSaveResultMutation,
+  useDeleteSavedResultMutation,
 } = userApiSlice;
 
 export const { usePostSubmitContactFormMutation } = publicApiSlice;

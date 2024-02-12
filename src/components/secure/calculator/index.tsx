@@ -98,6 +98,12 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
     setAnswers(newAnswers);
   };
 
+  const handleBackFromResult = () => {
+    setLevel(level - 2);
+    setAnswers((prevState) => prevState.slice(0, prevState.length - 2));
+    setItems([]);
+  };
+
   return (
     <div className="flex w-full justify-content-center mb-8">
       <div className="w-12 flex px-2 py-2 border-round bg-white flex-column">
@@ -144,6 +150,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
             fields={output}
             questions={input}
             answers={answers}
+            onGoBack={handleBackFromResult}
           />
         )}
 

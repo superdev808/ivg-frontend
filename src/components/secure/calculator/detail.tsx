@@ -9,6 +9,7 @@ interface DetailViewProps {
   fields: Array<{ name: string; text: string }>;
   questions: Array<{ name: string; text: string }>;
   answers: string[];
+  onGoBack: () => void;
 }
 
 const DetailView: React.FC<DetailViewProps> = ({
@@ -17,6 +18,7 @@ const DetailView: React.FC<DetailViewProps> = ({
   fields,
   questions,
   answers,
+  onGoBack,
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -47,7 +49,13 @@ const DetailView: React.FC<DetailViewProps> = ({
   const handleGoNext = () => setActiveIndex((prevState) => prevState + 1);
 
   return (
-    <div className="flex flex-column align-items-center justify-content-center px-3 pt-4 md:pt-8">
+    <div className="flex flex-column align-items-center justify-content-center mt-4 relative md:mt-4 md:px-0">
+      <Button
+        icon="pi pi-arrow-left"
+        className="left-0 top-0 md:ml-3 md:absolute"
+        onClick={onGoBack}
+      />
+
       <Slide calculatorName={calculatorName} itemInfo={itemInfo} quiz={quiz} />
 
       {items.length > 1 && (
