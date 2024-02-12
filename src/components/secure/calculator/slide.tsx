@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 // @ts-ignore
 import html2pdf from "html2pdf.js";
 import omit from "lodash/omit";
+import trim from "lodash/trim";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import { Toast } from "primereact/toast";
@@ -46,10 +47,11 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
   const contentRef = useRef(null);
   const toastRef = useRef(null);
 
-  const itemName = itemInfo["Item Name"] || itemInfo["Drill Kit Name"];
-  const itemImage = itemInfo["Item Image"];
-  const purchaseLink =
-    itemInfo["Link to Purchase"] || itemInfo["Drill Kit Link to Purchase"];
+  const itemName = trim(itemInfo["Item Name"] || itemInfo["Drill Kit Name"]);
+  const itemImage = trim(itemInfo["Item Image"]);
+  const purchaseLink = trim(
+    itemInfo["Link to Purchase"] || itemInfo["Drill Kit Link to Purchase"]
+  );
 
   const details = omit(itemInfo, [
     "Item Name",
@@ -184,7 +186,7 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
       <div className="w-12 lg:w-10 xl:w-7">
         <div
           ref={contentRef}
-          className="w-full py-2 align-items-start gap-1 md:flex"
+          className="w-full py-2 align-items-start gap-4 md:flex"
         >
           <div className="flex-1">
             {itemName && <h1 className="m-0">{itemName}</h1>}
@@ -204,7 +206,7 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
             <div
               className={cx(
                 "bg-white flex flex-column gap-3 shadow-6 p-4 mt-4 border-2 border-green-800 md:mt-0",
-                "answers"
+                "quiz"
               )}
             >
               {Object.keys(quiz).map((text) => (
@@ -212,7 +214,7 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
                   <div className="text-left" style={{ maxWidth: "50%" }}>
                     {text}
                   </div>
-                  <div className="flex-1 text-right">{quiz[text]}</div>
+                  <div className="flex-1 text-right">{trim(quiz[text])}</div>
                 </div>
               ))}
             </div>
@@ -224,27 +226,35 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
                   "details"
                 )}
               >
-                {Object.keys(details).map((text) => (
-                  <div key={text} className="flex align-items-center gap-4">
-                    <div className="text-left" style={{ maxWidth: "50%" }}>
-                      {text}
+                {Object.keys(details).map((text) => {
+                  const value = trim(details[text]);
+
+                  return (
+                    <div key={text} className="flex align-items-center gap-4">
+                      <div className="text-left" style={{ maxWidth: "50%" }}>
+                        {text}
+                      </div>
+                      <div className="flex-1 text-right">
+                        {isUrl(value) ? (
+                          <Link
+                            href={value}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ wordBreak: "break-word" }}
+                          >
+                            <Button
+                              className="px-0"
+                              link
+                              label="Click to Purchase"
+                            />
+                          </Link>
+                        ) : (
+                          value
+                        )}
+                      </div>
                     </div>
-                    <div className="flex-1 text-right">
-                      {isUrl(details[text].trim()) ? (
-                        <Link
-                          href={details[text]}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ wordBreak: "break-word" }}
-                        >
-                          {details[text].trim()}
-                        </Link>
-                      ) : (
-                        details[text].trim()
-                      )}
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
 
