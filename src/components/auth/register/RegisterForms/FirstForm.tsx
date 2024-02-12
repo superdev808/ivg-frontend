@@ -11,6 +11,7 @@ import { InputMask } from 'primereact/inputmask';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePostCheckEmailMutation } from '@/redux/hooks/apiHooks';
+import RegisterFooter from './Footer';
 
 const cx = classNames.bind(styles);
 
@@ -42,6 +43,7 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 
 	const handleCheckEmail = async (data: FormValues) => {
 		setIsLoading(true);
+
 		try {
 			const res = await postCheckEmail(data.email).unwrap();
 			if (res.available === true) {
@@ -58,7 +60,7 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 	};
 
 	useEffect(() => {
-		if (emailNotTaken === null) return;
+		if (emailNotTaken === null || emailNotTaken) return;
 		trigger('email');
 	}, [emailNotTaken]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -67,11 +69,12 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 		formState: { errors },
 		handleSubmit,
 		trigger,
-	} = useForm<FormValues>({ defaultValues });
+		clearErrors,
+	} = useForm<FormValues>({ defaultValues, mode: 'onSubmit', reValidateMode: 'onSubmit' });
 
 	return (
 		<form
-			className="grid m-0 p-0 justify-content-center mt-6 "
+			className={cx('grid m-0 p-0 justify-content-center h-full')}
 			onSubmit={handleSubmit((e) => handleCheckEmail(e))}>
 			<span className="col-12 text-center text-2xl text-secondary">Create your account</span>
 			<span className="col-12 text-center p-0 text-gray-600 mb-6">Please fill the form below to create an account.</span>
@@ -81,7 +84,7 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 					control={control}
 					rules={{ required: 'First Name is required.' }}
 					render={({ field, fieldState }) => (
-						<div className="flex flex-column  col-12 md:col-6 p-0 pr-2 mb-4">
+						<div className="flex flex-column  col-12 md:col-6 p-0 md:pr-2 mb-4">
 							<label
 								htmlFor={field.name}
 								className={cx({ 'p-error': errors[field.name] }, 'w-full')}></label>
@@ -106,7 +109,7 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 					control={control}
 					rules={{ required: 'Last Name is required.' }}
 					render={({ field, fieldState }) => (
-						<div className="flex flex-column  col-12 md:col-6  p-0 pl-2 mb-4">
+						<div className="flex flex-column  col-12 md:col-6  p-0 md:pl-2 mb-4">
 							<label
 								htmlFor={field.name}
 								className={cx({ 'p-error': errors[field.name] })}></label>
@@ -160,13 +163,14 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 					control={control}
 					rules={{
 						required: 'Email is required.',
+
+						validate: () => emailNotTaken || 'This email is already taken.',
 						pattern: {
 							value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
 							message: 'Invalid email address',
 						},
-						validate: () => emailNotTaken || 'This email is already taken.',
 					}}
-					render={({ field: { onChange, ...field }, fieldState }) => (
+					render={({ field, fieldState }) => (
 						<div className="flex flex-column  col-12 p-0">
 							<label
 								htmlFor={field.name}
@@ -174,8 +178,8 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 							<span className="p-float-label">
 								<InputText
 									id={field.name}
-									onChange={(e) => {
-										onChange(e);
+									onInput={(e: any) => {
+										clearErrors('email');
 										setEmailNotTaken(true);
 									}}
 									className={cx({ 'p-invalid': fieldState.error, 'w-full': true })}
@@ -242,7 +246,7 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 					control={control}
 					rules={{ required: 'Accept is required.' }}
 					render={({ field, fieldState }) => (
-						<>
+						<div className="grid col-12 justify-content-center md:col m-0 p-0">
 							<label
 								htmlFor={field.name}
 								className={cx({ 'p-error': errors[field.name] })}></label>
@@ -271,7 +275,7 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 									Privacy Notice
 								</Link>
 							</span>
-						</>
+						</div>
 					)}
 				/>
 			</div>
@@ -287,6 +291,19 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 						style={{ width: '200px' }}
 					/>
 				</div>
+			</div>
+			<div className="col-12 flex justify-content-center mt-4">
+				<span className="text-center p-0 text-gray-600">
+					Already have an account?{' '}
+					<Link
+						href={'/login'}
+						className="no-underline text-secondary">
+						Sign In
+					</Link>
+				</span>
+			</div>
+			<div className="col-12 flex-grow-1 flex align-items-end justify-content-center">
+				<RegisterFooter />
 			</div>
 		</form>
 	);

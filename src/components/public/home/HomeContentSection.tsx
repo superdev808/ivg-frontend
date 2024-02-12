@@ -9,8 +9,6 @@ import { CTASection } from '../shared/CTASection';
 const cx = classNames.bind(styles);
 
 export const HomeContentSection = () => {
-
-	// Avantage Section
 	const advantageItems = [
 		{
 			title: 'Reduce Additional Appointments',
@@ -28,7 +26,6 @@ export const HomeContentSection = () => {
 			image: '/images/home/advantage_support.svg',
 		},
 	];
-	// Help Section
 	const helpItems = [
 		{
 			title: 'Dental Practices',
@@ -46,7 +43,6 @@ export const HomeContentSection = () => {
 			image: '/images/home/schools.svg',
 		},
 	];
-	// CTA Section
 	const title: string = 'Media/Partnership Inquiries';
 	const text: JSX.Element = (
 		<>
@@ -59,8 +55,7 @@ export const HomeContentSection = () => {
 
 	return (
 		<>
-			<div className={cx(['section-container', 'mb-4 relative overflow-hidden'])}>
-				{/* BACKGROUND */}
+			<div className={cx(['section-container', 'relative overflow-hidden'])}>
 				<div
 					className={cx('background-radial-gradient', 'hidden lg:block')}
 					style={{ top: '-400px', left: '-300px', width: '800px', height: '800px' }}></div>
@@ -68,7 +63,6 @@ export const HomeContentSection = () => {
 					className={cx('background-radial-gradient', 'hidden lg:block')}
 					style={{ top: '400px', right: '-300px', width: '800px', height: '800px' }}></div>
 
-				{/* Our Plaform */}
 				<div className="flex flex-column align-items-center  justify-content-center text-center mt-8">
 					<span className={cx(['col-12 md:col-8', 'public-section-title', 'my-2'])}>Our Platform</span>
 					<span className={cx(['col-12 md:col-8', 'public-section-content-2xl', 'text-center'])}>
@@ -77,11 +71,7 @@ export const HomeContentSection = () => {
 				</div>
 				<div className="flex flex-column md:flex-row align-items-center justify-content-center my-6">
 					<div className={cx(['flex justify-content-center w-full relative  p-2	'])}>
-		
-
 						<Image
-							className=""
-							// imageClassName="absolute top-0 z-2"
 							src="/images/common/computer.png"
 							alt="centerImage"
 							width={'100%'}
@@ -99,8 +89,7 @@ export const HomeContentSection = () => {
 					</div>
 				</div>
 
-				{/* Advantages */}
-				<div className="p-2 md:p-4 border-round z-1 relative ">
+				<div className="p-2 md:p-4 border-round  relative ">
 					<ColItemsSection
 						reverse
 						items={advantageItems}
@@ -109,7 +98,6 @@ export const HomeContentSection = () => {
 					/>
 				</div>
 
-				{/* Who can we help? */}
 				<div className={cx('flex flex-column md:py-6  align-items-center justify-content-center surface-100 ')}>
 					<span className={cx('mt-4  public-section-title ')}>Who We Help</span>
 					<span className={cx('mb-8 text-center my-4 public-section-content-2xl')}>We are a FREE resource for all dental professionals.</span>
@@ -150,8 +138,6 @@ export const HomeContentSection = () => {
 							})}
 					</div>
 				</div>
-
-				{/* Call To Action */}
 				<CTASection
 					text={text}
 					title={title}

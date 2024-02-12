@@ -1,14 +1,10 @@
-import { useAppSelector } from '@/redux/hooks/hooks';
 import FooterExtended from './FooterExtended';
-import { usePathname } from 'next/navigation';
-import { use, useEffect, useState } from 'react';
 import Link from 'next/link';
 
 const cx = require('classnames/bind');
 const devMode = process.env.NEXT_PUBLIC_DEV_MODE;
 
-const Footer = ({extendFooter}: {extendFooter?:boolean}) => {
-
+const Footer = ({ extendFooter }: { extendFooter?: boolean }) => {
 	return (
 		<div className="relative overflow-hidden ">
 			{!extendFooter ? null : <FooterExtended />}
@@ -17,7 +13,6 @@ const Footer = ({extendFooter}: {extendFooter?:boolean}) => {
 				<div className={'grid bg-tranparent m-0 z-2 h-5rem w-full'}>
 					<div className="col-12  md:col-5 flex flex-column align-items-start">
 						<p className="text-center md:text-left">© 2023 Ivory Guide, LLC and its subsidiaries. All rights reserved.</p>
-						
 					</div>
 					<div className="col-12  md:col-2 flex flex-column text-center">
 						<p className="text-center">
@@ -26,25 +21,23 @@ const Footer = ({extendFooter}: {extendFooter?:boolean}) => {
 					</div>
 
 					<div className="col-12  md:col-5 flex flex-column align-items-end">
-						<p className="text-center md:text-right"><Link
-									href={'/agreement'}
-									className="text-600 font-bold"
-									target="_blank"
-									style={{ textDecorationColor: 'var(--gray-600)' }}>
-									
-										Terms of Use
-								
-								</Link>
+						<p className="text-center md:text-right">
+							<Link
+								href={'/agreement'}
+								className="text-600 font-bold"
+								target="_blank"
+								style={{ textDecorationColor: 'var(--gray-600)' }}>
+								Terms of Use
+							</Link>
 							{' | '}
-								<Link
-									href={'/privacy-policy'}
-									target="_blank"
-									className="text-600 font-bold"
-									style={{ textDecorationColor: 'var(--gray-600)' }}>
-								
-										Privacy Notice
-								
-								</Link></p>
+							<Link
+								href={'/privacy-policy'}
+								target="_blank"
+								className="text-600 font-bold"
+								style={{ textDecorationColor: 'var(--gray-600)' }}>
+								Privacy Notice
+							</Link>
+						</p>
 					</div>
 				</div>
 			</div>
