@@ -93,12 +93,6 @@ const Questionnaire: React.FC<InputProps> = ({
     }
   }, [autoPopulateData, onAutopopulate]);
 
-  useEffect(() => {
-    setAnswerOptions([]);
-    setAnswers([]);
-    setLevel(0);
-  }, [additionalInputs]);
-
   const { isLoading } = useQuery(
     [input, level, answers, option, site],
     async () => {
@@ -200,7 +194,9 @@ const Questionnaire: React.FC<InputProps> = ({
     const newAnswers = answers.slice(0, index);
     newAnswers[index] = e.value;
     setAnswers(newAnswers);
-    onInputSelect(site, questions[index], newAnswers[index]);
+    if (!(questions[index].name === "" && questions[index].text === "")) {
+      onInputSelect(site, questions[index], newAnswers[index]);
+    }
   };
 
   const handlePopulateResponse = (value: string) => {
