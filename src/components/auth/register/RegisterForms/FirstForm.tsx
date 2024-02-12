@@ -68,9 +68,6 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 		control,
 		formState: { errors },
 		handleSubmit,
-		getValues,
-		reset,
-		setValue,
 		trigger,
 		clearErrors,
 	} = useForm<FormValues>({ defaultValues, mode: 'onSubmit', reValidateMode: 'onSubmit' });
@@ -158,7 +155,6 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 									<FormErrorMessage message={errors[field.name]?.message} />
 								</div>
 							) : null}
-							{/* <FormErrorMessage message={errors[field.name]?.message} /> */}
 						</div>
 					)}
 				/>
@@ -254,31 +250,31 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 							<label
 								htmlFor={field.name}
 								className={cx({ 'p-error': errors[field.name] })}></label>
-							<div className="flex justify-content-center">
-								<Checkbox
-									inputId={field.name}
-									checked={field.value}
-									inputRef={field.ref}
-									className={cx({ 'p-invalid': fieldState.error }, ' align-self-center mr-2')}
-									onChange={(e) => field.onChange(e.checked)}
-								/>
-								<span className=" text-600 text-sm align-self-center">
-									I accept the{' '}
-									<Link
-										href={'#'}
-										className="text-600 font-bold"
-										style={{ textDecorationColor: 'var(--gray-600)' }}>
-										Terms of Service
-									</Link>{' '}
-									and have read the{' '}
-									<Link
-										href={'#'}
-										className="text-600 font-bold"
-										style={{ textDecorationColor: 'var(--gray-600)' }}>
-										Privacy Notice
-									</Link>
-								</span>
-							</div>
+							<Checkbox
+								inputId={field.name}
+								checked={field.value}
+								inputRef={field.ref}
+								className={cx({ 'p-invalid': fieldState.error }, 'mr-2')}
+								onChange={(e) => field.onChange(e.checked)}
+							/>
+							<span className="text-center text-600 text-sm">
+								I accept the{' '}
+								<Link
+									href={'/agreement'}
+									className="text-600 font-bold"
+									target="_blank"
+									style={{ textDecorationColor: 'var(--gray-600)' }}>
+									Terms of Use
+								</Link>{' '}
+								and have read the{' '}
+								<Link
+									href={'/privacy-policy'}
+									target="_blank"
+									className="text-600 font-bold"
+									style={{ textDecorationColor: 'var(--gray-600)' }}>
+									Privacy Notice
+								</Link>
+							</span>
 						</div>
 					)}
 				/>
