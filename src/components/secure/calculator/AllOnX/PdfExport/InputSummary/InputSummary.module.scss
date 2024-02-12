@@ -18,7 +18,7 @@
   th {
     background-color: var(--secondary-color);
     color: var(--surface-0);
-    word-break: break-all;
+    word-wrap: normal;
   }
   tr {
     &.even {

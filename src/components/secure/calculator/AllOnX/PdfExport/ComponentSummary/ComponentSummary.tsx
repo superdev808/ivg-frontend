@@ -45,7 +45,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
                   <td>
                     {isValidUrl(data.link) ? (
                       <a href={data.link} target="_blank">
-                        {data.link}
+                        {data.name}
                       </a>
                     ) : (
                       data.link
