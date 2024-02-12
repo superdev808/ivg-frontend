@@ -16,7 +16,11 @@ const Footer = ({ extendFooter }: { extendFooter?: boolean }) => {
 					</div>
 					<div className="col-12  md:col-2 flex flex-column text-center">
 						<p className="text-center">
-							{devMode ? <span className="text-red-700 border-1 border-red-700 border-round p-2 bg-red-100">This is a development build.</span> : ''}
+							{devMode ? (
+								<span className="text-red-700 border-1 border-red-700 border-round p-2 bg-red-100 z-0">This is a development build.</span>
+							) : (
+								''
+							)}
 						</p>
 					</div>
 

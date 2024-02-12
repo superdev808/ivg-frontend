@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, use, useEffect } from 'react';
 import { redirect, usePathname } from 'next/navigation';
 
 // STYLES
@@ -25,6 +25,9 @@ import { NavLink } from '@/types/Layout';
 import { MenuItem } from 'primereact/menuitem';
 import { getInitials } from '@/helpers/util';
 import { Avatar } from 'primereact/avatar';
+import { USER_ROLES } from '@/constants/users';
+import { getUserRole } from '@/helpers/getUserRole';
+import { set } from 'lodash';
 
 export interface NavigationProps {
 	secure?: boolean;
@@ -37,6 +40,7 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 	const userName = getCookie('name');
 	const userEmail = getCookie('email');
 
+	const { role } = useAppSelector((state) => state.auth);
 	// toggle sidebar
 	const [isOpen, setIsOpen] = useState(false);
 	const boxRef = useRef(null);
@@ -82,7 +86,6 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 		/>
 	);
 
-
 	let avatarLinks: MenuItem[] = [
 		{
 			template: (item, options) => {
@@ -114,6 +117,12 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 			url: '/help',
 		},
 		{
+			label: 'Administration',
+			icon: 'pi pi-cog',
+			url: '/admin',
+			visible: role === USER_ROLES.ADMIN,
+		},
+		{
 			separator: true,
 		},
 
@@ -123,10 +132,6 @@ const Navigation = ({ secure, transparentBg }: NavigationProps) => {
 			command: onSignOut,
 		},
 	];
-
-	const toggle = () => {
-		setIsOpen(!isOpen);
-	};
 
 	const closeMenu: () => void = () => {
 		setIsOpen(false);

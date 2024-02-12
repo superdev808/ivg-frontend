@@ -9,10 +9,15 @@ export const {
   usePostValidateTokenMutation,
   usePostResetPasswordMutation,
   useGetUserInfoQuery,
-  useGetUserInfoAdditionalQuery,
   usePutUpdateUserInfoMutation,
+  usePutUpdateUserMutation,
   usePostSendResetPasswordMutation,
   usePostUploadLogoMutation,
+  useGetUsersListQuery,
+  usePostSendVerificationEmailMutation,
+  usePostDeactivateUserMutation,
+  usePostVerifyTokenMutation,
+  usePostActivateUserMutation
 } = userApiSlice;
 
 export const { usePostSubmitContactFormMutation } = publicApiSlice;
