@@ -48,7 +48,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
                         {data.name}
                       </a>
                     ) : (
-                      data.link
+                      data.name
                     )}
                   </td>
                   <td>{data.amount}</td>
