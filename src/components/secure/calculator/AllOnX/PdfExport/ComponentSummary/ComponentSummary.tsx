@@ -22,7 +22,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
   return (
     <>
       {summary && summary.length ? (
-          <table className={cx("striped-table")}>
+          <table className={cx("striped-table", "mt-4")}>
             <thead>
               <tr>
                 <div className="font-bold my-0 pb-1">Options:</div>
@@ -45,10 +45,10 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
                   <td>
                     {isValidUrl(data.link) ? (
                       <a href={data.link} target="_blank">
-                        {data.link}
+                        {data.name}
                       </a>
                     ) : (
-                      data.link
+                      data.name
                     )}
                   </td>
                   <td>{data.amount}</td>
