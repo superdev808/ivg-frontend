@@ -49,37 +49,46 @@ const DetailView: React.FC<DetailViewProps> = ({
   const handleGoNext = () => setActiveIndex((prevState) => prevState + 1);
 
   return (
-    <div className="flex flex-column align-items-center justify-content-center mt-4 relative md:mt-4 md:px-0">
-      <Button
-        icon="pi pi-arrow-left"
-        className="left-0 top-0 md:ml-3 md:absolute"
-        onClick={onGoBack}
-      />
+    <>
+      <div className="relative md:p-2 md:text-center">
+        <Button
+          icon="pi pi-arrow-left"
+          className="left-0 md:mt-3 md:absolute lg:ml-3"
+          onClick={onGoBack}
+        />
+        <h2>{calculatorName} Calculator</h2>
+      </div>
 
-      <Slide calculatorName={calculatorName} itemInfo={itemInfo} quiz={quiz} />
+      <div className="flex flex-column align-items-center justify-content-center relative md:px-0">
+        <Slide
+          calculatorName={calculatorName}
+          itemInfo={itemInfo}
+          quiz={quiz}
+        />
 
-      {items.length > 1 && (
-        <div className="flex gap-4 mt-6">
-          <Button
-            icon="pi pi-caret-left"
-            rounded
-            text
-            size="large"
-            disabled={activeIndex === 0}
-            onClick={handleGoPrev}
-          />
+        {items.length > 1 && (
+          <div className="flex gap-4 mt-6">
+            <Button
+              icon="pi pi-caret-left"
+              rounded
+              text
+              size="large"
+              disabled={activeIndex === 0}
+              onClick={handleGoPrev}
+            />
 
-          <Button
-            icon="pi pi-caret-right"
-            rounded
-            text
-            size="large"
-            disabled={activeIndex === items.length - 1}
-            onClick={handleGoNext}
-          />
-        </div>
-      )}
-    </div>
+            <Button
+              icon="pi pi-caret-right"
+              rounded
+              text
+              size="large"
+              disabled={activeIndex === items.length - 1}
+              onClick={handleGoNext}
+            />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
