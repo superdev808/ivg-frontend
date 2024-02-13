@@ -53,7 +53,7 @@ const DetailView: React.FC<DetailViewProps> = ({
       <div className="relative md:p-2 md:text-center">
         <Button
           icon="pi pi-arrow-left"
-          className="left-0 md:mt-3 md:ml-3 md:absolute"
+          className="left-0 md:mt-3 md:absolute lg:ml-3"
           onClick={onGoBack}
         />
         <h2>{calculatorName} Calculator</h2>

@@ -1,5 +1,6 @@
 import cx from "classnames";
 import lowerCase from "lodash/lowerCase";
+import trim from "lodash/trim";
 import values from "lodash/values";
 import { useRouter } from "next/navigation";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
@@ -9,10 +10,10 @@ import React, { useMemo } from "react";
 import { formatDate } from "@/helpers/util";
 
 type SavedResult = {
-  mainInfo: Record<string, string>;
-  quiz: Record<string, string>;
-  details: Record<string, string>;
   id: string;
+  calculatorName: string;
+  itemInfo: Record<string, string>;
+  quiz: Record<string, string>;
   date: string;
 };
 
@@ -37,11 +38,9 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
     }
 
     return savedResults.filter((result) => {
-      const parsed = [
-        ...values(result.mainInfo),
-        ...values(result.quiz),
-        ...values(result.details),
-      ].map(lowerCase);
+      const parsed = [...values(result.itemInfo), ...values(result.quiz)].map(
+        lowerCase
+      );
 
       return parsed.some((elem) => elem.includes(lowerCase(search)));
     });
@@ -73,24 +72,30 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
   return (
     <div className="flex flex-column gap-4 mt-4">
       <ConfirmDialog />
-      {filteredResults.map((result) => {
-        const itemName = result.mainInfo["Item Name"];
+      {filteredResults.map(({ id, date, itemInfo }) => {
+        const itemName = trim(
+          itemInfo["Item Name"] || itemInfo["Drill Kit Name"]
+        );
+        const itemImage = trim(
+          itemInfo["Item Image"] ||
+            "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Alpha+Bio+Tec.png"
+        );
 
         return (
           <div
-            key={result.id}
+            key={id}
             className={cx(
               `border-2 border-gray-400 px-2 py-3 text-center
             flex flex-column gap-4 align-items-center
             md:text-left md:px-3 md:py-5 md:flex-row`,
               { "cursor-pointer": !isLoading, "cursor-wait": isLoading }
             )}
-            onClick={() => handleGoToDetailPage(result.id)}
+            onClick={() => handleGoToDetailPage(id)}
           >
-            {itemName && (
+            {itemImage && (
               <div className="flex-shrink-0">
                 <Image
-                  src="https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Alpha+Bio+Tec.png"
+                  src={itemImage}
                   alt={itemName}
                   width="100"
                   className="relative mb-3"
@@ -105,14 +110,14 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
 
             <div className="flex-shrink-0">
               <div className="font-bold">Saved Date:</div>
-              <div>{formatDate(result.date)}</div>
+              <div>{formatDate(date)}</div>
             </div>
 
             <div className="flex-shrink-0">
               <Button
                 icon="pi pi-trash"
                 disabled={isLoading}
-                onClick={(evt) => handleShowDeleteConfirm(evt, result.id)}
+                onClick={(evt) => handleShowDeleteConfirm(evt, id)}
               />
             </div>
           </div>

@@ -48,17 +48,16 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
   const toastRef = useRef(null);
 
   const itemName = trim(itemInfo["Item Name"] || itemInfo["Drill Kit Name"]);
-  const itemImage = trim(itemInfo["Item Image"]);
-  const purchaseLink = trim(
-    itemInfo["Link to Purchase"] || itemInfo["Drill Kit Link to Purchase"]
+  const itemImage = trim(
+    itemInfo["Item Image"] ||
+      "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Alpha+Bio+Tec.png"
   );
+  const purchaseLink = trim(itemInfo["Link to Purchase"]);
 
   const details = omit(itemInfo, [
     "Item Name",
     "Item Image",
     "Link to Purchase",
-    "Drill Kit Name",
-    "Drill Kit Link to Purchase",
   ]);
 
   const handleExport = async () => {
@@ -148,14 +147,9 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
 
   const handleSave = async () => {
     const payload = {
-      mainInfo: {
-        "Item Name": itemName,
-        "Item Image": itemImage,
-        "Link to Purchase": purchaseLink,
-      },
-      quiz,
-      details,
       calculatorName,
+      itemInfo,
+      quiz,
     };
 
     try {
@@ -183,116 +177,104 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
   return (
     <>
       <Toast ref={toastRef} position="top-right" />
-      <div className="w-12 lg:w-10 xl:w-7">
-        <div
-          ref={contentRef}
-          className="w-full align-items-start gap-4 md:flex"
-        >
-          <div className="flex-1">
-            {itemName && <h1 className="m-0">{itemName}</h1>}
-            {isPreparingPDF && purchaseLink && (
-              <div className="mt-4">
-                <a href={purchaseLink}>{purchaseLink}</a>
-              </div>
-            )}
-            {itemImage && (
-              <div className="mt-4">
-                <Image src={itemImage} alt={itemName} width="200px" />
-              </div>
-            )}
-          </div>
 
-          <div className="flex flex-column align-items-center lg:align-items-end">
-            <div
-              className={cx(
-                "bg-white flex flex-column gap-3 shadow-6 p-4 border-round-md mt-4 md:mt-0",
-                "quiz"
+      <div ref={contentRef} className="flex flex-column gap-4">
+        <div
+          className={`flex flex-column gap-4 justify-content-between
+          md:flex-row md:align-items-center`}
+        >
+          {itemName && <h1 className="m-0">{itemName}</h1>}
+
+          {!isPreparingPDF && (
+            <div className="flex align-items-center flex-shrink-0 gap-2">
+              <Button
+                className="px-3 py-2"
+                label="Email"
+                disabled={isSendingEmail}
+                onClick={handleSendEmail}
+              />
+              <Button
+                className="px-3 py-2"
+                label="Export"
+                disabled={isExporting}
+                onClick={handleExport}
+              />
+              <Button
+                className="px-3 py-2"
+                label="Save"
+                loading={isSavingResult}
+                onClick={handleSave}
+              />
+              {purchaseLink && (
+                <Link href={purchaseLink} target="_blank">
+                  <Button
+                    label="Click to Purchase"
+                    rel="noopener noreferrer"
+                    className="px-3 py-2"
+                  />
+                </Link>
               )}
-            >
-              {Object.keys(quiz).map((text) => (
-                <div key={text} className="flex gap-1">
+            </div>
+          )}
+        </div>
+
+        <div className="flex justify-content-between gap-4 flex-column md:flex-row">
+          {itemImage && (
+            <div className="flex-1">
+              <Image src={itemImage} alt={itemName} width="200px" />
+            </div>
+          )}
+
+          <div
+            className={cx(
+              "bg-white flex flex-column gap-3 shadow-6 p-4 border-round-md flex-shrink-0",
+              "quiz"
+            )}
+          >
+            {Object.keys(quiz).map((text) => (
+              <div key={text} className="flex gap-1">
+                <div className="text-left" style={{ maxWidth: "50%" }}>
+                  {text}
+                </div>
+                <div className="flex-1 text-right">{trim(quiz[text])}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {Object.keys(details).length > 0 && (
+          <div className="bg-white flex flex-column gap-3 p-4 border-2 border-gray-300 border-round-md">
+            {Object.keys(details).map((text) => {
+              const value = trim(details[text]);
+
+              return (
+                <div key={text} className="flex align-items-center gap-4">
                   <div className="text-left" style={{ maxWidth: "50%" }}>
                     {text}
                   </div>
-                  <div className="flex-1 text-right">{trim(quiz[text])}</div>
+                  <div className="flex-1 text-right">
+                    {isUrl(value) ? (
+                      <Link
+                        href={value}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ wordBreak: "break-word" }}
+                      >
+                        <Button
+                          className="p-0"
+                          link
+                          label="Click to Purchase"
+                        />
+                      </Link>
+                    ) : (
+                      value
+                    )}
+                  </div>
                 </div>
-              ))}
-            </div>
-
-            {Object.keys(details).length > 0 && (
-              <div
-                className={cx(
-                  "bg-white flex flex-column gap-3 p-4 mt-6 border-2 border-gray-300 border-round-md",
-                  "details"
-                )}
-              >
-                {Object.keys(details).map((text) => {
-                  const value = trim(details[text]);
-
-                  return (
-                    <div key={text} className="flex align-items-center gap-4">
-                      <div className="text-left" style={{ maxWidth: "50%" }}>
-                        {text}
-                      </div>
-                      <div className="flex-1 text-right">
-                        {isUrl(value) ? (
-                          <Link
-                            href={value}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{ wordBreak: "break-word" }}
-                          >
-                            <Button
-                              className="px-0"
-                              link
-                              label="Click to Purchase"
-                            />
-                          </Link>
-                        ) : (
-                          value
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {!isPreparingPDF && (
-              <div className="flex flex-wrap gap-2 w-full mt-6 justify-content-center">
-                <>
-                  <Button
-                    label="Email"
-                    className="px-3"
-                    disabled={isSendingEmail}
-                    onClick={handleSendEmail}
-                  />
-                  <Button
-                    label="Export"
-                    className="px-3"
-                    disabled={isExporting}
-                    onClick={handleExport}
-                  />
-                  <Button
-                    label="Save"
-                    className="px-3"
-                    loading={isSavingResult}
-                    onClick={handleSave}
-                  />
-                </>
-                {purchaseLink && (
-                  <Link href={purchaseLink} target="_blank">
-                    <Button
-                      label="Click to Purchase"
-                      rel="noopener noreferrer"
-                      className="px-3"
-                    />
-                  </Link>
-                )}
-              </div>
-            )}
+              );
+            })}
           </div>
-        </div>
+        )}
       </div>
     </>
   );
