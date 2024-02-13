@@ -27,7 +27,6 @@ export const Calculators = () => {
       subItems: [
         { label: "BoneReduction", text: "Bone Reduction Instruments" },
         { label: "ChairSidePickUp", text: "Chairside Pick-Up Materials" },
-        { label: "Cover Screws" },
         {
           label: "DrillKitAndSequence",
           text: "Drill Kits and Drill Sequences",
