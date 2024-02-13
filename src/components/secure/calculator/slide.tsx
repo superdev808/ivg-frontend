@@ -186,7 +186,7 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
       <div className="w-12 lg:w-10 xl:w-7">
         <div
           ref={contentRef}
-          className="w-full py-2 align-items-start gap-4 md:flex"
+          className="w-full align-items-start gap-4 md:flex"
         >
           <div className="flex-1">
             {itemName && <h1 className="m-0">{itemName}</h1>}

@@ -57,11 +57,12 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
 
   const contentRef = useRef(null);
 
-  const itemName = savedResult.mainInfo["Item Name"];
+  const { calculatorName, mainInfo, quiz, details, date } = savedResult;
+  const itemName = mainInfo["Item Name"];
   const itemImage =
-    savedResult.mainInfo["Item Image"] ||
+    mainInfo["Item Image"] ||
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Alpha+Bio+Tec.png";
-  const purchaseLink = savedResult.mainInfo["Link to Purchase"];
+  const purchaseLink = mainInfo["Link to Purchase"];
 
   const handleGoBack = () => {
     router.push("/settings/saved-results");
@@ -128,7 +129,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
       formData.append("attachment", blob, "exported-document.pdf");
       formData.append("name", getCookie("name"));
       formData.append("email", getCookie("email"));
-      formData.append("calculatorName", savedResult.calculatorName);
+      formData.append("calculatorName", calculatorName);
       formData.append("filename", PDF_EXPORT_OPTIONS.filename);
 
       const response = await fetch(
@@ -168,15 +169,17 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
       <Toast ref={toastRef} position="top-right" />
       <div className="w-12 lg-w-10 xl:w-7 pt-4">
         <ConfirmDialog />
-        <div className="border-bottom-2 border-green-800 pb-2 flex align-items-center justify-content-between mb-4">
+        <div className="border-bottom-2 border-green-800 flex align-items-center justify-content-between mb-4">
           <Button
             icon="pi pi-arrow-left"
             disabled={isDeleting}
             onClick={handleGoBack}
           />
 
+          <h2>{calculatorName} Calculator</h2>
+
           <div className="flex align-items-center gap-2">
-            Saved Date: {formatDate(savedResult.date)}{" "}
+            Saved Date: {formatDate(date)}{" "}
             <Button
               icon="pi pi-trash"
               size="small"
@@ -227,27 +230,25 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
                 "answers"
               )}
             >
-              {Object.keys(savedResult.quiz).map((text) => (
+              {Object.keys(quiz).map((text) => (
                 <div key={text} className="flex gap-1">
                   <div className="text-left" style={{ maxWidth: "50%" }}>
                     {text}
                   </div>
-                  <div className="flex-1 text-right">
-                    {trim(savedResult.quiz[text])}
-                  </div>
+                  <div className="flex-1 text-right">{trim(quiz[text])}</div>
                 </div>
               ))}
             </div>
 
-            {Object.keys(savedResult.details).length > 0 && (
+            {Object.keys(details).length > 0 && (
               <div
                 className={cx(
                   "bg-white flex flex-column gap-3 p-4 mt-6 border-2 border-green-800",
                   "details"
                 )}
               >
-                {Object.keys(savedResult.details).map((text) => {
-                  const value = trim(savedResult.details[text]);
+                {Object.keys(details).map((text) => {
+                  const value = trim(details[text]);
 
                   return (
                     <div key={text} className="flex align-items-center gap-4">
