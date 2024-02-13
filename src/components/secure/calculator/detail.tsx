@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { useMemo, useState } from "react";
 
-import Slide from "./slide";
+import Result from "./Result";
 
 interface DetailViewProps {
   calculatorName: string;
@@ -61,7 +61,7 @@ const DetailView: React.FC<DetailViewProps> = ({
 
       <div className="flex flex-column align-items-center">
         <div className="w-full relative lg:w-8 xl:w-6">
-          <Slide
+          <Result
             calculatorName={calculatorName}
             itemInfo={itemInfo}
             quiz={quiz}

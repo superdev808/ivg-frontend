@@ -6,17 +6,18 @@ import trim from "lodash/trim";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import { Toast } from "primereact/toast";
-import Link from "next/link";
 import { useRef, useState } from "react";
 
 import { getCookie } from "@/helpers/cookie";
-import { isUrl, productImages } from "@/helpers/util";
+import { productImages } from "@/helpers/util";
 import {
   useGetUserInfoQuery,
   useSaveResultMutation,
 } from "@/redux/hooks/apiHooks";
 
-import styles from "./slide.module.scss";
+import Outputs from "./Outputs";
+
+import styles from "./style.module.scss";
 
 const cx = classNames.bind(styles);
 
@@ -31,13 +32,13 @@ const PDF_EXPORT_OPTIONS = {
   },
 };
 
-interface SlideProps {
+interface ResultProps {
   calculatorName: string;
   itemInfo: Record<string, string>;
   quiz: Record<string, string>;
 }
 
-const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
+const Result: React.FC<ResultProps> = ({ calculatorName, itemInfo, quiz }) => {
   const { refetch } = useGetUserInfoQuery({});
   const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
 
@@ -47,12 +48,7 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
   const contentRef = useRef(null);
   const toastRef = useRef(null);
 
-  const itemName = trim(
-    itemInfo["Item Name"] ||
-      itemInfo["Bur Kit Name (Bone Reduction)"] ||
-      itemInfo["Luting Agent Name"] ||
-      itemInfo["Drill Kit Name"]
-  );
+  const itemName = trim(itemInfo["Item Name"]);
 
   const itemImage = productImages[calculatorName] || productImages["Default"];
   const purchaseLink = trim(itemInfo["Link to Purchase"]);
@@ -186,7 +182,7 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
           className={`flex flex-column gap-4 justify-content-between
           lg:flex-row lg:align-items-center`}
         >
-          {itemName && <h1 className="m-0">{itemName}</h1>}
+          <div>{itemName && <h1 className="m-0">{itemName}</h1>}</div>
 
           {!isPreparingPDF && (
             <div className="flex align-items-center flex-shrink-0 gap-2">
@@ -208,15 +204,6 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
                 loading={isSavingResult}
                 onClick={handleSave}
               />
-              {purchaseLink && (
-                <Link href={purchaseLink} target="_blank">
-                  <Button
-                    label="Click to Purchase"
-                    rel="noopener noreferrer"
-                    className="px-3 py-2"
-                  />
-                </Link>
-              )}
             </div>
           )}
         </div>
@@ -245,42 +232,15 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
           </div>
         </div>
 
-        {Object.keys(details).length > 0 && (
-          <div className="bg-white flex flex-column gap-3 p-4 border-2 border-gray-300 border-round-md">
-            {Object.keys(details).map((text) => {
-              const value = trim(details[text]);
-
-              return (
-                <div key={text} className="flex align-items-center gap-4">
-                  <div className="text-left" style={{ maxWidth: "50%" }}>
-                    {text}
-                  </div>
-                  <div className="flex-1 text-right">
-                    {isUrl(value) ? (
-                      <Link
-                        href={value}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ wordBreak: "break-word" }}
-                      >
-                        <Button
-                          className="p-0"
-                          link
-                          label="Click to Purchase"
-                        />
-                      </Link>
-                    ) : (
-                      value
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
+        <Outputs
+          calculatorName={calculatorName}
+          itemName={itemName}
+          purchaseLink={purchaseLink}
+          details={details}
+        />
       </div>
     </>
   );
 };
 
-export default Slide;
+export default Result;

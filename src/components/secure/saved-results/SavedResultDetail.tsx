@@ -4,7 +4,7 @@ import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Toast } from "primereact/toast";
 import React from "react";
 
-import Slide from "@/components/secure/calculator/slide";
+import Result from "@/components/secure/calculator/Result";
 import { formatDate } from "@/helpers/util";
 
 type SavedResult = {
@@ -76,7 +76,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
           </div>
         </div>
 
-        <Slide
+        <Result
           calculatorName={calculatorName}
           itemInfo={itemInfo}
           quiz={quiz}

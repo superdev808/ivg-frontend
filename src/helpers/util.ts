@@ -2499,7 +2499,7 @@ export const calculatorIO = [
     },
     {
         type: "TiBasesMUAs",
-        label: "Ti Bases (Direct to Implant)",
+        label: "Ti Bases (Multi-Unit Abutments)",
         description: "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
         input: [
             {
