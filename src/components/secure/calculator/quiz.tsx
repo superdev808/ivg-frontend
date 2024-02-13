@@ -75,7 +75,7 @@ export default function Quiz(props: QuizProps) {
         {props.handleBack && (
           <Button
             icon="pi pi-arrow-left"
-            className="absolute left-0 ml-4 mt-3"
+            className="absolute left-0 ml-2 mt-3 md:ml-4"
             onClick={props.handleBack}
           />
         )}
