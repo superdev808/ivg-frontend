@@ -49,7 +49,10 @@ export const FirstForm = ({ onSubmit }: { onSubmit: (data: FormValues) => void }
 			if (res.available === true) {
 				setEmailNotTaken(true);
 				onSubmit(data);
+			} else {
+				setEmailNotTaken(false);
 			}
+
 			setIsLoading(false);
 		} catch (err: any) {
 			if (err.data?.message.available === false) {
