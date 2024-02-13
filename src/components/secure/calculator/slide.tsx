@@ -205,7 +205,7 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
           <div className="flex flex-column align-items-center lg:align-items-end">
             <div
               className={cx(
-                "bg-white flex flex-column gap-3 shadow-6 p-4 mt-4 border-2 border-green-800 md:mt-0",
+                "bg-white flex flex-column gap-3 shadow-6 p-4 border-round-md mt-4 md:mt-0",
                 "quiz"
               )}
             >
@@ -222,7 +222,7 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
             {Object.keys(details).length > 0 && (
               <div
                 className={cx(
-                  "bg-white flex flex-column gap-3 p-4 mt-6 border-2 border-green-800",
+                  "bg-white flex flex-column gap-3 p-4 mt-6 border-2 border-gray-300 border-round-md",
                   "details"
                 )}
               >
