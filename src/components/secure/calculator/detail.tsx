@@ -59,34 +59,36 @@ const DetailView: React.FC<DetailViewProps> = ({
         <h2>{calculatorName} Calculator</h2>
       </div>
 
-      <div className="flex flex-column align-items-center justify-content-center relative md:px-0">
-        <Slide
-          calculatorName={calculatorName}
-          itemInfo={itemInfo}
-          quiz={quiz}
-        />
+      <div className="flex flex-column align-items-center">
+        <div className="w-full relative lg:w-8 xl:w-6">
+          <Slide
+            calculatorName={calculatorName}
+            itemInfo={itemInfo}
+            quiz={quiz}
+          />
 
-        {items.length > 1 && (
-          <div className="flex gap-4 mt-6">
-            <Button
-              icon="pi pi-caret-left"
-              rounded
-              text
-              size="large"
-              disabled={activeIndex === 0}
-              onClick={handleGoPrev}
-            />
+          {items.length > 1 && (
+            <div className="flex gap-4 mt-6">
+              <Button
+                icon="pi pi-caret-left"
+                rounded
+                text
+                size="large"
+                disabled={activeIndex === 0}
+                onClick={handleGoPrev}
+              />
 
-            <Button
-              icon="pi pi-caret-right"
-              rounded
-              text
-              size="large"
-              disabled={activeIndex === items.length - 1}
-              onClick={handleGoNext}
-            />
-          </div>
-        )}
+              <Button
+                icon="pi pi-caret-right"
+                rounded
+                text
+                size="large"
+                disabled={activeIndex === items.length - 1}
+                onClick={handleGoNext}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

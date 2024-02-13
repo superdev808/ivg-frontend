@@ -7,7 +7,7 @@ import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import React, { useMemo } from "react";
-import { formatDate } from "@/helpers/util";
+import { formatDate, productImages } from "@/helpers/util";
 
 type SavedResult = {
   id: string;
@@ -72,14 +72,12 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
   return (
     <div className="flex flex-column gap-4 mt-4">
       <ConfirmDialog />
-      {filteredResults.map(({ id, date, itemInfo }) => {
+      {filteredResults.map(({ id, date, calculatorName, itemInfo }) => {
         const itemName = trim(
           itemInfo["Item Name"] || itemInfo["Drill Kit Name"]
         );
-        const itemImage = trim(
-          itemInfo["Item Image"] ||
-            "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Alpha+Bio+Tec.png"
-        );
+        const itemImage =
+          productImages[calculatorName] || productImages["Default"];
 
         return (
           <div

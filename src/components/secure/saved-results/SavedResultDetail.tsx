@@ -55,7 +55,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
       <Toast ref={toastRef} position="top-right" />
       <ConfirmDialog />
 
-      <div className="w-12 lg-w-10 xl:w-7">
+      <div className="w-12 lg-w-8 xl:w-6">
         <div className="border-bottom-2 border-green-800 flex align-items-center justify-content-between mb-4 gap-3">
           <Button
             icon="pi pi-arrow-left"

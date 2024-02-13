@@ -1,11 +1,7 @@
 .quiz {
-  width: 500px;
+  width: 350px;
 
-  @media screen and (max-width: 1800px) {
-    width: 350px;
-  }
-
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 991px) {
     width: 100%;
   }
 }
