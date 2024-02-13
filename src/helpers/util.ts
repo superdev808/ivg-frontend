@@ -13,7 +13,7 @@ export function getInitials(name: string) {
 export const calculatorIO = [
     {
       type: "Scanbodies",
-      label: "scanbody",
+      label: "Scanbody",
       description:
         "Enter your implant information below to determine compatible authentic and generic scanbodies.",
       input: [
@@ -2499,7 +2499,7 @@ export const calculatorIO = [
     },
     {
         type: "TiBasesMUAs",
-        label: "Ti Bases (Direct to Implant)",
+        label: "Ti Bases (Multi-Unit Abutments)",
         description: "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
         input: [
             {
@@ -2662,19 +2662,27 @@ export const formatDate = (date: string) =>
     }).format(new Date(date))
 
 export const productImages: Record<string, string> = {
-    "Bone Reduction Instruments": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Bone+Reduction+Forceps.png",
-    "Chairside Pick-Up Materials": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Chairside+Pickup+Lufting.png",
-    "Implants": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Implant+generic.png",
-    "Multi-Unit Abutments": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/MultiUnitAbutment_custom_truabutment_final.png",
-    "Healing Abutments": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Healing+Abutment+D+4.5mm+H+3mm+2213.png",
-    "Implant Analogs": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+IOS+Model+Implant+Replica+Conical+RP+38190.png",
-    "Impression Copings (Multi-Unit Abutments)": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Impression+Coping+Open+Tray+Multi-Unit+29089.png",
-    "Impression Copings (Direct to Implant)": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Impression+Coping+Open+Tray+Branemark+RP+D+5mm+29072.png",
-    "Temporary Copings (Multi-Unit Abutments)": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Temporary+Coping+Multi-Unit+29046.png",
-    "Ti Bases (Multi-Unit Abutments)": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+30d+MUA+Plus+Conical+RP+H+3.5mm+38895.png",
-    "Both Drivers Calcs": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Screw+Driver+1.png",
-    "Cover Screw": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Straumann+RN+Closure+Cap+D+3.5mm+H+0mm+048371S.png",
-    "Implant Screws": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Straumann+NC+Variobase+Abutment+Screw+0252921.png",
-    "Ti Bases (Direct to Implant)": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Zimmer+TSV+BellaTek+Express+Abutment+D4.5mm+H+4.75mm+Hexed+TE451.png",
-    "Default": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/No+Image+BW.jpg",
+    BoneReduction: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Bone+Reduction+Forceps.png",
+    ChairSidePickUp: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Chairside+Pickup+Lufting.png",
+    Implants: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Implant+generic.png",
+    MUAs: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/MultiUnitAbutment_custom_truabutment_final.png",
+    HealingAbutments: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Healing+Abutment+D+4.5mm+H+3mm+2213.png",
+    ImplantAnalogs: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+IOS+Model+Implant+Replica+Conical+RP+38190.png",
+    ImpressingCopingsMUAs: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Impression+Coping+Open+Tray+Multi-Unit+29089.png",
+    ImpressingCopingsDirectToImplants: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Impression+Coping+Open+Tray+Branemark+RP+D+5mm+29072.png",
+    TemporaryCopingsMUAs: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Temporary+Coping+Multi-Unit+29046.png",
+    TiBasesMUAs: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+30d+MUA+Plus+Conical+RP+H+3.5mm+38895.png",
+    CoverScrew: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Straumann+RN+Closure+Cap+D+3.5mm+H+0mm+048371S.png",
+    ImplantScrews: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Straumann+NC+Variobase+Abutment+Screw+0252921.png",
+    TiBasesDirectToImplants: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Zimmer+TSV+BellaTek+Express+Abutment+D4.5mm+H+4.75mm+Hexed+TE451.png",
+    RestroativeDirectToImplant: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Screw+Driver+1.png",
+    RestorativeMultiUnitAbutments: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Screw+Driver+1.png",
+    Default: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/No+Image+BW.jpg",
+};
+
+export const getCalculatorName = (calculatorType: string) => {
+    const selectedCalculator = calculatorIO.find(
+        (item) => item.type === calculatorType
+    );
+    return selectedCalculator?.label || calculatorType;   
 };

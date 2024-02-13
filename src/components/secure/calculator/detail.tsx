@@ -1,10 +1,11 @@
 import { Button } from "primereact/button";
 import { useMemo, useState } from "react";
 
-import Slide from "./slide";
+import Result from "./Result";
+import { getCalculatorName } from "@/helpers/util";
 
 interface DetailViewProps {
-  calculatorName: string;
+  calculatorType: string;
   items: Array<Record<string, string>>;
   fields: Array<{ name: string; text: string }>;
   questions: Array<{ name: string; text: string }>;
@@ -13,7 +14,7 @@ interface DetailViewProps {
 }
 
 const DetailView: React.FC<DetailViewProps> = ({
-  calculatorName,
+  calculatorType,
   items,
   fields,
   questions,
@@ -56,13 +57,13 @@ const DetailView: React.FC<DetailViewProps> = ({
           className="left-0 md:mt-3 md:absolute lg:ml-3 text-6xl px-5"
           onClick={onGoBack}
         />
-        <h2>{calculatorName} Calculator</h2>
+        <h2>{getCalculatorName(calculatorType)} Calculator</h2>
       </div>
 
       <div className="flex flex-column align-items-center">
         <div className="w-full relative lg:w-8 xl:w-6">
-          <Slide
-            calculatorName={calculatorName}
+          <Result
+            calculatorType={calculatorType}
             itemInfo={itemInfo}
             quiz={quiz}
           />

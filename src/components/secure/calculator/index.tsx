@@ -30,13 +30,6 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
 
   const calculatorType = decodeURI(option);
 
-  const calculatorName = useMemo(() => {
-    const selectedCalculator = calculatorIO.find(
-      (item) => item.type === calculatorType
-    );
-    return selectedCalculator?.label || calculatorType;
-  }, [calculatorType]);
-
   const { isLoading } = useQuery(
     [input, level, answers, option],
     async () => {
@@ -152,7 +145,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
 
         {items.length > 0 && (
           <DetailView
-            calculatorName={calculatorName}
+            calculatorType={calculatorType}
             items={items}
             fields={output}
             questions={input}
