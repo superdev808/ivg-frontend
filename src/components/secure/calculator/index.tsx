@@ -26,6 +26,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   const [answerOptions, setAnswerOptions] = useState<any[]>([]);
   const [answers, setAnswers] = useState<any[]>([]);
   const [items, setItems] = useState<any[]>([]);
+  const [currentAnswer, setCurrentAnswer] = useState<string>("");
 
   const calculatorType = decodeURI(option);
 
@@ -94,6 +95,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
 
   const handleBack = (index: number) => () => {
     setLevel(index - 1);
+    setCurrentAnswer(answers[index - 1]);
     const newAnswers = answers.slice(0, index - 1);
     setAnswers(newAnswers);
   };
@@ -134,6 +136,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
                 question={quiz.text}
                 answers={answerOptions[index]}
                 selectedAnswer={answers[index] || null}
+                currentAnswer={currentAnswer}
                 handleSelectAnswer={handleSelectAnswer(index)}
                 handleBack={index > 0 ? handleBack(index) : undefined}
                 disabled={isLoading}
