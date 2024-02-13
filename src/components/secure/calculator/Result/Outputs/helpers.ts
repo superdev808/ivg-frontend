@@ -10,12 +10,12 @@ type Output = {
 };
 
 export const getOutputs = (
-  calculatorName: string,
+  calculatorType: string,
   itemName: string,
   purchaseLink: string,
   details: Record<string, string>
 ): Output[] => {
-  if (calculatorName === "Bone Reduction Instruments") {
+  if (calculatorType === "BoneReduction") {
     return [
       {
         name: details["Bur Kit Name (Bone Reduction)"],
@@ -29,7 +29,7 @@ export const getOutputs = (
     ];
   }
 
-  if (calculatorName === "Chairside Pick-Up Materials") {
+  if (calculatorType === "ChairSidePickUp") {
     return [
       {
         name: details["Luting Agent Name"],
@@ -46,7 +46,7 @@ export const getOutputs = (
     ];
   }
 
-  if (calculatorName === "Drill Kits and Drill Sequences") {
+  if (calculatorType === "DrillKitAndSequence") {
     const res: Output[] = [
       {
         name: details["Drill Kit Name"],
@@ -99,22 +99,22 @@ export const getOutputs = (
   }
 
   if (
-    calculatorName === "Drivers (Restorative, Direct to Implant)" ||
-    calculatorName === "Drivers (Restorative, on Multi-Unit Abutments)" ||
-    calculatorName === "Healing Abutments" ||
-    calculatorName === "Implants" ||
-    calculatorName === "Implant Screws" ||
-    calculatorName === "Implant Analogs" ||
-    calculatorName === "Impression Copings (Direct to Implant)" ||
-    calculatorName === "Impression Copings (Multi-Unit Abutments)" ||
-    calculatorName === "Multi-Unit Abutments" ||
-    calculatorName === "Scanbody Drivers (Direct to Implant)" ||
-    calculatorName === "Scanbody Drivers (MUAs)" ||
-    calculatorName === "Stock Abutments" ||
-    calculatorName === "Temporary Copings (Direct to Implant)" ||
-    calculatorName === "Temporary Copings (Multi-Unit Abutments)" ||
-    calculatorName === "Ti Bases (Direct to Implant)" ||
-    calculatorName === "Ti Bases (Multi-Unit Abutments)"
+    calculatorType === "RestroativeDirectToImplant" ||
+    calculatorType === "RestorativeMultiUnitAbutments" ||
+    calculatorType === "HealingAbutments" ||
+    calculatorType === "Implants" ||
+    calculatorType === "ImplantScrews" ||
+    calculatorType === "ImplantAnalogs" ||
+    calculatorType === "ImpressingCopingsDirectToImplants" ||
+    calculatorType === "ImpressingCopingsMUAs" ||
+    calculatorType === "MUAs" ||
+    calculatorType === "ScanbodyDriversDirectToImplants" ||
+    calculatorType === "ScanbodyDriversMUAs" ||
+    calculatorType === "StockAbutments" ||
+    calculatorType === "TemporaryCopingsDirectToImplants" ||
+    calculatorType === "TemporaryCopingsMUAs" ||
+    calculatorType === "TiBasesDirectToImplants" ||
+    calculatorType === "TiBasesMUAs"
   ) {
     return [
       {
@@ -125,7 +125,7 @@ export const getOutputs = (
     ];
   }
 
-  if (calculatorName === "scanbody") {
+  if (calculatorType === "Scanbodies") {
     return [
       {
         name: itemName,
@@ -138,7 +138,7 @@ export const getOutputs = (
     ];
   }
 
-  if (calculatorName === "Scanbodies (Mult-Unit Abutments)") {
+  if (calculatorType === "ScanbodyMUAs") {
     return [
       {
         name: itemName,

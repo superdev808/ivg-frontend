@@ -9,7 +9,7 @@ import { Toast } from "primereact/toast";
 import { useRef, useState } from "react";
 
 import { getCookie } from "@/helpers/cookie";
-import { productImages } from "@/helpers/util";
+import { getCalculatorName, productImages } from "@/helpers/util";
 import {
   useGetUserInfoQuery,
   useSaveResultMutation,
@@ -33,12 +33,12 @@ const PDF_EXPORT_OPTIONS = {
 };
 
 interface ResultProps {
-  calculatorName: string;
+  calculatorType: string;
   itemInfo: Record<string, string>;
   quiz: Record<string, string>;
 }
 
-const Result: React.FC<ResultProps> = ({ calculatorName, itemInfo, quiz }) => {
+const Result: React.FC<ResultProps> = ({ calculatorType, itemInfo, quiz }) => {
   const { refetch } = useGetUserInfoQuery({});
   const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
 
@@ -50,7 +50,7 @@ const Result: React.FC<ResultProps> = ({ calculatorName, itemInfo, quiz }) => {
 
   const itemName = trim(itemInfo["Item Name"]);
 
-  const itemImage = productImages[calculatorName] || productImages["Default"];
+  const itemImage = productImages[calculatorType] || productImages["Default"];
   const purchaseLink = trim(itemInfo["Link to Purchase"]);
 
   const details = omit(itemInfo, [
@@ -106,7 +106,7 @@ const Result: React.FC<ResultProps> = ({ calculatorName, itemInfo, quiz }) => {
       formData.append("attachment", blob, "exported-document.pdf");
       formData.append("name", getCookie("name"));
       formData.append("email", getCookie("email"));
-      formData.append("calculatorName", calculatorName);
+      formData.append("calculatorType", getCalculatorName(calculatorType));
       formData.append("filename", PDF_EXPORT_OPTIONS.filename);
 
       const response = await fetch(
@@ -146,7 +146,7 @@ const Result: React.FC<ResultProps> = ({ calculatorName, itemInfo, quiz }) => {
 
   const handleSave = async () => {
     const payload = {
-      calculatorName,
+      calculatorType,
       itemInfo,
       quiz,
     };
@@ -233,7 +233,7 @@ const Result: React.FC<ResultProps> = ({ calculatorName, itemInfo, quiz }) => {
         </div>
 
         <Outputs
-          calculatorName={calculatorName}
+          calculatorType={calculatorType}
           itemName={itemName}
           purchaseLink={purchaseLink}
           details={details}

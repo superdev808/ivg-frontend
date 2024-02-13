@@ -6,19 +6,19 @@ import Link from "next/link";
 import { getOutputs } from "./helpers";
 
 interface OutputsProps {
-  calculatorName: string;
+  calculatorType: string;
   itemName: string;
   purchaseLink: string;
   details: Record<string, string>;
 }
 
 const Outputs: React.FC<OutputsProps> = ({
-  calculatorName,
+  calculatorType,
   itemName,
   purchaseLink,
   details,
 }) => {
-  const outputs = getOutputs(calculatorName, itemName, purchaseLink, details);
+  const outputs = getOutputs(calculatorType, itemName, purchaseLink, details);
 
   return (
     <div className="flex flex-column gap-4">

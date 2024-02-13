@@ -5,11 +5,11 @@ import { Toast } from "primereact/toast";
 import React from "react";
 
 import Result from "@/components/secure/calculator/Result";
-import { formatDate } from "@/helpers/util";
+import { formatDate, getCalculatorName } from "@/helpers/util";
 
 type SavedResult = {
   id: string;
-  calculatorName: string;
+  calculatorType: string;
   itemInfo: Record<string, string>;
   quiz: Record<string, string>;
   date: string;
@@ -30,7 +30,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
 }) => {
   const router = useRouter();
 
-  const { calculatorName, itemInfo, quiz, date } = savedResult;
+  const { calculatorType, itemInfo, quiz, date } = savedResult;
 
   const handleGoBack = () => {
     router.push("/settings/saved-results");
@@ -63,7 +63,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
             onClick={handleGoBack}
           />
 
-          <h2>{calculatorName} Calculator</h2>
+          <h2>{getCalculatorName(calculatorType)} Calculator</h2>
 
           <div className="flex align-items-center gap-2">
             Saved Date: {formatDate(date)}{" "}
@@ -77,7 +77,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
         </div>
 
         <Result
-          calculatorName={calculatorName}
+          calculatorType={calculatorType}
           itemInfo={itemInfo}
           quiz={quiz}
         />
