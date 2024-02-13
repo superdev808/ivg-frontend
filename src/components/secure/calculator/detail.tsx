@@ -50,9 +50,10 @@ const DetailView: React.FC<DetailViewProps> = ({
 
   return (
     <div className="flex flex-column align-items-center justify-content-center mt-4 relative md:mt-4 md:px-0">
+
       <Button
         icon="pi pi-arrow-left"
-        className="left-0 top-0 md:ml-3 md:absolute"
+        className="left-0 top-0 md:ml-3 md:absolute text-6xl px-5"
         onClick={onGoBack}
       />
 

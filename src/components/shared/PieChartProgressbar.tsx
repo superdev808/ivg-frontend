@@ -11,13 +11,13 @@ const PieChartProgressBar = ({ percentage }: { percentage: number }) => {
 
   return (
     <div className="relative">
-      <PieChart width={200} height={200}>
+      <PieChart width={150} height={150}>
         <Pie
           data={data}
-          cx={100}
-          cy={100}
-          innerRadius={60}
-          outerRadius={80}
+          cx={75}
+          cy={75}
+          innerRadius={45}
+          outerRadius={60}
           fill="#8884d8"
           paddingAngle={5}
           dataKey="value"

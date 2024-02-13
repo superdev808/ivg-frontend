@@ -23,6 +23,7 @@ export const Calculators = () => {
   const groupItems = [
     {
       label: "Implant Component Selection",
+      description: "These calculators enable quick identification and procurement of a range of Impression Components, Abutments, CAD / CAM Restorations, and Prosthetic and Surgical Instruments to meet all your implant needs.",
       subItems: [
         { label: "BoneReduction", text: "Bone Reduction Instruments" },
         { label: "ChairSidePickUp", text: "Chairside Pick-Up Materials" },
@@ -77,14 +78,17 @@ export const Calculators = () => {
     },
     {
       label: "All-on-X Implant Surgery",
+      description: "This customized calculator enables quick identification and procurement of a variety of components, instruments, and materials to help you place or restore implants.",
       subItems: [{ label: "All-on-X Implant Surgery" }],
     },
     {
       label: "Product Material Selection",
+      description: "These calculators provides recommendations for which materials to use across a range of products based on your patient’s clinical situation.",
       subItems: [{ label: "Crown Materials" }],
     },
     {
       label: "Custom Combinations",
+      description: "This tool enables you to combine multiple Implant Component to identify and procure products, and easily share which components were used with colleagues or patients.",
       subItems: [],
     },
   ];
@@ -137,7 +141,7 @@ export const Calculators = () => {
 
   return (
     <div className={" nav-offset flex-grow-1"}>
-      <div className="wrapper my-8">
+      <div className="px-4 my-8">
         <div className=" p-5 border-round bg-white shadow-1">
           <h2 className="mt-0 mb-5 text-center">Calculators</h2>
           <div className="mt-0 mb-4">
@@ -161,18 +165,20 @@ export const Calculators = () => {
             <div className="col-6 border-right-1 p-4 surface-border">
               {groupItems.map((groupItem, index) => (
                 <Button
-                  className={cx("calculatorButton", "p-4 mb-2", {
+                  className={cx("calculatorButton", "p-4 mb-2 flex flex-column", {
                     "calculatorButton--highlighted": index === selectedGroup,
                   })}
                   key={`groupItem-${index}`}
                   style={{ width: "100%" }}
-                  label={groupItem.label}
                   onClick={() => {
                     groupItem.label === CALCULATOR_MAPPINGS.CUSTOM_COMBINATION
                       ? router.push("/calculators/" + groupItem.label)
                       : setSelectedGroup(index);
                   }}
-                />
+                >
+                  <h3 className="m-0">{groupItem.label}</h3>
+                  <p>{groupItem.description}</p>
+                </Button>
               ))}
             </div>
             {selectedGroup >= 0 && (
