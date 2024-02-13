@@ -99,22 +99,24 @@ export const getOutputs = (
   }
 
   if (
-    calculatorType === "RestroativeDirectToImplant" ||
-    calculatorType === "RestorativeMultiUnitAbutments" ||
-    calculatorType === "HealingAbutments" ||
-    calculatorType === "Implants" ||
-    calculatorType === "ImplantScrews" ||
-    calculatorType === "ImplantAnalogs" ||
-    calculatorType === "ImpressingCopingsDirectToImplants" ||
-    calculatorType === "ImpressingCopingsMUAs" ||
-    calculatorType === "MUAs" ||
-    calculatorType === "ScanbodyDriversDirectToImplants" ||
-    calculatorType === "ScanbodyDriversMUAs" ||
-    calculatorType === "StockAbutments" ||
-    calculatorType === "TemporaryCopingsDirectToImplants" ||
-    calculatorType === "TemporaryCopingsMUAs" ||
-    calculatorType === "TiBasesDirectToImplants" ||
-    calculatorType === "TiBasesMUAs"
+    [
+      "RestroativeDirectToImplant",
+      "RestorativeMultiUnitAbutments",
+      "HealingAbutments",
+      "Implants",
+      "ImplantScrews",
+      "ImplantAnalogs",
+      "ImpressingCopingsDirectToImplants",
+      "ImpressingCopingsMUAs",
+      "MUAs",
+      "ScanbodyDriversDirectToImplants",
+      "ScanbodyDriversMUAs",
+      "StockAbutments",
+      "TemporaryCopingsDirectToImplants",
+      "TemporaryCopingsMUAs",
+      "TiBasesDirectToImplants",
+      "TiBasesMUAs",
+    ].includes(calculatorType)
   ) {
     return [
       {
