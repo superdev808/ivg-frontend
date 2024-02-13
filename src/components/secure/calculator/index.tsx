@@ -101,9 +101,13 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   };
 
   const handleBackFromResult = () => {
-    setLevel(level - 2);
-    setAnswers((prevState) => prevState.slice(0, prevState.length - 2));
+    let lastAnswer = answers.findLastIndex((answer) => answer !== "");
+    if (lastAnswer === -1) {
+      lastAnswer = answers.length - 1;
+    }
     setItems([]);
+    setAnswers((prevState) => prevState.slice(0, lastAnswer - 1));
+    setLevel(lastAnswer);
   };
 
   return (

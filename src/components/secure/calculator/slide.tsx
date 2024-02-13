@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 
 import { getCookie } from "@/helpers/cookie";
-import { isUrl } from "@/helpers/util";
+import { isUrl, productImages } from "@/helpers/util";
 import {
   useGetUserInfoQuery,
   useSaveResultMutation,
@@ -47,11 +47,14 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
   const contentRef = useRef(null);
   const toastRef = useRef(null);
 
-  const itemName = trim(itemInfo["Item Name"] || itemInfo["Drill Kit Name"]);
-  const itemImage = trim(
-    itemInfo["Item Image"] ||
-      "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Alpha+Bio+Tec.png"
+  const itemName = trim(
+    itemInfo["Item Name"] ||
+      itemInfo["Bur Kit Name (Bone Reduction)"] ||
+      itemInfo["Luting Agent Name"] ||
+      itemInfo["Drill Kit Name"]
   );
+
+  const itemImage = productImages[calculatorName] || productImages["Default"];
   const purchaseLink = trim(itemInfo["Link to Purchase"]);
 
   const details = omit(itemInfo, [
@@ -181,7 +184,7 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
       <div ref={contentRef} className="flex flex-column gap-4">
         <div
           className={`flex flex-column gap-4 justify-content-between
-          md:flex-row md:align-items-center`}
+          lg:flex-row lg:align-items-center`}
         >
           {itemName && <h1 className="m-0">{itemName}</h1>}
 
@@ -218,16 +221,16 @@ const Slide: React.FC<SlideProps> = ({ calculatorName, itemInfo, quiz }) => {
           )}
         </div>
 
-        <div className="flex justify-content-between gap-4 flex-column md:flex-row">
+        <div className="flex justify-content-between gap-4 flex-column lg:flex-row">
           {itemImage && (
-            <div className="flex-1">
-              <Image src={itemImage} alt={itemName} width="200px" />
+            <div className="flex-1 overflow-hidden">
+              <Image src={itemImage} alt={itemName} imageClassName="w-full" />
             </div>
           )}
 
           <div
             className={cx(
-              "bg-white flex flex-column gap-3 shadow-6 p-4 border-round-md flex-shrink-0",
+              "bg-white flex flex-column gap-3 shadow-6 p-4 border-round-md h-fit",
               "quiz"
             )}
           >
