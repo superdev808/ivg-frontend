@@ -92,24 +92,25 @@ export const Calculators = () => {
     },
   ];
 
-  const calcLabels = groupItems.reduce(
+  const calcItems = groupItems.reduce(
     (accumulator: any, currentValue: any) => {
-      return [
-        ...accumulator,
-        ...currentValue.subItems.map((item: any) => item.label),
-      ];
+      const newValue = { ...accumulator };
+      currentValue.subItems.forEach((item: any) => {
+        newValue[item.label] = item.text
+      });
+      return newValue;
     },
-    []
+    {}
   );
 
   const handleSearch = (str: string) => {
     setLoading(true);
     const regExp = new RegExp(str, "i");
-    const newSearchResult: Array<string> = [];
+    const newCalcItemLabels: Array<string> = [];
 
-    for (const modelName of calcLabels) {
+    for (const modelName of Object.keys(calcItems)) {
       if (regExp.test(modelName)) {
-        newSearchResult.push(modelName);
+        newCalcItemLabels.push(modelName);
       }
     }
 
@@ -124,8 +125,8 @@ export const Calculators = () => {
         const { data } = result;
 
         for (const item of data) {
-          if (!newSearchResult.includes(item)) {
-            newSearchResult.push(item);
+          if (!newCalcItemLabels.includes(item)) {
+            newCalcItemLabels.push(item);
           }
         }
       })
@@ -133,7 +134,7 @@ export const Calculators = () => {
         console.log("Error Happening: ", ex.message);
       })
       .finally(() => {
-        setSearchResult(newSearchResult);
+        setSearchResult(newCalcItemLabels);
         setLoading(false);
       });
   };
@@ -152,7 +153,7 @@ export const Calculators = () => {
                 <Button
                   className={cx("calculatorButton", "p-3 m-2")}
                   key={`searched-calc-${index}`}
-                  label={searchLabel}
+                  label={calcItems[searchLabel] || searchLabel}
                   onClick={() => {
                     router.push("/calculators/" + searchLabel);
                   }}
