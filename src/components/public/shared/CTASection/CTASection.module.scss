@@ -1,25 +1,21 @@
 .cta-container {
-    display: flex;
-    justify-content: center;
-    margin: 0 ;
-    padding: 2rem 0;
-    width: 100%;
-    background: rgba(var(--secondary-color-rgb),1);
-    color: white;
-    z-index: 2000;
-    background-image: url('/images/common/elephant.svg');
-    background-size: 45%;
-    background-repeat: no-repeat;
- 
-    background-position: bottom right;
-    line-height: 1.25;
-
+	display: flex;
+	justify-content: center;
+	margin: 0;
+	padding: 2rem 0;
+	width: 100%;
+	background: rgba(var(--secondary-color-rgb), 1);
+	color: white;
+	background-image: url('/images/common/elephant.svg');
+	background-size: 45%;
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	line-height: 1.25;
 }
 
 @media screen and (min-width: 768px) {
-    .cta-container {
-        padding: 5rem;
-        background-position: right;
-    }
-    
+	.cta-container {
+		padding: 5rem;
+		background-position: right;
+	}
 }

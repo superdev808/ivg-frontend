@@ -158,19 +158,15 @@ export default function SettingsUserInfoForm() {
 							</div>
 						</div>
 						<div className="col-12 md:col-6 flex flex-column justify-content-center my-6 text-lg px-2 md: px-4">
-						
-								<span className="mb-2">
-									<span className="text-gray-600">Organization Name:</span> {user.organizationName}
-								</span>
-								<span className="mb-2">
-									<span className="text-gray-600">Location:</span> {user.organizationState}
-								</span>
-								<span className="mb-4">
-									<span className="text-gray-600">ID #:</span> {user.organizationNumber}
-								</span>
-						
-						
-							<span className="align-self-center">{resetMessage && <div className="text-600 text-secondary mx-4">{resetMessage}</div>}</span>
+							<span className="mb-2">
+								<span className="text-gray-600">Organization Name:</span> {user.organizationName}
+							</span>
+							<span className="mb-2">
+								<span className="text-gray-600">Location:</span> {user.organizationState}
+							</span>
+							<span className="mb-4">
+								<span className="text-gray-600">ID #:</span> {user.organizationNumber}
+							</span>
 						</div>
 					</div>
 
@@ -255,22 +251,20 @@ export default function SettingsUserInfoForm() {
 									</div>
 								)}
 							/>
-							
 						</div>
-						
 					</div>
-					
 				</div>
 				<div className="flex justify-content-center md:justify-content-start  mb-6">
-								<Button
-									disabled={resetMessage !== ''}
-									outlined
-									onClick={(e) => onReset(e)}
-									icon={isLoadingReset ? 'pi pi-spin pi-spinner' : ''}
-									label={'Change your password'}
-									className=" p-button-rounded p-outlined  text-red-600"
-								/>
-							</div>
+					<Button
+						disabled={resetMessage !== ''}
+						outlined
+						onClick={(e) => onReset(e)}
+						icon={isLoadingReset ? 'pi pi-spin pi-spinner' : ''}
+						label={'Change your password'}
+						className=" p-button-rounded p-outlined  text-red-600"
+					/>
+					<span className="align-self-center">{resetMessage && <div className="text-600 text-secondary mx-4">{resetMessage}</div>}</span>
+				</div>
 				<div className="grid m-0 p-0 justify-content-center md:justify-content-end align-items-center pb-6 md:pb-0">
 					<div className="flex align-items-center">
 						{updateMessage && <div className="text-600 text-secondary mx-4">{updateMessage}</div>}

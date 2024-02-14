@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { debounce } from "lodash";
 
 export default function SearchBox(
   { handleSearch, loading }: { handleSearch: (str: string) => void, loading: boolean }
 ) {
   const [qureyString, setQueryString] = useState("");
+  const debouncedSearch = debounce(handleSearch, 500);
 
   const handleChange = (e: any) => {
     setQueryString(e.target.value);
-  };
-
-  const handleSearchClick = () => {
-    handleSearch(qureyString);
+    debouncedSearch(e.target.value);
   };
 
   return (
@@ -24,7 +23,7 @@ export default function SearchBox(
         value={qureyString}
         disabled={loading}
       />
-      {loading ? <ProgressSpinner className="ml-4" style={{width: '50px', height: '50px'}} /> : <Button label="Search" onClick={handleSearchClick} disabled={loading} />}
+      {loading && <ProgressSpinner className="ml-4" style={{width: '50px', height: '50px'}} />}
     </div>
   );
 }

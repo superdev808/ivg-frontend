@@ -1,13 +1,17 @@
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Button } from "primereact/button";
 import { AutoComplete } from "primereact/autocomplete";
 import { Dropdown } from "primereact/dropdown";
 import { Image } from "primereact/image";
 import { calculatorImages } from "@/helpers/util";
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
+import styles from "./quiz.module.scss";
+import classNames from "classnames/bind";
+const cx = classNames.bind(styles);
 
 interface QuizProps {
   question: string;
+  currentAnswer: string;
   selectedAnswer: string | null;
   answers: Array<any>;
   handleSelectAnswer: (e: any) => void;
@@ -18,7 +22,7 @@ interface QuizProps {
 
 export default function Quiz(props: QuizProps) {
   const [searchValue, setSearchVaule] = useState("");
-  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [suggestions, setSuggestions] = useState<any[]>(props.answers);
   const [selectedSuggestion, setSelectedSuggestion] = useState("");
 
   const filteredAnswers = useMemo(() => {
@@ -30,10 +34,6 @@ export default function Quiz(props: QuizProps) {
 
   const firstOptions =
     filteredAnswers.length > 6 ? filteredAnswers.slice(0, 6) : filteredAnswers;
-  const dropdownOptions =
-    filteredAnswers.length > 6
-      ? filteredAnswers.slice(6, filteredAnswers.length)
-      : [];
 
   const dropdownOptionTemplate = (option: any) => {
     return (
@@ -75,7 +75,7 @@ export default function Quiz(props: QuizProps) {
         {props.handleBack && (
           <Button
             icon="pi pi-arrow-left"
-            className="absolute left-0 ml-4 mt-3"
+            className="absolute left-0 ml-2 mt-5 px-5 md:ml-4 text-6xl"
             onClick={props.handleBack}
           />
         )}
@@ -91,6 +91,8 @@ export default function Quiz(props: QuizProps) {
           inputClassName="w-full"
           completeMethod={handleAutoCompleteMethod}
           onSelect={handleSelect}
+          itemTemplate={dropdownOptionTemplate}
+          dropdown
         />
       </div>
       <div className="relative md:absolute flex align-items-center justify-content-center w-full md:w-2 md:col-offset-10">
@@ -105,7 +107,7 @@ export default function Quiz(props: QuizProps) {
               className="m-2 w-12 md:w-3 flex flex-column"
               onClick={() => props.handleSelectAnswer(answer)}
             >
-              <div className="border-3 border-300 w-full p-0 flex justify-content-center cursor-pointer">
+              <div className={cx("border-3 border-300 hover:border-teal-300 border-round-xl w-full p-0 flex justify-content-center cursor-pointer",  {"quiz-card--selected": props.currentAnswer === answer})}>
                 {image ? (
                   <Image
                     src={image}
@@ -128,18 +130,6 @@ export default function Quiz(props: QuizProps) {
           );
         })}
       </div>
-      {dropdownOptions.length > 0 && (
-        <div className="col-12 md:col-6 md:col-offset-3 mb-6">
-          <Dropdown
-            options={dropdownOptions}
-            className="w-full"
-            onChange={(e: any) => props.handleSelectAnswer(e.value)}
-            value={props.selectedAnswer}
-            placeholder="Other"
-            itemTemplate={dropdownOptionTemplate}
-          />
-        </div>
-      )}
     </>
   );
 }

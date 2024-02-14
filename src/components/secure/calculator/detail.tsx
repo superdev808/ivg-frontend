@@ -1,36 +1,39 @@
 import { Button } from "primereact/button";
-import { useMemo, useState } from "react";
+import { Carousel } from "primereact/carousel";
+import { useMemo } from "react";
 
-import Slide from "./slide";
+import { getCalculatorName } from "@/helpers/util";
+
+import Result from "./Result";
 
 interface DetailViewProps {
-  calculatorName: string;
+  calculatorType: string;
   items: Array<Record<string, string>>;
   fields: Array<{ name: string; text: string }>;
   questions: Array<{ name: string; text: string }>;
   answers: string[];
+  onGoBack: () => void;
 }
 
 const DetailView: React.FC<DetailViewProps> = ({
-  calculatorName,
-  items,
+  calculatorType,
   fields,
   questions,
   answers,
+  onGoBack,
+  ...props
 }) => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const items = useMemo(() => {
+    return props.items.map((item) => {
+      return fields.reduce((acc, field) => {
+        if (item[field.name]) {
+          acc[field.text] = item[field.text];
+        }
 
-  const activeItem = items[activeIndex];
-
-  const itemInfo = useMemo(() => {
-    return fields.reduce((acc, field) => {
-      if (activeItem[field.name]) {
-        acc[field.text] = activeItem[field.text];
-      }
-
-      return acc;
-    }, {} as Record<string, string>);
-  }, [fields, activeItem]);
+        return acc;
+      }, {} as Record<string, string>);
+    });
+  }, [fields, props.items]);
 
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
@@ -42,36 +45,42 @@ const DetailView: React.FC<DetailViewProps> = ({
     }, {} as Record<string, string>);
   }, [questions, answers]);
 
-  const handleGoPrev = () => setActiveIndex((prevState) => prevState - 1);
-
-  const handleGoNext = () => setActiveIndex((prevState) => prevState + 1);
-
   return (
-    <div className="flex flex-column align-items-center justify-content-center px-3 pt-4 md:pt-8">
-      <Slide calculatorName={calculatorName} itemInfo={itemInfo} quiz={quiz} />
+    <>
+      <div className="relative md:p-2 md:text-center">
+        <Button
+          icon="pi pi-arrow-left"
+          className="left-0 md:mt-3 md:absolute lg:ml-3 text-6xl px-5"
+          onClick={onGoBack}
+        />
+        <h2>{getCalculatorName(calculatorType)} Calculator</h2>
+      </div>
 
-      {items.length > 1 && (
-        <div className="flex gap-4 mt-6">
-          <Button
-            icon="pi pi-caret-left"
-            rounded
-            text
-            size="large"
-            disabled={activeIndex === 0}
-            onClick={handleGoPrev}
-          />
-
-          <Button
-            icon="pi pi-caret-right"
-            rounded
-            text
-            size="large"
-            disabled={activeIndex === items.length - 1}
-            onClick={handleGoNext}
-          />
+      <div className="flex flex-column align-items-center">
+        <div className="w-full relative lg:w-8">
+          {items.length > 1 ? (
+            <Carousel
+              value={items}
+              itemTemplate={(item) => (
+                <div className="px-3">
+                  <Result
+                    calculatorType={calculatorType}
+                    itemInfo={item}
+                    quiz={quiz}
+                  />
+                </div>
+              )}
+            />
+          ) : (
+            <Result
+              calculatorType={calculatorType}
+              itemInfo={items[0]}
+              quiz={quiz}
+            />
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 

@@ -1,7 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '@/redux/hooks/hooks';
-import { BYPASS_AUTH_ROUTES, PRIVATE_ROUTES, PUBLIC_AUTH_ROUTES, PUBLIC_ROUTES, REDIRECT_TO_AUTH, REDIRECT_TO_UNAUTH } from '@/constants/routes';
+import {
+	ADMIN_ROUTES,
+	BYPASS_AUTH_ROUTES,
+	PRIVATE_ROUTES,
+	PUBLIC_AUTH_ROUTES,
+	PUBLIC_ROUTES,
+	REDIRECT_TO_AUTH,
+	REDIRECT_TO_UNAUTH,
+} from '@/constants/routes';
 import { useRouter, usePathname } from 'next/navigation';
+import { get } from 'lodash';
+import { getCookie } from '@/helpers/cookie';
+import { decode } from 'jsonwebtoken';
+import { USER_ROLES } from '@/constants/users';
+import { getUserRole } from '@/helpers/getUserRole';
 
 interface LayoutStyle {
 	hidden?: boolean;
@@ -39,10 +52,19 @@ const useAuthRedirect = () => {
 			} else if (
 				authenticated &&
 				!BYPASS_AUTH_ROUTES.includes(activePath as PUBLIC_AUTH_ROUTES) &&
-				!Object.values(PRIVATE_ROUTES).filter(route => activePath.includes(route)).length
+				!Object.values(PRIVATE_ROUTES).filter((route) => activePath.includes(route)).length
 			) {
 				return router.replace(REDIRECT_TO_AUTH);
 			}
+
+			const userRole = getUserRole();
+
+			if (authenticated) {
+				if (ADMIN_ROUTES.includes(activePath as PRIVATE_ROUTES) && userRole !== USER_ROLES.ADMIN) {
+					return router.replace(PUBLIC_ROUTES.FORBIDDEN);
+				}
+			}
+
 			setIsLoading(false);
 		};
 

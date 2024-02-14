@@ -67,6 +67,24 @@ body {
 	// transform: translateY(-50%);
 }
 
+td {
+	padding:0 2rem;
+}
+@media (max-width: 768px) {
+	table,
+	tbody,
+	tr,
+	td,
+	thead,
+	th {
+		display: block;
+		width: 100%;
+	}
+	td {
+		padding:1rem 1rem;
+	}
+}
+
 // CONTAINERS
 
 .container {
@@ -105,6 +123,3 @@ body {
 		background: rgba(var(--secondary-color-rgb), 0.85) !important;
 	}
 }
-
-
-

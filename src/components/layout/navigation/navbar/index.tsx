@@ -74,7 +74,7 @@ const Navbar = ({
 				<div className="flex align-items-center ">
 					<div className={cx('navbarNav', 'hidden md:flex gap-x-6 ml-3')}>
 						{rightNavLinks
-							.filter((li) => li.secure === secure && secure === undefined || secure === false)
+							.filter((li) => (li.secure === secure && secure === undefined) || secure === false)
 							.map((item) => {
 								return (
 									<div

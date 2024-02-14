@@ -26,15 +26,9 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   const [answerOptions, setAnswerOptions] = useState<any[]>([]);
   const [answers, setAnswers] = useState<any[]>([]);
   const [items, setItems] = useState<any[]>([]);
+  const [currentAnswer, setCurrentAnswer] = useState<string>("");
 
   const calculatorType = decodeURI(option);
-
-  const calculatorName = useMemo(() => {
-    const selectedCalculator = calculatorIO.find(
-      (item) => item.type === calculatorType
-    );
-    return selectedCalculator?.label || calculatorType;
-  }, [calculatorType]);
 
   const { isLoading } = useQuery(
     [input, level, answers, option],
@@ -94,8 +88,19 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
 
   const handleBack = (index: number) => () => {
     setLevel(index - 1);
+    setCurrentAnswer(answers[index - 1]);
     const newAnswers = answers.slice(0, index - 1);
     setAnswers(newAnswers);
+  };
+
+  const handleBackFromResult = () => {
+    let lastAnswer = answers.findLastIndex((answer) => answer !== "");
+    if (lastAnswer === -1) {
+      lastAnswer = answers.length - 1;
+    }
+    setItems([]);
+    setAnswers((prevState) => prevState.slice(0, lastAnswer - 1));
+    setLevel(lastAnswer);
   };
 
   return (
@@ -128,6 +133,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
                 question={quiz.text}
                 answers={answerOptions[index]}
                 selectedAnswer={answers[index] || null}
+                currentAnswer={currentAnswer}
                 handleSelectAnswer={handleSelectAnswer(index)}
                 handleBack={index > 0 ? handleBack(index) : undefined}
                 disabled={isLoading}
@@ -139,11 +145,12 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
 
         {items.length > 0 && (
           <DetailView
-            calculatorName={calculatorName}
+            calculatorType={calculatorType}
             items={items}
             fields={output}
             questions={input}
             answers={answers}
+            onGoBack={handleBackFromResult}
           />
         )}
 
