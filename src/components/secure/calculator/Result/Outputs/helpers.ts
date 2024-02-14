@@ -1,3 +1,4 @@
+import trim from "lodash/trim";
 import values from "lodash/values";
 
 type Output = {
@@ -18,13 +19,15 @@ export const getOutputs = (
   if (calculatorType === "BoneReduction") {
     return [
       {
-        name: details["Bur Kit Name (Bone Reduction)"],
-        link: details["Bur Kit (Bone Reduction) Link to Purchase"],
-        additionals: [{ name: "Item Number", value: details["Item Number"] }],
+        name: trim(details["Bur Kit Name (Bone Reduction)"]),
+        link: trim(details["Bur Kit (Bone Reduction) Link to Purchase"]),
+        additionals: [
+          { name: "Item Number", value: trim(details["Item Number"]) },
+        ],
       },
       {
-        name: details["Bur Kit (Denture Conversion) Name"],
-        link: details["Bur Kit (Denture Conversion) Link to Purchase"],
+        name: trim(details["Bur Kit (Denture Conversion) Name"]),
+        link: trim(details["Bur Kit (Denture Conversion) Link to Purchase"]),
       },
     ];
   }
@@ -32,16 +35,18 @@ export const getOutputs = (
   if (calculatorType === "ChairSidePickUp") {
     return [
       {
-        name: details["Luting Agent Name"],
-        link: details["Luting Agent Link to Purchase"],
+        name: trim(details["Luting Agent Name"]),
+        link: trim(details["Luting Agent Link to Purchase"]),
       },
       {
-        name: details["Teflon Tape"],
-        link: details["Teflon Tape Link to Purchase"],
+        name: trim(details["Teflon Tape"]),
+        link: trim(details["Teflon Tape Link to Purchase"]),
       },
       {
-        name: details["Material to Close Screw Access Hole Name"],
-        link: details["Material to Close Screw Access Hole Link to Purchase"],
+        name: trim(details["Material to Close Screw Access Hole Name"]),
+        link: trim(
+          details["Material to Close Screw Access Hole Link to Purchase"]
+        ),
       },
     ];
   }
@@ -49,10 +54,13 @@ export const getOutputs = (
   if (calculatorType === "DrillKitAndSequence") {
     const res: Output[] = [
       {
-        name: details["Drill Kit Name"],
-        link: details["Drill Kit Link to Purchase"],
+        name: trim(details["Drill Kit Name"]),
+        link: trim(details["Drill Kit Link to Purchase"]),
         additionals: [
-          { name: "Item Number", value: details["Drill Kit Item Number"] },
+          {
+            name: "Item Number",
+            value: trim(details["Drill Kit Item Number"]),
+          },
         ],
       },
     ];
@@ -74,7 +82,10 @@ export const getOutputs = (
         kitItemInfo[drillName] = [];
       }
 
-      kitItemInfo[drillName].push({ name: itemName, value: details[key] });
+      kitItemInfo[drillName].push({
+        name: trim(itemName),
+        value: trim(details[key]),
+      });
     });
 
     values(kitItemInfo).forEach((itemInfo) => {
@@ -120,9 +131,11 @@ export const getOutputs = (
   ) {
     return [
       {
-        name: itemName,
-        link: purchaseLink,
-        additionals: [{ name: "Item Number", value: details["Item Number"] }],
+        name: trim(itemName),
+        link: trim(purchaseLink),
+        additionals: [
+          { name: "Item Number", value: trim(details["Item Number"]) },
+        ],
       },
     ];
   }
@@ -130,11 +143,11 @@ export const getOutputs = (
   if (calculatorType === "Scanbodies") {
     return [
       {
-        name: itemName,
-        link: purchaseLink,
+        name: trim(itemName),
+        link: trim(purchaseLink),
         additionals: [
-          { name: "Item Number", value: details["Scanbody Item Number"] },
-          { name: "Manufacturer", value: details["Manufacturer"] },
+          { name: "Item Number", value: trim(details["Scanbody Item Number"]) },
+          { name: "Manufacturer", value: trim(details["Manufacturer"]) },
         ],
       },
     ];
@@ -143,15 +156,35 @@ export const getOutputs = (
   if (calculatorType === "ScanbodyMUAs") {
     return [
       {
-        name: itemName,
-        link: purchaseLink,
+        name: trim(itemName),
+        link: trim(purchaseLink),
         additionals: [
-          { name: "Item Number", value: details["Item Number"] },
-          { name: "Manufacturer Name", value: details["Manufacturer Name"] },
+          { name: "Item Number", value: trim(details["Item Number"]) },
+          {
+            name: "Manufacturer Name",
+            value: trim(details["Manufacturer Name"]),
+          },
         ],
       },
     ];
   }
 
   return [];
+};
+
+export const getItemName = (
+  calculatorType: string,
+  details: Record<string, string>
+) => {
+  let name;
+
+  if (calculatorType === "BoneReduction") {
+    name = details["Bur Kit Name (Bone Reduction)"];
+  } else if (calculatorType === "ChairSidePickUp") {
+    name = details["Luting Agent Name"];
+  } else if (calculatorType === "DrillKitAndSequence") {
+    name = details["Drill Kit Name"];
+  }
+
+  return trim(name || details["Item Name"]);
 };
