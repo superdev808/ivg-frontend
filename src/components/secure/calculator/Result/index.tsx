@@ -16,6 +16,7 @@ import {
 } from "@/redux/hooks/apiHooks";
 
 import Outputs from "./Outputs";
+import { getItemName } from "./Outputs/helpers";
 
 import styles from "./style.module.scss";
 
@@ -48,7 +49,7 @@ const Result: React.FC<ResultProps> = ({ calculatorType, itemInfo, quiz }) => {
   const contentRef = useRef(null);
   const toastRef = useRef(null);
 
-  const itemName = trim(itemInfo["Item Name"]);
+  const itemName = getItemName(calculatorType, itemInfo);
 
   const itemImage = productImages[calculatorType] || productImages["Default"];
   const purchaseLink = trim(itemInfo["Link to Purchase"]);
