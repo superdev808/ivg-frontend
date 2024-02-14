@@ -1,4 +1,5 @@
 import classNames from "classnames/bind";
+import noop from "lodash";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import { useEffect } from "react";
@@ -12,7 +13,10 @@ const cx = classNames.bind(styles);
 interface HeroSectionProps {
   title: React.ReactNode;
   subtitle?: React.ReactNode;
-  cta: string;
+  cta?: {
+    label: string;
+    onClick?: () => void;
+  };
   image: {
     src?: string;
     width?: string;
@@ -83,14 +87,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <span className="text-white text-lg md:text-xl text-right md:text-left">
                 {subtitle}
               </span>
-              <Button
-                className={cx(
-                  "btn-primary",
-                  "mt-4 font-bold text-normal md:text-lg md:px-4 md:pt-3"
-                )}
-              >
-                {cta}
-              </Button>
+              {cta && (
+                <Button
+                  className={cx(
+                    "btn-primary",
+                    "mt-4 font-bold text-normal md:text-lg md:px-5 md:py-4"
+                  )}
+                  onClick={cta.onClick || noop}
+                >
+                  {cta.label}
+                </Button>
+              )}
             </div>
           </div>
         </div>

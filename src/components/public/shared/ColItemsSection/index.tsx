@@ -41,7 +41,7 @@ export const ColItemsSection: React.FC<ThreeColSectionProps> = ({
           <span
             className={cx(
               "public-section-content-xl",
-              "px-6 mb-4 text-center ",
+              "px-6 mb-4 text-center",
               { "text-white": dark }
             )}
           >
@@ -62,7 +62,7 @@ export const ColItemsSection: React.FC<ThreeColSectionProps> = ({
             >
               <span
                 className={cx(
-                  "public-section-label",
+                  "public-section-label-2xl",
                   { "flex-order-1": reverse },
                   { "text-white": dark }
                 )}
