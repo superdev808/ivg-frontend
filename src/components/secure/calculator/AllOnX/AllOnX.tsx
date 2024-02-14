@@ -17,6 +17,7 @@ import {
   SITE_SPECIFIC_REPORT_OPTIONS,
   TEXT_DENTAL_IMPLANT_PROCEDURE,
   TEXT_MUA_STATUS,
+  TotalQuantities,
 } from "./constants";
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
@@ -61,6 +62,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   );
   const [collections, setCollections] = useState<string[]>([]);
   const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
+  const [totalQuantities, setTotalQuantities] = useState<TotalQuantities[]>([]);
 
   useEffect(() => {
     const _collections = getProcedureCollections(
@@ -273,6 +275,21 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     setSelectedCollections(_selectedCollections);
   };
 
+  const handleUpdateQuantity = (
+    quantity: number,
+    itemName: string
+  ) => {
+    const indexOfItem: number = totalQuantities.findIndex(
+      (item: TotalQuantities) => item.itemName === itemName
+    );
+    if (indexOfItem === -1) {
+      totalQuantities.push({itemName, quantity})      
+    } else {
+      totalQuantities[indexOfItem].quantity = quantity;
+    }
+    setTotalQuantities(totalQuantities)
+  };
+
   return (
     <div className={" nav-offset flex-grow-1"}>
       <div className="wrapper my-8">
@@ -359,6 +376,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                         responseOrder={
                           procedureInputsAndResponse?.responseOrder || []
                         }
+                        onUpdateQuantity={handleUpdateQuantity}
                       />
                     </TabPanel>
                   </TabView>
@@ -372,6 +390,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                     responseOrder={
                       procedureInputsAndResponse?.responseOrder || []
                     }
+                    totalQuantities={totalQuantities}
                   ></PDFExport>
                 </div>
               )}

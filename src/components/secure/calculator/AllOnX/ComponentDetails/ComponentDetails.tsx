@@ -18,6 +18,7 @@ interface ComponentDetailProps {
   selectedSites: Site[];
   sitesData: SiteData;
   responseOrder: string[];
+  onUpdateQuantity: (value: number, itemName: string) => void;
 }
 
 /**
@@ -27,11 +28,13 @@ interface ComponentDetailProps {
  * @param {array} selectedSites
  * @param {object} sitesData
  * @param {array} responseOrder
+ * @param {func} onUpdateQuantity
  */
 const ComponentDetails: React.FC<ComponentDetailProps> = ({
   selectedSites,
   sitesData,
   responseOrder,
+  onUpdateQuantity
 }: ComponentDetailProps) => {
   const [componentSummary, setComponentSummary] = useState<ItemData[]>([]);
 
@@ -139,6 +142,7 @@ const ComponentDetails: React.FC<ComponentDetailProps> = ({
               info={data.info}
               quantityVisibilityState={QUANTITY_VISIBILITY_STATE.EDITABLE}
               isFirst={i === 0}
+              onUpdateQuantity={(value: number, itemName: string) => onUpdateQuantity(value, itemName)}
             />
           ))}
         </>

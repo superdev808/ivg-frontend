@@ -5,6 +5,7 @@ import {
   ItemData,
   ItemInsights,
   SiteData,
+  TotalQuantities,
   ignoreListForMultiples,
 } from "../../constants";
 import { cloneDeep } from "lodash";
@@ -38,6 +39,7 @@ interface PdfContentProps {
   calculatorName: string;
   patientInfo?: Patient | null;
   showTeethSelection: boolean;
+  totalQuantities: TotalQuantities[]
 }
 
 const PdfContent: React.FC<PdfContentProps> = ({
@@ -47,6 +49,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
   calculatorName,
   patientInfo,
   showTeethSelection,
+  totalQuantities
 }) => {
   const [componentSummary, setComponentSummary] = useState<summary[]>([]);
   useEffect(() => {
@@ -184,7 +187,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
       </div>
 
       <div className="px-4">
-        <ComponentSummary summary={componentSummary} />
+        <ComponentSummary summary={componentSummary} totalQuantities={totalQuantities} />
 
         <div className="flex flex-column pt-5 greet">
           <div>Thank You,</div>

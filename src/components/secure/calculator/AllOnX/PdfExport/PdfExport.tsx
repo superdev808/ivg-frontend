@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import { getCookie } from "@/helpers/cookie";
 import { Toast } from "primereact/toast";
 import PdfContent, { Site } from "./PdfContent/PdfContent";
-import { SiteData } from "../constants";
+import { SiteData, TotalQuantities } from "../constants";
 import { Dialog } from "primereact/dialog";
 import PatientInfo from "./PatientInfo/PatientInfo";
 
@@ -15,6 +15,7 @@ interface PDFExportProps {
   responseOrder: string[];
   calculatorName: string;
   showTeethSelection: boolean;
+  totalQuantities: TotalQuantities[]
 }
 
 export interface Patient {
@@ -30,6 +31,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
   sitesData,
   calculatorName,
   showTeethSelection,
+  totalQuantities
 }) => {
   const contentRef = useRef(null);
   const toastRef = useRef(null);
@@ -131,6 +133,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
               calculatorName={calculatorName}
               patientInfo={patientInfo}
               showTeethSelection={showTeethSelection}
+              totalQuantities={totalQuantities}
             />
           )}
         </div>
