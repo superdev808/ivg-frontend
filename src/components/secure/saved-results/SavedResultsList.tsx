@@ -1,17 +1,19 @@
 import cx from "classnames";
 import lowerCase from "lodash/lowerCase";
-import trim from "lodash/trim";
 import values from "lodash/values";
 import { useRouter } from "next/navigation";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
+import Link from "next/link";
 import React, { useMemo } from "react";
-import { formatDate, productImages } from "@/helpers/util";
+
+import { getItemName } from "@/components/secure/calculator/Result/Outputs/helpers";
+import { formatDate, getCalculatorName, productImages } from "@/helpers/util";
 
 type SavedResult = {
   id: string;
-  calculatorName: string;
+  calculatorType: string;
   itemInfo: Record<string, string>;
   quiz: Record<string, string>;
   date: string;
@@ -69,15 +71,21 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
     });
   };
 
+  const handleGoToCalculator = (
+    evt: React.SyntheticEvent,
+    calculatorType: string
+  ) => {
+    evt.stopPropagation();
+    router.push(`/calculators/${calculatorType}`);
+  };
+
   return (
     <div className="flex flex-column gap-4 mt-4">
       <ConfirmDialog />
-      {filteredResults.map(({ id, date, calculatorName, itemInfo }) => {
-        const itemName = trim(
-          itemInfo["Item Name"] || itemInfo["Drill Kit Name"]
-        );
+      {filteredResults.map(({ id, date, calculatorType, itemInfo }) => {
+        const itemName = getItemName(calculatorType, itemInfo);
         const itemImage =
-          productImages[calculatorName] || productImages["Default"];
+          productImages[calculatorType] || productImages["Default"];
 
         return (
           <div
@@ -101,8 +109,14 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
               </div>
             )}
 
-            <div className="flex-1">
+            <div className="flex-1 flex flex-column gap-2">
               <div className="font-bold">Title:</div>
+              <Button
+                link
+                label={getCalculatorName(calculatorType)}
+                className="px-0 py-0 w-fit border-noround"
+                onClick={(evt) => handleGoToCalculator(evt, calculatorType)}
+              />
               <div>{itemName}</div>
             </div>
 
