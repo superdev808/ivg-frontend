@@ -36,19 +36,20 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({ defaultValues });
 
   const [recipientEmails, setRecipientEmails] = useState<RecipientEmail>({});
   const [selectedRecipients, setSelectedRecipients] = useState<Recipient[]>([]);
-  const [recipientsList, setRecipientsList] = useState<string>("");
 
   useEffect(() => {
     let _recipientsList: string[] = [];
     Object.values(recipientEmails).map((emails: string[]) => {
       emails.map((email: string) => _recipientsList.push(email));
     });
-    setRecipientsList(_recipientsList.join('|'))
+    const emails = _recipientsList.join('|');
+    setValue(`recipientsList`, emails);
   },[recipientEmails])
 
   const recipients: Recipient[] = [
@@ -184,6 +185,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
                 </div>
                 {recipient.hasInput && isChecked && (                
                   <Chips
+                    addOnBlur={true}
                     inputId={recipient.key}
                     name={recipient.key}
                     separator=","
@@ -198,10 +200,15 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
         <InputText
           hidden
           id="recipientsList"
-          value={recipientsList}
-          {...register("recipientsList")}
-          className={errors.recipientsList ? "p-invalid" : ""}
-        />      
+          {...register("recipientsList", {
+            required: true,
+            validate: (value) => !!value.trim(),
+          })}
+          className={errors.filename ? "p-invalid" : ""}
+        />
+        {errors.recipientsList && (
+          <small className="p-error">Please provide atleast one recipient.</small>
+        )}     
       </div>
 
       <Button type="submit" label="Submit" />

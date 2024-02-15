@@ -24,6 +24,7 @@ export interface Patient {
   address: string;
   filename: string;
   actionType?: string;
+  recipientsList: string
 }
 const PDFExport: React.FC<PDFExportProps> = ({
   responseOrder,
@@ -73,6 +74,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
           formData.append("attachment", blob, "exported-document.pdf");
           formData.append("name", name);
           formData.append("email", email);
+          formData.append("recipientsList", info.recipientsList);
           formData.append("calculatorName", calculatorName);
           formData.append("filename", options.filename);
           const response = await fetch(
@@ -117,7 +119,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
     ExportAndSendPDF(info);
   };
   const showPatientInfoDialog = (actionType: string) => {
-    const info: Patient = { filename, name: "", address: "", actionType };
+    const info: Patient = { filename, name: "", address: "", recipientsList:"", actionType };
     setPatientInfo(info);
     setVisible(true);
   };
