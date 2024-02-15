@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Patient } from "../PdfExport";
@@ -12,6 +12,9 @@ interface FormValues {
   address: string;
   filename: string;
   recipientsList: string;
+  Dentist: string[];
+  "Office Staff": string[];
+  Patient: string[];
 }
 interface Recipient { 
   name: string, 
@@ -31,12 +34,17 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
     name: "",
     address: "",
     filename: info?.filename || "",
-    recipientsList: ""
+    recipientsList: "",
+    Dentist:[],
+    "Office Staff":[],
+    Patient:[],
   };
   const {
     register,
     handleSubmit,
     setValue,
+    control,
+    clearErrors,
     formState: { errors },
   } = useForm<FormValues>({ defaultValues });
 
@@ -50,6 +58,9 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
     });
     const emails = _recipientsList.join('|');
     setValue(`recipientsList`, emails);
+    if(!!emails){
+      clearErrors('recipientsList');
+    }
   },[recipientEmails, setValue])
 
   const recipients: Recipient[] = [
@@ -73,6 +84,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
         _selectedRecipients = _selectedRecipients.filter(item => item.key !== recipient.key);
         const _recipientEmails = {...recipientEmails};
         delete _recipientEmails[recipient.key]
+        setValue(`${recipient.key}` as any, []);
         setRecipientEmails(_recipientEmails);
       }
       setSelectedRecipients(_selectedRecipients);    
@@ -84,6 +96,15 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
     _recipientEmails = {..._recipientEmails, ...newEmails}
     setRecipientEmails(_recipientEmails);
   }
+
+  const getFormErrorMessage = (name: string) => {
+    type errors = { [key: string]: { message: string } };
+    return (errors as errors)[name] ? (
+      <small className="p-error">{(errors as errors)[name].message}</small>
+    ) : (
+      null
+    );
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
@@ -165,9 +186,9 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
       {info?.actionType === "export" && <div className="mb-3">
         <p>Who are you sending this to?</p>
         <div className="flex flex-column gap-3">
-          {recipients.map((recipient) => {
-            const isChecked = selectedRecipients.some(
-              (item) => item.key === recipient.key
+          {recipients.map((recipient: Recipient) => {
+            const isChecked: boolean = selectedRecipients.some(
+              (item: Recipient) => item.key === recipient.key
             );
             return (
               <>
@@ -183,15 +204,32 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
                     {recipient.name}
                   </label>
                 </div>
-                {recipient.hasInput && isChecked && (                
-                  <Chips
-                    addOnBlur={true}
-                    inputId={recipient.key}
-                    name={recipient.key}
-                    separator=","
-                    value={recipientEmails[recipient.key]}
-                    onChange={(e) => handleRecipientEmailChange(e.value||[], recipient.key)}
-                  />
+                {recipient.hasInput && isChecked && (
+                  <>                    
+                    <Controller
+                      name={`${recipient.key}` as any}
+                      control={control}
+                      rules={{ required: "Please enter email address.", validate: (value: string[]) => value.every((email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) || 'Please enter valid email addresses'}}
+                      render={({ field, fieldState }) => (
+                        <Chips
+                          addOnBlur={true}
+                          separator=","
+                          id={field.name}
+                          name={recipient.key}
+                          value={field.value}
+                          onChange={(e) => {
+                            field.onChange(e.value);
+                            handleRecipientEmailChange(
+                              e.value || [],
+                              recipient.key
+                            );
+                          }}
+                          className={fieldState.error ? "p-invalid" : ""}
+                        />
+                      )}
+                    />
+                    {getFormErrorMessage(recipient.key)}
+                  </>
                 )}
               </>
             );
