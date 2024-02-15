@@ -1,11 +1,12 @@
 "use client";
 import { useParams } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Card } from "primereact/card";
 import CalculatorContainer from "@/components/secure/calculator";
 import { CALCULATOR_MAPPINGS } from "../constants";
 import AllOnXCalculator from "@/components/secure/calculator/AllOnX/AllOnX";
 import { calculatorIO as tabItems } from "@/helpers/util";
+import FeedbackDialog from "@/components/secure/calculator/Feedback/FeedbackDialog";
 
 export default function CalculatorPage() {
   // const router = useRouter();
@@ -14,6 +15,7 @@ export default function CalculatorPage() {
   const selectedType = useMemo(() => {
     return tabItems.find((item) => item.type === tabId);
   }, [searchParams.id]);
+  const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
 
   const componentMapping: { [key: string]: JSX.Element } = {
     [CALCULATOR_MAPPINGS.ALL_ON_X_CALCULATOR]: <AllOnXCalculator />,
@@ -22,19 +24,39 @@ export default function CalculatorPage() {
     ),
   };
 
+  const onClickFeedback = () => {
+    setFeedbackShow(true);
+  };
+
   return (
-    componentMapping[tabId] || (
-      <div className="nav-offset flex flex-grow-1">
-        <div className="w-full">
-          <div className="flex flex-column align-items-center justify-content-center">
-            <CalculatorContainer
-              option={searchParams.id as string}
-              input={selectedType?.input || []}
-              output={selectedType?.output || []}
-            />
+    <>
+      {componentMapping[tabId] || (
+        <div className="nav-offset flex flex-grow-1">
+          <div className="w-full">
+            <div className="flex flex-column align-items-center justify-content-center">
+              <CalculatorContainer
+                option={searchParams.id as string}
+                input={selectedType?.input || []}
+                output={selectedType?.output || []}
+              />
+            </div>
           </div>
         </div>
+      )}
+      <div
+        className="fixed text-2xl m-1 bg-green-300 border-round-3xl m-0 p-3 pl-5"
+        style={{
+          transform: "rotate(180deg)",
+          writingMode: "vertical-rl",
+          top: "30%",
+          right: "-30px",
+          cursor: "pointer",
+        }}
+        onClick={onClickFeedback}
+      >
+        Feedback
       </div>
-    )
+      {feedbkackShow && <FeedbackDialog visible={feedbkackShow} setVisible={setFeedbackShow} />}
+    </>
   );
 }

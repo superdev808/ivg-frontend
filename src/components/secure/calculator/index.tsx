@@ -3,6 +3,7 @@ import React, { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 
 import { calculatorIO } from "@/helpers/util";
+import { getCalculatorName } from "@/helpers/util";
 
 import DetailView from "./detail";
 import Quiz from "./quiz";
@@ -104,63 +105,65 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   };
 
   return (
-    <div className="flex w-full justify-content-center mb-8">
-      <div className="w-12 flex px-2 py-2 border-round bg-white flex-column">
-        <div className="grid">
-          {questions.map((quiz, index) => {
-            if (index !== level) {
-              return null;
-            }
-
-            if (
-              answerOptions[index] &&
-              answerOptions[index].length === 1 &&
-              answerOptions[index][0] === ""
-            ) {
-              if (
-                index <= level &&
-                level < input.length &&
-                answers[index] !== ""
-              ) {
-                handleSelectAnswer(index)("");
+    <>
+      <div className="flex w-full justify-content-center mb-8">
+        <div className="w-12 flex px-2 py-2 border-round bg-white flex-column">
+          <div className="grid">
+            {questions.map((quiz, index) => {
+              if (index !== level) {
+                return null;
               }
-              return null;
-            }
 
-            return (
-              <Quiz
-                key={`quiz-${index}`}
-                question={quiz.text}
-                answers={answerOptions[index]}
-                selectedAnswer={answers[index] || null}
-                currentAnswer={currentAnswer}
-                handleSelectAnswer={handleSelectAnswer(index)}
-                handleBack={index > 0 ? handleBack(index) : undefined}
-                disabled={isLoading}
-                progress={Math.floor((index / input.length) * 100)}
-              />
-            );
-          })}
-        </div>
+              if (
+                answerOptions[index] &&
+                answerOptions[index].length === 1 &&
+                answerOptions[index][0] === ""
+              ) {
+                if (
+                  index <= level &&
+                  level < input.length &&
+                  answers[index] !== ""
+                ) {
+                  handleSelectAnswer(index)("");
+                }
+                return null;
+              }
 
-        {items.length > 0 && (
-          <DetailView
-            calculatorType={calculatorType}
-            items={items}
-            fields={output}
-            questions={input}
-            answers={answers}
-            onGoBack={handleBackFromResult}
-          />
-        )}
-
-        {isLoading && (
-          <div className="w-12 flex justify-content-center">
-            <ProgressSpinner className="w-1" />
+              return (
+                <Quiz
+                  key={`quiz-${index}`}
+                  question={quiz.text}
+                  answers={answerOptions[index]}
+                  selectedAnswer={answers[index] || null}
+                  currentAnswer={currentAnswer}
+                  handleSelectAnswer={handleSelectAnswer(index)}
+                  handleBack={index > 0 ? handleBack(index) : undefined}
+                  disabled={isLoading}
+                  progress={Math.floor((index / input.length) * 100)}
+                />
+              );
+            })}
           </div>
-        )}
+
+          {items.length > 0 && (
+            <DetailView
+              calculatorType={calculatorType}
+              items={items}
+              fields={output}
+              questions={input}
+              answers={answers}
+              onGoBack={handleBackFromResult}
+            />
+          )}
+
+          {isLoading && (
+            <div className="w-12 flex justify-content-center">
+              <ProgressSpinner className="w-1" />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
