@@ -14,7 +14,7 @@ export const ProductContentSection = () => {
   // Advantage Section
   const advantageItems = [
     {
-      title: "Confirm Component Compatibility",
+      title: "Component Compatibility Confirmation",
       description: "",
       image: "/images/product/compatibility.svg",
     },
@@ -29,7 +29,7 @@ export const ProductContentSection = () => {
       image: "/images/product/procurement.svg",
     },
     {
-      title: "Simple Treatment Planninge",
+      title: "Simple Treatment Planning",
       description: "",
       image: "/images/product/treatment.svg",
     },
@@ -39,10 +39,11 @@ export const ProductContentSection = () => {
   const title: string = "What are we missing?";
   const text: JSX.Element = (
     <>
-      Request an additional Calculator or feature.&nbsp;
+      Request an additional Calculator or feature&nbsp;
       <Link href="/contact">
         <span className="font-bold text-primary underline">here</span>
       </Link>
+      .
     </>
   );
 
@@ -81,7 +82,7 @@ export const ProductContentSection = () => {
             style={{ maxWidth: 1400 }}
           >
             <div className="col-12 xl:col">
-              <ScrollCard description="Easy to navigate, interactive interface." />
+              <ScrollCard description="Easy to navigate, interactive interface" />
             </div>
             <div className="xl:col-3" />
             <div className="col-12 xl:col">
@@ -94,7 +95,9 @@ export const ProductContentSection = () => {
         </div>
       </div>
       {/* Advantage Section*/}
-      <ColItemsSection reverse items={advantageItems} title="Our Advantage" />
+      <div className="p-2 md:p-4 border-round">
+        <ColItemsSection reverse items={advantageItems} title="What We Offer" />
+      </div>
 
       {/* CTA Section */}
       <CTASection text={text} title={title} />

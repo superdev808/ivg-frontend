@@ -62,7 +62,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     <div className={cx("hero-container", "px-3 md:px-0 overflow-hidden")}>
       <div className={cx("hero-wrapper", "grid justify-content-between")}>
         <div className="col-12 md:col-6">
-          <div className="h-full flex align-items-center justify-content-between gap-6 md:pl-4 lg:gap-8">
+          <div className="h-full flex align-items-center gap-6 md:pl-4 lg:gap-8">
             <div className="hidden md:flex flex-column justify-content-center gap-5">
               {socialButtons.map((button, index) => (
                 <Button
