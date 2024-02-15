@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Patient } from "../PdfExport";
+import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
+import { Chips } from "primereact/chips";
+import { getCookie } from "@/helpers/cookie";
 
 interface FormValues {
   name: string;
   address: string;
   filename: string;
+}
+interface Recipient { 
+  name: string, 
+  key: string, 
+  hasInput: boolean 
+}
+interface RecipientEmail {
+  [key: string]: string[]
 }
 interface PatientInfoProps {
   onSubmit: (data: FormValues) => void;
@@ -25,6 +36,42 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({ defaultValues });
+
+  const [recipientEmails, setRecipientEmails] = useState<RecipientEmail>({});
+
+  const recipients: Recipient[] = [
+    { name: 'Myself', key: 'Myself', hasInput: false },
+    { name: 'Dentist', key: 'Dentist', hasInput: true },
+    { name: 'Office Staff', key: 'Office Staff', hasInput: true },
+    { name: 'Patient', key: 'Patient', hasInput: true }
+];
+const [selectedRecipients, setSelectedRecipients] = useState<Recipient[]>([]);
+
+const onRecipientsChange = (e: CheckboxChangeEvent) => {
+    let _selectedRecipients: Recipient[] = [...selectedRecipients];
+    const recipient: Recipient = e.value;
+    if (e.checked){
+      _selectedRecipients.push(recipient);
+      if(recipient.key === "Myself"){
+        const loggedInUserEmail = getCookie("email") || "";
+        handleRecipientEmailChange([loggedInUserEmail], "Myself")
+      }
+    }    
+    else {
+      _selectedRecipients = _selectedRecipients.filter(recipient => recipient.key !== recipient.key);
+      const _recipientEmails = {...recipientEmails};
+      delete _recipientEmails[recipient.key]
+      setRecipientEmails(_recipientEmails);
+    }
+    setSelectedRecipients(_selectedRecipients);    
+};
+
+const handleRecipientEmailChange = (emails: string[], recipientType: string) => {
+  let _recipientEmails: RecipientEmail = {...recipientEmails};
+  const newEmails: RecipientEmail = {[recipientType]: emails}
+  _recipientEmails = {..._recipientEmails, ...newEmails}
+  setRecipientEmails(_recipientEmails);
+}
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
@@ -48,7 +95,9 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
           })}
           className={errors.name ? "p-invalid" : ""}
         />
-        {errors.name && <small className="p-error">Patient Name is required.</small>}
+        {errors.name && (
+          <small className="p-error">Patient Name is required.</small>
+        )}
       </div>
 
       <div className="p-field mb-3">
@@ -60,7 +109,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
               : "p-float p-label-always"
           }
         >
-         Street Address
+          Street Address
         </label>
         <InputText
           id="address"
@@ -99,6 +148,42 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
         {errors.filename && (
           <small className="p-error">File Name is required.</small>
         )}
+      </div>
+
+      <div className="mb-3">
+        <p>Who are you sending this to?</p>
+        <div className="flex flex-column gap-3">
+          {recipients.map((recipient) => {
+            const isChecked = selectedRecipients.some(
+              (item) => item.key === recipient.key
+            );
+            return (
+              <>
+                <div key={recipient.key} className="flex align-items-center">
+                  <Checkbox
+                    inputId={recipient.key}
+                    name="recipient"
+                    value={recipient}
+                    onChange={onRecipientsChange}
+                    checked={isChecked}
+                  />
+                  <label htmlFor={recipient.key} className="ml-2">
+                    {recipient.name}
+                  </label>
+                </div>
+                {recipient.hasInput && isChecked && (                
+                  <Chips
+                    inputId={recipient.key}
+                    name={recipient.key}
+                    separator=","
+                    value={recipientEmails[recipient.key]}
+                    onChange={(e) => handleRecipientEmailChange(e.value||[], recipient.key)}
+                  />
+                )}
+              </>
+            );
+          })}
+        </div>
       </div>
 
       <Button type="submit" label="Submit" />
