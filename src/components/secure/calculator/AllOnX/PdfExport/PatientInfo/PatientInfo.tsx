@@ -50,7 +50,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
     });
     const emails = _recipientsList.join('|');
     setValue(`recipientsList`, emails);
-  },[recipientEmails])
+  },[recipientEmails, setValue])
 
   const recipients: Recipient[] = [
     { name: 'Myself', key: 'Myself', hasInput: false },
@@ -162,7 +162,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
         )}
       </div>
 
-      <div className="mb-3">
+      {info?.actionType === "export" && <div className="mb-3">
         <p>Who are you sending this to?</p>
         <div className="flex flex-column gap-3">
           {recipients.map((recipient) => {
@@ -204,12 +204,12 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
             required: true,
             validate: (value) => !!value.trim(),
           })}
-          className={errors.filename ? "p-invalid" : ""}
+          className={errors.recipientsList ? "p-invalid" : ""}
         />
         {errors.recipientsList && (
           <small className="p-error">Please provide atleast one recipient.</small>
         )}     
-      </div>
+      </div>}
 
       <Button type="submit" label="Submit" />
     </form>

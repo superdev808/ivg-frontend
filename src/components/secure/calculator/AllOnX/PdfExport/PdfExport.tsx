@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 // @ts-ignore
 import html2pdf from "html2pdf.js";
 import { Button } from "primereact/button";
-import { getCookie } from "@/helpers/cookie";
 import { Toast } from "primereact/toast";
 import PdfContent, { Site } from "./PdfContent/PdfContent";
 import { SiteData, TotalQuantities } from "../constants";
@@ -38,8 +37,6 @@ const PDFExport: React.FC<PDFExportProps> = ({
   const toastRef = useRef(null);
   const [patientInfo, setPatientInfo] = useState<Patient | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
-  const name = getCookie("name");
-  const email = getCookie("email");
   const filename: string = patientInfo?.filename || `${calculatorName}-Summary`;
   const ExportAndSendPDF = async (info: Patient) => {
     const element = contentRef.current;
@@ -73,7 +70,6 @@ const PDFExport: React.FC<PDFExportProps> = ({
           const formData = new FormData();
           formData.append("attachment", blob, "exported-document.pdf");
           formData.append("name", info.name);
-          formData.append("email", email);
           formData.append("recipientsList", info.recipientsList);
           formData.append("calculatorName", calculatorName);
           formData.append("filename", options.filename);
