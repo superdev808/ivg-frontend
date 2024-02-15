@@ -1,8 +1,9 @@
 import { Button } from "primereact/button";
 import { Carousel } from "primereact/carousel";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import { getCalculatorName } from "@/helpers/util";
+import HelpfulFeedbackDialog from "./Feedback/HelpfulFeedbackDialog";
 
 import Result from "./Result";
 
@@ -23,6 +24,7 @@ const DetailView: React.FC<DetailViewProps> = ({
   onGoBack,
   ...props
 }) => {
+  const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
   const items = useMemo(() => {
     return props.items.map((item) => {
       return fields.reduce((acc, field) => {
@@ -44,6 +46,10 @@ const DetailView: React.FC<DetailViewProps> = ({
       return acc;
     }, {} as Record<string, string>);
   }, [questions, answers]);
+
+  const onClickFeedback = () => {
+    setFeedbackShow(true);
+  };
 
   return (
     <>
@@ -80,6 +86,20 @@ const DetailView: React.FC<DetailViewProps> = ({
           )}
         </div>
       </div>
+      <div
+        className="fixed text-2xl m-1 left-50 bg-green-300 p-3 pb-6 border-round-3xl m-0"
+        style={{ transform: "translate(-50%, -50%)", bottom: "-90px", zIndex: "100" }}
+      >
+        <i className="pi pi-thumbs-up text-3xl mr-3" />
+        Was this helpful?
+        <i className="pi pi-thumbs-down text-3xl ml-3"
+        onClick={onClickFeedback}/>
+      </div>
+      <HelpfulFeedbackDialog
+        visible={feedbkackShow}
+        setVisible={setFeedbackShow}
+        calculatorName={getCalculatorName(calculatorType)}
+      />
     </>
   );
 };
