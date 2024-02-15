@@ -1,158 +1,176 @@
-'use client';
-import { useState, useRef, use, useEffect } from 'react';
-import { redirect, usePathname } from 'next/navigation';
+"use client";
 
-// STYLES
-import classNames from 'classnames/bind';
-import styles from './Navigation.module.scss';
+import classNames from "classnames/bind";
+import { useRouter } from "next/navigation";
+import { PrimeIcons } from "primereact/api";
+import { Avatar } from "primereact/avatar";
+import { MenuItem } from "primereact/menuitem";
+import { useDispatch } from "react-redux";
+
+import { USER_ROLES } from "@/constants/users";
+import { deleteCookie, getCookie } from "@/helpers/cookie";
+import { getInitials } from "@/helpers/util";
+import { useAppSelector } from "@/redux/hooks/hooks";
+import { setAuth } from "@/redux/slices/auth/authSlice";
+import { NavLink } from "@/types/Layout";
+
+import styles from "./Navigation.module.scss";
+
+import Navbar from "./navbar";
+
 const cx = classNames.bind(styles);
 
-import Navbar from './navbar';
-
-// HOOKS & HELPERS
-import useOutsideClick from '@/hooks/useOutsideClick';
-import useCheckMobileScreen from '@/hooks/useCheckMobileScreen';
-import { deleteCookie, getCookie } from '@/helpers/cookie';
-
-import { PrimeIcons } from 'primereact/api';
-
-//REDUX
-import { useAppSelector } from '@/redux/hooks/hooks';
-import { useDispatch } from 'react-redux';
-import { setAuth } from '@/redux/slices/auth/authSlice';
-import { useRouter } from 'next/navigation';
-import { NavLink } from '@/types/Layout';
-import { MenuItem } from 'primereact/menuitem';
-import { getInitials } from '@/helpers/util';
-import { Avatar } from 'primereact/avatar';
-import { USER_ROLES } from '@/constants/users';
-import { getUserRole } from '@/helpers/getUserRole';
-import { set } from 'lodash';
-
 export interface NavigationProps {
-	secure?: boolean;
-	transparentBg?: boolean;
+  authenticated?: boolean;
+  transparentBg?: boolean;
 }
 
-const Navigation = ({ secure, transparentBg }: NavigationProps) => {
-	const dispatch = useDispatch();
-	const router = useRouter();
-	const userName = getCookie('name');
-	const userEmail = getCookie('email');
+const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const userName = getCookie("name");
+  const userEmail = getCookie("email");
 
-	const { role } = useAppSelector((state) => state.auth);
-	// toggle sidebar
-	const [isOpen, setIsOpen] = useState(false);
-	const boxRef = useRef(null);
+  const { role } = useAppSelector((state) => state.auth);
 
-	const onSignOut = async () => {
-		try {
-			deleteCookie('appToken', '/');
-			deleteCookie('email', '/');
-			dispatch(setAuth(false));
+  const onSignOut = async () => {
+    try {
+      deleteCookie("appToken", "/");
+      deleteCookie("email", "/");
+      dispatch(setAuth(false));
 
-			router.push('/login');
-		} catch (error: any) {
-			console.log(error);
-		}
-	};
+      router.push("/login");
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
 
-	const navLinks: NavLink[] = [
-		{ id: 'product', title: 'Product', link: '/product' },
-		{ id: 'about', title: 'About', link: '/about' },
+  const navLinks: NavLink[] = [
+    { id: "product", title: "Product", link: "/product", visibility: "public" },
 
-		// Protected Links
-		{ id: 'calculators', title: 'Calculators', link: '/calculators', secure: true },
-		// {id: 'workflows',title: 'Workflows', link: '/workflows', icon: PrimeIcons.SITEMAP, auth: true},
-	];
+    // Protected Links
+    {
+      id: "calculators",
+      title: "Calculators",
+      link: "/calculators",
+      visibility: "authenticated",
+    },
+    // {id: 'workflows',title: 'Workflows', link: '/workflows', icon: PrimeIcons.SITEMAP, auth: true},
+  ];
 
-	const rightNavLinks: NavLink[] = [
-		{ id: 'contact', title: 'Contact Us', link: '/contact', icon: PrimeIcons.PHONE },
-		{ id: 'register', title: 'Register', link: '/register', icon: PrimeIcons.USER },
-		{ id: 'login', title: 'Login', link: '/login', icon: PrimeIcons.SIGN_IN },
+  const rightNavLinks: NavLink[] = [
+    {
+      id: "contact",
+      title: "Contact Us",
+      link: "/contact",
+      icon: PrimeIcons.PHONE,
+      visibility: "public",
+    },
+    {
+      id: "register",
+      title: "Register",
+      link: "/register",
+      icon: PrimeIcons.USER,
+      visibility: "unauthenticated",
+    },
+    {
+      id: "login",
+      title: "Login",
+      link: "/login",
+      icon: PrimeIcons.SIGN_IN,
+      visibility: "unauthenticated",
+    },
 
-		// Protected Links
-		{ id: 'help', title: 'Help', link: '/help', icon: PrimeIcons.QUESTION_CIRCLE, secure: true },
-		{ id: 'settings', title: 'Settings', link: '/settings', icon: PrimeIcons.USER, secure: true },
-		{ id: 'signout', title: 'Sign Out', onClick: onSignOut, icon: PrimeIcons.SIGN_OUT, secure: true },
-	];
+    // Protected Links
+    {
+      id: "help",
+      title: "Help",
+      link: "/help",
+      icon: PrimeIcons.QUESTION_CIRCLE,
+      visibility: "hidden",
+    },
+    {
+      id: "settings",
+      title: "Settings",
+      link: "/settings",
+      icon: PrimeIcons.USER,
+      visibility: "hidden",
+    },
+    {
+      id: "signout",
+      title: "Sign Out",
+      onClick: onSignOut,
+      icon: PrimeIcons.SIGN_OUT,
+      visibility: "hidden",
+    },
+  ];
 
-	const avatar = (
-		<Avatar
-			label={getInitials(userName)}
-			size="normal"
-			className="bg-orange-100 font-bold text-700"
-			shape="circle"
-		/>
-	);
+  const avatar = (
+    <Avatar
+      label={getInitials(userName)}
+      size="normal"
+      className="bg-orange-100 font-bold text-700"
+      shape="circle"
+    />
+  );
 
-	let avatarLinks: MenuItem[] = [
-		{
-			template: (item, options) => {
-				return (
-					<div className="flex px-2">
-						{avatar}
+  const avatarLinks: MenuItem[] = [
+    {
+      template: () => (
+        <div className="flex px-2">
+          {avatar}
 
-						<div className="flex flex-column align ml-3">
-							<span className="font-bold">{userName}</span>
-							<span className="text-sm">{userEmail}</span>
-						</div>
-					</div>
-				);
-			},
-		},
+          <div className="flex flex-column align ml-3">
+            <span className="font-bold">{userName}</span>
+            <span className="text-sm">{userEmail}</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      separator: true,
+    },
+    {
+      label: "Settings",
+      icon: "pi pi-cog",
+      url: "/settings",
+    },
+    {
+      label: "Help",
+      icon: "pi pi-question",
+      url: "/help",
+    },
+    {
+      label: "Administration",
+      icon: "pi pi-cog",
+      url: "/admin",
+      visible: role === USER_ROLES.ADMIN,
+    },
+    {
+      separator: true,
+    },
+    {
+      label: "Logout",
+      icon: "pi pi-sign-out",
+      command: onSignOut,
+    },
+  ];
 
-		{
-			separator: true,
-		},
-
-		{
-			label: 'Settings',
-			icon: 'pi pi-cog',
-			url: '/settings',
-		},
-		{
-			label: 'Help',
-			icon: 'pi pi-question',
-			url: '/help',
-		},
-		{
-			label: 'Administration',
-			icon: 'pi pi-cog',
-			url: '/admin',
-			visible: role === USER_ROLES.ADMIN,
-		},
-		{
-			separator: true,
-		},
-
-		{
-			label: 'Logout',
-			icon: 'pi pi-sign-out',
-			command: onSignOut,
-		},
-	];
-
-	const closeMenu: () => void = () => {
-		setIsOpen(false);
-	};
-
-	useOutsideClick(boxRef, closeMenu);
-	useCheckMobileScreen(closeMenu);
-
-	return (
-		<div
-			ref={boxRef}
-			className={cx(['z-2 w-full py-2 absolute top-1', { 'nav-background': !transparentBg }])}>
-			<Navbar
-				navLinks={navLinks}
-				rightNavLinks={rightNavLinks}
-				avatarLinks={avatarLinks}
-				avatar={avatar}
-				secure={secure}
-			/>
-		</div>
-	);
+  return (
+    <div
+      className={cx("z-2 w-full py-2 absolute top-1", {
+        "nav-background": !transparentBg,
+      })}
+    >
+      <Navbar
+        navLinks={navLinks}
+        rightNavLinks={rightNavLinks}
+        avatarLinks={avatarLinks}
+        avatar={avatar}
+        authenticated={authenticated}
+      />
+    </div>
+  );
 };
 
 export default Navigation;

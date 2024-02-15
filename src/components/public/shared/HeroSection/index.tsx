@@ -1,89 +1,138 @@
-import { useAppDispatch } from '@/redux/hooks/hooks';
-import { Button } from 'primereact/button';
-import { Image } from 'primereact/image';
+import classNames from "classnames/bind";
+import noop from "lodash";
+import { Button } from "primereact/button";
+import { Image } from "primereact/image";
+import { useEffect } from "react";
 
-import classNames from 'classnames/bind';
-import styles from './HeroSection.module.scss';
-import { useEffect } from 'react';
+import { useAppDispatch } from "@/redux/hooks/hooks";
+
+import styles from "./HeroSection.module.scss";
+import Link from "next/link";
 
 const cx = classNames.bind(styles);
 
-export const HeroSection = ({
-	title,
-	subtitle,
-	cta,
-	image,
-}: {
-	title: React.JSX.Element | string;
-	subtitle?: React.JSX.Element | string;
-	cta: string;
-	image: { src?: string; width?: string; height?: string; offset?: boolean };
+interface HeroSectionProps {
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  cta?: {
+    label: string;
+    onClick?: () => void;
+  };
+  image: {
+    src?: string;
+    width?: string;
+    height?: string;
+    offset?: boolean;
+    hideOnMobile?: boolean;
+  };
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({
+  title,
+  subtitle,
+  cta,
+  image,
 }) => {
-	const defaultImageAttr = { src: '', alt: 'hero-image', width: '100%', height: '100%', offset: false };
-	const imageAttr = { ...defaultImageAttr, ...image };
+  const defaultImageAttr = {
+    src: "",
+    alt: "hero-image",
+    width: "100%",
+    height: "100%",
+    offset: false,
+  };
 
-	const dispatch = useAppDispatch();
+  const imageAttr = { ...defaultImageAttr, ...image };
 
-	useEffect(() => {
-		dispatch({ type: 'ui/setTransparentNavBar', payload: true });
+  const dispatch = useAppDispatch();
 
-		return () => {
-			dispatch({ type: 'ui/setTransparentNavBar', payload: false });
-		};
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch({ type: "ui/setTransparentNavBar", payload: true });
 
-	const socialButtons = [
-		{ icon: 'pi pi-facebook', ariaLabel: 'Facebook Link', link: '#' },
-		{ icon: 'pi pi-instagram', ariaLabel: 'Instagram Link', link: '#' },
-		{ icon: 'pi pi-linkedin', ariaLabel: 'LinkedIn Link', link: '#' },
-	];
+    return () => {
+      dispatch({ type: "ui/setTransparentNavBar", payload: false });
+    };
+  }, [dispatch]);
 
-	return (
-		<>
-			<div className={cx(['hero-container', 'px-3 md:px-0 overflow-hidden '])}>
-				<div className={cx('radial-gradient-2', 'hidden md:flex')}></div>
-				<div className={cx(['hero-wrapper', 'grid justify-content-between'])}>
-					<div className="grid col-12 md:col-6">
-						<div className="col-3 hidden md:flex  flex-column justify-content-center pl-5">
-							{socialButtons.map((button, index) => {
-								return (
-									<Button
-										key={`social_${index}`}
-										pt={{
-											icon: { className: cx(['social-button']) },
-										}}
-										rounded
-										outlined
-										text
-										icon={button.icon}
-										className={cx(['text-white mt-5'])}
-										aria-label={button.ariaLabel}
-									/>
-								);
-							})}
-						</div>
-						<div className="col-12 md:col-7  flex flex-column justify-content-center align-items-center md:align-items-start ">
-							<span className="text-primary text-4xl sm:text-5xl lg:text-6xl font-semibold	 text-center md:text-left">{title}</span>
-							<span className="text-white text-lg md:text-xl text-right md:text-left">{subtitle}</span>
-							<Button className={cx(['btn-primary', 'my-4 font-bold text-normal md:text-lg md:px-4 :md:py-3 '])}>{cta}</Button>
-						</div>
-					</div>
-					<div className="col-12  md:col-6  md:flex px-0 pt-5">
-						<div
-							className={cx([
-								'md:pr-6',
-								{ 'hero-image-container': imageAttr.offset },
-								{ 'flex align-items-center justify-content-center w-full': !imageAttr.offset },
-							])}>
-							<Image
-								src={imageAttr.src}
-								width={imageAttr.width}
-								alt="hero-image"
-							/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+  const socialButtons = [
+    {
+      icon: "pi pi-facebook",
+      ariaLabel: "Facebook Link",
+      link: "https://www.facebook.com/profile.php?id=61551773567714",
+    },
+    {
+      icon: "pi pi-instagram",
+      ariaLabel: "Instagram Link",
+      link: "https://www.instagram.com/ivory.guide?fbclid=IwAR2T81D8g_ICPZCn2uKavFn23VVZBDMZ-xpP-19LpKFHYA5-YqbeFPIL5TQ",
+    },
+    {
+      icon: "pi pi-linkedin",
+      ariaLabel: "LinkedIn Link",
+      link: "https://www.linkedin.com/company/ivory-guide/?viewAsMember=true",
+    },
+  ];
+
+  return (
+    <div className={cx("hero-container", "px-3 md:px-0 overflow-hidden")}>
+      <div className={cx("hero-wrapper", "grid justify-content-between")}>
+        <div className="col-12 md:col-6">
+          <div className="h-full flex align-items-center gap-6 md:pl-4 lg:gap-8">
+            <div className="hidden md:flex flex-column justify-content-center gap-5">
+              {socialButtons.map((button) => (
+                <Link key={button.ariaLabel} href={button.link} target="_blank">
+                  <Button
+                    pt={{
+                      icon: { className: cx("social-button") },
+                    }}
+                    rounded
+                    outlined
+                    text
+                    icon={button.icon}
+                    className="text-white"
+                    aria-label={button.ariaLabel}
+                  />
+                </Link>
+              ))}
+            </div>
+
+            <div className="flex flex-column justify-content-center align-items-center md:align-items-start lg:pl-0 xl:px-8">
+              <span className="text-primary text-4xl sm:text-5xl lg:text-6xl font-semibold text-center md:text-left">
+                {title}
+              </span>
+              <span className="text-white text-lg md:text-xl text-right md:text-left">
+                {subtitle}
+              </span>
+              {cta && (
+                <Button
+                  className={cx(
+                    "btn-primary",
+                    "mt-4 font-bold text-normal md:text-lg md:px-5 md:py-4"
+                  )}
+                  onClick={cta.onClick || noop}
+                >
+                  {cta.label}
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="col-12 md:col-6 md:flex">
+          <div
+            className={cx("md:pr-6", {
+              "hero-image-container": imageAttr.offset,
+              "md:flex align-items-center justify-content-center w-full pt-4":
+                !imageAttr.offset,
+              hidden: imageAttr.hideOnMobile,
+            })}
+          >
+            <Image
+              src={imageAttr.src}
+              width={imageAttr.width}
+              alt="hero-image"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
