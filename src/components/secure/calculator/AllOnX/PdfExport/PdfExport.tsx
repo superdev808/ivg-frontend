@@ -69,7 +69,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
 
           const formData = new FormData();
           formData.append("attachment", blob, "exported-document.pdf");
-          formData.append("name", info.name);
+          //formData.append("name", info.name);
           formData.append("recipientsList", info.recipientsList);
           formData.append("calculatorName", calculatorName);
           formData.append("filename", options.filename);
@@ -82,10 +82,12 @@ const PDFExport: React.FC<PDFExportProps> = ({
           );
           if (!response.ok) {
             response.json().then((res: any) => {
+              const msg: string =
+              res?.message?.message || res?.message || "Something went wrong";
               (toastRef.current as any).show({
                 severity: "error",
-                summary: res.status,
-                detail: res.message,
+                summary: res?.status,
+                detail: msg,
                 life: 5000,
               });
             });
