@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -11,6 +11,7 @@ interface FormValues {
   name: string;
   address: string;
   filename: string;
+  recipientsList: string;
 }
 interface Recipient { 
   name: string, 
@@ -30,6 +31,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
     name: "",
     address: "",
     filename: info?.filename || "",
+    recipientsList: ""
   };
   const {
     register,
@@ -38,40 +40,49 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
   } = useForm<FormValues>({ defaultValues });
 
   const [recipientEmails, setRecipientEmails] = useState<RecipientEmail>({});
+  const [selectedRecipients, setSelectedRecipients] = useState<Recipient[]>([]);
+  const [recipientsList, setRecipientsList] = useState<string>("");
+
+  useEffect(() => {
+    let _recipientsList: string[] = [];
+    Object.values(recipientEmails).map((emails: string[]) => {
+      emails.map((email: string) => _recipientsList.push(email));
+    });
+    setRecipientsList(_recipientsList.join('|'))
+  },[recipientEmails])
 
   const recipients: Recipient[] = [
     { name: 'Myself', key: 'Myself', hasInput: false },
     { name: 'Dentist', key: 'Dentist', hasInput: true },
     { name: 'Office Staff', key: 'Office Staff', hasInput: true },
     { name: 'Patient', key: 'Patient', hasInput: true }
-];
-const [selectedRecipients, setSelectedRecipients] = useState<Recipient[]>([]);
+  ];
 
-const onRecipientsChange = (e: CheckboxChangeEvent) => {
-    let _selectedRecipients: Recipient[] = [...selectedRecipients];
-    const recipient: Recipient = e.value;
-    if (e.checked){
-      _selectedRecipients.push(recipient);
-      if(recipient.key === "Myself"){
-        const loggedInUserEmail = getCookie("email") || "";
-        handleRecipientEmailChange([loggedInUserEmail], "Myself")
+  const onRecipientsChange = (e: CheckboxChangeEvent) => {
+      let _selectedRecipients: Recipient[] = [...selectedRecipients];
+      const recipient: Recipient = e.value;
+      if (e.checked){
+        _selectedRecipients.push(recipient);
+        if(recipient.key === "Myself"){
+          const loggedInUserEmail = getCookie("email") || "";
+          handleRecipientEmailChange([loggedInUserEmail], "Myself")
+        }
+      }    
+      else {
+        _selectedRecipients = _selectedRecipients.filter(item => item.key !== recipient.key);
+        const _recipientEmails = {...recipientEmails};
+        delete _recipientEmails[recipient.key]
+        setRecipientEmails(_recipientEmails);
       }
-    }    
-    else {
-      _selectedRecipients = _selectedRecipients.filter(recipient => recipient.key !== recipient.key);
-      const _recipientEmails = {...recipientEmails};
-      delete _recipientEmails[recipient.key]
-      setRecipientEmails(_recipientEmails);
-    }
-    setSelectedRecipients(_selectedRecipients);    
-};
+      setSelectedRecipients(_selectedRecipients);    
+  };
 
-const handleRecipientEmailChange = (emails: string[], recipientType: string) => {
-  let _recipientEmails: RecipientEmail = {...recipientEmails};
-  const newEmails: RecipientEmail = {[recipientType]: emails}
-  _recipientEmails = {..._recipientEmails, ...newEmails}
-  setRecipientEmails(_recipientEmails);
-}
+  const handleRecipientEmailChange = (emails: string[], recipientType: string) => {
+    let _recipientEmails: RecipientEmail = {...recipientEmails};
+    const newEmails: RecipientEmail = {[recipientType]: emails}
+    _recipientEmails = {..._recipientEmails, ...newEmails}
+    setRecipientEmails(_recipientEmails);
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
@@ -183,7 +194,14 @@ const handleRecipientEmailChange = (emails: string[], recipientType: string) => 
               </>
             );
           })}
-        </div>
+        </div>  
+        <InputText
+          hidden
+          id="recipientsList"
+          value={recipientsList}
+          {...register("recipientsList")}
+          className={errors.recipientsList ? "p-invalid" : ""}
+        />      
       </div>
 
       <Button type="submit" label="Submit" />
