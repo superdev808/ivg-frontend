@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "@/redux/hooks/hooks";
 
 import styles from "./HeroSection.module.scss";
+import Link from "next/link";
 
 const cx = classNames.bind(styles);
 
@@ -53,9 +54,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   }, [dispatch]);
 
   const socialButtons = [
-    { icon: "pi pi-facebook", ariaLabel: "Facebook Link", link: "#" },
-    { icon: "pi pi-instagram", ariaLabel: "Instagram Link", link: "#" },
-    { icon: "pi pi-linkedin", ariaLabel: "LinkedIn Link", link: "#" },
+    {
+      icon: "pi pi-facebook",
+      ariaLabel: "Facebook Link",
+      link: "https://www.facebook.com/profile.php?id=61551773567714",
+    },
+    {
+      icon: "pi pi-instagram",
+      ariaLabel: "Instagram Link",
+      link: "https://www.instagram.com/ivory.guide?fbclid=IwAR2T81D8g_ICPZCn2uKavFn23VVZBDMZ-xpP-19LpKFHYA5-YqbeFPIL5TQ",
+    },
+    {
+      icon: "pi pi-linkedin",
+      ariaLabel: "LinkedIn Link",
+      link: "https://www.linkedin.com/company/ivory-guide/?viewAsMember=true",
+    },
   ];
 
   return (
@@ -64,19 +77,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="col-12 md:col-6">
           <div className="h-full flex align-items-center gap-6 md:pl-4 lg:gap-8">
             <div className="hidden md:flex flex-column justify-content-center gap-5">
-              {socialButtons.map((button, index) => (
-                <Button
-                  key={`social_${index}`}
-                  pt={{
-                    icon: { className: cx("social-button") },
-                  }}
-                  rounded
-                  outlined
-                  text
-                  icon={button.icon}
-                  className="text-white"
-                  aria-label={button.ariaLabel}
-                />
+              {socialButtons.map((button) => (
+                <Link key={button.ariaLabel} href={button.link} target="_blank">
+                  <Button
+                    pt={{
+                      icon: { className: cx("social-button") },
+                    }}
+                    rounded
+                    outlined
+                    text
+                    icon={button.icon}
+                    className="text-white"
+                    aria-label={button.ariaLabel}
+                  />
+                </Link>
               ))}
             </div>
 
