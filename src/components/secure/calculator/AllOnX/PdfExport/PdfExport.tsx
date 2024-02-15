@@ -69,7 +69,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
 
           const formData = new FormData();
           formData.append("attachment", blob, "exported-document.pdf");
-          //formData.append("name", info.name);
+          formData.append("name", info.name);
           formData.append("recipientsList", info.recipientsList);
           formData.append("calculatorName", calculatorName);
           formData.append("filename", options.filename);
