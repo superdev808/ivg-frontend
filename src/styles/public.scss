@@ -1,67 +1,68 @@
 // CONTAINERS
 .public-content-container {
-	width: 100%;
-	.public-content-wrapper {
-		width: 100%;
-		display: flex;
-		padding: 0 20px;
-	}
+  width: 100%;
+  .public-content-wrapper {
+    width: 100%;
+    display: flex;
+    padding: 0 20px;
+  }
 }
 
 @media screen and (min-width: 768px) {
-		.public-content-wrapper {
-			margin: 0 auto;
-			max-width: 1500px;
-			padding: 0 !important;
-    }
+  .public-content-wrapper {
+    margin: 0 auto;
+    max-width: 1500px;
+    padding: 0 !important;
+  }
 }
-
-
-
 
 // EFFECTS
 
 .public-blur-shadow {
-    position: absolute;
-    top: -100px; 
-    left: -100px;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, #7ec09925 0%, rgba(131, 184, 153, 0) 65%);
-
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #7ec09925 0%, rgba(131, 184, 153, 0) 65%);
 }
+
 .public-blur-shadow-dark {
-    position: absolute;
-    top: -100px; 
-    left: 50%;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, #a6c7b435 0%, rgba(131, 184, 153, 0) 70%);
-	transform: translateX(-50%);
-
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #a6c7b435 0%, rgba(131, 184, 153, 0) 70%);
+  transform: translateX(-50%);
 }
+
 // TYPOGRAPHY
-$public-section-text: 'text-lg text-left md:text-center line-height-3 text-gray-600';
 
 .public-section-title {
-	
-	@include styleclass('text-4xl md:text-6xl font-bold text-gray-800');
+  @include styleclass("text-4xl md:text-6xl font-bold text-gray-800");
 }
 
 .public-section-content {
-	@include styleclass($public-section-text);
-	&-xl {
-		@include styleclass($public-section-text + ' md:text-xl');
-	}
-	&-2xl {
-		@include styleclass($public-section-text + ' md:text-2xl');
-	}
+  $public-section-content-text: "text-lg text-left md:text-center line-height-3 text-gray-600";
 
-	
+  @include styleclass($public-section-content-text);
+
+  &-xl {
+    @include styleclass($public-section-content-text + " md:text-xl");
+  }
+
+  &-2xl {
+    @include styleclass($public-section-content-text + " md:text-2xl");
+  }
 }
 
 .public-section-label {
-	@include styleclass('text-lg md:text-xl text-gray-800 font-semibold mb-4');
+  $public-section-label-text: "text-lg md:text-xl text-gray-800 font-semibold mb-4";
+
+  @include styleclass("text-lg md:text-xl text-gray-800 font-semibold mb-4");
+
+  &-2xl {
+    @include styleclass($public-section-label-text + " md:text-2xl");
+  }
 }
-
-

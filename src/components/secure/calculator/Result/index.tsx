@@ -209,16 +209,26 @@ const Result: React.FC<ResultProps> = ({ calculatorType, itemInfo, quiz }) => {
           )}
         </div>
 
-        <div className="flex justify-content-between gap-4 flex-column lg:flex-row">
+        <div className="flex justify-content-between gap-4 flex-column lg:flex-row ">
           {itemImage && (
-            <div className="flex-1 overflow-hidden">
-              <Image src={itemImage} alt={itemName} imageClassName="w-full" />
+            <div
+              className={cx(
+                "flex-1 flex justify-content-center overflow-hidden",
+                "image"
+              )}
+            >
+              <Image
+                src={itemImage}
+                alt={itemName}
+                className="flex-1 flex justify-content-center"
+                imageClassName="w-full sm:w-5 lg:w-auto lg:h-full"
+              />
             </div>
           )}
 
           <div
             className={cx(
-              "bg-white flex flex-column gap-3 shadow-6 p-4 border-round-md h-fit",
+              "bg-white flex flex-column justify-content-around gap-3 shadow-6 p-4 border-round-md",
               "quiz"
             )}
           >

@@ -1,25 +1,34 @@
-'use client';
+"use client";
 
-import React, { PropsWithChildren, useEffect, useState, } from 'react';
-import Navigation from '@/components/layout/navigation';
-import Footer from '@/components/layout/footer';
-import Loading from '@/components/layout/loading';
+import React, { PropsWithChildren } from "react";
 
-import useAuthRedirect from '@/hooks/useAuthRedirect';
+import Footer from "@/components/layout/footer";
+import Loading from "@/components/layout/loading";
+import Navigation from "@/components/layout/navigation";
+import useAuthRedirect from "@/hooks/useAuthRedirect";
+import { useAppSelector } from "@/redux/hooks/hooks";
 
 export default function PublicLayout({ children }: PropsWithChildren) {
-	const {isLoading, layoutStyle} = useAuthRedirect();
+  const { isLoading, layoutStyle } = useAuthRedirect();
 
-	if (isLoading) {
-		return <Loading />;
-	}
+  const { authenticated } = useAppSelector((state) => state.auth);
 
-	return (
-		<>
-			{layoutStyle.hidden ? null : <Navigation transparentBg={layoutStyle.transparentBg} />}
-			{children}
-			{layoutStyle.hidden ? null : <Footer extendFooter={layoutStyle.extendFooter} />}
-		
-		</>
-	);
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  return (
+    <>
+      {!layoutStyle.hidden && (
+        <Navigation
+          authenticated={authenticated}
+          transparentBg={layoutStyle.transparentBg}
+        />
+      )}
+      {children}
+      {!layoutStyle.hidden && (
+        <Footer extendFooter={layoutStyle.extendFooter} />
+      )}
+    </>
+  );
 }

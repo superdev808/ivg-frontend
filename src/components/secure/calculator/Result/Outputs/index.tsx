@@ -24,7 +24,7 @@ const Outputs: React.FC<OutputsProps> = ({
     <div className="flex flex-column gap-4">
       {outputs.map(({ name, link, additionals }) => (
         <div
-          key={name}
+          key={name || link}
           className="flex flex-column justify-content-between gap-4 p-3 border-2 border-gray-300 border-round-md md:flex-row md:align-items-center"
         >
           <div className="flex flex-column gap-2">

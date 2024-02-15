@@ -1,9 +1,9 @@
 export interface NavLink {
-	id: string;
-	link?: string;
-	title: string;
-	icon?: string;
-	secure?: boolean;
-	onClick?: any;
-	className?: string;
+  id: string;
+  link?: string;
+  title: string;
+  icon?: string;
+  visibility: "public" | "authenticated" | "unauthenticated" | "hidden";
+  onClick?: any;
+  className?: string;
 }

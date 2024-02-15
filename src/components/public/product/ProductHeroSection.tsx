@@ -1,19 +1,22 @@
-import { HeroSection } from '../shared/HeroSection';
+import { useRouter } from "next/navigation";
+
+import { HeroSection } from "../shared/HeroSection";
 
 export const ProductHeroSection = () => {
-	const heroTitle = 'Instantaneous Access To Trustworthy Clinical Recommendations';
-	const heroSubtitle = (
-		<>
-			Instantaneous Access to trustworthy clinical recommendations
-		</>
-	);
-	return (
-		<>
-			<HeroSection
-				title={heroTitle}
-				// subtitle={heroSubtitle}
-				cta="Request More Information"
-				image={{src:'/images/common/elephant.svg'}}></HeroSection>
-		</>
-	);
+  const router = useRouter();
+
+  const handleRedirectToContactUs = () => {
+    router.push("/contact");
+  };
+
+  return (
+    <HeroSection
+      title="Instantaneous Access To Trustworthy Clinical Recommendations"
+      cta={{
+        label: "Request more information",
+        onClick: handleRedirectToContactUs,
+      }}
+      image={{ src: "/images/common/elephant.svg", hideOnMobile: true }}
+    />
+  );
 };
