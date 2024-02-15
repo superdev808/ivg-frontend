@@ -45,16 +45,24 @@ const useAuthRedirect = () => {
   );
 
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const checkAuthStatus = () => {
       if (authLoading) return;
+
+      if (Object.values(PUBLIC_ROUTES).includes(activePath as PUBLIC_ROUTES)) {
+        setIsLoading(false);
+        return;
+      }
 
       if (
         !authenticated &&
         Object.values(PRIVATE_ROUTES).includes(activePath as PRIVATE_ROUTES)
       ) {
         return router.replace(REDIRECT_TO_UNAUTH);
-      } else if (
+      }
+
+      if (
         authenticated &&
         !BYPASS_AUTH_ROUTES.includes(activePath as PUBLIC_AUTH_ROUTES) &&
         !Object.values(PRIVATE_ROUTES).filter((route) =>

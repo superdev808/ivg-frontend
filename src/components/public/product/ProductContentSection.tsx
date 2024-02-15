@@ -14,6 +14,28 @@ export const ProductContentSection = () => {
   // Advantage Section
   const advantageItems = [
     {
+      title: "Fractured Clinical Approaches",
+      description:
+        "Dental knowledge is segmented across the country between dental practices, offices, schools and manufacturers, creating communication silos",
+      image: "/images/about/advantage_fracture.svg",
+    },
+    {
+      title: "Overwhelmed Support Staffs",
+      description:
+        "Dental manufacturers frequently lack the ability or staff to provide patient-in-chair or case planning support",
+      image: "/images/about/advantage_overwhelmed.svg",
+    },
+    {
+      title: "Unpredictable Patient Care",
+      description:
+        "Treatment approaches can vary significantly between offices, harming business growth and lowering customer retention",
+      image: "/images/about/advantage_inconsistent.svg",
+    },
+  ];
+
+  // Offer Section
+  const offerItems = [
+    {
       title: "Component Compatibility Confirmation",
       description: "",
       image: "/images/product/compatibility.svg",
@@ -94,9 +116,19 @@ export const ProductContentSection = () => {
           </div>
         </div>
       </div>
+
       {/* Advantage Section*/}
       <div className="p-2 md:p-4 border-round">
-        <ColItemsSection reverse items={advantageItems} title="What We Offer" />
+        <ColItemsSection
+          items={advantageItems}
+          title="Let's address the elephant in the room"
+          subtitle="The dental industry lacks comprehensive support, training, and treatment planning solutions for doctors and their staff"
+        />
+      </div>
+
+      {/* Offer Section*/}
+      <div className="p-2 md:p-4 border-round">
+        <ColItemsSection reverse items={offerItems} title="What We Offer" />
       </div>
 
       {/* CTA Section */}

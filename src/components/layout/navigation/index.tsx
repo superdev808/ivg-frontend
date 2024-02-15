@@ -47,12 +47,6 @@ const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
 
   const navLinks: NavLink[] = [
     { id: "product", title: "Product", link: "/product", visibility: "public" },
-    {
-      id: "about",
-      title: "About",
-      link: "/about",
-      visibility: "unauthenticated",
-    },
 
     // Protected Links
     {

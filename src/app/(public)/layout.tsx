@@ -6,9 +6,12 @@ import Footer from "@/components/layout/footer";
 import Loading from "@/components/layout/loading";
 import Navigation from "@/components/layout/navigation";
 import useAuthRedirect from "@/hooks/useAuthRedirect";
+import { useAppSelector } from "@/redux/hooks/hooks";
 
 export default function PublicLayout({ children }: PropsWithChildren) {
   const { isLoading, layoutStyle } = useAuthRedirect();
+
+  const { authenticated } = useAppSelector((state) => state.auth);
 
   if (isLoading) {
     return <Loading />;
@@ -17,7 +20,10 @@ export default function PublicLayout({ children }: PropsWithChildren) {
   return (
     <>
       {!layoutStyle.hidden && (
-        <Navigation transparentBg={layoutStyle.transparentBg} />
+        <Navigation
+          authenticated={authenticated}
+          transparentBg={layoutStyle.transparentBg}
+        />
       )}
       {children}
       {!layoutStyle.hidden && (
