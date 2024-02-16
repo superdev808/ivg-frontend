@@ -19,12 +19,12 @@
     word-wrap: normal;
   }
 
-  tr {
-    &.even {
+  tbody {
+    tr:nth-of-type(2n + 1) {
       background-color: var(--gray-50);
     }
 
-    &.odd {
+    tr:nth-of-type(2n) {
       background-color: #c3dfd0;
     }
   }

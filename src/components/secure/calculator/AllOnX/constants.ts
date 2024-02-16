@@ -42,10 +42,12 @@ export interface InputDetail {
 
 export interface ItemInsights {
   id?: string;
+  brand: string;
   itemName: string;
   itemNumber?: string;
   link: string;
   quantity?: number;
+  manufacturer?: string;
 }
 export interface ItemData {
   id?: string;

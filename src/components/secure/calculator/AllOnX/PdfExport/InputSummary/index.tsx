@@ -19,53 +19,51 @@ const InputSummary: React.FC<InputSummaryProps> = ({
   selectedSites,
   sitesData,
 }) => {
-  let sitesObj: { [key: string]: InputDetail[] } = {};
+  let sitesObj: Record<string, InputDetail[]> = {};
 
-  selectedSites.map((site: Site) => {
+  selectedSites.forEach((site) => {
     const inputDetailArr: InputDetail[] = [];
-    const questionnaire: InputDetail[] =
-      sitesData[site.name]?.inputDetails || [];
-    questionnaire.map((data: InputDetail) => {
-      !!data.answer && inputDetailArr.push(data);
+    const questionnaire = sitesData[site.name]?.inputDetails || [];
+
+    questionnaire.forEach((data) => {
+      if (data.answer) {
+        inputDetailArr.push(data);
+      }
     });
 
     sitesObj = { ...sitesObj, [site.name]: inputDetailArr };
   });
 
-  const uniqueQuestions: string[] = uniq(
-    flatMap(Object.values(sitesObj), (site: InputDetail[]) =>
-      site.map((item: InputDetail) => item.question)
+  const uniqueQuestions = uniq(
+    flatMap(Object.values(sitesObj), (site) =>
+      site.map((item) => item.question)
     )
   ).filter(Boolean);
 
   return (
     <>
-      {chunk(uniqueQuestions, 9).map((questions: string[], idx: number) => (
+      {chunk(uniqueQuestions, 9).map((questions, idx) => (
         <table
           className={cx("striped-table", { "mt-4": idx !== 0 })}
           key={`uniqueQuestions-${idx}`}
         >
           <thead>
-            {idx === 0 && (
-              <tr>
-                <span className="font-bold my-0 pb-1">Inputs:</span>
-              </tr>
-            )}
+            {idx === 0 && <tr className="font-bold my-0 pb-1">Inputs:</tr>}
 
             <tr>
               <th>Site Number</th>
-              {questions.map((question: string, index: number) => (
+              {questions.map((question, index) => (
                 <th key={index}>{question}</th>
               ))}
             </tr>
           </thead>
 
           <tbody>
-            {Object.keys(sitesObj).map((site, siteIdx) => (
-              <tr key={site} className={cx(siteIdx % 2 === 0 ? "even" : "odd")}>
+            {Object.keys(sitesObj).map((site) => (
+              <tr key={site}>
                 <td>{site.replace("Site", "").trim()}</td>
 
-                {questions.map((question: string, index: number) => {
+                {questions.map((question, index) => {
                   const item =
                     sitesObj[site].filter(
                       (obj: InputDetail) => obj.question === question

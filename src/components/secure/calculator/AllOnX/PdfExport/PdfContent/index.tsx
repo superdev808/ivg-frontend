@@ -1,8 +1,10 @@
 import classNames from "classnames/bind";
 import cloneDeep from "lodash/cloneDeep";
 import findIndex from "lodash/findIndex";
+import find from "lodash/find";
+import get from "lodash/get";
 import uniqBy from "lodash/uniqBy";
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 
 import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 import { getCookie } from "@/helpers/cookie";
@@ -10,26 +12,20 @@ import { formatDate } from "@/helpers/util";
 import { Patient } from "@/types/PublicTypes";
 
 import {
-  ComponentDetail,
   ignoreListForMultiples,
+  InputDetail,
   ItemData,
-  ItemInsights,
   SiteData,
   TotalQuantities,
 } from "../../constants";
 import TeethSelector from "../../TeethSelector";
 import { TeethSelectorVariant } from "../../TeethSelector/TeethSelector";
-import ComponentSummary, { Summary } from "../ComponentSummary";
+import ComponentSummary from "../ComponentSummary";
 import InputSummary from "../InputSummary";
 
 import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
-
-export interface InputDetail {
-  id?: string;
-  answer: string;
-}
 
 export interface Site {
   name: string;
@@ -55,55 +51,51 @@ const PdfContent: React.FC<PdfContentProps> = ({
   showTeethSelection,
   totalQuantities,
 }) => {
-  const [componentSummary, setComponentSummary] = useState<Summary[]>([]);
+  const componentSummary = useMemo(() => {
+    const items: ItemData[] = [];
 
-  useEffect(() => {
-    let items: ItemData[] = [];
+    const brand =
+      find(
+        get(Object.values(sitesData), "0.inputDetails"),
+        (item: InputDetail) => item.question === "Implant Brand"
+      )?.answer || "";
 
-    Object.keys(sitesData).forEach((siteName: string) => {
-      let data: SiteData = cloneDeep(sitesData);
+    Object.keys(sitesData).forEach((siteName) => {
+      const componentDetail = cloneDeep(sitesData[siteName].componentDetails);
 
-      const componentDetail: ComponentDetail = cloneDeep(
-        data[siteName].componentDetails
-      );
-
-      responseOrder.forEach((key: string) => {
+      responseOrder.forEach((key) => {
         componentDetail[CALCULATOR_NAME_COLLECTION_MAPPINGS[key]]?.forEach(
-          (response: ItemData) => {
-            const indexOfItem: number = findIndex(items, (item: ItemData) => {
-              return item.label === response.label;
-            });
+          (response) => {
+            const indexOfItem = findIndex(
+              items,
+              (item) => item.label === response.label
+            );
 
             if (indexOfItem > -1) {
-              items[indexOfItem].info.forEach(
-                (info: ItemInsights, i: number) => {
-                  const indexOfInfo: number = response.info.findIndex(
-                    (res: ItemInsights) => {
-                      return (
-                        info.itemName === res.itemName && info.link === res.link
-                      );
-                    }
-                  );
+              items[indexOfItem].info.forEach((info, i) => {
+                const indexOfInfo = response.info.findIndex(
+                  (res) =>
+                    info.itemName === res.itemName && info.link === res.link
+                );
 
-                  if (indexOfInfo > -1) {
-                    if (
-                      !ignoreListForMultiples.includes(
-                        response.label.toLowerCase()
-                      ) &&
-                      items[indexOfItem].info[i].quantity
-                    ) {
-                      items[indexOfItem].info[i].quantity =
-                        (items[indexOfItem].info[i].quantity as number) + 1;
-                    }
-                  } else {
-                    items[indexOfItem].info = uniqBy(
-                      [...items[indexOfItem].info, ...response.info],
-                      "itemName"
-                    );
+                if (indexOfInfo > -1) {
+                  if (
+                    !ignoreListForMultiples.includes(
+                      response.label.toLowerCase()
+                    ) &&
+                    items[indexOfItem].info[i].quantity
+                  ) {
+                    items[indexOfItem].info[i].quantity =
+                      (items[indexOfItem].info[i].quantity as number) + 1;
                   }
+                } else {
+                  items[indexOfItem].info = uniqBy(
+                    [...items[indexOfItem].info, ...response.info],
+                    "itemName"
+                  );
                 }
-              );
-              // check and add new items which are not in the list
+              });
+
               if (items[indexOfItem].info.length != response.info.length) {
                 items[indexOfItem].info = uniqBy(
                   [...items[indexOfItem].info, ...response.info],
@@ -118,16 +110,19 @@ const PdfContent: React.FC<PdfContentProps> = ({
       });
     });
 
-    const summaryData: Summary[] = items.flatMap((category: ItemData) =>
-      category.info.map((item: ItemInsights) => ({
+    const summaryData = items.flatMap((category: ItemData) =>
+      category.info.map((item) => ({
         description: category.label,
         name: item.itemName,
+        number: item.itemNumber,
+        manufacturer: item.manufacturer,
         amount: item.quantity,
         link: item.link,
+        brand,
       }))
     );
 
-    setComponentSummary(summaryData);
+    return summaryData;
   }, [sitesData, responseOrder]);
 
   const currentDate = formatDate(patientInfo?.date);

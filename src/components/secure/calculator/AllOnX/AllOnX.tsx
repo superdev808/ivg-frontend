@@ -1,6 +1,22 @@
-import React, { useEffect, useState } from "react";
+import cloneDeep from "lodash/cloneDeep";
+import has from "lodash/has";
+import isEqual from "lodash/isEqual";
+import { CheckboxChangeEvent } from "primereact/checkbox";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import { TabView, TabPanel } from "primereact/tabview";
+import React, { useEffect, useState } from "react";
+
+import {
+  getProcedureCollections,
+  getProcedureInputsAndResponse,
+} from "@/components/calculator/AllOnX/AllOnXUtills";
+import {
+  CALCULATOR_NAME_COLLECTION_MAPPINGS,
+  InputAndResponse,
+} from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
+
+import AdditionalInputs from "./AdditionalInputs";
+import ComponentDetails from "./ComponentDetails";
 import {
   AutoPopulateData,
   ComponentDetail,
@@ -19,23 +35,10 @@ import {
   TEXT_MUA_STATUS,
   TotalQuantities,
 } from "./constants";
-import InputDetails from "./InputDetails";
-import ComponentDetails from "./ComponentDetails";
-import TeethSelector from "./TeethSelector";
-import { cloneDeep } from "lodash";
-import {
-  getProcedureCollections,
-  getProcedureInputsAndResponse,
-} from "@/components/calculator/AllOnX/AllOnXUtills";
-import {
-  CALCULATOR_NAME_COLLECTION_MAPPINGS,
-  InputAndResponse,
-} from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
-import AdditionalInputs from "./AdditionalInputs";
-import { CheckboxChangeEvent } from "primereact/checkbox";
-import PDFExport from "./PdfExport";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
-import _ from "lodash";
+import InputDetails from "./InputDetails";
+import PDFExport from "./PdfExport";
+import TeethSelector from "./TeethSelector";
 
 interface AllOnXCalculatorProps {
   isCustom?: boolean;
@@ -195,7 +198,12 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       data[site.name].componentDetails
     );
 
-    if(!(_.has(componentDetails, collection) && _.isEqual(componentDetails[collection], response))){
+    if (
+      !(
+        has(componentDetails, collection) &&
+        isEqual(componentDetails[collection], response)
+      )
+    ) {
       componentDetails = { ...componentDetails, [collection]: response };
       const updatedData = {
         ...data,
@@ -257,11 +265,14 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   const handleCollectionChange = (e: CheckboxChangeEvent) => {
     let _selectedCollections: string[] = [...selectedCollections];
 
-    if(siteSpecificReport === SITE_SPECIFIC_REPORT_OPTIONS[1].value && !selectedCollections.length){
+    if (
+      siteSpecificReport === SITE_SPECIFIC_REPORT_OPTIONS[1].value &&
+      !selectedCollections.length
+    ) {
       handleSiteChange(1, true);
     }
     if (e.checked) {
-      _selectedCollections.push(e.value);      
+      _selectedCollections.push(e.value);
     } else {
       _selectedCollections = _selectedCollections.filter(
         (collection) => collection !== e.value
@@ -275,19 +286,16 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     setSelectedCollections(_selectedCollections);
   };
 
-  const handleUpdateQuantity = (
-    quantity: number,
-    itemName: string
-  ) => {
+  const handleUpdateQuantity = (quantity: number, itemName: string) => {
     const indexOfItem: number = totalQuantities.findIndex(
       (item: TotalQuantities) => item.itemName === itemName
     );
     if (indexOfItem === -1) {
-      totalQuantities.push({itemName, quantity})      
+      totalQuantities.push({ itemName, quantity });
     } else {
       totalQuantities[indexOfItem].quantity = quantity;
     }
-    setTotalQuantities(totalQuantities)
+    setTotalQuantities(totalQuantities);
   };
 
   return (
@@ -384,14 +392,15 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                     selectedSites={selectedSites}
                     sitesData={sitesData}
                     calculatorName={!!isCustom ? `Custom` : `All-On-X`}
-                    showTeethSelection={ (
+                    showTeethSelection={
                       siteSpecificReport ===
-                        SITE_SPECIFIC_REPORT_OPTIONS[0].value) }
+                      SITE_SPECIFIC_REPORT_OPTIONS[0].value
+                    }
                     responseOrder={
                       procedureInputsAndResponse?.responseOrder || []
                     }
                     totalQuantities={totalQuantities}
-                  ></PDFExport>
+                  />
                 </div>
               )}
             </div>

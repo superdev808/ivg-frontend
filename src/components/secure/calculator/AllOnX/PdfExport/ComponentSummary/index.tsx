@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import trim from "lodash/trim";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { isValidUrl } from "@/components/calculator/AllOnX/AllOnXUtills";
 
@@ -13,8 +13,11 @@ const cx = classNames.bind(styles);
 export interface Summary {
   description: string;
   name: string;
-  amount: number | undefined;
+  number?: string;
+  amount?: number;
+  manufacturer?: string;
   link: string;
+  brand: string;
 }
 interface ComponentSummaryProps {
   summary: Summary[];
@@ -24,6 +27,16 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
   summary,
   totalQuantities,
 }) => {
+  const showManufacturer = useMemo(() => {
+    if (!summary || summary.length === 0) {
+      return false;
+    }
+
+    const { brand, manufacturer } = summary[0];
+
+    return manufacturer && brand !== manufacturer;
+  }, [summary]);
+
   if (!summary || summary.length === 0) {
     return null;
   }
@@ -35,16 +48,24 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
       <table className={cx("striped-table")}>
         <thead>
           <tr>
-            {["Description", "Name", "Quantity"].map((columnName) => (
-              <th key={columnName}>{columnName}</th>
-            ))}
+            {[
+              "Description",
+              "Name",
+              "Number",
+              showManufacturer ? "Manufacturer" : "",
+              "Quantity",
+            ]
+              .filter(Boolean)
+              .map((columnName) => (
+                <th key={columnName}>{columnName}</th>
+              ))}
           </tr>
         </thead>
 
         <tbody>
           {summary.map((data, summaryIdx) => {
-            const indexOfItem: number = totalQuantities.findIndex(
-              (item: TotalQuantities) => item.itemName === data.name
+            const indexOfItem = totalQuantities.findIndex(
+              (item) => item.itemName === data.name
             );
             const amount =
               indexOfItem !== -1
@@ -67,6 +88,8 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
                     data.name
                   )}
                 </td>
+                <td>{data.number}</td>
+                {showManufacturer && <td>{data.manufacturer}</td>}
                 <td>{amount}</td>
               </tr>
             );
