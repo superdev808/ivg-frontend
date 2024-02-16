@@ -80,6 +80,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
           calculatorType={calculatorType}
           itemInfo={itemInfo}
           quiz={quiz}
+          hideSave
         />
       </div>
     </>

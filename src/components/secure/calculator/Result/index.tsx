@@ -37,9 +37,15 @@ interface ResultProps {
   calculatorType: string;
   itemInfo: Record<string, string>;
   quiz: Record<string, string>;
+  hideSave?: boolean;
 }
 
-const Result: React.FC<ResultProps> = ({ calculatorType, itemInfo, quiz }) => {
+const Result: React.FC<ResultProps> = ({
+  calculatorType,
+  itemInfo,
+  quiz,
+  hideSave = false,
+}) => {
   const { refetch } = useGetUserInfoQuery({});
   const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
 
@@ -199,12 +205,14 @@ const Result: React.FC<ResultProps> = ({ calculatorType, itemInfo, quiz }) => {
                 disabled={isExporting}
                 onClick={handleExport}
               />
-              <Button
-                className="px-3 py-2"
-                label="Save"
-                loading={isSavingResult}
-                onClick={handleSave}
-              />
+              {!hideSave && (
+                <Button
+                  className="px-3 py-2"
+                  label="Save"
+                  loading={isSavingResult}
+                  onClick={handleSave}
+                />
+              )}
             </div>
           )}
         </div>
