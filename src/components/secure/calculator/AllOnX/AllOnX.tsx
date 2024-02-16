@@ -17,6 +17,7 @@ import {
   SITE_SPECIFIC_REPORT_OPTIONS,
   TEXT_DENTAL_IMPLANT_PROCEDURE,
   TEXT_MUA_STATUS,
+  TotalQuantities,
 } from "./constants";
 import InputDetails from "./InputDetails";
 import ComponentDetails from "./ComponentDetails";
@@ -34,6 +35,7 @@ import AdditionalInputs from "./AdditionalInputs";
 import { CheckboxChangeEvent } from "primereact/checkbox";
 import PDFExport from "./PdfExport/PdfExport";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
+import _ from "lodash";
 
 interface AllOnXCalculatorProps {
   isCustom?: boolean;
@@ -60,6 +62,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   );
   const [collections, setCollections] = useState<string[]>([]);
   const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
+  const [totalQuantities, setTotalQuantities] = useState<TotalQuantities[]>([]);
 
   useEffect(() => {
     const _collections = getProcedureCollections(
@@ -191,15 +194,18 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     let componentDetails: ComponentDetail = cloneDeep(
       data[site.name].componentDetails
     );
-    componentDetails = { ...componentDetails, [collection]: response };
-    const updatedData = {
-      ...data,
-      [site.name]: {
-        inputDetails: data[site.name].inputDetails,
-        componentDetails,
-      },
-    };
-    setSitesData(updatedData);
+
+    if(!(_.has(componentDetails, collection) && _.isEqual(componentDetails[collection], response))){
+      componentDetails = { ...componentDetails, [collection]: response };
+      const updatedData = {
+        ...data,
+        [site.name]: {
+          inputDetails: data[site.name].inputDetails,
+          componentDetails,
+        },
+      };
+      setSitesData(updatedData);
+    }
   };
 
   const handleAutopopulate = (dataToPopulate: AutoPopulateData | null) => {
@@ -234,15 +240,8 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       }
       return { ...state, [target]: value };
     });
-    setSitesData((state) => {
-      selectedSites?.map((site) => {
-        if (state[site.name]) {
-          state[site.name].componentDetails = {};
-          state[site.name].inputDetails = [];
-        }
-      });
-      return state;
-    });
+    setSelectedSites([]);
+    setSitesData({});
   };
 
   const handleSiteSpecificReport = (value: string) => {
@@ -274,6 +273,21 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       setSitesData({});
     }
     setSelectedCollections(_selectedCollections);
+  };
+
+  const handleUpdateQuantity = (
+    quantity: number,
+    itemName: string
+  ) => {
+    const indexOfItem: number = totalQuantities.findIndex(
+      (item: TotalQuantities) => item.itemName === itemName
+    );
+    if (indexOfItem === -1) {
+      totalQuantities.push({itemName, quantity})      
+    } else {
+      totalQuantities[indexOfItem].quantity = quantity;
+    }
+    setTotalQuantities(totalQuantities)
   };
 
   return (
@@ -362,6 +376,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                         responseOrder={
                           procedureInputsAndResponse?.responseOrder || []
                         }
+                        onUpdateQuantity={handleUpdateQuantity}
                       />
                     </TabPanel>
                   </TabView>
@@ -375,6 +390,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                     responseOrder={
                       procedureInputsAndResponse?.responseOrder || []
                     }
+                    totalQuantities={totalQuantities}
                   ></PDFExport>
                 </div>
               )}

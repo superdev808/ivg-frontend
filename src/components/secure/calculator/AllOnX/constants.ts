@@ -67,6 +67,11 @@ export interface KeyValuePair {
   [key: string]: string;
 }
 
+export interface TotalQuantities {
+  itemName: string;
+  quantity: number;
+}
+
 export interface InputOutputValues {
   name: string;
   text: string;

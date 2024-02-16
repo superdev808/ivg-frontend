@@ -5,6 +5,7 @@ import {
   ItemData,
   ItemInsights,
   SiteData,
+  TotalQuantities,
   ignoreListForMultiples,
 } from "../../constants";
 import { cloneDeep } from "lodash";
@@ -38,6 +39,7 @@ interface PdfContentProps {
   calculatorName: string;
   patientInfo?: Patient | null;
   showTeethSelection: boolean;
+  totalQuantities: TotalQuantities[]
 }
 
 const PdfContent: React.FC<PdfContentProps> = ({
@@ -47,6 +49,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
   calculatorName,
   patientInfo,
   showTeethSelection,
+  totalQuantities
 }) => {
   const [componentSummary, setComponentSummary] = useState<summary[]>([]);
   useEffect(() => {
@@ -132,13 +135,8 @@ const PdfContent: React.FC<PdfContentProps> = ({
     <>
       <div className={cx("bg-color", "px-0 py-3")}></div>
       <div className="flex mx-4 mt-3 mb-3 justify-content-between">
-        <Image
-          src="/images/logo/Ivory-Guide-PDF-Logo.png"
-          alt="Logo"
-          width={"360"}
-          height={"63"}
-          className="relative"
-        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/logo/Ivory-Guide-PDF-Logo.png" alt="logo" width={360} height={63}/>
         <div className="flex flex-column font-semibold">
           <div>{name}</div>
           {/* TODO: Need to add dynamic values when available */}
@@ -184,7 +182,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
       </div>
 
       <div className="px-4">
-        <ComponentSummary summary={componentSummary} />
+        <ComponentSummary summary={componentSummary} totalQuantities={totalQuantities} />
 
         <div className="flex flex-column pt-5 greet">
           <div>Thank You,</div>

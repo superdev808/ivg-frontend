@@ -882,6 +882,11 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "TiBasesMUAs",
     },
     {
+      name: "Connection",
+      text: "Connection [Ti Bases (Multi-Unit Abutments)]",
+      calculator: "TiBasesMUAs",
+    },
+    {
       name: "Abutment Diameter",
       text: "Abutment Diameter [Ti Bases (Multi-Unit Abutments)]",
       calculator: "TiBasesMUAs",

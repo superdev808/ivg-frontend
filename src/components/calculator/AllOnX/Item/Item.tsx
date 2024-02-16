@@ -6,10 +6,12 @@ import {
 import { isValidUrl } from "../AllOnXUtills";
 import { InputNumber } from "primereact/inputnumber";
 import React from "react";
+import { noop } from "lodash";
 
 interface ItemDataParams extends ItemData {
   quantityVisibilityState: QUANTITY_VISIBILITY_STATE;
   isFirst?: boolean;
+  onUpdateQuantity?: (value: number, itemName: string) => void;
 }
 
 /**
@@ -21,15 +23,17 @@ interface ItemDataParams extends ItemData {
  * @param {object} procedure
  * @param {object} quantityVisibilityState
  * @param {boolean} isFirst
+ * @param {func} onUpdateQuantity
  */
 const Item: React.FC<ItemDataParams> = ({
   label = "",
   info = [],
   quantityVisibilityState = QUANTITY_VISIBILITY_STATE.HIDE,
   isFirst,
+  onUpdateQuantity = noop
 }: ItemDataParams) => {
   const renderQuantity = React.useCallback(
-    (quantity: number) => {
+    (quantity: number, itemName: string) => {
       switch (quantityVisibilityState) {
         case QUANTITY_VISIBILITY_STATE.SHOW:
           return (
@@ -49,6 +53,7 @@ const Item: React.FC<ItemDataParams> = ({
               className="w-1"
               maxLength={3}
               value={quantity}
+              onValueChange={(e) => onUpdateQuantity(e.value||0, itemName)}
             />
           );
 
@@ -102,7 +107,7 @@ const Item: React.FC<ItemDataParams> = ({
                   {quantityVisibilityState !==
                     QUANTITY_VISIBILITY_STATE.HIDE && (
                     <div className="w-1 py-2 px-1 border-right-1 surface-border">
-                      {quantity && renderQuantity(quantity)}
+                      {quantity && renderQuantity(quantity, itemName)}
                     </div>
                   )}
                 </div>

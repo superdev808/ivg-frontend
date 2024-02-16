@@ -8,11 +8,8 @@
     padding: 8px;
     text-align: center;
     font-size: 12px;
-    border-right: 1px solid var(--surface-800);
-    border-bottom: 1px solid var(--surface-800);
-    &:first-child {
-      border-left: 1px solid var(--surface-800);
-    }
+    border: 1px solid var(--surface-border);
+    border-collapse: collapse;
   }
 
   th {

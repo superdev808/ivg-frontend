@@ -93,12 +93,6 @@ const Questionnaire: React.FC<InputProps> = ({
     }
   }, [autoPopulateData, onAutopopulate]);
 
-  useEffect(() => {
-    setAnswerOptions([]);
-    setAnswers([]);
-    setLevel(0);
-  }, [additionalInputs]);
-
   const { isLoading } = useQuery(
     [input, level, answers, option, site],
     async () => {
@@ -200,7 +194,9 @@ const Questionnaire: React.FC<InputProps> = ({
     const newAnswers = answers.slice(0, index);
     newAnswers[index] = e.value;
     setAnswers(newAnswers);
-    onInputSelect(site, questions[index], newAnswers[index]);
+    if (!(questions[index].name === "" && questions[index].text === "")) {
+      onInputSelect(site, questions[index], newAnswers[index]);
+    }
   };
 
   const handlePopulateResponse = (value: string) => {
@@ -274,7 +270,7 @@ const Questionnaire: React.FC<InputProps> = ({
                         options={answerOptions[index]}
                         placeholder="Select"
                         className="w-full"
-                        disabled={isLoading || answers[level] === ""}
+                        disabled={isLoading || !!!answerOptions[index]?.length}
                       />
                     </div>
                   </div>
@@ -291,7 +287,7 @@ const Questionnaire: React.FC<InputProps> = ({
         )}
       </React.Fragment>
       <div className="w-12 flex justify-content-center">
-        {(isLoading || answers[level] === "") && (
+        {(isLoading || (input[level] && !!!answerOptions[level]?.length)) && (
           <ProgressSpinner className="w-1" />
         )}
       </div>
