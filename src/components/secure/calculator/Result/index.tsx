@@ -13,12 +13,15 @@ import { getCalculatorName, productImages } from "@/helpers/util";
 import {
   useGetUserInfoQuery,
   useSaveResultMutation,
+  useUpdateSavedResultMutation,
 } from "@/redux/hooks/apiHooks";
 
 import Outputs from "./Outputs";
 import { getItemName } from "./Outputs/helpers";
+import SaveDialog from "./SaveDialog";
 
 import styles from "./style.module.scss";
+import { InputText } from "primereact/inputtext";
 
 const cx = classNames.bind(styles);
 
@@ -34,28 +37,36 @@ const PDF_EXPORT_OPTIONS = {
 };
 
 interface ResultProps {
-  calculatorType: string;
+  id?: string;
+  name?: string;
   itemInfo: Record<string, string>;
   quiz: Record<string, string>;
-  hideSave?: boolean;
+  calculatorType: string;
 }
 
 const Result: React.FC<ResultProps> = ({
-  calculatorType,
+  id = "",
+  name = "",
   itemInfo,
   quiz,
-  hideSave = false,
+  calculatorType,
 }) => {
   const { refetch } = useGetUserInfoQuery({});
   const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
+  const [updateSavedResult] = useUpdateSavedResultMutation();
 
   const [isExporting, setIsExporting] = useState<boolean>(false);
   const [isSendingEmail, setIsSendingEmail] = useState<boolean>(false);
+  const [showSaveDialog, setShowSaveDialog] = useState<boolean>(false);
+  const [editMode, setEditMode] = useState<"init" | "started" | "pending">(
+    "init"
+  );
+  const [editingName, setEditingName] = useState<string>("");
 
   const contentRef = useRef(null);
   const toastRef = useRef(null);
 
-  const itemName = getItemName(calculatorType, itemInfo);
+  const itemName = name || getItemName(calculatorType, itemInfo);
 
   const itemImage = productImages[calculatorType] || productImages["Default"];
   const purchaseLink = trim(itemInfo["Link to Purchase"]);
@@ -65,6 +76,10 @@ const Result: React.FC<ResultProps> = ({
     "Item Image",
     "Link to Purchase",
   ]);
+
+  console.log(id);
+
+  const isSaved = Boolean(id);
 
   const handleExport = async () => {
     const element = contentRef.current;
@@ -82,6 +97,7 @@ const Result: React.FC<ResultProps> = ({
         summary: "Success",
         detail: "Downloaded PDF successfully.",
         life: 5000,
+        className: "mt-8",
       });
     } catch {
       (toastRef.current as any).show({
@@ -89,6 +105,7 @@ const Result: React.FC<ResultProps> = ({
         summary: "Eror",
         detail: "Failed to download PDF.",
         life: 5000,
+        className: "mt-8",
       });
     }
 
@@ -130,6 +147,7 @@ const Result: React.FC<ResultProps> = ({
           summary: "Error",
           detail: "Failed to send email.",
           life: 3000,
+          className: "mt-8",
         });
       } else {
         (toastRef.current as any).show({
@@ -137,6 +155,7 @@ const Result: React.FC<ResultProps> = ({
           summary: "Success",
           detail: "Sent email successfully.",
           life: 3000,
+          className: "mt-8",
         });
       }
     } catch {
@@ -145,17 +164,19 @@ const Result: React.FC<ResultProps> = ({
         summary: "Eror",
         detail: "Failed to send email.",
         life: 5000,
+        className: "mt-8",
       });
     }
 
     setIsSendingEmail(false);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (name: string) => {
     const payload = {
       calculatorType,
       itemInfo,
       quiz,
+      name,
     };
 
     try {
@@ -167,6 +188,7 @@ const Result: React.FC<ResultProps> = ({
         summary: "Saved result",
         detail: "Go to profile page",
         life: 3000,
+        className: "mt-8",
       });
     } catch (error) {
       (toastRef.current as any).show({
@@ -174,7 +196,63 @@ const Result: React.FC<ResultProps> = ({
         summary: "Error",
         detail: "Failed to save result",
         life: 3000,
+        className: "mt-8",
       });
+    }
+  };
+
+  const handleCloseSaveDialog = (resultName?: string) => {
+    setShowSaveDialog(false);
+
+    if (resultName) {
+      handleSave(resultName);
+    }
+  };
+
+  const handleStartNameEdit = () => {
+    setEditMode("started");
+    setEditingName(name);
+  };
+
+  const handleCancelNameEdit = () => {
+    setEditMode("init");
+    setEditingName(name);
+  };
+
+  const handleSaveNameEdit = async () => {
+    if (!id) {
+      return;
+    }
+
+    const data = { name: editingName };
+
+    try {
+      setEditMode("pending");
+
+      await updateSavedResult({ id, data }).unwrap();
+
+      (toastRef.current as any).show({
+        severity: "success",
+        summary: "Success",
+        detail: "Updated saved result successfully",
+        life: 3000,
+        className: "mt-8",
+      });
+
+      setEditMode("init");
+      setEditingName("");
+
+      refetch();
+    } catch (error) {
+      (toastRef.current as any).show({
+        severity: "error",
+        summary: "Error",
+        detail: "Failed to update saved result",
+        life: 3000,
+        className: "mt-8",
+      });
+
+      setEditMode("started");
     }
   };
 
@@ -182,14 +260,65 @@ const Result: React.FC<ResultProps> = ({
 
   return (
     <>
-      <Toast ref={toastRef} position="top-right" />
+      <Toast ref={toastRef} />
+
+      <SaveDialog
+        visible={showSaveDialog}
+        defaultValue={itemName}
+        onClose={handleCloseSaveDialog}
+      />
 
       <div ref={contentRef} className="flex flex-column gap-4">
         <div
           className={`flex flex-column gap-4 justify-content-between
           lg:flex-row lg:align-items-center`}
         >
-          <div>{itemName && <h1 className="m-0">{itemName}</h1>}</div>
+          <div className="flex align-items-center gap-2">
+            {editMode !== "init" ? (
+              <InputText
+                value={editingName}
+                onChange={(evt) => setEditingName(evt.target.value)}
+              />
+            ) : (
+              <h1 className="m-0">{itemName}</h1>
+            )}
+
+            {isSaved && (
+              <div className="flex align-items-center gap-2">
+                {editMode === "init" && (
+                  <Button
+                    icon="pi pi-pencil"
+                    rounded
+                    text
+                    aria-label="Edit"
+                    onClick={handleStartNameEdit}
+                  />
+                )}
+                {(editMode === "started" || editMode === "pending") && (
+                  <>
+                    <Button
+                      icon="pi pi-check"
+                      rounded
+                      text
+                      aria-label="Save"
+                      loading={editMode === "pending"}
+                      disabled={editingName === name}
+                      onClick={handleSaveNameEdit}
+                    />
+
+                    <Button
+                      icon="pi pi-times"
+                      rounded
+                      text
+                      disabled={editMode === "pending"}
+                      aria-label="Cancel"
+                      onClick={handleCancelNameEdit}
+                    />
+                  </>
+                )}
+              </div>
+            )}
+          </div>
 
           {!isPreparingPDF && (
             <div className="flex align-items-center flex-shrink-0 gap-2">
@@ -205,19 +334,19 @@ const Result: React.FC<ResultProps> = ({
                 disabled={isExporting}
                 onClick={handleExport}
               />
-              {!hideSave && (
+              {!isSaved && (
                 <Button
                   className="px-3 py-2"
                   label="Save"
                   loading={isSavingResult}
-                  onClick={handleSave}
+                  onClick={() => setShowSaveDialog(true)}
                 />
               )}
             </div>
           )}
         </div>
 
-        <div className="flex justify-content-between gap-4 flex-column lg:flex-row ">
+        <div className="flex justify-content-between gap-4 flex-column lg:flex-row">
           {itemImage && (
             <div
               className={cx(
@@ -229,7 +358,8 @@ const Result: React.FC<ResultProps> = ({
                 src={itemImage}
                 alt={itemName}
                 className="flex-1 flex justify-content-center"
-                imageClassName="w-full sm:w-5 lg:w-auto lg:h-full"
+                imageClassName="w-full sm:w-5 lg:w-full lg:h-full"
+                imageStyle={{ objectFit: "contain" }}
               />
             </div>
           )}

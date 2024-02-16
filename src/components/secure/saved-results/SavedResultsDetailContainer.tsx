@@ -56,6 +56,7 @@ const SavedResultsDetailContainer: React.FC = () => {
         summary: "Success",
         detail: "Deleted saved result",
         life: 3000,
+        className: "mt-8",
       });
 
       router.replace(SAVED_RESULTS_LISTING_PAGE_URL);
@@ -65,6 +66,7 @@ const SavedResultsDetailContainer: React.FC = () => {
         summary: "Error",
         detail: "Failed to save result",
         life: 3000,
+        className: "mt-8",
       });
     }
   };

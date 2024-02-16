@@ -19,6 +19,7 @@ export const {
   usePostVerifyTokenMutation,
   usePostActivateUserMutation,
   useSaveResultMutation,
+  useUpdateSavedResultMutation,
   useDeleteSavedResultMutation,
 } = userApiSlice;
 

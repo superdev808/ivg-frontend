@@ -1,18 +1,18 @@
 import cx from "classnames";
 import lowerCase from "lodash/lowerCase";
+import orderBy from "lodash/orderBy";
 import values from "lodash/values";
 import { useRouter } from "next/navigation";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
-import Link from "next/link";
 import React, { useMemo } from "react";
 
-import { getItemName } from "@/components/secure/calculator/Result/Outputs/helpers";
 import { formatDate, getCalculatorName, productImages } from "@/helpers/util";
 
 type SavedResult = {
   id: string;
+  name: string;
   calculatorType: string;
   itemInfo: Record<string, string>;
   quiz: Record<string, string>;
@@ -35,11 +35,13 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
   const router = useRouter();
 
   const filteredResults = useMemo(() => {
+    const orderedResults = orderBy(savedResults, ["date"], ["desc"]);
+
     if (!search) {
-      return savedResults;
+      return orderedResults;
     }
 
-    return savedResults.filter((result) => {
+    return orderedResults.filter((result) => {
       const parsed = [...values(result.itemInfo), ...values(result.quiz)].map(
         lowerCase
       );
@@ -80,10 +82,9 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
   };
 
   return (
-    <div className="flex flex-column gap-4 mt-4">
+    <div className="w-full flex flex-column gap-4 mt-4">
       <ConfirmDialog />
-      {filteredResults.map(({ id, date, calculatorType, itemInfo }) => {
-        const itemName = getItemName(calculatorType, itemInfo);
+      {filteredResults.map(({ id, name, date, calculatorType }) => {
         const itemImage =
           productImages[calculatorType] || productImages["Default"];
 
@@ -100,12 +101,7 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
           >
             {itemImage && (
               <div className="flex-shrink-0">
-                <Image
-                  src={itemImage}
-                  alt={itemName}
-                  width="100"
-                  className="relative mb-3"
-                />
+                <Image src={itemImage} alt={name} width="100" />
               </div>
             )}
 
@@ -117,7 +113,7 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
                 className="px-0 py-0 w-fit border-noround"
                 onClick={(evt) => handleGoToCalculator(evt, calculatorType)}
               />
-              <div>{itemName}</div>
+              <div>{name}</div>
             </div>
 
             <div className="flex-shrink-0">
