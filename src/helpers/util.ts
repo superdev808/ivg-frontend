@@ -2654,12 +2654,12 @@ export const calculatorImages: any = {
     "msdi": "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/msdi.png"
 };
 
-export const formatDate = (date: string) =>
+export const formatDate = (date?: Date | null | string) =>
     new Intl.DateTimeFormat("en-US", {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
-    }).format(new Date(date))
+    }).format(date ? new Date(date) : new Date())
 
 export const productImages: Record<string, string> = {
     BoneReduction: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Bone+Reduction+Forceps.png",

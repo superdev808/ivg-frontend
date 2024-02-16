@@ -1,27 +1,31 @@
+import classNames from "classnames/bind";
+import cloneDeep from "lodash/cloneDeep";
+import findIndex from "lodash/findIndex";
+import uniqBy from "lodash/uniqBy";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+
+import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
+import { getCookie } from "@/helpers/cookie";
+import { formatDate } from "@/helpers/util";
+import { Patient } from "@/types/PublicTypes";
+
 import {
   ComponentDetail,
+  ignoreListForMultiples,
   ItemData,
   ItemInsights,
   SiteData,
   TotalQuantities,
-  ignoreListForMultiples,
 } from "../../constants";
-import { cloneDeep } from "lodash";
-import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
-import _ from "lodash";
-import styles from "./PdfContent.module.scss";
-import classNames from "classnames/bind";
-import { getCookie } from "@/helpers/cookie";
 import TeethSelector from "../../TeethSelector";
-import InputSummary from "../InputSummary/InputSummary";
-import ComponentSummary, {
-  summary,
-} from "../ComponentSummary/ComponentSummary";
-import { Patient } from "../PdfExport";
 import { TeethSelectorVariant } from "../../TeethSelector/TeethSelector";
+import ComponentSummary, { Summary } from "../ComponentSummary";
+import InputSummary from "../InputSummary";
+
+import styles from "./styles.module.scss";
+
 const cx = classNames.bind(styles);
+
 export interface InputDetail {
   id?: string;
   answer: string;
@@ -39,7 +43,7 @@ interface PdfContentProps {
   calculatorName: string;
   patientInfo?: Patient | null;
   showTeethSelection: boolean;
-  totalQuantities: TotalQuantities[]
+  totalQuantities: TotalQuantities[];
 }
 
 const PdfContent: React.FC<PdfContentProps> = ({
@@ -49,51 +53,59 @@ const PdfContent: React.FC<PdfContentProps> = ({
   calculatorName,
   patientInfo,
   showTeethSelection,
-  totalQuantities
+  totalQuantities,
 }) => {
-  const [componentSummary, setComponentSummary] = useState<summary[]>([]);
+  const [componentSummary, setComponentSummary] = useState<Summary[]>([]);
+
   useEffect(() => {
     let items: ItemData[] = [];
-    Object.keys(sitesData).map((siteName: string) => {
+
+    Object.keys(sitesData).forEach((siteName: string) => {
       let data: SiteData = cloneDeep(sitesData);
+
       const componentDetail: ComponentDetail = cloneDeep(
         data[siteName].componentDetails
       );
-      responseOrder.map((key: string) => {
-        componentDetail[CALCULATOR_NAME_COLLECTION_MAPPINGS[key]]?.map(
+
+      responseOrder.forEach((key: string) => {
+        componentDetail[CALCULATOR_NAME_COLLECTION_MAPPINGS[key]]?.forEach(
           (response: ItemData) => {
-            const indexOfItem: number = _.findIndex(items, (item: ItemData) => {
+            const indexOfItem: number = findIndex(items, (item: ItemData) => {
               return item.label === response.label;
             });
+
             if (indexOfItem > -1) {
-              items[indexOfItem].info.map((info: ItemInsights, i: number) => {
-                const indexOfInfo: number = response.info.findIndex(
-                  (res: ItemInsights) => {
-                    return (
-                      info.itemName === res.itemName && info.link === res.link
+              items[indexOfItem].info.forEach(
+                (info: ItemInsights, i: number) => {
+                  const indexOfInfo: number = response.info.findIndex(
+                    (res: ItemInsights) => {
+                      return (
+                        info.itemName === res.itemName && info.link === res.link
+                      );
+                    }
+                  );
+
+                  if (indexOfInfo > -1) {
+                    if (
+                      !ignoreListForMultiples.includes(
+                        response.label.toLowerCase()
+                      ) &&
+                      items[indexOfItem].info[i].quantity
+                    ) {
+                      items[indexOfItem].info[i].quantity =
+                        (items[indexOfItem].info[i].quantity as number) + 1;
+                    }
+                  } else {
+                    items[indexOfItem].info = uniqBy(
+                      [...items[indexOfItem].info, ...response.info],
+                      "itemName"
                     );
                   }
-                );
-                if (indexOfInfo > -1) {
-                  if (
-                    !ignoreListForMultiples.includes(
-                      response.label.toLowerCase()
-                    ) &&
-                    items[indexOfItem].info[i].quantity
-                  ) {
-                    items[indexOfItem].info[i].quantity =
-                      (items[indexOfItem].info[i].quantity as number) + 1;
-                  }
-                } else {
-                  items[indexOfItem].info = _.uniqBy(
-                    [...items[indexOfItem].info, ...response.info],
-                    "itemName"
-                  );
                 }
-              });
+              );
               // check and add new items which are not in the list
               if (items[indexOfItem].info.length != response.info.length) {
-                items[indexOfItem].info = _.uniqBy(
+                items[indexOfItem].info = uniqBy(
                   [...items[indexOfItem].info, ...response.info],
                   "itemName"
                 );
@@ -105,38 +117,37 @@ const PdfContent: React.FC<PdfContentProps> = ({
         );
       });
     });
-    const summaryData: summary[] = items.flatMap((category: ItemData) => {
-      return category.info.map((item: ItemInsights) => {
-        return {
-          description: category.label,
-          name: item.itemName,
-          amount: item.quantity,
-          link: item.link,
-        };
-      });
-    });
+
+    const summaryData: Summary[] = items.flatMap((category: ItemData) =>
+      category.info.map((item: ItemInsights) => ({
+        description: category.label,
+        name: item.itemName,
+        amount: item.quantity,
+        link: item.link,
+      }))
+    );
+
     setComponentSummary(summaryData);
   }, [sitesData, responseOrder]);
 
-  const currentDate = patientInfo?.date?.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
-  const currentDateTime = patientInfo?.date?.toLocaleTimeString("en-US", {
-    hour12: true,
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  const currentDate = formatDate(patientInfo?.date);
+  const currentDateTime = formatDate(patientInfo?.date);
 
   const name = getCookie("name");
   const email = getCookie("email");
+
   return (
     <>
-      <div className={cx("bg-color", "px-0 py-3")}></div>
+      <div className={cx("bg-color", "px-0 py-3")} />
       <div className="flex mx-4 mt-3 mb-3 justify-content-between">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/logo/Ivory-Guide-PDF-Logo.png" alt="logo" width={360} height={63}/>
+        <img
+          src="/images/logo/Ivory-Guide-PDF-Logo.png"
+          alt="logo"
+          width={360}
+          height={63}
+        />
+
         <div className="flex flex-column font-semibold">
           <div>{name}</div>
           {/* TODO: Need to add dynamic values when available */}
@@ -153,11 +164,20 @@ const PdfContent: React.FC<PdfContentProps> = ({
           <div className={cx("break-all", "pb-2")}>{patientInfo?.name}</div>
           <div className={cx("break-all")}>{patientInfo?.address}</div>
         </div>
+
         <div>
-          <div className="pb-2"><span>Date: </span>{currentDate}</div>
-          <div><span>Time: </span>{currentDateTime}</div>
+          <div className="pb-2">
+            <span>Date: </span>
+            {currentDate}
+          </div>
+
+          <div>
+            <span>Time: </span>
+            {currentDateTime}
+          </div>
         </div>
       </div>
+
       <div className="flex mx-4 my-1 justify-content-between">
         <div className="flex flex-column">
           <div className="py-2">
@@ -165,6 +185,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
             <span className="font-semibold">{calculatorName}</span> calculator.
           </div>
         </div>
+
         {showTeethSelection && (
           <div className="mt-2 pr-5">
             <TeethSelector
@@ -182,7 +203,10 @@ const PdfContent: React.FC<PdfContentProps> = ({
       </div>
 
       <div className="px-4">
-        <ComponentSummary summary={componentSummary} totalQuantities={totalQuantities} />
+        <ComponentSummary
+          summary={componentSummary}
+          totalQuantities={totalQuantities}
+        />
 
         <div className="flex flex-column pt-5 greet">
           <div>Thank You,</div>

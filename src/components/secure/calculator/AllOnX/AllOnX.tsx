@@ -33,7 +33,7 @@ import {
 } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 import AdditionalInputs from "./AdditionalInputs";
 import { CheckboxChangeEvent } from "primereact/checkbox";
-import PDFExport from "./PdfExport/PdfExport";
+import PDFExport from "./PdfExport";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
 import _ from "lodash";
 

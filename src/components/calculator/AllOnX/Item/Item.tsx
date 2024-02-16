@@ -30,7 +30,7 @@ const Item: React.FC<ItemDataParams> = ({
   info = [],
   quantityVisibilityState = QUANTITY_VISIBILITY_STATE.HIDE,
   isFirst,
-  onUpdateQuantity = noop
+  onUpdateQuantity = noop,
 }: ItemDataParams) => {
   const renderQuantity = React.useCallback(
     (quantity: number, itemName: string) => {
@@ -53,7 +53,7 @@ const Item: React.FC<ItemDataParams> = ({
               className="w-1"
               maxLength={3}
               value={quantity}
-              onValueChange={(e) => onUpdateQuantity(e.value||0, itemName)}
+              onValueChange={(e) => onUpdateQuantity(e.value || 0, itemName)}
             />
           );
 
