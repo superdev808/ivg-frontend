@@ -34,6 +34,7 @@ const SavedResultsContainer: React.FC = () => {
         summary: "Success",
         detail: "Deleted saved result",
         life: 3000,
+        className: "mt-8",
       });
     } catch (error) {
       (toastRef.current as any).show({
@@ -41,6 +42,7 @@ const SavedResultsContainer: React.FC = () => {
         summary: "Error",
         detail: "Failed to save result",
         life: 3000,
+        className: "mt-8",
       });
     }
   };
@@ -53,10 +55,10 @@ const SavedResultsContainer: React.FC = () => {
       <div className="nav-offset container flex flex-column align-items-center overflow-auto px-4 pb-4">
         <h1>Saved Results</h1>
 
-        <div className="mt-2 w-12 mx-auto flex flex-column align-items-center xl:w-6">
+        <div className="mt-2 w-12 mx-auto flex flex-column align-items-center lg:w-8 xl:w-6">
           {isLoading && <ProgressSpinner className="w-1" />}
           {!isLoading && userInfo && (
-            <div>
+            <>
               {userInfo.savedResults.length === 0 ? (
                 <p className="text-center">
                   You have not saved any results yet.
@@ -82,7 +84,7 @@ const SavedResultsContainer: React.FC = () => {
                   />
                 </>
               )}
-            </div>
+            </>
           )}
         </div>
       </div>

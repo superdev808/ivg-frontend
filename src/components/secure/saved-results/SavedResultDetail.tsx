@@ -1,7 +1,6 @@
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { Toast } from "primereact/toast";
 import React from "react";
 
 import Result from "@/components/secure/calculator/Result";
@@ -9,6 +8,7 @@ import { formatDate, getCalculatorName } from "@/helpers/util";
 
 type SavedResult = {
   id: string;
+  name: string;
   calculatorType: string;
   itemInfo: Record<string, string>;
   quiz: Record<string, string>;
@@ -30,7 +30,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
 }) => {
   const router = useRouter();
 
-  const { calculatorType, itemInfo, quiz, date } = savedResult;
+  const { id, calculatorType, itemInfo, quiz, date, name } = savedResult;
 
   const handleGoBack = () => {
     router.push("/settings/saved-results");
@@ -52,7 +52,6 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
 
   return (
     <>
-      <Toast ref={toastRef} position="top-right" />
       <ConfirmDialog />
 
       <div className="w-12 lg-w-8 xl:w-6">
@@ -77,6 +76,8 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
         </div>
 
         <Result
+          id={id}
+          name={name}
           calculatorType={calculatorType}
           itemInfo={itemInfo}
           quiz={quiz}
