@@ -1,12 +1,15 @@
-import React, { useRef, useState } from "react";
 // @ts-ignore
 import html2pdf from "html2pdf.js";
 import { Button } from "primereact/button";
-import { Toast } from "primereact/toast";
-import PdfContent, { Site } from "./PdfContent/PdfContent";
-import { SiteData, TotalQuantities } from "../constants";
 import { Dialog } from "primereact/dialog";
-import PatientInfo from "./PatientInfo/PatientInfo";
+import { Toast } from "primereact/toast";
+import React, { useRef, useState } from "react";
+
+import PatientInfo from "@/components/shared/PatientInfo";
+import { Patient } from "@/types/PublicTypes";
+
+import { SiteData, TotalQuantities } from "../constants";
+import PdfContent, { Site } from "./PdfContent";
 
 interface PDFExportProps {
   selectedSites: Site[];
@@ -14,36 +17,30 @@ interface PDFExportProps {
   responseOrder: string[];
   calculatorName: string;
   showTeethSelection: boolean;
-  totalQuantities: TotalQuantities[]
+  totalQuantities: TotalQuantities[];
 }
 
-export interface Patient {
-  date?: Date | null;
-  name: string;
-  address: string;
-  filename: string;
-  actionType?: string;
-  recipientsList: string
-}
 const PDFExport: React.FC<PDFExportProps> = ({
   responseOrder,
   selectedSites,
   sitesData,
   calculatorName,
   showTeethSelection,
-  totalQuantities
+  totalQuantities,
 }) => {
   const contentRef = useRef(null);
   const toastRef = useRef(null);
   const [patientInfo, setPatientInfo] = useState<Patient | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const filename: string = patientInfo?.filename || `${calculatorName}-Summary`;
-  const ExportAndSendPDF = async (info: Patient) => {
+
+  const exportAndSendPDF = async (info: Patient) => {
     const element = contentRef.current;
+
     if (element) {
       try {
         const options = {
-          margin:[8, 0],
+          margin: [8, 0],
           filename: info.filename || filename,
           image: { type: "jpeg", quality: 0.9 },
           html2canvas: { scale: 2 },
@@ -61,6 +58,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
             summary: "Success",
             detail: "Pdf downloaded successfully.",
             life: 5000,
+            className: "mt-8",
           });
         } else if (info.actionType === "export") {
           const blob = await html2pdf()
@@ -84,15 +82,15 @@ const PDFExport: React.FC<PDFExportProps> = ({
           if (!response.ok) {
             response.json().then((res: any) => {
               const msg: string =
-              res?.message?.message || res?.message || "Something went wrong";
+                res?.message?.message || res?.message || "Something went wrong";
               (toastRef.current as any).show({
                 severity: "error",
                 summary: res?.status,
                 detail: msg,
                 life: 5000,
+                className: "mt-8",
               });
             });
-            return;
           } else {
             const { data, status } = await response.json();
             (toastRef.current as any).show({
@@ -100,11 +98,11 @@ const PDFExport: React.FC<PDFExportProps> = ({
               summary: status,
               detail: data,
               life: 5000,
+              className: "mt-8",
             });
-            return;
           }
         }
-        //setPatientInfo(null);
+        setPatientInfo(null);
       } catch (error) {
         console.error("Error exporting to PDF or sending email:", error);
       }
@@ -113,15 +111,26 @@ const PDFExport: React.FC<PDFExportProps> = ({
 
   const handleSubmit = (data: Patient) => {
     setVisible(false);
-    const info: Patient = { ...patientInfo, ...data, date: new Date() };
-    setPatientInfo({ ...info });
-    ExportAndSendPDF(info);
+
+    const newPatientInfo = { ...patientInfo, ...data, date: new Date() };
+
+    setPatientInfo(newPatientInfo);
+    exportAndSendPDF(newPatientInfo);
   };
+
   const showPatientInfoDialog = (actionType: string) => {
-    const info: Patient = { filename, name: "", address: "", recipientsList:"", actionType };
+    const info: Patient = {
+      filename,
+      name: "",
+      address: "",
+      recipientsList: "",
+      actionType,
+    };
+
     setPatientInfo(info);
     setVisible(true);
   };
+
   return (
     <>
       <div className="hidden">
@@ -139,6 +148,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
           )}
         </div>
       </div>
+
       <div className="p-buttonset absolute pt-2 top-0 right-0">
         <Button
           onClick={() => showPatientInfoDialog("download")}
@@ -156,12 +166,14 @@ const PDFExport: React.FC<PDFExportProps> = ({
           icon="pi pi-envelope"
         />
       </div>
+
       <Toast ref={toastRef} position="top-right" />
+
       <Dialog
         header="Patient Info"
         visible={visible}
-        position={"top"}
-        style={{ width: "30vw" }}
+        position="top"
+        className="w-10 md:w-6 xl:w-4"
         onHide={() => setVisible(false)}
         draggable={false}
         resizable={false}
