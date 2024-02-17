@@ -40,6 +40,7 @@ interface PdfContentProps {
   patientInfo?: Patient | null;
   showTeethSelection: boolean;
   totalQuantities: TotalQuantities[];
+  hideSite?: boolean;
 }
 
 const PdfContent: React.FC<PdfContentProps> = ({
@@ -50,6 +51,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
   patientInfo,
   showTeethSelection,
   totalQuantities,
+  hideSite,
 }) => {
   const componentSummary = useMemo(() => {
     const items: ItemData[] = [];
@@ -145,9 +147,6 @@ const PdfContent: React.FC<PdfContentProps> = ({
 
         <div className="flex flex-column font-semibold">
           <div>{name}</div>
-          {/* TODO: Need to add dynamic values when available */}
-          {/* <div>User Address</div>
-          <div className="mt-2">phone</div> */}
           <div>{email}</div>
         </div>
       </div>
@@ -194,7 +193,11 @@ const PdfContent: React.FC<PdfContentProps> = ({
       </div>
 
       <div className="px-4 py-1">
-        <InputSummary selectedSites={selectedSites} sitesData={sitesData} />
+        <InputSummary
+          selectedSites={selectedSites}
+          sitesData={sitesData}
+          hideSite={hideSite}
+        />
       </div>
 
       <div className="px-4">

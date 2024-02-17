@@ -58,6 +58,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
             summary: "Success",
             detail: "Pdf downloaded successfully.",
             life: 5000,
+            className: "mt-8",
           });
         } else if (info.actionType === "export") {
           const blob = await html2pdf()
@@ -87,9 +88,9 @@ const PDFExport: React.FC<PDFExportProps> = ({
                 summary: res?.status,
                 detail: msg,
                 life: 5000,
+                className: "mt-8",
               });
             });
-            return;
           } else {
             const { data, status } = await response.json();
             (toastRef.current as any).show({
@@ -97,11 +98,11 @@ const PDFExport: React.FC<PDFExportProps> = ({
               summary: status,
               detail: data,
               life: 5000,
+              className: "mt-8",
             });
-            return;
           }
         }
-        //setPatientInfo(null);
+        setPatientInfo(null);
       } catch (error) {
         console.error("Error exporting to PDF or sending email:", error);
       }

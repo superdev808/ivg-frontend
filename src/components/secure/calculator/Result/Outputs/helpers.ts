@@ -65,45 +65,43 @@ export const getOutputs = (
       },
     ];
 
-    const kitItemInfo: Record<string, Array<Record<string, string>>> = {};
+    // const convertedDrillsArray = [];
 
-    Object.keys(details).forEach((key) => {
-      const regExp = new RegExp(/(Drill\s\d)\s\(.+\)\s(.+)/gm);
-      const match = regExp.exec(key);
+    const arr = ["(Extra Short)", "(Short)", "(Standard / Medium)", "(Long)"];
 
-      if (!match) {
-        return;
+    arr.map((value) => {
+      // Iterate over the drill data
+      for (let i = 1; i < 20; i++) {
+        const itemKey = `Drill ${i} ${value}`;
+        const linkKey = `${itemKey} Link to Purchase`;
+        const itemNumberKey = `${itemKey} Item Number`;
+        const manfacturerKey = `${itemKey} Manufacturer Recommendations`;
+
+        const link = trim(details[linkKey]) || "";
+        const itemNumber = details[itemNumberKey] || "";
+        const recommendations = trim(details[manfacturerKey]) || "";
+
+        const additionals = [];
+
+        if (itemNumber) {
+          additionals.push({ name: "Item Number", value: itemNumber });
+        }
+
+        if (recommendations) {
+          additionals.push({
+            name: "Manufacturer Recommendations",
+            value: recommendations,
+          });
+        }
+
+        if (itemNumber) {
+          res.push({
+            name: itemKey,
+            link,
+            additionals,
+          });
+        }
       }
-
-      const drillName = match[1];
-      const itemName = match[2] === "Name" ? drillName : match[2];
-
-      if (!kitItemInfo[drillName]) {
-        kitItemInfo[drillName] = [];
-      }
-
-      kitItemInfo[drillName].push({
-        name: trim(itemName),
-        value: trim(details[key]),
-      });
-    });
-
-    values(kitItemInfo).forEach((itemInfo) => {
-      const item: Record<string, string | Array<Record<string, string>>> = {};
-      const link = itemInfo.find((elem) => elem.name === "Link to Purchase");
-
-      if (link) {
-        item["link"] = link.value;
-      }
-
-      const additionals = itemInfo.filter(
-        (elem) => elem.name !== "Link to Purchase"
-      );
-      if (additionals.length > 0) {
-        item["additionals"] = additionals;
-      }
-
-      res.push(item);
     });
 
     return res;

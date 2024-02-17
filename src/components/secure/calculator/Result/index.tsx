@@ -4,37 +4,30 @@ import html2pdf from "html2pdf.js";
 import omit from "lodash/omit";
 import trim from "lodash/trim";
 import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
 import { Image } from "primereact/image";
+import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { useRef, useState } from "react";
 
-import { getCookie } from "@/helpers/cookie";
+import PatientInfo from "@/components/shared/PatientInfo";
 import { getCalculatorName, productImages } from "@/helpers/util";
 import {
   useGetUserInfoQuery,
   useSaveResultMutation,
   useUpdateSavedResultMutation,
 } from "@/redux/hooks/apiHooks";
+import { Patient } from "@/types/PublicTypes";
 
+import PdfContent from "../AllOnX/PdfExport/PdfContent";
+import { prepareExportProps } from "./helper";
 import Outputs from "./Outputs";
 import { getItemName } from "./Outputs/helpers";
 import SaveDialog from "./SaveDialog";
 
 import styles from "./style.module.scss";
-import { InputText } from "primereact/inputtext";
 
 const cx = classNames.bind(styles);
-
-const PDF_EXPORT_OPTIONS = {
-  filename: "Summary",
-  margin: 10,
-  image: { type: "jpeg", quality: 0.9 },
-  html2canvas: { scale: 2 },
-  jsPDF: { unit: "mm", format: "letter", orientation: "landscape" },
-  pagebreak: {
-    avoid: ["table", "thead", "tr", ".greet"],
-  },
-};
 
 interface ResultProps {
   id?: string;
@@ -63,11 +56,16 @@ const Result: React.FC<ResultProps> = ({
   );
   const [editingName, setEditingName] = useState<string>("");
 
+  const [patientInfo, setPatientInfo] = useState<Patient | null>(null);
+  const [visible, setVisible] = useState<boolean>(false);
+
   const contentRef = useRef(null);
   const toastRef = useRef(null);
 
-  const itemName = name || getItemName(calculatorType, itemInfo);
+  const calculatorName = getCalculatorName(calculatorType);
+  const filename = patientInfo?.filename || `${calculatorName}-Summary`;
 
+  const itemName = name || getItemName(calculatorType, itemInfo);
   const itemImage = productImages[calculatorType] || productImages["Default"];
   const purchaseLink = trim(itemInfo["Link to Purchase"]);
 
@@ -77,98 +75,95 @@ const Result: React.FC<ResultProps> = ({
     "Link to Purchase",
   ]);
 
-  console.log(id);
-
   const isSaved = Boolean(id);
 
-  const handleExport = async () => {
+  const exportAndSendPDF = async (info: Patient) => {
     const element = contentRef.current;
-    if (!element) {
-      return;
+
+    if (element) {
+      try {
+        const options = {
+          margin: [8, 0],
+          filename: info.filename || filename,
+          image: { type: "jpeg", quality: 0.9 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "mm", format: "letter", orientation: "portrait" },
+          pagebreak: {
+            avoid: ["thead", "tr", ".greet"],
+          },
+        };
+        // Create an html2pdf instance
+        if (info.actionType === "download") {
+          const pdfInstance = html2pdf(element, options);
+          await pdfInstance.output();
+          (toastRef.current as any).show({
+            severity: "success",
+            summary: "Success",
+            detail: "Pdf downloaded successfully.",
+            life: 5000,
+            className: "mt-8",
+          });
+        } else if (info.actionType === "export") {
+          const blob = await html2pdf()
+            .set(options)
+            .from(element)
+            .outputPdf("blob", options.filename);
+
+          const formData = new FormData();
+          formData.append("attachment", blob, "exported-document.pdf");
+          formData.append("name", info.name);
+          formData.append("recipientsList", info.recipientsList);
+          formData.append("calculatorName", calculatorName);
+          formData.append("filename", options.filename);
+
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/sendCalculatorSummary`,
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
+          if (!response.ok) {
+            response.json().then((res: any) => {
+              const msg: string =
+                res?.message?.message || res?.message || "Something went wrong";
+              (toastRef.current as any).show({
+                severity: "error",
+                summary: res?.status,
+                detail: msg,
+                life: 5000,
+                className: "mt-8",
+              });
+            });
+          } else {
+            const { data, status } = await response.json();
+            (toastRef.current as any).show({
+              severity: "success",
+              summary: status,
+              detail: data,
+              life: 5000,
+              className: "mt-8",
+            });
+          }
+        }
+        setPatientInfo(null);
+      } catch (error) {
+        console.error("Error exporting to PDF or sending email:", error);
+      }
     }
-
-    setIsExporting(true);
-
-    try {
-      const pdfInstance = html2pdf(element, PDF_EXPORT_OPTIONS);
-      await pdfInstance.output();
-      (toastRef.current as any).show({
-        severity: "success",
-        summary: "Success",
-        detail: "Downloaded PDF successfully.",
-        life: 5000,
-        className: "mt-8",
-      });
-    } catch {
-      (toastRef.current as any).show({
-        severity: "error",
-        summary: "Eror",
-        detail: "Failed to download PDF.",
-        life: 5000,
-        className: "mt-8",
-      });
-    }
-
-    setIsExporting(false);
   };
 
-  const handleSendEmail = async () => {
-    const element = contentRef.current;
-    if (!element) {
-      return;
-    }
+  const showPatientInfoDialog = (actionType: string) => {
+    const info: Patient = {
+      filename,
+      name: "",
+      address: "",
+      recipientsList: "",
+      actionType,
+    };
 
-    setIsSendingEmail(true);
-
-    try {
-      const blob = await html2pdf()
-        .set(PDF_EXPORT_OPTIONS)
-        .from(element)
-        .outputPdf("blob", PDF_EXPORT_OPTIONS.filename);
-
-      const formData = new FormData();
-      formData.append("attachment", blob, "exported-document.pdf");
-      formData.append("name", getCookie("name"));
-      formData.append("email", getCookie("email"));
-      formData.append("calculatorType", getCalculatorName(calculatorType));
-      formData.append("filename", PDF_EXPORT_OPTIONS.filename);
-
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/sendCalculatorSummary`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      if (!response.ok) {
-        (toastRef.current as any).show({
-          severity: "error",
-          summary: "Error",
-          detail: "Failed to send email.",
-          life: 3000,
-          className: "mt-8",
-        });
-      } else {
-        (toastRef.current as any).show({
-          severity: "success",
-          summary: "Success",
-          detail: "Sent email successfully.",
-          life: 3000,
-          className: "mt-8",
-        });
-      }
-    } catch {
-      (toastRef.current as any).show({
-        severity: "error",
-        summary: "Eror",
-        detail: "Failed to send email.",
-        life: 5000,
-        className: "mt-8",
-      });
-    }
-
-    setIsSendingEmail(false);
+    setPatientInfo(info);
+    setVisible(true);
   };
 
   const handleSave = async (name: string) => {
@@ -256,6 +251,15 @@ const Result: React.FC<ResultProps> = ({
     }
   };
 
+  const handleSubmit = (data: Patient) => {
+    setVisible(false);
+
+    const newPatientInfo = { ...patientInfo, ...data, date: new Date() };
+
+    setPatientInfo(newPatientInfo);
+    exportAndSendPDF(newPatientInfo);
+  };
+
   const isPreparingPDF = isExporting || isSendingEmail;
 
   return (
@@ -268,7 +272,7 @@ const Result: React.FC<ResultProps> = ({
         onClose={handleCloseSaveDialog}
       />
 
-      <div ref={contentRef} className="flex flex-column gap-4">
+      <div className="flex flex-column gap-4">
         <div
           className={`flex flex-column gap-4 justify-content-between
           lg:flex-row lg:align-items-center`}
@@ -326,13 +330,13 @@ const Result: React.FC<ResultProps> = ({
                 className="px-3 py-2"
                 label="Email"
                 disabled={isSendingEmail}
-                onClick={handleSendEmail}
+                onClick={() => showPatientInfoDialog("export")}
               />
               <Button
                 className="px-3 py-2"
                 label="Export"
                 disabled={isExporting}
-                onClick={handleExport}
+                onClick={() => showPatientInfoDialog("download")}
               />
               {!isSaved && (
                 <Button
@@ -388,6 +392,34 @@ const Result: React.FC<ResultProps> = ({
           details={details}
         />
       </div>
+
+      <div className="hidden">
+        <div ref={contentRef}>
+          {patientInfo && (
+            <PdfContent
+              {...prepareExportProps(
+                calculatorType,
+                calculatorName,
+                patientInfo,
+                quiz,
+                itemInfo
+              )}
+            />
+          )}
+        </div>
+      </div>
+
+      <Dialog
+        header="Patient Info"
+        visible={visible}
+        position="top"
+        className="w-10 md:w-6 xl:w-4"
+        onHide={() => setVisible(false)}
+        draggable={false}
+        resizable={false}
+      >
+        <PatientInfo info={patientInfo} onSubmit={handleSubmit} />
+      </Dialog>
     </>
   );
 };

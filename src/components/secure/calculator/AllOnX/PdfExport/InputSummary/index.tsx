@@ -13,11 +13,13 @@ const cx = classNames.bind(styles);
 interface InputSummaryProps {
   selectedSites: Site[];
   sitesData: SiteData;
+  hideSite?: boolean;
 }
 
 const InputSummary: React.FC<InputSummaryProps> = ({
   selectedSites,
   sitesData,
+  hideSite,
 }) => {
   let sitesObj: Record<string, InputDetail[]> = {};
 
@@ -42,16 +44,16 @@ const InputSummary: React.FC<InputSummaryProps> = ({
 
   return (
     <>
+      <h3 className="mb-1">Inputs:</h3>
+
       {chunk(uniqueQuestions, 9).map((questions, idx) => (
         <table
           className={cx("striped-table", { "mt-4": idx !== 0 })}
           key={`uniqueQuestions-${idx}`}
         >
           <thead>
-            {idx === 0 && <tr className="font-bold my-0 pb-1">Inputs:</tr>}
-
             <tr>
-              <th>Site Number</th>
+              {!hideSite && <th>Site Number</th>}
               {questions.map((question, index) => (
                 <th key={index}>{question}</th>
               ))}
@@ -61,7 +63,7 @@ const InputSummary: React.FC<InputSummaryProps> = ({
           <tbody>
             {Object.keys(sitesObj).map((site) => (
               <tr key={site}>
-                <td>{site.replace("Site", "").trim()}</td>
+                {!hideSite && <td>{site.replace("Site", "").trim()}</td>}
 
                 {questions.map((question, index) => {
                   const item =
