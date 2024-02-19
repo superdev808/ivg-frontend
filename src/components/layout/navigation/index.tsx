@@ -136,6 +136,11 @@ const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
       url: "/settings",
     },
     {
+      label: "Saved Results",
+      icon: "pi pi-save",
+      url: "/settings/saved-results",
+    },
+    {
       label: "Help",
       icon: "pi pi-question",
       url: "/help",
