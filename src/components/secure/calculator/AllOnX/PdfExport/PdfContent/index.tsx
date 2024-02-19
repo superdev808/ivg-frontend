@@ -18,8 +18,7 @@ import {
   SiteData,
   TotalQuantities,
 } from "../../constants";
-import TeethSelector from "../../TeethSelector";
-import { TeethSelectorVariant } from "../../TeethSelector/TeethSelector";
+import TeethSelector, { TeethSelectorVariant } from "../../TeethSelector";
 import ComponentSummary from "../ComponentSummary";
 import InputSummary from "../InputSummary";
 
@@ -98,7 +97,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
                 }
               });
 
-              if (items[indexOfItem].info.length != response.info.length) {
+              if (items[indexOfItem].info.length !== response.info.length) {
                 items[indexOfItem].info = uniqBy(
                   [...items[indexOfItem].info, ...response.info],
                   "itemName"

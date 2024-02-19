@@ -43,15 +43,18 @@
       }
     }
   }
+
   &.smTeethSelector {
     text {
       transform: scale(0.6);
     }
+
     .containerFlex {
       path {
         transform: scale(0.6);
       }
     }
+
     .columnFlex {
       width: 180px;
       height: 120px;

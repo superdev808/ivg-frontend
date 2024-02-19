@@ -2,9 +2,6 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import React, { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 
-import { calculatorIO } from "@/helpers/util";
-import { getCalculatorName } from "@/helpers/util";
-
 import DetailView from "./detail";
 import Quiz from "./quiz";
 
@@ -134,12 +131,11 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
                   key={`quiz-${index}`}
                   question={quiz.text}
                   answers={answerOptions[index]}
-                  selectedAnswer={answers[index] || null}
                   currentAnswer={currentAnswer}
-                  handleSelectAnswer={handleSelectAnswer(index)}
-                  handleBack={index > 0 ? handleBack(index) : undefined}
                   disabled={isLoading}
                   progress={Math.floor((index / input.length) * 100)}
+                  onSelectAnswer={handleSelectAnswer(index)}
+                  onGoBack={index > 0 ? handleBack(index) : undefined}
                 />
               );
             })}
