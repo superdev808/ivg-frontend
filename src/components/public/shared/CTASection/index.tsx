@@ -13,7 +13,7 @@ interface CTASectionProps {
 export const CTASection: React.FC<CTASectionProps> = ({ title, text }) => (
   <div
     className={cx(
-      "w-full flex justify-content-center text-white py-3",
+      "w-full flex justify-content-center text-white py-3 z-2",
       "cta-container"
     )}
   >
