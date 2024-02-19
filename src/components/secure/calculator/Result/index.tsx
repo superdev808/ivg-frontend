@@ -180,8 +180,8 @@ const Result: React.FC<ResultProps> = ({
 
       (toastRef.current as any).show({
         severity: "success",
-        summary: "Saved result",
-        detail: "Go to profile page",
+        summary: "Success",
+        detail: "Saved result successfully",
         life: 3000,
         className: "mt-8",
       });

@@ -46,19 +46,19 @@ const InputDetails: React.FC<InputDetailsProps> = ({
 }) => (
   <div className="relative">
     <TabView renderActiveOnly={false} scrollable>
-      {selectedSites.map((site: Site, index: number) => (
+      {selectedSites.map((site, index) => (
         <TabPanel key={site.name} header={site.name}>
           <Questionnaire
             site={site}
             input={procedureInputs}
             option={CALCULATOR_MAPPINGS.ALL_ON_X_CALCULATOR}
-            onInputSelect={onInputSelect}
             showAutopopulatePrompt={selectedSites.length > 1 && index === 0}
-            onAutopopulate={onAutopopulate}
             autoPopulateData={autoPopulateData}
-            onQuizResponse={onQuizResponse}
             sitesData={sitesData}
             responseOrder={responseOrder}
+            onInputSelect={onInputSelect}
+            onAutopopulate={onAutopopulate}
+            onQuizResponse={onQuizResponse}
             onUpdateQuantity={onUpdateQuantity}
           />
         </TabPanel>

@@ -3,6 +3,8 @@ import { Toast } from "primereact/toast";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
 
+import Quiz from "../../../quiz";
+import ComponentDetails from "../../ComponentDetails";
 import {
   AUTO_POPULATE_OPTIONS,
   AutoPopulateData,
@@ -13,8 +15,7 @@ import {
 } from "../../constants";
 
 import AutoPopulatePromt from "./AutoPopulatePromt";
-import Quiz from "../../../quiz";
-import ComponentDetails from "../../ComponentDetails";
+import QuestionNavbar from "./QuestionNavbar";
 
 interface InputProps {
   site: Site;
@@ -198,67 +199,84 @@ const Questionnaire: React.FC<InputProps> = ({
     }
   };
 
+  const handleChange = (index: number) => {
+    setLevel(index);
+    setAnswers((prevState) => prevState.slice(0, index));
+  };
+
   const answeredAllQuestions = Boolean(input.length > 0 && !input[level + 1]);
 
   return (
-    <div className="grid mt-3 mb-3">
-      {questions.map((quiz, index) => {
-        if (index !== level) {
-          return null;
-        }
+    <div className="my-3">
+      <QuestionNavbar
+        questions={input}
+        answers={answers}
+        onChange={handleChange}
+      />
 
-        if (
-          answerOptions[index] &&
-          answerOptions[index].length === 1 &&
-          answerOptions[index][0] === ""
-        ) {
-          if (index <= level && level < input.length && answers[index] !== "") {
-            handleSelectAnswer(index)("");
+      <div className="grid">
+        {questions.map((quiz, index) => {
+          if (index !== level) {
+            return null;
           }
-          return null;
-        }
 
-        if (!quiz.text || !quiz.name || !answerOptions[index]) {
-          return null;
-        }
+          if (
+            answerOptions[index] &&
+            answerOptions[index].length === 1 &&
+            answerOptions[index][0] === ""
+          ) {
+            if (
+              index <= level &&
+              level < input.length &&
+              answers[index] !== ""
+            ) {
+              handleSelectAnswer(index)("");
+            }
+            return null;
+          }
 
-        return (
-          <Quiz
-            key={`quiz-${index}`}
-            question={quiz.name}
-            answers={answerOptions[index]}
-            currentAnswer={answers[index]}
-            disabled={isLoading}
-            progress={Math.floor((index / input.length) * 100)}
-            onSelectAnswer={handleSelectAnswer(index)}
+          if (!quiz.text || !quiz.name || !answerOptions[index]) {
+            return null;
+          }
+
+          return (
+            <Quiz
+              key={`quiz-${index}`}
+              question={quiz.name}
+              answers={answerOptions[index]}
+              currentAnswer={answers[index]}
+              disabled={isLoading}
+              progress={Math.floor((index / input.length) * 100)}
+              onSelectAnswer={handleSelectAnswer(index)}
+            />
+          );
+        })}
+
+        {showAutopopulatePrompt && answeredAllQuestions && (
+          <AutoPopulatePromt
+            autoPopulate={autoPopulate}
+            onPopulateResponse={handlePopulateResponse}
+            showRefreshButton={isAutoPopulatedAnswersChanged}
           />
-        );
-      })}
+        )}
 
-      {showAutopopulatePrompt && answeredAllQuestions && (
-        <AutoPopulatePromt
-          autoPopulate={autoPopulate}
-          onPopulateResponse={handlePopulateResponse}
-          showRefreshButton={isAutoPopulatedAnswersChanged}
-        />
-      )}
+        {answeredAllQuestions && sitesData[site.name]?.componentDetails && (
+          <ComponentDetails
+            componentDetails={sitesData[site.name]?.componentDetails}
+            responseOrder={responseOrder}
+            onUpdateQuantity={onUpdateQuantity}
+          />
+        )}
 
-      {answeredAllQuestions && sitesData[site.name]?.componentDetails && (
-        <ComponentDetails
-          componentDetails={sitesData[site.name]?.componentDetails}
-          responseOrder={responseOrder}
-          onUpdateQuantity={onUpdateQuantity}
-        />
-      )}
+        {(isLoading ||
+          (input[level] && !Boolean(answerOptions[level]?.length))) && (
+          <div className="w-12 flex justify-content-center">
+            <ProgressSpinner className="w-1" />
+          </div>
+        )}
 
-      {(isLoading ||
-        (input[level] && !Boolean(answerOptions[level]?.length))) && (
-        <div className="w-12 flex justify-content-center">
-          <ProgressSpinner className="w-1" />
-        </div>
-      )}
-
-      <Toast ref={toastRef} position="top-right" />
+        <Toast ref={toastRef} position="top-right" />
+      </div>
     </div>
   );
 };
