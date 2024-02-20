@@ -37,7 +37,7 @@ const Outputs: React.FC<OutputsProps> = ({
               ))}
           </div>
           {link && (
-            <Link href={link}>
+            <Link href={link} target="_blank">
               <Button label="Link to Purchase" size="small" />
             </Link>
           )}
