@@ -1,14 +1,17 @@
 "use client";
-import React, { useState, useMemo } from "react";
+
+import classNames from "classnames/bind";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
-import styles from "./page.module.scss";
-import classNames from "classnames/bind";
-const cx = classNames.bind(styles);
+import React, { useState } from "react";
 
 import SearchBox from "@/components/ui/searchbox";
-import Loading from "@/components/layout/loading";
+
 import { CALCULATOR_MAPPINGS } from "./constants";
+
+import styles from "./page.module.scss";
+
+const cx = classNames.bind(styles);
 
 export default function CalculatorsPage() {
   return <Calculators />;
@@ -80,13 +83,9 @@ export const Calculators = () => {
       label: "All-on-X Implant Surgery",
       description:
         "This customized calculator enables quick identification and procurement of a variety of components, instruments, and materials to help you place or restore implants.",
-      subItems: [{ label: "All-on-X Implant Surgery" }],
-    },
-    {
-      label: "Product Material Selection",
-      description:
-        "These calculators provides recommendations for which materials to use across a range of products based on your patient’s clinical situation.",
-      subItems: [{ label: "Crown Materials" }],
+      subItems: [
+        { label: "All-on-X Implant Surgery", text: "All-on-X Implant Surgery" },
+      ],
     },
     {
       label: "Custom Combinations",
@@ -106,8 +105,9 @@ export const Calculators = () => {
 
   const handleSearch = (str: string) => {
     setLoading(true);
+
     const regExp = new RegExp(str, "i");
-    const newCalcItemLabels: Array<string> = [];
+    const newCalcItemLabels: string[] = [];
 
     for (const modelName of Object.keys(calcItems)) {
       if (regExp.test(modelName)) {
@@ -141,70 +141,71 @@ export const Calculators = () => {
   };
 
   return (
-      <div className={" nav-offset flex-grow-1"}>
-        <div className="px-4 my-8">
-          <div className=" p-5 border-round bg-white shadow-1">
-            <h2 className="mt-0 mb-5 text-center">Calculators</h2>
-            <div className="mt-0 mb-4">
-              <SearchBox handleSearch={handleSearch} loading={loading} />
+    <div className="nav-offset flex-grow-1">
+      <div className="px-4 my-8">
+        <div className=" p-5 border-round bg-white shadow-1">
+          <h2 className="mt-0 mb-5 text-center">Calculators</h2>
+
+          <div className="mt-0 mb-4">
+            <SearchBox handleSearch={handleSearch} loading={loading} />
+          </div>
+
+          {searchResult.length > 0 && (
+            <div className="mb-4">
+              {searchResult.map((searchLabel, index) => (
+                <Button
+                  className={cx("calculatorButton", "p-3 m-2")}
+                  key={`searched-calc-${index}`}
+                  label={calcItems[searchLabel] || searchLabel}
+                  onClick={() => {
+                    router.push("/calculators/" + searchLabel);
+                  }}
+                />
+              ))}
             </div>
-            {searchResult.length > 0 && (
-              <div className="mb-4">
-                {searchResult.map((searchLabel, index) => (
+          )}
+
+          <div className="grid border-top-1 surface-border">
+            <div className="col-6 border-right-1 p-4 surface-border">
+              {groupItems.map((groupItem, index) => (
+                <Button
+                  className={cx(
+                    "calculatorButton",
+                    "p-4 mb-2 flex flex-column w-full",
+                    {
+                      "calculatorButton--highlighted": index === selectedGroup,
+                    }
+                  )}
+                  key={`groupItem-${index}`}
+                  onClick={() => {
+                    groupItem.label === CALCULATOR_MAPPINGS.CUSTOM_COMBINATION
+                      ? router.push(`/calculators/${groupItem.label}`)
+                      : setSelectedGroup(index);
+                  }}
+                >
+                  <h3 className="m-0">{groupItem.label}</h3>
+                  <p>{groupItem.description}</p>
+                </Button>
+              ))}
+            </div>
+
+            {selectedGroup >= 0 && (
+              <div className={cx("col-6 p-4", "calculatorButtonSection")}>
+                {groupItems[selectedGroup].subItems.map((calcItem, index) => (
                   <Button
-                    className={cx("calculatorButton", "p-3 m-2")}
-                    key={`searched-calc-${index}`}
-                    label={calcItems[searchLabel] || searchLabel}
+                    className={cx("calculatorButton", "p-4 mb-2 w-full")}
+                    key={`calcItem-${index}`}
+                    label={calcItem.text || calcItem.label}
                     onClick={() => {
-                      router.push("/calculators/" + searchLabel);
+                      router.push(`/calculators/${calcItem.label}`);
                     }}
                   />
                 ))}
               </div>
             )}
-            <div className="grid border-top-1 surface-border">
-              <div className="col-6 border-right-1 p-4 surface-border">
-                {groupItems.map((groupItem, index) => (
-                  <Button
-                    className={cx(
-                      "calculatorButton",
-                      "p-4 mb-2 flex flex-column",
-                      {
-                        "calculatorButton--highlighted":
-                          index === selectedGroup,
-                      }
-                    )}
-                    key={`groupItem-${index}`}
-                    style={{ width: "100%" }}
-                    onClick={() => {
-                      groupItem.label === CALCULATOR_MAPPINGS.CUSTOM_COMBINATION
-                        ? router.push("/calculators/" + groupItem.label)
-                        : setSelectedGroup(index);
-                    }}
-                  >
-                    <h3 className="m-0">{groupItem.label}</h3>
-                    <p>{groupItem.description}</p>
-                  </Button>
-                ))}
-              </div>
-              {selectedGroup >= 0 && (
-                <div className={cx("col-6 p-4", "calculatorButtonSection")}>
-                  {groupItems[selectedGroup].subItems.map((calcItem, index) => (
-                    <Button
-                      className={cx("calculatorButton", "p-4 mb-2")}
-                      key={`calcItem-${index}`}
-                      style={{ width: "100%" }}
-                      label={calcItem.text || calcItem.label}
-                      onClick={() => {
-                        router.push("/calculators/" + calcItem.label);
-                      }}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </div>
+    </div>
   );
 };
