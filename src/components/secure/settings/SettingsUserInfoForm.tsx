@@ -88,6 +88,7 @@ export default function SettingsUserInfoForm() {
     setValue("lastName", userData.lastName);
     setValue("phone", userData.phone);
     setValue("email", userData.email);
+    setValue("organizationName", userData.organizationName);
     setUpdateMessage("");
   }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -171,11 +172,6 @@ export default function SettingsUserInfoForm() {
             </div>
 
             <div className="col-12 md:col-6 flex flex-column justify-content-center my-6 text-lg px-2 md:px-4">
-              <span className="mb-2">
-                <span className="text-gray-600">Organization Name:</span>{" "}
-                {user.organizationName}
-              </span>
-
               <span className="mb-2">
                 <span className="text-gray-600">Location:</span>{" "}
                 {user.organizationState}
@@ -279,6 +275,36 @@ export default function SettingsUserInfoForm() {
                       />
 
                       <label htmlFor={field.name}>Phone Number</label>
+                    </span>
+
+                    {FormErrorMessage({ message: errors[field.name]?.message })}
+                  </div>
+                )}
+              />
+
+              <Controller
+                name="organizationName"
+                control={control}
+                rules={{ required: "Organization name is required." }}
+                render={({ field, fieldState }) => (
+                  <div className="flex flex-column col-12 md:col-6">
+                    <label
+                      htmlFor={field.name}
+                      className={cx({ "p-error": errors[field.name] })}
+                    />
+
+                    <span className="p-float-label w-full">
+                      <InputText
+                        id={field.name}
+                        value={field.value}
+                        className={cx([
+                          { "p-invalid": fieldState.error },
+                          "w-full",
+                        ])}
+                        onChange={(e) => field.onChange(e.target.value)}
+                      />
+
+                      <label htmlFor={field.name}>Organization Name</label>
                     </span>
 
                     {FormErrorMessage({ message: errors[field.name]?.message })}
