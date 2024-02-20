@@ -129,6 +129,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
               return (
                 <Quiz
                   key={`quiz-${index}`}
+                  calculatorType={calculatorType}
                   question={quiz.text}
                   answers={answerOptions[index]}
                   currentAnswer={currentAnswer}

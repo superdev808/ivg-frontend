@@ -10,13 +10,14 @@ import { Image } from "primereact/image";
 import React, { useState, useMemo } from "react";
 
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
-import { calculatorImages } from "@/helpers/util";
+import { calculatorImages, getCalculatorName } from "@/helpers/util";
 
 import styles from "./quiz.module.scss";
 
 const cx = classNames.bind(styles);
 
 interface QuizProps {
+  calculatorType?: string;
   question: string;
   currentAnswer: string;
   answers: string[];
@@ -27,6 +28,7 @@ interface QuizProps {
 }
 
 const Quiz: React.FC<QuizProps> = ({
+  calculatorType,
   question,
   currentAnswer,
   answers,
@@ -82,13 +84,17 @@ const Quiz: React.FC<QuizProps> = ({
 
   return (
     <>
-      <div className="col-12 flex justify-content-center relative">
+      <div className="col-12 flex flex-column justify-content-center align-items-center relative">
         {onGoBack && (
           <Button
             icon="pi pi-arrow-left"
             className="absolute left-0 ml-2 mt-5 px-5 md:ml-4 text-6xl"
             onClick={onGoBack}
           />
+        )}
+
+        {calculatorType && (
+          <h1 className="underline">{getCalculatorName(calculatorType)}</h1>
         )}
         <h2>Select {question}</h2>
       </div>
