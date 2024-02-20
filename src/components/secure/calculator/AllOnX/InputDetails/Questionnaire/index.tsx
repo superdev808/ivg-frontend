@@ -1,4 +1,10 @@
+import { ProgressSpinner } from "primereact/progressspinner";
+import { Toast } from "primereact/toast";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useQuery } from "react-query";
+
+import Quiz from "../../../quiz";
+import ComponentDetails from "../../ComponentDetails";
 import {
   AUTO_POPULATE_OPTIONS,
   AutoPopulateData,
@@ -6,16 +12,10 @@ import {
   Site,
   SiteData,
   ItemData,
-  QUANTITY_VISIBILITY_STATE,
-  KeyValuePair,
 } from "../../constants";
-import { useQuery } from "react-query";
-import { ProgressSpinner } from "primereact/progressspinner";
-import { Toast } from "primereact/toast";
+
 import AutoPopulatePromt from "./AutoPopulatePromt";
-import Item from "@/components/calculator/AllOnX/Item";
-import { Divider } from "primereact/divider";
-import { Dropdown } from "primereact/dropdown";
+import QuestionNavbar from "./QuestionNavbar";
 
 interface InputProps {
   site: Site;
@@ -24,7 +24,7 @@ interface InputProps {
   showAutopopulatePrompt: boolean;
   autoPopulateData: AutoPopulateData | null;
   sitesData: SiteData;
-  additionalInputs: KeyValuePair;
+  responseOrder: string[];
   onInputSelect: (
     site: Site,
     question: InputOutputValues,
@@ -36,24 +36,9 @@ interface InputProps {
     response: ItemData[],
     collection: string
   ) => void;
+  onUpdateQuantity: (quantity: number, itemName: string) => void;
 }
 
-/**
- * Name : Questionnaire.
- * Desc : The `Questionnaire` component is a React functional component that renders a series of quiz
- * questions based on the provided `input` and `option` props. It manages the state of the quiz level,
- * answer options, selected answers, and item information.
- * @param {object} site
- * @param {array} input
- * @param {string} option
- * @param {boolean} showAutopopulatePrompt
- * @param {object} autoPopulateData
- * @param {object} sitesData
- * @param {func} onInputSelect
- * @param {func} onAutopopulate
- * @param {func} onQuizResponse
- * @param {object} additionalInputs
- */
 const Questionnaire: React.FC<InputProps> = ({
   site,
   input,
@@ -61,11 +46,12 @@ const Questionnaire: React.FC<InputProps> = ({
   showAutopopulatePrompt,
   autoPopulateData,
   sitesData,
+  responseOrder,
   onInputSelect,
   onAutopopulate,
   onQuizResponse,
-  additionalInputs,
-}: InputProps) => {
+  onUpdateQuantity,
+}) => {
   const [level, setLevel] = useState(0);
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
   const [answers, setAnswers] = useState<string[]>([]);
@@ -82,9 +68,11 @@ const Questionnaire: React.FC<InputProps> = ({
   useEffect(() => {
     if (autoPopulateData) {
       const { questions, answerOptions, answers } = autoPopulateData;
+
       setAnswerOptions(answerOptions);
       setAnswers(answers);
       setAutoQuestions(questions);
+
       setLevel(questions.length);
       setTimeout(() => {
         onAutopopulate(null);
@@ -106,6 +94,7 @@ const Questionnaire: React.FC<InputProps> = ({
         if (quiz[input[level]?.name]) {
           delete quiz[input[level]?.name];
         }
+
         if (answer) {
           quiz[input[index].name] = answer;
         }
@@ -155,6 +144,7 @@ const Questionnaire: React.FC<InputProps> = ({
         if (newAnswerOptions.length) {
           setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
         }
+
         if (quizResponse) {
           onQuizResponse(site, quizResponse, input[level]?.outputFrom ?? "");
         }
@@ -171,20 +161,20 @@ const Questionnaire: React.FC<InputProps> = ({
   );
 
   const questions: InputOutputValues[] = useMemo(() => {
-    return autoQuestions ? autoQuestions : input.slice(0, level + 1);
+    return autoQuestions || input.slice(0, level + 1);
   }, [input, level, autoQuestions]);
 
-  const handleSelectAnswer = (index: number) => (e: any) => {
+  const handleSelectAnswer = (index: number) => (value: string) => {
     setAutoQuestions(null);
+
     if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value) {
       setIsAutoPopulatedAnswersChanged(true);
     }
-    if (e.value === "" && questions[index].name === "") {
-      const promise = new Promise((resolve) => {
+    if (value === "" && questions[index].name === "") {
+      new Promise((resolve) => {
         setLevel(index);
         setTimeout(() => resolve(true), 1000);
-      });
-      promise.then(() => {
+      }).then(() => {
         setLevel(index + 1);
       });
     } else {
@@ -192,8 +182,9 @@ const Questionnaire: React.FC<InputProps> = ({
     }
 
     const newAnswers = answers.slice(0, index);
-    newAnswers[index] = e.value;
+    newAnswers[index] = value;
     setAnswers(newAnswers);
+
     if (!(questions[index].name === "" && questions[index].text === "")) {
       onInputSelect(site, questions[index], newAnswers[index]);
     }
@@ -202,16 +193,33 @@ const Questionnaire: React.FC<InputProps> = ({
   const handlePopulateResponse = (value: string) => {
     setAutoPopulate(value);
     setIsAutoPopulatedAnswersChanged(false);
+
     if (value === AUTO_POPULATE_OPTIONS[0].value) {
       onAutopopulate({ site, questions, answerOptions, answers });
     }
   };
 
+  const handleChange = (index: number) => {
+    setLevel(index);
+    setAnswers((prevState) => prevState.slice(0, index));
+  };
+
+  const answeredAllQuestions = Boolean(input.length > 0 && !input[level + 1]);
+
   return (
-    <div className="mt-3 mb-3">
-      <React.Fragment>
-        {questions.map((quiz: any, index: number) => {
-          let noAvailableOptions: boolean = false;
+    <div className="my-3">
+      <QuestionNavbar
+        questions={input}
+        answers={answers}
+        onChange={handleChange}
+      />
+
+      <div className="grid">
+        {questions.map((quiz, index) => {
+          if (index !== level) {
+            return null;
+          }
+
           if (
             answerOptions[index] &&
             answerOptions[index].length === 1 &&
@@ -222,76 +230,53 @@ const Questionnaire: React.FC<InputProps> = ({
               level < input.length &&
               answers[index] !== ""
             ) {
-              handleSelectAnswer(index)({ value: "" });
+              handleSelectAnswer(index)("");
             }
-            noAvailableOptions = true;
+            return null;
           }
-          const outputCollection: string = questions[index]?.outputFrom || "";
-          const componentDetails: ItemData[] =
-            sitesData[site.name]?.componentDetails[outputCollection] || [];
+
+          if (!quiz.text || !quiz.name || !answerOptions[index]) {
+            return null;
+          }
+
           return (
-            <React.Fragment key={`quiz-${index}`}>
-              {componentDetails.length > 0 && (
-                <div className="py-4">
-                  {componentDetails.map((data: ItemData, i: number) => {
-                    return (
-                      <Item
-                        key={`${data.label}-${i}`}
-                        label={data.label}
-                        info={data.info}
-                        quantityVisibilityState={QUANTITY_VISIBILITY_STATE.HIDE}
-                        isFirst={i === 0}
-                      />
-                    );
-                  })}
-                </div>
-              )}
-
-              {quiz.displayCalculatorName && (
-                <Divider align="left">
-                  <div className="inline-flex align-items-center">
-                    <i className="pi pi-calculator mr-2"></i>
-                    <b>{quiz.displayCalculatorName}</b>
-                  </div>
-                </Divider>
-              )}
-
-              {!!(quiz.text && quiz.name) &&
-                !!answerOptions[index] &&
-                !noAvailableOptions && (
-                  <div className="col-12 flex p-0">
-                    <div className="col-3 flex align-items-center">
-                      {quiz.name}
-                    </div>
-                    <div className="col-9">
-                      <Dropdown
-                        value={answers[index] || null}
-                        onChange={handleSelectAnswer(index)}
-                        options={answerOptions[index]}
-                        placeholder="Select"
-                        className="w-full"
-                        disabled={isLoading || !!!answerOptions[index]?.length}
-                      />
-                    </div>
-                  </div>
-                )}
-            </React.Fragment>
+            <Quiz
+              key={`quiz-${index}`}
+              question={quiz.name}
+              answers={answerOptions[index]}
+              currentAnswer={answers[index]}
+              disabled={isLoading}
+              progress={Math.floor((index / input.length) * 100)}
+              onSelectAnswer={handleSelectAnswer(index)}
+            />
           );
         })}
-        {showAutopopulatePrompt && input.length > 0 && !input[level + 1] && (
+
+        {showAutopopulatePrompt && answeredAllQuestions && (
           <AutoPopulatePromt
             autoPopulate={autoPopulate}
             onPopulateResponse={handlePopulateResponse}
             showRefreshButton={isAutoPopulatedAnswersChanged}
           />
         )}
-      </React.Fragment>
-      <div className="w-12 flex justify-content-center">
-        {(isLoading || (input[level] && !!!answerOptions[level]?.length)) && (
-          <ProgressSpinner className="w-1" />
+
+        {answeredAllQuestions && sitesData[site.name]?.componentDetails && (
+          <ComponentDetails
+            componentDetails={sitesData[site.name]?.componentDetails}
+            responseOrder={responseOrder}
+            onUpdateQuantity={onUpdateQuantity}
+          />
         )}
+
+        {(isLoading ||
+          (input[level] && !Boolean(answerOptions[level]?.length))) && (
+          <div className="w-12 flex justify-content-center">
+            <ProgressSpinner className="w-1" />
+          </div>
+        )}
+
+        <Toast ref={toastRef} position="top-right" />
       </div>
-      <Toast ref={toastRef} position="top-right" />
     </div>
   );
 };

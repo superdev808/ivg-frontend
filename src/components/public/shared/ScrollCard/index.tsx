@@ -54,7 +54,7 @@ export const ScrollCard = ({ description, rtl, ...props }: ScrollCardProps) => {
 							d="M5 30 H595"
 							strokeWidth="2"
 							style={{ stroke: 'var(--primary-color)' }}
-							stroke-dasharray="5,5"
+							strokeDasharray="5,5"
 						/>
 					</svg>
 					<svg

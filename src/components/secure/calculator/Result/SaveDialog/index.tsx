@@ -16,6 +16,8 @@ const SaveDialog: React.FC<SaveDialogProps> = ({
 }) => {
   const [value, setValue] = useState<string>("");
 
+  const canSave = !value || value === defaultValue;
+
   useEffect(() => {
     setValue(defaultValue);
   }, [defaultValue]);
@@ -37,7 +39,12 @@ const SaveDialog: React.FC<SaveDialogProps> = ({
         />
 
         <div className="flex justify-content-end gap-2">
-          <Button label="Save" size="small" onClick={() => onClose(value)} />
+          <Button
+            label="Save"
+            size="small"
+            disabled={canSave}
+            onClick={() => onClose(value)}
+          />
           <Button label="Cancel" size="small" onClick={() => onClose()} />
         </div>
       </div>

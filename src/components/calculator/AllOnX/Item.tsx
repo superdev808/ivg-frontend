@@ -1,37 +1,27 @@
-import {
-  ItemData,
-  ItemInsights,
-  QUANTITY_VISIBILITY_STATE,
-} from "@/components/secure/calculator/AllOnX/constants";
-import { isValidUrl } from "../AllOnXUtills";
+import noop from "lodash/noop";
 import { InputNumber } from "primereact/inputnumber";
 import React from "react";
-import { noop } from "lodash";
 
-interface ItemDataParams extends ItemData {
+import {
+  ItemData,
+  QUANTITY_VISIBILITY_STATE,
+} from "@/components/secure/calculator/AllOnX/constants";
+
+import { isValidUrl } from "./AllOnXUtills";
+
+interface ItemDataProps extends ItemData {
   quantityVisibilityState: QUANTITY_VISIBILITY_STATE;
   isFirst?: boolean;
   onUpdateQuantity?: (value: number, itemName: string) => void;
 }
 
-/**
- * Name : Item.
- * Desc : Renders an item with its details and quantity options.
- * @param {string} id
- * @param {string} label
- * @param {object} info
- * @param {object} procedure
- * @param {object} quantityVisibilityState
- * @param {boolean} isFirst
- * @param {func} onUpdateQuantity
- */
-const Item: React.FC<ItemDataParams> = ({
+const Item: React.FC<ItemDataProps> = ({
   label = "",
   info = [],
   quantityVisibilityState = QUANTITY_VISIBILITY_STATE.HIDE,
   isFirst,
   onUpdateQuantity = noop,
-}: ItemDataParams) => {
+}) => {
   const renderQuantity = React.useCallback(
     (quantity: number, itemName: string) => {
       switch (quantityVisibilityState) {
@@ -61,7 +51,7 @@ const Item: React.FC<ItemDataParams> = ({
           return null;
       }
     },
-    [quantityVisibilityState]
+    [quantityVisibilityState, onUpdateQuantity]
   );
 
   return (
@@ -76,8 +66,9 @@ const Item: React.FC<ItemDataParams> = ({
             {label}
           </div>
           <div className="w-8">
-            {info.map((item: ItemInsights, i: number) => {
+            {info.map((item, i) => {
               const { itemName, itemNumber, link, quantity } = item;
+
               return (
                 <div key={`${itemName}-${i}`} className="flex">
                   <span

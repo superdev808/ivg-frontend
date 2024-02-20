@@ -803,7 +803,7 @@ export const CALCULATORS: CollectionsIO = {
       name: "Abutment Diameter",
       text: "Abutment Diameter [Temporary Copings (Multi-Unit Abutments)]",
       calculator: "TemporaryCopingsMUAs",
-    },    
+    },
     {
       name: "Abutment Type",
       text: "Abutment Type [Temporary Copings (Multi-Unit Abutments)]",

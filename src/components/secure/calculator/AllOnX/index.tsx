@@ -3,7 +3,6 @@ import has from "lodash/has";
 import isEqual from "lodash/isEqual";
 import { CheckboxChangeEvent } from "primereact/checkbox";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
-import { TabView, TabPanel } from "primereact/tabview";
 import React, { useEffect, useState } from "react";
 
 import {
@@ -16,7 +15,6 @@ import {
 } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 
 import AdditionalInputs from "./AdditionalInputs";
-import ComponentDetails from "./ComponentDetails";
 import {
   AutoPopulateData,
   ComponentDetail,
@@ -50,8 +48,8 @@ interface AllOnXCalculatorProps {
  * @param {boolean} isCustom
  */
 const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
-  isCustom,
-}: AllOnXCalculatorProps) => {
+  isCustom = false,
+}) => {
   const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
@@ -68,14 +66,16 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   const [totalQuantities, setTotalQuantities] = useState<TotalQuantities[]>([]);
 
   useEffect(() => {
-    const _collections = getProcedureCollections(
+    const newCollections = getProcedureCollections(
       procedure,
       additionalInputs,
-      !!isCustom
+      isCustom
     );
-    setCollections(_collections);
+
+    setCollections(newCollections);
+
     if (!isCustom) {
-      setSelectedCollections(_collections);
+      setSelectedCollections(newCollections);
     }
   }, [procedure, additionalInputs, isCustom]);
 
@@ -84,7 +84,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       procedure,
       additionalInputs,
       selectedCollections,
-      !!isCustom
+      isCustom
     );
     setProcedureInputsAndResponse(procedureInputsAndResponse);
   }, [additionalInputs, isCustom, procedure, selectedCollections]);
@@ -360,38 +360,11 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
               )}
 
               {selectedSites.length > 0 && (
-                <div className="mt-3 relative">
-                  <TabView renderActiveOnly={false}>
-                    <TabPanel header="Input Details">
-                      <InputDetails
-                        procedure={procedure}
-                        selectedSites={selectedSites}
-                        sitesData={sitesData}
-                        onInputSelect={handleInputSelect}
-                        onAutopopulate={handleAutopopulate}
-                        autoPopulateData={autoPopulateData}
-                        procedureInputs={
-                          procedureInputsAndResponse?.input || []
-                        }
-                        additionalInputs={additionalInputs}
-                        onQuizResponse={handleQuizResponse}
-                      />
-                    </TabPanel>
-                    <TabPanel header="Component Details">
-                      <ComponentDetails
-                        selectedSites={selectedSites}
-                        sitesData={sitesData}
-                        responseOrder={
-                          procedureInputsAndResponse?.responseOrder || []
-                        }
-                        onUpdateQuantity={handleUpdateQuantity}
-                      />
-                    </TabPanel>
-                  </TabView>
+                <>
                   <PDFExport
                     selectedSites={selectedSites}
                     sitesData={sitesData}
-                    calculatorName={!!isCustom ? `Custom` : `All-On-X`}
+                    calculatorName={isCustom ? `Custom` : `All-On-X`}
                     showTeethSelection={
                       siteSpecificReport ===
                       SITE_SPECIFIC_REPORT_OPTIONS[0].value
@@ -401,7 +374,21 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                     }
                     totalQuantities={totalQuantities}
                   />
-                </div>
+
+                  <InputDetails
+                    selectedSites={selectedSites}
+                    sitesData={sitesData}
+                    onInputSelect={handleInputSelect}
+                    onAutopopulate={handleAutopopulate}
+                    autoPopulateData={autoPopulateData}
+                    procedureInputs={procedureInputsAndResponse?.input || []}
+                    responseOrder={
+                      procedureInputsAndResponse?.responseOrder || []
+                    }
+                    onQuizResponse={handleQuizResponse}
+                    onUpdateQuantity={handleUpdateQuantity}
+                  />
+                </>
               )}
             </div>
           </div>

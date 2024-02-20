@@ -1643,7 +1643,7 @@ const fullIcons: FullIcons = {
 
 /*
  * The function returns validIcons
-*/
+ */
 export const validIcons: FullIcons = {
   ...fullIcons,
 };
