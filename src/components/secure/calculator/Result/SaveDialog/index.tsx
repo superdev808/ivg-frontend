@@ -16,8 +16,6 @@ const SaveDialog: React.FC<SaveDialogProps> = ({
 }) => {
   const [value, setValue] = useState<string>("");
 
-  const canSave = !value || value === defaultValue;
-
   useEffect(() => {
     setValue(defaultValue);
   }, [defaultValue]);
@@ -28,6 +26,7 @@ const SaveDialog: React.FC<SaveDialogProps> = ({
       blockScroll
       className="w-10 md:w-6 xl:w-4"
       visible={visible}
+      draggable={false}
       onHide={onClose}
     >
       <div className="flex flex-column gap-4">
@@ -42,7 +41,7 @@ const SaveDialog: React.FC<SaveDialogProps> = ({
           <Button
             label="Save"
             size="small"
-            disabled={canSave}
+            disabled={!value}
             onClick={() => onClose(value)}
           />
           <Button label="Cancel" size="small" onClick={() => onClose()} />

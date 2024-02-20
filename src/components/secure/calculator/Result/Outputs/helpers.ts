@@ -69,10 +69,9 @@ export const getOutputs = (
 
     const arr = ["(Extra Short)", "(Short)", "(Standard / Medium)", "(Long)"];
 
-    arr.map((value) => {
-      // Iterate over the drill data
-      for (let i = 1; i < 20; i++) {
-        const itemKey = `Drill ${i} ${value}`;
+    for (let i = 1; i < 20; i++) {
+      arr.forEach((size) => {
+        const itemKey = `Drill ${i} ${size}`;
         const linkKey = `${itemKey} Link to Purchase`;
         const itemNumberKey = `${itemKey} Item Number`;
         const manfacturerKey = `${itemKey} Manufacturer Recommendations`;
@@ -101,8 +100,8 @@ export const getOutputs = (
             additionals,
           });
         }
-      }
-    });
+      });
+    }
 
     return res;
   }

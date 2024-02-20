@@ -15,7 +15,7 @@ import {
   PROCEDURE_INPUTS_AND_RESPONSE,
 } from "./ProcedureInputsAndResponse";
 
-export const isValidUrl = (urlString: string) => {
+export const isValidUrl = (urlString = "") => {
   const urlPattern = new RegExp(
     "^(https?:\\/\\/)?" + // validate protocol
       "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
@@ -25,8 +25,7 @@ export const isValidUrl = (urlString: string) => {
       "(\\#[-a-z\\d_]*)?$",
     "i"
   ); // validate fragment locator
-  urlString = !!urlString ? urlString.trim() : "";
-  return !!urlPattern.test(urlString);
+  return Boolean(urlPattern.test(urlString.trim()));
 };
 
 const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
