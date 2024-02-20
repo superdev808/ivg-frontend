@@ -11,6 +11,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { FormErrorMessage } from "@/components/shared/FormErrorMessage";
 import ImageUploader from "@/components/shared/ImageUploader";
+import { setCookie } from "@/helpers/cookie";
 import {
   useGetUserInfoQuery,
   usePostSendResetPasswordMutation,
@@ -103,6 +104,7 @@ export default function SettingsUserInfoForm() {
   const onSubmit = async (data: FormValues) => {
     try {
       await putUpdateUserInfo(data).unwrap();
+      setCookie("name", `${data.firstName} ${data.lastName}`);
       refetch();
       setUpdateMessage("Successfully updated.");
     } catch (error: any) {
