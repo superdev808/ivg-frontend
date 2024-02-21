@@ -155,7 +155,9 @@ const PdfContent: React.FC<PdfContentProps> = ({
       >
         <div className="col-4 p-0">
           <div className={cx("break-all", "pb-2")}>{patientInfo?.name}</div>
-          <div className={cx("break-all")}>{patientInfo?.address}</div>
+          {patientInfo?.address && (
+            <div className={cx("break-all")}>{patientInfo?.address}</div>
+          )}
         </div>
 
         <div>
