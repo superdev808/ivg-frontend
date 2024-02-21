@@ -1,3 +1,5 @@
+import union from "lodash/union";
+
 import {
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
   InputOutputValues,
@@ -5,15 +7,15 @@ import {
   PROCEDURES,
   KeyValuePair,
 } from "@/components/secure/calculator/AllOnX/constants";
+
 import {
   CALCULATORS,
   CollectionsIO,
   InputAndResponse,
   PROCEDURE_INPUTS_AND_RESPONSE,
 } from "./ProcedureInputsAndResponse";
-import _ from "lodash";
 
-export const isValidUrl = (urlString: string) => {
+export const isValidUrl = (urlString = "") => {
   const urlPattern = new RegExp(
     "^(https?:\\/\\/)?" + // validate protocol
       "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
@@ -23,8 +25,7 @@ export const isValidUrl = (urlString: string) => {
       "(\\#[-a-z\\d_]*)?$",
     "i"
   ); // validate fragment locator
-  urlString = !!urlString ? urlString.trim() : "";
-  return !!urlPattern.test(urlString);
+  return Boolean(urlPattern.test(urlString.trim()));
 };
 
 const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
@@ -36,7 +37,7 @@ const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
     return PROCEDURE_INPUTS_AND_RESPONSE.RESTORATIVE_DIRECT_TO_IMPLANT;
   }
   // Restorative (On MUAs, MUAs Not Placed)
-  else if (
+  if (
     additionalInputs[DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name] ===
       DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value &&
     additionalInputs[MUA_OPTIONS[0].name] === MUA_OPTIONS[1].value
@@ -44,7 +45,7 @@ const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
     return PROCEDURE_INPUTS_AND_RESPONSE.RESTORATIVE_ON_MUAS_MUAS_NOT_PLACED;
   }
   // Restorative (On MUAs, MUAs Placed)
-  else if (
+  if (
     additionalInputs[DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name] ===
       DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value &&
     additionalInputs[MUA_OPTIONS[0].name] === MUA_OPTIONS[0].value
@@ -52,9 +53,7 @@ const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
     return PROCEDURE_INPUTS_AND_RESPONSE.RESTORATIVE_ON_MUAS_MUAS_PLACED;
   }
   // No match found
-  else {
-    return {};
-  }
+  return {};
 };
 
 export const getProcedureCollections = (
@@ -77,7 +76,7 @@ export const getProcedureCollections = (
           PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
         const restorativeCollections: CollectionsIO =
           getRestorativeCollections(additionalInputs);
-        return _.union([
+        return union([
           ...Object.keys(surgeryCollections),
           ...Object.keys(restorativeCollections),
         ]);
@@ -85,9 +84,9 @@ export const getProcedureCollections = (
       default:
         return [];
     }
-  } else {
-    return Object.keys(CALCULATORS);
   }
+
+  return Object.keys(CALCULATORS);
 };
 
 const prepareInputsAndResponse = (
@@ -96,6 +95,7 @@ const prepareInputsAndResponse = (
 ) => {
   let inputs: InputOutputValues[] = [];
   let responseOrder: string[] = [];
+
   selectedCollections.map((selectedCollection: string) => {
     let isDisplayNameAssigned: boolean = false;
     collections[selectedCollection]?.map((input: InputOutputValues) => {
@@ -115,6 +115,7 @@ const prepareInputsAndResponse = (
     });
     responseOrder.push(selectedCollection);
   });
+
   return { input: inputs, responseOrder };
 };
 
@@ -156,11 +157,12 @@ export const getProcedureInputsAndResponse = (
       default:
         return { input: [], responseOrder: [] };
     }
-  } else {
-    const customResults: InputAndResponse = prepareInputsAndResponse(
-      selectedCollections,
-      CALCULATORS
-    );
-    return customResults;
   }
+
+  const customResults: InputAndResponse = prepareInputsAndResponse(
+    selectedCollections,
+    CALCULATORS
+  );
+
+  return customResults;
 };

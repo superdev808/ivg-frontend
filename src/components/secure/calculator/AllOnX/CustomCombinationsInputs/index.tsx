@@ -1,7 +1,8 @@
-import React from "react";
-import { RadioButton } from "primereact/radiobutton";
-import { RadioButtonOption, SITE_SPECIFIC_REPORT_OPTIONS } from "../constants";
 import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
+import { RadioButton } from "primereact/radiobutton";
+import React from "react";
+
+import { RadioButtonOption, SITE_SPECIFIC_REPORT_OPTIONS } from "../constants";
 
 interface CustomCombinationsInputsParams {
   collections: string[];
@@ -26,7 +27,7 @@ const CustomCombinationsInputs: React.FC<CustomCombinationsInputsParams> = ({
   onCollectionChange,
   siteSpecificReport,
   onChangeSiteSpecificReport,
-}: CustomCombinationsInputsParams) => {
+}) => {
   const collectionsWrapper = {
     display: "grid",
     gap: "20px",
@@ -42,46 +43,43 @@ const CustomCombinationsInputs: React.FC<CustomCombinationsInputsParams> = ({
           report
         </p>
         <div style={collectionsWrapper}>
-          {collections.map((collection: string, index: number) => {
-            return (
-              <div
-                key={`${collection}-${index}`}
-                className="flex align-items-center"
-              >
-                <Checkbox
-                  inputId={`${collection}-${index}`}
-                  name="collection"
-                  value={collection}
-                  onChange={onCollectionChange}
-                  checked={selectedCollections.includes(collection)}
-                />
-                <label htmlFor={`${collection}-${index}`} className="ml-2">
-                  {collection}
-                </label>
-              </div>
-            );
-          })}
+          {collections.map((collection: string, index: number) => (
+            <div
+              key={`${collection}-${index}`}
+              className="flex align-items-center"
+            >
+              <Checkbox
+                inputId={`${collection}-${index}`}
+                name="collection"
+                value={collection}
+                onChange={onCollectionChange}
+                checked={selectedCollections.includes(collection)}
+              />
+              <label htmlFor={`${collection}-${index}`} className="ml-2">
+                {collection}
+              </label>
+            </div>
+          ))}
         </div>
       </div>
+
       <div className="flex flex-column w-12 mb-2">
         <p>Do you want to add make your custom report site specific?</p>
         <div className="flex flex-wrap gap-3">
-          <>
-            {SITE_SPECIFIC_REPORT_OPTIONS.map((option: RadioButtonOption) => (
-              <div className="flex align-items-center" key={option.id}>
-                <RadioButton
-                  inputId={option.id}
-                  name={option.name}
-                  value={option.value}
-                  onChange={(e) => onChangeSiteSpecificReport(e.value)}
-                  checked={siteSpecificReport === option.value}
-                />
-                <label htmlFor={option.id} className="ml-2">
-                  {option.value}
-                </label>
-              </div>
-            ))}
-          </>
+          {SITE_SPECIFIC_REPORT_OPTIONS.map((option: RadioButtonOption) => (
+            <div className="flex align-items-center" key={option.id}>
+              <RadioButton
+                inputId={option.id}
+                name={option.name}
+                value={option.value}
+                onChange={(e) => onChangeSiteSpecificReport(e.value)}
+                checked={siteSpecificReport === option.value}
+              />
+              <label htmlFor={option.id} className="ml-2">
+                {option.value}
+              </label>
+            </div>
+          ))}
         </div>
       </div>
     </div>

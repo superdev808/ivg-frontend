@@ -132,7 +132,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
   };
 
   return (
-    <>
+    <div className="relative flex justify-content-end my-3">
       <div className="hidden">
         <div ref={contentRef}>
           {patientInfo && (
@@ -149,7 +149,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
         </div>
       </div>
 
-      <div className="p-buttonset absolute pt-2 top-0 right-0">
+      <div className="p-buttonset">
         <Button
           onClick={() => showPatientInfoDialog("download")}
           size="small"
@@ -180,7 +180,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
       >
         <PatientInfo info={patientInfo} onSubmit={handleSubmit} />
       </Dialog>
-    </>
+    </div>
   );
 };
 

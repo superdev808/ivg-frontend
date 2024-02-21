@@ -42,9 +42,11 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
     }
 
     return orderedResults.filter((result) => {
-      const parsed = [...values(result.itemInfo), ...values(result.quiz)].map(
-        lowerCase
-      );
+      const parsed = [
+        ...values(result.itemInfo),
+        ...values(result.quiz),
+        result.name,
+      ].map(lowerCase);
 
       return parsed.some((elem) => elem.includes(lowerCase(search)));
     });

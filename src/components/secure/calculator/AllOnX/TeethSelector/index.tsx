@@ -1,12 +1,15 @@
 import React from "react";
-import { Tooth } from "./Tooth/Tooth";
-import styles from "./TeethSelector.module.scss";
+
 import { LOWER_SITES, Site, UPPER_SITES } from "../constants";
+
+import Tooth from "./Tooth";
+import styles from "./TeethSelector.module.scss";
 
 export enum TeethSelectorVariant {
   SMALL,
   DEFAULT,
 }
+
 interface TeethSelectorProps {
   selectedSites: Site[];
   onSiteChange: (teeth: number) => void;
@@ -28,10 +31,8 @@ const TeethSelector: React.FC<TeethSelectorProps> = ({
   onSiteChange,
   showLabel = true,
   variant = TeethSelectorVariant.DEFAULT,
-}: TeethSelectorProps) => {
-  const selectedSitesKeys: number[] = selectedSites.map(
-    (site: Site) => site.key
-  );
+}) => {
+  const selectedSitesKeys = selectedSites.map((site: Site) => site.key);
 
   return (
     <div
@@ -45,22 +46,19 @@ const TeethSelector: React.FC<TeethSelectorProps> = ({
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            width={`${variant === TeethSelectorVariant.SMALL ? "180" : "300"}`}
-            height={`${variant === TeethSelectorVariant.SMALL ? "120" : "200"}`}
+            width={`${variant === TeethSelectorVariant.SMALL ? 180 : 300}`}
+            height={`${variant === TeethSelectorVariant.SMALL ? 120 : 200}`}
           >
             {/* upper teeth */}
-            {UPPER_SITES.map((item: Site) => {
-              return (
-                <React.Fragment key={item.key}>
-                  <Tooth
-                    name={`tooth${item.key}`}
-                    value={item.key}
-                    isSelected={selectedSitesKeys.includes(item.key)}
-                    onClickHandler={onSiteChange}
-                  />
-                </React.Fragment>
-              );
-            })}
+            {UPPER_SITES.map((item: Site) => (
+              <Tooth
+                key={item.key}
+                name={`tooth${item.key}`}
+                value={item.key}
+                isSelected={selectedSitesKeys.includes(item.key)}
+                onClickHandler={onSiteChange}
+              />
+            ))}
           </svg>
         </div>
 
@@ -68,23 +66,20 @@ const TeethSelector: React.FC<TeethSelectorProps> = ({
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            width={`${variant === TeethSelectorVariant.SMALL ? "180" : "300"}`}
-            height={`${variant === TeethSelectorVariant.SMALL ? "120" : "200"}`}
+            width={`${variant === TeethSelectorVariant.SMALL ? 180 : 300}`}
+            height={`${variant === TeethSelectorVariant.SMALL ? 120 : 200}`}
           >
             {/* lower teeth */}
 
-            {LOWER_SITES.map((item: Site) => {
-              return (
-                <React.Fragment key={item.key}>
-                  <Tooth
-                    name={`tooth${item.key}`}
-                    value={item.key}
-                    isSelected={selectedSitesKeys.includes(item.key)}
-                    onClickHandler={onSiteChange}
-                  />
-                </React.Fragment>
-              );
-            })}
+            {LOWER_SITES.map((item: Site) => (
+              <Tooth
+                key={item.key}
+                name={`tooth${item.key}`}
+                value={item.key}
+                isSelected={selectedSitesKeys.includes(item.key)}
+                onClickHandler={onSiteChange}
+              />
+            ))}
           </svg>
         </div>
       </div>

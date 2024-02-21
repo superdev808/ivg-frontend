@@ -26,6 +26,7 @@ const SaveDialog: React.FC<SaveDialogProps> = ({
       blockScroll
       className="w-10 md:w-6 xl:w-4"
       visible={visible}
+      draggable={false}
       onHide={onClose}
     >
       <div className="flex flex-column gap-4">
@@ -37,7 +38,12 @@ const SaveDialog: React.FC<SaveDialogProps> = ({
         />
 
         <div className="flex justify-content-end gap-2">
-          <Button label="Save" size="small" onClick={() => onClose(value)} />
+          <Button
+            label="Save"
+            size="small"
+            disabled={!value}
+            onClick={() => onClose(value)}
+          />
           <Button label="Cancel" size="small" onClick={() => onClose()} />
         </div>
       </div>

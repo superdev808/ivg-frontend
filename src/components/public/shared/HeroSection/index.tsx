@@ -1,13 +1,14 @@
 import classNames from "classnames/bind";
 import noop from "lodash";
+import Link from "next/link";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import { useEffect } from "react";
 
+import { socialButtons } from "@/helpers/util";
 import { useAppDispatch } from "@/redux/hooks/hooks";
 
 import styles from "./HeroSection.module.scss";
-import Link from "next/link";
 
 const cx = classNames.bind(styles);
 
@@ -52,24 +53,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       dispatch({ type: "ui/setTransparentNavBar", payload: false });
     };
   }, [dispatch]);
-
-  const socialButtons = [
-    {
-      icon: "pi pi-facebook",
-      ariaLabel: "Facebook Link",
-      link: "https://www.facebook.com/profile.php?id=61551773567714",
-    },
-    {
-      icon: "pi pi-instagram",
-      ariaLabel: "Instagram Link",
-      link: "https://www.instagram.com/ivory.guide?fbclid=IwAR2T81D8g_ICPZCn2uKavFn23VVZBDMZ-xpP-19LpKFHYA5-YqbeFPIL5TQ",
-    },
-    {
-      icon: "pi pi-linkedin",
-      ariaLabel: "LinkedIn Link",
-      link: "https://www.linkedin.com/company/ivory-guide/?viewAsMember=true",
-    },
-  ];
 
   return (
     <div className={cx("hero-container", "px-3 md:px-0 overflow-hidden")}>
