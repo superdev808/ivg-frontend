@@ -4,13 +4,16 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { RadioButton } from "primereact/radiobutton";
 import { Toast } from "primereact/toast";
 import { useState, useRef } from "react";
+
 import { getCookie } from "@/helpers/cookie";
+
+import { InputDetail } from "../AllOnX/constants";
 
 interface HelpfulFeedbackDialogProps {
   calculatorName: string;
   visible: boolean;
   setVisible: (_: boolean) => void;
-  quiz: Record<string, string>
+  quiz: InputDetail[];
 }
 
 const feedbackCategories = [
@@ -26,7 +29,7 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
   calculatorName,
   visible,
   setVisible,
-  quiz
+  quiz,
 }) => {
   const [feedbackCategory, setFeedbackCategory] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -47,7 +50,7 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
       feedbackCategory,
       message,
       timestamp: new Date().toString(),
-      quiz
+      quiz,
     };
 
     setLoading(true);
@@ -94,7 +97,11 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
         label={loading ? "Submitting" : "Send Feedback"}
         onClick={handleSubmit}
         autoFocus
-        disabled={!feedbackCategory || (feedbackCategory === "Other" && !message) || loading}
+        disabled={
+          !feedbackCategory ||
+          (feedbackCategory === "Other" && !message) ||
+          loading
+        }
       />
     </div>
   );

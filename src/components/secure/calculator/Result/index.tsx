@@ -1,8 +1,8 @@
 import classNames from "classnames/bind";
 // @ts-ignore
 import html2pdf from "html2pdf.js";
-import omit from "lodash/omit";
-import trim from "lodash/trim";
+// import omit from "lodash/omit";
+// import trim from "lodash/trim";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { Image } from "primereact/image";
@@ -20,9 +20,8 @@ import {
 import { Patient } from "@/types/PublicTypes";
 
 import PdfContent from "../AllOnX/PdfExport/PdfContent";
-import { prepareExportProps } from "./helper";
+import { prepareExportProps, ResultItem } from "./helpers";
 import Outputs from "./Outputs";
-import { getItemName } from "./Outputs/helpers";
 import SaveDialog from "./SaveDialog";
 
 import styles from "./style.module.scss";
@@ -31,16 +30,16 @@ const cx = classNames.bind(styles);
 
 interface ResultProps {
   id?: string;
-  name?: string;
-  itemInfo: Record<string, string>;
-  quiz: Record<string, string>;
+  name: string;
+  items: ResultItem[];
+  quiz: { question: string; answer: string }[];
   calculatorType: string;
 }
 
 const Result: React.FC<ResultProps> = ({
   id = "",
-  name = "",
-  itemInfo,
+  name,
+  items,
   quiz,
   calculatorType,
 }) => {
@@ -63,15 +62,7 @@ const Result: React.FC<ResultProps> = ({
   const calculatorName = getCalculatorName(calculatorType);
   const filename = patientInfo?.filename || `${calculatorName}-Summary`;
 
-  const itemName = name || getItemName(calculatorType, itemInfo);
-  const itemImage = productImages[calculatorType] || productImages["Default"];
-  const purchaseLink = trim(itemInfo["Link to Purchase"]);
-
-  const details = omit(itemInfo, [
-    "Item Name",
-    "Item Image",
-    "Link to Purchase",
-  ]);
+  const image = productImages[calculatorType] || productImages["Default"];
 
   const isSaved = Boolean(id);
 
@@ -167,7 +158,7 @@ const Result: React.FC<ResultProps> = ({
   const handleSave = async (name: string) => {
     const payload = {
       calculatorType,
-      itemInfo,
+      items,
       quiz,
       name,
     };
@@ -264,7 +255,7 @@ const Result: React.FC<ResultProps> = ({
 
       <SaveDialog
         visible={showSaveDialog}
-        defaultValue={itemName}
+        defaultValue={name}
         onClose={handleCloseSaveDialog}
       />
 
@@ -280,7 +271,7 @@ const Result: React.FC<ResultProps> = ({
                 onChange={(evt) => setEditingName(evt.target.value)}
               />
             ) : (
-              <h1 className="m-0">{itemName}</h1>
+              <h1 className="m-0">{name}</h1>
             )}
 
             {isSaved && (
@@ -343,7 +334,7 @@ const Result: React.FC<ResultProps> = ({
         </div>
 
         <div className="flex justify-content-between gap-4 flex-column lg:flex-row">
-          {itemImage && (
+          {image && (
             <div
               className={cx(
                 "flex-1 flex justify-content-center overflow-hidden",
@@ -351,8 +342,8 @@ const Result: React.FC<ResultProps> = ({
               )}
             >
               <Image
-                src={itemImage}
-                alt={itemName}
+                src={image}
+                alt={name}
                 className="flex-1 flex justify-content-center"
                 imageClassName="w-full sm:w-5 lg:w-full lg:h-full"
                 imageStyle={{ objectFit: "contain" }}
@@ -366,23 +357,18 @@ const Result: React.FC<ResultProps> = ({
               "quiz"
             )}
           >
-            {Object.keys(quiz).map((text) => (
-              <div key={text} className="flex gap-1">
+            {quiz.map(({ question, answer }) => (
+              <div key={question} className="flex gap-1">
                 <div className="text-left" style={{ maxWidth: "50%" }}>
-                  {text}
+                  {question}
                 </div>
-                <div className="flex-1 text-right">{trim(quiz[text])}</div>
+                <div className="flex-1 text-right">{answer}</div>
               </div>
             ))}
           </div>
         </div>
 
-        <Outputs
-          calculatorType={calculatorType}
-          itemName={itemName}
-          purchaseLink={purchaseLink}
-          details={details}
-        />
+        <Outputs name={name} items={items} />
       </div>
 
       <div className="hidden">
@@ -394,7 +380,7 @@ const Result: React.FC<ResultProps> = ({
                 calculatorName,
                 patientInfo,
                 quiz,
-                itemInfo
+                items
               )}
             />
           )}

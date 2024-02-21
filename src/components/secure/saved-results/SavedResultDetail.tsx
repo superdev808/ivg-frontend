@@ -6,31 +6,31 @@ import React from "react";
 import Result from "@/components/secure/calculator/Result";
 import { formatDate, getCalculatorName } from "@/helpers/util";
 
+import { ResultItem } from "../calculator/Result/helpers";
+
 type SavedResult = {
   id: string;
   name: string;
   calculatorType: string;
-  itemInfo: Record<string, string>;
-  quiz: Record<string, string>;
+  items: ResultItem[];
+  quiz: { answer: string; question: string }[];
   date: string;
 };
 
 interface SavedResultsListProps {
   savedResult: SavedResult;
   isDeleting: boolean;
-  toastRef: any;
   onDelete: () => void;
 }
 
 const SavedResultDetail: React.FC<SavedResultsListProps> = ({
   savedResult,
   isDeleting,
-  toastRef,
   onDelete,
 }) => {
   const router = useRouter();
 
-  const { id, calculatorType, itemInfo, quiz, date, name } = savedResult;
+  const { id, calculatorType, items, quiz, date, name } = savedResult;
 
   const handleGoBack = () => {
     router.push("/settings/saved-results");
@@ -79,7 +79,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
           id={id}
           name={name}
           calculatorType={calculatorType}
-          itemInfo={itemInfo}
+          items={items}
           quiz={quiz}
         />
       </div>

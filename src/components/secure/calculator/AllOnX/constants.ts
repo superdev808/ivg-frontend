@@ -45,7 +45,7 @@ export interface ItemInsights {
   brand: string;
   itemName: string;
   itemNumber?: string;
-  link: string;
+  link?: string;
   quantity?: number;
   manufacturer?: string;
 }
