@@ -2750,6 +2750,13 @@ export const formatDate = (date?: Date | null | string) =>
     day: "2-digit",
   }).format(date ? new Date(date) : new Date());
 
+export const formatTime = (date?: Date | null | string) =>
+  new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  }).format(date ? new Date(date) : new Date());
+
 export const productImages: Record<string, string> = {
   BoneReduction:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Bone+Reduction+Forceps.png",

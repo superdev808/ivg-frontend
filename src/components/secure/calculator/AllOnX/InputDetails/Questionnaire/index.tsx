@@ -221,8 +221,6 @@ const Questionnaire: React.FC<InputProps> = ({
     return res;
   }, [answers, input]);
 
-  console.log(quiz);
-
   return (
     <div className="my-3">
       <QuestionNavbar

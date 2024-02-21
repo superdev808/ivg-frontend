@@ -13,6 +13,7 @@ import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
 import { calculatorImages, getCalculatorName } from "@/helpers/util";
 
 import styles from "./quiz.module.scss";
+import { orderBy } from "lodash";
 
 const cx = classNames.bind(styles);
 
@@ -47,8 +48,26 @@ const Quiz: React.FC<QuizProps> = ({
     );
   }, [answers, selectedSuggestion]);
 
-  const firstOptions =
-    filteredAnswers.length > 6 ? filteredAnswers.slice(0, 6) : filteredAnswers;
+  const options = useMemo(() => {
+    const availableOptions =
+      filteredAnswers.length > 6
+        ? filteredAnswers.slice(0, 6)
+        : filteredAnswers;
+
+    if (availableOptions.length === 0) {
+      return [];
+    }
+
+    if (availableOptions[0].endsWith(" mm")) {
+      return orderBy(
+        availableOptions,
+        (option) => Number(option.split(" ")[0]),
+        ["asc"]
+      );
+    }
+
+    return availableOptions;
+  }, [filteredAnswers]);
 
   const dropdownOptionTemplate = (option: any) => (
     <div className="flex align-items-center justify-content-center">
@@ -119,7 +138,7 @@ const Quiz: React.FC<QuizProps> = ({
       </div>
 
       <div className="flex align-items-start justify-content-around flex-wrap w-12">
-        {firstOptions.map((answer, index) => {
+        {options.map((answer, index) => {
           const image = calculatorImages[`${answer}`.toLowerCase()];
 
           return (

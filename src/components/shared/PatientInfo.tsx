@@ -151,30 +151,11 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
       </div>
 
       <div className="p-field mb-3">
-        <label
-          htmlFor="address"
-          className={
-            errors.address
-              ? "p-error p-float p-label-always"
-              : "p-float p-label-always"
-          }
-        >
+        <label htmlFor="address" className="p-float p-label-always">
           Street Address
         </label>
 
-        <InputText
-          id="address"
-          maxLength={128}
-          {...register("address", {
-            required: true,
-            validate: (value) => !!value.trim(),
-          })}
-          className={errors.address ? "p-invalid" : ""}
-        />
-
-        {errors.address && (
-          <small className="p-error">Street Address is required.</small>
-        )}
+        <InputText id="address" maxLength={128} {...register("address")} />
       </div>
 
       <div className="p-field mb-3">
@@ -250,6 +231,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
                               id={field.name}
                               name={recipient.key}
                               value={field.value}
+                              placeholder="Email addresses"
                               onChange={(e) => {
                                 field.onChange(e.value);
                                 handleRecipientEmailChange(
@@ -282,7 +264,7 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
 
           {errors.recipientsList && (
             <small className="p-error">
-              Please provide atleast one recipient.
+              Please provide at least one recipient.
             </small>
           )}
         </div>

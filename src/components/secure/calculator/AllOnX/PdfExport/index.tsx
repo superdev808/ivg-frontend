@@ -42,8 +42,8 @@ const PDFExport: React.FC<PDFExportProps> = ({
         const options = {
           margin: [8, 0],
           filename: info.filename || filename,
-          image: { type: "jpeg", quality: 0.9 },
-          html2canvas: { scale: 2 },
+          image: { type: "png", quality: 2 },
+          html2canvas: { scale: 1 },
           jsPDF: { unit: "mm", format: "letter", orientation: "portrait" },
           pagebreak: {
             avoid: ["thead", "tr", ".greet"],
