@@ -140,7 +140,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
         <img
           src="/images/logo/Ivory-Guide-PDF-Logo.png"
           alt="logo"
-          width={360}
+          width="auto"
           height={63}
         />
 
