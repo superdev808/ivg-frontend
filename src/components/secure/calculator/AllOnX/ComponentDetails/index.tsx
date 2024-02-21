@@ -50,6 +50,7 @@ const ComponentDetails: React.FC<ComponentDetailsProps> = ({
           quiz={quiz}
           calculatorType={result.calculatorType}
           hideMenu
+          onUpdateQuantity={onUpdateQuantity}
         />
       ))}
     </div>

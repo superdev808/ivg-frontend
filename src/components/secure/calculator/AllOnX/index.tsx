@@ -299,7 +299,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   };
 
   return (
-    <div className={" nav-offset flex-grow-1"}>
+    <div className="nav-offset flex-grow-1">
       <div className="wrapper my-8">
         <div className="flex flex-column p-5 border-round bg-white shadow-1">
           {!isCustom && (
@@ -364,7 +364,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   <PDFExport
                     selectedSites={selectedSites}
                     sitesData={sitesData}
-                    calculatorName={isCustom ? `Custom` : `All-On-X`}
+                    calculatorName={isCustom ? "Custom" : "All-On-X"}
                     showTeethSelection={
                       siteSpecificReport ===
                       SITE_SPECIFIC_REPORT_OPTIONS[0].value

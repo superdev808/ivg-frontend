@@ -33,6 +33,7 @@ interface ResultProps {
   quiz: { question: string; answer: string }[];
   calculatorType: string;
   hideMenu?: boolean;
+  onUpdateQuantity: (quantity: number, itemName: string) => void;
 }
 
 const Result: React.FC<ResultProps> = ({
@@ -42,6 +43,7 @@ const Result: React.FC<ResultProps> = ({
   quiz,
   calculatorType,
   hideMenu = false,
+  onUpdateQuantity,
 }) => {
   const { refetch } = useGetUserInfoQuery({});
   const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
@@ -370,7 +372,7 @@ const Result: React.FC<ResultProps> = ({
           </div>
         </div>
 
-        <Outputs items={items} />
+        <Outputs items={items} onUpdateQuantity={onUpdateQuantity} />
       </div>
 
       <div className="hidden">
