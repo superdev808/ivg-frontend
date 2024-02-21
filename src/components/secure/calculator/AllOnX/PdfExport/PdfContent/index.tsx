@@ -8,7 +8,7 @@ import React, { useMemo } from "react";
 
 import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 import { getCookie } from "@/helpers/cookie";
-import { formatDate } from "@/helpers/util";
+import { formatDate, formatTime } from "@/helpers/util";
 import { Patient } from "@/types/PublicTypes";
 
 import {
@@ -127,7 +127,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
   }, [sitesData, responseOrder]);
 
   const currentDate = formatDate(patientInfo?.date);
-  const currentDateTime = formatDate(patientInfo?.date);
+  const currentTime = formatTime(patientInfo?.date);
 
   const name = getCookie("name");
   const email = getCookie("email");
@@ -166,7 +166,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
 
           <div>
             <span>Time: </span>
-            {currentDateTime}
+            {currentTime}
           </div>
         </div>
       </div>
