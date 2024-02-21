@@ -26,54 +26,63 @@ export const Calculators = () => {
       description:
         "These calculators enable quick identification and procurement of a range of Impression Components, Abutments, CAD / CAM Restorations, and Prosthetic and Surgical Instruments to meet all your implant needs.",
       subItems: [
-        { label: "BoneReduction", text: "Bone Reduction Instruments" },
-        { label: "ChairSidePickUp", text: "Chairside Pick-Up Materials" },
+        { label: "BoneReduction", text: "Bone Reduction Instruments", description: "This calculator provides recommended instruments to perform bone reduction and denture conversions." },
+        { label: "ChairSidePickUp", text: "Chairside Pick-Up Materials", description: "This calculator provides recommended materials to perform chairside pick-ups on the day of surgery." },
         {
           label: "DrillKitAndSequence",
           text: "Drill Kits and Drill Sequences",
+          description: "This calculator displays surgical drill kits, drills, and drill sequences based on desired implant brand and size, as well as links to purchase this equipment."
         },
         {
           label: "RestroativeDirectToImplant",
           text: "Drivers (Restorative, Direct to Implant)",
+          description: "This calculator displays restorative drivers for single implants based on desired implant brand and size, as well as links to purchase this equipment."
         },
         {
           label: "RestorativeMultiUnitAbutments",
           text: "Drivers (Restorative, on Multi-Unit Abutments)",
+          description: "This calculator displays restorative drivers for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment."
         },
-        { label: "HealingAbutments", text: "Healing Abutments" },
-        { label: "Implants", text: "Implants" },
-        { label: "ImplantScrews", text: "Implant Screws" },
-        { label: "ImplantAnalogs", text: "Implant Analogs" },
+        { label: "HealingAbutments", text: "Healing Abutments", description: "This calculator displays healing abutments based on desired implant brand and size, as well as links to purchase this equipment." },
+        { label: "Implants", text: "Implants", description: "This calculator displays implants based on desired implant brand and size, as well as links to purchase this equipment." },
+        { label: "ImplantScrews", text: "Implant Screws", description: "This calculator displays screws based on desired implant brand and size, as well as links to purchase this equipment." },
+        { label: "ImplantAnalogs", text: "Implant Analogs", description: "This calculator displays implant analogs for stone (lab) and digital (IOS) models based on desired implant brand and size, as well as links to purchase this equipment." },
         {
           label: "ImpressingCopingsDirectToImplants",
           text: "Impression Copings (Direct to Implant)",
+          description: "This calculator displays impression copings for single implants based on desired implant brand and size, as well as links to purchase this equipment."
         },
         {
           label: "ImpressingCopingsMUAs",
           text: "Impression Copings (Multi-Unit Abutments)",
+          description: "This calculator displays impression copings for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment."
         },
-        { label: "MUAs", text: "Multi-Unit Abutments" },
-        { label: "Scanbodies", text: "Scanbodies (Single Unit)" },
-        { label: "ScanbodyMUAs", text: "Scanbodies (Mult-Unit Abutments)" },
+        { label: "MUAs", text: "Multi-Unit Abutments", description: "This calculator displays multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment." },
+        { label: "Scanbodies", text: "Scanbodies (Single Unit)", description: "This calculator displays scanbodies for single implants based on desired implant brand and size, as well as links to purchase this equipment." },
+        { label: "ScanbodyMUAs", text: "Scanbodies (Mult-Unit Abutments)", description: "This calculator displays scanbodies for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment." },
         {
           label: "ScanbodyDriversDirectToImplants",
           text: "Scanbody Drivers (Direct to Implant)",
+          description: "This calculator displays scanbody drivers for single implants based on desired implant brand and size, as well as links to purchase this equipment."
         },
-        { label: "ScanbodyDriversMUAs", text: "Scanbody Drivers (MUAs)" },
-        { label: "StockAbutments", text: "Stock Abutments" },
+        { label: "ScanbodyDriversMUAs", text: "Scanbody Drivers (MUAs)", description: "This calculator displays scanbody drivers for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment." },
+        { label: "StockAbutments", text: "Stock Abutments", description: "This calculator displays stock abutments based on desired implant brand and size, as well as links to purchase this equipment." },
         {
           label: "TemporaryCopingsDirectToImplants",
           text: "Temporary Copings (Direct to Implant)",
+          description: "This calculator displays temporary copings for single implants based on desired implant brand and size, as well as links to purchase this equipment."
         },
         {
           label: "TemporaryCopingsMUAs",
           text: "Temporary Copings (Multi-Unit Abutments)",
+          description: "This calculator displays temporary copings for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment."
         },
         {
           label: "TiBasesDirectToImplants",
           text: "Ti Bases (Direct to Implant)",
+          description: "This calculator displays Ti Bases for single implants based on desired implant brand and size, as well as links to purchase this equipment."
         },
-        { label: "TiBasesMUAs", text: "Ti Bases (Multi-Unit Abutments)" },
+        { label: "TiBasesMUAs", text: "Ti Bases (Multi-Unit Abutments)", description: "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment." },
       ],
     },
     {
@@ -81,12 +90,6 @@ export const Calculators = () => {
       description:
         "This customized calculator enables quick identification and procurement of a variety of components, instruments, and materials to help you place or restore implants.",
       subItems: [{ label: "All-on-X Implant Surgery" }],
-    },
-    {
-      label: "Product Material Selection",
-      description:
-        "These calculators provides recommendations for which materials to use across a range of products based on your patient’s clinical situation.",
-      subItems: [{ label: "Crown Materials" }],
     },
     {
       label: "Custom Combinations",
@@ -191,14 +194,17 @@ export const Calculators = () => {
                 <div className={cx("col-6 p-4", "calculatorButtonSection")}>
                   {groupItems[selectedGroup].subItems.map((calcItem, index) => (
                     <Button
-                      className={cx("calculatorButton", "p-4 mb-2")}
+                      className={cx("calculatorButton", "p-4 mb-2 flex flex-column")}
                       key={`calcItem-${index}`}
                       style={{ width: "100%" }}
-                      label={calcItem.text || calcItem.label}
+                      // label={calcItem.text || calcItem.label}
                       onClick={() => {
                         router.push("/calculators/" + calcItem.label);
                       }}
-                    />
+                    >
+                      <h4 className="m-0">{calcItem.text || calcItem.label}</h4>
+                      {calcItem.description && <p>{calcItem.description}</p>}
+                    </Button>
                   ))}
                 </div>
               )}
