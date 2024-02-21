@@ -206,6 +206,23 @@ const Questionnaire: React.FC<InputProps> = ({
 
   const answeredAllQuestions = Boolean(input.length > 0 && !input[level + 1]);
 
+  const quiz = useMemo(() => {
+    const res: { question: string; answer: string }[] = [];
+
+    answers.forEach((answer, answerIdx) => {
+      if (answer) {
+        res.push({
+          question: input[answerIdx].text || input[answerIdx].name,
+          answer,
+        });
+      }
+    });
+
+    return res;
+  }, [answers, input]);
+
+  console.log(quiz);
+
   return (
     <div className="my-3">
       <QuestionNavbar
@@ -262,6 +279,7 @@ const Questionnaire: React.FC<InputProps> = ({
 
         {answeredAllQuestions && sitesData[site.name]?.componentDetails && (
           <ComponentDetails
+            quiz={quiz}
             componentDetails={sitesData[site.name]?.componentDetails}
             responseOrder={responseOrder}
             onUpdateQuantity={onUpdateQuantity}

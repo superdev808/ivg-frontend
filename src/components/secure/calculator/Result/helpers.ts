@@ -5,6 +5,7 @@ import trim from "lodash/trim";
 import { Patient } from "@/types/PublicTypes";
 
 import { InputDetail } from "../AllOnX/constants";
+import { getCalculatorName } from "@/helpers/util";
 
 export type ResultInfo = {
   itemName: string;
@@ -43,19 +44,6 @@ export const getResultName = (calculatorType: string, items: ResultItem[]) => {
   const item = find(items, { label: key });
 
   return get(item, ["info", 0, "itemName"]) || "";
-};
-
-const OUTPUT_LABELS = {
-  IMPLANT_DRILL_KIT: "Implant Drill Kit Name",
-  DRILL_SEQUENCE: "Drill Sequence",
-  BUR_KIT: "Bur Kit Name (Bone Reduction)",
-  SURGICAL_BUR_KIT: "Bur Kit (Denture Conversion) Name",
-  IMPLANT_DRIVER: "Master Implant Driver ",
-  LUTING_AGENT: "Luting Agent",
-  TEFLON_TAPE: "Teflon Tape",
-  MATERIAL_CLOSE_ACCESS_HOLE: "Material to Close Screw Access Hole",
-  IMPLANT: "Implant",
-  SCANBODIES: "Master Scanbody",
 };
 
 export const prepareExportProps = (
@@ -162,7 +150,7 @@ export const parseItems = (
   if (calculatorType === "DrillKitAndSequence") {
     const res: ResultItem[] = [
       {
-        label: "Drill Kit Name",
+        label: "Implant Drill Kit Name",
         info: [
           {
             itemName: trim(item["Drill Kit Name"]),
@@ -229,11 +217,12 @@ export const parseItems = (
   ) {
     return [
       {
-        label: "Item Name",
+        label: getCalculatorName(calculatorType),
         info: [
           {
             itemName: trim(item["Item Name"]),
             itemNumber: trim(item["Item Number"]),
+            link: trim(item["Link to Purchase"]),
           },
         ],
       },
@@ -243,7 +232,7 @@ export const parseItems = (
   if (calculatorType === "Scanbodies") {
     return [
       {
-        label: OUTPUT_LABELS.SCANBODIES,
+        label: "Master Scanbody",
         info: [
           {
             itemName: trim(item["Item Name"]),
@@ -259,7 +248,7 @@ export const parseItems = (
   if (calculatorType === "ScanbodyMUAs") {
     return [
       {
-        label: OUTPUT_LABELS.SCANBODIES,
+        label: "Master Scanbody",
         info: [
           {
             itemName: trim(item["Item Name"]),

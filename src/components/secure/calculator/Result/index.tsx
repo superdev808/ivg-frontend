@@ -1,8 +1,6 @@
 import classNames from "classnames/bind";
 // @ts-ignore
 import html2pdf from "html2pdf.js";
-// import omit from "lodash/omit";
-// import trim from "lodash/trim";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { Image } from "primereact/image";
@@ -34,6 +32,7 @@ interface ResultProps {
   items: ResultItem[];
   quiz: { question: string; answer: string }[];
   calculatorType: string;
+  hideMenu?: boolean;
 }
 
 const Result: React.FC<ResultProps> = ({
@@ -42,6 +41,7 @@ const Result: React.FC<ResultProps> = ({
   items,
   quiz,
   calculatorType,
+  hideMenu = false,
 }) => {
   const { refetch } = useGetUserInfoQuery({});
   const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
@@ -311,29 +311,31 @@ const Result: React.FC<ResultProps> = ({
             )}
           </div>
 
-          <div className="flex align-items-center flex-shrink-0 gap-2">
-            <Button
-              className="px-3 py-2"
-              label="Email"
-              onClick={() => showPatientInfoDialog("export")}
-            />
-            <Button
-              className="px-3 py-2"
-              label="Export"
-              onClick={() => showPatientInfoDialog("download")}
-            />
-            {!isSaved && (
+          {!hideMenu && (
+            <div className="flex align-items-center flex-shrink-0 gap-2">
               <Button
                 className="px-3 py-2"
-                label="Save"
-                loading={isSavingResult}
-                onClick={() => setShowSaveDialog(true)}
+                label="Email"
+                onClick={() => showPatientInfoDialog("export")}
               />
-            )}
-          </div>
+              <Button
+                className="px-3 py-2"
+                label="Export"
+                onClick={() => showPatientInfoDialog("download")}
+              />
+              {!isSaved && (
+                <Button
+                  className="px-3 py-2"
+                  label="Save"
+                  loading={isSavingResult}
+                  onClick={() => setShowSaveDialog(true)}
+                />
+              )}
+            </div>
+          )}
         </div>
 
-        <div className="flex justify-content-between gap-4 flex-column lg:flex-row">
+        <div className="flex justify-content-between align-items-center gap-4 flex-column lg:flex-row">
           {image && (
             <div
               className={cx(
@@ -368,7 +370,7 @@ const Result: React.FC<ResultProps> = ({
           </div>
         </div>
 
-        <Outputs name={name} items={items} />
+        <Outputs items={items} />
       </div>
 
       <div className="hidden">

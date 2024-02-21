@@ -1,19 +1,26 @@
 import { Button } from "primereact/button";
-import React from "react";
+import React, { useMemo } from "react";
 
 import Link from "next/link";
 
 import { ResultItem } from "../helpers";
 
 interface OutputsProps {
-  name: string;
   items: ResultItem[];
 }
 
-const Outputs: React.FC<OutputsProps> = ({ name, items }) => {
+const Outputs: React.FC<OutputsProps> = ({ items }) => {
+  const filteredItems = useMemo(() => {
+    return items.filter((item) => item.info.length > 0);
+  }, [items]);
+
+  if (filteredItems.length === 0) {
+    return null;
+  }
+
   return (
     <div className="flex flex-column gap-4">
-      {items.map(({ label, info }) => {
+      {filteredItems.map(({ label, info }) => {
         const item = info[0];
 
         return (
@@ -22,7 +29,7 @@ const Outputs: React.FC<OutputsProps> = ({ name, items }) => {
             className="flex flex-column justify-content-between gap-4 p-3 border-2 border-gray-300 border-round-md md:flex-row md:align-items-center"
           >
             <div className="flex flex-column gap-2">
-              {name && <div>{item.itemName}</div>}
+              {item.itemName && <div>{item.itemName}</div>}
               {item.itemNumber && (
                 <div>
                   <b>Item Number:</b> {item.itemNumber}
