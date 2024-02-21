@@ -6,6 +6,7 @@ import { InputOutputValues } from "../../constants";
 interface QuestionNavbarProps {
   questions: InputOutputValues[];
   answers: string[];
+  showSummary?: boolean;
   onChange: (_: number) => void;
 }
 
@@ -14,39 +15,36 @@ const QuestionNavbar: React.FC<QuestionNavbarProps> = ({
   answers,
   onChange,
 }) => {
-  const haveAnswer = useMemo(() => {
-    return answers.filter(Boolean).length > 0;
-  }, [answers]);
+  const filteredQuestions = useMemo(() => {
+    return questions
+      .map((question, questionIdx) => {
+        const answer = answers[questionIdx];
+        const questionName = question.text || question.name;
 
-  if (!haveAnswer) {
-    return null;
-  }
+        if (answer) {
+          return questionName;
+        }
 
-  const handleTagChange = ({ index }: TabViewTabChangeEvent) => {
+        return null;
+      })
+      .filter(Boolean);
+  }, [questions, answers]);
+
+  const handleTabChange = ({ index }: TabViewTabChangeEvent) => {
     onChange(index);
   };
 
+  if (filteredQuestions.length === 0) {
+    return null;
+  }
+
   return (
-    <TabView
-      activeIndex={-1}
-      renderActiveOnly={false}
-      onTabChange={handleTagChange}
-    >
-      {answers.map((answer, answerIdx) => {
-        const question = questions[answerIdx];
-
-        if (!answer || !question || (!question.text && !question.name)) {
-          return null;
-        }
-
-        return (
-          <TabPanel key={answerIdx} header={question.text || question.name} />
-        );
-      })}
+    <TabView activeIndex={-1} scrollable onTabChange={handleTabChange}>
+      {filteredQuestions.map((question) => (
+        <TabPanel key={question} header={question} />
+      ))}
     </TabView>
   );
-
-  return <div>Hi</div>;
 };
 
 export default QuestionNavbar;

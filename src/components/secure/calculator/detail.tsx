@@ -1,3 +1,4 @@
+import trim from "lodash/trim";
 import { Button } from "primereact/button";
 import { Carousel } from "primereact/carousel";
 import { useMemo, useState } from "react";
@@ -6,6 +7,7 @@ import { getCalculatorName } from "@/helpers/util";
 import HelpfulFeedbackDialog from "./Feedback/HelpfulFeedbackDialog";
 
 import Result from "./Result";
+import { parseItems, getResultName } from "./Result/helpers";
 
 interface DetailViewProps {
   calculatorType: string;
@@ -25,34 +27,24 @@ const DetailView: React.FC<DetailViewProps> = ({
   ...props
 }) => {
   const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
-  const items = useMemo(() => {
-    return props.items.map((item) => {
-      return fields.reduce((acc, field) => {
-        if (item[field.name]) {
-          acc[field.text] = item[field.text];
-        }
 
-        return acc;
-      }, {} as Record<string, string>);
-    });
-  }, [fields, props.items]);
+  const results = useMemo(() => {
+    return props.items.map((item) => parseItems(item, calculatorType));
+  }, [props.items, calculatorType]);
 
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
       if (answers[idx]) {
-        acc[question.text] = answers[idx];
+        acc.push({ question: trim(question.text), answer: trim(answers[idx]) });
       }
 
       return acc;
-    }, {} as Record<string, string>);
+    }, [] as { question: string; answer: string }[]);
   }, [questions, answers]);
 
   const onClickFeedback = () => {
     setFeedbackShow(true);
   };
-
-  console.log(">>>", quiz);
-  // console.log("@@@", items.length > 1 ? items : items[0]);
 
   return (
     <>
@@ -67,15 +59,16 @@ const DetailView: React.FC<DetailViewProps> = ({
 
       <div className="flex flex-column align-items-center">
         <div className="w-full relative lg:w-8">
-          {items.length > 1 ? (
+          {results.length > 1 ? (
             <Carousel
-              value={items}
-              itemTemplate={(item) => (
+              value={results}
+              itemTemplate={(result) => (
                 <div className="px-3">
                   <Result
                     calculatorType={calculatorType}
-                    itemInfo={item}
+                    items={result}
                     quiz={quiz}
+                    name={getResultName(calculatorType, result)}
                   />
                 </div>
               )}
@@ -83,20 +76,27 @@ const DetailView: React.FC<DetailViewProps> = ({
           ) : (
             <Result
               calculatorType={calculatorType}
-              itemInfo={items[0]}
+              items={results[0]}
               quiz={quiz}
+              name={getResultName(calculatorType, results[0])}
             />
           )}
         </div>
       </div>
       <div
         className="fixed text-2xl m-1 left-50 bg-green-300 p-3 pb-6 border-round-3xl m-0"
-        style={{ transform: "translate(-50%, -50%)", bottom: "-90px", zIndex: "100" }}
+        style={{
+          transform: "translate(-50%, -50%)",
+          bottom: "-90px",
+          zIndex: "100",
+        }}
       >
         <i className="pi pi-thumbs-up text-3xl mr-3" />
         Was this helpful?
-        <i className="pi pi-thumbs-down text-3xl ml-3"
-        onClick={onClickFeedback}/>
+        <i
+          className="pi pi-thumbs-down text-3xl ml-3"
+          onClick={onClickFeedback}
+        />
       </div>
       <HelpfulFeedbackDialog
         visible={feedbkackShow}

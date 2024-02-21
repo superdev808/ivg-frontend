@@ -1,92 +1,55 @@
-import findIndex from "lodash/findIndex";
-import uniqBy from "lodash/uniqBy";
 import React, { useMemo } from "react";
 
-import Item from "@/components/calculator/AllOnX/Item";
 import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 
-import {
-  ComponentDetail,
-  ItemData,
-  QUANTITY_VISIBILITY_STATE,
-  ignoreListForMultiples,
-} from "../constants";
+import { ComponentDetail } from "../constants";
+import Result from "../../Result";
 
 interface ComponentDetailsProps {
   componentDetails: ComponentDetail;
   responseOrder: string[];
+  quiz: { question: string; answer: string }[];
   onUpdateQuantity: (value: number, itemName: string) => void;
 }
 
 const ComponentDetails: React.FC<ComponentDetailsProps> = ({
   componentDetails,
   responseOrder,
+  quiz,
   onUpdateQuantity,
 }) => {
-  const componentSummary = useMemo(() => {
-    let items: ItemData[] = [];
+  const results = useMemo(() => {
+    let res: any[] = [];
 
-    responseOrder.map((key) => {
-      componentDetails[CALCULATOR_NAME_COLLECTION_MAPPINGS[key]]?.map(
-        (response) => {
-          const indexOfItem: number = findIndex(
-            items,
-            (item) => item.label === response.label
-          );
+    responseOrder.forEach((key) => {
+      const calculatorType = CALCULATOR_NAME_COLLECTION_MAPPINGS[key];
 
-          if (indexOfItem > -1) {
-            items[indexOfItem].info.map((info, i) => {
-              const indexOfInfo = response.info.findIndex(
-                (res) =>
-                  info.itemName === res.itemName && info.link === res.link
-              );
+      if (!calculatorType || !componentDetails[calculatorType]) {
+        return;
+      }
 
-              if (indexOfInfo > -1) {
-                if (
-                  !ignoreListForMultiples.includes(
-                    response.label.toLowerCase()
-                  ) &&
-                  items[indexOfItem].info[i].quantity
-                ) {
-                  items[indexOfItem].info[i].quantity =
-                    (items[indexOfItem].info[i].quantity as number) + 1;
-                }
-              } else {
-                items[indexOfItem].info = uniqBy(
-                  [...items[indexOfItem].info, ...response.info],
-                  "itemName"
-                );
-              }
-            });
-            // check and add new items which are not in the list
-            if (items[indexOfItem].info.length !== response.info.length) {
-              items[indexOfItem].info = uniqBy(
-                [...items[indexOfItem].info, ...response.info],
-                "itemName"
-              );
-            }
-          } else {
-            items.push(response);
-          }
-        }
-      );
+      const item = {
+        calculatorType,
+        name: key,
+        items: componentDetails[calculatorType],
+      };
+
+      res.push(item);
     });
 
-    return items;
+    return res;
   }, [componentDetails, responseOrder]);
 
   return (
-    <div>
-      {componentSummary.map((data, i) => (
-        <Item
-          key={`${data.label}-${i}`}
-          label={data.label}
-          info={data.info}
-          quantityVisibilityState={QUANTITY_VISIBILITY_STATE.EDITABLE}
-          isFirst={i === 0}
-          onUpdateQuantity={(value: number, itemName: string) =>
-            onUpdateQuantity(value, itemName)
-          }
+    <div className="w-full flex flex-column justify-content-center gap-8">
+      {results.map((result, resultIdx) => (
+        <Result
+          key={resultIdx}
+          name={result.name}
+          items={result.items}
+          quiz={quiz}
+          calculatorType={result.calculatorType}
+          hideMenu
         />
       ))}
     </div>

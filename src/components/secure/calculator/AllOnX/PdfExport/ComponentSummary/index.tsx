@@ -16,7 +16,7 @@ export interface Summary {
   number?: string;
   amount?: number;
   manufacturer?: string;
-  link: string;
+  link?: string;
   brand: string;
 }
 interface ComponentSummaryProps {
