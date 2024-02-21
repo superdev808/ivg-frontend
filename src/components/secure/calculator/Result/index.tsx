@@ -48,8 +48,6 @@ const Result: React.FC<ResultProps> = ({
   const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
   const [updateSavedResult] = useUpdateSavedResultMutation();
 
-  const [isExporting, setIsExporting] = useState<boolean>(false);
-  const [isSendingEmail, setIsSendingEmail] = useState<boolean>(false);
   const [showSaveDialog, setShowSaveDialog] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<"init" | "started" | "pending">(
     "init"
@@ -260,8 +258,6 @@ const Result: React.FC<ResultProps> = ({
     exportAndSendPDF(newPatientInfo);
   };
 
-  const isPreparingPDF = isExporting || isSendingEmail;
-
   return (
     <>
       <Toast ref={toastRef} />
@@ -324,30 +320,26 @@ const Result: React.FC<ResultProps> = ({
             )}
           </div>
 
-          {!isPreparingPDF && (
-            <div className="flex align-items-center flex-shrink-0 gap-2">
+          <div className="flex align-items-center flex-shrink-0 gap-2">
+            <Button
+              className="px-3 py-2"
+              label="Email"
+              onClick={() => showPatientInfoDialog("export")}
+            />
+            <Button
+              className="px-3 py-2"
+              label="Export"
+              onClick={() => showPatientInfoDialog("download")}
+            />
+            {!isSaved && (
               <Button
                 className="px-3 py-2"
-                label="Email"
-                disabled={isSendingEmail}
-                onClick={() => showPatientInfoDialog("export")}
+                label="Save"
+                loading={isSavingResult}
+                onClick={() => setShowSaveDialog(true)}
               />
-              <Button
-                className="px-3 py-2"
-                label="Export"
-                disabled={isExporting}
-                onClick={() => showPatientInfoDialog("download")}
-              />
-              {!isSaved && (
-                <Button
-                  className="px-3 py-2"
-                  label="Save"
-                  loading={isSavingResult}
-                  onClick={() => setShowSaveDialog(true)}
-                />
-              )}
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         <div className="flex justify-content-between gap-4 flex-column lg:flex-row">
