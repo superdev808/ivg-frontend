@@ -10,6 +10,7 @@ interface HelpfulFeedbackDialogProps {
   calculatorName: string;
   visible: boolean;
   setVisible: (_: boolean) => void;
+  quiz: Record<string, string>
 }
 
 const feedbackCategories = [
@@ -25,6 +26,7 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
   calculatorName,
   visible,
   setVisible,
+  quiz
 }) => {
   const [feedbackCategory, setFeedbackCategory] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -44,7 +46,8 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
       email,
       feedbackCategory,
       message,
-      timestamp: new Date().toString()
+      timestamp: new Date().toString(),
+      quiz
     };
 
     setLoading(true);

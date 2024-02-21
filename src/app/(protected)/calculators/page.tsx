@@ -202,15 +202,14 @@ export const Calculators = () => {
               <div className={cx("col-6 p-4", "calculatorButtonSection")}>
                 {groupItems[selectedGroup].subItems.map((calcItem, index) => (
                   <Button
-                    className={cx("calculatorButton", "p-4 mb-2 w-full")}
+                    className={cx("calculatorButton", "p-4 mb-2 w-full flex flex-column")}
                     key={`calcItem-${index}`}
-                    label={calcItem.text || calcItem.label}
                     onClick={() => {
                       router.push(`/calculators/${calcItem.label}`);
                     }}
                   >
                     <h4 className="m-0">{calcItem.text || calcItem.label}</h4>
-                    {calcItem.description && <p>{calcItem.description}</p>}
+                    {calcItem.description && <p className="mb-0 mt-2">{calcItem.description}</p>}
                   </Button>
                 ))}
               </div>

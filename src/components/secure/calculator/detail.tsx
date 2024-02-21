@@ -51,6 +51,9 @@ const DetailView: React.FC<DetailViewProps> = ({
     setFeedbackShow(true);
   };
 
+  console.log(">>>", quiz);
+  // console.log("@@@", items.length > 1 ? items : items[0]);
+
   return (
     <>
       <div className="relative md:p-2 md:text-center">
@@ -99,6 +102,7 @@ const DetailView: React.FC<DetailViewProps> = ({
         visible={feedbkackShow}
         setVisible={setFeedbackShow}
         calculatorName={getCalculatorName(calculatorType)}
+        quiz={quiz}
       />
     </>
   );
