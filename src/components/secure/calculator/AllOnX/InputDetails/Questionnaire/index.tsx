@@ -17,6 +17,18 @@ import {
 import AutoPopulatePromt from "./AutoPopulatePromt";
 import QuestionNavbar from "./QuestionNavbar";
 
+const getProgessValue = (index: number, input: InputOutputValues[]) => {
+  const totalQuestionCount = input.filter(
+    (elem) => elem.text || elem.name
+  ).length;
+
+  const availableIndex = input
+    .slice(0, index)
+    .filter((elem) => elem.text || elem.name).length;
+
+  return Math.floor((availableIndex / totalQuestionCount) * 100);
+};
+
 interface InputProps {
   site: Site;
   input: InputOutputValues[];
@@ -295,7 +307,7 @@ const Questionnaire: React.FC<InputProps> = ({
               answers={answerOptions[index]}
               currentAnswer={answers[index]}
               disabled={isLoading}
-              progress={Math.floor((index / input.length) * 100)}
+              progress={getProgessValue(index, input)}
               onSelectAnswer={handleSelectAnswer(index)}
             />
           );

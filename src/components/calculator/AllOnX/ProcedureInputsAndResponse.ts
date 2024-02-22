@@ -198,11 +198,6 @@ export const CALCULATORS: CollectionsIO = {
       isCommon: true,
     },
     {
-      name: "Do you need to purchase materials for chairside pick-up?",
-      text: "Do you need to purchase materials for chairside pick-up?",
-      calculator: "ChairSidePickUp",
-    },
-    {
       name: "",
       text: "",
       calculator: "ChairSidePickUp",
@@ -252,11 +247,6 @@ export const CALCULATORS: CollectionsIO = {
     {
       name: "Implant Surface Treatment",
       text: "Implant Surface Treatment",
-      calculator: "Implants",
-    },
-    {
-      name: "Do you need to purchase an implant?",
-      text: "Do you need to purchase an implant?",
       calculator: "Implants",
     },
     {
