@@ -63,6 +63,7 @@ const Questionnaire: React.FC<InputProps> = ({
   );
   const [isAutoPopulatedAnswersChanged, setIsAutoPopulatedAnswersChanged] =
     useState<boolean>(false);
+  const [canProceed, setCanProceed] = useState<boolean>(true);
   const toastRef = useRef(null);
 
   useEffect(() => {
@@ -82,8 +83,12 @@ const Questionnaire: React.FC<InputProps> = ({
   }, [autoPopulateData, onAutopopulate]);
 
   const { isLoading } = useQuery(
-    [input, answers, option, site],
+    [input, level, answers, option, site, canProceed],
     async () => {
+      if (!canProceed) {
+        return;
+      }
+
       if (level > input.length || autoPopulateData !== null) {
         return;
       }
@@ -165,6 +170,7 @@ const Questionnaire: React.FC<InputProps> = ({
   }, [input, level, autoQuestions]);
 
   const handleSelectAnswer = (index: number) => (value: string) => {
+    setCanProceed(true);
     setAutoQuestions(null);
 
     if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value) {
@@ -200,7 +206,16 @@ const Questionnaire: React.FC<InputProps> = ({
   };
 
   const handleChange = (index: number) => {
-    setLevel(index);
+    const answersWithIndex = answers
+      .map((answer, idx) => ({ answer, idx }))
+      .filter((elem) => Boolean(elem.answer));
+
+    const convertedIdx = answersWithIndex[index]?.idx;
+
+    if (convertedIdx !== undefined) {
+      setCanProceed(false);
+      setLevel(convertedIdx);
+    }
   };
 
   const handleShowSummary = () => {
@@ -239,6 +254,7 @@ const Questionnaire: React.FC<InputProps> = ({
         onShowSummary={handleShowSummary}
         onChange={handleChange}
       />
+
       {(isLoading ||
         (input[level] && !Boolean(answerOptions[level]?.length))) && (
         <ProgressSpinner
