@@ -200,7 +200,15 @@ const Questionnaire: React.FC<InputProps> = ({
   };
 
   const handleChange = (index: number) => {
-    setLevel(index);
+    const answersWithIndex = answers
+      .map((answer, idx) => ({ answer, idx }))
+      .filter((elem) => Boolean(elem.answer));
+
+    const convertedIdx = answersWithIndex[index]?.idx;
+
+    if (convertedIdx !== undefined) {
+      setLevel(convertedIdx);
+    }
   };
 
   const handleShowSummary = () => {
@@ -239,6 +247,7 @@ const Questionnaire: React.FC<InputProps> = ({
         onShowSummary={handleShowSummary}
         onChange={handleChange}
       />
+
       {(isLoading ||
         (input[level] && !Boolean(answerOptions[level]?.length))) && (
         <ProgressSpinner
