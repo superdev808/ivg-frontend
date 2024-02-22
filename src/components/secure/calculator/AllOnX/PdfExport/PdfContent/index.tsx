@@ -154,9 +154,11 @@ const PdfContent: React.FC<PdfContentProps> = ({
         className={cx("separator", "flex pb-2 mx-4 justify-content-between")}
       >
         <div className="col-4 p-0">
-          <div className={cx("break-all", "pb-2")}>{patientInfo?.name}</div>
+          {patientInfo?.name && (
+            <div className={cx("break-all", "pb-2")}>{patientInfo.name}</div>
+          )}
           {patientInfo?.address && (
-            <div className={cx("break-all")}>{patientInfo?.address}</div>
+            <div className={cx("break-all")}>{patientInfo.address}</div>
           )}
         </div>
 
