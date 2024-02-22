@@ -82,7 +82,7 @@ const Questionnaire: React.FC<InputProps> = ({
   }, [autoPopulateData, onAutopopulate]);
 
   const { isLoading } = useQuery(
-    [input, level, answers, option, site],
+    [input, answers, option, site],
     async () => {
       if (level > input.length || autoPopulateData !== null) {
         return;
@@ -201,10 +201,11 @@ const Questionnaire: React.FC<InputProps> = ({
 
   const handleChange = (index: number) => {
     setLevel(index);
-    setAnswers((prevState) => prevState.slice(0, index));
   };
 
-  const answeredAllQuestions = Boolean(input.length > 0 && !input[level + 1]);
+  const handleShowSummary = () => {
+    setLevel(input.length);
+  };
 
   const quiz = useMemo(() => {
     const res: { question: string; answer: string }[] = [];
@@ -221,11 +222,19 @@ const Questionnaire: React.FC<InputProps> = ({
     return res;
   }, [answers, input]);
 
+  const answeredAllQuestions = Boolean(
+    input.length > 0 && answers.length === input.length
+  );
+
+  const showSummary = level === input.length;
+
   return (
     <div className="my-3">
       <QuestionNavbar
         questions={input}
         answers={answers}
+        isSummaryReady={answeredAllQuestions}
+        onShowSummary={handleShowSummary}
         onChange={handleChange}
       />
 
@@ -275,14 +284,16 @@ const Questionnaire: React.FC<InputProps> = ({
           />
         )}
 
-        {answeredAllQuestions && sitesData[site.name]?.componentDetails && (
-          <ComponentDetails
-            quiz={quiz}
-            componentDetails={sitesData[site.name]?.componentDetails}
-            responseOrder={responseOrder}
-            onUpdateQuantity={onUpdateQuantity}
-          />
-        )}
+        {answeredAllQuestions &&
+          showSummary &&
+          sitesData[site.name]?.componentDetails && (
+            <ComponentDetails
+              quiz={quiz}
+              componentDetails={sitesData[site.name]?.componentDetails}
+              responseOrder={responseOrder}
+              onUpdateQuantity={onUpdateQuantity}
+            />
+          )}
 
         {(isLoading ||
           (input[level] && !Boolean(answerOptions[level]?.length))) && (
