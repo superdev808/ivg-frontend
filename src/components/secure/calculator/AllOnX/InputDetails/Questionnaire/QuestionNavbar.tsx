@@ -6,13 +6,16 @@ import { InputOutputValues } from "../../constants";
 interface QuestionNavbarProps {
   questions: InputOutputValues[];
   answers: string[];
-  showSummary?: boolean;
+  isSummaryReady?: boolean;
+  onShowSummary: () => void;
   onChange: (_: number) => void;
 }
 
 const QuestionNavbar: React.FC<QuestionNavbarProps> = ({
   questions,
   answers,
+  isSummaryReady,
+  onShowSummary,
   onChange,
 }) => {
   const filteredQuestions = useMemo(() => {
@@ -31,17 +34,33 @@ const QuestionNavbar: React.FC<QuestionNavbarProps> = ({
   }, [questions, answers]);
 
   const handleTabChange = ({ index }: TabViewTabChangeEvent) => {
-    onChange(index);
+    if (isSummaryReady && index === filteredQuestions.length) {
+      onShowSummary();
+    } else {
+      onChange(index);
+    }
   };
 
   if (filteredQuestions.length === 0) {
     return null;
   }
 
+  const allQuestions = isSummaryReady
+    ? [...filteredQuestions, "Summary"]
+    : filteredQuestions;
+
   return (
     <TabView activeIndex={-1} scrollable onTabChange={handleTabChange}>
-      {filteredQuestions.map((question) => (
-        <TabPanel key={question} header={question} />
+      {allQuestions.map((question, idx) => (
+        <TabPanel
+          key={question}
+          header={question}
+          headerClassName={
+            idx === allQuestions.length - 1
+              ? ""
+              : "border-right-1 border-gray-300"
+          }
+        />
       ))}
     </TabView>
   );

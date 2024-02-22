@@ -82,7 +82,6 @@ const SavedResultsDetailContainer: React.FC = () => {
               <SavedResultDetail
                 savedResult={savedResult}
                 isDeleting={isDeletingSavedResult}
-                toastRef={toastRef}
                 onDelete={handleDelete}
               />
             )}

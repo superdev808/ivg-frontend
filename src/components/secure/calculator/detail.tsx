@@ -1,13 +1,13 @@
 import trim from "lodash/trim";
 import { Button } from "primereact/button";
 import { Carousel } from "primereact/carousel";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { getCalculatorName } from "@/helpers/util";
 import HelpfulFeedbackDialog from "./Feedback/HelpfulFeedbackDialog";
 
 import Result from "./Result";
-import { parseItems, getResultName } from "./Result/helpers";
+import { parseItems, getResultName, ResultItem } from "./Result/helpers";
 
 interface DetailViewProps {
   calculatorType: string;
@@ -28,8 +28,10 @@ const DetailView: React.FC<DetailViewProps> = ({
 }) => {
   const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
 
-  const results = useMemo(() => {
-    return props.items.map((item) => parseItems(item, calculatorType));
+  const [results, setResults] = useState<ResultItem[][]>([]);
+
+  useEffect(() => {
+    setResults(props.items.map((item) => parseItems(item, calculatorType)));
   }, [props.items, calculatorType]);
 
   const quiz = useMemo(() => {
@@ -41,6 +43,20 @@ const DetailView: React.FC<DetailViewProps> = ({
       return acc;
     }, [] as { question: string; answer: string }[]);
   }, [questions, answers]);
+
+  const handleUpdateQuantity = (quantity: number, itemName: string) => {
+    setResults((prevState) =>
+      prevState.map((result) =>
+        result.map((item) => ({
+          ...item,
+          info:
+            item.info[0].itemName === itemName
+              ? [{ ...item.info[0], quantity }]
+              : item.info,
+        }))
+      )
+    );
+  };
 
   const onClickFeedback = () => {
     setFeedbackShow(true);
@@ -57,32 +73,36 @@ const DetailView: React.FC<DetailViewProps> = ({
         <h2>{getCalculatorName(calculatorType)} Calculator</h2>
       </div>
 
-      <div className="flex flex-column align-items-center">
-        <div className="w-full relative lg:w-8">
-          {results.length > 1 ? (
-            <Carousel
-              value={results}
-              itemTemplate={(result) => (
-                <div className="px-3">
-                  <Result
-                    calculatorType={calculatorType}
-                    items={result}
-                    quiz={quiz}
-                    name={getResultName(calculatorType, result)}
-                  />
-                </div>
-              )}
-            />
-          ) : (
-            <Result
-              calculatorType={calculatorType}
-              items={results[0]}
-              quiz={quiz}
-              name={getResultName(calculatorType, results[0])}
-            />
-          )}
+      {results.length > 0 && (
+        <div className="flex flex-column align-items-center">
+          <div className="w-full relative lg:w-8">
+            {results.length > 1 ? (
+              <Carousel
+                value={results}
+                itemTemplate={(result) => (
+                  <div className="px-3">
+                    <Result
+                      calculatorType={calculatorType}
+                      items={result}
+                      quiz={quiz}
+                      name={getResultName(calculatorType, result)}
+                      onUpdateQuantity={handleUpdateQuantity}
+                    />
+                  </div>
+                )}
+              />
+            ) : (
+              <Result
+                calculatorType={calculatorType}
+                items={results[0]}
+                quiz={quiz}
+                name={getResultName(calculatorType, results[0])}
+                onUpdateQuantity={handleUpdateQuantity}
+              />
+            )}
+          </div>
         </div>
-      </div>
+      )}
       <div
         className="fixed text-2xl m-1 left-50 bg-green-300 p-3 pb-6 border-round-3xl m-0"
         style={{

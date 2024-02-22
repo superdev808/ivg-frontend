@@ -4,6 +4,7 @@ import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/components/calculator/All
 
 import { ComponentDetail } from "../constants";
 import Result from "../../Result";
+import { ResultItem } from "../../Result/helpers";
 
 interface ComponentDetailsProps {
   componentDetails: ComponentDetail;
@@ -19,7 +20,11 @@ const ComponentDetails: React.FC<ComponentDetailsProps> = ({
   onUpdateQuantity,
 }) => {
   const results = useMemo(() => {
-    let res: any[] = [];
+    const response: Array<{
+      calculatorType: string;
+      name: string;
+      items: ResultItem[];
+    }> = [];
 
     responseOrder.forEach((key) => {
       const calculatorType = CALCULATOR_NAME_COLLECTION_MAPPINGS[key];
@@ -34,14 +39,14 @@ const ComponentDetails: React.FC<ComponentDetailsProps> = ({
         items: componentDetails[calculatorType],
       };
 
-      res.push(item);
+      response.push(item);
     });
 
-    return res;
+    return response;
   }, [componentDetails, responseOrder]);
 
   return (
-    <div className="w-full flex flex-column justify-content-center gap-8">
+    <div className="w-full flex flex-column justify-content-center gap-8 mt-4">
       {results.map((result, resultIdx) => (
         <Result
           key={resultIdx}
@@ -50,6 +55,7 @@ const ComponentDetails: React.FC<ComponentDetailsProps> = ({
           quiz={quiz}
           calculatorType={result.calculatorType}
           hideMenu
+          onUpdateQuantity={onUpdateQuantity}
         />
       ))}
     </div>

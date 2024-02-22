@@ -124,30 +124,11 @@ const PatientInfo: React.FC<PatientInfoProps> = ({ info, onSubmit }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
       <div className="p-field mb-3">
-        <label
-          htmlFor="name"
-          className={
-            errors.name
-              ? "p-error p-float p-label-always"
-              : "p-float p-label-always"
-          }
-        >
+        <label htmlFor="name" className="p-float p-label-always">
           Patient Name
         </label>
 
-        <InputText
-          id="name"
-          maxLength={64}
-          {...register("name", {
-            required: true,
-            validate: (value) => !!value.trim(),
-          })}
-          className={errors.name ? "p-invalid" : ""}
-        />
-
-        {errors.name && (
-          <small className="p-error">Patient Name is required.</small>
-        )}
+        <InputText id="name" maxLength={64} {...register("name")} />
       </div>
 
       <div className="p-field mb-3">

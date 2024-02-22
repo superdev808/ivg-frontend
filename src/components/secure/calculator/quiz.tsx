@@ -118,7 +118,7 @@ const Quiz: React.FC<QuizProps> = ({
         <h2>Select {question}</h2>
       </div>
 
-      <div className="col-12 md:col-6 md:col-offset-3 mb-6">
+      <div className="col-12 md:col-6 md:col-offset-3 md:mb-6">
         <AutoComplete
           value={searchValue}
           suggestions={suggestions}

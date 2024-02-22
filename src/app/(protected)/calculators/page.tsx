@@ -158,13 +158,14 @@ export const Calculators = () => {
       ],
     },
     {
-      label: "All-on-X Surgery and Restorative",
+      label: "All-on-X Ordering Guide",
       description:
         "This customized calculator enables quick identification and procurement of a variety of components, instruments, and materials to help you place or restore implants.",
       subItems: [
         {
-          label: "All-on-X Surgery and Restorative",
-          text: "All-on-X Surgery and Restorative",
+          label: "All-on-X Ordering Guide",
+          text: "All-on-X Ordering Guide",
+          description: "",
         },
       ],
     },

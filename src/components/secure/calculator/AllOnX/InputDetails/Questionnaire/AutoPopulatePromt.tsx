@@ -15,7 +15,7 @@ const AutoPopulatePromt: React.FC<AutoPopulatePromtParams> = ({
   showRefreshButton,
   onPopulateResponse,
 }) => (
-  <div className="flex flex-column w-12 mb-4">
+  <div className="flex flex-column w-12">
     <p>Auto-populate these answers for all other sites?</p>
     <div className="flex flex-wrap gap-3">
       {AUTO_POPULATE_OPTIONS.map((option: RadioButtonOption) => (

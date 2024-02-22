@@ -1,14 +1,14 @@
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Result from "@/components/secure/calculator/Result";
 import { formatDate, getCalculatorName } from "@/helpers/util";
 
 import { ResultItem } from "../calculator/Result/helpers";
 
-type SavedResult = {
+export type SavedResult = {
   id: string;
   name: string;
   calculatorType: string;
@@ -30,7 +30,13 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
 }) => {
   const router = useRouter();
 
-  const { id, calculatorType, items, quiz, date, name } = savedResult;
+  const [items, setItems] = useState<ResultItem[]>([]);
+
+  const { id, calculatorType, quiz, date, name } = savedResult;
+
+  useEffect(() => {
+    setItems(savedResult.items);
+  }, [savedResult.items]);
 
   const handleGoBack = () => {
     router.push("/settings/saved-results");
@@ -48,6 +54,18 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
       acceptClassName: "p-button-danger",
       accept: onDelete,
     });
+  };
+
+  const handleUpdateQuantity = (quantity: number, itemName: string) => {
+    setItems((prevState) =>
+      prevState.map((item) => ({
+        ...item,
+        info:
+          item.info[0].itemName === itemName
+            ? [{ ...item.info[0], quantity }]
+            : item.info,
+      }))
+    );
   };
 
   return (
@@ -81,6 +99,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
           calculatorType={calculatorType}
           items={items}
           quiz={quiz}
+          onUpdateQuantity={handleUpdateQuantity}
         />
       </div>
     </>
