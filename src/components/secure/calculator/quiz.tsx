@@ -10,7 +10,7 @@ import { Image } from "primereact/image";
 import React, { useState, useMemo } from "react";
 
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
-import { calculatorImages, getCalculatorName } from "@/helpers/util";
+import { calculatorImages } from "@/helpers/util";
 
 import styles from "./quiz.module.scss";
 import { orderBy } from "lodash";
@@ -18,7 +18,7 @@ import { orderBy } from "lodash";
 const cx = classNames.bind(styles);
 
 interface QuizProps {
-  calculatorType?: string;
+  calculatorName?: string;
   question: string;
   currentAnswer: string;
   answers: string[];
@@ -29,7 +29,7 @@ interface QuizProps {
 }
 
 const Quiz: React.FC<QuizProps> = ({
-  calculatorType,
+  calculatorName,
   question,
   currentAnswer,
   answers,
@@ -112,9 +112,7 @@ const Quiz: React.FC<QuizProps> = ({
           />
         )}
 
-        {calculatorType && (
-          <h1 className="underline">{getCalculatorName(calculatorType)}</h1>
-        )}
+        {calculatorName && <h1 className="underline">{calculatorName}</h1>}
         <h2>Select {question}</h2>
       </div>
 

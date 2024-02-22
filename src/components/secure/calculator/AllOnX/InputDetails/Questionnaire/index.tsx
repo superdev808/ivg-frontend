@@ -181,6 +181,13 @@ const Questionnaire: React.FC<InputProps> = ({
     return autoQuestions || input.slice(0, level + 1);
   }, [input, level, autoQuestions]);
 
+  const getCalculatorNameByQuestion = (index: number) => {
+    const question = questions
+      .slice(0, index + 1)
+      .findLast((question) => question.displayCalculatorName);
+    return question?.displayCalculatorName;
+  };
+
   const handleSelectAnswer = (index: number) => (value: string) => {
     setCanProceed(true);
     setAutoQuestions(null);
@@ -304,6 +311,7 @@ const Questionnaire: React.FC<InputProps> = ({
             <Quiz
               key={`quiz-${index}`}
               question={quiz.name}
+              calculatorName={getCalculatorNameByQuestion(index)}
               answers={answerOptions[index]}
               currentAnswer={answers[index]}
               disabled={isLoading}
