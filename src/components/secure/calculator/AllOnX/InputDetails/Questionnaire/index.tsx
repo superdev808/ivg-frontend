@@ -229,7 +229,9 @@ const Questionnaire: React.FC<InputProps> = ({
   const showSummary = level === input.length;
 
   return (
-    <div className="my-3">
+    <div className="mt-3 relative" style={{ minHeight: 700 }}>
+      <Toast ref={toastRef} position="top-right" />
+
       <QuestionNavbar
         questions={input}
         answers={answers}
@@ -237,6 +239,13 @@ const Questionnaire: React.FC<InputProps> = ({
         onShowSummary={handleShowSummary}
         onChange={handleChange}
       />
+      {(isLoading ||
+        (input[level] && !Boolean(answerOptions[level]?.length))) && (
+        <ProgressSpinner
+          className="w-1 absolute top-50 left-50"
+          style={{ transform: "translate(-50%, -50%)" }}
+        />
+      )}
 
       <div className="grid">
         {questions.map((quiz, index) => {
@@ -294,15 +303,6 @@ const Questionnaire: React.FC<InputProps> = ({
               onUpdateQuantity={onUpdateQuantity}
             />
           )}
-
-        {(isLoading ||
-          (input[level] && !Boolean(answerOptions[level]?.length))) && (
-          <div className="w-12 flex justify-content-center">
-            <ProgressSpinner className="w-1" />
-          </div>
-        )}
-
-        <Toast ref={toastRef} position="top-right" />
       </div>
     </div>
   );

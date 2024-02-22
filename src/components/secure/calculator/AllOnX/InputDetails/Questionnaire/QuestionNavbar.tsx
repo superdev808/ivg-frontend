@@ -45,12 +45,23 @@ const QuestionNavbar: React.FC<QuestionNavbarProps> = ({
     return null;
   }
 
+  const allQuestions = isSummaryReady
+    ? [...filteredQuestions, "Summary"]
+    : filteredQuestions;
+
   return (
     <TabView activeIndex={-1} scrollable onTabChange={handleTabChange}>
-      {filteredQuestions.map((question) => (
-        <TabPanel key={question} header={question} />
+      {allQuestions.map((question, idx) => (
+        <TabPanel
+          key={question}
+          header={question}
+          headerClassName={
+            idx === allQuestions.length - 1
+              ? ""
+              : "border-right-1 border-gray-300"
+          }
+        />
       ))}
-      {isSummaryReady && <TabPanel header="Summary" />}
     </TabView>
   );
 };

@@ -299,9 +299,9 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   };
 
   return (
-    <div className="nav-offset flex-grow-1">
-      <div className="wrapper my-8">
-        <div className="flex flex-column p-5 border-round bg-white shadow-1">
+    <div className="nav-offset flex-grow-1 border-right-1">
+      <div className="px-2 my-4 wrapper md:px-0 md:my-8">
+        <div className="px-3 py-5 flex flex-column m:p-5 border-round bg-white shadow-1">
           {!isCustom && (
             <>
               <h3 className="mt-0 mb-3 text-center">
