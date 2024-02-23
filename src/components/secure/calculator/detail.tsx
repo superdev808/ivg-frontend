@@ -3,13 +3,13 @@ import { Button } from "primereact/button";
 import { Carousel } from "primereact/carousel";
 import { useEffect, useMemo, useState } from "react";
 
+import { parseItems, getResultName } from "@/helpers/calculators";
 import { getCalculatorName } from "@/helpers/util";
+import { event as gaEvent } from "@/lib/gtag";
+import { ItemData } from "@/types/calculators";
 
-import { ItemData } from "./AllOnX/constants";
 import HelpfulFeedbackDialog from "./Feedback/HelpfulFeedbackDialog";
 import Result from "./Result";
-import { parseItems, getResultName } from "./Result/helpers";
-import { event as gaEvent } from "@/lib/gtag";
 
 interface DetailViewProps {
   calculatorType: string;
@@ -37,7 +37,7 @@ const DetailView: React.FC<DetailViewProps> = ({
   }, [props.items, calculatorType]);
 
   const calculatorName = useMemo(() => {
-    return getCalculatorName(calculatorType)
+    return getCalculatorName(calculatorType);
   }, [calculatorType]);
 
   const quiz = useMemo(() => {
@@ -68,15 +68,15 @@ const DetailView: React.FC<DetailViewProps> = ({
     gaEvent({
       action: "Thumb_Up",
       category: "Button",
-      label: calculatorName
+      label: calculatorName,
     });
-  }
+  };
 
   const onClickFeedback = () => {
     gaEvent({
       action: "Thumb_Down",
       category: "Button",
-      label: calculatorName
+      label: calculatorName,
     });
     setFeedbackShow(true);
   };
@@ -104,8 +104,6 @@ const DetailView: React.FC<DetailViewProps> = ({
                       calculatorType={calculatorType}
                       items={result}
                       quiz={quiz}
-                      name={getResultName(calculatorType, result)}
-                      showQuantityChanger
                       onUpdateQuantity={handleUpdateQuantity}
                     />
                   </div>
@@ -116,8 +114,6 @@ const DetailView: React.FC<DetailViewProps> = ({
                 calculatorType={calculatorType}
                 items={results[0]}
                 quiz={quiz}
-                name={getResultName(calculatorType, results[0])}
-                showQuantityChanger
                 onUpdateQuantity={handleUpdateQuantity}
               />
             )}

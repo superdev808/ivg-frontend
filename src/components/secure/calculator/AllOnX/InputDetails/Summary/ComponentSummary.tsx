@@ -1,17 +1,15 @@
+import Link from "next/link";
+import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { InputNumber } from "primereact/inputnumber";
 import React, { useMemo } from "react";
 
-import { ItemInsights } from "../../constants";
-
-export interface Summary extends ItemInsights {
-  description: string;
-  brand: string;
-}
+import { isValidUrl } from "@/helpers/calculators";
+import { ComponentSummary as ComponentSummaryType } from "@/types/calculators";
 
 interface ComponentSummaryProps {
-  summary: Summary[];
+  summary: ComponentSummaryType[];
   onUpdateQuantity: (quantity: number, itemName: string) => void;
 }
 
@@ -33,13 +31,23 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
     return null;
   }
 
-  const renderManufacturer = (item: Summary) => {
+  const renderManufacturer = (item: ComponentSummaryType) => {
     return item.manufacturer && item.manufacturer !== item.brand
       ? item.manufacturer
       : "";
   };
 
-  const renderQuantity = (item: Summary) => {
+  const renderLink = (item: ComponentSummaryType) => {
+    return item.link && isValidUrl(item.link) ? (
+      <Link href={item.link} target="_blank">
+        <Button label="Link to Purchase" size="small" />
+      </Link>
+    ) : (
+      item.link
+    );
+  };
+
+  const renderQuantity = (item: ComponentSummaryType) => {
     return (
       <InputNumber
         value={item.quantity}
@@ -72,6 +80,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
         <Column field="description" header="Description" />
         <Column field="itemName" header="Name" />
         <Column field="itemNumber" header="Number" />
+        <Column field="link" header="Link" body={renderLink} />
         {showManufacturer && (
           <Column
             field="manufacturer"

@@ -6,10 +6,9 @@ import { useMemo, useState } from "react";
 import CalculatorContainer from "@/components/secure/calculator";
 import AllOnXCalculator from "@/components/secure/calculator/AllOnX";
 import FeedbackDialog from "@/components/secure/calculator/Feedback/FeedbackDialog";
-import { calculatorIO as tabItems } from "@/helpers/util";
-
-import { CALCULATOR_MAPPINGS } from "../constants";
+import { CALCULATOR_MAPPINGS } from "@/constants/calculators";
 import { event as gaEvent } from "@/lib/gtag";
+import { calculatorIO as tabItems } from "@/helpers/util";
 
 export default function CalculatorPage() {
   // const router = useRouter();
@@ -30,7 +29,7 @@ export default function CalculatorPage() {
     gaEvent({
       action: "Feedback",
       category: "Button",
-      label: "Feedback"
+      label: "Feedback",
     });
     setFeedbackShow(true);
   };

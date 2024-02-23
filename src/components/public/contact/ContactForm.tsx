@@ -395,7 +395,7 @@ export const ContactComponent = () => {
 
           <p className="text-bold">
             <strong>
-              We have recieved your message and will be in touch shortly.
+              We have received your message and will be in touch shortly.
             </strong>
           </p>
         </div>

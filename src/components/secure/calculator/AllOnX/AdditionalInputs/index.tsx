@@ -4,9 +4,8 @@ import React from "react";
 import {
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
   MUA_OPTIONS,
-  RadioButtonOption,
-  KeyValuePair,
-} from "../constants";
+} from "@/constants/calculators";
+import { RadioButtonOption, KeyValuePair } from "@/types/calculators";
 
 interface AdditionalInputsParams {
   textDentalImplantProcedure: string;

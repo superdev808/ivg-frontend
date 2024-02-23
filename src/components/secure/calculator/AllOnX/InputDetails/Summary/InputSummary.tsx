@@ -3,10 +3,10 @@ import { Column, ColumnBodyOptions } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import React, { useMemo } from "react";
 
-import { SiteDetail } from "../../constants";
+import { InputSummary as InputSummaryType } from "@/types/calculators";
 
 interface InputSummary {
-  summary: SiteDetail[];
+  summary: InputSummaryType[];
 }
 
 const InputSummary: React.FC<InputSummary> = ({ summary }) => {
@@ -22,7 +22,7 @@ const InputSummary: React.FC<InputSummary> = ({ summary }) => {
     return null;
   }
 
-  const renderCell = (item: SiteDetail, column: ColumnBodyOptions) => {
+  const renderCell = (item: InputSummaryType, column: ColumnBodyOptions) => {
     const inputDetails = item.inputDetails;
     const answer =
       inputDetails.find((elem) => elem.question === column.field)?.answer || "";
@@ -39,6 +39,7 @@ const InputSummary: React.FC<InputSummary> = ({ summary }) => {
         showGridlines
         scrollable
       >
+        <Column field="site" header="Site" />
         {questions.map((question) => (
           <Column
             key={question}

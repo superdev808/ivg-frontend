@@ -2,9 +2,8 @@ import classNames from "classnames/bind";
 import trim from "lodash/trim";
 import React, { useMemo } from "react";
 
-import { isValidUrl } from "@/components/calculator/AllOnX/AllOnXUtills";
-
-import { ItemInsights, TotalQuantities } from "../../constants";
+import { isValidUrl } from "@/helpers/calculators";
+import { ItemInsights, TotalQuantities } from "@/types/calculators";
 
 import styles from "../InputSummary/styles.module.scss";
 

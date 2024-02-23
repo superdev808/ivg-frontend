@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 
-import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
+import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/constants/calculators";
+import { ComponentDetail, ItemData } from "@/types/calculators";
 
-import { ComponentDetail, ItemData } from "../constants";
 import Result from "../../Result";
 
 interface ComponentDetailsProps {

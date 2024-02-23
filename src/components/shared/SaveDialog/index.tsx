@@ -5,13 +5,13 @@ import React, { useEffect, useState } from "react";
 
 interface SaveDialogProps {
   visible: boolean;
-  defaultValue: string;
+  defaultValue?: string;
   onClose: (_?: string) => void;
 }
 
 const SaveDialog: React.FC<SaveDialogProps> = ({
   visible,
-  defaultValue,
+  defaultValue = "",
   onClose,
 }) => {
   const [value, setValue] = useState<string>("");

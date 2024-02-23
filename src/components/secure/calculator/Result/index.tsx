@@ -9,20 +9,19 @@ import { Toast } from "primereact/toast";
 import { useRef, useState } from "react";
 
 import PatientInfo from "@/components/shared/PatientInfo";
+import PDFContent from "@/components/shared/PDFExport/PDFContent";
+import SaveDialog from "@/components/shared/SaveDialog";
+import { prepareExportProps } from "@/helpers/calculators";
 import { getCalculatorName, productImages } from "@/helpers/util";
+import { event as gaEvent } from "@/lib/gtag";
 import {
   useGetUserInfoQuery,
   useSaveResultMutation,
   useUpdateSavedResultMutation,
 } from "@/redux/hooks/apiHooks";
-import { Patient } from "@/types/PublicTypes";
+import { ItemData, Patient } from "@/types/calculators";
 
-import { ItemData } from "../AllOnX/constants";
-import PdfContent from "../AllOnX/PdfExport/PdfContent";
-import { prepareExportProps } from "./helpers";
 import Outputs from "./Outputs";
-import SaveDialog from "./SaveDialog";
-import { event as gaEvent } from "@/lib/gtag";
 
 import styles from "./style.module.scss";
 
@@ -30,23 +29,21 @@ const cx = classNames.bind(styles);
 
 interface ResultProps {
   id?: string;
-  name: string;
+  name?: string;
   items: ItemData[];
   quiz: { question: string; answer: string }[];
   calculatorType: string;
   hideMenu?: boolean;
-  showQuantityChanger?: boolean;
   onUpdateQuantity: (quantity: number, itemName: string) => void;
 }
 
 const Result: React.FC<ResultProps> = ({
   id = "",
-  name,
+  name = "",
   items,
   quiz,
   calculatorType,
   hideMenu = false,
-  showQuantityChanger = false,
   onUpdateQuantity,
 }) => {
   const { refetch } = useGetUserInfoQuery({});
@@ -72,7 +69,7 @@ const Result: React.FC<ResultProps> = ({
 
   const isSaved = Boolean(id);
 
-  const exportAndSendPDF = async (info: Patient) => {
+  const handleExportAndSendPDF = async (info: Patient) => {
     const element = contentRef.current;
 
     if (element) {
@@ -94,12 +91,12 @@ const Result: React.FC<ResultProps> = ({
           gaEvent({
             action: "Download_Button",
             category: "Button",
-            label: calculatorName
+            label: calculatorName,
           });
           (toastRef.current as any).show({
             severity: "success",
             summary: "Success",
-            detail: "Pdf downloaded successfully.",
+            detail: "PDF downloaded successfully.",
             life: 5000,
             className: "mt-8",
           });
@@ -111,7 +108,7 @@ const Result: React.FC<ResultProps> = ({
           gaEvent({
             action: "Email_Button",
             category: "Button",
-            label: calculatorName
+            label: calculatorName,
           });
 
           const formData = new FormData();
@@ -177,6 +174,7 @@ const Result: React.FC<ResultProps> = ({
       items,
       quiz,
       name,
+      type: "single",
     };
 
     try {
@@ -262,7 +260,7 @@ const Result: React.FC<ResultProps> = ({
     const newPatientInfo = { ...patientInfo, ...data, date: new Date() };
 
     setPatientInfo(newPatientInfo);
-    exportAndSendPDF(newPatientInfo);
+    handleExportAndSendPDF(newPatientInfo);
   };
 
   return (
@@ -271,7 +269,7 @@ const Result: React.FC<ResultProps> = ({
 
       <SaveDialog
         visible={showSaveDialog}
-        defaultValue={name}
+        defaultValue={name || calculatorName}
         onClose={handleCloseSaveDialog}
       />
 
@@ -386,24 +384,14 @@ const Result: React.FC<ResultProps> = ({
           </div>
         </div>
 
-        <Outputs
-          items={items}
-          showQuantityChanger={showQuantityChanger}
-          onUpdateQuantity={onUpdateQuantity}
-        />
+        <Outputs items={items} onUpdateQuantity={onUpdateQuantity} />
       </div>
 
       <div className="hidden">
         <div ref={contentRef}>
           {patientInfo && (
-            <PdfContent
-              {...prepareExportProps(
-                calculatorType,
-                calculatorName,
-                patientInfo,
-                quiz,
-                items
-              )}
+            <PDFContent
+              {...prepareExportProps(calculatorType, patientInfo, quiz, items)}
             />
           )}
         </div>

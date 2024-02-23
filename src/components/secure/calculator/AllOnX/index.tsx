@@ -5,38 +5,37 @@ import { CheckboxChangeEvent } from "primereact/checkbox";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import React, { useEffect, useState } from "react";
 
+import TeethSelector from "@/components/shared/TeethSelector";
 import {
   getProcedureCollections,
   getProcedureInputsAndResponse,
-} from "@/components/calculator/AllOnX/AllOnXUtills";
+} from "@/helpers/calculators";
 import {
   CALCULATOR_NAME_COLLECTION_MAPPINGS,
-  InputAndResponse,
-} from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
-
-import AdditionalInputs from "./AdditionalInputs";
-import {
-  AutoPopulateData,
-  ComponentDetail,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
-  InputDetail,
-  InputOutputValues,
-  ItemData,
-  MUA_OPTIONS,
   PROCEDURES,
-  procedures,
-  Site,
-  SiteData,
-  KeyValuePair,
+  MUA_OPTIONS,
   SITE_SPECIFIC_REPORT_OPTIONS,
   TEXT_DENTAL_IMPLANT_PROCEDURE,
   TEXT_MUA_STATUS,
+} from "@/constants/calculators";
+import {
+  AutoPopulateData,
+  ComponentDetail,
+  InputAndResponse,
+  InputDetail,
+  InputOutputValues,
+  Site,
+  SiteData,
+  KeyValuePair,
   TotalQuantities,
-} from "./constants";
+  ItemData,
+  PROCEDURE,
+} from "@/types/calculators";
+
+import AdditionalInputs from "./AdditionalInputs";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
 import InputDetails from "./InputDetails";
-import PDFExport from "./PdfExport";
-import TeethSelector from "./TeethSelector";
 
 interface AllOnXCalculatorProps {
   isCustom?: boolean;
@@ -50,7 +49,7 @@ interface AllOnXCalculatorProps {
 const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   isCustom = false,
 }) => {
-  const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
+  const [procedure, setProcedure] = useState<PROCEDURE>(PROCEDURE.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
   const [additionalInputs, setAdditionalInputs] = useState<KeyValuePair>({});
@@ -94,8 +93,8 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     setSelectedSites([]);
     setSitesData({});
     if (
-      e.value === PROCEDURES.RESTORATIVE ||
-      e.value === PROCEDURES.SURGERY_AND_RESTORATIVE
+      e.value === PROCEDURE.RESTORATIVE ||
+      e.value === PROCEDURE.SURGERY_AND_RESTORATIVE
     ) {
       handleAdditionalInputs(
         DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value,
@@ -111,7 +110,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     );
     if (isSelected.length === 0) {
       const newSite: Site = isAnonymous
-        ? { name: `Site Anonymous`, key: tooth }
+        ? { name: `General Details`, key: tooth }
         : { name: `Site ${tooth}`, key: tooth };
       _selectedSites.push(newSite);
       //Add new site data
@@ -125,7 +124,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
         _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
       } else {
         const newSiteData = {
-          [`Site Anonymous`]: { inputDetails: [], componentDetails: {} },
+          "General Details": { inputDetails: [], componentDetails: {} },
         };
         setSitesData(newSiteData);
       }
@@ -303,7 +302,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   };
 
   return (
-    <div className="nav-offset flex-grow-1 border-right-1">
+    <div className="nav-offset flex-grow-1">
       <div className="px-2 my-4 wrapper md:px-0 md:my-8">
         <div className="px-3 py-5 flex flex-column m:p-5 border-round bg-white shadow-1">
           {!isCustom && (
@@ -317,15 +316,15 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   value={procedure}
                   onChange={(e) => handleProcedureChange(e)}
                   optionLabel="name"
-                  options={procedures}
+                  options={PROCEDURES}
                 />
               </div>
             </>
           )}
 
           {!isCustom &&
-            (procedure === PROCEDURES.RESTORATIVE ||
-              procedure === PROCEDURES.SURGERY_AND_RESTORATIVE) && (
+            (procedure === PROCEDURE.RESTORATIVE ||
+              procedure === PROCEDURE.SURGERY_AND_RESTORATIVE) && (
               <AdditionalInputs
                 textDentalImplantProcedure={TEXT_DENTAL_IMPLANT_PROCEDURE}
                 textMUAStatus={TEXT_MUA_STATUS}
@@ -364,36 +363,24 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
               )}
 
               {selectedSites.length > 0 && (
-                <>
-                  <PDFExport
-                    selectedSites={selectedSites}
-                    sitesData={sitesData}
-                    calculatorName={isCustom ? "Custom" : "All-On-X"}
-                    showTeethSelection={
-                      siteSpecificReport ===
-                      SITE_SPECIFIC_REPORT_OPTIONS[0].value
-                    }
-                    responseOrder={
-                      procedureInputsAndResponse?.responseOrder || []
-                    }
-                    totalQuantities={totalQuantities}
-                  />
-
-                  <InputDetails
-                    selectedSites={selectedSites}
-                    sitesData={sitesData}
-                    onInputSelect={handleInputSelect}
-                    onAutopopulate={handleAutopopulate}
-                    autoPopulateData={autoPopulateData}
-                    procedureInputs={procedureInputsAndResponse?.input || []}
-                    responseOrder={
-                      procedureInputsAndResponse?.responseOrder || []
-                    }
-                    totalQuantities={totalQuantities}
-                    onQuizResponse={handleQuizResponse}
-                    onUpdateQuantity={handleUpdateQuantity}
-                  />
-                </>
+                <InputDetails
+                  selectedSites={selectedSites}
+                  sitesData={sitesData}
+                  showTeethSelection={
+                    siteSpecificReport === SITE_SPECIFIC_REPORT_OPTIONS[0].value
+                  }
+                  isCustom={isCustom}
+                  onInputSelect={handleInputSelect}
+                  onAutopopulate={handleAutopopulate}
+                  autoPopulateData={autoPopulateData}
+                  procedureInputs={procedureInputsAndResponse?.input || []}
+                  responseOrder={
+                    procedureInputsAndResponse?.responseOrder || []
+                  }
+                  totalQuantities={totalQuantities}
+                  onQuizResponse={handleQuizResponse}
+                  onUpdateQuantity={handleUpdateQuantity}
+                />
               )}
             </div>
           </div>

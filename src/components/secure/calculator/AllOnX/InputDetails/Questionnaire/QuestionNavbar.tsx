@@ -1,7 +1,7 @@
 import { TabPanel, TabView, TabViewTabChangeEvent } from "primereact/tabview";
 import React, { useMemo } from "react";
 
-import { InputOutputValues } from "../../constants";
+import { InputOutputValues } from "@/types/calculators";
 
 interface QuestionNavbarProps {
   questions: InputOutputValues[];
