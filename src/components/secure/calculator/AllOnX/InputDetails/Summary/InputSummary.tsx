@@ -1,68 +1,53 @@
-import classNames from "classnames";
 import get from "lodash/get";
-import values from "lodash/values";
+import { Column, ColumnBodyOptions } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import React, { useMemo } from "react";
 
-import { SiteData } from "../../constants";
+import { SiteDetail } from "../../constants";
 
 interface InputSummary {
-  sitesData: SiteData;
+  summary: SiteDetail[];
 }
 
-const InputSummary: React.FC<InputSummary> = ({ sitesData }) => {
+const InputSummary: React.FC<InputSummary> = ({ summary }) => {
   const questions = useMemo(() => {
-    const inputDetails = get(values(sitesData), [0, "inputDetails"]);
+    const inputDetails = get(summary, [0, "inputDetails"]);
 
     return inputDetails
       .filter((item) => Boolean(item.answer))
       .map((item) => item.question);
-  }, [sitesData]);
+  }, [summary]);
 
   if (questions.length === 0) {
     return null;
   }
 
+  const renderCell = (item: SiteDetail, column: ColumnBodyOptions) => {
+    const inputDetails = item.inputDetails;
+    const answer =
+      inputDetails.find((elem) => elem.question === column.field)?.answer || "";
+    return answer;
+  };
+
   return (
     <div>
       <h3 className="mb-3">Inputs:</h3>
 
-      <div className="flex border-left-1 border-top-1 border-gray-400 w-fit">
-        <div className="flex flex-column">
-          {["Questions", ...questions].map((question) => (
-            <div
-              key={question}
-              style={{ height: 45 }}
-              className="flex align-items-center px-3 border-right-1 border-bottom-1 border-gray-400 font-bold"
-            >
-              {question}
-            </div>
-          ))}
-        </div>
-
-        {Object.keys(sitesData).map((siteName) => {
-          const site = sitesData[siteName];
-          const answers = site.inputDetails
-            .filter((item) => Boolean(item.answer))
-            .map((item) => item.answer);
-
-          return (
-            <div key={siteName} className="flex flex-column">
-              {[siteName, ...answers].map((answer, idx) => (
-                <div
-                  key={answer}
-                  style={{ height: 45 }}
-                  className={classNames(
-                    "flex align-items-center px-3 border-right-1 border-bottom-1 border-gray-400",
-                    { "font-bold": idx === 0 }
-                  )}
-                >
-                  {answer}
-                </div>
-              ))}
-            </div>
-          );
-        })}
-      </div>
+      <DataTable
+        value={summary}
+        tableStyle={{ minWidth: "50rem" }}
+        showGridlines
+        scrollable
+      >
+        {questions.map((question) => (
+          <Column
+            key={question}
+            field={question}
+            header={question}
+            body={renderCell}
+          />
+        ))}
+      </DataTable>
     </div>
   );
 };

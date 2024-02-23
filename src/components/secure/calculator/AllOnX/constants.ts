@@ -58,11 +58,14 @@ export interface ComponentDetail {
   [key: string]: ItemData[];
 }
 
+export interface SiteDetail {
+  name?: string;
+  inputDetails: InputDetail[];
+  componentDetails: ComponentDetail;
+}
+
 export interface SiteData {
-  [key: string]: {
-    inputDetails: InputDetail[];
-    componentDetails: ComponentDetail;
-  };
+  [key: string]: SiteDetail;
 }
 
 export interface KeyValuePair {

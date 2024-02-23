@@ -4,9 +4,9 @@ import { Carousel } from "primereact/carousel";
 import { useEffect, useMemo, useState } from "react";
 
 import { getCalculatorName } from "@/helpers/util";
-import HelpfulFeedbackDialog from "./Feedback/HelpfulFeedbackDialog";
 
 import { ItemData } from "./AllOnX/constants";
+import HelpfulFeedbackDialog from "./Feedback/HelpfulFeedbackDialog";
 import Result from "./Result";
 import { parseItems, getResultName } from "./Result/helpers";
 

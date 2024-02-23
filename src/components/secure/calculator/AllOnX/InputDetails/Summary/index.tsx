@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 
-import { SiteData, TotalQuantities } from "../../constants";
+import { SiteData, SiteDetail } from "../../constants";
 
 import InputSummary from "./InputSummary";
 import ComponentSummary from "./ComponentSummary";
@@ -17,13 +17,20 @@ const Summary: React.FC<SummaryProps> = ({
   responseOrder,
   onUpdateQuantity,
 }) => {
+  const inputSummary = useMemo(() => {
+    return Object.keys(sitesData).reduce((acc, name) => {
+      acc.push({ name, ...sitesData[name] });
+      return acc;
+    }, [] as SiteDetail[]);
+  }, [sitesData]);
+
   const componentSummary = useMemo(() => {
     return getComponentSummary(sitesData, responseOrder);
   }, [sitesData, responseOrder]);
 
   return (
     <div className="flex flex-column gap-4">
-      <InputSummary sitesData={sitesData} />
+      <InputSummary summary={inputSummary} />
       <ComponentSummary
         summary={componentSummary}
         onUpdateQuantity={onUpdateQuantity}

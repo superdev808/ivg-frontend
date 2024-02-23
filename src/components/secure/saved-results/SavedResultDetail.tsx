@@ -99,6 +99,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
           calculatorType={calculatorType}
           items={items}
           quiz={quiz}
+          showQuantityChanger
           onUpdateQuantity={handleUpdateQuantity}
         />
       </div>
