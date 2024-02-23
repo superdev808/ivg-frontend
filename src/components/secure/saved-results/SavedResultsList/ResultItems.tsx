@@ -1,13 +1,10 @@
-import cx from "classnames";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import React, { useMemo } from "react";
 
-import { formatDate, getCalculatorName, productImages } from "@/helpers/util";
+import { getCalculatorName, productImages } from "@/helpers/util";
 import {
-  ComponentSummary,
-  InputSummary,
   SingleSavedResult as SingleSavedResultType,
   MultiSavedResult as MultiSavedResultType,
 } from "@/types/calculators";
@@ -15,82 +12,47 @@ import TeethSelector, {
   TeethSelectorVariant,
 } from "@/components/shared/TeethSelector";
 
+const LOGO_URL = "/images/logo/Ivory-Guide-Logo-Horizontal.svg";
+
 /**
  * Single saved result
  */
 interface SingleSavedResultProps {
   savedResult: SingleSavedResultType;
-  isLoading: boolean;
-  onDelete: () => void;
 }
 
 export const SingleSavedResult: React.FC<SingleSavedResultProps> = ({
   savedResult,
-  isLoading,
-  onDelete,
 }) => {
   const router = useRouter();
 
-  const { id, name, calculatorType, date } = savedResult;
+  const { name, calculatorType } = savedResult;
 
-  const itemImage = productImages[calculatorType] || productImages["Default"];
-
-  const handleGoToDetailPage = (resultId: string) => {
-    if (isLoading) {
-      return;
-    }
-
-    router.push(`/settings/saved-results/detail/?id=${resultId}`);
-  };
+  const itemImage = productImages[calculatorType] || LOGO_URL;
 
   const handleGoToCalculator = (evt: React.SyntheticEvent) => {
     evt.stopPropagation();
     router.push(`/calculators/${calculatorType}`);
   };
 
-  const handleDelete = (evt: React.SyntheticEvent) => {
-    evt.stopPropagation();
-    onDelete();
-  };
-
   return (
-    <div
-      className={cx(
-        `border-2 border-gray-400 px-2 py-3 text-center
-      flex flex-column gap-4 align-items-center
-      md:text-left md:px-3 md:py-5 md:flex-row`,
-        { "cursor-pointer": !isLoading, "cursor-wait": isLoading }
-      )}
-      onClick={() => handleGoToDetailPage(id)}
-    >
+    <>
       <div className="flex-shrink-0">
         <Image src={itemImage} alt={name} width="100" />
       </div>
 
       <div className="flex-1 flex flex-column gap-2">
-        <div className="font-bold">Title:</div>
+        <div>
+          <span className="font-bold">Title:</span> {name}
+        </div>
         <Button
           link
           label={getCalculatorName(calculatorType)}
           className="px-0 py-0 w-fit border-noround"
           onClick={handleGoToCalculator}
         />
-        <div>{name}</div>
       </div>
-
-      <div className="flex-shrink-0">
-        <div className="font-bold">Saved Date:</div>
-        <div>{formatDate(date)}</div>
-      </div>
-
-      <div className="flex-shrink-0">
-        <Button
-          icon="pi pi-trash"
-          disabled={isLoading}
-          onClick={handleDelete}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 
@@ -99,18 +61,14 @@ export const SingleSavedResult: React.FC<SingleSavedResultProps> = ({
  */
 interface MultiSavedResultProps {
   savedResult: MultiSavedResultType;
-  isLoading: boolean;
-  onDelete: () => void;
 }
 
 export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
   savedResult,
-  isLoading,
-  onDelete,
 }) => {
   const router = useRouter();
 
-  const { id, name, date, inputSummary, type } = savedResult;
+  const { name, inputSummary, type } = savedResult;
 
   const selectedSites = useMemo(() => {
     if (
@@ -127,14 +85,6 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
     });
   }, [inputSummary]);
 
-  const handleGoToDetailPage = (resultId: string) => {
-    if (isLoading) {
-      return;
-    }
-
-    router.push(`/settings/saved-results/detail/?id=${resultId}`);
-  };
-
   const handleGoToCalculator = (evt: React.SyntheticEvent) => {
     evt.stopPropagation();
 
@@ -145,33 +95,24 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
     }
   };
 
-  const handleDelete = (evt: React.SyntheticEvent) => {
-    evt.stopPropagation();
-    onDelete();
-  };
-
   return (
-    <div
-      className={cx(
-        `border-2 border-gray-400 px-2 py-3 text-center
-      flex flex-column gap-4 align-items-center
-      md:text-left md:px-3 md:py-5 md:flex-row`,
-        { "cursor-pointer": !isLoading, "cursor-wait": isLoading }
-      )}
-      onClick={() => handleGoToDetailPage(id)}
-    >
-      {selectedSites.length !== 0 && (
-        <div className="flex-shrink-0">
+    <>
+      <div className="flex-shrink-0">
+        {selectedSites.length !== 0 ? (
           <TeethSelector
             selectedSites={selectedSites}
             showLabel={false}
             variant={TeethSelectorVariant.SMALL}
           />
-        </div>
-      )}
+        ) : (
+          <Image src={LOGO_URL} alt={name} width="100" />
+        )}
+      </div>
 
       <div className="flex-1 flex flex-column gap-2">
-        <div className="font-bold">Title:</div>
+        <div>
+          <span className="font-bold">Title:</span> {name}
+        </div>
         <Button
           link
           label={
@@ -182,21 +123,7 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
           className="px-0 py-0 w-fit border-noround"
           onClick={handleGoToCalculator}
         />
-        <div>{name}</div>
       </div>
-
-      <div className="flex-shrink-0">
-        <div className="font-bold">Saved Date:</div>
-        <div>{formatDate(date)}</div>
-      </div>
-
-      <div className="flex-shrink-0">
-        <Button
-          icon="pi pi-trash"
-          disabled={isLoading}
-          onClick={handleDelete}
-        />
-      </div>
-    </div>
+    </>
   );
 };
