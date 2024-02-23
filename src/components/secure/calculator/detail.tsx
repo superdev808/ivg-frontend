@@ -104,7 +104,6 @@ const DetailView: React.FC<DetailViewProps> = ({
                       calculatorType={calculatorType}
                       items={result}
                       quiz={quiz}
-                      name={getResultName(calculatorType, result)}
                       onUpdateQuantity={handleUpdateQuantity}
                     />
                   </div>
@@ -115,7 +114,6 @@ const DetailView: React.FC<DetailViewProps> = ({
                 calculatorType={calculatorType}
                 items={results[0]}
                 quiz={quiz}
-                name={getResultName(calculatorType, results[0])}
                 onUpdateQuantity={handleUpdateQuantity}
               />
             )}

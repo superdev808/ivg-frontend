@@ -245,7 +245,13 @@ const PDFExport: React.FC<PDFExportProps> = ({
         <PatientInfo info={patientInfo} onSubmit={handleSubmit} />
       </Dialog>
 
-      <SaveDialog visible={showSaveDialog} onClose={handleCloseSaveDialog} />
+      <SaveDialog
+        defaultValue={
+          isCustom ? "Custom Combinations" : "All-on-X Ordering Guide"
+        }
+        visible={showSaveDialog}
+        onClose={handleCloseSaveDialog}
+      />
     </div>
   );
 };

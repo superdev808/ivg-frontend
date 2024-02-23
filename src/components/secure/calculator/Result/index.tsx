@@ -29,7 +29,7 @@ const cx = classNames.bind(styles);
 
 interface ResultProps {
   id?: string;
-  name: string;
+  name?: string;
   items: ItemData[];
   quiz: { question: string; answer: string }[];
   calculatorType: string;
@@ -39,7 +39,7 @@ interface ResultProps {
 
 const Result: React.FC<ResultProps> = ({
   id = "",
-  name,
+  name = "",
   items,
   quiz,
   calculatorType,
@@ -269,7 +269,7 @@ const Result: React.FC<ResultProps> = ({
 
       <SaveDialog
         visible={showSaveDialog}
-        defaultValue={name}
+        defaultValue={name || calculatorName}
         onClose={handleCloseSaveDialog}
       />
 
