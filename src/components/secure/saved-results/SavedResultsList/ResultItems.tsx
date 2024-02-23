@@ -113,6 +113,13 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
   const { id, name, date, inputSummary, type } = savedResult;
 
   const selectedSites = useMemo(() => {
+    if (
+      inputSummary.length === 1 &&
+      inputSummary[0].site === "General Details"
+    ) {
+      return [];
+    }
+
     return inputSummary.map((elem) => {
       const site = elem.site || "Site 0";
       const siteNumber = site.split(" ")[1];
@@ -153,13 +160,15 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
       )}
       onClick={() => handleGoToDetailPage(id)}
     >
-      <div className="flex-shrink-0">
-        <TeethSelector
-          selectedSites={selectedSites}
-          showLabel={false}
-          variant={TeethSelectorVariant.SMALL}
-        />
-      </div>
+      {selectedSites.length !== 0 && (
+        <div className="flex-shrink-0">
+          <TeethSelector
+            selectedSites={selectedSites}
+            showLabel={false}
+            variant={TeethSelectorVariant.SMALL}
+          />
+        </div>
+      )}
 
       <div className="flex-1 flex flex-column gap-2">
         <div className="font-bold">Title:</div>

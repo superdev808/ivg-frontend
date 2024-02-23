@@ -110,7 +110,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     );
     if (isSelected.length === 0) {
       const newSite: Site = isAnonymous
-        ? { name: `Site Anonymous`, key: tooth }
+        ? { name: `General Details`, key: tooth }
         : { name: `Site ${tooth}`, key: tooth };
       _selectedSites.push(newSite);
       //Add new site data
@@ -124,7 +124,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
         _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
       } else {
         const newSiteData = {
-          [`Site Anonymous`]: { inputDetails: [], componentDetails: {} },
+          "General Details": { inputDetails: [], componentDetails: {} },
         };
         setSitesData(newSiteData);
       }
