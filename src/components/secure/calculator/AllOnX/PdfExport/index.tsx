@@ -149,21 +149,17 @@ const PDFExport: React.FC<PDFExportProps> = ({
         </div>
       </div>
 
-      <div className="p-buttonset">
+      <div className="flex align-items-center flex-shrink-0 gap-2">
         <Button
-          onClick={() => showPatientInfoDialog("download")}
-          size="small"
-          tooltip="Download"
-          tooltipOptions={{ position: "top" }}
-          icon="pi pi-download"
+          className="px-3 py-2"
+          label="Email"
+          onClick={() => showPatientInfoDialog("export")}
         />
 
         <Button
-          onClick={() => showPatientInfoDialog("export")}
-          size="small"
-          tooltip="Mail"
-          tooltipOptions={{ position: "top" }}
-          icon="pi pi-envelope"
+          className="px-3 py-2"
+          label="Export"
+          onClick={() => showPatientInfoDialog("download")}
         />
       </div>
 

@@ -287,15 +287,19 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   };
 
   const handleUpdateQuantity = (quantity: number, itemName: string) => {
-    const indexOfItem: number = totalQuantities.findIndex(
-      (item: TotalQuantities) => item.itemName === itemName
+    const newTotalQuantities = cloneDeep(totalQuantities);
+
+    const index = newTotalQuantities.findIndex(
+      (item) => item.itemName === itemName
     );
-    if (indexOfItem === -1) {
-      totalQuantities.push({ itemName, quantity });
+
+    if (index === -1) {
+      newTotalQuantities.push({ itemName, quantity });
     } else {
-      totalQuantities[indexOfItem].quantity = quantity;
+      newTotalQuantities[index].quantity = quantity;
     }
-    setTotalQuantities(totalQuantities);
+
+    setTotalQuantities(newTotalQuantities);
   };
 
   return (
@@ -353,7 +357,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   siteSpecificReport ===
                     SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
                 <TeethSelector
-                  showLabel={true}
+                  showLabel
                   selectedSites={selectedSites}
                   onSiteChange={handleSiteChange}
                 />
@@ -385,6 +389,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                     responseOrder={
                       procedureInputsAndResponse?.responseOrder || []
                     }
+                    totalQuantities={totalQuantities}
                     onQuizResponse={handleQuizResponse}
                     onUpdateQuantity={handleUpdateQuantity}
                   />

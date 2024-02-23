@@ -1,21 +1,18 @@
-import classNames from "classnames";
-import get from "lodash/get";
-import values from "lodash/values";
 import { TabPanel, TabView } from "primereact/tabview";
-import React, { useMemo } from "react";
+import React from "react";
 
 import { CALCULATOR_MAPPINGS } from "@/app/(protected)/calculators/constants";
 
 import {
   Site,
   SiteData,
-  InputDetail,
   AutoPopulateData,
   InputOutputValues,
   ItemData,
+  TotalQuantities,
 } from "../constants";
 import Questionnaire from "./Questionnaire";
-import { InputNumber } from "primereact/inputnumber";
+import Summary from "./Summary";
 
 interface InputDetailsProps {
   selectedSites: Site[];
@@ -23,6 +20,7 @@ interface InputDetailsProps {
   autoPopulateData: AutoPopulateData | null;
   procedureInputs: InputOutputValues[];
   responseOrder: string[];
+  totalQuantities: TotalQuantities[];
   onInputSelect: (
     site: Site,
     question: InputOutputValues,
@@ -43,19 +41,12 @@ const InputDetails: React.FC<InputDetailsProps> = ({
   autoPopulateData,
   procedureInputs,
   responseOrder,
+  totalQuantities,
   onInputSelect,
   onAutopopulate,
   onQuizResponse,
   onUpdateQuantity,
 }) => {
-  const questions = useMemo(() => {
-    const inputDetails = get(values(sitesData), [0, "inputDetails"]);
-
-    return inputDetails
-      .filter((item) => Boolean(item.answer))
-      .map((item) => item.question);
-  }, [sitesData]);
-
   return (
     <div className="relative">
       <TabView renderActiveOnly={false} scrollable>
@@ -78,43 +69,11 @@ const InputDetails: React.FC<InputDetailsProps> = ({
         ))}
 
         <TabPanel header="Summary">
-          <div className="flex border-left-1 border-top-1 border-gray-400 mt-4 w-fit">
-            <div className="flex flex-column">
-              {["Questions", ...questions].map((question) => (
-                <div
-                  key={question}
-                  style={{ height: 45 }}
-                  className="flex align-items-center px-3 border-right-1 border-bottom-1 border-gray-400 font-bold"
-                >
-                  {question}
-                </div>
-              ))}
-            </div>
-
-            {Object.keys(sitesData).map((siteName) => {
-              const site = sitesData[siteName];
-              const answers = site.inputDetails
-                .filter((item) => Boolean(item.answer))
-                .map((item) => item.answer);
-
-              return (
-                <div key={siteName} className="flex flex-column">
-                  {[siteName, ...answers].map((answer, idx) => (
-                    <div
-                      key={answer}
-                      style={{ height: 45 }}
-                      className={classNames(
-                        "flex align-items-center px-3 border-right-1 border-bottom-1 border-gray-400",
-                        { "font-bold": idx === 0 }
-                      )}
-                    >
-                      {answer}
-                    </div>
-                  ))}
-                </div>
-              );
-            })}
-          </div>
+          <Summary
+            sitesData={sitesData}
+            responseOrder={responseOrder}
+            onUpdateQuantity={onUpdateQuantity}
+          />
         </TabPanel>
       </TabView>
     </div>

@@ -6,8 +6,9 @@ import { useEffect, useMemo, useState } from "react";
 import { getCalculatorName } from "@/helpers/util";
 import HelpfulFeedbackDialog from "./Feedback/HelpfulFeedbackDialog";
 
+import { ItemData } from "./AllOnX/constants";
 import Result from "./Result";
-import { parseItems, getResultName, ResultItem } from "./Result/helpers";
+import { parseItems, getResultName } from "./Result/helpers";
 
 interface DetailViewProps {
   calculatorType: string;
@@ -28,7 +29,7 @@ const DetailView: React.FC<DetailViewProps> = ({
 }) => {
   const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
 
-  const [results, setResults] = useState<ResultItem[][]>([]);
+  const [results, setResults] = useState<ItemData[][]>([]);
 
   useEffect(() => {
     setResults(props.items.map((item) => parseItems(item, calculatorType)));
@@ -86,6 +87,7 @@ const DetailView: React.FC<DetailViewProps> = ({
                       items={result}
                       quiz={quiz}
                       name={getResultName(calculatorType, result)}
+                      showQuantityChanger
                       onUpdateQuantity={handleUpdateQuantity}
                     />
                   </div>
@@ -97,6 +99,7 @@ const DetailView: React.FC<DetailViewProps> = ({
                 items={results[0]}
                 quiz={quiz}
                 name={getResultName(calculatorType, results[0])}
+                showQuantityChanger
                 onUpdateQuantity={handleUpdateQuantity}
               />
             )}
