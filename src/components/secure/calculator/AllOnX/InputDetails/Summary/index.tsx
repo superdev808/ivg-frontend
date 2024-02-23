@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
 
-import { SiteData, SiteDetail } from "../../constants";
+import { getComponentSummary } from "@/helpers/calculators";
+import { SiteData, SiteDetail } from "@/types/calculators";
 
 import InputSummary from "./InputSummary";
 import ComponentSummary from "./ComponentSummary";
-import { getComponentSummary } from "../../helpers";
 
 interface SummaryProps {
   sitesData: SiteData;

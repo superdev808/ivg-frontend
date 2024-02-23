@@ -1,4 +1,3 @@
-import ImageUploader from "@/components/shared/ImageUploader";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputTextarea } from "primereact/inputtextarea";
@@ -6,6 +5,7 @@ import { RadioButton } from "primereact/radiobutton";
 import { FileUpload } from "primereact/fileupload";
 import { Toast } from "primereact/toast";
 import { useState, useRef } from "react";
+
 import { getCookie } from "@/helpers/cookie";
 
 interface FeedbackDialogProps {

@@ -1,3 +1,4 @@
+import orderBy from "lodash/orderBy";
 import classNames from "classnames/bind";
 import {
   AutoComplete,
@@ -13,7 +14,6 @@ import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
 import { calculatorImages } from "@/helpers/util";
 
 import styles from "./quiz.module.scss";
-import { orderBy } from "lodash";
 
 const cx = classNames.bind(styles);
 

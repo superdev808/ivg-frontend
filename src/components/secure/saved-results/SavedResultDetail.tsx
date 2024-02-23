@@ -5,8 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import Result from "@/components/secure/calculator/Result";
 import { formatDate, getCalculatorName } from "@/helpers/util";
-
-import { ItemData } from "../calculator/AllOnX/constants";
+import { ItemData } from "@/types/calculators";
 
 export type SavedResult = {
   id: string;

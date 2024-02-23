@@ -4,7 +4,7 @@ import flatMap from "lodash/flatMap";
 import uniq from "lodash/uniq";
 import React from "react";
 
-import { InputDetail, Site, SiteData } from "../../constants";
+import { InputDetail, Site, SiteData } from "@/types/calculators";
 
 import styles from "./styles.module.scss";
 

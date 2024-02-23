@@ -6,9 +6,8 @@ import { useMemo, useState } from "react";
 import CalculatorContainer from "@/components/secure/calculator";
 import AllOnXCalculator from "@/components/secure/calculator/AllOnX";
 import FeedbackDialog from "@/components/secure/calculator/Feedback/FeedbackDialog";
+import { CALCULATOR_MAPPINGS } from "@/constants/calculators";
 import { calculatorIO as tabItems } from "@/helpers/util";
-
-import { CALCULATOR_MAPPINGS } from "../constants";
 
 export default function CalculatorPage() {
   // const router = useRouter();

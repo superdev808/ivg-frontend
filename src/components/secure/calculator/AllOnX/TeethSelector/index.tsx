@@ -1,6 +1,8 @@
 import React from "react";
 
-import { LOWER_SITES, Site, UPPER_SITES } from "../constants";
+import { LOWER_SITES, UPPER_SITES } from "@/constants/calculators";
+
+import { Site } from "@/types/calculators";
 
 import Tooth from "./Tooth";
 import styles from "./TeethSelector.module.scss";

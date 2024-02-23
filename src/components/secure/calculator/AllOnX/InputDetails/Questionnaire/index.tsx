@@ -3,16 +3,17 @@ import { Toast } from "primereact/toast";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
 
-import Quiz from "../../../quiz";
-import ComponentDetails from "../../ComponentDetails";
+import { AUTO_POPULATE_OPTIONS } from "@/constants/calculators";
 import {
-  AUTO_POPULATE_OPTIONS,
   AutoPopulateData,
   InputOutputValues,
   Site,
   SiteData,
   ItemData,
-} from "../../constants";
+} from "@/types/calculators";
+
+import Quiz from "../../../quiz";
+import ComponentDetails from "../../ComponentDetails";
 
 import AutoPopulatePromt from "./AutoPopulatePromt";
 import QuestionNavbar from "./QuestionNavbar";

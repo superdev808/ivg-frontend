@@ -8,31 +8,32 @@ import React, { useEffect, useState } from "react";
 import {
   getProcedureCollections,
   getProcedureInputsAndResponse,
-} from "@/components/calculator/AllOnX/AllOnXUtills";
+} from "@/helpers/calculators";
 import {
   CALCULATOR_NAME_COLLECTION_MAPPINGS,
-  InputAndResponse,
-} from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
-
-import AdditionalInputs from "./AdditionalInputs";
-import {
-  AutoPopulateData,
-  ComponentDetail,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
-  InputDetail,
-  InputOutputValues,
-  ItemData,
-  MUA_OPTIONS,
   PROCEDURES,
-  procedures,
-  Site,
-  SiteData,
-  KeyValuePair,
+  MUA_OPTIONS,
   SITE_SPECIFIC_REPORT_OPTIONS,
   TEXT_DENTAL_IMPLANT_PROCEDURE,
   TEXT_MUA_STATUS,
+} from "@/constants/calculators";
+import { InputAndResponse } from "@/types/calculators";
+
+import {
+  AutoPopulateData,
+  ComponentDetail,
+  InputDetail,
+  InputOutputValues,
+  Site,
+  SiteData,
+  KeyValuePair,
   TotalQuantities,
-} from "./constants";
+  ItemData,
+  PROCEDURE,
+} from "@/types/calculators";
+
+import AdditionalInputs from "./AdditionalInputs";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
 import InputDetails from "./InputDetails";
 import PDFExport from "./PdfExport";
@@ -50,7 +51,7 @@ interface AllOnXCalculatorProps {
 const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   isCustom = false,
 }) => {
-  const [procedure, setProcedure] = useState<PROCEDURES>(PROCEDURES.SURGERY);
+  const [procedure, setProcedure] = useState<PROCEDURE>(PROCEDURE.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
   const [additionalInputs, setAdditionalInputs] = useState<KeyValuePair>({});
@@ -94,8 +95,8 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     setSelectedSites([]);
     setSitesData({});
     if (
-      e.value === PROCEDURES.RESTORATIVE ||
-      e.value === PROCEDURES.SURGERY_AND_RESTORATIVE
+      e.value === PROCEDURE.RESTORATIVE ||
+      e.value === PROCEDURE.SURGERY_AND_RESTORATIVE
     ) {
       handleAdditionalInputs(
         DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value,
@@ -317,15 +318,15 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   value={procedure}
                   onChange={(e) => handleProcedureChange(e)}
                   optionLabel="name"
-                  options={procedures}
+                  options={PROCEDURES}
                 />
               </div>
             </>
           )}
 
           {!isCustom &&
-            (procedure === PROCEDURES.RESTORATIVE ||
-              procedure === PROCEDURES.SURGERY_AND_RESTORATIVE) && (
+            (procedure === PROCEDURE.RESTORATIVE ||
+              procedure === PROCEDURE.SURGERY_AND_RESTORATIVE) && (
               <AdditionalInputs
                 textDentalImplantProcedure={TEXT_DENTAL_IMPLANT_PROCEDURE}
                 textMUAStatus={TEXT_MUA_STATUS}

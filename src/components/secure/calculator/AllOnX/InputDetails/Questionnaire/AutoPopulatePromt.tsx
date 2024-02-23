@@ -2,7 +2,8 @@ import { Button } from "primereact/button";
 import { RadioButton } from "primereact/radiobutton";
 import React from "react";
 
-import { AUTO_POPULATE_OPTIONS, RadioButtonOption } from "../../constants";
+import { AUTO_POPULATE_OPTIONS } from "@/constants/calculators";
+import { RadioButtonOption } from "@/types/calculators";
 
 interface AutoPopulatePromtParams {
   autoPopulate: string;

@@ -1,13 +1,12 @@
+import Link from "next/link";
+import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { InputNumber } from "primereact/inputnumber";
 import React, { useMemo } from "react";
 
-import { isValidUrl } from "@/components/calculator/AllOnX/AllOnXUtills";
-
-import { ItemInsights } from "../../constants";
-import Link from "next/link";
-import { Button } from "primereact/button";
+import { isValidUrl } from "@/helpers/calculators";
+import { ItemInsights } from "@/types/calculators";
 
 export interface Summary extends ItemInsights {
   description: string;
@@ -42,8 +41,6 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
       ? item.manufacturer
       : "";
   };
-
-  console.log(summary);
 
   const renderLink = (item: Summary) => {
     return item.link && isValidUrl(item.link) ? (

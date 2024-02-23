@@ -9,17 +9,16 @@ import { Toast } from "primereact/toast";
 import { useRef, useState } from "react";
 
 import PatientInfo from "@/components/shared/PatientInfo";
+import { prepareExportProps } from "@/helpers/calculators";
 import { getCalculatorName, productImages } from "@/helpers/util";
 import {
   useGetUserInfoQuery,
   useSaveResultMutation,
   useUpdateSavedResultMutation,
 } from "@/redux/hooks/apiHooks";
-import { Patient } from "@/types/PublicTypes";
+import { ItemData, Patient } from "@/types/calculators";
 
-import { ItemData } from "../AllOnX/constants";
 import PdfContent from "../AllOnX/PdfExport/PdfContent";
-import { prepareExportProps } from "./helpers";
 import Outputs from "./Outputs";
 import SaveDialog from "./SaveDialog";
 

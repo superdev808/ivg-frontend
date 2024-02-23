@@ -4,9 +4,8 @@ import React, { useMemo } from "react";
 
 import Link from "next/link";
 
-import { isValidUrl } from "@/components/calculator/AllOnX/AllOnXUtills";
-
-import { ItemData } from "../../AllOnX/constants";
+import { isValidUrl } from "@/helpers/calculators";
+import { ItemData } from "@/types/calculators";
 
 interface OutputsProps {
   items: ItemData[];

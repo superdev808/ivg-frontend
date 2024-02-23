@@ -6,8 +6,7 @@ import { Toast } from "primereact/toast";
 import { useState, useRef } from "react";
 
 import { getCookie } from "@/helpers/cookie";
-
-import { InputDetail } from "../AllOnX/constants";
+import { InputDetail } from "@/types/calculators";
 
 interface HelpfulFeedbackDialogProps {
   calculatorName: string;
@@ -46,7 +45,7 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
     const quizData: any = {};
     quiz.forEach(({ question, answer }) => {
       quizData[question] = answer;
-    })
+    });
     const formData = {
       calculatorName,
       name,

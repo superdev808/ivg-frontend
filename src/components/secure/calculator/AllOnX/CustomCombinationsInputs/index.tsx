@@ -2,7 +2,8 @@ import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
 import { RadioButton } from "primereact/radiobutton";
 import React from "react";
 
-import { RadioButtonOption, SITE_SPECIFIC_REPORT_OPTIONS } from "../constants";
+import { SITE_SPECIFIC_REPORT_OPTIONS } from "@/constants/calculators";
+import { RadioButtonOption } from "@/types/calculators";
 
 interface CustomCombinationsInputsParams {
   collections: string[];

@@ -1,8 +1,7 @@
 import { TabPanel, TabView } from "primereact/tabview";
 import React from "react";
 
-import { CALCULATOR_MAPPINGS } from "@/app/(protected)/calculators/constants";
-
+import { CALCULATOR_MAPPINGS } from "@/constants/calculators";
 import {
   Site,
   SiteData,
@@ -10,7 +9,8 @@ import {
   InputOutputValues,
   ItemData,
   TotalQuantities,
-} from "../constants";
+} from "@/types/calculators";
+
 import Questionnaire from "./Questionnaire";
 import Summary from "./Summary";
 

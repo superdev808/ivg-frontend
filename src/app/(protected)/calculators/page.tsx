@@ -6,8 +6,7 @@ import { Button } from "primereact/button";
 import React, { useState } from "react";
 
 import SearchBox from "@/components/ui/searchbox";
-
-import { CALCULATOR_MAPPINGS } from "./constants";
+import { CALCULATOR_MAPPINGS } from "@/constants/calculators";
 
 import styles from "./page.module.scss";
 

@@ -7,12 +7,3 @@ export interface ContactForm {
   message: string;
   token: string;
 }
-
-export interface Patient {
-  date?: Date | null;
-  name: string;
-  address: string;
-  filename: string;
-  actionType?: string;
-  recipientsList: string;
-}

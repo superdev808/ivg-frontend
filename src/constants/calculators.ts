@@ -1,24 +1,18 @@
-import { InputOutputValues } from "@/components/secure/calculator/AllOnX/constants";
+import {
+  CollectionsIO,
+  KeyValuePair,
+  PROCEDURE_COMBINATIONS,
+  Procedure,
+  PROCEDURE,
+  ProcedureInputsAndResponse,
+  RadioButtonOption,
+  Site,
+} from "@/types/calculators";
 
-export enum PROCEDURE_COMBINATIONS {
-  SURGERY = "SURGERY",
-  RESTORATIVE_DIRECT_TO_IMPLANT = "RESTORATIVE_DIRECT_TO_IMPLANT",
-  RESTORATIVE_ON_MUAS_MUAS_NOT_PLACED = "RESTORATIVE_ON_MUAS_MUAS_NOT_PLACED",
-  RESTORATIVE_ON_MUAS_MUAS_PLACED = "RESTORATIVE_ON_MUAS_MUAS_PLACED",
-}
-
-export interface InputAndResponse {
-  input: InputOutputValues[];
-  responseOrder: string[];
-}
-
-export interface CollectionsIO {
-  [key: string]: InputOutputValues[];
-}
-
-export interface ProcedureInputsAndResponse {
-  [key: string]: CollectionsIO;
-}
+export const CALCULATOR_MAPPINGS: KeyValuePair = {
+  ALL_ON_X_CALCULATOR: "All-on-X Ordering Guide",
+  CUSTOM_COMBINATION: "Custom Combinations",
+};
 
 export const CALCULATORS: CollectionsIO = {
   "Drill Kits and Drill Sequences": [
@@ -1409,3 +1403,95 @@ export const CALCULATOR_NAME_COLLECTION_MAPPINGS: { [key: string]: string } = {
   "Healing Abutments": "HealingAbutments",
   "Stock Abutments": "StockAbutments",
 };
+
+export const PROCEDURES: Procedure[] = [
+  { name: "Surgery", value: PROCEDURE.SURGERY },
+  { name: "Restorative", value: PROCEDURE.RESTORATIVE },
+  {
+    name: "Surgery and Restorative",
+    value: PROCEDURE.SURGERY_AND_RESTORATIVE,
+  },
+];
+
+const SITE_COUNT: number = 32;
+// Create an array of Site objects representing different sites.
+// The array is initialized with SITE_COUNT number of elements and then mapped to generate Site objects.
+const SITES: Site[] = Array(SITE_COUNT)
+  .fill(null)
+  .map((v, i) => {
+    return { name: `Site ${i + 1}`, key: i + 1 };
+  });
+
+// Create two subsets of sites: UPPER_SITES and LOWER_SITES.
+// UPPER_SITES contains the first 16 sites, and LOWER_SITES contains the next 16 sites.
+export const UPPER_SITES: Site[] = SITES.slice(0, 16);
+export const LOWER_SITES: Site[] = SITES.slice(16, 32);
+
+export const AUTO_POPULATE_OPTIONS: RadioButtonOption[] = [
+  {
+    id: "Autopopulate1",
+    name: "autopopulate",
+    value: "Yes",
+  },
+  {
+    id: "Autopopulate2",
+    name: "autopopulate",
+    value: "No",
+  },
+];
+
+export const DENTAL_IMPLANT_PROCEDURE_OPTIONS: RadioButtonOption[] = [
+  {
+    id: "DirectToImplant",
+    name: "dentalImplantProcedure",
+    value: "Direct to implant",
+  },
+  {
+    id: "MUAs",
+    name: "dentalImplantProcedure",
+    value: "MUAs",
+  },
+];
+
+export const MUA_OPTIONS: RadioButtonOption[] = [
+  {
+    id: "MUA1",
+    name: "MUA",
+    value: "Yes",
+  },
+  {
+    id: "MUA2",
+    name: "MUA",
+    value: "No",
+  },
+];
+
+export const SITE_SPECIFIC_REPORT_OPTIONS: RadioButtonOption[] = [
+  {
+    id: "customReportOption1",
+    name: "customReportOption",
+    value: "Yes",
+  },
+  {
+    id: "customReportOption2",
+    name: "customReportOption",
+    value: "No",
+  },
+];
+
+export const IGNORE_LIST_FOR_QUANTITY_MULTIPLES: string[] = [
+  "implant drill kit name",
+  "drill sequence",
+  "implant driver",
+  "bur kit name (bone reduction)",
+  "mua driver",
+  "luting agent",
+  "teflon tape",
+  "material to close screw access hole",
+];
+
+export const TEXT_DENTAL_IMPLANT_PROCEDURE =
+  "Are you restoring with multi-unit abutments (MUAs) or directly to the implant?";
+
+export const TEXT_MUA_STATUS =
+  "Are the multi-unit abutments already connected to the implants?";

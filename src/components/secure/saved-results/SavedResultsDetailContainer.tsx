@@ -1,6 +1,6 @@
 "use client";
 
-import { find } from "lodash";
+import find from "lodash/find";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from "primereact/toast";

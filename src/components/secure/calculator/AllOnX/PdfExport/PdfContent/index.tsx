@@ -1,12 +1,11 @@
 import classNames from "classnames/bind";
 import React, { useMemo } from "react";
 
+import { getComponentSummary } from "@/helpers/calculators";
 import { getCookie } from "@/helpers/cookie";
 import { formatDate, formatTime } from "@/helpers/util";
-import { Patient } from "@/types/PublicTypes";
+import { Patient, SiteData, TotalQuantities } from "@/types/calculators";
 
-import { SiteData, TotalQuantities } from "../../constants";
-import { getComponentSummary } from "../../helpers";
 import TeethSelector, { TeethSelectorVariant } from "../../TeethSelector";
 import ComponentSummary from "../ComponentSummary";
 import InputSummary from "../InputSummary";

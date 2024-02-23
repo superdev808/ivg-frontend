@@ -6,9 +6,8 @@ import { Toast } from "primereact/toast";
 import React, { useRef, useState } from "react";
 
 import PatientInfo from "@/components/shared/PatientInfo";
-import { Patient } from "@/types/PublicTypes";
+import { Patient, SiteData, TotalQuantities } from "@/types/calculators";
 
-import { SiteData, TotalQuantities } from "../constants";
 import PdfContent, { Site } from "./PdfContent";
 
 interface PDFExportProps {

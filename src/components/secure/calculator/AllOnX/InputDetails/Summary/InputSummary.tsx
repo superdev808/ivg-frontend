@@ -3,7 +3,7 @@ import { Column, ColumnBodyOptions } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import React, { useMemo } from "react";
 
-import { SiteDetail } from "../../constants";
+import { SiteDetail } from "@/types/calculators";
 
 interface InputSummary {
   summary: SiteDetail[];
