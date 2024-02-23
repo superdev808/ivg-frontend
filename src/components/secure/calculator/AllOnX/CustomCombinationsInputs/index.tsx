@@ -65,7 +65,7 @@ const CustomCombinationsInputs: React.FC<CustomCombinationsInputsParams> = ({
       </div>
 
       <div className="flex flex-column w-12 mb-2">
-        <p>Do you want to add make your custom report site specific?</p>
+        <p>Do you want to make your custom report site specific?</p>
         <div className="flex flex-wrap gap-3">
           {SITE_SPECIFIC_REPORT_OPTIONS.map((option: RadioButtonOption) => (
             <div className="flex align-items-center" key={option.id}>
