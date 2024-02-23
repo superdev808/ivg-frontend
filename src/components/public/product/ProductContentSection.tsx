@@ -79,7 +79,7 @@ export const ProductContentSection = () => {
           >
             <Image
               imageClassName="xl:absolute top-0 left-0"
-              src="/images/common/computer.png"
+              src="/images/product/output-mockup.png"
               alt="centerImage"
               width="100%"
             />
@@ -89,12 +89,12 @@ export const ProductContentSection = () => {
             style={{ maxWidth: "1600px" }}
           >
             <div className="col-12 xl:col">
-              <ScrollCard description="Automatically prompts users with necessary questions" />
+              <ScrollCard description="Easy to navigate, interactive interface" />
             </div>
             <div className="xl:col-3"></div>
             <div className="col-12 xl:col">
               <ScrollCard
-                description="Allows for planning of complicated treatment procedures with ease"
+                description="Allow users to save, export and email result summaries"
                 rtl
               />
             </div>
@@ -104,7 +104,7 @@ export const ProductContentSection = () => {
             style={{ maxWidth: 1400 }}
           >
             <div className="col-12 xl:col">
-              <ScrollCard description="Easy to navigate, interactive interface" />
+              <ScrollCard description="Allows for planning of complicated treatment procedures with ease" />
             </div>
             <div className="xl:col-3" />
             <div className="col-12 xl:col">

@@ -112,21 +112,11 @@ export const HomeContentSection = () => {
         <div className="flex flex-column md:flex-row align-items-center justify-content-center my-6">
           <div className="flex justify-content-center w-full relative p-2">
             <Image
-              src="/images/common/computer.png"
+              src="/images/home/calculator-mockup.png"
               alt="centerImage"
-              width="100%"
+              className="flex justify-content-center"
+              imageClassName="w-full md:w-10 lg:w-8 xl:w-6"
             />
-            <div
-              className="w-8 absolute flex justify-content-center align-content-center"
-              style={{ top: "40%", transform: "translateY(-40%)" }}
-            >
-              <Image
-                className=" "
-                src="/images/home/image_01.png"
-                alt="centerImage"
-                width="100%"
-              />
-            </div>
           </div>
         </div>
 
