@@ -152,6 +152,12 @@ const PDFExport: React.FC<PDFExportProps> = ({
       <div className="flex align-items-center flex-shrink-0 gap-2">
         <Button
           className="px-3 py-2"
+          label="Save"
+          onClick={() => showPatientInfoDialog("save")}
+        />
+
+        <Button
+          className="px-3 py-2"
           label="Email"
           onClick={() => showPatientInfoDialog("export")}
         />

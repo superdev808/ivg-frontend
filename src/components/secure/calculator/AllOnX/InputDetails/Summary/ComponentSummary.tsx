@@ -3,7 +3,11 @@ import { DataTable } from "primereact/datatable";
 import { InputNumber } from "primereact/inputnumber";
 import React, { useMemo } from "react";
 
+import { isValidUrl } from "@/components/calculator/AllOnX/AllOnXUtills";
+
 import { ItemInsights } from "../../constants";
+import Link from "next/link";
+import { Button } from "primereact/button";
 
 export interface Summary extends ItemInsights {
   description: string;
@@ -39,6 +43,18 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
       : "";
   };
 
+  console.log(summary);
+
+  const renderLink = (item: Summary) => {
+    return item.link && isValidUrl(item.link) ? (
+      <Link href={item.link} target="_blank">
+        <Button label="Link to Purchase" size="small" />
+      </Link>
+    ) : (
+      item.link
+    );
+  };
+
   const renderQuantity = (item: Summary) => {
     return (
       <InputNumber
@@ -72,6 +88,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
         <Column field="description" header="Description" />
         <Column field="itemName" header="Name" />
         <Column field="itemNumber" header="Number" />
+        <Column field="link" header="Link" body={renderLink} />
         {showManufacturer && (
           <Column
             field="manufacturer"

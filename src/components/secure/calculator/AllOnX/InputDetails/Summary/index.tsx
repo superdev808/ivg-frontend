@@ -18,8 +18,8 @@ const Summary: React.FC<SummaryProps> = ({
   onUpdateQuantity,
 }) => {
   const inputSummary = useMemo(() => {
-    return Object.keys(sitesData).reduce((acc, name) => {
-      acc.push({ name, ...sitesData[name] });
+    return Object.keys(sitesData).reduce((acc, site) => {
+      acc.push({ site, ...sitesData[site] });
       return acc;
     }, [] as SiteDetail[]);
   }, [sitesData]);

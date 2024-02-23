@@ -4,6 +4,8 @@ import React, { useMemo } from "react";
 
 import Link from "next/link";
 
+import { isValidUrl } from "@/components/calculator/AllOnX/AllOnXUtills";
+
 import { ItemData } from "../../AllOnX/constants";
 
 interface OutputsProps {
@@ -73,7 +75,7 @@ const Outputs: React.FC<OutputsProps> = ({
                   decrementButtonClassName="px-0 text-xs"
                 />
               )}
-              {item.link && (
+              {item.link && isValidUrl(item.link) && (
                 <Link href={item.link} target="_blank">
                   <Button label="Link to Purchase" size="small" />
                 </Link>

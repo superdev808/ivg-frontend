@@ -59,7 +59,7 @@ export interface ComponentDetail {
 }
 
 export interface SiteDetail {
-  name?: string;
+  site?: string;
   inputDetails: InputDetail[];
   componentDetails: ComponentDetail;
 }

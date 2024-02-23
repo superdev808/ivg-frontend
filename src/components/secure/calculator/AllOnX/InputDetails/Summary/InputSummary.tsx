@@ -39,6 +39,7 @@ const InputSummary: React.FC<InputSummary> = ({ summary }) => {
         showGridlines
         scrollable
       >
+        <Column field="site" header="Site" />
         {questions.map((question) => (
           <Column
             key={question}
