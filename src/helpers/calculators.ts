@@ -269,25 +269,29 @@ export const getResultName = (calculatorType: string, items: ItemData[]) => {
 
 export const prepareExportProps = (
   calculatorType: string,
-  calculatorName: string,
   patientInfo: Patient,
   quiz: InputDetail[],
   items: ItemData[]
 ) => {
+  const calculatorName = getCalculatorName(calculatorType);
+
   const componentDetails = {
     [calculatorType]: items,
   };
 
-  return {
-    selectedSites: [{ name: "Site 1", key: 1 }],
-    sitesData: {
-      "Site 1": {
-        inputDetails: quiz,
-        componentDetails,
-      },
+  const sitesData = {
+    "Site 1": {
+      inputDetails: quiz,
+      componentDetails,
     },
-    responseOrder: [calculatorName],
-    calculatorName: calculatorName,
+  };
+
+  const componentSummary = getComponentSummary(sitesData, [calculatorName]);
+
+  return {
+    inputSummary: [{ name: "Site 1", inputDetails: quiz, componentDetails }],
+    componentSummary,
+    calculatorName,
     patientInfo,
     showTeethSelection: false,
     hideSite: true,

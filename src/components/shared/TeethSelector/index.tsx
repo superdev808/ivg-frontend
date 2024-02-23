@@ -1,3 +1,4 @@
+import noop from "lodash/noop";
 import React from "react";
 
 import { LOWER_SITES, UPPER_SITES } from "@/constants/calculators";
@@ -14,8 +15,8 @@ export enum TeethSelectorVariant {
 
 interface TeethSelectorProps {
   selectedSites: Site[];
-  onSiteChange: (teeth: number) => void;
-  showLabel: boolean;
+  onSiteChange?: (teeth: number) => void;
+  showLabel?: boolean;
   variant?: TeethSelectorVariant;
 }
 
@@ -30,7 +31,7 @@ interface TeethSelectorProps {
  */
 const TeethSelector: React.FC<TeethSelectorProps> = ({
   selectedSites,
-  onSiteChange,
+  onSiteChange = noop,
   showLabel = true,
   variant = TeethSelectorVariant.DEFAULT,
 }) => {

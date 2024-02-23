@@ -6,34 +6,87 @@ import { Toast } from "primereact/toast";
 import React, { useRef, useState } from "react";
 
 import PatientInfo from "@/components/shared/PatientInfo";
-import { Patient, SiteData, TotalQuantities } from "@/types/calculators";
+import { useSaveResultMutation } from "@/redux/hooks/apiHooks";
+import {
+  ComponentSummary,
+  Patient,
+  InputSummary,
+  TotalQuantities,
+} from "@/types/calculators";
 
-import PdfContent, { Site } from "./PdfContent";
+import PDFContent from "./PDFContent";
+import SaveDialog from "../SaveDialog";
 
 interface PDFExportProps {
-  selectedSites: Site[];
-  sitesData: SiteData;
-  responseOrder: string[];
-  calculatorName: string;
+  isCustom: boolean;
   showTeethSelection: boolean;
   totalQuantities: TotalQuantities[];
+  inputSummary: InputSummary[];
+  componentSummary: ComponentSummary[];
+  hideSave?: boolean;
 }
 
 const PDFExport: React.FC<PDFExportProps> = ({
-  responseOrder,
-  selectedSites,
-  sitesData,
-  calculatorName,
+  isCustom,
   showTeethSelection,
   totalQuantities,
+  inputSummary,
+  componentSummary,
+  hideSave = false,
 }) => {
+  const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
+
   const contentRef = useRef(null);
   const toastRef = useRef(null);
   const [patientInfo, setPatientInfo] = useState<Patient | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
-  const filename: string = patientInfo?.filename || `${calculatorName}-Summary`;
+  const [showSaveDialog, setShowSaveDialog] = useState<boolean>(false);
 
-  const exportAndSendPDF = async (info: Patient) => {
+  const calculatorName = isCustom ? "Custom" : "All-On-X";
+
+  const filename = patientInfo?.filename || `${calculatorName}-Summary`;
+
+  const handleSave = async (name: string) => {
+    const compWithUpdatedQuantity = componentSummary.map((comp) => {
+      const quantity = totalQuantities.find(
+        (elem) => elem.itemName === comp.itemName
+      )?.quantity;
+
+      return {
+        ...comp,
+        quantity: quantity || comp.quantity,
+      };
+    });
+
+    const payload = {
+      inputSummary,
+      componentSummary: compWithUpdatedQuantity,
+      name,
+      type: isCustom ? "combined" : "all-on-x",
+    };
+
+    try {
+      await saveResult(payload).unwrap();
+
+      (toastRef.current as any).show({
+        severity: "success",
+        summary: "Success",
+        detail: "Saved result successfully",
+        life: 3000,
+        className: "mt-8",
+      });
+    } catch (error) {
+      (toastRef.current as any).show({
+        severity: "error",
+        summary: "Error",
+        detail: "Failed to save result",
+        life: 3000,
+        className: "mt-8",
+      });
+    }
+  };
+
+  const handleExportAndSendPDF = async (info: Patient) => {
     const element = contentRef.current;
 
     if (element) {
@@ -55,7 +108,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
           (toastRef.current as any).show({
             severity: "success",
             summary: "Success",
-            detail: "Pdf downloaded successfully.",
+            detail: "PDF downloaded successfully.",
             life: 5000,
             className: "mt-8",
           });
@@ -108,13 +161,21 @@ const PDFExport: React.FC<PDFExportProps> = ({
     }
   };
 
+  const handleCloseSaveDialog = (resultName?: string) => {
+    setShowSaveDialog(false);
+
+    if (resultName) {
+      handleSave(resultName);
+    }
+  };
+
   const handleSubmit = (data: Patient) => {
     setVisible(false);
 
     const newPatientInfo = { ...patientInfo, ...data, date: new Date() };
 
     setPatientInfo(newPatientInfo);
-    exportAndSendPDF(newPatientInfo);
+    handleExportAndSendPDF(newPatientInfo);
   };
 
   const showPatientInfoDialog = (actionType: string) => {
@@ -131,29 +192,31 @@ const PDFExport: React.FC<PDFExportProps> = ({
   };
 
   return (
-    <div className="relative flex justify-content-end my-3">
+    <div className="relative flex justify-content-end mt-3">
       <div className="hidden">
         <div ref={contentRef}>
           {patientInfo && (
-            <PdfContent
-              selectedSites={selectedSites}
-              sitesData={sitesData}
-              responseOrder={responseOrder}
+            <PDFContent
               calculatorName={calculatorName}
               patientInfo={patientInfo}
               showTeethSelection={showTeethSelection}
               totalQuantities={totalQuantities}
+              inputSummary={inputSummary}
+              componentSummary={componentSummary}
             />
           )}
         </div>
       </div>
 
       <div className="flex align-items-center flex-shrink-0 gap-2">
-        <Button
-          className="px-3 py-2"
-          label="Save"
-          onClick={() => showPatientInfoDialog("save")}
-        />
+        {!hideSave && (
+          <Button
+            className="px-3 py-2"
+            label="Save"
+            loading={isSavingResult}
+            onClick={() => setShowSaveDialog(true)}
+          />
+        )}
 
         <Button
           className="px-3 py-2"
@@ -181,6 +244,8 @@ const PDFExport: React.FC<PDFExportProps> = ({
       >
         <PatientInfo info={patientInfo} onSubmit={handleSubmit} />
       </Dialog>
+
+      <SaveDialog visible={showSaveDialog} onClose={handleCloseSaveDialog} />
     </div>
   );
 };

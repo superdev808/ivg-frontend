@@ -18,9 +18,10 @@ import {
 } from "@/redux/hooks/apiHooks";
 import { ItemData, Patient } from "@/types/calculators";
 
-import PdfContent from "../AllOnX/PdfExport/PdfContent";
+import PDFContent from "@/components/shared/PDFExport/PDFContent";
+import SaveDialog from "@/components/shared/SaveDialog";
+
 import Outputs from "./Outputs";
-import SaveDialog from "./SaveDialog";
 
 import styles from "./style.module.scss";
 
@@ -70,7 +71,7 @@ const Result: React.FC<ResultProps> = ({
 
   const isSaved = Boolean(id);
 
-  const exportAndSendPDF = async (info: Patient) => {
+  const handleExportAndSendPDF = async (info: Patient) => {
     const element = contentRef.current;
 
     if (element) {
@@ -92,7 +93,7 @@ const Result: React.FC<ResultProps> = ({
           (toastRef.current as any).show({
             severity: "success",
             summary: "Success",
-            detail: "Pdf downloaded successfully.",
+            detail: "PDF downloaded successfully.",
             life: 5000,
             className: "mt-8",
           });
@@ -165,6 +166,7 @@ const Result: React.FC<ResultProps> = ({
       items,
       quiz,
       name,
+      type: "single",
     };
 
     try {
@@ -250,7 +252,7 @@ const Result: React.FC<ResultProps> = ({
     const newPatientInfo = { ...patientInfo, ...data, date: new Date() };
 
     setPatientInfo(newPatientInfo);
-    exportAndSendPDF(newPatientInfo);
+    handleExportAndSendPDF(newPatientInfo);
   };
 
   return (
@@ -384,14 +386,8 @@ const Result: React.FC<ResultProps> = ({
       <div className="hidden">
         <div ref={contentRef}>
           {patientInfo && (
-            <PdfContent
-              {...prepareExportProps(
-                calculatorType,
-                calculatorName,
-                patientInfo,
-                quiz,
-                items
-              )}
+            <PDFContent
+              {...prepareExportProps(calculatorType, patientInfo, quiz, items)}
             />
           )}
         </div>

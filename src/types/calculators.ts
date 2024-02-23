@@ -40,14 +40,19 @@ export interface ComponentDetail {
   [key: string]: ItemData[];
 }
 
-export interface SiteDetail {
+export interface InputSummary {
   site?: string;
   inputDetails: InputDetail[];
   componentDetails: ComponentDetail;
 }
 
+export interface ComponentSummary extends ItemInsights {
+  description: string;
+  brand: string;
+}
+
 export interface SiteData {
-  [key: string]: SiteDetail;
+  [key: string]: InputSummary;
 }
 
 export interface KeyValuePair {
@@ -106,4 +111,23 @@ export interface CollectionsIO {
 
 export interface ProcedureInputsAndResponse {
   [key: string]: CollectionsIO;
+}
+
+export interface SingleSavedResult {
+  id: string;
+  name: string;
+  calculatorType: string;
+  quiz: InputDetail[];
+  items: ItemData[];
+  date: string;
+  type: "single";
+}
+
+export interface MultiSavedResult {
+  id: string;
+  name: string;
+  inputSummary: InputSummary[];
+  componentSummary: ComponentSummary[];
+  date: string;
+  type: "all-on-x" | "combined";
 }

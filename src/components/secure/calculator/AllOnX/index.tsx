@@ -5,6 +5,7 @@ import { CheckboxChangeEvent } from "primereact/checkbox";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
 import React, { useEffect, useState } from "react";
 
+import TeethSelector from "@/components/shared/TeethSelector";
 import {
   getProcedureCollections,
   getProcedureInputsAndResponse,
@@ -18,11 +19,10 @@ import {
   TEXT_DENTAL_IMPLANT_PROCEDURE,
   TEXT_MUA_STATUS,
 } from "@/constants/calculators";
-import { InputAndResponse } from "@/types/calculators";
-
 import {
   AutoPopulateData,
   ComponentDetail,
+  InputAndResponse,
   InputDetail,
   InputOutputValues,
   Site,
@@ -36,8 +36,6 @@ import {
 import AdditionalInputs from "./AdditionalInputs";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
 import InputDetails from "./InputDetails";
-import PDFExport from "./PdfExport";
-import TeethSelector from "./TeethSelector";
 
 interface AllOnXCalculatorProps {
   isCustom?: boolean;
@@ -365,36 +363,24 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
               )}
 
               {selectedSites.length > 0 && (
-                <>
-                  <PDFExport
-                    selectedSites={selectedSites}
-                    sitesData={sitesData}
-                    calculatorName={isCustom ? "Custom" : "All-On-X"}
-                    showTeethSelection={
-                      siteSpecificReport ===
-                      SITE_SPECIFIC_REPORT_OPTIONS[0].value
-                    }
-                    responseOrder={
-                      procedureInputsAndResponse?.responseOrder || []
-                    }
-                    totalQuantities={totalQuantities}
-                  />
-
-                  <InputDetails
-                    selectedSites={selectedSites}
-                    sitesData={sitesData}
-                    onInputSelect={handleInputSelect}
-                    onAutopopulate={handleAutopopulate}
-                    autoPopulateData={autoPopulateData}
-                    procedureInputs={procedureInputsAndResponse?.input || []}
-                    responseOrder={
-                      procedureInputsAndResponse?.responseOrder || []
-                    }
-                    totalQuantities={totalQuantities}
-                    onQuizResponse={handleQuizResponse}
-                    onUpdateQuantity={handleUpdateQuantity}
-                  />
-                </>
+                <InputDetails
+                  selectedSites={selectedSites}
+                  sitesData={sitesData}
+                  showTeethSelection={
+                    siteSpecificReport === SITE_SPECIFIC_REPORT_OPTIONS[0].value
+                  }
+                  isCustom={isCustom}
+                  onInputSelect={handleInputSelect}
+                  onAutopopulate={handleAutopopulate}
+                  autoPopulateData={autoPopulateData}
+                  procedureInputs={procedureInputsAndResponse?.input || []}
+                  responseOrder={
+                    procedureInputsAndResponse?.responseOrder || []
+                  }
+                  totalQuantities={totalQuantities}
+                  onQuizResponse={handleQuizResponse}
+                  onUpdateQuantity={handleUpdateQuantity}
+                />
               )}
             </div>
           </div>

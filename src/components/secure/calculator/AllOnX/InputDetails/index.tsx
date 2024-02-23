@@ -20,6 +20,8 @@ interface InputDetailsProps {
   autoPopulateData: AutoPopulateData | null;
   procedureInputs: InputOutputValues[];
   responseOrder: string[];
+  isCustom: boolean;
+  showTeethSelection: boolean;
   totalQuantities: TotalQuantities[];
   onInputSelect: (
     site: Site,
@@ -42,6 +44,8 @@ const InputDetails: React.FC<InputDetailsProps> = ({
   procedureInputs,
   responseOrder,
   totalQuantities,
+  isCustom,
+  showTeethSelection,
   onInputSelect,
   onAutopopulate,
   onQuizResponse,
@@ -71,7 +75,10 @@ const InputDetails: React.FC<InputDetailsProps> = ({
         <TabPanel header="Summary">
           <Summary
             sitesData={sitesData}
+            isCustom={isCustom}
+            showTeethSelection={showTeethSelection}
             responseOrder={responseOrder}
+            totalQuantities={totalQuantities}
             onUpdateQuantity={onUpdateQuantity}
           />
         </TabPanel>

@@ -6,15 +6,10 @@ import { InputNumber } from "primereact/inputnumber";
 import React, { useMemo } from "react";
 
 import { isValidUrl } from "@/helpers/calculators";
-import { ItemInsights } from "@/types/calculators";
-
-export interface Summary extends ItemInsights {
-  description: string;
-  brand: string;
-}
+import { ComponentSummary as ComponentSummaryType } from "@/types/calculators";
 
 interface ComponentSummaryProps {
-  summary: Summary[];
+  summary: ComponentSummaryType[];
   onUpdateQuantity: (quantity: number, itemName: string) => void;
 }
 
@@ -36,13 +31,13 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
     return null;
   }
 
-  const renderManufacturer = (item: Summary) => {
+  const renderManufacturer = (item: ComponentSummaryType) => {
     return item.manufacturer && item.manufacturer !== item.brand
       ? item.manufacturer
       : "";
   };
 
-  const renderLink = (item: Summary) => {
+  const renderLink = (item: ComponentSummaryType) => {
     return item.link && isValidUrl(item.link) ? (
       <Link href={item.link} target="_blank">
         <Button label="Link to Purchase" size="small" />
@@ -52,7 +47,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
     );
   };
 
-  const renderQuantity = (item: Summary) => {
+  const renderQuantity = (item: ComponentSummaryType) => {
     return (
       <InputNumber
         value={item.quantity}

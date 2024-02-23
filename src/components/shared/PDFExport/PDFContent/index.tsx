@@ -1,12 +1,19 @@
 import classNames from "classnames/bind";
 import React, { useMemo } from "react";
 
-import { getComponentSummary } from "@/helpers/calculators";
+import TeethSelector, {
+  TeethSelectorVariant,
+} from "@/components/shared/TeethSelector";
 import { getCookie } from "@/helpers/cookie";
 import { formatDate, formatTime } from "@/helpers/util";
-import { Patient, SiteData, TotalQuantities } from "@/types/calculators";
+import {
+  ComponentSummary as ComponentSummaryType,
+  InputSummary as InputSummaryType,
+  Patient,
+  SiteData,
+  TotalQuantities,
+} from "@/types/calculators";
 
-import TeethSelector, { TeethSelectorVariant } from "../../TeethSelector";
 import ComponentSummary from "../ComponentSummary";
 import InputSummary from "../InputSummary";
 
@@ -19,33 +26,35 @@ export interface Site {
   key: number;
 }
 
-interface PdfContentProps {
-  selectedSites: Site[];
-  sitesData: SiteData;
-  responseOrder: string[];
+interface PDFContentProps {
   calculatorName: string;
   patientInfo?: Patient | null;
   showTeethSelection: boolean;
   totalQuantities: TotalQuantities[];
   hideSite?: boolean;
+  inputSummary: InputSummaryType[];
+  componentSummary: ComponentSummaryType[];
 }
 
-const PdfContent: React.FC<PdfContentProps> = ({
-  responseOrder,
-  selectedSites,
-  sitesData,
+const PDFContent: React.FC<PDFContentProps> = ({
   calculatorName,
   patientInfo,
   showTeethSelection,
   totalQuantities,
   hideSite,
+  inputSummary,
+  componentSummary,
 }) => {
-  const componentSummary = useMemo(() => {
-    return getComponentSummary(sitesData, responseOrder);
-  }, [sitesData, responseOrder]);
-
   const currentDate = formatDate(patientInfo?.date);
   const currentTime = formatTime(patientInfo?.date);
+
+  const selectedSites = useMemo(() => {
+    return inputSummary.map((elem) => {
+      const site = elem.site || "Site 0";
+      const siteNumber = site.split(" ")[1];
+      return { name: site, key: Number(siteNumber) };
+    });
+  }, [inputSummary]);
 
   const name = getCookie("name");
   const email = getCookie("email");
@@ -114,11 +123,7 @@ const PdfContent: React.FC<PdfContentProps> = ({
       </div>
 
       <div className="px-4 py-1">
-        <InputSummary
-          selectedSites={selectedSites}
-          sitesData={sitesData}
-          hideSite={hideSite}
-        />
+        <InputSummary inputSummary={inputSummary} hideSite={hideSite} />
       </div>
 
       <div className="px-4">
@@ -136,4 +141,4 @@ const PdfContent: React.FC<PdfContentProps> = ({
   );
 };
 
-export default PdfContent;
+export default PDFContent;

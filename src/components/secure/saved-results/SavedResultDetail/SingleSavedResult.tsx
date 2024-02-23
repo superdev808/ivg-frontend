@@ -5,24 +5,15 @@ import React, { useEffect, useState } from "react";
 
 import Result from "@/components/secure/calculator/Result";
 import { formatDate, getCalculatorName } from "@/helpers/util";
-import { ItemData } from "@/types/calculators";
+import { ItemData, SingleSavedResult } from "@/types/calculators";
 
-export type SavedResult = {
-  id: string;
-  name: string;
-  calculatorType: string;
-  items: ItemData[];
-  quiz: { answer: string; question: string }[];
-  date: string;
-};
-
-interface SavedResultsListProps {
-  savedResult: SavedResult;
+interface SingleResultDetailProps {
+  savedResult: SingleSavedResult;
   isDeleting: boolean;
   onDelete: () => void;
 }
 
-const SavedResultDetail: React.FC<SavedResultsListProps> = ({
+const SingleSavedResultDetail: React.FC<SingleResultDetailProps> = ({
   savedResult,
   isDeleting,
   onDelete,
@@ -71,7 +62,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
     <>
       <ConfirmDialog />
 
-      <div className="w-12 lg-w-8 xl:w-6">
+      <div className="w-12 lg:w-8 xl:w-6">
         <div className="border-bottom-2 border-green-800 flex align-items-center justify-content-between mb-4 gap-3">
           <Button
             icon="pi pi-arrow-left"
@@ -106,4 +97,4 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
   );
 };
 
-export default SavedResultDetail;
+export default SingleSavedResultDetail;
