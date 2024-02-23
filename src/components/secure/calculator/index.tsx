@@ -2,6 +2,8 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import React, { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 
+import { getCalculatorName } from "@/helpers/util";
+
 import DetailView from "./detail";
 import Quiz from "./quiz";
 
@@ -129,7 +131,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
               return (
                 <Quiz
                   key={`quiz-${index}`}
-                  calculatorType={calculatorType}
+                  calculatorName={getCalculatorName(calculatorType)}
                   question={quiz.text}
                   answers={answerOptions[index]}
                   currentAnswer={currentAnswer}

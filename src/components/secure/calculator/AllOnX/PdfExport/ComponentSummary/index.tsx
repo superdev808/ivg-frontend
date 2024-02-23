@@ -4,25 +4,22 @@ import React, { useMemo } from "react";
 
 import { isValidUrl } from "@/components/calculator/AllOnX/AllOnXUtills";
 
-import { TotalQuantities } from "../../constants";
+import { ItemInsights, TotalQuantities } from "../../constants";
 
 import styles from "../InputSummary/styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-export interface Summary {
+export interface Summary extends ItemInsights {
   description: string;
-  name: string;
-  number?: string;
-  amount?: number;
-  manufacturer?: string;
-  link?: string;
   brand: string;
 }
+
 interface ComponentSummaryProps {
   summary: Summary[];
   totalQuantities: TotalQuantities[];
 }
+
 const ComponentSummary: React.FC<ComponentSummaryProps> = ({
   summary,
   totalQuantities,
@@ -32,14 +29,22 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
       return false;
     }
 
-    const { brand, manufacturer } = summary[0];
-
-    return manufacturer && brand !== manufacturer;
+    return summary.some(
+      (item) => item.manufacturer && item.manufacturer !== item.brand
+    );
   }, [summary]);
 
   if (!summary || summary.length === 0) {
     return null;
   }
+
+  const columns = [
+    "Description",
+    "Name",
+    "Number",
+    showManufacturer ? "Manufacturer" : "",
+    "Quantity",
+  ].filter(Boolean);
 
   return (
     <>
@@ -48,29 +53,21 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
       <table className={cx("striped-table")}>
         <thead>
           <tr>
-            {[
-              "Description",
-              "Name",
-              "Number",
-              showManufacturer ? "Manufacturer" : "",
-              "Quantity",
-            ]
-              .filter(Boolean)
-              .map((columnName) => (
-                <th key={columnName}>{columnName}</th>
-              ))}
+            {columns.map((columnName) => (
+              <th key={columnName}>{columnName}</th>
+            ))}
           </tr>
         </thead>
 
         <tbody>
           {summary.map((data, summaryIdx) => {
             const indexOfItem = totalQuantities.findIndex(
-              (item) => item.itemName === data.name
+              (item) => item.itemName === data.itemName
             );
-            const amount =
+            const quantity =
               indexOfItem !== -1
                 ? totalQuantities[indexOfItem].quantity
-                : data.amount;
+                : data.quantity;
             const link = trim(data.link);
 
             return (
@@ -82,15 +79,21 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
                 <td>
                   {isValidUrl(link) ? (
                     <a href={link} target="_blank">
-                      {data.name}
+                      {data.itemName}
                     </a>
                   ) : (
-                    data.name
+                    data.itemName
                   )}
                 </td>
-                <td>{data.number}</td>
-                {showManufacturer && <td>{data.manufacturer}</td>}
-                <td>{amount}</td>
+                <td>{data.itemNumber}</td>
+                {showManufacturer && (
+                  <td>
+                    {data.manufacturer && data.manufacturer !== data.brand
+                      ? data.manufacturer
+                      : ""}
+                  </td>
+                )}
+                <td>{quantity}</td>
               </tr>
             );
           })}

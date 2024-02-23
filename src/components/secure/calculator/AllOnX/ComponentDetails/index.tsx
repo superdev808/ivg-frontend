@@ -2,9 +2,8 @@ import React, { useMemo } from "react";
 
 import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/components/calculator/AllOnX/ProcedureInputsAndResponse";
 
-import { ComponentDetail } from "../constants";
+import { ComponentDetail, ItemData } from "../constants";
 import Result from "../../Result";
-import { ResultItem } from "../../Result/helpers";
 
 interface ComponentDetailsProps {
   componentDetails: ComponentDetail;
@@ -23,7 +22,7 @@ const ComponentDetails: React.FC<ComponentDetailsProps> = ({
     const response: Array<{
       calculatorType: string;
       name: string;
-      items: ResultItem[];
+      items: ItemData[];
     }> = [];
 
     responseOrder.forEach((key) => {

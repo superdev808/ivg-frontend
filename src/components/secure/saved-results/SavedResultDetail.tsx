@@ -6,13 +6,13 @@ import React, { useEffect, useState } from "react";
 import Result from "@/components/secure/calculator/Result";
 import { formatDate, getCalculatorName } from "@/helpers/util";
 
-import { ResultItem } from "../calculator/Result/helpers";
+import { ItemData } from "../calculator/AllOnX/constants";
 
 export type SavedResult = {
   id: string;
   name: string;
   calculatorType: string;
-  items: ResultItem[];
+  items: ItemData[];
   quiz: { answer: string; question: string }[];
   date: string;
 };
@@ -30,7 +30,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
 }) => {
   const router = useRouter();
 
-  const [items, setItems] = useState<ResultItem[]>([]);
+  const [items, setItems] = useState<ItemData[]>([]);
 
   const { id, calculatorType, quiz, date, name } = savedResult;
 
@@ -99,6 +99,7 @@ const SavedResultDetail: React.FC<SavedResultsListProps> = ({
           calculatorType={calculatorType}
           items={items}
           quiz={quiz}
+          showQuantityChanger
           onUpdateQuantity={handleUpdateQuantity}
         />
       </div>

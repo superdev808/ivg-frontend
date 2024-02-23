@@ -2,35 +2,12 @@ import find from "lodash/find";
 import get from "lodash/get";
 import trim from "lodash/trim";
 
+import { getCalculatorName } from "@/helpers/util";
 import { Patient } from "@/types/PublicTypes";
 
-import { InputDetail } from "../AllOnX/constants";
-import { getCalculatorName } from "@/helpers/util";
+import { InputDetail, ItemData } from "../AllOnX/constants";
 
-export type ResultInfo = {
-  itemName: string;
-  itemNumber?: string;
-  link?: string;
-  quantity?: number;
-  manufacturer?: string;
-  manufacturerRecommendations?: string;
-};
-
-export type ResultItem = {
-  label: string;
-  info: ResultInfo[];
-};
-
-export type Output = {
-  name?: string;
-  link?: string;
-  additionals?: Array<{
-    name: string;
-    value: string;
-  }>;
-};
-
-export const getResultName = (calculatorType: string, items: ResultItem[]) => {
+export const getResultName = (calculatorType: string, items: ItemData[]) => {
   let key = "Item Name";
 
   if (calculatorType === "BoneReduction") {
@@ -51,16 +28,10 @@ export const prepareExportProps = (
   calculatorName: string,
   patientInfo: Patient,
   quiz: InputDetail[],
-  items: ResultItem[]
+  items: ItemData[]
 ) => {
-  const brand =
-    quiz.find(({ question }) => question === "Implant Brand")?.answer || "";
-
   const componentDetails = {
-    [calculatorType]: items.map((item) => ({
-      ...item,
-      info: item.info.map((elem) => ({ ...elem, brand })),
-    })),
+    [calculatorType]: items,
   };
 
   return {
@@ -83,7 +54,7 @@ export const prepareExportProps = (
 export const parseItems = (
   item: Record<string, string>,
   calculatorType: string
-): ResultItem[] => {
+): ItemData[] => {
   if (calculatorType === "BoneReduction") {
     return [
       {
@@ -148,7 +119,7 @@ export const parseItems = (
   }
 
   if (calculatorType === "DrillKitAndSequence") {
-    const res: ResultItem[] = [
+    const res: ItemData[] = [
       {
         label: "Implant Drill Kit Name",
         info: [

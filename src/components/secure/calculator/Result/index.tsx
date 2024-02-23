@@ -17,8 +17,9 @@ import {
 } from "@/redux/hooks/apiHooks";
 import { Patient } from "@/types/PublicTypes";
 
+import { ItemData } from "../AllOnX/constants";
 import PdfContent from "../AllOnX/PdfExport/PdfContent";
-import { prepareExportProps, ResultItem } from "./helpers";
+import { prepareExportProps } from "./helpers";
 import Outputs from "./Outputs";
 import SaveDialog from "./SaveDialog";
 
@@ -29,10 +30,11 @@ const cx = classNames.bind(styles);
 interface ResultProps {
   id?: string;
   name: string;
-  items: ResultItem[];
+  items: ItemData[];
   quiz: { question: string; answer: string }[];
   calculatorType: string;
   hideMenu?: boolean;
+  showQuantityChanger?: boolean;
   onUpdateQuantity: (quantity: number, itemName: string) => void;
 }
 
@@ -43,6 +45,7 @@ const Result: React.FC<ResultProps> = ({
   quiz,
   calculatorType,
   hideMenu = false,
+  showQuantityChanger = false,
   onUpdateQuantity,
 }) => {
   const { refetch } = useGetUserInfoQuery({});
@@ -372,7 +375,11 @@ const Result: React.FC<ResultProps> = ({
           </div>
         </div>
 
-        <Outputs items={items} onUpdateQuantity={onUpdateQuantity} />
+        <Outputs
+          items={items}
+          showQuantityChanger={showQuantityChanger}
+          onUpdateQuantity={onUpdateQuantity}
+        />
       </div>
 
       <div className="hidden">

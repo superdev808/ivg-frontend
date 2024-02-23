@@ -42,12 +42,12 @@ export interface InputDetail {
 
 export interface ItemInsights {
   id?: string;
-  brand: string;
   itemName: string;
   itemNumber?: string;
   link?: string;
   quantity?: number;
   manufacturer?: string;
+  manufacturerRecommendations?: string;
 }
 export interface ItemData {
   id?: string;
@@ -58,11 +58,14 @@ export interface ComponentDetail {
   [key: string]: ItemData[];
 }
 
+export interface SiteDetail {
+  name?: string;
+  inputDetails: InputDetail[];
+  componentDetails: ComponentDetail;
+}
+
 export interface SiteData {
-  [key: string]: {
-    inputDetails: InputDetail[];
-    componentDetails: ComponentDetail;
-  };
+  [key: string]: SiteDetail;
 }
 
 export interface KeyValuePair {
