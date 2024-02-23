@@ -9,6 +9,7 @@ import FeedbackDialog from "@/components/secure/calculator/Feedback/FeedbackDial
 import { calculatorIO as tabItems } from "@/helpers/util";
 
 import { CALCULATOR_MAPPINGS } from "../constants";
+import { event as gaEvent } from "@/lib/gtag";
 
 export default function CalculatorPage() {
   // const router = useRouter();
@@ -26,6 +27,11 @@ export default function CalculatorPage() {
   };
 
   const onClickFeedback = () => {
+    gaEvent({
+      action: "Feedback",
+      category: "Button",
+      label: "Feedback"
+    });
     setFeedbackShow(true);
   };
 

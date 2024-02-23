@@ -22,6 +22,7 @@ import PdfContent from "../AllOnX/PdfExport/PdfContent";
 import { prepareExportProps } from "./helpers";
 import Outputs from "./Outputs";
 import SaveDialog from "./SaveDialog";
+import { event as gaEvent } from "@/lib/gtag";
 
 import styles from "./style.module.scss";
 
@@ -90,6 +91,11 @@ const Result: React.FC<ResultProps> = ({
         if (info.actionType === "download") {
           const pdfInstance = html2pdf(element, options);
           await pdfInstance.output();
+          gaEvent({
+            action: "Download_Button",
+            category: "Button",
+            label: calculatorName
+          });
           (toastRef.current as any).show({
             severity: "success",
             summary: "Success",
@@ -102,6 +108,11 @@ const Result: React.FC<ResultProps> = ({
             .set(options)
             .from(element)
             .outputPdf("blob", options.filename);
+          gaEvent({
+            action: "Email_Button",
+            category: "Button",
+            label: calculatorName
+          });
 
           const formData = new FormData();
           formData.append("attachment", blob, "exported-document.pdf");
