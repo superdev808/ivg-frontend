@@ -271,13 +271,6 @@ export const SecondForm: React.FC<SecondFormProps> = ({
           <Controller
             name="organizationNumber"
             control={control}
-            rules={{
-              required:
-                currentOrgRole !== ORGANIZATION_ROLE.OTHER &&
-                currentOrgRole !== ORGANIZATION_ROLE.DENTAL_LABORATORY
-                  ? "License or School number is required"
-                  : false,
-            }}
             render={({ field, fieldState }) => (
               <div className="flex flex-column col-12 md:col-6 p-0 md:pl-2 mb-4">
                 <label

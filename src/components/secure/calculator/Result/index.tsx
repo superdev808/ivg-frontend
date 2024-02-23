@@ -9,17 +9,17 @@ import { Toast } from "primereact/toast";
 import { useRef, useState } from "react";
 
 import PatientInfo from "@/components/shared/PatientInfo";
+import PDFContent from "@/components/shared/PDFExport/PDFContent";
+import SaveDialog from "@/components/shared/SaveDialog";
 import { prepareExportProps } from "@/helpers/calculators";
 import { getCalculatorName, productImages } from "@/helpers/util";
+import { event as gaEvent } from "@/lib/gtag";
 import {
   useGetUserInfoQuery,
   useSaveResultMutation,
   useUpdateSavedResultMutation,
 } from "@/redux/hooks/apiHooks";
 import { ItemData, Patient } from "@/types/calculators";
-
-import PDFContent from "@/components/shared/PDFExport/PDFContent";
-import SaveDialog from "@/components/shared/SaveDialog";
 
 import Outputs from "./Outputs";
 
@@ -90,6 +90,11 @@ const Result: React.FC<ResultProps> = ({
         if (info.actionType === "download") {
           const pdfInstance = html2pdf(element, options);
           await pdfInstance.output();
+          gaEvent({
+            action: "Download_Button",
+            category: "Button",
+            label: calculatorName,
+          });
           (toastRef.current as any).show({
             severity: "success",
             summary: "Success",
@@ -102,6 +107,11 @@ const Result: React.FC<ResultProps> = ({
             .set(options)
             .from(element)
             .outputPdf("blob", options.filename);
+          gaEvent({
+            action: "Email_Button",
+            category: "Button",
+            label: calculatorName,
+          });
 
           const formData = new FormData();
           formData.append("attachment", blob, "exported-document.pdf");

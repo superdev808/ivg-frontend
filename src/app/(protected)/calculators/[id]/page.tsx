@@ -7,6 +7,7 @@ import CalculatorContainer from "@/components/secure/calculator";
 import AllOnXCalculator from "@/components/secure/calculator/AllOnX";
 import FeedbackDialog from "@/components/secure/calculator/Feedback/FeedbackDialog";
 import { CALCULATOR_MAPPINGS } from "@/constants/calculators";
+import { event as gaEvent } from "@/lib/gtag";
 import { calculatorIO as tabItems } from "@/helpers/util";
 
 export default function CalculatorPage() {
@@ -25,6 +26,11 @@ export default function CalculatorPage() {
   };
 
   const onClickFeedback = () => {
+    gaEvent({
+      action: "Feedback",
+      category: "Button",
+      label: "Feedback",
+    });
     setFeedbackShow(true);
   };
 

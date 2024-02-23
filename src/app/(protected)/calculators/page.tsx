@@ -8,6 +8,8 @@ import React, { useState } from "react";
 import SearchBox from "@/components/ui/searchbox";
 import { CALCULATOR_MAPPINGS } from "@/constants/calculators";
 
+import { event as gaEvent } from "@/lib/gtag";
+
 import styles from "./page.module.scss";
 
 const cx = classNames.bind(styles);
@@ -259,6 +261,11 @@ export const Calculators = () => {
                   )}
                   key={`groupItem-${index}`}
                   onClick={() => {
+                    gaEvent({
+                      action: groupItem.label,
+                      category: "Button",
+                      label: `Calculator ${groupItem.label}`
+                    });
                     groupItem.label === CALCULATOR_MAPPINGS.CUSTOM_COMBINATION
                       ? router.push(`/calculators/${groupItem.label}`)
                       : setSelectedGroup(index);

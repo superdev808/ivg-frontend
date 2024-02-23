@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { parseItems, getResultName } from "@/helpers/calculators";
 import { getCalculatorName } from "@/helpers/util";
+import { event as gaEvent } from "@/lib/gtag";
 import { ItemData } from "@/types/calculators";
 
 import HelpfulFeedbackDialog from "./Feedback/HelpfulFeedbackDialog";
@@ -35,6 +36,10 @@ const DetailView: React.FC<DetailViewProps> = ({
     setResults(props.items.map((item) => parseItems(item, calculatorType)));
   }, [props.items, calculatorType]);
 
+  const calculatorName = useMemo(() => {
+    return getCalculatorName(calculatorType);
+  }, [calculatorType]);
+
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
       if (answers[idx]) {
@@ -59,7 +64,20 @@ const DetailView: React.FC<DetailViewProps> = ({
     );
   };
 
+  const onClickThumbUp = () => {
+    gaEvent({
+      action: "Thumb_Up",
+      category: "Button",
+      label: calculatorName,
+    });
+  };
+
   const onClickFeedback = () => {
+    gaEvent({
+      action: "Thumb_Down",
+      category: "Button",
+      label: calculatorName,
+    });
     setFeedbackShow(true);
   };
 
@@ -71,7 +89,7 @@ const DetailView: React.FC<DetailViewProps> = ({
           className="left-0 md:mt-3 md:absolute lg:ml-3 text-6xl px-5"
           onClick={onGoBack}
         />
-        <h2>{getCalculatorName(calculatorType)} Calculator</h2>
+        <h2>{calculatorName} Calculator</h2>
       </div>
 
       {results.length > 0 && (
@@ -114,7 +132,7 @@ const DetailView: React.FC<DetailViewProps> = ({
           zIndex: "100",
         }}
       >
-        <i className="pi pi-thumbs-up text-3xl mr-3" />
+        <i className="pi pi-thumbs-up text-3xl mr-3" onClick={onClickThumbUp} />
         Was this helpful?
         <i
           className="pi pi-thumbs-down text-3xl ml-3"
