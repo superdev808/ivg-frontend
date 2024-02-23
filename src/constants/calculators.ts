@@ -1479,16 +1479,7 @@ export const SITE_SPECIFIC_REPORT_OPTIONS: RadioButtonOption[] = [
   },
 ];
 
-export const IGNORE_LIST_FOR_QUANTITY_MULTIPLES: string[] = [
-  "implant drill kit name",
-  "drill sequence",
-  "implant driver",
-  "bur kit name (bone reduction)",
-  "mua driver",
-  "luting agent",
-  "teflon tape",
-  "material to close screw access hole",
-];
+export const QUANTITY_MULTIPLES_LIST = ["implants"];
 
 export const TEXT_DENTAL_IMPLANT_PROCEDURE =
   "Are you restoring with multi-unit abutments (MUAs) or directly to the implant?";

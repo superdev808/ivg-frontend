@@ -89,7 +89,6 @@ const SingleSavedResultDetail: React.FC<SingleResultDetailProps> = ({
           calculatorType={calculatorType}
           items={items}
           quiz={quiz}
-          showQuantityChanger
           onUpdateQuantity={handleUpdateQuantity}
         />
       </div>

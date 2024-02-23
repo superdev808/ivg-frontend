@@ -34,7 +34,6 @@ interface ResultProps {
   quiz: { question: string; answer: string }[];
   calculatorType: string;
   hideMenu?: boolean;
-  showQuantityChanger?: boolean;
   onUpdateQuantity: (quantity: number, itemName: string) => void;
 }
 
@@ -45,7 +44,6 @@ const Result: React.FC<ResultProps> = ({
   quiz,
   calculatorType,
   hideMenu = false,
-  showQuantityChanger = false,
   onUpdateQuantity,
 }) => {
   const { refetch } = useGetUserInfoQuery({});
@@ -386,11 +384,7 @@ const Result: React.FC<ResultProps> = ({
           </div>
         </div>
 
-        <Outputs
-          items={items}
-          showQuantityChanger={showQuantityChanger}
-          onUpdateQuantity={onUpdateQuantity}
-        />
+        <Outputs items={items} onUpdateQuantity={onUpdateQuantity} />
       </div>
 
       <div className="hidden">

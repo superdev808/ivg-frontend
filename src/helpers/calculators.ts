@@ -10,7 +10,7 @@ import {
   CALCULATORS,
   CALCULATOR_NAME_COLLECTION_MAPPINGS,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
-  IGNORE_LIST_FOR_QUANTITY_MULTIPLES,
+  QUANTITY_MULTIPLES_LIST,
   MUA_OPTIONS,
   PROCEDURE_INPUTS_AND_RESPONSE,
 } from "@/constants/calculators";
@@ -211,7 +211,7 @@ export const getComponentSummary = (
 
             if (indexOfInfo > -1) {
               if (
-                !IGNORE_LIST_FOR_QUANTITY_MULTIPLES.includes(
+                QUANTITY_MULTIPLES_LIST.includes(
                   response.label.toLowerCase()
                 ) &&
                 items[itemIndex].info[i].quantity

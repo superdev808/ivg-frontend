@@ -9,15 +9,10 @@ import { ItemData } from "@/types/calculators";
 
 interface OutputsProps {
   items: ItemData[];
-  showQuantityChanger?: boolean;
   onUpdateQuantity: (quantity: number, itemName: string) => void;
 }
 
-const Outputs: React.FC<OutputsProps> = ({
-  items,
-  showQuantityChanger = false,
-  onUpdateQuantity,
-}) => {
+const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
   const filteredItems = useMemo(() => {
     return items.filter((item) => item.info.length > 0);
   }, [items]);
@@ -56,24 +51,23 @@ const Outputs: React.FC<OutputsProps> = ({
               )}
             </div>
             <div className="flex align-items-center gap-2">
-              {showQuantityChanger && (
-                <InputNumber
-                  value={item.quantity}
-                  onValueChange={({ value }) =>
-                    onUpdateQuantity(value as number, item.itemName)
-                  }
-                  showButtons
-                  buttonLayout="horizontal"
-                  step={1}
-                  size={1}
-                  min={1}
-                  incrementButtonIcon="pi pi-plus text-xs"
-                  decrementButtonIcon="pi pi-minus text-xs"
-                  inputClassName="py-0 text-xs"
-                  incrementButtonClassName="px-0 text-xs"
-                  decrementButtonClassName="px-0 text-xs"
-                />
-              )}
+              <InputNumber
+                value={item.quantity}
+                onValueChange={({ value }) =>
+                  onUpdateQuantity(value as number, item.itemName)
+                }
+                showButtons
+                buttonLayout="horizontal"
+                step={1}
+                size={1}
+                min={1}
+                incrementButtonIcon="pi pi-plus text-xs"
+                decrementButtonIcon="pi pi-minus text-xs"
+                inputClassName="py-0 text-xs"
+                incrementButtonClassName="px-0 text-xs"
+                decrementButtonClassName="px-0 text-xs"
+              />
+
               {item.link && isValidUrl(item.link) && (
                 <Link href={item.link} target="_blank">
                   <Button label="Link to Purchase" size="small" />
