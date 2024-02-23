@@ -10,7 +10,7 @@ export function getInitials(name: string) {
 export const calculatorIO = [
   {
     type: "Scanbodies",
-    label: "Scanbody",
+    label: "Scanbodies (Single Unit)",
     description:
       "Enter your implant information below to determine compatible authentic and generic scanbodies.",
     input: [
