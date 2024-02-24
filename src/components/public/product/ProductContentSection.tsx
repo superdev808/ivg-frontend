@@ -94,7 +94,7 @@ export const ProductContentSection = () => {
             <div className="xl:col-3"></div>
             <div className="col-12 xl:col">
               <ScrollCard
-                description="Allow users to save, export and email result summaries"
+                description="Allows users to save, export and email result summaries"
                 rtl
               />
             </div>
@@ -106,7 +106,7 @@ export const ProductContentSection = () => {
             <div className="col-12 xl:col">
               <ScrollCard description="Allows for planning of complicated treatment procedures with ease" />
             </div>
-            <div className="xl:col-3" />
+            <div className="xl:col-4" />
             <div className="col-12 xl:col">
               <ScrollCard
                 description="Provides quick links to purchase necessary components"
