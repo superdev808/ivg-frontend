@@ -25,7 +25,6 @@ interface HeroSectionProps {
     height?: string;
     offset?: boolean;
     hideOnMobile?: boolean;
-    showBorder?: boolean;
   };
 }
 
@@ -102,27 +101,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         <div className="col-12 md:col-6 md:flex">
           <div
-            className={cx("relative md:mr-6", {
+            className={cx("md:pr-6", {
               "hero-image-container": imageAttr.offset,
-              "md:flex align-items-center justify-content-center w-full mt-4":
+              "md:flex align-items-center justify-content-center w-full pt-4":
                 !imageAttr.offset,
               hidden: imageAttr.hideOnMobile,
             })}
           >
-            <div className="relative">
-              {image.showBorder && (
-                <div
-                  className="absolute w-full h-full border-2 -ml-3 -mt-3 z-0"
-                  style={{ borderColor: "var(--primary-color)" }}
-                />
-              )}
-              <Image
-                src={imageAttr.src}
-                width={imageAttr.width}
-                alt="hero-image"
-                className="relative z-1"
-              />
-            </div>
+            <Image
+              src={imageAttr.src}
+              width={imageAttr.width}
+              alt="hero-image"
+            />
           </div>
         </div>
       </div>
