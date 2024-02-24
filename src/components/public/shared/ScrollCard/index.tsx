@@ -1,15 +1,23 @@
-import { useEffect, useRef, useState } from "react";
-import styles from "./ScrollCard.module.scss";
 import classNames from "classnames/bind";
+import { useEffect, useRef, useState } from "react";
+
+import styles from "./ScrollCard.module.scss";
+
 const cx = classNames.bind(styles);
 
 interface ScrollCardProps {
   description: string;
   className?: string;
+  cardClassName?: string;
   rtl?: boolean;
 }
 
-export const ScrollCard = ({ description, rtl, ...props }: ScrollCardProps) => {
+export const ScrollCard = ({
+  description,
+  rtl,
+  cardClassName,
+  ...props
+}: ScrollCardProps) => {
   const [length, setLength] = useState(0);
   const lineRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -24,7 +32,7 @@ export const ScrollCard = ({ description, rtl, ...props }: ScrollCardProps) => {
 
       const scrollPercent = currentScrollPosition / targetScrollPosition;
       const scrollPercentClamped = Math.min(Math.max(scrollPercent, 0), 1);
-      var widthPercentage = scrollPercentClamped * 85;
+      var widthPercentage = scrollPercentClamped * 100;
 
       const line = lineRef.current;
       const card = cardRef.current;
@@ -36,7 +44,7 @@ export const ScrollCard = ({ description, rtl, ...props }: ScrollCardProps) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [length]);
   return (
-    <div className={cx("scroll-card")} ref={cardRef} style={{ opacity: 0 }}>
+    <div className={cx("scroll-card", cardClassName)} ref={cardRef}>
       <div className={cx("card", "flex z-2", { "flex-order-1": rtl })}>
         {description}
       </div>
