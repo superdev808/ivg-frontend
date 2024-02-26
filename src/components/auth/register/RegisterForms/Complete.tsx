@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import Link from "next/link";
 
-export const RegisterComplete: React.FC = () => (
+const RegisterComplete: React.FC = () => (
   <div className="flex flex-column justify-content-center align-items-center h-full text-center">
     <span className="text-6xl mb-6">Thank you for registering!</span>
 
@@ -21,3 +21,5 @@ export const RegisterComplete: React.FC = () => (
     </Link>
   </div>
 );
+
+export default RegisterComplete;
