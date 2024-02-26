@@ -86,16 +86,20 @@ export const ProductContentSection = () => {
           </div>
           <div
             className="w-full px-2 xl:mb-6 grid justify-content-center relative z-2"
-            style={{ maxWidth: "1600px" }}
+            style={{ maxWidth: 1600 }}
           >
             <div className="col-12 xl:col">
-              <ScrollCard description="Easy to navigate, interactive interface" />
+              <ScrollCard
+                description="Easy to navigate, interactive interface"
+                cardClassName={cx("card-1")}
+              />
             </div>
-            <div className="xl:col-3"></div>
+            <div className="xl:col-4" />
             <div className="col-12 xl:col">
               <ScrollCard
-                description="Allow users to save, export and email result summaries"
+                description="Allows users to save, export and email result summaries"
                 rtl
+                cardClassName={cx("card-2")}
               />
             </div>
           </div>
@@ -104,13 +108,17 @@ export const ProductContentSection = () => {
             style={{ maxWidth: 1400 }}
           >
             <div className="col-12 xl:col">
-              <ScrollCard description="Allows for planning of complicated treatment procedures with ease" />
+              <ScrollCard
+                description="Allows for planning of complicated treatment procedures with ease"
+                cardClassName={cx("card-3")}
+              />
             </div>
-            <div className="xl:col-3" />
+            <div className="xl:col-4" />
             <div className="col-12 xl:col">
               <ScrollCard
                 description="Provides quick links to purchase necessary components"
                 rtl
+                cardClassName={cx("card-4")}
               />
             </div>
           </div>

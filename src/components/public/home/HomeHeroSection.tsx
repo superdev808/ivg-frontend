@@ -21,7 +21,7 @@ export const HomeHeroSection = () => {
           ? { label: "Join for FREE", onClick: handleJoin }
           : undefined
       }
-      image={{ src: "/images/home/main.jpg" }}
+      image={{ src: "/images/home/landing-analytics.png" }}
     />
   );
 };
