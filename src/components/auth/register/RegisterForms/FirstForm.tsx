@@ -34,21 +34,23 @@ const defaultValues: FormValues = {
   agree: false,
 };
 
-export const FirstForm = ({
-  onSubmit,
-}: {
+interface FirstFormProps {
   onSubmit: (data: FormValues) => void;
-}) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [emailNotTaken, setEmailNotTaken] = useState<boolean | null>(null);
+}
+
+const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
   const [postCheckEmail] = usePostCheckEmailMutation();
-  const [isLoading, setIsLoading] = useState(false);
+
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [emailNotTaken, setEmailNotTaken] = useState<boolean | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleCheckEmail = async (data: FormValues) => {
     setIsLoading(true);
 
     try {
-      const res = await postCheckEmail(data.email).unwrap();
+      const res = await postCheckEmail(data.email.toLowerCase()).unwrap();
+
       if (res.available === true) {
         setEmailNotTaken(true);
         onSubmit(data);
@@ -61,6 +63,7 @@ export const FirstForm = ({
       if (err.data?.message.available === false) {
         setEmailNotTaken(false);
       }
+
       setIsLoading(false);
     }
   };
@@ -337,7 +340,7 @@ export const FirstForm = ({
             type="submit"
             outlined
             disabled={isLoading}
-            icon={isLoading ? "pi pi-spin pi-spinner" : ""}
+            icon={isLoading ? "pi pi-spin pi-spinner" : undefined}
             label="Continue"
             className="p-button-rounded bg-secondary"
             style={{ width: 200 }}
@@ -360,3 +363,5 @@ export const FirstForm = ({
     </form>
   );
 };
+
+export default FirstForm;

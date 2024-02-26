@@ -1,46 +1,22 @@
 .teethSelector {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   text {
     transform: scale(1);
   }
 
-  .containerFlex {
-    path {
-      transform: scale(1);
-    }
-
-    display: flex;
-    overflow: hidden;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  .containerFlex path {
+    transform: scale(1);
   }
 
   .columnFlex {
-    display: flex;
-    align-items: center;
-    vertical-align: middle;
-    justify-content: center;
     width: 300px;
     height: 200px;
 
-    &.bottomTeeth {
-      position: relative;
-
-      svg {
-        g {
-          transform: translate(0, -185px);
-        }
-      }
+    &.bottomTeeth svg g {
+      transform: translate(0, -185px);
     }
 
-    svg {
-      g {
-        cursor: pointer;
-      }
+    svg g {
+      cursor: pointer;
     }
   }
 
@@ -49,22 +25,16 @@
       transform: scale(0.6);
     }
 
-    .containerFlex {
-      path {
-        transform: scale(0.6);
-      }
+    .containerFlex path {
+      transform: scale(0.6);
     }
 
     .columnFlex {
       width: 180px;
       height: 120px;
 
-      &.bottomTeeth {
-        svg {
-          g {
-            transform: translate(0, -105px);
-          }
-        }
+      &.bottomTeeth svg g {
+        transform: translate(0, -105px);
       }
     }
   }

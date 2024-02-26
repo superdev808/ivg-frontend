@@ -3,7 +3,12 @@ export interface NavLink {
   link?: string;
   title: string;
   icon?: string;
-  visibility: "public" | "authenticated" | "unauthenticated" | "hidden";
+  visibility:
+    | "public"
+    | "authenticated"
+    | "unauthenticated"
+    | "authenticatedSidebar"
+    | "hidden";
   onClick?: any;
   className?: string;
 }

@@ -1,26 +1,20 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React from "react";
 
-import { LoginForm } from './LoginForm';
-import styles from './Login.module.scss';
-import classNames from 'classnames/bind';
+import LoginForm from "./LoginForm";
+import LoginHeader from "./LoginHeader";
 
-import { LoginHeader } from './LoginHeader';
+const LoginComponent: React.FC = () => (
+  <>
+    <div className="background-gradient" />
+    <div className="container">
+      <div className="wrapper h-full flex flex-column align-items-center justify-content-center">
+        <LoginHeader />
+        <LoginForm />
+      </div>
+    </div>
+  </>
+);
 
-const cx = classNames.bind(styles);
-
-export const LoginComponent = () => {
-	return (
-		<>
-			<div className="background-gradient"></div>
-			<div className="container ">
-				<div className="wrapper h-full flex flex-column align-items-center justify-content-center">
-					<LoginHeader />
-					<LoginForm />
-				</div>
-			
-			</div>
-		</>
-	);
-};
+export default LoginComponent;

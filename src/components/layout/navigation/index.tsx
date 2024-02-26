@@ -28,6 +28,7 @@ export interface NavigationProps {
 const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
+
   const userName = getCookie("name");
   const userEmail = getCookie("email");
 
@@ -83,25 +84,32 @@ const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
 
     // Protected Links
     {
-      id: "help",
-      title: "Help",
-      link: "/help",
-      icon: PrimeIcons.QUESTION_CIRCLE,
-      visibility: "hidden",
-    },
-    {
       id: "settings",
       title: "Settings",
       link: "/settings",
       icon: PrimeIcons.USER,
-      visibility: "hidden",
+      visibility: "authenticatedSidebar",
+    },
+    {
+      id: "saved-results",
+      title: "Saved Results",
+      link: "/saved-results",
+      icon: PrimeIcons.USER,
+      visibility: "authenticatedSidebar",
+    },
+    {
+      id: "help",
+      title: "Help",
+      link: "/help",
+      icon: PrimeIcons.QUESTION_CIRCLE,
+      visibility: "authenticatedSidebar",
     },
     {
       id: "signout",
       title: "Sign Out",
       onClick: onSignOut,
       icon: PrimeIcons.SIGN_OUT,
-      visibility: "hidden",
+      visibility: "authenticatedSidebar",
     },
   ];
 

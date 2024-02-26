@@ -1,34 +1,33 @@
-import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
+import cx from "classnames";
+import React, { useEffect, useState } from "react";
 
 import { usePostRegisterUserMutation } from "@/redux/hooks/apiHooks";
 
-import { RegisterComplete } from "./Complete";
+import RegisterComplete from "./Complete";
 import { registerForm, RegisterForm } from "./constants";
-import { RegisterError } from "./Error";
-import { FirstForm } from "./FirstForm";
-import { SecondForm } from "./SecondForm";
+import RegisterError from "./Error";
+import FirstForm from "./FirstForm";
+import SecondForm from "./SecondForm";
 
-import styles from "../Register.module.scss";
-
-const cx = classNames.bind(styles);
-
-export const RegisterFormComponent = () => {
-  const [formStep, setFormStep] = useState(0);
+const RegisterFormComponent: React.FC = () => {
+  const [formStep, setFormStep] = useState<number>(0);
   const [registerValues, setRegisterValues] =
     useState<RegisterForm>(registerForm);
   const [postRegisterUser, { isLoading, isSuccess, isError }] =
     usePostRegisterUserMutation();
 
   const onSubmit = (data: any) => {
+    const payload = { ...registerValues, ...data };
+    payload.email = payload.email.toLowerCase();
+
     if (formStep === 0) {
       setFormStep(1);
-      setRegisterValues({ ...registerValues, ...data });
+      setRegisterValues(payload);
     }
 
     if (formStep === 1) {
-      setRegisterValues({ ...registerValues, ...data });
-      postRegisterUser({ ...registerValues, ...data });
+      setRegisterValues(payload);
+      postRegisterUser(payload);
     }
   };
 
@@ -66,3 +65,5 @@ export const RegisterFormComponent = () => {
     </div>
   );
 };
+
+export default RegisterFormComponent;

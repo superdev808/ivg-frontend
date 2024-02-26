@@ -1,4 +1,4 @@
-import classNames from "classnames/bind";
+import cx from "classnames";
 import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
@@ -6,18 +6,13 @@ import { RadioButton } from "primereact/radiobutton";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import styles from "../Register.module.scss";
-
 import {
-  ORGANIZATION_ROLE,
   dentalPracticeRole,
   organizationRole,
   referralSource,
   states,
 } from "./constants";
 import RegisterFooter from "./Footer";
-
-const cx = classNames.bind(styles);
 
 type FormValues = {
   organizationName: string;
@@ -47,7 +42,7 @@ interface SecondFormProps {
   isSubmitting: boolean;
 }
 
-export const SecondForm: React.FC<SecondFormProps> = ({
+const SecondForm: React.FC<SecondFormProps> = ({
   onSubmit,
   back,
   isSubmitting,
@@ -60,12 +55,9 @@ export const SecondForm: React.FC<SecondFormProps> = ({
     control,
     formState: { errors },
     handleSubmit,
-    watch,
     resetField,
     reset,
   } = useForm<FormValues>({ defaultValues });
-
-  const currentOrgRole = watch("organizationRole", "");
 
   const onOrgRoleChange = (role: string) => {
     if (role !== "other") {
@@ -250,7 +242,7 @@ export const SecondForm: React.FC<SecondFormProps> = ({
             control={control}
             rules={{ required: "State is required." }}
             render={({ field, fieldState }) => (
-              <div className="flex flex-column col-12 md:col-6 p-0 md:pr-2 mb-4 ">
+              <div className="flex flex-column col-12 md:col-6 p-0 md:pr-2 mb-4">
                 <span className="p-float-label w-full">
                   <Dropdown
                     {...field}
@@ -330,7 +322,7 @@ export const SecondForm: React.FC<SecondFormProps> = ({
 
                       <label
                         htmlFor={`referral_${source.value.toString()}`}
-                        className="ml-1 mr-3 "
+                        className="ml-1 mr-3"
                       >
                         {source.label}
                       </label>
@@ -385,9 +377,9 @@ export const SecondForm: React.FC<SecondFormProps> = ({
             <Button
               disabled={isSubmitting}
               type="submit"
-              icon={isSubmitting ? "pi pi-spin pi-spinner" : ""}
+              icon={isSubmitting ? "pi pi-spin pi-spinner" : undefined}
               label="Register"
-              className=" p-button-rounded bg-secondary w-full md:w-min"
+              className="p-button-rounded bg-secondary w-full md:w-min"
             />
           </div>
         </div>
@@ -399,3 +391,5 @@ export const SecondForm: React.FC<SecondFormProps> = ({
     </form>
   );
 };
+
+export default SecondForm;

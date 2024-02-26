@@ -15,20 +15,22 @@ import styles from "./styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-const Navbar = ({
-  navLinks,
-  rightNavLinks,
-  avatarLinks,
-  avatar,
-  authenticated,
-}: {
+interface NavbarProps {
   navLinks: NavLink[];
   rightNavLinks: NavLink[];
   avatarLinks: MenuItem[];
   avatar: JSX.Element;
   authenticated?: boolean;
+}
+
+const Navbar: React.FC<NavbarProps> = ({
+  navLinks,
+  rightNavLinks,
+  avatarLinks,
+  avatar,
+  authenticated,
 }) => {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const pathName = usePathname();
 
   const avatarMenu = useRef<Menu>(null);
@@ -56,6 +58,10 @@ const Navbar = ({
   const navLinksFilter = (li: NavLink) =>
     li.visibility === "public" ||
     li.visibility === (authenticated ? "authenticated" : "unauthenticated");
+
+  const sidebarLinksFilter = (li: NavLink) =>
+    li.visibility === "public" ||
+    ["authenticated", "authenticatedSidebar"].includes(li.visibility);
 
   return (
     <div
@@ -131,22 +137,24 @@ const Navbar = ({
         position="right"
         onHide={() => setShowSidebar(false)}
         className={cx("sidebar", "align-items-end")}
+        pt={{
+          closeIcon: {
+            className: "text-white",
+          },
+        }}
       >
         <div
           className={cx("navbarNav", "flex flex-column align-items-start pl-4")}
         >
           {[...navLinks, ...rightNavLinks]
-            .filter(navLinksFilter)
+            .filter(sidebarLinksFilter)
             .map((item) => (
               <Link
                 href={item.link || ""}
                 key={item.id}
                 onClick={() => onClick(item)}
               >
-                <p>
-                  {/* <i className={cx(item.icon, 'px-2')} /> */}
-                  {item.title}
-                </p>
+                <p>{item.title}</p>
               </Link>
             ))}
         </div>

@@ -3,14 +3,14 @@ import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import React, { useMemo } from "react";
 
+import TeethSelector, {
+  TeethSelectorVariant,
+} from "@/components/shared/TeethSelector";
 import { getCalculatorName, productImages } from "@/helpers/util";
 import {
   SingleSavedResult as SingleSavedResultType,
   MultiSavedResult as MultiSavedResultType,
 } from "@/types/calculators";
-import TeethSelector, {
-  TeethSelectorVariant,
-} from "@/components/shared/TeethSelector";
 
 const LOGO_URL = "/images/logo/Ivory-Guide-Logo-Horizontal.svg";
 
@@ -43,7 +43,12 @@ export const SingleSavedResult: React.FC<SingleSavedResultProps> = ({
 
       <div className="flex-1 flex flex-column gap-2">
         <div>
-          <span className="font-bold">Title:</span> {name}
+          <span className="font-bold">Title:</span>{" "}
+          <Button
+            link
+            label={name}
+            className="ml-1 px-0 py-0 w-fit border-noround"
+          />
         </div>
         <Button
           link
@@ -103,6 +108,7 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
             selectedSites={selectedSites}
             showLabel={false}
             variant={TeethSelectorVariant.SMALL}
+            showVertical
           />
         ) : (
           <Image src={LOGO_URL} alt={name} width="100" />
@@ -111,7 +117,12 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
 
       <div className="flex-1 flex flex-column gap-2">
         <div>
-          <span className="font-bold">Title:</span> {name}
+          <span className="font-bold">Title:</span>{" "}
+          <Button
+            link
+            label={name}
+            className="ml-1 px-0 py-0 w-fit border-noround"
+          />
         </div>
         <Button
           link
