@@ -577,7 +577,7 @@ export const CALCULATORS: CollectionsIO = {
       outputFrom: "TiBasesDirectToImplants",
     },
   ],
-  "Scanbodies (Mult-Unit Abutments)": [
+  "Scanbodies (Multi-Unit Abutments)": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -604,27 +604,27 @@ export const CALCULATORS: CollectionsIO = {
     },
     {
       name: "Authentic or Generic",
-      text: "Authentic or Generic [Scanbodies (Mult-Unit Abutments)]",
+      text: "Authentic or Generic [Scanbodies (Multi-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
       name: "Abutment Diameter",
-      text: "Abutment Diameter [Scanbodies (Mult-Unit Abutments)]",
+      text: "Abutment Diameter [Scanbodies (Multi-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
       name: "Abutment Height",
-      text: "Abutment Height [Scanbodies (Mult-Unit Abutments)]",
+      text: "Abutment Height [Scanbodies (Multi-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
       name: "Abutment Type",
-      text: "Abutment Type [Scanbodies (Mult-Unit Abutments)]",
+      text: "Abutment Type [Scanbodies (Multi-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
       name: "Angulation",
-      text: "Angulation [Scanbodies (Mult-Unit Abutments)]",
+      text: "Angulation [Scanbodies (Multi-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
@@ -1349,8 +1349,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
       CALCULATORS["Drivers (Restorative, Direct to Implant)"],
   },
   [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_NOT_PLACED]: {
-    "Scanbodies (Mult-Unit Abutments)":
-      CALCULATORS["Scanbodies (Mult-Unit Abutments)"],
+    "Scanbodies (Multi-Unit Abutments)":
+      CALCULATORS["Scanbodies (Multi-Unit Abutments)"],
     "Scanbody Drivers (MUAs)": CALCULATORS["Scanbody Drivers (MUAs)"],
     "Impression Copings (Multi-Unit Abutments)":
       CALCULATORS["Impression Copings (Multi-Unit Abutments)"],
@@ -1365,8 +1365,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
       CALCULATORS["Drivers (Restorative, Direct to Implant)"],
   },
   [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_PLACED]: {
-    "Scanbodies (Mult-Unit Abutments)":
-      CALCULATORS["Scanbodies (Mult-Unit Abutments)"],
+    "Scanbodies (Multi-Unit Abutments)":
+      CALCULATORS["Scanbodies (Multi-Unit Abutments)"],
     "Scanbody Drivers (MUAs)": CALCULATORS["Scanbody Drivers (MUAs)"],
     "Impression Copings (Multi-Unit Abutments)":
       CALCULATORS["Impression Copings (Multi-Unit Abutments)"],
@@ -1390,7 +1390,7 @@ export const CALCULATOR_NAME_COLLECTION_MAPPINGS: { [key: string]: string } = {
   "Impression Copings (Direct to Implant)": "ImpressingCopingsDirectToImplants",
   "Temporary Copings (Direct to Implant)": "TemporaryCopingsDirectToImplants",
   "Ti Bases (Direct to Implant)": "TiBasesDirectToImplants",
-  "Scanbodies (Mult-Unit Abutments)": "ScanbodyMUAs",
+  "Scanbodies (Multi-Unit Abutments)": "ScanbodyMUAs",
   "Scanbody Drivers (MUAs)": "ScanbodyDriversMUAs",
   "Impression Copings (Multi-Unit Abutments)": "ImpressingCopingsMUAs",
   "Temporary Copings (Multi-Unit Abutments)": "TemporaryCopingsMUAs",
@@ -1573,7 +1573,7 @@ export const calculatorGroupItems = [
       },
       {
         label: "ScanbodyMUAs",
-        text: "Scanbodies (Mult-Unit Abutments)",
+        text: "Scanbodies (Multi-Unit Abutments)",
         description:
           "This calculator displays scanbodies for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
       },

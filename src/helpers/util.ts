@@ -2050,7 +2050,7 @@ export const calculatorIO = [
   },
   {
     type: "ScanbodyMUAs",
-    label: "Scanbodies (Mult-Unit Abutments)",
+    label: "Scanbodies (Multi-Unit Abutments)",
     description:
       "This calculator displays scanbodies for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
     input: [
