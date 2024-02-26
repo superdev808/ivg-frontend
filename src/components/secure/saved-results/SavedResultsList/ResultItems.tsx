@@ -3,14 +3,14 @@ import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import React, { useMemo } from "react";
 
+import TeethSelector, {
+  TeethSelectorVariant,
+} from "@/components/shared/TeethSelector";
 import { getCalculatorName, productImages } from "@/helpers/util";
 import {
   SingleSavedResult as SingleSavedResultType,
   MultiSavedResult as MultiSavedResultType,
 } from "@/types/calculators";
-import TeethSelector, {
-  TeethSelectorVariant,
-} from "@/components/shared/TeethSelector";
 
 const LOGO_URL = "/images/logo/Ivory-Guide-Logo-Horizontal.svg";
 
@@ -108,6 +108,7 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
             selectedSites={selectedSites}
             showLabel={false}
             variant={TeethSelectorVariant.SMALL}
+            showVertical
           />
         ) : (
           <Image src={LOGO_URL} alt={name} width="100" />
