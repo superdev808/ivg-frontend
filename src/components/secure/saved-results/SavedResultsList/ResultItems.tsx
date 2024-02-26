@@ -43,7 +43,12 @@ export const SingleSavedResult: React.FC<SingleSavedResultProps> = ({
 
       <div className="flex-1 flex flex-column gap-2">
         <div>
-          <span className="font-bold">Title:</span> {name}
+          <span className="font-bold">Title:</span>{" "}
+          <Button
+            link
+            label={name}
+            className="ml-1 px-0 py-0 w-fit border-noround"
+          />
         </div>
         <Button
           link
@@ -111,7 +116,12 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
 
       <div className="flex-1 flex flex-column gap-2">
         <div>
-          <span className="font-bold">Title:</span> {name}
+          <span className="font-bold">Title:</span>{" "}
+          <Button
+            link
+            label={name}
+            className="ml-1 px-0 py-0 w-fit border-noround"
+          />
         </div>
         <Button
           link
