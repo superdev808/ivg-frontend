@@ -2514,76 +2514,76 @@ export const calculatorIO = [
       },
     ],
   },
-  {
-    type: "TiBasesMUAs",
-    label: "Ti Bases (Multi-Unit Abutments)",
-    description:
-      "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-    input: [
-      {
-        name: "Implant Brand",
-        text: "Implant Brand",
-      },
-      {
-        name: "Implant Model",
-        text: "Implant Model",
-      },
-      {
-        name: "Implant Diameter",
-        text: "Implant Diameter",
-      },
-      {
-        name: "Implant Platform",
-        text: "Implant Platform",
-      },
-      {
-        name: "Engaging or Non-Engaging",
-        text: "Engaging or Non-Engaging",
-      },
-      {
-        name: "MUA Type",
-        text: "MUA Type",
-      },
-      {
-        name: "Connection",
-        text: "Connection",
-      },
-      {
-        name: "Abutment Diameter",
-        text: "Abutment Diameter",
-      },
-      {
-        name: "Abutment Height",
-        text: "Abutment Height",
-      },
-      {
-        name: "Collar Height",
-        text: "Collar Height",
-      },
-      {
-        name: "Angulation",
-        text: "Angulation",
-      },
-      {
-        name: "Material",
-        text: "Material",
-      },
-    ],
-    output: [
-      {
-        name: "Item Name",
-        text: "Item Name",
-      },
-      {
-        name: "Item Number",
-        text: "Item Number",
-      },
-      {
-        name: "Link to Purchase",
-        text: "Link to Purchase",
-      },
-    ],
-  },
+  // {
+  //   type: "TiBasesMUAs",
+  //   label: "Ti Bases (Multi-Unit Abutments)",
+  //   description:
+  //     "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
+  //   input: [
+  //     {
+  //       name: "Implant Brand",
+  //       text: "Implant Brand",
+  //     },
+  //     {
+  //       name: "Implant Model",
+  //       text: "Implant Model",
+  //     },
+  //     {
+  //       name: "Implant Diameter",
+  //       text: "Implant Diameter",
+  //     },
+  //     {
+  //       name: "Implant Platform",
+  //       text: "Implant Platform",
+  //     },
+  //     {
+  //       name: "Engaging or Non-Engaging",
+  //       text: "Engaging or Non-Engaging",
+  //     },
+  //     {
+  //       name: "MUA Type",
+  //       text: "MUA Type",
+  //     },
+  //     {
+  //       name: "Connection",
+  //       text: "Connection",
+  //     },
+  //     {
+  //       name: "Abutment Diameter",
+  //       text: "Abutment Diameter",
+  //     },
+  //     {
+  //       name: "Abutment Height",
+  //       text: "Abutment Height",
+  //     },
+  //     {
+  //       name: "Collar Height",
+  //       text: "Collar Height",
+  //     },
+  //     {
+  //       name: "Angulation",
+  //       text: "Angulation",
+  //     },
+  //     {
+  //       name: "Material",
+  //       text: "Material",
+  //     },
+  //   ],
+  //   output: [
+  //     {
+  //       name: "Item Name",
+  //       text: "Item Name",
+  //     },
+  //     {
+  //       name: "Item Number",
+  //       text: "Item Number",
+  //     },
+  //     {
+  //       name: "Link to Purchase",
+  //       text: "Link to Purchase",
+  //     },
+  //   ],
+  // },
 ];
 
 export const calculatorImages: any = {
