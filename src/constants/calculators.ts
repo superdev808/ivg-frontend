@@ -825,78 +825,78 @@ export const CALCULATORS: CollectionsIO = {
       outputFrom: "TemporaryCopingsMUAs",
     },
   ],
-  "Ti Bases (Multi-Unit Abutments)": [
-    {
-      name: "Implant Brand",
-      text: "Implant Brand",
-      calculator: "TiBasesMUAs",
-      isCommon: true,
-    },
-    {
-      name: "Implant Model",
-      text: "Implant Model",
-      calculator: "TiBasesMUAs",
-      isCommon: true,
-    },
-    {
-      name: "Implant Diameter",
-      text: "Implant Diameter",
-      calculator: "TiBasesMUAs",
-      isCommon: true,
-    },
-    {
-      name: "Implant Platform",
-      text: "Implant Platform",
-      calculator: "TiBasesMUAs",
-      isCommon: true,
-    },
-    {
-      name: "Engaging or Non-Engaging",
-      text: "Engaging or Non-Engaging [Ti Bases (Multi-Unit Abutments)]",
-      calculator: "TiBasesMUAs",
-    },
-    {
-      name: "MUA Type",
-      text: "MUA Type [Ti Bases (Multi-Unit Abutments)]",
-      calculator: "TiBasesMUAs",
-    },
-    {
-      name: "Connection",
-      text: "Connection [Ti Bases (Multi-Unit Abutments)]",
-      calculator: "TiBasesMUAs",
-    },
-    {
-      name: "Abutment Diameter",
-      text: "Abutment Diameter [Ti Bases (Multi-Unit Abutments)]",
-      calculator: "TiBasesMUAs",
-    },
-    {
-      name: "Abutment Height",
-      text: "Abutment Height [Ti Bases (Multi-Unit Abutments)]",
-      calculator: "TiBasesMUAs",
-    },
-    {
-      name: "Collar Height",
-      text: "Collar Height [Ti Bases (Multi-Unit Abutments)]",
-      calculator: "TiBasesMUAs",
-    },
-    {
-      name: "Angulation",
-      text: "Angulation [Ti Bases (Multi-Unit Abutments)]",
-      calculator: "TiBasesMUAs",
-    },
-    {
-      name: "Material",
-      text: "Material [Ti Bases (Multi-Unit Abutments)]",
-      calculator: "TiBasesMUAs",
-    },
-    {
-      name: "",
-      text: "",
-      calculator: "TiBasesMUAs",
-      outputFrom: "TiBasesMUAs",
-    },
-  ],
+  // "Ti Bases (Multi-Unit Abutments)": [
+  //   {
+  //     name: "Implant Brand",
+  //     text: "Implant Brand",
+  //     calculator: "TiBasesMUAs",
+  //     isCommon: true,
+  //   },
+  //   {
+  //     name: "Implant Model",
+  //     text: "Implant Model",
+  //     calculator: "TiBasesMUAs",
+  //     isCommon: true,
+  //   },
+  //   {
+  //     name: "Implant Diameter",
+  //     text: "Implant Diameter",
+  //     calculator: "TiBasesMUAs",
+  //     isCommon: true,
+  //   },
+  //   {
+  //     name: "Implant Platform",
+  //     text: "Implant Platform",
+  //     calculator: "TiBasesMUAs",
+  //     isCommon: true,
+  //   },
+  //   {
+  //     name: "Engaging or Non-Engaging",
+  //     text: "Engaging or Non-Engaging [Ti Bases (Multi-Unit Abutments)]",
+  //     calculator: "TiBasesMUAs",
+  //   },
+  //   {
+  //     name: "MUA Type",
+  //     text: "MUA Type [Ti Bases (Multi-Unit Abutments)]",
+  //     calculator: "TiBasesMUAs",
+  //   },
+  //   {
+  //     name: "Connection",
+  //     text: "Connection [Ti Bases (Multi-Unit Abutments)]",
+  //     calculator: "TiBasesMUAs",
+  //   },
+  //   {
+  //     name: "Abutment Diameter",
+  //     text: "Abutment Diameter [Ti Bases (Multi-Unit Abutments)]",
+  //     calculator: "TiBasesMUAs",
+  //   },
+  //   {
+  //     name: "Abutment Height",
+  //     text: "Abutment Height [Ti Bases (Multi-Unit Abutments)]",
+  //     calculator: "TiBasesMUAs",
+  //   },
+  //   {
+  //     name: "Collar Height",
+  //     text: "Collar Height [Ti Bases (Multi-Unit Abutments)]",
+  //     calculator: "TiBasesMUAs",
+  //   },
+  //   {
+  //     name: "Angulation",
+  //     text: "Angulation [Ti Bases (Multi-Unit Abutments)]",
+  //     calculator: "TiBasesMUAs",
+  //   },
+  //   {
+  //     name: "Material",
+  //     text: "Material [Ti Bases (Multi-Unit Abutments)]",
+  //     calculator: "TiBasesMUAs",
+  //   },
+  //   {
+  //     name: "",
+  //     text: "",
+  //     calculator: "TiBasesMUAs",
+  //     outputFrom: "TiBasesMUAs",
+  //   },
+  // ],
   "Multi-Unit Abutments": [
     {
       name: "Implant Brand",
@@ -1351,8 +1351,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
       CALCULATORS["Impression Copings (Multi-Unit Abutments)"],
     "Temporary Copings (Multi-Unit Abutments)":
       CALCULATORS["Temporary Copings (Multi-Unit Abutments)"],
-    "Ti Bases (Multi-Unit Abutments)":
-      CALCULATORS["Ti Bases (Multi-Unit Abutments)"],
+    // "Ti Bases (Multi-Unit Abutments)":
+    //   CALCULATORS["Ti Bases (Multi-Unit Abutments)"],
     "Multi-Unit Abutments": CALCULATORS["Multi-Unit Abutments"],
     "Drivers (Restorative, on Multi-Unit Abutments)":
       CALCULATORS["Drivers (Restorative, on Multi-Unit Abutments)"],
@@ -1367,8 +1367,8 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
       CALCULATORS["Impression Copings (Multi-Unit Abutments)"],
     "Temporary Copings (Multi-Unit Abutments)":
       CALCULATORS["Temporary Copings (Multi-Unit Abutments)"],
-    "Ti Bases (Multi-Unit Abutments)":
-      CALCULATORS["Ti Bases (Multi-Unit Abutments)"],
+    // "Ti Bases (Multi-Unit Abutments)":
+    //   CALCULATORS["Ti Bases (Multi-Unit Abutments)"],
     "Drivers (Restorative, Direct to Implant)":
       CALCULATORS["Drivers (Restorative, Direct to Implant)"],
   },
@@ -1389,7 +1389,7 @@ export const CALCULATOR_NAME_COLLECTION_MAPPINGS: { [key: string]: string } = {
   "Scanbody Drivers (MUAs)": "ScanbodyDriversMUAs",
   "Impression Copings (Multi-Unit Abutments)": "ImpressingCopingsMUAs",
   "Temporary Copings (Multi-Unit Abutments)": "TemporaryCopingsMUAs",
-  "Ti Bases (Multi-Unit Abutments)": "TiBasesMUAs",
+  // "Ti Bases (Multi-Unit Abutments)": "TiBasesMUAs",
   "Multi-Unit Abutments": "MUAs",
   "Drivers (Restorative, on Multi-Unit Abutments)":
     "RestorativeMultiUnitAbutments",
@@ -1608,12 +1608,12 @@ export const calculatorGroupItems = [
         description:
           "This calculator displays Ti Bases for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
       },
-      {
-        label: "TiBasesMUAs",
-        text: "Ti Bases (Multi-Unit Abutments)",
-        description:
-          "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
+      // {
+      //   label: "TiBasesMUAs",
+      //   text: "Ti Bases (Multi-Unit Abutments)",
+      //   description:
+      //     "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
+      // },
     ],
   },
   {

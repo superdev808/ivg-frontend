@@ -4,11 +4,12 @@ import { Button } from "primereact/button";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 
 import InputSummary from "@/components/secure/calculator/AllOnX/InputDetails/Summary/InputSummary";
 import ComponentSummary from "@/components/secure/calculator/AllOnX/InputDetails/Summary/ComponentSummary";
 import PDFExport from "@/components/shared/PDFExport";
+import TeethSelector from "@/components/shared/TeethSelector";
 import { formatDate } from "@/helpers/util";
 import {
   useGetUserInfoQuery,
@@ -41,6 +42,14 @@ const MultiSavedResultDetail: React.FC<MultiResultDetailProps> = ({
   const toastRef = useRef(null);
 
   const { id, date, name, inputSummary, componentSummary } = savedResult;
+
+  const selectedSites = useMemo(() => {
+    return inputSummary.map((elem) => {
+      const site = elem.site || "Site 0";
+      const siteNumber = site.split(" ")[1];
+      return { name: site, key: Number(siteNumber) };
+    });
+  }, [inputSummary]);
 
   const handleGoBack = () => {
     router.push("/settings/saved-results");
@@ -152,6 +161,10 @@ const MultiSavedResultDetail: React.FC<MultiResultDetailProps> = ({
               onClick={handleShowDeleteConfirm}
             />
           </div>
+        </div>
+
+        <div className="my-6 md:my-8">
+          <TeethSelector showLabel={false} selectedSites={selectedSites} />
         </div>
 
         <div className="flex flex-column gap-4">
