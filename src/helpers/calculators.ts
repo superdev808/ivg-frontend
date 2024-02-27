@@ -492,3 +492,20 @@ export const parseItems = (
 
   return [];
 };
+
+export const getQuizByCalculator = (
+  quiz: InputDetail[],
+  calculatorName: string
+) => {
+  const allQuestions = (CALCULATORS[calculatorName] || []).map(
+    (elem) => elem.text
+  );
+
+  const filteredQuiz = quiz.filter((quiz) =>
+    allQuestions.includes(quiz.question)
+  );
+  return filteredQuiz.map((quiz) => ({
+    ...quiz,
+    question: (quiz.question || "").split("[")[0],
+  }));
+};

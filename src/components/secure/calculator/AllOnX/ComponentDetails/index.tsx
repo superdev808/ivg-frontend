@@ -1,14 +1,14 @@
 import React, { useMemo } from "react";
 
 import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/constants/calculators";
-import { ComponentDetail, ItemData } from "@/types/calculators";
+import { ComponentDetail, InputDetail, ItemData } from "@/types/calculators";
 
 import Result from "../../Result";
 
 interface ComponentDetailsProps {
   componentDetails: ComponentDetail;
   responseOrder: string[];
-  quiz: { question: string; answer: string }[];
+  quiz: InputDetail[];
   onUpdateQuantity: (value: number, itemName: string) => void;
 }
 

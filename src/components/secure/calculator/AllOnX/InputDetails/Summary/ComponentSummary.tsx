@@ -48,6 +48,10 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
   };
 
   const renderQuantity = (item: ComponentSummaryType) => {
+    if (!item.link) {
+      return null;
+    }
+
     return (
       <InputNumber
         value={item.quantity}
