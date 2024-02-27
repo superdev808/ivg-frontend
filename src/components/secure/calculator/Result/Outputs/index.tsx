@@ -61,7 +61,7 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
                   buttonLayout="horizontal"
                   step={1}
                   size={1}
-                  min={1}
+                  min={0}
                   incrementButtonIcon="pi pi-plus text-xs"
                   decrementButtonIcon="pi pi-minus text-xs"
                   inputClassName="py-0 text-xs"
