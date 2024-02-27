@@ -77,8 +77,8 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
 
   const selectedSites = useMemo(() => {
     if (
-      inputSummary.length === 1 &&
-      inputSummary[0].site === "General Details"
+      !Array.isArray(inputSummary) ||
+      (inputSummary.length === 1 && inputSummary[0].site === "General Details")
     ) {
       return [];
     }
