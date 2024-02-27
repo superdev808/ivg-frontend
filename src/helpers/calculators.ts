@@ -73,32 +73,39 @@ export const getProcedureCollections = (
   additionalInputs: KeyValuePair,
   isCustom: boolean
 ) => {
+  let collections: string[] = [];
+
   if (!isCustom) {
     switch (procedure) {
       case PROCEDURE.SURGERY:
-        return Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY);
+        collections = Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY);
+        break;
 
       case PROCEDURE.RESTORATIVE:
         const response: CollectionsIO =
           getRestorativeCollections(additionalInputs);
-        return Object.keys(response);
+        collections = Object.keys(response);
+        break;
 
       case PROCEDURE.SURGERY_AND_RESTORATIVE:
         const surgeryCollections: CollectionsIO =
           PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
         const restorativeCollections: CollectionsIO =
           getRestorativeCollections(additionalInputs);
-        return union([
+        collections = union([
           ...Object.keys(surgeryCollections),
           ...Object.keys(restorativeCollections),
         ]);
+        break;
 
       default:
-        return [];
+        break;
     }
+  } else {
+    collections = Object.keys(CALCULATORS);
   }
 
-  return Object.keys(CALCULATORS);
+  return collections.sort();
 };
 
 const prepareInputsAndResponse = (
@@ -484,4 +491,21 @@ export const parseItems = (
   }
 
   return [];
+};
+
+export const getQuizByCalculator = (
+  quiz: InputDetail[],
+  calculatorName: string
+) => {
+  const allQuestions = (CALCULATORS[calculatorName] || []).map(
+    (elem) => elem.text
+  );
+
+  const filteredQuiz = quiz.filter((quiz) =>
+    allQuestions.includes(quiz.question)
+  );
+  return filteredQuiz.map((quiz) => ({
+    ...quiz,
+    question: (quiz.question || "").split("[")[0],
+  }));
 };

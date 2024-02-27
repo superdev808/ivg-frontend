@@ -1,0 +1,14 @@
+.collectionsWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @media screen and (max-width: 1124px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 787px) {
+    display: flex;
+    flex-direction: column;
+  }
+}

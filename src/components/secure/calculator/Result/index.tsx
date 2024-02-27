@@ -11,7 +11,7 @@ import { useRef, useState } from "react";
 import PatientInfo from "@/components/shared/PatientInfo";
 import PDFContent from "@/components/shared/PDFExport/PDFContent";
 import SaveDialog from "@/components/shared/SaveDialog";
-import { prepareExportProps } from "@/helpers/calculators";
+import { getQuizByCalculator, prepareExportProps } from "@/helpers/calculators";
 import { getCalculatorName, productImages } from "@/helpers/util";
 import { event as gaEvent } from "@/lib/gtag";
 import {
@@ -19,7 +19,7 @@ import {
   useSaveResultMutation,
   useUpdateSavedResultMutation,
 } from "@/redux/hooks/apiHooks";
-import { ItemData, Patient } from "@/types/calculators";
+import { InputDetail, ItemData, Patient } from "@/types/calculators";
 
 import Outputs from "./Outputs";
 
@@ -31,7 +31,7 @@ interface ResultProps {
   id?: string;
   name?: string;
   items: ItemData[];
-  quiz: { question: string; answer: string }[];
+  quiz: InputDetail[];
   calculatorType: string;
   hideMenu?: boolean;
   onUpdateQuantity: (quantity: number, itemName: string) => void;
@@ -373,14 +373,16 @@ const Result: React.FC<ResultProps> = ({
               "quiz"
             )}
           >
-            {quiz.map(({ question, answer }) => (
-              <div key={question} className="flex gap-1">
-                <div className="text-left" style={{ maxWidth: "50%" }}>
-                  {question}
+            {getQuizByCalculator(quiz, calculatorName).map(
+              ({ question, answer }) => (
+                <div key={question} className="flex gap-1">
+                  <div className="text-left" style={{ maxWidth: "50%" }}>
+                    {question}
+                  </div>
+                  <div className="flex-1 text-right">{answer}</div>
                 </div>
-                <div className="flex-1 text-right">{answer}</div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
 

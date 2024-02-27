@@ -88,11 +88,6 @@ export const CALCULATORS: CollectionsIO = {
       isCommon: true,
     },
     {
-      name: "Will you perform bone reduction?",
-      text: "Will you perform bone reduction?",
-      calculator: "BoneReduction",
-    },
-    {
       name: "",
       text: "",
       calculator: "BoneReduction",

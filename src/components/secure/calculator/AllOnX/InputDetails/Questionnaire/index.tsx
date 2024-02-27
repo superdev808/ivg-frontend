@@ -106,6 +106,10 @@ const Questionnaire: React.FC<InputProps> = ({
         return;
       }
 
+      if (!input[level]) {
+        return;
+      }
+
       const quiz = {} as any;
 
       answers.forEach((answer, index) => {
@@ -113,14 +117,14 @@ const Questionnaire: React.FC<InputProps> = ({
           delete quiz[input[level]?.name];
         }
 
-        if (answer) {
+        if (
+          answer &&
+          (input[index].isCommon ||
+            input[index].calculator === input[level].calculator)
+        ) {
           quiz[input[index].name] = answer;
         }
       });
-
-      if (!input[level]) {
-        return;
-      }
 
       try {
         const response: Response = await fetch(
@@ -134,7 +138,7 @@ const Questionnaire: React.FC<InputProps> = ({
               type: input[level]?.calculator,
               output: input[level]?.outputFrom,
               quiz,
-              fields: input[level]?.name ? [input[level]?.name] : [],
+              fields: [input[level]?.name].filter(Boolean),
             }),
           }
         );
