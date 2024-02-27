@@ -2787,10 +2787,12 @@ export const productImages: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Screw+Driver+1.png",
   RestorativeMultiUnitAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Screw+Driver+1.png",
+  Scanbodies:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Scanbody+DTI+Generic.png",
   ScanbodyDriversMUAs:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Scanbody+MUA+Generic.png",
   ScanbodyDriversDirectToImplants:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Scanbody+DTI+Generic.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Screw+Driver+1.png",
   DrillKitAndSequence:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Drill+Kit+Generic.png",
   StockAbutments:
