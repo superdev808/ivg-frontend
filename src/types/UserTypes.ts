@@ -46,4 +46,5 @@ export interface EditUser {
   role: string;
   verified: boolean;
   active: boolean;
+  organizationName: string;
 }

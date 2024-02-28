@@ -45,6 +45,7 @@ const AdminUserManagement = () => {
 		firstName: { value: null, matchMode: FilterMatchMode.CONTAINS },
 		lastName: { value: null, matchMode: FilterMatchMode.CONTAINS },
 		email: { value: null, matchMode: FilterMatchMode.CONTAINS },
+		organizationName: { value: null, matchMode: FilterMatchMode.CONTAINS },
 		role: { value: null, matchMode: FilterMatchMode.CONTAINS },
 		verified: { value: null, matchMode: FilterMatchMode.EQUALS },
 		active: { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -259,6 +260,13 @@ const AdminUserManagement = () => {
 			filterElement: roleFilterTemplate,
 		},
 		{
+			field: 'organizationName',
+			header: "Organization",
+			body: (row: EditUser) => <span>{row.organizationName}</span>,
+			sortable: true,
+			filter: true
+		},
+		{
 			field: 'verified',
 			header: 'Verified?',
 			body: (row: EditUser) => checkBodyTemplate(row.verified),
@@ -290,7 +298,7 @@ const AdminUserManagement = () => {
 					paginator
 					rows={10}
 					rowsPerPageOptions={[10, 25, 50]}
-					globalFilterFields={['firstName', 'lastName', 'email', 'role']}
+					globalFilterFields={['firstName', 'lastName', 'email', 'organizationName', 'role']}
 					filters={filters}
 					filterDisplay="row"
 					pt={{ wrapper: { className: 'h-auto	' } }}>
