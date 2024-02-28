@@ -61,7 +61,8 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const sidebarLinksFilter = (li: NavLink) =>
     li.visibility === "public" ||
-    ["authenticated", "authenticatedSidebar"].includes(li.visibility);
+    (authenticated && ["authenticated", "authenticatedSidebar"].includes(li.visibility)) ||
+    (!authenticated && li.visibility === "unauthenticated");
 
   return (
     <div
