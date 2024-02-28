@@ -2796,7 +2796,7 @@ export const productImages: Record<string, string> = {
   DrillKitAndSequence:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Drill+Kit+Generic.png",
   StockAbutments:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Drill+Kit+Generic.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Stock+Abutment+Generic.png",
   Default:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/No+Image+BW.jpg",
 };
