@@ -96,7 +96,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
 
   const handleBackFromResult = () => {
     setItems([]);
-    handleBack(level);
+    handleBack(level)();
   };
 
   const showLoader =
