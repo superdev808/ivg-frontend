@@ -50,32 +50,44 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
                 </div>
               )}
             </div>
-            {item.link && (
-              <div className="flex align-items-center gap-2">
-                <InputNumber
-                  value={item.quantity}
-                  onValueChange={({ value }) =>
-                    onUpdateQuantity(value as number, item.itemName)
-                  }
-                  showButtons
-                  buttonLayout="horizontal"
-                  step={1}
-                  size={1}
-                  min={0}
-                  incrementButtonIcon="pi pi-plus text-xs"
-                  decrementButtonIcon="pi pi-minus text-xs"
-                  inputClassName="py-0 text-xs"
-                  incrementButtonClassName="px-0 text-xs"
-                  decrementButtonClassName="px-0 text-xs"
-                />
 
-                {isValidUrl(item.link) && (
-                  <Link href={item.link} target="_blank">
-                    <Button label="Link to Purchase" size="small" />
-                  </Link>
-                )}
-              </div>
-            )}
+            <div className="flex align-items-center gap-4">
+              <InputNumber
+                value={item.quantity}
+                onValueChange={({ value }) =>
+                  onUpdateQuantity(value as number, item.itemName)
+                }
+                showButtons
+                buttonLayout="horizontal"
+                step={1}
+                size={1}
+                min={0}
+                incrementButtonIcon="pi pi-plus text-xs"
+                decrementButtonIcon="pi pi-minus text-xs"
+                inputClassName="py-0 text-xs"
+                incrementButtonClassName="px-0 text-xs"
+                decrementButtonClassName="px-0 text-xs"
+              />
+
+              {item.link && isValidUrl(item.link) ? (
+                <Link href={item.link} target="_blank">
+                  <Button
+                    style={{ width: 172 }}
+                    label="Click to Purchase"
+                    size="small"
+                  />
+                </Link>
+              ) : (
+                <div
+                  className="text-center text-gray-500"
+                  style={{ width: 172 }}
+                >
+                  Please contact your
+                  <br />
+                  distributor to purchase.
+                </div>
+              )}
+            </div>
           </div>
         );
       })}

@@ -3,7 +3,7 @@ import { Button } from "primereact/button";
 import { Carousel } from "primereact/carousel";
 import { useEffect, useMemo, useState } from "react";
 
-import { parseItems, getResultName } from "@/helpers/calculators";
+import { parseItems } from "@/helpers/calculators";
 import { getCalculatorName } from "@/helpers/util";
 import { event as gaEvent } from "@/lib/gtag";
 import { ItemData } from "@/types/calculators";

@@ -498,7 +498,7 @@ export const getQuizByCalculator = (
   calculatorName: string
 ) => {
   const allQuestions = (CALCULATORS[calculatorName] || []).map(
-    (elem) => elem.text
+    (elem) => elem.name
   );
 
   const filteredQuiz = quiz.filter((quiz) =>
