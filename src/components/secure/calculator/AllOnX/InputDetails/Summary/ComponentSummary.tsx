@@ -41,12 +41,18 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
     if (item.link && isValidUrl(item.link)) {
       return (
         <Link href={item.link} target="_blank">
-          <Button label="Link to Purchase" size="small" />
+          <Button label="Click to Purchase" size="small" />
         </Link>
       );
     }
 
-    return null;
+    return (
+      <div className="text-center text-gray-500">
+        Please contact your
+        <br />
+        distributor to purchase.
+      </div>
+    );
   };
 
   const renderQuantity = (item: ComponentSummaryType) => {
