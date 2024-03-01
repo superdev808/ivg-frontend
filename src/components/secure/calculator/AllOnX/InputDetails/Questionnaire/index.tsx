@@ -267,6 +267,9 @@ const Questionnaire: React.FC<InputProps> = ({
 
   const showSummary = level === input.length;
 
+  const showLoader =
+    isLoading || (input[level] && !Boolean(answerOptions[level]?.length));
+
   return (
     <div className="mt-3 relative" style={{ minHeight: 700 }}>
       <Toast ref={toastRef} position="top-right" />
@@ -279,8 +282,7 @@ const Questionnaire: React.FC<InputProps> = ({
         onChange={handleChange}
       />
 
-      {(isLoading ||
-        (input[level] && !Boolean(answerOptions[level]?.length))) && (
+      {showLoader && (
         <ProgressSpinner
           className="w-1 absolute top-50 left-50"
           style={{ transform: "translate(-50%, -50%)" }}
@@ -319,7 +321,7 @@ const Questionnaire: React.FC<InputProps> = ({
               calculatorName={getCalculatorNameByQuestion(index)}
               answers={answerOptions[index]}
               currentAnswer={answers[index]}
-              disabled={isLoading}
+              disabled={showLoader}
               progress={getProgessValue(index, input)}
               onSelectAnswer={handleSelectAnswer(index)}
             />

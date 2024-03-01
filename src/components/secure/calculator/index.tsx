@@ -26,7 +26,6 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   const [answerOptions, setAnswerOptions] = useState<any[]>([]);
   const [answers, setAnswers] = useState<any[]>([]);
   const [items, setItems] = useState<any[]>([]);
-  const [currentAnswer, setCurrentAnswer] = useState<string>("");
 
   const calculatorType = decodeURI(option);
 
@@ -87,21 +86,21 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   };
 
   const handleBack = (index: number) => () => {
-    setLevel(index - 1);
-    setCurrentAnswer(answers[index - 1]);
-    const newAnswers = answers.slice(0, index - 1);
-    setAnswers(newAnswers);
+    const lastAnswerIndex = answers
+      .slice(0, index)
+      .findLastIndex((answer) => answer !== "");
+    setLevel(lastAnswerIndex);
+    setAnswers((prevSate) => prevSate.slice(0, lastAnswerIndex));
+    setAnswerOptions((prevState) => prevState.slice(0, lastAnswerIndex));
   };
 
   const handleBackFromResult = () => {
-    let lastAnswer = answers.findLastIndex((answer) => answer !== "");
-    if (lastAnswer === -1) {
-      lastAnswer = answers.length - 1;
-    }
     setItems([]);
-    setAnswers((prevState) => prevState.slice(0, lastAnswer - 1));
-    setLevel(lastAnswer);
+    handleBack(level);
   };
+
+  const showLoader =
+    isLoading || (input[level] && !Boolean(answerOptions[level]?.length));
 
   return (
     <>
@@ -134,8 +133,8 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
                   calculatorName={getCalculatorName(calculatorType)}
                   question={quiz.text}
                   answers={answerOptions[index]}
-                  currentAnswer={currentAnswer}
-                  disabled={isLoading}
+                  currentAnswer={answers[index]}
+                  disabled={showLoader}
                   progress={Math.floor((index / input.length) * 100)}
                   onSelectAnswer={handleSelectAnswer(index)}
                   onGoBack={index > 0 ? handleBack(index) : undefined}
@@ -155,7 +154,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
             />
           )}
 
-          {isLoading && (
+          {showLoader && (
             <div className="w-12 flex justify-content-center">
               <ProgressSpinner className="w-1" />
             </div>

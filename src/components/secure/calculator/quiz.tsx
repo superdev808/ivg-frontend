@@ -108,6 +108,7 @@ const Quiz: React.FC<QuizProps> = ({
           <Button
             icon="pi pi-arrow-left"
             className="absolute left-0 ml-2 mt-5 px-5 md:ml-4 text-6xl"
+            disabled={disabled}
             onClick={onGoBack}
           />
         )}
