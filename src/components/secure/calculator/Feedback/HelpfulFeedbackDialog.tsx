@@ -119,6 +119,7 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
         footer={footerContent}
       >
         <h4>Feedback Category (Choose One)*</h4>
+
         <div className="grid">
           {feedbackCategories.map(({ id, label }) => (
             <div className="col-6" key={`helpful-${id}`}>
@@ -134,14 +135,15 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
               </label>
             </div>
           ))}
+
           {feedbackCategory === "Other" && (
             <div className="col-12 mt-2">
               <span className="p-float-label w-full mt-2">
                 <InputTextarea
-                  id={"message"}
+                  id="message"
                   rows={4}
                   cols={30}
-                  className={"w-full"}
+                  className="w-full"
                   onChange={handleMessageChange}
                   value={message}
                   placeholder="If Other, specify here"
@@ -151,6 +153,7 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
           )}
         </div>
       </Dialog>
+
       <Toast ref={toastRef} position="top-right" />
     </>
   );

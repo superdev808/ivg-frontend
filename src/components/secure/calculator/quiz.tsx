@@ -1,5 +1,5 @@
-import orderBy from "lodash/orderBy";
 import classNames from "classnames/bind";
+import orderBy from "lodash/orderBy";
 import {
   AutoComplete,
   AutoCompleteChangeEvent,
@@ -38,9 +38,9 @@ const Quiz: React.FC<QuizProps> = ({
   onGoBack,
   onSelectAnswer,
 }) => {
-  const [searchValue, setSearchVaule] = useState("");
+  const [searchValue, setSearchVaule] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>(answers);
-  const [selectedSuggestion, setSelectedSuggestion] = useState("");
+  const [selectedSuggestion, setSelectedSuggestion] = useState<string>("");
 
   const filteredAnswers = useMemo(() => {
     return (
@@ -71,12 +71,11 @@ const Quiz: React.FC<QuizProps> = ({
 
   const dropdownOptionTemplate = (option: any) => (
     <div className="flex align-items-center justify-content-center">
-      <div className="w-12 md:w-4 flex align-items-center">
+      <div className="w-12 md:w-6 flex align-items-center gap-8">
         <Image
           alt={option.name}
           src={calculatorImages[`${option}`.toLowerCase()]}
-          className={`mr-8`}
-          imageStyle={{ width: 24 }}
+          imageStyle={{ height: 48, width: 96, objectFit: "contain" }}
         />
         <div>{option}</div>
       </div>
@@ -85,6 +84,7 @@ const Quiz: React.FC<QuizProps> = ({
 
   const handleSearchChange = (e: AutoCompleteChangeEvent) => {
     setSearchVaule(e.value);
+
     if (!e.value) {
       setSelectedSuggestion("");
     }
@@ -94,6 +94,7 @@ const Quiz: React.FC<QuizProps> = ({
     const filteredSuggestions = answers?.filter((item) =>
       item.toLowerCase().includes(e.query.toLowerCase())
     );
+
     setSuggestions(filteredSuggestions);
   };
 
@@ -114,15 +115,15 @@ const Quiz: React.FC<QuizProps> = ({
         )}
 
         {calculatorName && <h1 className="underline">{calculatorName}</h1>}
-        <h2>Select {question}</h2>
+        <h1>Select {question}</h1>
       </div>
 
-      <div className="col-12 md:col-6 md:col-offset-3 md:mb-6">
+      <div className="col-12 sm:col-8 sm:col-offset-2 xl:col-4 xl:col-offset-4 md:mb-6">
         <AutoComplete
           value={searchValue}
           suggestions={suggestions}
           onChange={handleSearchChange}
-          placeholder="Search..."
+          placeholder="Search all available options..."
           className="w-full"
           inputClassName="w-full"
           completeMethod={handleAutoCompleteMethod}

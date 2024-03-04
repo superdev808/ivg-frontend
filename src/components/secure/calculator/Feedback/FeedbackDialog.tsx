@@ -124,6 +124,7 @@ const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
         footer={footerContent}
       >
         <h4>Feedback Category (Choose One)*</h4>
+
         <div className="grid">
           {feedbackCategories.map(({ id, label }) => (
             <div className="col-6" key={id}>
@@ -139,6 +140,7 @@ const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
               </label>
             </div>
           ))}
+
           <div className="col-12 mt-2">
             <label htmlFor={"message"}>Message *</label>
             <span className="p-float-label w-full mt-2">
@@ -154,6 +156,7 @@ const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
           </div>
         </div>
       </Dialog>
+
       <Toast ref={toastRef} position="top-right" />
     </>
   );
