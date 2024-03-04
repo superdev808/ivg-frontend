@@ -145,31 +145,30 @@ export const Calculators = () => {
             </div>
 
             {selectedGroup >= 0 && (
-              <div
-                className={cx(
-                  "col-6 p-4 flex flex-column gap-2",
-                  "calculatorButtonSection"
-                )}
-              >
-                {CALCULATOR_GROUP_ITEMS[selectedGroup].subItems.map(
-                  (calcItem, index) => (
-                    <Button
-                      className={cx(
-                        "calculatorButton",
-                        "p-4 w-full flex flex-column"
-                      )}
-                      key={`calcItem-${index}`}
-                      onClick={() => {
-                        router.push(`/calculators/${calcItem.label}`);
-                      }}
-                    >
-                      <h4 className="m-0">{calcItem.text || calcItem.label}</h4>
-                      {calcItem.description && (
-                        <p className="mb-0 mt-2">{calcItem.description}</p>
-                      )}
-                    </Button>
-                  )
-                )}
+              <div className={cx("col-6 p-4", "calculatorButtonSection")}>
+                <div className="flex flex-column gap-2">
+                  {CALCULATOR_GROUP_ITEMS[selectedGroup].subItems.map(
+                    (calcItem, index) => (
+                      <Button
+                        className={cx(
+                          "calculatorButton",
+                          "p-4 w-full flex flex-column"
+                        )}
+                        key={`calcItem-${index}`}
+                        onClick={() => {
+                          router.push(`/calculators/${calcItem.label}`);
+                        }}
+                      >
+                        <h4 className="m-0">
+                          {calcItem.text || calcItem.label}
+                        </h4>
+                        {calcItem.description && (
+                          <p className="mb-0 mt-2">{calcItem.description}</p>
+                        )}
+                      </Button>
+                    )
+                  )}
+                </div>
               </div>
             )}
           </div>
