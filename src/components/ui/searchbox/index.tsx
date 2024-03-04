@@ -1,14 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
-import { InputText } from "primereact/inputtext";
-import { ProgressSpinner } from 'primereact/progressspinner';
 import { debounce } from "lodash";
+import { InputText } from "primereact/inputtext";
+import { ProgressSpinner } from "primereact/progressspinner";
+import React, { useEffect, useState } from "react";
 
-export default function SearchBox(
-  { handleSearch, loading }: { handleSearch: (str: string) => void, loading: boolean }
-) {
-  const [qureyString, setQueryString] = useState("");
+interface SearchBoxProps {
+  handleSearch: (str: string) => void;
+  loading: boolean;
+  inputRef: any;
+}
+
+const SearchBox: React.FC<SearchBoxProps> = ({
+  handleSearch,
+  loading,
+  inputRef,
+}) => {
+  const [qureyString, setQueryString] = useState<string>("");
   const debouncedSearch = debounce(handleSearch, 500);
-  const inputRef = useRef(null);
 
   const handleChange = (e: any) => {
     setQueryString(e.target.value);
@@ -19,7 +26,7 @@ export default function SearchBox(
     if (!loading && inputRef.current) {
       (inputRef.current as any).focus();
     }
-  }, [loading])
+  }, [loading, inputRef]);
 
   return (
     <div className="p-inputgroup flex-1">
@@ -29,7 +36,11 @@ export default function SearchBox(
         value={qureyString}
         ref={inputRef}
       />
-      {loading && <ProgressSpinner className="ml-4" style={{width: '50px', height: '50px'}} />}
+      {loading && (
+        <ProgressSpinner className="ml-4" style={{ width: 50, height: 50 }} />
+      )}
     </div>
   );
-}
+};
+
+export default SearchBox;
