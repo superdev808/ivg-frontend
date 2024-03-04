@@ -27,7 +27,6 @@ export default function SearchBox(
         placeholder="Keyword"
         onChange={handleChange}
         value={qureyString}
-        disabled={loading}
         ref={inputRef}
       />
       {loading && <ProgressSpinner className="ml-4" style={{width: '50px', height: '50px'}} />}
