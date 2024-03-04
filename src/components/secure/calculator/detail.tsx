@@ -86,8 +86,6 @@ const DetailView: React.FC<DetailViewProps> = ({
     setFeedbackShow(true);
   };
 
-  const a = [...results, ...results];
-
   return (
     <>
       <div className="relative md:p-2 md:text-center">
@@ -99,7 +97,7 @@ const DetailView: React.FC<DetailViewProps> = ({
         <h2>{calculatorName} Calculator</h2>
       </div>
 
-      {a.length > 0 && (
+      {results.length > 0 && (
         <div className="flex flex-column align-items-center">
           <div className="w-full relative lg:w-8">
             <Swiper
@@ -109,7 +107,7 @@ const DetailView: React.FC<DetailViewProps> = ({
               pagination
               modules={[Navigation, Pagination]}
             >
-              {a.map((result, idx) => (
+              {results.map((result, idx) => (
                 <SwiperSlide key={idx}>
                   <Result
                     className="px-6 pb-6 md:px-7"
