@@ -2759,11 +2759,11 @@ export const formatTime = (date?: Date | null | string) =>
 
 export const productImages: Record<string, string> = {
   BoneReduction:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Bone+Reduction+Forceps.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Meisinger+Drill+Kit+ALV18.png",
   ChairSidePickUp:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Chairside+Pickup+Lufting.png",
   Implants:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Implant+generic.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Straumann+BL++Implant+RC+D+4.1mm+EL+8mm+0214508.png",
   MUAs: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/MultiUnitAbutment_custom_truabutment_final.png",
   HealingAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Healing+Abutment+D+4.5mm+H+3mm+2213.png",
@@ -2772,7 +2772,7 @@ export const productImages: Record<string, string> = {
   ImpressingCopingsMUAs:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Impression+Coping+Open+Tray+Multi-Unit+29089.png",
   ImpressingCopingsDirectToImplants:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Impression+Coping+Open+Tray+Branemark+RP+D+5mm+29072.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Temporary+Coping+Multi-Unit+29046.png",
   TemporaryCopingsMUAs:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Temporary+Coping+Multi-Unit+29046.png",
   TiBasesMUAs:
@@ -2784,15 +2784,15 @@ export const productImages: Record<string, string> = {
   TiBasesDirectToImplants:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Zimmer+TSV+BellaTek+Express+Abutment+D4.5mm+H+4.75mm+Hexed+TE451.png",
   RestroativeDirectToImplant:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Screw+Driver+1.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Neodent+CM+Implant+Driver+Torque+Wrench+Long+105074.png",
   RestorativeMultiUnitAbutments:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Screw+Driver+1.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Neodent+CM+Implant+Driver+Torque+Wrench+Long+105074.png",
   Scanbodies:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Scanbody+DTI+Generic.png",
   ScanbodyDriversMUAs:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Scanbody+MUA+Generic.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Elos+Accurate+Screwdriver+Manual+Mini+0.9+Hex.png",
   ScanbodyDriversDirectToImplants:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Screw+Driver+1.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Elos+Accurate+Screwdriver+Manual+Mini+0.9+Hex.png",
   DrillKitAndSequence:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Drill+Kit+Generic.png",
   StockAbutments:
