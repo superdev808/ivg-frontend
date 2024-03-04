@@ -110,7 +110,9 @@ const DetailView: React.FC<DetailViewProps> = ({
               {results.map((result, idx) => (
                 <SwiperSlide key={idx}>
                   <Result
-                    className="px-6 pb-6 md:px-7"
+                    className={
+                      results.length > 1 ? "px-6 pb-6 md:px-7" : "px-3"
+                    }
                     calculatorType={calculatorType}
                     items={result}
                     quiz={quiz}
