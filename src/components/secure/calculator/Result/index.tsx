@@ -34,6 +34,7 @@ interface ResultProps {
   quiz: InputDetail[];
   calculatorType: string;
   hideMenu?: boolean;
+  className?: string;
   onUpdateQuantity: (quantity: number, itemName: string) => void;
 }
 
@@ -44,6 +45,7 @@ const Result: React.FC<ResultProps> = ({
   quiz,
   calculatorType,
   hideMenu = false,
+  className,
   onUpdateQuantity,
 }) => {
   const { refetch } = useGetUserInfoQuery({});
@@ -273,7 +275,7 @@ const Result: React.FC<ResultProps> = ({
         onClose={handleCloseSaveDialog}
       />
 
-      <div className="flex flex-column gap-4">
+      <div className={cx("flex flex-column gap-4", className)}>
         <div
           className={`flex flex-column gap-4 justify-content-between
           lg:flex-row lg:align-items-center`}

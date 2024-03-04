@@ -1,125 +1,149 @@
-@import 'primeflex/primeflex.scss';
-@import '~video-react/styles/scss/video-react';
+@import "primeflex/primeflex.scss";
+@import "~video-react/styles/scss/video-react";
 
-@import '@/styles/theme.scss';
+@import "@/styles/theme.scss";
 
-@import '@/styles/public.scss';
+@import "@/styles/public.scss";
 
 html,
 body {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	margin: 0;
-	padding: 0;
-	font-family: var(--font-family);
-	font-weight: normal;
-	font-style: normal;
-	background-color: var(--surface-0);
-	color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  font-weight: normal;
+  font-style: normal;
+  background-color: var(--surface-0);
+  color: var(--secondary-color);
 }
 
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
-	scrollbar-width: auto;
-	scrollbar-color: #c9c9c9 #f2f2f2;
+  scrollbar-width: auto;
+  scrollbar-color: #c9c9c9 #f2f2f2;
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-	width: 12px;
+  width: 12px;
 }
 
 *::-webkit-scrollbar-track {
-	background: #f2f2f2;
+  background: #f2f2f2;
 }
 
 *::-webkit-scrollbar-thumb {
-	background-color: #c9c9c9;
-	border-radius: 0px;
-	border: 0px solid #ffffff;
+  background-color: #c9c9c9;
+  border-radius: 0px;
+  border: 0px solid #ffffff;
 }
 
 //GLOBAL
 .background-gradient {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 120vh;
-	width: 100%;
-	background-image: linear-gradient(to right, #02393230, white);
-	z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 120vh;
+  width: 100%;
+  background-image: linear-gradient(to right, #02393230, white);
+  z-index: 0;
 }
 
 .nav-offset {
-	padding-top: 5rem;
+  padding-top: 5rem;
 }
 
 .radial-gradient {
-	position: absolute;
-	bottom: -400px;
-	width: 800px;
-	height: 800px;
-	background: radial-gradient(circle, #a6c7b470 0%, rgba(131, 184, 153, 0) 75%);
-	left: 50%;
-	transform: translateX(-50%);
-	// transform: translateY(-50%);
+  position: absolute;
+  bottom: -400px;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, #a6c7b470 0%, rgba(131, 184, 153, 0) 75%);
+  left: 50%;
+  transform: translateX(-50%);
+  // transform: translateY(-50%);
 }
 
 td {
-	padding:0 2rem;
+  padding: 0 2rem;
 }
 @media (max-width: 768px) {
-	table,
-	tbody,
-	tr,
-	td,
-	thead,
-	th {
-		display: block;
-		width: 100%;
-	}
-	td {
-		padding:1rem 1rem;
-	}
+  table,
+  tbody,
+  tr,
+  td,
+  thead,
+  th {
+    display: block;
+    width: 100%;
+  }
+  td {
+    padding: 1rem 1rem;
+  }
 }
 
 // CONTAINERS
 
 .container {
-	width: 100%;
-	height: calc(100vh - 5rem);
-	z-index: 1;
+  width: 100%;
+  height: calc(100vh - 5rem);
+  z-index: 1;
 
-	.wrapper {
-		width: 100%;
-		display: flex;
-		padding: 0 20px;
-		position: relative;
-	}
+  .wrapper {
+    width: 100%;
+    display: flex;
+    padding: 0 20px;
+    position: relative;
+  }
 }
 
 @media screen and (min-width: 768px) {
-	.wrapper {
-		margin: 0 auto;
-		max-width: 1200px;
-		padding: 0 !important;
-	}
-	.background-gradient {
-		height: 100vh;
-	}
+  .wrapper {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 !important;
+  }
+  .background-gradient {
+    height: 100vh;
+  }
 }
 
 //BUTTONS
 
 .btn-primary {
-	@include styleclass('hover:text-white hover:bg-primary focus:bg-primary justify-content-center text-secondary');
+  @include styleclass(
+    "hover:text-white hover:bg-primary focus:bg-primary justify-content-center text-secondary"
+  );
 }
 
 .btn-secondary {
-	@include styleclass('bg-secondary focus:bg-primary justify-content-center');
-	&:hover {
-		background: rgba(var(--secondary-color-rgb), 0.85) !important;
-	}
+  @include styleclass("bg-secondary focus:bg-primary justify-content-center");
+  &:hover {
+    background: rgba(var(--secondary-color-rgb), 0.85) !important;
+  }
+}
+
+// SWIPER
+.swiper-button-prev,
+.swiper-button-next {
+  height: 32px !important;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 32px !important;
+  color: var(--primary-color) !important;
+}
+
+.swiper-pagination-bullet {
+  border-radius: 0 !important;
+  width: 30px !important;
+  height: 4px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--primary-color) !important;
 }

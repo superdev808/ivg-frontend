@@ -1,12 +1,17 @@
 import trim from "lodash/trim";
 import { Button } from "primereact/button";
-import { Carousel } from "primereact/carousel";
 import { useEffect, useMemo, useState } from "react";
+import { Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import { parseItems } from "@/helpers/calculators";
 import { getCalculatorName } from "@/helpers/util";
 import { event as gaEvent } from "@/lib/gtag";
 import { ItemData } from "@/types/calculators";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 import HelpfulFeedbackDialog from "./Feedback/HelpfulFeedbackDialog";
 import Result from "./Result";
@@ -81,6 +86,8 @@ const DetailView: React.FC<DetailViewProps> = ({
     setFeedbackShow(true);
   };
 
+  const a = [...results, ...results];
+
   return (
     <>
       <div className="relative md:p-2 md:text-center">
@@ -92,31 +99,28 @@ const DetailView: React.FC<DetailViewProps> = ({
         <h2>{calculatorName} Calculator</h2>
       </div>
 
-      {results.length > 0 && (
+      {a.length > 0 && (
         <div className="flex flex-column align-items-center">
           <div className="w-full relative lg:w-8">
-            {results.length > 1 ? (
-              <Carousel
-                value={results}
-                itemTemplate={(result) => (
-                  <div className="px-3">
-                    <Result
-                      calculatorType={calculatorType}
-                      items={result}
-                      quiz={quiz}
-                      onUpdateQuantity={handleUpdateQuantity}
-                    />
-                  </div>
-                )}
-              />
-            ) : (
-              <Result
-                calculatorType={calculatorType}
-                items={results[0]}
-                quiz={quiz}
-                onUpdateQuantity={handleUpdateQuantity}
-              />
-            )}
+            <Swiper
+              spaceBetween={50}
+              slidesPerView={1}
+              navigation
+              pagination
+              modules={[Navigation, Pagination]}
+            >
+              {a.map((result, idx) => (
+                <SwiperSlide key={idx}>
+                  <Result
+                    className="px-6 pb-6 md:px-7"
+                    calculatorType={calculatorType}
+                    items={result}
+                    quiz={quiz}
+                    onUpdateQuantity={handleUpdateQuantity}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       )}
