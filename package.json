@@ -47,6 +47,7 @@
     "reactflow": "^11.7.4",
     "recharts": "^2.11.0",
     "redux": "^4.2.1",
+    "swiper": "^11.0.7",
     "video-react": "^0.16.0"
   },
   "devDependencies": {
