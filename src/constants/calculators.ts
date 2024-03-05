@@ -7,6 +7,7 @@ import {
   ProcedureInputsAndResponse,
   RadioButtonOption,
   Site,
+  CALCULATOR_GROUP_ITEM,
 } from "@/types/calculators";
 
 export const CALCULATOR_MAPPINGS: KeyValuePair = {
@@ -1482,7 +1483,7 @@ export const TEXT_DENTAL_IMPLANT_PROCEDURE =
 export const TEXT_MUA_STATUS =
   "Are the multi-unit abutments already connected to the implants?";
 
-export const calculatorGroupItems = [
+export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
   {
     label: "Implant Component Selection",
     description:
@@ -1620,13 +1621,7 @@ export const calculatorGroupItems = [
     label: "All-on-X Ordering Guide",
     description:
       "This customized calculator enables quick identification and procurement of a variety of components, instruments, and materials to help you place or restore implants.",
-    subItems: [
-      {
-        label: "All-on-X Ordering Guide",
-        text: "All-on-X Ordering Guide",
-        description: "",
-      },
-    ],
+    subItems: [],
   },
   {
     label: "Custom Combinations",

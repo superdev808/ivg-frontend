@@ -1,8 +1,7 @@
+import Link from "next/link";
 import { Button } from "primereact/button";
 import { InputNumber } from "primereact/inputnumber";
 import React, { useMemo } from "react";
-
-import Link from "next/link";
 
 import { isValidUrl } from "@/helpers/calculators";
 import { ItemData } from "@/types/calculators";

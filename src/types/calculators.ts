@@ -131,3 +131,13 @@ export interface MultiSavedResult {
   date: string;
   type: "all-on-x" | "combined";
 }
+
+export interface CALCULATOR_GROUP_ITEM {
+  label: string;
+  description: string;
+  subItems: Array<{
+    label: string;
+    text: string;
+    description: string;
+  }>;
+}

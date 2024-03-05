@@ -1,9 +1,10 @@
 import { Skeleton } from "primereact/skeleton";
 import { useSelector } from "react-redux";
+import React from "react";
 
 import { selectCalculator } from "@/redux/slices/calculators/calculatorSlice";
 
-export default function CalculatorHeader() {
+const CalculatorHeader: React.FC = () => {
   const { selectedCalculator, calculatorNodeData } =
     useSelector(selectCalculator);
 
@@ -26,4 +27,6 @@ export default function CalculatorHeader() {
       </div>
     </>
   );
-}
+};
+
+export default CalculatorHeader;
