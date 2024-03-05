@@ -24,12 +24,13 @@ export interface InputDetail {
 
 export interface ItemInsights {
   id?: string;
-  itemName: string;
+  itemName?: string;
   itemNumber?: string;
   link?: string;
   quantity?: number;
   manufacturer?: string;
   manufacturerRecommendations?: string;
+  torqueValue?: string;
 }
 export interface ItemData {
   id?: string;

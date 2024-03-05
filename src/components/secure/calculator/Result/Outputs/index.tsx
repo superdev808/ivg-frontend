@@ -48,6 +48,13 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
                   {item.manufacturerRecommendations}
                 </div>
               )}
+              {
+                item.torqueValue && (
+                  <div>
+                    <b>Torque Value:</b> {item.torqueValue}
+                  </div>
+                )
+              }
             </div>
 
             <div className="flex align-items-center gap-4">

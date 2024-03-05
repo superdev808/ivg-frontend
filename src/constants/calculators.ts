@@ -1084,6 +1084,43 @@ export const CALCULATORS: CollectionsIO = {
       outputFrom: "ImplantAnalogs",
     },
   ],
+  "Implant Torques": [
+    {
+      name: "Implant Brand",
+      text: "Implant Brand",
+      calculator: "ImplantTorques",
+      isCommon: true,
+    },
+    {
+      name: "Implant Model",
+      text: "Implant Model",
+      calculator: "ImplantTorques",
+      isCommon: true,
+    },
+    {
+      name: "Implant Diameter",
+      text: "Implant Diameter",
+      calculator: "ImplantTorques",
+      isCommon: true,
+    },
+    {
+      name: "Implant Platform",
+      text: "Implant Platform",
+      calculator: "ImplantTorques",
+      isCommon: true,
+    },
+    {
+      name: "Product, Component, or Procedure",
+      text: "Product, Component, or Procedure",
+      calculator: "ImplantTorques",
+    },
+    {
+      name: "",
+      text: "",
+      calculator: "ImplantTorques",
+      outputFrom: "ImplantTorques",
+    },
+  ],
   "Implant Screws": [
     {
       name: "Implant Brand",
@@ -1615,6 +1652,11 @@ export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
         description:
           "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
       },
+      {
+        label: "ImplantTorques",
+        text: "Implant Torques",
+        description: ""
+      }
     ],
   },
   {

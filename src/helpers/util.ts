@@ -2584,6 +2584,43 @@ export const calculatorIO = [
       },
     ],
   },
+  {
+    type: "ImplantTorques",
+    label: "Implant Torques",
+    description: "",
+    input: [
+      {
+        name: "Implant Brand",
+        text: "Implant Brand",
+      },
+      {
+        name: "Implant Model",
+        text: "Implant Model",
+      },
+      {
+        name: "Implant Diameter",
+        text: "Implant Diameter",
+      },
+      {
+        name: "Implant Platform",
+        text: "Implant Platform",
+      },
+      {
+        name: "Product, Component, or Procedure",
+        text: "Product, Component, or Procedure"
+      }
+    ],
+    output: [
+      {
+        name: "Torque Value",
+        text: "Torque Value"
+      },
+      {
+        name: "Notes",
+        text: "Notes"
+      }
+    ]
+  }
 ];
 
 export const calculatorImages: any = {

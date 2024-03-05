@@ -490,6 +490,19 @@ export const parseItems = (
     ];
   }
 
+  if (calculatorType === "ImplantTorques") {
+    return [
+      {
+        label: "Implant Torques",
+        info: [
+          {
+            torqueValue: trim(item["Torque Value"]),
+          },
+        ],
+      },
+    ];
+  }
+
   return [];
 };
 
