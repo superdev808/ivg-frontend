@@ -1527,18 +1527,6 @@ export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
       "These calculators enable quick identification and procurement of a range of Impression Components, Abutments, CAD / CAM Restorations, and Prosthetic and Surgical Instruments to meet all your implant needs.",
     subItems: [
       {
-        label: "BoneReduction",
-        text: "Bone Reduction Instruments",
-        description:
-          "This calculator provides recommended instruments to perform bone reduction and denture conversions.",
-      },
-      {
-        label: "ChairSidePickUp",
-        text: "Chairside Pick-Up Materials",
-        description:
-          "This calculator provides recommended materials to perform chairside pick-ups on the day of surgery.",
-      },
-      {
         label: "DrillKitAndSequence",
         text: "Drill Kits and Drill Sequences",
         description:
@@ -1656,7 +1644,19 @@ export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
         label: "ImplantTorques",
         text: "Implant Torques",
         description: ""
-      }
+      },
+      {
+        label: "BoneReduction",
+        text: "Bone Reduction Instruments",
+        description:
+          "This calculator provides recommended instruments to perform bone reduction and denture conversions.",
+      },
+      {
+        label: "ChairSidePickUp",
+        text: "Chairside Pick-Up Materials",
+        description:
+          "This calculator provides recommended materials to perform chairside pick-ups on the day of surgery.",
+      },
     ],
   },
   {
