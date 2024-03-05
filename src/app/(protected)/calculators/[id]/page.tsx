@@ -50,7 +50,7 @@ export default function CalculatorPage() {
         </div>
       )}
 
-      <div
+      {/* <div
         className="fixed text-2xl m-1 bg-green-300 border-round-3xl m-0 p-3 pl-5"
         style={{
           transform: "rotate(180deg)",
@@ -62,7 +62,7 @@ export default function CalculatorPage() {
         onClick={onClickFeedback}
       >
         Feedback
-      </div>
+      </div> */}
 
       {feedbkackShow && (
         <FeedbackDialog visible={feedbkackShow} setVisible={setFeedbackShow} />
