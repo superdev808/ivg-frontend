@@ -27,7 +27,7 @@ export default function CalculatorPage() {
   return (
     <>
       {componentMapping[tabId] || (
-        <div className="nav-offset flex flex-grow-1">
+        <div className="flex flex-grow-1">
           <div className="w-full">
             <div className="flex flex-column align-items-center justify-content-center">
               <CalculatorContainer
