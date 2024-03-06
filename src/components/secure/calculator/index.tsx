@@ -6,6 +6,7 @@ import { getCalculatorName } from "@/helpers/util";
 
 import DetailView from "./detail";
 import Quiz from "./quiz";
+import FeedbackDialogWrapper from "./Feedback/FeedbackDialogWrapper";
 
 interface QuizOption {
   name: string;
@@ -143,7 +144,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
             })}
           </div>
 
-          {items.length > 0 && (
+          {items.length > 0 ? (
             <DetailView
               calculatorType={calculatorType}
               items={items}
@@ -152,7 +153,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
               answers={answers}
               onGoBack={handleBackFromResult}
             />
-          )}
+          ) : <FeedbackDialogWrapper label={getCalculatorName(calculatorType)} />}
 
           {showLoader && (
             <div className="w-12 flex justify-content-center">

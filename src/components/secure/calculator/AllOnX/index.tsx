@@ -3,8 +3,9 @@ import cloneDeep from "lodash/cloneDeep";
 import has from "lodash/has";
 import isEqual from "lodash/isEqual";
 import { CheckboxChangeEvent } from "primereact/checkbox";
+import { Toast } from "primereact/toast";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import TeethSelector from "@/components/shared/TeethSelector";
 import {
@@ -38,6 +39,7 @@ import AdditionalInputs from "./AdditionalInputs";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
 import InputDetails from "./InputDetails";
 import HelpfulFeedbackDialog from "../Feedback/HelpfulFeedbackDialog";
+import FeedbackDialogWrapper from "../Feedback/FeedbackDialogWrapper";
 
 interface AllOnXCalculatorProps {
     isCustom?: boolean;
@@ -54,12 +56,24 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     const calculatorName = "All-on-X Calculator";
 
     const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
+    
+    const toastRef = useRef(null);
+    const showFeedbackToast = useCallback(() => {
+        (toastRef?.current as any)?.show({
+            severity: "success",
+            summary: "Successfully submitted",
+            detail: "Thank you for your feedback",
+            life: 5000,
+        });
+    }, [toastRef.current])
+
     const onClickThumbUp = () => {
         gaEvent({
             action: "Thumb_Up",
             category: "Button",
             label: calculatorName,
         });
+        showFeedbackToast()
     };
 
     const onClickFeedback = () => {
@@ -93,7 +107,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
 
     console.log("AAA", sitesData, selectedSites);
 
-    const allSitesAnswered = selectedSites.reduce(
+    const isAllSitesAnswered = selectedSites.reduce(
         (acc: boolean, site: Site) => {
             if (acc == false) return false;
             return (
@@ -396,7 +410,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                     {!isCustom &&
                         (procedure === PROCEDURE.RESTORATIVE ||
                             procedure ===
-                                PROCEDURE.SURGERY_AND_RESTORATIVE) && (
+                            PROCEDURE.SURGERY_AND_RESTORATIVE) && (
                             <AdditionalInputs
                                 textDentalImplantProcedure={
                                     TEXT_DENTAL_IMPLANT_PROCEDURE
@@ -404,7 +418,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                                 textMUAStatus={TEXT_MUA_STATUS}
                                 showMUAOptions={
                                     additionalInputs[
-                                        DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name
+                                    DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name
                                     ] ===
                                     DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
                                 }
@@ -431,16 +445,16 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                                 (isCustom &&
                                     procedureInputsAndResponse?.input &&
                                     procedureInputsAndResponse?.input.length >
-                                        0 &&
+                                    0 &&
                                     siteSpecificReport ===
-                                        SITE_SPECIFIC_REPORT_OPTIONS[0]
-                                            .value)) && (
-                                <TeethSelector
-                                    showLabel
-                                    selectedSites={selectedSites}
-                                    onSiteChange={handleSiteChange}
-                                />
-                            )}
+                                    SITE_SPECIFIC_REPORT_OPTIONS[0]
+                                        .value)) && (
+                                    <TeethSelector
+                                        showLabel
+                                        selectedSites={selectedSites}
+                                        onSiteChange={handleSiteChange}
+                                    />
+                                )}
 
                             {selectedSites.length > 0 && (
                                 <InputDetails
@@ -472,7 +486,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                 </div>
             </div>
 
-            {allSitesAnswered && selectedSites.length > 0 && (
+            {isAllSitesAnswered && selectedSites.length > 0 && (
                 <div
                     className="fixed text-2xl m-1 left-50 bg-green-300 p-3 pb-6 border-round-3xl m-0"
                     style={{
@@ -492,12 +506,16 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                     />
                 </div>
             )}
+            {
+                isAllSitesAnswered == false && selectedSites.length > 0 && <FeedbackDialogWrapper label={calculatorName}/>
+            }
             <HelpfulFeedbackDialog
                 visible={feedbkackShow}
                 setVisible={setFeedbackShow}
                 calculatorName={calculatorName}
                 quiz={[]}
             />
+            <Toast ref={toastRef} position="top-right" />
         </div>
     );
 };

@@ -126,6 +126,7 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
           (feedbackCategory === "Other" && !message) ||
           loading
         }
+        className="ml-3"
       />
     </div>
   );
