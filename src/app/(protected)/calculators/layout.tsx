@@ -17,10 +17,9 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
                     sticky: true,
                     life: 1000,
                     severity: 'success',
-                    closable: false,
+                    closable: true,
                     content: (
                         <>
-                            <Image alt="logo" src="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" width="32" height='32' />
                             <div className="ml-4">This is the announcement banner ad</div>
                         </>
                     )
