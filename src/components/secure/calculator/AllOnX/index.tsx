@@ -47,7 +47,7 @@ interface AllOnXCalculatorProps {
 
 /**
  * Name : AllOnXCalculator.
- * Desc : The code defines a functional component called `AllOnXCalculator` which is a       * calculator for the All-on-X dental procedure.
+ * Desc : The code defines a functional component called `AllOnXCalculator` which is a           * calculator for the All-on-X dental procedure.
  * @param {boolean} isCustom
  */
 const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
@@ -425,7 +425,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   selectedSites={selectedSites}
                   onSiteChange={handleSiteChange}
                 />
-                )}
+              )}
 
               {selectedSites.length > 0 && (
                 <InputDetails
