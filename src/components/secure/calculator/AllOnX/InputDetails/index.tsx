@@ -35,6 +35,7 @@ interface InputDetailsProps {
     collection: string
   ) => void;
   onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onAllAnswered: (site: Site) => void;
 }
 
 const InputDetails: React.FC<InputDetailsProps> = ({
@@ -50,6 +51,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
   onAutopopulate,
   onQuizResponse,
   onUpdateQuantity,
+  onAllAnswered
 }) => {
   return (
     <div className="relative">
@@ -68,6 +70,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               onAutopopulate={onAutopopulate}
               onQuizResponse={onQuizResponse}
               onUpdateQuantity={onUpdateQuantity}
+              onAllAnswered={onAllAnswered}
             />
           </TabPanel>
         ))}

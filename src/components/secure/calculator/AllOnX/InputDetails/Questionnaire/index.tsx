@@ -50,6 +50,7 @@ interface InputProps {
     collection: string
   ) => void;
   onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onAllAnswered: (site: Site) => void;
 }
 
 const Questionnaire: React.FC<InputProps> = ({
@@ -64,6 +65,7 @@ const Questionnaire: React.FC<InputProps> = ({
   onAutopopulate,
   onQuizResponse,
   onUpdateQuantity,
+  onAllAnswered
 }) => {
   const [level, setLevel] = useState(0);
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
@@ -264,6 +266,11 @@ const Questionnaire: React.FC<InputProps> = ({
   const answeredAllQuestions = Boolean(
     input.length > 0 && answers.length === input.length
   );
+
+  useEffect(() => {
+    if (answeredAllQuestions)
+      onAllAnswered(site)
+  }, [answeredAllQuestions])
 
   const showSummary = level === input.length;
 
