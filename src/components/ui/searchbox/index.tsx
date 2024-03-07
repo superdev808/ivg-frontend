@@ -35,6 +35,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
         onChange={handleChange}
         value={qureyString}
         ref={inputRef}
+        style={{ height: 50 }}
       />
       {loading && (
         <ProgressSpinner className="ml-4" style={{ width: 50, height: 50 }} />
