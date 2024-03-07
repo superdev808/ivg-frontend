@@ -104,7 +104,9 @@ const Quiz: React.FC<QuizProps> = ({
   };
 
   useEffect(() => {
-    setSuggestions(answers.sort());
+    if (answers && answers.length) {
+      setSuggestions(answers?.sort());
+    }
   }, [answers]);
 
   return (
