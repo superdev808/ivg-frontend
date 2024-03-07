@@ -74,12 +74,12 @@ const Quiz: React.FC<QuizProps> = ({
 
     return (
       <div className="flex align-items-center justify-content-center">
-        <div className="w-12 flex align-items-center gap-8">
+        <div className="w-12 flex align-items-center gap-8 pl-2">
           {image && (
             <Image
               alt={option}
               src={image}
-              imageStyle={{ height: 48, width: 96, objectFit: "contain" }}
+              imageStyle={{ height: 60, width: 160, objectFit: "contain" }}
             />
           )}
           <div>{option}</div>
