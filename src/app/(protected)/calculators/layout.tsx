@@ -23,15 +23,12 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
                             <div className="ml-4">This is the announcement banner ad</div>
                         </>
                     )
-                },
-                // { sticky: true, life: 2000, severity: 'info', summary: 'Info', detail: 'Message Content', closable: false },
-                // { sticky: true, life: 3000, severity: 'warn', summary: 'Warning', detail: 'Message Content', closable: false },
-                // { sticky: true, life: 4000, severity: 'error', summary: 'Error', detail: 'Message Content', closable: false }
+                }
             ]);
         }
     });
     return (
-        <div className='nav-offset'>
+        <div className='nav-offset flex-grow-1'>
             <Messages ref={msgs} />
             {children}
         </div>

@@ -71,7 +71,7 @@ const Quiz: React.FC<QuizProps> = ({
 
   const dropdownOptionTemplate = (option: any) => (
     <div className="flex align-items-center justify-content-center">
-      <div className="w-12 md:w-6 flex align-items-center gap-8">
+      <div className="w-12 flex align-items-center gap-8">
         <Image
           alt={option.name}
           src={calculatorImages[`${option}`.toLowerCase()]}
