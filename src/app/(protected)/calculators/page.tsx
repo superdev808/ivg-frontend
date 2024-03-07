@@ -37,7 +37,12 @@ export const Calculators = () => {
     {}
   );
 
-  const handleSearch = (str: string) => {
+  const handleSearch = (str = "") => {
+    if (!str) {
+      setSearchResult([]);
+      return;
+    }
+
     setLoading(true);
 
     const regExp = new RegExp(str, "i");

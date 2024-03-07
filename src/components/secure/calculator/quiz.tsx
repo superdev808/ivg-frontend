@@ -70,18 +70,24 @@ const Quiz: React.FC<QuizProps> = ({
     return availableOptions;
   }, [filteredAnswers]);
 
-  const dropdownOptionTemplate = (option: any) => (
-    <div className="flex align-items-center justify-content-center">
-      <div className="w-12 flex align-items-center gap-8">
-        <Image
-          alt={option.name}
-          src={calculatorImages[`${option}`.toLowerCase()]}
-          imageStyle={{ height: 48, width: 96, objectFit: "contain" }}
-        />
-        <div>{option}</div>
+  const dropdownOptionTemplate = (option: string) => {
+    const image = calculatorImages[String(option).toLowerCase()];
+
+    return (
+      <div className="flex align-items-center justify-content-center">
+        <div className="w-12 flex align-items-center gap-8 pl-2">
+          {image && (
+            <Image
+              alt={option}
+              src={image}
+              imageStyle={{ height: 60, width: 160, objectFit: "contain" }}
+            />
+          )}
+          <div>{option}</div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const handleSearchChange = (e: AutoCompleteChangeEvent) => {
     setSearchVaule(e.value);
@@ -92,9 +98,9 @@ const Quiz: React.FC<QuizProps> = ({
   };
 
   const handleAutoCompleteMethod = (e: AutoCompleteCompleteEvent) => {
-    const filteredSuggestions = answers?.filter((item) =>
-      item.toLowerCase().includes(e.query.toLowerCase())
-    ).sort();
+    const filteredSuggestions = answers
+      ?.filter((item) => item.toLowerCase().includes(e.query.toLowerCase()))
+      .sort((a, b) => a.localeCompare(b));
 
     setSuggestions(filteredSuggestions);
   };
