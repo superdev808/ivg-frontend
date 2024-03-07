@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import classNames from "classnames/bind";
 import orderBy from "lodash/orderBy";
 import {
@@ -39,7 +40,7 @@ const Quiz: React.FC<QuizProps> = ({
   onSelectAnswer,
 }) => {
   const [searchValue, setSearchVaule] = useState<string>("");
-  const [suggestions, setSuggestions] = useState<string[]>(answers);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState<string>("");
 
   const filteredAnswers = useMemo(() => {
@@ -107,6 +108,12 @@ const Quiz: React.FC<QuizProps> = ({
   const handleSelect = (e: AutoCompleteSelectEvent) => {
     setSelectedSuggestion(e.value);
   };
+
+  useEffect(() => {
+    if (answers && answers.length) {
+      setSuggestions(answers?.sort());
+    }
+  }, [answers]);
 
   return (
     <>
