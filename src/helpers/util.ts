@@ -2862,3 +2862,5 @@ export const socialButtons = [
     link: "https://www.linkedin.com/company/ivory-guide/?viewAsMember=true",
   },
 ];
+
+export const invalidPurchaseCalcs = ["Implant Torque Guide"]

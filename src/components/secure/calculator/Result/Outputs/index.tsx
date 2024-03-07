@@ -5,6 +5,11 @@ import React, { useMemo } from "react";
 
 import { isValidUrl } from "@/helpers/calculators";
 import { ItemData } from "@/types/calculators";
+import { invalidPurchaseCalcs } from "@/helpers/util";
+import classNames from "classnames/bind";
+import styles from "../style.module.scss";
+
+const cx = classNames.bind(styles);
 
 interface OutputsProps {
   items: ItemData[];
@@ -30,7 +35,7 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
             key={label}
             className="flex flex-column justify-content-between gap-4 p-3 border-2 border-gray-300 border-round-md md:flex-row md:align-items-center"
           >
-            <div className="flex flex-column gap-2">
+            <div className={cx("flex flex-column gap-2", { "w-12": invalidPurchaseCalcs.includes(label) })}>
               {item.itemName && <div>{item.itemName}</div>}
               {item.itemNumber && (
                 <div>
@@ -50,14 +55,14 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
               )}
               {
                 item.torqueValue && (
-                  <div>
+                  <div className="text-center text-2xl">
                     <b>Torque Value:</b> {item.torqueValue}
                   </div>
                 )
               }
             </div>
 
-            <div className="flex align-items-center gap-4">
+            {!invalidPurchaseCalcs.includes(label) && <div className="flex align-items-center gap-4">
               <InputNumber
                 value={item.quantity}
                 onValueChange={({ value }) =>
@@ -93,7 +98,7 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
                   distributor to purchase.
                 </div>
               )}
-            </div>
+            </div>}
           </div>
         );
       })}
