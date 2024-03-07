@@ -1,33 +1,45 @@
-'use client';
-import styles from '@/components/secure/admin/Admin.module.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+"use client";
 
-export interface SettingsMenuProps {
-	active?: string;
-	menuItems: { id: string; label: string; icon: string }[];
-	onSelect?: (item) => void;
+import cx from "classnames";
+
+export interface MenuItem {
+  id: string;
+  label: string;
+  icon: string;
 }
 
-export default function AdminMenu({ active, menuItems, onSelect }: SettingsMenuProps = { menuItems: [] } as SettingsMenuProps) {
-	return (
-		<div className={cx('menu')}>
-			<div className={cx('menu-title')}>
-				<span>Administrator Settings</span>
-			</div>
-			<div className="flex flex-column">
-				{menuItems.map((item, index) => {
-					return (
-						<div
-							key={`${item.id}_${index}`}
-							className={cx('menu-item', { active: active === item.id })}
-							onClick={() => onSelect && onSelect(item)}>
-							<i className={cx('icon', `${item.icon}`, ' mr-2 text-gray-900')}></i>
-							<span>{item.label}</span>
-						</div>
-					);
-				})}
-			</div>
-		</div>
-	);
+export interface AdminMenuProps {
+  active?: string;
+  menuItems: MenuItem[];
+  onSelect?: (item: MenuItem) => void;
 }
+
+const AdminMenu: React.FC<AdminMenuProps> = ({
+  active,
+  menuItems,
+  onSelect,
+}) => (
+  <div>
+    <div className="text-2xl font-semibold mb-5">Administrator Settings</div>
+    <div className="flex flex-column gap-4">
+      {menuItems.map((item) => (
+        <div
+          key={item.id}
+          className={cx(
+            "menu-item",
+            "flex align-items-center gap-2 cursor-pointer text-gray-600 text-lg w-fit hover:text-primary",
+            {
+              "text-primary": active === item.id,
+            }
+          )}
+          onClick={() => onSelect && onSelect(item)}
+        >
+          <i className={item.icon} />
+          <span>{item.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+export default AdminMenu;
