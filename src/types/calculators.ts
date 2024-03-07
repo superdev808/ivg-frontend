@@ -142,3 +142,8 @@ export interface CALCULATOR_GROUP_ITEM {
     description: string;
   }>;
 }
+
+export interface ANNOUNCEMENT_ITEM {
+  content: string;
+  published_at: Date;
+}
