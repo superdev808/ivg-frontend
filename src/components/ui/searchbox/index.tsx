@@ -1,7 +1,7 @@
 import { debounce } from "lodash";
 import { InputText } from "primereact/inputtext";
 import { ProgressSpinner } from "primereact/progressspinner";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 interface SearchBoxProps {
   handleSearch: (str: string) => void;
@@ -15,7 +15,8 @@ const SearchBox: React.FC<SearchBoxProps> = ({
   inputRef,
 }) => {
   const [qureyString, setQueryString] = useState<string>("");
-  const debouncedSearch = debounce(handleSearch, 500);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedSearch = useCallback(debounce(handleSearch, 500), []);
 
   const handleChange = (e: any) => {
     setQueryString(e.target.value);
