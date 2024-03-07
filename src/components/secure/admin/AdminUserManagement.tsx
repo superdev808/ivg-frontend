@@ -26,6 +26,7 @@ import {
 import { EditUser } from "@/types/UserTypes";
 
 import AdminEditUser from "./AdminForms/AdminEditUser";
+import { formatDate, formatTime } from "@/helpers/util";
 
 const cx = classNames.bind({});
 
@@ -335,6 +336,16 @@ const AdminUserManagement: React.FC = () => {
     />
   );
 
+  const verificationEmailTemplate = (row: EditUser) => (
+    <div className="flex justify-content-center">
+      {row.verificationEmailSent
+        ? `${formatDate(row.verificationEmailSent)} ${formatTime(
+            row.verificationEmailSent
+          )}`
+        : ""}
+    </div>
+  );
+
   const columns = [
     {
       field: "firstName",
@@ -378,6 +389,13 @@ const AdminUserManagement: React.FC = () => {
       body: (row: EditUser) => checkBodyTemplate(row.verified),
       sortable: true,
       filter: true,
+      filterElement: triStateFilterTemplate,
+    },
+    {
+      field: "verified",
+      header: "Verification email sent?",
+      body: (row: EditUser) => verificationEmailTemplate(row),
+      sortable: true,
       filterElement: triStateFilterTemplate,
     },
     {

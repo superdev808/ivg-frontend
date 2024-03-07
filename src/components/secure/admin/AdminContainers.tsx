@@ -25,7 +25,7 @@ const AdminContainers: React.FC = () => {
     <>
       <div className="nav-offset flex flex-column justify-content-center flex-grow-1">
         <div className="grid m-0 flex-grow-1 p-3">
-          <div className="col-3 p-2 border-right-1">
+          <div className="col-2 border-right-1">
             <AdminMenu
               active={currentSetting}
               menuItems={menuItems}
