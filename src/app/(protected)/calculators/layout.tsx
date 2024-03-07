@@ -31,7 +31,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
         }
     });
     return (
-        <div className='nav-offset'>
+        <div className='nav-offset flex flex-column flex-grow-1'>
             <Messages ref={msgs} />
             {children}
         </div>
