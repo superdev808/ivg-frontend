@@ -96,8 +96,8 @@ export const Calculators = () => {
   };
 
   return (
-    <div className="nav-offset flex-grow-1">
-      <div className="px-4 my-8">
+    <div className="flex-grow-1">
+      <div className={"px-4" || "px-4 my-8"}>
         <div className="p-5 border-round bg-white shadow-1">
           <h2 className="mt-0 mb-5 text-center">Calculators</h2>
 

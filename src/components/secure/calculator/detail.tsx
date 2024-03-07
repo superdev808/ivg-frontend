@@ -1,6 +1,7 @@
 import trim from "lodash/trim";
+import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -69,12 +70,22 @@ const DetailView: React.FC<DetailViewProps> = ({
     );
   };
 
+  const toastRef = useRef(null);
+  const showFeedbackToast = useCallback(() => {
+    (toastRef?.current as any)?.show({
+      severity: "success",
+      summary: "Successfully submitted",
+      detail: "Thank you for your feedback",
+      life: 5000,
+    });
+  }, [toastRef.current])
   const onClickThumbUp = () => {
     gaEvent({
       action: "Thumb_Up",
       category: "Button",
       label: calculatorName,
     });
+    showFeedbackToast()
   };
 
   const onClickFeedback = () => {
@@ -145,6 +156,7 @@ const DetailView: React.FC<DetailViewProps> = ({
         calculatorName={getCalculatorName(calculatorType)}
         quiz={quiz}
       />
+      <Toast ref={toastRef} position="top-right" />
     </>
   );
 };

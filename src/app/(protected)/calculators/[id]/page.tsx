@@ -14,7 +14,6 @@ export default function CalculatorPage() {
   // const router = useRouter();
   const searchParams = useParams();
   const tabId = decodeURIComponent(searchParams.id as string);
-  const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
 
   const selectedType = useMemo(() => {
     return tabItems.find((item) => item.type === tabId);
@@ -25,19 +24,10 @@ export default function CalculatorPage() {
     [CALCULATOR_MAPPINGS.CUSTOM_COMBINATION]: <AllOnXCalculator isCustom />,
   };
 
-  const onClickFeedback = () => {
-    gaEvent({
-      action: "Feedback",
-      category: "Button",
-      label: "Feedback",
-    });
-    setFeedbackShow(true);
-  };
-
   return (
     <>
       {componentMapping[tabId] || (
-        <div className="nav-offset flex flex-grow-1">
+        <div className="flex flex-grow-1">
           <div className="w-full">
             <div className="flex flex-column align-items-center justify-content-center">
               <CalculatorContainer
@@ -48,24 +38,6 @@ export default function CalculatorPage() {
             </div>
           </div>
         </div>
-      )}
-
-      <div
-        className="fixed text-2xl m-1 bg-green-300 border-round-3xl m-0 p-3 pl-5"
-        style={{
-          transform: "rotate(180deg)",
-          writingMode: "vertical-rl",
-          top: "30%",
-          right: "-30px",
-          cursor: "pointer",
-        }}
-        onClick={onClickFeedback}
-      >
-        Feedback
-      </div>
-
-      {feedbkackShow && (
-        <FeedbackDialog visible={feedbkackShow} setVisible={setFeedbackShow} />
       )}
     </>
   );

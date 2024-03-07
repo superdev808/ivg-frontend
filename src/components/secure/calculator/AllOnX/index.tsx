@@ -1,9 +1,11 @@
+import { event as gaEvent } from "@/lib/gtag";
 import cloneDeep from "lodash/cloneDeep";
 import has from "lodash/has";
 import isEqual from "lodash/isEqual";
 import { CheckboxChangeEvent } from "primereact/checkbox";
+import { Toast } from "primereact/toast";
 import { SelectButton, SelectButtonChangeEvent } from "primereact/selectbutton";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import TeethSelector from "@/components/shared/TeethSelector";
 import {
@@ -36,6 +38,8 @@ import {
 import AdditionalInputs from "./AdditionalInputs";
 import CustomCombinationsInputs from "./CustomCombinationsInputs";
 import InputDetails from "./InputDetails";
+import HelpfulFeedbackDialog from "../Feedback/HelpfulFeedbackDialog";
+import FeedbackDialogWrapper from "../Feedback/FeedbackDialogWrapper";
 
 interface AllOnXCalculatorProps {
   isCustom?: boolean;
@@ -49,6 +53,38 @@ interface AllOnXCalculatorProps {
 const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   isCustom = false,
 }) => {
+  const calculatorName = "All-on-X Calculator";
+
+  const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
+  
+  const toastRef = useRef(null);
+  const showFeedbackToast = useCallback(() => {
+    (toastRef?.current as any)?.show({
+      severity: "success",
+      summary: "Successfully submitted",
+      detail: "Thank you for your feedback",
+      life: 5000,
+    });
+  }, [toastRef.current])
+
+  const onClickThumbUp = () => {
+    gaEvent({
+      action: "Thumb_Up",
+      category: "Button",
+      label: calculatorName,
+    });
+    showFeedbackToast()
+  };
+
+  const onClickFeedback = () => {
+    gaEvent({
+      action: "Thumb_Down",
+      category: "Button",
+      label: calculatorName,
+    });
+    setFeedbackShow(true);
+  };
+
   const [procedure, setProcedure] = useState<PROCEDURE>(PROCEDURE.SURGERY);
   const [selectedSites, setSelectedSites] = useState<Site[]>([]);
   const [sitesData, setSitesData] = useState<SiteData>({});
@@ -63,6 +99,31 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   const [collections, setCollections] = useState<string[]>([]);
   const [selectedCollections, setSelectedCollections] = useState<string[]>([]);
   const [totalQuantities, setTotalQuantities] = useState<TotalQuantities[]>([]);
+  const [allAnsweredSites, setAllAnsweredSites] = useState<Site[]>([]);
+
+  const isAllSitesAnswered = selectedSites.reduce(
+    (acc: boolean, site: Site) => {
+      if (acc == false) return false;
+      return (
+        allAnsweredSites.filter(
+          (answeredSite: Site) => answeredSite.key === site.key
+        ).length > 0
+      );
+    },
+    true
+  );
+
+  useEffect(() => {
+    let newAllAnsweredSites = allAnsweredSites.filter((site: Site) => {
+      return (
+        selectedSites.filter(
+          (selectedSite: Site) => selectedSite.key == site.key
+        ).length > 0
+      );
+    });
+    if (newAllAnsweredSites.length != allAnsweredSites.length)
+      setAllAnsweredSites(newAllAnsweredSites);
+  }, [selectedSites, allAnsweredSites]);
 
   useEffect(() => {
     const newCollections = getProcedureCollections(
@@ -87,6 +148,10 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     );
     setProcedureInputsAndResponse(procedureInputsAndResponse);
   }, [additionalInputs, isCustom, procedure, selectedCollections]);
+
+  const handleAllAnswered = (site: Site) => {
+    setAllAnsweredSites([...allAnsweredSites, site]);
+  };
 
   const handleProcedureChange = (e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
@@ -302,7 +367,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   };
 
   return (
-    <div className="nav-offset flex-grow-1">
+    <div className="flex-grow-1">
       <div className="px-2 my-4 wrapper md:px-0 md:my-8">
         <div className="px-3 py-5 flex flex-column m:p-5 border-round bg-white shadow-1">
           {!isCustom && (
@@ -380,12 +445,44 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   totalQuantities={totalQuantities}
                   onQuizResponse={handleQuizResponse}
                   onUpdateQuantity={handleUpdateQuantity}
+                  onAllAnswered={handleAllAnswered}
                 />
               )}
             </div>
           </div>
         </div>
       </div>
+
+      {isAllSitesAnswered && selectedSites.length > 0 && (
+        <div
+          className="fixed text-2xl m-1 left-50 bg-green-300 p-3 pb-6 border-round-3xl m-0"
+          style={{
+            transform: "translate(-50%, -50%)",
+            bottom: "-90px",
+            zIndex: "100",
+          }}
+        >
+          <i
+            className="pi pi-thumbs-up text-3xl mr-3"
+            onClick={onClickThumbUp}
+          />
+          Was this helpful?
+          <i
+            className="pi pi-thumbs-down text-3xl ml-3"
+            onClick={onClickFeedback}
+          />
+        </div>
+      )}
+      {
+        isAllSitesAnswered == false && selectedSites.length > 0 && <FeedbackDialogWrapper label={calculatorName}/>
+      }
+      <HelpfulFeedbackDialog
+        visible={feedbkackShow}
+        setVisible={setFeedbackShow}
+        calculatorName={calculatorName}
+        quiz={[]}
+      />
+      <Toast ref={toastRef} position="top-right" />
     </div>
   );
 };

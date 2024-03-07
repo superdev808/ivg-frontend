@@ -2,6 +2,7 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputTextarea } from "primereact/inputtextarea";
 import { RadioButton } from "primereact/radiobutton";
+import { FileUpload } from "primereact/fileupload";
 import { Toast } from "primereact/toast";
 import { useState, useRef } from "react";
 
@@ -30,6 +31,10 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
   setVisible,
   quiz,
 }) => {
+  const [fileContent, setFileContent] = useState<any>({
+    fileName: null,
+    content: null,
+  });
   const [feedbackCategory, setFeedbackCategory] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -41,20 +46,24 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
     setMessage(e.target.value);
   };
 
+
   const handleSubmit = async () => {
     const quizData: any = {};
     quiz.forEach(({ question, answer }) => {
       quizData[question] = answer;
     });
-    const formData = {
-      calculatorName,
-      name,
-      email,
-      feedbackCategory,
-      message,
-      timestamp: new Date().toString(),
-      quiz: quizData,
-    };
+    const formData = new FormData();
+    if (fileContent.content) {
+      formData.append("attachment", fileContent.content, "feedback-screenshot");
+      formData.append("fileName", fileContent.fileName);
+    }
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("feedbackCategory", feedbackCategory);
+    formData.append("calculatorName", calculatorName);
+    formData.append("message", message);
+    formData.append("timestamp", new Date().toString());
+    formData.append("quiz", JSON.stringify(quizData))
 
     setLoading(true);
 
@@ -63,10 +72,7 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
         `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/sendHelpfulFeedback`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
+          body: formData,
         }
       );
       if (!response.ok) {
@@ -94,8 +100,23 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
     }
   };
 
+  const onUploadSelect = async (event: any) => {
+    // convert file to base64 encoded
+    const file = event.files[0];
+    let blob = await fetch(file.objectURL).then((r) => r.blob()); //blob:url
+
+    setFileContent({ fileName: file.name, content: blob });
+  };
+
   const footerContent = (
     <div className="flex justify-content-center">
+      <FileUpload
+        mode="basic"
+        accept="image/*"
+        onSelect={onUploadSelect}
+        chooseLabel="Add Screenshot"
+        disabled={loading}
+      />
       <Button
         label={loading ? "Submitting" : "Send Feedback"}
         onClick={handleSubmit}
@@ -105,6 +126,7 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
           (feedbackCategory === "Other" && !message) ||
           loading
         }
+        className="ml-3"
       />
     </div>
   );
