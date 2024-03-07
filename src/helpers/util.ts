@@ -2607,20 +2607,20 @@ export const calculatorIO = [
       },
       {
         name: "Product, Component, or Procedure",
-        text: "Product, Component, or Procedure"
-      }
+        text: "Product, Component, or Procedure",
+      },
     ],
     output: [
       {
         name: "Torque Value",
-        text: "Torque Value"
+        text: "Torque Value",
       },
       {
         name: "Notes",
-        text: "Notes"
-      }
-    ]
-  }
+        text: "Notes",
+      },
+    ],
+  },
 ];
 
 export const calculatorImages: any = {
@@ -2806,6 +2806,8 @@ export const productImages: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Healing+Abutment+D+4.5mm+H+3mm+2213.png",
   ImplantAnalogs:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+IOS+Model+Implant+Replica+Conical+RP+38190.png",
+  ImplantTorques:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Neodent+CM+Implant+Driver+Torque+Wrench+Long+105074.png",
   ImpressingCopingsMUAs:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Impression+Coping+Open+Tray+Multi-Unit+29089.png",
   ImpressingCopingsDirectToImplants:
@@ -2863,4 +2865,4 @@ export const socialButtons = [
   },
 ];
 
-export const invalidPurchaseCalcs = ["Implant Torque Guide"]
+export const invalidPurchaseCalcs = ["Implant Torque Guide"];
