@@ -2812,6 +2812,8 @@ export const productImages: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Impression+Coping+Open+Tray+Multi-Unit+29089.png",
   ImpressingCopingsDirectToImplants:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Temporary+Coping+Multi-Unit+29046.png",
+  TemporaryCopingsDirectToImplants:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Temporary+Coping+Multi-Unit+29046.png",
   TemporaryCopingsMUAs:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Temporary+Coping+Multi-Unit+29046.png",
   TiBasesMUAs:

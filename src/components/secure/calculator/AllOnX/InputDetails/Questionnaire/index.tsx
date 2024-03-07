@@ -65,7 +65,7 @@ const Questionnaire: React.FC<InputProps> = ({
   onAutopopulate,
   onQuizResponse,
   onUpdateQuantity,
-  onAllAnswered
+  onAllAnswered,
 }) => {
   const [level, setLevel] = useState(0);
   const [answerOptions, setAnswerOptions] = useState<string[][]>([]);
@@ -268,9 +268,9 @@ const Questionnaire: React.FC<InputProps> = ({
   );
 
   useEffect(() => {
-    if (answeredAllQuestions)
-      onAllAnswered(site)
-  }, [answeredAllQuestions])
+    if (answeredAllQuestions) onAllAnswered(site);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [answeredAllQuestions]);
 
   const showSummary = level === input.length;
 
