@@ -1084,7 +1084,7 @@ export const CALCULATORS: CollectionsIO = {
       outputFrom: "ImplantAnalogs",
     },
   ],
-  "Implant Torques": [
+  "Implant Torque Guide": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -1563,6 +1563,11 @@ export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
           "This calculator displays screws based on desired implant brand and size, as well as links to purchase this equipment.",
       },
       {
+        label: "ImplantTorques",
+        text: "Implant Torque Guide",
+        description: "Find the right torque value for your desired component, product, or procedure."
+      },
+      {
         label: "ImplantAnalogs",
         text: "Implant Analogs",
         description:
@@ -1639,11 +1644,6 @@ export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
         text: "Ti Bases (Multi-Unit Abutments)",
         description:
           "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "ImplantTorques",
-        text: "Implant Torques",
-        description: ""
       },
       {
         label: "BoneReduction",

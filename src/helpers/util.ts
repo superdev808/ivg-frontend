@@ -2586,7 +2586,7 @@ export const calculatorIO = [
   },
   {
     type: "ImplantTorques",
-    label: "Implant Torques",
+    label: "Implant Torque Guide",
     description: "",
     input: [
       {

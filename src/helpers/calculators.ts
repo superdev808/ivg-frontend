@@ -493,7 +493,7 @@ export const parseItems = (
   if (calculatorType === "ImplantTorques") {
     return [
       {
-        label: "Implant Torques",
+        label: "Implant Torque Guide",
         info: [
           {
             torqueValue: trim(item["Torque Value"]),
