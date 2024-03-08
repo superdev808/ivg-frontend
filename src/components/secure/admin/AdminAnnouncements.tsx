@@ -9,6 +9,7 @@ import { Editor } from 'primereact/editor';
 import { InputText } from "primereact/inputtext";
 import React, { useMemo, useRef, useState } from "react";
 import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
+import parse from 'html-react-parser'
 
 import {
   useGetLatestAnnouncementQuery,
@@ -107,7 +108,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
     {
       field: "content",
       header: "Content",
-      body: (row: ANNOUNCEMENT_ITEM) => <div className="h-8rem w-full overflow-y-auto inline-block flex align-items-center"><span dangerouslySetInnerHTML={{__html: row.content}} /></div>,
+      body: (row: ANNOUNCEMENT_ITEM) => <div className="h-8rem w-full overflow-y-auto inline-block flex align-items-center"><span>{parse(row.content)}</span></div>,
       sortable: true,
       filter: true,
     },

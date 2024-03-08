@@ -7,6 +7,7 @@ import { Messages } from 'primereact/messages';
 import {
     useGetLatestAnnouncementQuery
 } from "@/redux/hooks/apiHooks";
+import parse from 'html-react-parser'
 
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
     const msgs = useRef<Messages>(null);
@@ -21,11 +22,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
                     life: 1000,
                     severity: 'success',
                     closable: true,
-                    content: (
-                        <>
-                            <div dangerouslySetInnerHTML={{ __html: data?.content }} className='h-3rem w-full overflow-y-hidden' />
-                        </>
-                    )
+                    content: (<div className='h-3rem w-full overflow-y-hidden'>{parse(data?.content)}</div>)
                 }
             ]);
         }
