@@ -242,7 +242,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    getAnnouncementsList:  builder.query({
+    getAnnouncementsList:  builder.query<any, any>({
       query: () => ({
         url: "/announcements/get_all",
         method: "GET"
@@ -254,7 +254,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    getLatestAnnouncement:  builder.query({
+    getLatestAnnouncement:  builder.query<any, any>({
       query: () => ({
         url: "/announcements/get_latest",
         method: "GET"
