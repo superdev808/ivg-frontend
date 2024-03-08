@@ -92,12 +92,13 @@ const AdminAnnouncementsManagement: React.FC = () => {
   const calendarRangeFilterTemplate = (
     options: ColumnFilterElementTemplateOptions
   ) => (
-    <div className="flex justify-content-center">
+    <div className="flex justify-content-start">
       <Calendar
         value={options.value}
         onChange={(e: CalendarChangeEvent) => options.filterApplyCallback(e.value)}
         selectionMode="range"
         readOnlyInput
+        className="flex-grow-1"
       />
     </div>
   );
