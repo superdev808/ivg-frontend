@@ -11,7 +11,7 @@ import parse from 'html-react-parser'
 
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
     const msgs = useRef<Messages>(null);
-    const { data, refetch } = useGetLatestAnnouncementQuery({});
+    const { data } = useGetLatestAnnouncementQuery({});
 
     useEffect(() => {
         if (msgs.current && data?.content) {
