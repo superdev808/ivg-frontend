@@ -21,6 +21,9 @@ export const {
   useSaveResultMutation,
   useUpdateSavedResultMutation,
   useDeleteSavedResultMutation,
+  useGetAnnouncementsListQuery,
+  useGetLatestAnnouncementQuery,
+  useCreateAnnouncementMutation
 } = userApiSlice;
 
 export const { usePostSubmitContactFormMutation } = publicApiSlice;
