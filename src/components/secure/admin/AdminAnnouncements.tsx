@@ -4,17 +4,20 @@ import { Column, ColumnFilterElementTemplateOptions } from "primereact/column";
 import { FilterMatchMode } from "primereact/api";
 import { Button } from 'primereact/button';
 import { Toast, ToastMessage } from "primereact/toast";
+import { OverlayPanel } from "primereact/overlaypanel";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Dialog } from 'primereact/dialog';
 import { Editor } from 'primereact/editor';
 import { InputText } from "primereact/inputtext";
-import React, { useMemo, useRef, useState } from "react";
+import React, { SyntheticEvent, useMemo, useRef, useState } from "react";
 import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
 import parse from 'html-react-parser'
 
 import {
   useGetLatestAnnouncementQuery,
   useGetAnnouncementsListQuery,
-  useCreateAnnouncementMutation
+  useCreateAnnouncementMutation,
+  useDeleteAnnouncementMutation
 } from "@/redux/hooks/apiHooks";
 import { ANNOUNCEMENT_ITEM } from "@/types/calculators";
 
@@ -25,6 +28,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
 
   const [contentDialogVisible, setContentDialogVisible] = useState(false);
   const [newContent, setNewContent] = useState('');
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const { data, refetch } = useGetAnnouncementsListQuery({});
   const cleanedData = useMemo(() => {
@@ -36,11 +40,13 @@ const AdminAnnouncementsManagement: React.FC = () => {
   }, [data])
 
   const [createAnnouncement] = useCreateAnnouncementMutation()
-  const onCreateAnnouncement = async (content: string) => {
-    setContentDialogVisible(false)
-    setNewContent('')
+  const [deleteAnnouncement] = useDeleteAnnouncementMutation()
+  const onCreateOrUpdateAnnouncement = async (content: string, _id: string | null) => {
+    setContentDialogVisible(false);
+    setNewContent('');
+    setSelectedId(null);
     try {
-      const response: any = await createAnnouncement({ content });
+      const response: any = await createAnnouncement({ content, _id: _id == null ? undefined : _id });
       if (response.error) {
         throw new Error("An error occurred while publishing new announcement.");
       }
@@ -61,6 +67,55 @@ const AdminAnnouncementsManagement: React.FC = () => {
       );
     }
   }
+  const onCreateAnnouncement = async () => {
+    setContentDialogVisible(true);
+    setNewContent('');
+  }
+  const onUpdateAnnouncement = async (e: SyntheticEvent) => {
+    setNewContent(selectedAnnouncement?.content || '');
+    setSelectedId(selectedAnnouncement?._id || null);
+    setContentDialogVisible(true);
+    (menuPanel.current as OverlayPanel).toggle(e);
+  }
+  const onDeleteAnnouncement = async (announcementItem: ANNOUNCEMENT_ITEM) => {
+    confirmDialog({
+      message: "Are you sure you want to delete?",
+      header: "Confirmation",
+      icon: "pi pi-exclamation-triangle",
+
+      accept: async () => {
+        try {
+          const response: any = await deleteAnnouncement({ _id: announcementItem._id });
+          refetch();
+          if (response.error) {
+            throw new Error(
+              "An error occurred while deleting selected announcement."
+            );
+          }
+          showToast(
+            {
+              label: "Success",
+              message: "Announcement deleted successfully.",
+            },
+            toast,
+            "success"
+          );
+        } catch (error) {
+          showToast(
+            {
+              label: "Error",
+              message: "An error occurred while deleting selected announcement.",
+            },
+            toast,
+            "error"
+          );
+        }
+      },
+    });
+  };
+
+  const menuPanel = useRef<OverlayPanel>(null);
+  const [selectedAnnouncement, setSelectedAnnouncement] = useState<ANNOUNCEMENT_ITEM | null>(null);
 
   const [filters, setFilters] = useState<DataTableFilterMeta>({
     content: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -104,6 +159,46 @@ const AdminAnnouncementsManagement: React.FC = () => {
     </div>
   );
 
+  const actionsBodyTemplate = (row: ANNOUNCEMENT_ITEM) => (
+    <>
+      <Button
+        icon="pi pi-ellipsis-v"
+        rounded
+        text
+        onClick={(e) => {
+          (menuPanel.current as OverlayPanel).toggle(e);
+          console.log(row)
+          setSelectedAnnouncement(row);
+        }}
+      />
+
+      <OverlayPanel
+        pt={{
+          content: { className: "py-0 px-4 text-sm" },
+          root: { className: "border-round-lg	shadow-2 border-1 border-100" },
+        }}
+        ref={menuPanel}
+        onHide={() => setSelectedAnnouncement(null)}
+      >
+        <p
+          className="cursor-pointer hover:text-gray-600"
+          onClick={(e) => onUpdateAnnouncement(e)}
+        >
+          Update
+        </p>
+
+        <p
+          className="cursor-pointer hover:text-gray-600"
+          onClick={() => {
+            onDeleteAnnouncement(selectedAnnouncement as ANNOUNCEMENT_ITEM);
+          }}
+        >
+          Delete
+        </p>
+      </OverlayPanel>
+    </>
+  );
+
   const columns = [
     {
       field: "content",
@@ -119,14 +214,19 @@ const AdminAnnouncementsManagement: React.FC = () => {
       sortable: true,
       filter: true,
       filterElement: calendarRangeFilterTemplate
-    }
+    },
+    {
+      field: "actions",
+      body: (row: ANNOUNCEMENT_ITEM) => actionsBodyTemplate(row),
+      sortable: false,
+    },
   ];
 
   return (
     <div className="flex flex-column flex-grow-1">
       <div className="mb-3 flex align-items-center">
         <span className="text-2xl font-semibold">Announcements Management</span>
-        <Button label="Publish new one" className="ml-3 text-md px-3 py-3" onClick={() => setContentDialogVisible(true)} />
+        <Button label="Publish new one" className="ml-3 text-md px-3 py-3" onClick={onCreateAnnouncement} />
       </div>
 
       <div className="flex-grow-1">
@@ -168,6 +268,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
         </DataTable>
       </div>
       <Toast ref={toast} position="bottom-center" />
+      <ConfirmDialog />
       <Dialog
         header="Publish new announcement"
         visible={contentDialogVisible}
@@ -176,8 +277,8 @@ const AdminAnnouncementsManagement: React.FC = () => {
         onHide={() => setContentDialogVisible(false)}
         footer={
           <>
-            <Button label="Publish" className="p-button p-button-primary" icon="pi pi-check" onClick={() => onCreateAnnouncement(newContent)} autoFocus />
-            <Button label="Cancel" className="p-button p-button-secondary" icon="pi pi-times" onClick={() => setContentDialogVisible(false)}/>
+            <Button label="Publish" className="p-button p-button-primary" icon="pi pi-check" onClick={() => onCreateOrUpdateAnnouncement(newContent, selectedId)} autoFocus />
+            <Button label="Cancel" className="p-button p-button-secondary" icon="pi pi-times" onClick={() => setContentDialogVisible(false)} />
           </>
         }
       >
