@@ -27,12 +27,17 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   const [answerOptions, setAnswerOptions] = useState<any[]>([]);
   const [answers, setAnswers] = useState<any[]>([]);
   const [items, setItems] = useState<any[]>([]);
+  const [canProceed, setCanProceed] = useState<boolean>(true);
 
   const calculatorType = decodeURI(option);
 
   const { isLoading } = useQuery(
-    [input, level, answers, option],
+    [input, level, answers, option, canProceed],
     async () => {
+      if (!canProceed) {
+        return;
+      }
+
       if (level > input.length) {
         return;
       }
@@ -80,6 +85,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   }, [input, level]);
 
   const handleSelectAnswer = (index: number) => (value: any) => {
+    setCanProceed(true);
     setLevel(index + 1);
     const newAnswers = answers.slice(0, index);
     newAnswers[index] = value;
@@ -87,12 +93,11 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   };
 
   const handleBack = (index: number) => () => {
+    setCanProceed(false);
     const lastAnswerIndex = answers
       .slice(0, index)
       .findLastIndex((answer) => answer !== "");
     setLevel(lastAnswerIndex);
-    setAnswers((prevSate) => prevSate.slice(0, lastAnswerIndex));
-    setAnswerOptions((prevState) => prevState.slice(0, lastAnswerIndex));
   };
 
   const handleBackFromResult = () => {
@@ -153,7 +158,9 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
               answers={answers}
               onGoBack={handleBackFromResult}
             />
-          ) : <FeedbackDialogWrapper label={getCalculatorName(calculatorType)} />}
+          ) : (
+            <FeedbackDialogWrapper label={getCalculatorName(calculatorType)} />
+          )}
 
           {showLoader && (
             <div className="w-12 flex justify-content-center">
