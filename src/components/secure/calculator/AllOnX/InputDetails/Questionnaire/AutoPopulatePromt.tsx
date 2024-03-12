@@ -8,13 +8,13 @@ import { RadioButtonOption } from "@/types/calculators";
 interface AutoPopulatePromtParams {
   autoPopulate: string;
   showRefreshButton: boolean;
-  onPopulateResponse: (value: string) => void;
+  onAutoPopulateChange: (value: string) => void;
 }
 
 const AutoPopulatePromt: React.FC<AutoPopulatePromtParams> = ({
   autoPopulate,
   showRefreshButton,
-  onPopulateResponse,
+  onAutoPopulateChange,
 }) => (
   <div className="flex flex-column w-12">
     <p>Auto-populate these answers for all other sites?</p>
@@ -25,7 +25,7 @@ const AutoPopulatePromt: React.FC<AutoPopulatePromtParams> = ({
             inputId={option.id}
             name={option.name}
             value={option.value}
-            onChange={(e) => onPopulateResponse(e.value)}
+            onChange={(e) => onAutoPopulateChange(e.value)}
             checked={autoPopulate === option.value}
           />
           <label htmlFor={option.id} className="ml-2">
@@ -38,7 +38,7 @@ const AutoPopulatePromt: React.FC<AutoPopulatePromtParams> = ({
         <Button
           label="Refresh"
           size="small"
-          onClick={() => onPopulateResponse(AUTO_POPULATE_OPTIONS[0].value)}
+          onClick={() => onAutoPopulateChange(AUTO_POPULATE_OPTIONS[0].value)}
         />
       )}
     </div>

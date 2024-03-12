@@ -1462,13 +1462,13 @@ export const LOWER_SITES: Site[] = SITES.slice(16, 32);
 
 export const AUTO_POPULATE_OPTIONS: RadioButtonOption[] = [
   {
-    id: "Autopopulate1",
-    name: "autopopulate",
+    id: "autoPopulateYes",
+    name: "autoPopulate",
     value: "Yes",
   },
   {
-    id: "Autopopulate2",
-    name: "autopopulate",
+    id: "autoPopulateNo",
+    name: "autoPopulate",
     value: "No",
   },
 ];
@@ -1565,7 +1565,8 @@ export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
       {
         label: "ImplantTorques",
         text: "Implant Torque Guide",
-        description: "Find the right torque value for your desired component, product, or procedure."
+        description:
+          "Find the right torque value for your desired component, product, or procedure.",
       },
       {
         label: "ImplantAnalogs",

@@ -5,8 +5,8 @@ import { useQuery } from "react-query";
 import { getCalculatorName } from "@/helpers/util";
 
 import DetailView from "./detail";
-import Quiz from "./quiz";
 import FeedbackDialogWrapper from "./Feedback/FeedbackDialogWrapper";
+import Quiz from "./quiz";
 
 interface QuizOption {
   name: string;

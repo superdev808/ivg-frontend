@@ -28,7 +28,7 @@ interface InputDetailsProps {
     question: InputOutputValues,
     answer: string
   ) => void;
-  onAutopopulate: (dataToPopulate: AutoPopulateData | null) => void;
+  onAutoPopulate: (dataToPopulate: AutoPopulateData | null) => void;
   onQuizResponse: (
     site: Site,
     response: ItemData[],
@@ -48,10 +48,10 @@ const InputDetails: React.FC<InputDetailsProps> = ({
   isCustom,
   showTeethSelection,
   onInputSelect,
-  onAutopopulate,
+  onAutoPopulate,
   onQuizResponse,
   onUpdateQuantity,
-  onAllAnswered
+  onAllAnswered,
 }) => {
   return (
     <div className="relative">
@@ -62,12 +62,12 @@ const InputDetails: React.FC<InputDetailsProps> = ({
               site={site}
               input={procedureInputs}
               option={CALCULATOR_MAPPINGS.ALL_ON_X_CALCULATOR}
-              showAutopopulatePrompt={selectedSites.length > 1 && index === 0}
+              showAutoPopulatePrompt={selectedSites.length > 1 && index === 0}
               autoPopulateData={autoPopulateData}
               sitesData={sitesData}
               responseOrder={responseOrder}
               onInputSelect={onInputSelect}
-              onAutopopulate={onAutopopulate}
+              onAutoPopulate={onAutoPopulate}
               onQuizResponse={onQuizResponse}
               onUpdateQuantity={onUpdateQuantity}
               onAllAnswered={onAllAnswered}

@@ -16,6 +16,7 @@ import {
 import React, { useRef, useState } from "react";
 
 import { USER_ROLES_OPTIONS } from "@/constants/users";
+import { formatDate, formatTime } from "@/helpers/util";
 import {
   useGetUsersListQuery,
   usePostDeactivateUserMutation,
@@ -26,7 +27,6 @@ import {
 import { EditUser } from "@/types/UserTypes";
 
 import AdminEditUser from "./AdminForms/AdminEditUser";
-import { formatDate, formatTime } from "@/helpers/util";
 
 const cx = classNames.bind({});
 
@@ -71,11 +71,13 @@ const AdminUserManagement: React.FC = () => {
       accept: async () => {
         try {
           const response: any = await postSendResetPassword({ id: user._id });
+
           if (response.error) {
             throw new Error(
               "An error occurred while sending reset password email."
             );
           }
+
           showToast(
             {
               label: "Success",
@@ -109,11 +111,13 @@ const AdminUserManagement: React.FC = () => {
           const response: any = await postSendVerificationEmail({
             email: user.email,
           });
+
           if (response.error) {
             throw new Error(
               "An error occurred while sending verification email."
             );
           }
+
           showToast(
             {
               label: "Success",
@@ -145,14 +149,17 @@ const AdminUserManagement: React.FC = () => {
       accept: async () => {
         try {
           const response: any = await postDeactivateUser({ id: user._id });
+
           if (response.error) {
             throw new Error("An error occurred while deactivating user.");
           }
+
           showToast(
             { label: "Success", message: "User deactivated successfully." },
             toast,
             "success"
           );
+
           refetch();
         } catch (error) {
           showToast(
@@ -177,14 +184,17 @@ const AdminUserManagement: React.FC = () => {
       accept: async () => {
         try {
           const response: any = await postActivateUser({ id: user._id });
+
           if (response.error) {
             throw new Error("An error occurred while activating user.");
           }
+
           showToast(
             { label: "Success", message: "User activated successfully." },
             toast,
             "success"
           );
+
           refetch();
         } catch (error) {
           showToast(
@@ -222,9 +232,9 @@ const AdminUserManagement: React.FC = () => {
         )}
       >
         {value ? (
-          <i className="pi pi-check-circle"></i>
+          <i className="pi pi-check-circle" />
         ) : (
-          <i className="pi pi-times-circle"></i>
+          <i className="pi pi-times-circle" />
         )}
       </div>
     </div>

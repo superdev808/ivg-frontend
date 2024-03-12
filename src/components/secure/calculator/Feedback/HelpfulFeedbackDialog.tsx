@@ -46,7 +46,6 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
     setMessage(e.target.value);
   };
 
-
   const handleSubmit = async () => {
     const quizData: any = {};
     quiz.forEach(({ question, answer }) => {
@@ -63,7 +62,7 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
     formData.append("calculatorName", calculatorName);
     formData.append("message", message);
     formData.append("timestamp", new Date().toString());
-    formData.append("quiz", JSON.stringify(quizData))
+    formData.append("quiz", JSON.stringify(quizData));
 
     setLoading(true);
 

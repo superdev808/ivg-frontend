@@ -1,23 +1,22 @@
 import classNames from "classnames/bind";
-import { DataTable, DataTableFilterMeta } from "primereact/datatable";
-import { Column, ColumnFilterElementTemplateOptions } from "primereact/column";
+import parse from "html-react-parser";
 import { FilterMatchMode } from "primereact/api";
-import { Button } from 'primereact/button';
-import { Toast, ToastMessage } from "primereact/toast";
-import { OverlayPanel } from "primereact/overlaypanel";
+import { Button } from "primereact/button";
+import { Calendar, CalendarChangeEvent } from "primereact/calendar";
+import { Column, ColumnFilterElementTemplateOptions } from "primereact/column";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { Dialog } from 'primereact/dialog';
-import { Editor } from 'primereact/editor';
+import { DataTable, DataTableFilterMeta } from "primereact/datatable";
+import { Dialog } from "primereact/dialog";
+import { Editor } from "primereact/editor";
 import { InputText } from "primereact/inputtext";
+import { OverlayPanel } from "primereact/overlaypanel";
+import { Toast, ToastMessage } from "primereact/toast";
 import React, { SyntheticEvent, useMemo, useRef, useState } from "react";
-import { Calendar, CalendarChangeEvent } from 'primereact/calendar';
-import parse from 'html-react-parser'
 
 import {
-  useGetLatestAnnouncementQuery,
   useGetAnnouncementsListQuery,
   useCreateAnnouncementMutation,
-  useDeleteAnnouncementMutation
+  useDeleteAnnouncementMutation,
 } from "@/redux/hooks/apiHooks";
 import { ANNOUNCEMENT_ITEM } from "@/types/calculators";
 
@@ -26,35 +25,51 @@ const cx = classNames.bind({});
 const AdminAnnouncementsManagement: React.FC = () => {
   const toast = useRef(null);
 
-  const [contentDialogVisible, setContentDialogVisible] = useState(false);
-  const [newContent, setNewContent] = useState('');
+  const [contentDialogVisible, setContentDialogVisible] =
+    useState<boolean>(false);
+  const [newContent, setNewContent] = useState<string>("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const { data, refetch } = useGetAnnouncementsListQuery({});
+
   const cleanedData = useMemo(() => {
-    return ((data ?? []) as any[]).map(item => {
+    return ((data ?? []) as any[]).map((item) => {
       let published_at = new Date(item.published_at);
       published_at.setHours(0, 0, 0, 0);
-      return { ...item, published_at }
-    })
-  }, [data])
+      return { ...item, published_at };
+    });
+  }, [data]);
 
-  const [createAnnouncement] = useCreateAnnouncementMutation()
-  const [deleteAnnouncement] = useDeleteAnnouncementMutation()
-  const onCreateOrUpdateAnnouncement = async (content: string, _id: string | null) => {
+  const [createAnnouncement] = useCreateAnnouncementMutation();
+  const [deleteAnnouncement] = useDeleteAnnouncementMutation();
+
+  const onCreateOrUpdateAnnouncement = async (
+    content: string,
+    _id: string | null
+  ) => {
     setContentDialogVisible(false);
-    setNewContent('');
+    setNewContent("");
     setSelectedId(null);
+
     try {
-      const response: any = await createAnnouncement({ content, _id: _id == null ? undefined : _id });
+      const response: any = await createAnnouncement({
+        content,
+        _id: _id == null ? undefined : _id,
+      });
+
       if (response.error) {
         throw new Error("An error occurred while publishing new announcement.");
       }
+
       showToast(
-        { label: "Success", message: "New announcement published successfully." },
+        {
+          label: "Success",
+          message: "New announcement published successfully.",
+        },
         toast,
         "success"
       );
+
       refetch();
     } catch (error) {
       showToast(
@@ -66,17 +81,20 @@ const AdminAnnouncementsManagement: React.FC = () => {
         "error"
       );
     }
-  }
+  };
+
   const onCreateAnnouncement = async () => {
     setContentDialogVisible(true);
-    setNewContent('');
-  }
+    setNewContent("");
+  };
+
   const onUpdateAnnouncement = async (e: SyntheticEvent) => {
-    setNewContent(selectedAnnouncement?.content || '');
+    setNewContent(selectedAnnouncement?.content || "");
     setSelectedId(selectedAnnouncement?._id || null);
     setContentDialogVisible(true);
     (menuPanel.current as OverlayPanel).toggle(e);
-  }
+  };
+
   const onDeleteAnnouncement = async (announcementItem: ANNOUNCEMENT_ITEM) => {
     confirmDialog({
       message: "Are you sure you want to delete?",
@@ -85,13 +103,18 @@ const AdminAnnouncementsManagement: React.FC = () => {
 
       accept: async () => {
         try {
-          const response: any = await deleteAnnouncement({ _id: announcementItem._id });
+          const response: any = await deleteAnnouncement({
+            _id: announcementItem._id,
+          });
+
           refetch();
+
           if (response.error) {
             throw new Error(
               "An error occurred while deleting selected announcement."
             );
           }
+
           showToast(
             {
               label: "Success",
@@ -104,7 +127,8 @@ const AdminAnnouncementsManagement: React.FC = () => {
           showToast(
             {
               label: "Error",
-              message: "An error occurred while deleting selected announcement.",
+              message:
+                "An error occurred while deleting selected announcement.",
             },
             toast,
             "error"
@@ -115,7 +139,8 @@ const AdminAnnouncementsManagement: React.FC = () => {
   };
 
   const menuPanel = useRef<OverlayPanel>(null);
-  const [selectedAnnouncement, setSelectedAnnouncement] = useState<ANNOUNCEMENT_ITEM | null>(null);
+  const [selectedAnnouncement, setSelectedAnnouncement] =
+    useState<ANNOUNCEMENT_ITEM | null>(null);
 
   const [filters, setFilters] = useState<DataTableFilterMeta>({
     content: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -151,7 +176,9 @@ const AdminAnnouncementsManagement: React.FC = () => {
     <div className="flex justify-content-start">
       <Calendar
         value={options.value}
-        onChange={(e: CalendarChangeEvent) => options.filterApplyCallback(e.value)}
+        onChange={(e: CalendarChangeEvent) =>
+          options.filterApplyCallback(e.value)
+        }
         selectionMode="range"
         readOnlyInput
         className="flex-grow-1"
@@ -167,7 +194,6 @@ const AdminAnnouncementsManagement: React.FC = () => {
         text
         onClick={(e) => {
           (menuPanel.current as OverlayPanel).toggle(e);
-          console.log(row)
           setSelectedAnnouncement(row);
         }}
       />
@@ -203,17 +229,29 @@ const AdminAnnouncementsManagement: React.FC = () => {
     {
       field: "content",
       header: "Content",
-      body: (row: ANNOUNCEMENT_ITEM) => <div className="h-8rem w-full overflow-y-auto inline-block flex align-items-center"><span>{parse(row.content)}</span></div>,
+      body: (row: ANNOUNCEMENT_ITEM) => (
+        <div className="h-8rem w-full overflow-y-auto inline-block flex align-items-center">
+          <span>{parse(row.content)}</span>
+        </div>
+      ),
       sortable: true,
       filter: true,
     },
     {
       field: "published_at",
       header: "Published at",
-      body: (row: ANNOUNCEMENT_ITEM) => <span>{row.published_at.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>,
+      body: (row: ANNOUNCEMENT_ITEM) => (
+        <span>
+          {row.published_at.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
+        </span>
+      ),
       sortable: true,
       filter: true,
-      filterElement: calendarRangeFilterTemplate
+      filterElement: calendarRangeFilterTemplate,
     },
     {
       field: "actions",
@@ -226,7 +264,11 @@ const AdminAnnouncementsManagement: React.FC = () => {
     <div className="flex flex-column flex-grow-1">
       <div className="mb-3 flex align-items-center">
         <span className="text-2xl font-semibold">Announcements Management</span>
-        <Button label="Publish new one" className="ml-3 text-md px-3 py-3" onClick={onCreateAnnouncement} />
+        <Button
+          label="Publish new one"
+          className="ml-3 text-md px-3 py-3"
+          onClick={onCreateAnnouncement}
+        />
       </div>
 
       <div className="flex-grow-1">
@@ -238,10 +280,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
           paginator
           rows={10}
           rowsPerPageOptions={[10, 25, 50]}
-          globalFilterFields={[
-            "content",
-            "published_at",
-          ]}
+          globalFilterFields={["content", "published_at"]}
           filters={filters}
           filterDisplay="row"
           pt={{ wrapper: { className: "h-auto" } }}
@@ -267,22 +306,42 @@ const AdminAnnouncementsManagement: React.FC = () => {
           ))}
         </DataTable>
       </div>
+
       <Toast ref={toast} position="bottom-center" />
+
       <ConfirmDialog />
+
       <Dialog
         header="Publish new announcement"
         visible={contentDialogVisible}
         maximizable
-        style={{ width: '50vw' }}
+        style={{ width: "50vw" }}
         onHide={() => setContentDialogVisible(false)}
         footer={
           <>
-            <Button label="Publish" className="p-button p-button-primary" icon="pi pi-check" onClick={() => onCreateOrUpdateAnnouncement(newContent, selectedId)} autoFocus />
-            <Button label="Cancel" className="p-button p-button-secondary" icon="pi pi-times" onClick={() => setContentDialogVisible(false)} />
+            <Button
+              label="Publish"
+              className="p-button p-button-primary"
+              icon="pi pi-check"
+              onClick={() =>
+                onCreateOrUpdateAnnouncement(newContent, selectedId)
+              }
+              autoFocus
+            />
+            <Button
+              label="Cancel"
+              className="p-button p-button-secondary"
+              icon="pi pi-times"
+              onClick={() => setContentDialogVisible(false)}
+            />
           </>
         }
       >
-        <Editor value={newContent} onTextChange={(e) => setNewContent(e.htmlValue ?? '')} style={{ height: '320px' }} />
+        <Editor
+          value={newContent}
+          onTextChange={(e) => setNewContent(e.htmlValue ?? "")}
+          style={{ height: 320 }}
+        />
       </Dialog>
     </div>
   );
