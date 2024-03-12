@@ -34,7 +34,7 @@ interface InputProps {
   site: Site;
   input: InputOutputValues[];
   option: string;
-  showAutopopulatePrompt: boolean;
+  showAutoPopulatePrompt: boolean;
   autoPopulateData: AutoPopulateData | null;
   sitesData: SiteData;
   responseOrder: string[];
@@ -43,7 +43,7 @@ interface InputProps {
     question: InputOutputValues,
     answer: string
   ) => void;
-  onAutopopulate: (dataToPopulate: AutoPopulateData | null) => void;
+  onAutoPopulate: (dataToPopulate: AutoPopulateData | null) => void;
   onQuizResponse: (
     site: Site,
     response: ItemData[],
@@ -57,12 +57,12 @@ const Questionnaire: React.FC<InputProps> = ({
   site,
   input,
   option,
-  showAutopopulatePrompt,
+  showAutoPopulatePrompt,
   autoPopulateData,
   sitesData,
   responseOrder,
   onInputSelect,
-  onAutopopulate,
+  onAutoPopulate,
   onQuizResponse,
   onUpdateQuantity,
   onAllAnswered,
@@ -82,6 +82,10 @@ const Questionnaire: React.FC<InputProps> = ({
   const toastRef = useRef(null);
 
   useEffect(() => {
+    if (showAutoPopulatePrompt) {
+      return;
+    }
+
     if (autoPopulateData) {
       const { questions, answerOptions, answers } = autoPopulateData;
 
@@ -90,12 +94,12 @@ const Questionnaire: React.FC<InputProps> = ({
       setAutoQuestions(questions);
 
       setLevel(questions.length);
-      setTimeout(() => {
-        onAutopopulate(null);
-        setAutoQuestions(null);
-      }, 1000);
+    } else {
+      setAutoQuestions(null);
+      setLevel(0);
+      setAnswers([]);
     }
-  }, [autoPopulateData, onAutopopulate]);
+  }, [autoPopulateData, site, showAutoPopulatePrompt, onAutoPopulate]);
 
   const { isLoading } = useQuery(
     [input, level, answers, option, site, canProceed],
@@ -222,12 +226,14 @@ const Questionnaire: React.FC<InputProps> = ({
     }
   };
 
-  const handlePopulateResponse = (value: string) => {
+  const handleAutoPopulateChange = (value: string) => {
     setAutoPopulate(value);
     setIsAutoPopulatedAnswersChanged(false);
 
     if (value === AUTO_POPULATE_OPTIONS[0].value) {
-      onAutopopulate({ site, questions, answerOptions, answers });
+      onAutoPopulate({ site, questions, answerOptions, answers });
+    } else {
+      onAutoPopulate(null);
     }
   };
 
@@ -335,10 +341,10 @@ const Questionnaire: React.FC<InputProps> = ({
           );
         })}
 
-        {showAutopopulatePrompt && answeredAllQuestions && (
+        {showAutoPopulatePrompt && answeredAllQuestions && (
           <AutoPopulatePromt
             autoPopulate={autoPopulate}
-            onPopulateResponse={handlePopulateResponse}
+            onAutoPopulateChange={handleAutoPopulateChange}
             showRefreshButton={isAutoPopulatedAnswersChanged}
           />
         )}
