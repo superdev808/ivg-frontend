@@ -136,6 +136,11 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "RestroativeDirectToImplant",
     },
     {
+      name: "Abutment Type",
+      text: "Abutment Type [Drivers (Restorative, Direct to Implant)]",
+      calculator: "RestroativeDirectToImplant",
+    },
+    {
       name: "One Piece or Torque Attachment",
       text: "One Piece or Torque Attachment [Drivers (Restorative, Direct to Implant)]",
       calculator: "RestroativeDirectToImplant",
@@ -567,6 +572,11 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "TiBasesDirectToImplants",
     },
     {
+      name: "Hexed or Non-Hexed",
+      text: "Hexed or Non-Hexed [Ti Bases (Direct to Implant)]",
+      calculator: "TiBasesDirectToImplants",
+    },
+    {
       name: "",
       text: "",
       calculator: "TiBasesDirectToImplants",
@@ -601,6 +611,11 @@ export const CALCULATORS: CollectionsIO = {
     {
       name: "Authentic or Generic",
       text: "Authentic or Generic [Scanbodies (Multi-Unit Abutments)]",
+      calculator: "ScanbodyMUAs",
+    },
+    {
+      name: "Abutment Type",
+      text: "Abutment Type [Scanbodies (Multi-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
@@ -1343,6 +1358,11 @@ export const CALCULATORS: CollectionsIO = {
     {
       name: "Abutment Height",
       text: "Abutment Height [Stock Abutments]",
+      calculator: "StockAbutments",
+    },
+    {
+      name: "Engaging",
+      text: "Engaging [Stock Abutments]",
       calculator: "StockAbutments",
     },
     {
