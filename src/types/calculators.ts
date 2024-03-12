@@ -144,6 +144,7 @@ export interface CALCULATOR_GROUP_ITEM {
 }
 
 export interface ANNOUNCEMENT_ITEM {
+  _id: string;
   content: string;
   published_at: Date;
 }

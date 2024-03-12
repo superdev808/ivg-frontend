@@ -266,9 +266,22 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    createAnnouncement: builder.mutation<any, { content: string }>({
+    createAnnouncement: builder.mutation<any, { content: string, _id?: string }>({
       query: (body) => ({
         url: "/announcements/create",
+        method: "POST",
+        body: body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+      transformResponse: (res: Response) => {
+        return res.status === "Success" ? res.data : res.status;
+      },
+    }),
+    deleteAnnouncement: builder.mutation<any, { _id: string }>({
+      query: (body) => ({
+        url: "/announcements/delete",
         method: "POST",
         body: body,
       }),

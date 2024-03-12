@@ -23,7 +23,8 @@ export const {
   useDeleteSavedResultMutation,
   useGetAnnouncementsListQuery,
   useGetLatestAnnouncementQuery,
-  useCreateAnnouncementMutation
+  useCreateAnnouncementMutation,
+  useDeleteAnnouncementMutation
 } = userApiSlice;
 
 export const { usePostSubmitContactFormMutation } = publicApiSlice;
