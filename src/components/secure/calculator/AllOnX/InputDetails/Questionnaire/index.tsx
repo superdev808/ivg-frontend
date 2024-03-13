@@ -94,12 +94,18 @@ const Questionnaire: React.FC<InputProps> = ({
       setAutoQuestions(questions);
 
       setLevel(questions.length);
-    } else {
+    } else if (Object.keys(sitesData).length > 1) {
       setAutoQuestions(null);
       setLevel(0);
       setAnswers([]);
     }
-  }, [autoPopulateData, site, showAutoPopulatePrompt, onAutoPopulate]);
+  }, [
+    autoPopulateData,
+    site,
+    sitesData,
+    showAutoPopulatePrompt,
+    onAutoPopulate,
+  ]);
 
   const { isLoading } = useQuery(
     [input, level, answers, option, site, canProceed],
