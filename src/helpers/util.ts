@@ -56,6 +56,10 @@ export const calculatorIO = [
         name: "Link to Purchase",
         text: "Link to Purchase",
       },
+      {
+        name: "Notes",
+        text: "Notes",
+      },
     ],
   },
   {
@@ -177,6 +181,10 @@ export const calculatorIO = [
         text: "Luting Agent Link to Purchase",
       },
       {
+        name: "Notes",
+        text: "Notes",
+      },
+      {
         name: "Teflon Tape",
         text: "Teflon Tape",
       },
@@ -185,12 +193,20 @@ export const calculatorIO = [
         text: "Teflon Tape Link to Purchase",
       },
       {
+        name: "Notes_1",
+        text: "Notes_1",
+      },
+      {
         name: "Material to Close Screw Access Hole Name",
         text: "Material to Close Screw Access Hole Name",
       },
       {
         name: "Material to Close Screw Access Hole Link to Purchase",
         text: "Material to Close Screw Access Hole Link to Purchase",
+      },
+      {
+        name: "Notes_2",
+        text: "Notes_2",
       },
     ],
   },
@@ -1448,6 +1464,14 @@ export const calculatorIO = [
         name: "Bur Kit (Denture Conversion) Link to Purchase",
         text: "Bur Kit (Denture Conversion) Link to Purchase",
       },
+      {
+        name: "Notes",
+        text: "Notes",
+      },
+      {
+        name: "Notes_1",
+        text: "Notes_1",
+      },
     ],
   },
   {
@@ -1513,6 +1537,10 @@ export const calculatorIO = [
       {
         name: "Link to Purchase",
         text: "Link to Purchase",
+      },
+      {
+        name: "Notes",
+        text: "Notes",
       },
     ],
   },
@@ -1580,6 +1608,10 @@ export const calculatorIO = [
         name: "Link to Purchase",
         text: "Link to Purchase",
       },
+      {
+        name: "Notes",
+        text: "Notes",
+      },
     ],
   },
   {
@@ -1642,6 +1674,10 @@ export const calculatorIO = [
         name: "Link to Purchase",
         text: "Link to Purchase",
       },
+      {
+        name: "Notes",
+        text: "Notes",
+      },
     ],
   },
   {
@@ -1691,6 +1727,10 @@ export const calculatorIO = [
       {
         name: "Link to Purchase",
         text: "Link to Purchase",
+      },
+      {
+        name: "Notes",
+        text: "Notes",
       },
     ],
   },
@@ -1778,6 +1818,10 @@ export const calculatorIO = [
         name: "Link to Purchase",
         text: "Link to Purchase",
       },
+      {
+        name: "Notes",
+        text: "Notes",
+      },
     ],
   },
   {
@@ -1831,6 +1875,10 @@ export const calculatorIO = [
       {
         name: "Link to Purchase",
         text: "Link to Purchase",
+      },
+      {
+        name: "Notes",
+        text: "Notes",
       },
     ],
   },
@@ -1901,6 +1949,10 @@ export const calculatorIO = [
       {
         name: "Link to Purchase",
         text: "Link to Purchase",
+      },
+      {
+        name: "Notes",
+        text: "Notes",
       },
     ],
   },
@@ -1976,6 +2028,10 @@ export const calculatorIO = [
         name: "Link to Purchase",
         text: "Link to Purchase",
       },
+      {
+        name: "Notes",
+        text: "Notes",
+      },
     ],
   },
   {
@@ -2046,6 +2102,10 @@ export const calculatorIO = [
         name: "Link to Purchase",
         text: "Link to Purchase",
       },
+      {
+        name: "Notes",
+        text: "Notes",
+      },
     ],
   },
   {
@@ -2108,6 +2168,10 @@ export const calculatorIO = [
         name: "Link to Purchase",
         text: "Link to Purchase",
       },
+      {
+        name: "Notes",
+        text: "Notes",
+      },
     ],
   },
   {
@@ -2158,6 +2222,10 @@ export const calculatorIO = [
         name: "Link to Purchase",
         text: "Link to Purchase",
       },
+      {
+        name: "Notes",
+        text: "Notes",
+      },
     ],
   },
   {
@@ -2207,6 +2275,10 @@ export const calculatorIO = [
       {
         name: "Link to Purchase",
         text: "Link to Purchase",
+      },
+      {
+        name: "Notes",
+        text: "Notes",
       },
     ],
   },
@@ -2285,6 +2357,10 @@ export const calculatorIO = [
       {
         name: "Link to Purchase",
         text: "Link to Purchase",
+      },
+      {
+        name: "Notes",
+        text: "Notes",
       },
     ],
   },
@@ -2368,6 +2444,10 @@ export const calculatorIO = [
         name: "Link to Purchase",
         text: "Link to Purchase",
       },
+      {
+        name: "Notes",
+        text: "Notes",
+      },
     ],
   },
   {
@@ -2437,6 +2517,10 @@ export const calculatorIO = [
       {
         name: "Link to Purchase",
         text: "Link to Purchase",
+      },
+      {
+        name: "Notes",
+        text: "Notes",
       },
     ],
   },
@@ -2512,6 +2596,10 @@ export const calculatorIO = [
         name: "Link to Purchase",
         text: "Link to Purchase",
       },
+      {
+        name: "Notes",
+        text: "Notes",
+      },
     ],
   },
   {
@@ -2581,6 +2669,10 @@ export const calculatorIO = [
       {
         name: "Link to Purchase",
         text: "Link to Purchase",
+      },
+      {
+        name: "Notes",
+        text: "Notes",
       },
     ],
   },
