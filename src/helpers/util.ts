@@ -1475,7 +1475,7 @@ export const calculatorIO = [
     ],
   },
   {
-    type: "RestroativeDirectToImplant",
+    type: "RestorativeDirectToImplant",
     label: "Drivers (Restorative, Direct to Implant)",
     description:
       "This calculator displays restorative drivers for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
@@ -2916,7 +2916,7 @@ export const productImages: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Straumann+NC+Variobase+Abutment+Screw+0252921.png",
   TiBasesDirectToImplants:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Zimmer+TSV+BellaTek+Express+Abutment+D4.5mm+H+4.75mm+Hexed+TE451.png",
-  RestroativeDirectToImplant:
+  RestorativeDirectToImplant:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Neodent+CM+Implant+Driver+Torque+Wrench+Long+105074.png",
   RestorativeMultiUnitAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Neodent+CM+Implant+Driver+Torque+Wrench+Long+105074.png",
