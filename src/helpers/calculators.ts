@@ -428,7 +428,7 @@ export const parseItems = (
 
   if (
     [
-      "RestroativeDirectToImplant",
+      "RestorativeDirectToImplant",
       "RestorativeMultiUnitAbutments",
       "HealingAbutments",
       "Implants",
@@ -498,7 +498,7 @@ export const parseItems = (
     ];
   }
 
-  if (calculatorType === "ImplantTorques") {
+  if (calculatorType === "ImplantTorquesGuide") {
     return [
       {
         label: "Implant Torque Guide",
