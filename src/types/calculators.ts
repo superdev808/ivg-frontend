@@ -31,6 +31,7 @@ export interface ItemInsights {
   manufacturer?: string;
   manufacturerRecommendations?: string;
   torqueValue?: string;
+  notes?: string;
 }
 export interface ItemData {
   id?: string;

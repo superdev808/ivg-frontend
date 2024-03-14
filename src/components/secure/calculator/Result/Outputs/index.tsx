@@ -62,6 +62,11 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
                   <b>Torque Value:</b> {item.torqueValue}
                 </div>
               )}
+              {item.notes && (
+                <div>
+                  <b>Notes:</b> {item.notes}
+                </div>
+              )}
             </div>
 
             {!invalidPurchaseCalcs.includes(label) && (
