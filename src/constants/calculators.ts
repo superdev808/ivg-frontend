@@ -99,67 +99,72 @@ export const CALCULATORS: CollectionsIO = {
     {
       name: "Implant Brand",
       text: "Implant Brand",
-      calculator: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
       isCommon: true,
     },
     {
       name: "Implant Model",
       text: "Implant Model",
-      calculator: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
       isCommon: true,
     },
     {
       name: "Implant Diameter",
       text: "Implant Diameter",
-      calculator: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
       isCommon: true,
     },
     {
       name: "Implant Platform",
       text: "Implant Platform",
-      calculator: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
       isCommon: true,
     },
     {
       name: "Implant Length",
       text: "Implant Length [Drivers (Restorative, Direct to Implant)]",
-      calculator: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
     },
     {
       name: "Authentic or Generic",
       text: "Authentic or Generic [Drivers (Restorative, Direct to Implant)]",
-      calculator: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
     },
     {
       name: "Driver Length",
       text: "Driver Length [Drivers (Restorative, Direct to Implant)]",
-      calculator: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
+    },
+    {
+      name: "Abutment Type",
+      text: "Abutment Type [Drivers (Restorative, Direct to Implant)]",
+      calculator: "RestorativeDirectToImplant",
     },
     {
       name: "One Piece or Torque Attachment",
       text: "One Piece or Torque Attachment [Drivers (Restorative, Direct to Implant)]",
-      calculator: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
     },
     {
       name: "Driver Size",
       text: "Driver Size [Drivers (Restorative, Direct to Implant)]",
-      calculator: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
     },
     {
       name: "Abutment Angulation",
       text: "Abutment Angulation [Drivers (Restorative, Direct to Implant)]",
-      calculator: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
     },
     {
       name: "Machine or Manual",
       text: "Machine or Manual [Drivers (Restorative, Direct to Implant)]",
-      calculator: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
     },
     {
       name: "",
       text: "",
-      calculator: "RestroativeDirectToImplant",
-      outputFrom: "RestroativeDirectToImplant",
+      calculator: "RestorativeDirectToImplant",
+      outputFrom: "RestorativeDirectToImplant",
     },
   ],
   "Chairside Pick-Up Materials": [
@@ -567,6 +572,11 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "TiBasesDirectToImplants",
     },
     {
+      name: "Hexed or Non-Hexed",
+      text: "Hexed or Non-Hexed [Ti Bases (Direct to Implant)]",
+      calculator: "TiBasesDirectToImplants",
+    },
+    {
       name: "",
       text: "",
       calculator: "TiBasesDirectToImplants",
@@ -601,6 +611,11 @@ export const CALCULATORS: CollectionsIO = {
     {
       name: "Authentic or Generic",
       text: "Authentic or Generic [Scanbodies (Multi-Unit Abutments)]",
+      calculator: "ScanbodyMUAs",
+    },
+    {
+      name: "Abutment Type",
+      text: "Abutment Type [Scanbodies (Multi-Unit Abutments)]",
       calculator: "ScanbodyMUAs",
     },
     {
@@ -1084,7 +1099,7 @@ export const CALCULATORS: CollectionsIO = {
       outputFrom: "ImplantAnalogs",
     },
   ],
-  "Implant Torques": [
+  "Implant Torque Guide": [
     {
       name: "Implant Brand",
       text: "Implant Brand",
@@ -1346,6 +1361,11 @@ export const CALCULATORS: CollectionsIO = {
       calculator: "StockAbutments",
     },
     {
+      name: "Engaging",
+      text: "Engaging [Stock Abutments]",
+      calculator: "StockAbutments",
+    },
+    {
       name: "Emergence Profile",
       text: "Emergence Profile [Stock Abutments]",
       calculator: "StockAbutments",
@@ -1415,7 +1435,7 @@ export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
 export const CALCULATOR_NAME_COLLECTION_MAPPINGS: { [key: string]: string } = {
   "Drill Kits and Drill Sequences": "DrillKitAndSequence",
   "Bone Reduction Instruments": "BoneReduction",
-  "Drivers (Restorative, Direct to Implant)": "RestroativeDirectToImplant",
+  "Drivers (Restorative, Direct to Implant)": "RestorativeDirectToImplant",
   "Chairside Pick-Up Materials": "ChairSidePickUp",
   Implants: "Implants",
   "Scanbodies (Single Unit)": "Scanbodies",
@@ -1462,13 +1482,13 @@ export const LOWER_SITES: Site[] = SITES.slice(16, 32);
 
 export const AUTO_POPULATE_OPTIONS: RadioButtonOption[] = [
   {
-    id: "Autopopulate1",
-    name: "autopopulate",
+    id: "autoPopulateYes",
+    name: "autoPopulate",
     value: "Yes",
   },
   {
-    id: "Autopopulate2",
-    name: "autopopulate",
+    id: "autoPopulateNo",
+    name: "autoPopulate",
     value: "No",
   },
 ];
@@ -1533,7 +1553,7 @@ export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
           "This calculator displays surgical drill kits, drills, and drill sequences based on desired implant brand and size, as well as links to purchase this equipment.",
       },
       {
-        label: "RestroativeDirectToImplant",
+        label: "RestorativeDirectToImplant",
         text: "Drivers (Restorative, Direct to Implant)",
         description:
           "This calculator displays restorative drivers for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
@@ -1561,6 +1581,12 @@ export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
         text: "Implant Screws",
         description:
           "This calculator displays screws based on desired implant brand and size, as well as links to purchase this equipment.",
+      },
+      {
+        label: "ImplantTorquesGuide",
+        text: "Implant Torque Guide",
+        description:
+          "Find the right torque value for your desired component, product, or procedure.",
       },
       {
         label: "ImplantAnalogs",
@@ -1639,11 +1665,6 @@ export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
         text: "Ti Bases (Multi-Unit Abutments)",
         description:
           "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "ImplantTorques",
-        text: "Implant Torques",
-        description: ""
       },
       {
         label: "BoneReduction",

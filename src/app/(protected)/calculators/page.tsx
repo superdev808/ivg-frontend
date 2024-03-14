@@ -37,14 +37,20 @@ export const Calculators = () => {
     {}
   );
 
-  const handleSearch = (str: string) => {
+  const handleSearch = (str = "") => {
+    if (!str) {
+      setSearchResult([]);
+      return;
+    }
+
     setLoading(true);
 
-    const regExp = new RegExp(str, "i");
+    str = str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regExp = new RegExp(str, "ig");
     const newCalcItemLabels: string[] = [];
 
     for (const modelName of Object.keys(calcItems)) {
-      if (regExp.test(modelName)) {
+      if (regExp.test(modelName) || regExp.test(calcItems[modelName])) {
         newCalcItemLabels.push(modelName);
       }
     }

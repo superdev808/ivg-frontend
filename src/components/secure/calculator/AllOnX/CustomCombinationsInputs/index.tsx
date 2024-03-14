@@ -20,8 +20,8 @@ interface CustomCombinationsInputsParams {
 const CustomCombinationsInputs: React.FC<CustomCombinationsInputsParams> = ({
   collections,
   selectedCollections,
-  onCollectionChange,
   siteSpecificReport,
+  onCollectionChange,
   onChangeSiteSpecificReport,
 }) => (
   <div className="pb-4">

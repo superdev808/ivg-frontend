@@ -38,6 +38,8 @@ const DetailView: React.FC<DetailViewProps> = ({
 
   const [results, setResults] = useState<ItemData[][]>([]);
 
+  const toastRef = useRef(null);
+
   useEffect(() => {
     setResults(props.items.map((item) => parseItems(item, calculatorType)));
   }, [props.items, calculatorType]);
@@ -70,7 +72,6 @@ const DetailView: React.FC<DetailViewProps> = ({
     );
   };
 
-  const toastRef = useRef(null);
   const showFeedbackToast = useCallback(() => {
     (toastRef?.current as any)?.show({
       severity: "success",
@@ -78,14 +79,16 @@ const DetailView: React.FC<DetailViewProps> = ({
       detail: "Thank you for your feedback",
       life: 5000,
     });
-  }, [toastRef.current])
+    // eslint-disable-next-line
+  }, [toastRef.current]);
+
   const onClickThumbUp = () => {
     gaEvent({
       action: "Thumb_Up",
       category: "Button",
       label: calculatorName,
     });
-    showFeedbackToast()
+    showFeedbackToast();
   };
 
   const onClickFeedback = () => {
@@ -135,6 +138,7 @@ const DetailView: React.FC<DetailViewProps> = ({
           </div>
         </div>
       )}
+
       <div
         className="fixed text-2xl m-1 left-50 bg-green-300 p-3 pb-6 border-round-3xl m-0"
         style={{
@@ -150,12 +154,14 @@ const DetailView: React.FC<DetailViewProps> = ({
           onClick={onClickFeedback}
         />
       </div>
+
       <HelpfulFeedbackDialog
         visible={feedbkackShow}
         setVisible={setFeedbackShow}
         calculatorName={getCalculatorName(calculatorType)}
         quiz={quiz}
       />
+
       <Toast ref={toastRef} position="top-right" />
     </>
   );

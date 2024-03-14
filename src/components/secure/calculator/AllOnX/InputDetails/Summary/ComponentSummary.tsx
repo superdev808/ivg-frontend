@@ -64,7 +64,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
       <InputNumber
         value={item.quantity}
         onValueChange={({ value }) =>
-          onUpdateQuantity(value || 0, item.itemName)
+          onUpdateQuantity(value || 0, item.itemName || "")
         }
         showButtons
         buttonLayout="horizontal"

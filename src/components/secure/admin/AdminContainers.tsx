@@ -1,51 +1,51 @@
-'use client';
-import styles from '@/components/secure/settings/Settings.module.scss';
-import classNames from 'classnames/bind';
+"use client";
 
-import { useState } from 'react';
-import AdminMenu from './AdminMenu';
-import AdminUserManagement from './AdminUserManagement';
+import { useState } from "react";
 
-const cx = classNames.bind(styles);
+import AdminMenu, { MenuItem } from "./AdminMenu";
+import AdminUserManagement from "./AdminUserManagement";
+import AdminAnnouncements from "./AdminAnnouncements";
 
-export interface MenuItem {
-	id: string;
-	label: string;
-	icon: string;
-}
+const menuItems: MenuItem[] = [
+  {
+    id: "userManagement",
+    label: "User Management",
+    icon: "pi pi-fw pi-users",
+  },
+  { id: "auditLog", label: "Audit Log", icon: "pi pi-fw pi-users" },
+  { id: "announcements", label: "Announcements", icon: "pi pi-fw pi-users" },
+];
 
-export default function AdminContainers() {
-	const menuItems: MenuItem[] = [
-		{ id: 'userManagement', label: 'User Management', icon: 'pi pi-fw pi-users' },
-		{ id: 'auditLog', label: 'Audit Log', icon: 'pi pi-fw pi-users' },
-	];
-	const [currentSetting, setCurrentSetting] = useState(menuItems[0].id);
+const AdminContainers: React.FC = () => {
+  const [currentSetting, setCurrentSetting] = useState(menuItems[0].id);
 
-	const onSelect = (item: MenuItem) => {
-		setCurrentSetting(item.id);
-	};
+  const onSelect = (item: MenuItem) => {
+    setCurrentSetting(item.id);
+  };
 
-	return (
-		<>
-			<div
-				id="container"
-				className="nav-offset flex flex-column justify-content-center flex-grow-1">
-				<div
-					id="wrapper"
-					className={cx('grid m-0 flex-grow-1 p-3')}>
-					<div className={cx('col-3 p-2 bg-white border-right-1')}>
-						<AdminMenu
-							active={currentSetting}
-							menuItems={menuItems}
-							onSelect={onSelect}
-						/>
-					</div>
-					<div className="col ml-6 bg-white border-round-xl">
-						{currentSetting === menuItems[0].id && <AdminUserManagement />}
-						{currentSetting === menuItems[1].id && <div className="grid flex-grow-1">audit log</div>}
-					</div>
-				</div>
-			</div>
-		</>
-	);
-}
+  return (
+    <>
+      <div className="nav-offset flex flex-column justify-content-center flex-grow-1">
+        <div className="grid m-0 flex-grow-1 p-3">
+          <div className="col-2 border-right-1">
+            <AdminMenu
+              active={currentSetting}
+              menuItems={menuItems}
+              onSelect={onSelect}
+            />
+          </div>
+
+          <div className="col md:ml-6 border-round-xl">
+            {currentSetting === menuItems[0].id && <AdminUserManagement />}
+            {currentSetting === menuItems[1].id && (
+              <div className="grid flex-grow-1">audit log</div>
+            )}
+            {currentSetting === menuItems[2].id && <AdminAnnouncements />}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default AdminContainers;

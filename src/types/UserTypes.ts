@@ -47,4 +47,5 @@ export interface EditUser {
   verified: boolean;
   active: boolean;
   organizationName: string;
+  verificationEmailSent: string;
 }

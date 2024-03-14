@@ -320,6 +320,7 @@ export const parseItems = (
             itemNumber: trim(item["Item Number"]),
             link: trim(item["Bur Kit (Bone Reduction) Link to Purchase"]),
             quantity: 1,
+            notes: trim(item["Notes"]),
           },
         ],
       },
@@ -330,6 +331,7 @@ export const parseItems = (
             itemName: trim(item["Bur Kit (Denture Conversion) Name"]),
             link: trim(item["Bur Kit (Denture Conversion) Link to Purchase"]),
             quantity: 1,
+            notes: trim(item["Notes_1"]),
           },
         ],
       },
@@ -345,6 +347,7 @@ export const parseItems = (
             itemName: trim(item["Luting Agent Name"]),
             link: trim(item["Luting Agent Link to Purchase"]),
             quantity: 1,
+            notes: trim(item["Notes"]),
           },
         ],
       },
@@ -355,6 +358,7 @@ export const parseItems = (
             itemName: trim(item["Teflon Tape"]),
             link: trim(item["Teflon Tape Link to Purchase"]),
             quantity: 1,
+            notes: trim(item["Notes_1"]),
           },
         ],
       },
@@ -367,6 +371,7 @@ export const parseItems = (
               item["Material to Close Screw Access Hole Link to Purchase"]
             ),
             quantity: 1,
+            notes: trim(item["Notes_2"]),
           },
         ],
       },
@@ -423,7 +428,7 @@ export const parseItems = (
 
   if (
     [
-      "RestroativeDirectToImplant",
+      "RestorativeDirectToImplant",
       "RestorativeMultiUnitAbutments",
       "HealingAbutments",
       "Implants",
@@ -450,6 +455,7 @@ export const parseItems = (
             itemNumber: trim(item["Item Number"]),
             link: trim(item["Link to Purchase"]),
             quantity: 1,
+            notes: trim(item["Notes"]),
           },
         ],
       },
@@ -467,6 +473,7 @@ export const parseItems = (
             link: trim(item["Link to Purchase"]),
             manufacturer: trim(item["Manufacturer"]),
             quantity: 1,
+            notes: trim(item["Notes"]),
           },
         ],
       },
@@ -484,19 +491,21 @@ export const parseItems = (
             link: trim(item["Link to Purchase"]),
             manufacturer: trim(item["Manufacturer Name"]),
             quantity: 1,
+            notes: trim(item["Notes"]),
           },
         ],
       },
     ];
   }
 
-  if (calculatorType === "ImplantTorques") {
+  if (calculatorType === "ImplantTorquesGuide") {
     return [
       {
-        label: "Implant Torques",
+        label: "Implant Torque Guide",
         info: [
           {
             torqueValue: trim(item["Torque Value"]),
+            notes: trim(item["Notes"]),
           },
         ],
       },
