@@ -7,8 +7,18 @@ import { Toast } from "primereact/toast";
 import { useState, useRef } from "react";
 
 import { getCookie } from "@/helpers/cookie";
+import { FeedbackDialogWrapperProps } from "./FeedbackDialogWrapper";
 
-interface FeedbackDialogProps {
+export interface FeedbackUserTrackingProps {
+  calculatorName?: string;
+  userAnswers?: {
+    name: string;
+    text: string;
+    answer: string;
+  }[];
+}
+
+interface FeedbackDialogProps extends FeedbackUserTrackingProps {
   visible: boolean;
   setVisible: (_: boolean) => void;
 }
@@ -23,6 +33,8 @@ const feedbackCategories = [
 const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
   visible,
   setVisible,
+  calculatorName,
+  userAnswers
 }) => {
   const [feedbackCategory, setFeedbackCategory] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -58,6 +70,9 @@ const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
     formData.append("feedbackCategory", feedbackCategory);
     formData.append("message", message);
     formData.append("timestamp", new Date().toString());
+    formData.append("calculatorName", calculatorName || "");
+    formData.append("userAnswers", JSON.stringify(userAnswers || []));
+
 
     setLoading(true);
 

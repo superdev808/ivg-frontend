@@ -159,7 +159,15 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
               onGoBack={handleBackFromResult}
             />
           ) : (
-            <FeedbackDialogWrapper label={getCalculatorName(calculatorType)} />
+            <FeedbackDialogWrapper
+              calculatorName={getCalculatorName(calculatorType)}
+              userAnswers={
+                input.map((inputItem, index) => ({
+                  ...inputItem,
+                  answer: answers[index]
+                }))
+              }
+            />
           )}
 
           {showLoader && (
