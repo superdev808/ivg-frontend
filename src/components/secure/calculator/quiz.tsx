@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import classNames from "classnames/bind";
 import orderBy from "lodash/orderBy";
 import {
@@ -9,7 +8,7 @@ import {
 } from "primereact/autocomplete";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
 import { calculatorImages } from "@/helpers/util";

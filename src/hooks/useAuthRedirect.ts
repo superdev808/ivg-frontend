@@ -40,11 +40,11 @@ const useAuthRedirect = () => {
   const { isLoading: authLoading, authenticated } = useAppSelector(
     (state) => state.auth
   );
+
   const [layoutStyle, setLayoutStyle] = useState<LayoutStyle>(
     layoutStyles.default
   );
-
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const checkAuthStatus = () => {
@@ -57,7 +57,9 @@ const useAuthRedirect = () => {
 
       if (
         !authenticated &&
-        Object.values(PRIVATE_ROUTES).includes(activePath as PRIVATE_ROUTES)
+        Object.values(PRIVATE_ROUTES).some((route) =>
+          activePath.startsWith(route)
+        )
       ) {
         return router.replace(REDIRECT_TO_UNAUTH);
       }

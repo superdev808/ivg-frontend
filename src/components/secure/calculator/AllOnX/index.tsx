@@ -56,7 +56,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   const calculatorName = "All-on-X Calculator";
 
   const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
-  
+
   const toastRef = useRef(null);
   const showFeedbackToast = useCallback(() => {
     (toastRef?.current as any)?.show({
@@ -65,7 +65,8 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       detail: "Thank you for your feedback",
       life: 5000,
     });
-  }, [toastRef.current])
+    // eslint-disable-next-line
+  }, [toastRef.current]);
 
   const onClickThumbUp = () => {
     gaEvent({
@@ -73,7 +74,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       category: "Button",
       label: calculatorName,
     });
-    showFeedbackToast()
+    showFeedbackToast();
   };
 
   const onClickFeedback = () => {
@@ -280,18 +281,35 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     }
   };
 
-  const handleAutopopulate = (dataToPopulate: AutoPopulateData | null) => {
+  const handleAutoPopulate = (dataToPopulate: AutoPopulateData | null) => {
     setAutoPopulateData(dataToPopulate);
+
     if (dataToPopulate) {
-      let _sitesData: SiteData = cloneDeep(sitesData);
-      const key: string = dataToPopulate.site.name;
-      const data = { ..._sitesData[key] };
-      Object.keys(_sitesData).map((siteName: string) => {
-        if (siteName !== key) {
-          _sitesData[siteName] = data;
+      const newSitesData: SiteData = cloneDeep(sitesData);
+      const siteNameToPopulate = dataToPopulate.site.name;
+      const data = { ...newSitesData[siteNameToPopulate] };
+
+      Object.keys(newSitesData).forEach((siteName: string) => {
+        if (siteName !== siteNameToPopulate) {
+          newSitesData[siteName] = data;
         }
       });
-      setSitesData(_sitesData);
+
+      setSitesData(newSitesData);
+    } else {
+      const newSitesData: SiteData = cloneDeep(sitesData);
+      const firstSiteName = selectedSites[0].name;
+
+      Object.keys(newSitesData).forEach((siteName: string) => {
+        if (siteName !== firstSiteName) {
+          newSitesData[siteName] = {
+            inputDetails: [],
+            componentDetails: {},
+          };
+        }
+      });
+
+      setSitesData(newSitesData);
     }
   };
 
@@ -436,7 +454,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   }
                   isCustom={isCustom}
                   onInputSelect={handleInputSelect}
-                  onAutopopulate={handleAutopopulate}
+                  onAutoPopulate={handleAutoPopulate}
                   autoPopulateData={autoPopulateData}
                   procedureInputs={procedureInputsAndResponse?.input || []}
                   responseOrder={
@@ -473,9 +491,9 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
           />
         </div>
       )}
-      {
-        isAllSitesAnswered == false && selectedSites.length > 0 && <FeedbackDialogWrapper label={calculatorName}/>
-      }
+      {isAllSitesAnswered == false && selectedSites.length > 0 && (
+        <FeedbackDialogWrapper label={calculatorName} />
+      )}
       <HelpfulFeedbackDialog
         visible={feedbkackShow}
         setVisible={setFeedbackShow}

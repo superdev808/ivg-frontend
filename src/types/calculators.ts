@@ -31,6 +31,7 @@ export interface ItemInsights {
   manufacturer?: string;
   manufacturerRecommendations?: string;
   torqueValue?: string;
+  notes?: string;
 }
 export interface ItemData {
   id?: string;
@@ -141,4 +142,10 @@ export interface CALCULATOR_GROUP_ITEM {
     text: string;
     description: string;
   }>;
+}
+
+export interface ANNOUNCEMENT_ITEM {
+  _id: string;
+  content: string;
+  published_at: Date;
 }
