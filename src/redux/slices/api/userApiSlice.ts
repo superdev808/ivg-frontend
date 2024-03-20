@@ -242,10 +242,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    getAnnouncementsList:  builder.query<any, any>({
+    getAnnouncementsList: builder.query<any, any>({
       query: () => ({
         url: "/announcements/get_all",
-        method: "GET"
+        method: "GET",
       }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue;
@@ -254,10 +254,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    getLatestAnnouncement:  builder.query<any, any>({
+    getLatestAnnouncement: builder.query<any, any>({
       query: () => ({
         url: "/announcements/get_latest",
-        method: "GET"
+        method: "GET",
       }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue;
@@ -266,7 +266,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    createAnnouncement: builder.mutation<any, { content: string, _id?: string }>({
+    createAnnouncement: builder.mutation<
+      any,
+      { content: string; _id?: string }
+    >({
       query: (body) => ({
         url: "/announcements/create",
         method: "POST",
@@ -284,6 +287,19 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: "/announcements/delete",
         method: "POST",
         body: body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+      transformResponse: (res: Response) => {
+        return res.status === "Success" ? res.data : res.status;
+      },
+    }),
+    uploadCalculatorData: builder.mutation({
+      query: (body) => ({
+        url: "/uploadCalculatorData",
+        method: "POST",
+        body,
       }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue;

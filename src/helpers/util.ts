@@ -62,27 +62,28 @@ export const calculatorIO = [
       },
     ],
   },
+  // {
+  //   type: "Implant Drivers",
+  //   label: "implant driver",
+  //   placeholder: "Select Manufacturer",
+  //   description:
+  //     "This calculator will provide the correct implant driver for you to use based on the implant (manufacturer, system, size) that was placed.",
+  //   value: 1,
+  // },
+  // {
+  //   type: "Implant Screws",
+  //   label: "implant screw",
+  //   placeholder: "Select Implant Manufacturer",
+  //   description:
+  //     "This calculator will provide you with the correct implant screw to use based on the implant (manufacturer, system, size) that was placed.",
+  //   value: 2,
+  // },
   {
-    type: "Implant Drivers",
-    label: "implant driver",
-    placeholder: "Select Manufacturer",
-    description:
-      "This calculator will provide the correct implant driver for you to use based on the implant (manufacturer, system, size) that was placed.",
-    value: 1,
-  },
-  {
-    type: "Implant Screws",
-    label: "implant screw",
-    placeholder: "Select Implant Manufacturer",
-    description:
-      "This calculator will provide you with the correct implant screw to use based on the implant (manufacturer, system, size) that was placed.",
-    value: 2,
-  },
-  {
-    type: "Crown Materials",
-    label: "crownMaterials",
+    type: "crownMaterials",
+    label: "Crown Materials",
     description:
       "Enter your patient's information below to determine suggested materials for the restoration.",
+    disabled: true,
     input: [
       {
         name: "Fixed / Removable",
@@ -2962,3 +2963,10 @@ export const socialButtons = [
 ];
 
 export const invalidPurchaseCalcs = ["Implant Torque Guide"];
+
+export const CALCULATORS = calculatorIO
+  .filter((calc) => !calc.disabled)
+  .map((calc) => ({
+    id: calc.type,
+    label: calc.label,
+  }));

@@ -5,6 +5,7 @@ import { useState } from "react";
 import AdminMenu, { MenuItem } from "./AdminMenu";
 import AdminUserManagement from "./AdminUserManagement";
 import AdminAnnouncements from "./AdminAnnouncements";
+import AdminUploadData from "./AdminUploadData";
 
 const menuItems: MenuItem[] = [
   {
@@ -12,8 +13,17 @@ const menuItems: MenuItem[] = [
     label: "User Management",
     icon: "pi pi-fw pi-users",
   },
-  { id: "auditLog", label: "Audit Log", icon: "pi pi-fw pi-users" },
-  { id: "announcements", label: "Announcements", icon: "pi pi-fw pi-users" },
+  { id: "auditLog", label: "Audit Log", icon: "pi pi-fw pi-book" },
+  {
+    id: "announcements",
+    label: "Announcements",
+    icon: "pi pi-fw pi-megaphone",
+  },
+  {
+    id: "uploadData",
+    label: "Upload Data",
+    icon: "pi pi-fw pi-upload",
+  },
 ];
 
 const AdminContainers: React.FC = () => {
@@ -41,6 +51,7 @@ const AdminContainers: React.FC = () => {
               <div className="grid flex-grow-1">audit log</div>
             )}
             {currentSetting === menuItems[2].id && <AdminAnnouncements />}
+            {currentSetting === menuItems[3].id && <AdminUploadData />}
           </div>
         </div>
       </div>
