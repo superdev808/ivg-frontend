@@ -1,31 +1,20 @@
 import cx from "classnames";
+import trim from "lodash/trim";
 import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
-import { InputSwitch } from "primereact/inputswitch";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { Controller, useForm } from "react-hook-form";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 import { FormErrorMessage } from "@/components/shared/FormErrorMessage";
 import { CALCULATORS } from "@/helpers/util";
 import { useUploadCalculatorDataMutation } from "@/redux/hooks/apiHooks";
 
-const validateGSheetLink = (value: string) => {
-  const regExp = new RegExp(
-    /https:\/\/docs\.google\.com\/spreadsheets\/d\/(.*?)/g
-  );
-
-  if (!regExp.test(value)) {
-    return "Please provide valid Google Sheet Link.";
-  }
-};
-
 interface FormValues {
-  isExisting: boolean;
   calculatorId: string;
-  calculatorLabel: string;
-  gSheetLink: string;
+  spreadsheetId: string;
+  pageName: string;
 }
 
 interface AdminUploadDataFormProps {}
@@ -41,42 +30,30 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
     handleSubmit,
     reset,
     resetField,
-    watch,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
-      isExisting: true,
       calculatorId: "",
-      calculatorLabel: "",
-      gSheetLink: "",
+      spreadsheetId: "",
+      pageName: "",
     },
   });
 
-  const isExisting = watch("isExisting");
-
-  useEffect(() => {
-    resetField("calculatorId");
-    resetField("calculatorLabel");
-    resetField("gSheetLink");
-  }, [resetField, isExisting]);
-
   const onSubmit = async (data: FormValues) => {
     const payload = {
-      calculatorId: data.calculatorId,
-      calculatorLabel:
-        data.calculatorLabel ||
-        CALCULATORS.find((elem) => elem.id === data.calculatorId)?.label,
-      gSheetLink: data.gSheetLink,
+      calculatorId: trim(data.calculatorId),
+      spreadsheetId: trim(data.spreadsheetId),
+      pageName: trim(data.pageName),
     };
 
     try {
-      await uploadCalculatorData(payload).unwrap();
+      const message = await uploadCalculatorData(payload).unwrap();
       reset();
 
       (toastRef?.current as any)?.show({
         severity: "success",
         summary: "Success",
-        detail: "Uploaded data successfully.",
+        detail: message,
         life: 5000,
       });
     } catch {
@@ -95,114 +72,34 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid">
           <Controller
-            name="isExisting"
+            name="calculatorId"
             control={control}
+            rules={{ required: "Please select Calculator." }}
             render={({ field, fieldState }) => (
-              <div className="col-12">
-                <div className="flex align-items-center gap-4">
-                  <label htmlFor={field.name}>Is existing calculator?</label>
-
-                  <InputSwitch
-                    id={field.name}
-                    checked={field.value}
+              <div className="col-12 md:col-6">
+                <span className="p-float-label w-full">
+                  <Dropdown
+                    {...field}
                     disabled={isLoading}
-                    className={cx({ "p-invalid": fieldState.error })}
-                    onChange={(e) => field.onChange(e.value)}
+                    options={CALCULATORS}
+                    optionLabel="label"
+                    optionValue="id"
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
                   />
-                </div>
+
+                  <label htmlFor={field.name}>Calculator</label>
+                </span>
+
+                {FormErrorMessage({ message: errors[field.name]?.message })}
               </div>
             )}
           />
 
-          {isExisting ? (
-            <Controller
-              name="calculatorId"
-              control={control}
-              rules={{ required: "Please select Calculator." }}
-              render={({ field, fieldState }) => (
-                <div className="col-12 md:col-6">
-                  <span className="p-float-label w-full">
-                    <Dropdown
-                      {...field}
-                      disabled={isLoading}
-                      options={CALCULATORS}
-                      optionLabel="label"
-                      optionValue="id"
-                      className={cx(
-                        { "p-invalid": fieldState.error },
-                        "w-full"
-                      )}
-                    />
-
-                    <label htmlFor={field.name}>Calculator</label>
-                  </span>
-
-                  {FormErrorMessage({ message: errors[field.name]?.message })}
-                </div>
-              )}
-            />
-          ) : (
-            <>
-              <Controller
-                name="calculatorId"
-                control={control}
-                rules={{ required: "Please provide Calculator Id." }}
-                render={({ field, fieldState }) => (
-                  <div className="col-12 md:col-6">
-                    <span className="p-float-label w-full">
-                      <InputText
-                        id={field.name}
-                        value={field.value}
-                        disabled={isLoading}
-                        className={cx([
-                          { "p-invalid": fieldState.error },
-                          "w-full",
-                        ])}
-                        onChange={(e) => field.onChange(e.target.value)}
-                      />
-
-                      <label htmlFor={field.name}>Calculator Id</label>
-                    </span>
-
-                    {FormErrorMessage({ message: errors[field.name]?.message })}
-                  </div>
-                )}
-              />
-
-              <Controller
-                name="calculatorLabel"
-                control={control}
-                rules={{ required: "Please provide Calculator Label." }}
-                render={({ field, fieldState }) => (
-                  <div className="col-12 md:col-6">
-                    <span className="p-float-label w-full">
-                      <InputText
-                        id={field.name}
-                        value={field.value}
-                        disabled={isLoading}
-                        className={cx([
-                          { "p-invalid": fieldState.error },
-                          "w-full",
-                        ])}
-                        onChange={(e) => field.onChange(e.target.value)}
-                      />
-
-                      <label htmlFor={field.name}>Calculator Label</label>
-                    </span>
-
-                    {FormErrorMessage({ message: errors[field.name]?.message })}
-                  </div>
-                )}
-              />
-            </>
-          )}
-
           <Controller
-            name="gSheetLink"
+            name="spreadsheetId"
             control={control}
             rules={{
-              required: "Please provide Google Sheet Link.",
-              validate: validateGSheetLink,
+              required: "Please provide Spreadsheet ID.",
             }}
             render={({ field, fieldState }) => (
               <div className="col-12 md:col-6">
@@ -223,7 +120,40 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                     onChange={(e) => field.onChange(e.target.value)}
                   />
 
-                  <label htmlFor={field.name}>Google Sheet Link</label>
+                  <label htmlFor={field.name}>Spreadsheet ID</label>
+                </span>
+
+                {FormErrorMessage({ message: errors[field.name]?.message })}
+              </div>
+            )}
+          />
+
+          <Controller
+            name="pageName"
+            control={control}
+            rules={{
+              required: "Please provide Page Name.",
+            }}
+            render={({ field, fieldState }) => (
+              <div className="col-12 md:col-6">
+                <label
+                  htmlFor={field.name}
+                  className={cx({ "p-error": errors[field.name] })}
+                />
+
+                <span className="p-float-label w-full">
+                  <InputText
+                    id={field.name}
+                    value={field.value}
+                    disabled={isLoading}
+                    className={cx([
+                      { "p-invalid": fieldState.error },
+                      "w-full",
+                    ])}
+                    onChange={(e) => field.onChange(e.target.value)}
+                  />
+
+                  <label htmlFor={field.name}>Page Name</label>
                 </span>
 
                 {FormErrorMessage({ message: errors[field.name]?.message })}
