@@ -2677,7 +2677,7 @@ export const calculatorIO = [
     ],
   },
   {
-    type: "ImplantTorques",
+    type: "ImplantTorquesGuide",
     label: "Implant Torque Guide",
     description: "",
     input: [
@@ -2898,7 +2898,7 @@ export const productImages: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Healing+Abutment+D+4.5mm+H+3mm+2213.png",
   ImplantAnalogs:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+IOS+Model+Implant+Replica+Conical+RP+38190.png",
-  ImplantTorques:
+  ImplantTorquesGuide:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Neodent+CM+Implant+Driver+Torque+Wrench+Long+105074.png",
   ImpressingCopingsMUAs:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Impression+Coping+Open+Tray+Multi-Unit+29089.png",
