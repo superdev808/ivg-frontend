@@ -2714,6 +2714,13 @@ export const calculatorIO = [
       },
     ],
   },
+  {
+    type: "ToothBorneBridge",
+    label: "Tooth-Borne Bridge",
+    description: "",
+    input: [],
+    output: [],
+  },
 ];
 
 export const calculatorImages: any = {

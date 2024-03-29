@@ -5,11 +5,13 @@ import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { Controller, useForm } from "react-hook-form";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { FormErrorMessage } from "@/components/shared/FormErrorMessage";
 import { CALCULATORS } from "@/helpers/util";
 import { useUploadCalculatorDataMutation } from "@/redux/hooks/apiHooks";
+
+const POLLING_INTERVAL = 3000;
 
 interface FormValues {
   calculatorId: string;
@@ -20,16 +22,27 @@ interface FormValues {
 interface AdminUploadDataFormProps {}
 
 const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
-  const [uploadCalculatorData, { isLoading }] =
+  const [uploadCalculatorData, { isLoading: isSaving }] =
     useUploadCalculatorDataMutation();
 
   const toastRef = useRef(null);
+
+  const pollingRef = useRef<any>(null);
+  const [uploadingProgress, setUploadingProgress] = useState<any>(null);
+
+  useEffect(() => {
+    return () => {
+      if (pollingRef.current) {
+        clearInterval(pollingRef.current);
+        pollingRef.current = null;
+      }
+    };
+  }, []);
 
   const {
     control,
     handleSubmit,
     reset,
-    resetField,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -47,8 +60,12 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
     };
 
     try {
-      const message = await uploadCalculatorData(payload).unwrap();
-      reset();
+      setUploadingProgress(null);
+      pollingRef.current = null;
+
+      const { message, progressId } = await uploadCalculatorData(
+        payload
+      ).unwrap();
 
       (toastRef?.current as any)?.show({
         severity: "success",
@@ -56,15 +73,47 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
         detail: message,
         life: 5000,
       });
-    } catch {
+
+      pollingRef.current = setInterval(() => {
+        fetch(
+          `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/uploadProgress/${progressId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then(({ data }) => {
+            setUploadingProgress(data);
+            if (!data || data.status === "FINISHED") {
+              clearInterval(pollingRef.current);
+              pollingRef.current = null;
+
+              if (data.uploaded === data.total) {
+                reset();
+              }
+            }
+          })
+          .catch(() => {
+            setUploadingProgress(null);
+            clearInterval(pollingRef.current);
+            pollingRef.current = null;
+          });
+      }, POLLING_INTERVAL);
+    } catch (error) {
+      console.log(error);
       (toastRef?.current as any)?.show({
         severity: "error",
         summary: "Error",
-        detail: "Failed to upload data.",
+        detail: (error as any)?.data?.message || "Failed to upload data.",
         life: 5000,
       });
     }
   };
+
+  const isLoading = isSaving || pollingRef.current;
 
   return (
     <>
@@ -162,7 +211,20 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
           />
 
           <div className="col-12">
-            <div className="flex justify-content-end">
+            <div className="flex justify-content-end align-items-center gap-4">
+              {uploadingProgress && (
+                <div>
+                  <b>
+                    {uploadingProgress.status === "STARTED" && "UPLOADING"}
+                    {uploadingProgress.status === "FINISHED" && "FINISHED"}
+                  </b>
+                  :{" "}
+                  <>
+                    Uploaded <b>{uploadingProgress.uploaded}</b> of{" "}
+                    <b>{uploadingProgress.total}</b>
+                  </>
+                </div>
+              )}
               <Button
                 label="Upload"
                 className="p-button-primary bg-secondary border-round-3xl"
