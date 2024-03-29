@@ -103,11 +103,15 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
           });
       }, POLLING_INTERVAL);
     } catch (error) {
-      console.log(error);
+      const message =
+        typeof (error as any)?.data?.message === "string"
+          ? (error as any)?.data?.message
+          : "Failed to upload data.";
+
       (toastRef?.current as any)?.show({
         severity: "error",
         summary: "Error",
-        detail: (error as any)?.data?.message || "Failed to upload data.",
+        detail: message,
         life: 5000,
       });
     }
@@ -221,7 +225,8 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                   :{" "}
                   <>
                     Uploaded <b>{uploadingProgress.uploaded}</b> of{" "}
-                    <b>{uploadingProgress.total}</b>
+                    <b>{uploadingProgress.total}</b> for{" "}
+                    <b>{uploadingProgress.calculatorId}</b>
                   </>
                 </div>
               )}

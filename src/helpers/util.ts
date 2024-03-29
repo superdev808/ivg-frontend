@@ -2721,6 +2721,27 @@ export const calculatorIO = [
     input: [],
     output: [],
   },
+  {
+    type: "ToothBorneCrown",
+    label: "Tooth-Borne Crown",
+    description: "",
+    input: [],
+    output: [],
+  },
+  {
+    type: "ImplantBorneBridge",
+    label: "Implant-Borne Bridge",
+    description: "",
+    input: [],
+    output: [],
+  },
+  {
+    type: "ImplantBorneCrown",
+    label: "Implant-Borne Crown",
+    description: "",
+    input: [],
+    output: [],
+  },
 ];
 
 export const calculatorImages: any = {
