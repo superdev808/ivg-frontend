@@ -351,7 +351,7 @@ const Result: React.FC<ResultProps> = ({
           )}
         </div>
 
-        <div className="flex justify-content-between align-items-center gap-4 flex-column lg:flex-row">
+        <div className="flex justify-content-between align-items-center gap-4 flex-column pb-6 lg:flex-row">
           {image && (
             <div
               className={cx(

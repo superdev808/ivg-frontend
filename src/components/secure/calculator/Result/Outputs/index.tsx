@@ -27,12 +27,10 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
 
   return (
     <div className="flex flex-column gap-4">
-      {filteredItems.map(({ label, info }) => {
-        const item = info[0];
-
-        return (
+      {filteredItems.map(({ label, info }) =>
+        info.map((item, itemIdx) => (
           <div
-            key={label}
+            key={`${label}-${itemIdx}`}
             className="flex flex-column justify-content-between gap-4 p-3 border-2 border-gray-300 border-round-md md:flex-row md:align-items-center"
           >
             <div
@@ -109,8 +107,8 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
               </div>
             )}
           </div>
-        );
-      })}
+        ))
+      )}
     </div>
   );
 };
