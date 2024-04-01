@@ -1,12 +1,21 @@
 "use client";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+
+import classNames from "classnames";
 import Link from "next/link";
-import styles from "../Navigation.module.scss"
+import { useEffect, useState } from "react";
+
 import { useAppSelector } from "@/redux/hooks/hooks";
 
-const Logo = () => {
-  const {isLoading:authLoading, authenticated} = useAppSelector((state) => state.auth);
+import LogoIcon from "../../../../../public/images/logo/Ivory-Guide-Logo-Horizontal.svg";
+
+import LogoLightIcon from "../../../../../public/images/logo/Ivory-Guide-Logo-Horizontal-Light.svg";
+
+import styles from "./styles.module.scss";
+
+const cx = classNames.bind(styles);
+
+const Logo = ({ light }: { light?: boolean }) => {
+  const { authenticated } = useAppSelector((state) => state.auth);
   //update the size of the logo when the size of the screen changes
   const [width, setWidth] = useState(0);
 
@@ -35,17 +44,11 @@ const Logo = () => {
     window.addEventListener("scroll", changeNavButton);
   }, []);
 
+  const LogoComponent = light ? LogoLightIcon : LogoIcon;
+
   return (
     <Link href={authenticated ? "/home" : "/"}>
-      <Image
-        src="/images/logo/Ivory-Guide-Horizontal-Logo-White.png"
-        alt="Logo"
-        // width={width < 1024 ? "180" : "320"}
-        // height={width < 1024 ? "45" : "64"}
-        width={"210"}
-        height={"35"}
-        className="relative"
-      />
+      <LogoComponent style={{ width: 210, height: 35 }} />
     </Link>
   );
 };

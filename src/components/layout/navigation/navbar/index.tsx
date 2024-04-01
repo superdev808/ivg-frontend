@@ -21,6 +21,7 @@ interface NavbarProps {
   avatarLinks: MenuItem[];
   avatar: JSX.Element;
   authenticated?: boolean;
+  light?: boolean;
 }
 
 const Navbar: React.FC<NavbarProps> = ({
@@ -29,6 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({
   avatarLinks,
   avatar,
   authenticated,
+  light,
 }) => {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const pathName = usePathname();
@@ -45,7 +47,11 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const renderHambuger = () => (
     <div
-      className={cx("hamburger", { open: showSidebar }, "md:hidden")}
+      className={cx(
+        "hamburger",
+        { open: showSidebar, light: !light },
+        "md:hidden"
+      )}
       onClick={() => setShowSidebar(!showSidebar)}
     >
       <span />
@@ -61,7 +67,8 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const sidebarLinksFilter = (li: NavLink) =>
     li.visibility === "public" ||
-    (authenticated && ["authenticated", "authenticatedSidebar"].includes(li.visibility)) ||
+    (authenticated &&
+      ["authenticated", "authenticatedSidebar"].includes(li.visibility)) ||
     (!authenticated && li.visibility === "unauthenticated");
 
   return (
@@ -72,9 +79,13 @@ const Navbar: React.FC<NavbarProps> = ({
     >
       <div className="flex items-center justify-content-between">
         <div className="flex align-items-center gap-3 lg:gap-6">
-          <Logo />
+          <Logo light={light} />
 
-          <div className={cx("navbarNav", "hidden gap-3 md:flex lg:gap-6")}>
+          <div
+            className={cx("navbarNav", "hidden gap-3 md:flex lg:gap-6", {
+              light,
+            })}
+          >
             {navLinks.filter(navLinksFilter).map((item) => (
               <div key={`${item.id}_full`}>
                 <Link href={item.link || ""}>
@@ -92,7 +103,11 @@ const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         <div className="flex align-items-center">
-          <div className={cx("navbarNav", "hidden gap-3 md:flex lg:gap-6")}>
+          <div
+            className={cx("navbarNav", "hidden gap-3 md:flex lg:gap-6", {
+              light,
+            })}
+          >
             {rightNavLinks.filter(navLinksFilter).map((item) => (
               <div key={`${item.id}_full`} className={cx(item.className)}>
                 <Link href={item.link || "/"} onClick={() => onClick(item)}>

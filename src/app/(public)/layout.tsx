@@ -20,14 +20,14 @@ export default function PublicLayout({ children }: PropsWithChildren) {
   return (
     <>
       {!layoutStyle.hidden && (
-        <Navigation
-          authenticated={authenticated}
-          transparentBg={layoutStyle.transparentBg}
-        />
+        <Navigation authenticated={authenticated} light={layoutStyle.light} />
       )}
       {children}
       {!layoutStyle.hidden && (
-        <Footer extendFooter={layoutStyle.extendFooter} />
+        <Footer
+          light={layoutStyle.light}
+          extendFooter={layoutStyle.extendFooter}
+        />
       )}
     </>
   );

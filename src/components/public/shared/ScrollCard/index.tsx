@@ -43,6 +43,7 @@ export const ScrollCard = ({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [length]);
+
   return (
     <div className={cx("scroll-card", cardClassName)} ref={cardRef}>
       <div className={cx("card", "flex z-2", { "flex-order-1": rtl })}>
@@ -65,7 +66,7 @@ export const ScrollCard = ({
             <path
               d="M5 30 H595"
               strokeWidth="2"
-              style={{ stroke: "var(--primary-color)" }}
+              style={{ stroke: "var(--light-brown)" }}
               strokeDasharray="5,5"
             />
           </svg>
@@ -78,7 +79,7 @@ export const ScrollCard = ({
             <g>
               <circle
                 style={{
-                  stroke: "var(--primary-color)",
+                  stroke: "var(--light-brown)",
                   fillOpacity: "0",
                   strokeWidth: "2",
                   strokeDasharray: "none",
@@ -88,7 +89,7 @@ export const ScrollCard = ({
                 cy="15"
                 r="9"
               />
-              <circle fill="var(--primary-color)" cx="15" cy="15" r="6" />
+              <circle fill="var(--light-brown)" cx="15" cy="15" r="6" />
             </g>
           </svg>
         </div>

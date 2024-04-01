@@ -1,3 +1,4 @@
+import cx from "classnames";
 import Link from "next/link";
 import React from "react";
 
@@ -7,12 +8,17 @@ const devMode = process.env.NEXT_PUBLIC_DEV_MODE;
 
 interface FooterProps {
   extendFooter?: boolean;
+  light?: boolean;
 }
 
-const Footer: React.FC<FooterProps> = ({ extendFooter }) => (
-  <div className="relative overflow-hidden">
+const Footer: React.FC<FooterProps> = ({ extendFooter, light }) => (
+  <div
+    className={cx("relative overflow-hidden", {
+      "bg-beige text-light-green": light,
+    })}
+  >
     <div className="radial-gradient z-0" />
-    {extendFooter && <FooterExtended />}
+    {extendFooter && <FooterExtended light={light} />}
     <div className="flex px-3 md:px-8">
       <div className="grid bg-tranparent m-0 h-5rem w-full">
         <div className="col-12 md:col-5 flex flex-column align-items-start">
@@ -35,7 +41,10 @@ const Footer: React.FC<FooterProps> = ({ extendFooter }) => (
           <p className="text-center md:text-right">
             <Link
               href="/agreement"
-              className="text-600 font-bold"
+              className={cx("font-bold", {
+                "text-600": !light,
+                "text-light-green": light,
+              })}
               target="_blank"
               style={{ textDecorationColor: "var(--gray-600)" }}
             >
@@ -45,7 +54,10 @@ const Footer: React.FC<FooterProps> = ({ extendFooter }) => (
             <Link
               href="/privacy-policy"
               target="_blank"
-              className="text-600 font-bold"
+              className={cx("font-bold", {
+                "text-600": !light,
+                "text-light-green": light,
+              })}
               style={{ textDecorationColor: "var(--gray-600)" }}
             >
               Privacy Notice

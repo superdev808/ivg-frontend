@@ -16,9 +16,12 @@ export default function ProtectedLayout({ children }: PropsWithChildren) {
 
   return (
     <>
-      <Navigation authenticated transparentBg={layoutStyle.transparentBg} />
+      <Navigation authenticated light={layoutStyle.light} />
       {children}
-      <Footer extendFooter={layoutStyle.extendFooter} />
+      <Footer
+        extendFooter={layoutStyle.extendFooter}
+        light={layoutStyle.light}
+      />
     </>
   );
 }
