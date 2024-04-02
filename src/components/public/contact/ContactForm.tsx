@@ -98,7 +98,7 @@ export const ContactComponent = () => {
 
   return (
     <>
-      <div className={cx("section-container", "mt-2")}>
+      <div className="flex justify-content-center bg-beige">
         <div style={{ maxWidth: 900 }}>
           <form className="w-full p-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid justify-content-between mb-3">
@@ -237,14 +237,14 @@ export const ContactComponent = () => {
                 rules={{ required: "Role is required." }}
                 render={({ field }) => (
                   <div className="flex flex-column px-2 align-content-center">
-                    <span className="mb-3 text-600 text-lg text-center">
+                    <span className="mb-3 text-light-green text-lg text-center">
                       Please choose your role.
                     </span>
 
                     <div className="flex flex-column flex-wrap md:flex-row">
                       {practices.map((practice, index) => (
                         <div
-                          className="flex align-items-center mb-2 gap-2"
+                          className="flex align-items-center mb-2 gap-2 text-light-green"
                           key={`practice_${index}`}
                         >
                           <RadioButton
@@ -334,13 +334,12 @@ export const ContactComponent = () => {
                 type="submit"
                 disabled={sendStatus === "sending" || sendStatus === "sent"}
                 className={cx(
-                  "btn-secondary",
-                  "xl:w-3 w-12 text-xl hover:text-secondary"
+                  "btn-light-brown",
+                  "xl:w-3 w-12 text-xl text-center hover:text-secondary block"
                 )}
               >
                 {sendStatus === "sending" ? (
                   <>
-                    {" "}
                     <i
                       className="pi pi-spin pi-spinner"
                       style={{ fontSize: "2rem", marginRight: "1rem" }}
@@ -355,7 +354,7 @@ export const ContactComponent = () => {
               </Button>
 
               {sendStatus === "error" && (
-                <small className="p-error mt-2">
+                <small className="text-dark-brown mt-2">
                   There was an error, please try again.
                 </small>
               )}
@@ -368,21 +367,24 @@ export const ContactComponent = () => {
         showHeader={false}
         blockScroll
         draggable={false}
-        className="bg-primary"
+        className="bg-beige"
         visible={visible}
         style={{
-          background: "var(--primary-color)",
+          background: "var(--beige)",
         }}
         modal
         onHide={handleCloseModal}
       >
-        <div className="flex flex-column align-content-center text-center p-4">
+        <div className="flex flex-column align-content-center text-center text-light-green p-4">
           <div className="flex justify-content-end">
             <Button
               icon="pi pi-times"
               outlined
               rounded
               onClick={handleCloseModal}
+              style={{
+                color: "var(--light-green)",
+              }}
               className="border-0 mt-2"
             />
           </div>

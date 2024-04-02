@@ -1,69 +1,61 @@
-import cx from "classnames";
+import classNames from "classnames/bind";
 import Link from "next/link";
 import React from "react";
 
 import FooterExtended from "./FooterExtended";
 
-const devMode = process.env.NEXT_PUBLIC_DEV_MODE;
+import styles from "./Footer.module.scss";
+
+const cx = classNames.bind(styles);
+
+const IS_DEV_MODE = process.env.NEXT_PUBLIC_DEV_MODE;
 
 interface FooterProps {
   extendFooter?: boolean;
-  light?: boolean;
 }
 
-const Footer: React.FC<FooterProps> = ({ extendFooter, light }) => (
-  <div
-    className={cx("relative overflow-hidden", {
-      "bg-beige text-light-green": light,
-    })}
-  >
-    <div className="radial-gradient z-0" />
-    {extendFooter && <FooterExtended light={light} />}
-    <div className="flex px-3 md:px-8">
-      <div className="grid bg-tranparent m-0 h-5rem w-full">
-        <div className="col-12 md:col-5 flex flex-column align-items-start">
-          <p className="text-center md:text-left">
-            © {new Date().getFullYear()} Ivory Guide, LLC and its subsidiaries.
-            All rights reserved.
-          </p>
-        </div>
-        <div className="col-12 md:col-2 flex flex-column text-center">
-          <p className="text-center">
-            {devMode && (
-              <span className="text-red-700 border-1 border-red-700 border-round p-2 bg-red-100 z-0">
-                This is a development build.
-              </span>
-            )}
-          </p>
-        </div>
+const Footer: React.FC<FooterProps> = ({ extendFooter }) => (
+  <div className="relative overflow-hidden bg-beige text-light-green line-height-2 px-3 md:px-8">
+    {extendFooter && <FooterExtended />}
 
-        <div className="col-12 md:col-5 flex flex-column align-items-end">
-          <p className="text-center md:text-right">
-            <Link
-              href="/agreement"
-              className={cx("font-bold", {
-                "text-600": !light,
-                "text-light-green": light,
-              })}
-              target="_blank"
-              style={{ textDecorationColor: "var(--gray-600)" }}
-            >
-              Terms of Use
-            </Link>
-            {" | "}
-            <Link
-              href="/privacy-policy"
-              target="_blank"
-              className={cx("font-bold", {
-                "text-600": !light,
-                "text-light-green": light,
-              })}
-              style={{ textDecorationColor: "var(--gray-600)" }}
-            >
-              Privacy Notice
-            </Link>
-          </p>
-        </div>
+    <div
+      className={cx(
+        "relative flex flex-column gap-4 justify-content-between align-items-center py-5 text-center",
+        { "xl:flex-row": IS_DEV_MODE, "md:flex-row": !IS_DEV_MODE }
+      )}
+    >
+      <div className={cx("copyRight")}>
+        © {new Date().getFullYear()} Ivory Guide, LLC and its subsidiaries.
+        {"\n"}All rights reserved.
+      </div>
+
+      {IS_DEV_MODE && (
+        <span
+          className={cx(
+            "centerSection",
+            "text-red-700 border-1 border-red-700 border-round p-2 bg-red-100 z-0"
+          )}
+        >
+          This is a development build.
+        </span>
+      )}
+
+      <div>
+        <Link
+          href="/agreement"
+          className="font-bold text-light-green"
+          target="_blank"
+        >
+          Terms of Use
+        </Link>
+        {" | "}
+        <Link
+          href="/privacy-policy"
+          target="_blank"
+          className="font-bold text-light-green"
+        >
+          Privacy Notice
+        </Link>
       </div>
     </div>
   </div>

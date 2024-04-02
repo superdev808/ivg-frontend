@@ -74,7 +74,7 @@ const SavedResultsDetailContainer: React.FC = () => {
   return (
     <>
       <Toast ref={toastRef} position="top-right" />
-      <div className="nav-offset container flex flex-column align-items-center overflow-auto px-2 pb-4">
+      <div className="container flex flex-column align-items-center overflow-auto px-2 pb-4">
         {id && (
           <>
             {isLoading && <ProgressSpinner className="w-1 mt-4" />}

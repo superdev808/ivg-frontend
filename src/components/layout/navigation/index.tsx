@@ -171,8 +171,9 @@ const Navigation = ({ authenticated, light }: NavigationProps) => {
 
   return (
     <div
-      className={cx("z-2 w-full py-2 absolute top-1", {
-        "dark-background": !light,
+      className={cx("z-2 w-full py-2", {
+        "nav-light": light,
+        "nav-dark": !light,
       })}
     >
       <Navbar

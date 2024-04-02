@@ -8,7 +8,7 @@ export const ContactCTASection = () => (
       <>
         Request an additional Calculator or feature&nbsp;
         <Link href="/contact">
-          <span className="font-bold text-primary underline">here</span>
+          <span className="font-bold text-dark-green underline">here</span>
         </Link>
         .
       </>
