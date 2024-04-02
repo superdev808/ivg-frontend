@@ -157,8 +157,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <Button
                   className={cx(
                     { "btn-primary": !light, "btn-light-brown": light },
-                    "mt-4 font-bold text-normal md:text-lg md:px-5 md:py-4",
-                    { "border-light-green border-1": light }
+                    "mt-4 font-bold text-normal md:text-lg md:px-5 md:py-4"
                   )}
                   onClick={cta.onClick || noop}
                 >
