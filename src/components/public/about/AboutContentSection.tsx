@@ -149,7 +149,7 @@ export const AboutContentSection = () => {
       </div>
 
       {/* CTA Section */}
-      <CTASection text={text} title={title} light />
+      <CTASection text={text} title={title} />
     </div>
   );
 };

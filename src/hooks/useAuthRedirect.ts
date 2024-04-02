@@ -95,10 +95,7 @@ const useAuthRedirect = () => {
     ) {
       setLayoutStyle(layoutStyles.hidden);
     } else if (activePath === PUBLIC_ROUTES.CONTACT) {
-      setLayoutStyle({
-        light: false,
-        extendFooter: true,
-      });
+      setLayoutStyle(layoutStyles.simple);
     } else if (
       Object.values(PUBLIC_ROUTES).includes(activePath as PUBLIC_ROUTES)
     ) {

@@ -31,7 +31,6 @@ interface HeroSectionProps {
     hideOnMobile?: boolean;
     className?: string;
   };
-  light?: boolean;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
@@ -40,7 +39,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   cta,
   video,
   image,
-  light,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -110,11 +108,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   };
 
   return (
-    <div
-      className={cx("hero-container", "px-3 md:px-0 overflow-hidden", {
-        light,
-      })}
-    >
+    <div className={cx("hero-container", "px-3 md:px-0 overflow-hidden")}>
       <div className={cx("hero-wrapper", "grid justify-content-between")}>
         <div className="col-12 md:col-6">
           <div className="h-full flex align-items-center gap-6 md:pl-4 lg:gap-8">
@@ -122,15 +116,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {socialButtons.map((button) => (
                 <Link key={button.ariaLabel} href={button.link} target="_blank">
                   <Button
-                    pt={{
-                      icon: {
-                        className: cx("social-button"),
-                      },
-                    }}
-                    className={cx({
-                      "text-white": !light,
-                      "text-light-green border-light-green": light,
-                    })}
+                    className="text-light-green border-light-green"
                     rounded
                     outlined
                     text
@@ -142,12 +128,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
 
             <div className="flex flex-column justify-content-center align-items-center md:align-items-start lg:pl-0 xl:px-8">
-              <span
-                className={cx(
-                  { "text-primary": !light, "text-light-green": light },
-                  "text-4xl sm:text-5xl lg:text-6xl font-semibold text-center md:text-left"
-                )}
-              >
+              <span className="text-light-green text-4xl sm:text-5xl lg:text-6xl font-semibold text-center md:text-left">
                 {title}
               </span>
               <span className="text-white text-lg md:text-xl text-right md:text-left">
@@ -156,9 +137,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {cta && (
                 <Button
                   className={cx(
-                    { "btn-primary": !light, "btn-light-brown": light },
-                    "mt-4 font-bold text-normal md:text-lg md:px-5 md:py-4",
-                    { "border-light-green border-1": light }
+                    "btn-light-brown",
+                    "mt-4 font-bold text-normal md:text-lg md:px-5 md:py-4"
                   )}
                   onClick={cta.onClick || noop}
                 >

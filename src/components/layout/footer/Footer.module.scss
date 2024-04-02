@@ -1,16 +1,25 @@
 .socialButton {
-  color: var(--secondary-color);
+  color: var(--light-green);
   font-size: 32px;
 
   &:hover {
-    color: 1px solid var(--primary-color) !important;
+    color: 1px solid var(--light-green) !important;
   }
+}
 
-  &.light {
-    color: var(--light-green);
+.copyRight {
+  white-space: pre-line;
 
-    &:hover {
-      color: 1px solid var(--light-green) !important;
-    }
+  @media screen and (min-width: 991px) {
+    white-space: initial;
+  }
+}
+
+.centerSection {
+  @media screen and (min-width: 1440px) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 }

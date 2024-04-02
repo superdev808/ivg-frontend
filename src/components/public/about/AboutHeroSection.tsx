@@ -22,7 +22,6 @@ export const AboutHeroSection = () => {
         src: "https://www.youtube.com/embed/JPx2v-QBwoQ?si=8AbMbjHZ3PnPSq-0 ",
         className: styles.video,
       }}
-      light
     />
   );
 };

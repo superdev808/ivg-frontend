@@ -1,3 +1,4 @@
+import classNames from "classnames/bind";
 import { useRouter } from "next/navigation";
 
 import { useAppSelector } from "@/redux/hooks/hooks";
@@ -5,6 +6,8 @@ import { useAppSelector } from "@/redux/hooks/hooks";
 import { HeroSection } from "../shared/HeroSection";
 
 import styles from "./Home.module.scss";
+
+const cx = classNames.bind(styles);
 
 export const HomeHeroSection = () => {
   const router = useRouter();
@@ -25,9 +28,8 @@ export const HomeHeroSection = () => {
       }
       image={{
         src: "/images/home/landing-analytics.png",
-        className: styles["hero-image"],
+        className: cx("hero-image"),
       }}
-      light
     />
   );
 };

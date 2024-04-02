@@ -165,7 +165,7 @@ export const HomeContentSection = () => {
         </div>
       </div>
 
-      <CTASection title={ctaSectionTitle} text={ctaSectionText} light />
+      <CTASection title={ctaSectionTitle} text={ctaSectionText} />
     </div>
   );
 };
