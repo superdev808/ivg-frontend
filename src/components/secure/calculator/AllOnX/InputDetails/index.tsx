@@ -54,7 +54,7 @@ const InputDetails: React.FC<InputDetailsProps> = ({
   onAllAnswered,
 }) => {
   return (
-    <div className="relative">
+    <div className="relative bg-beige border-1 border-light-green border-round-2xl overflow-hidden">
       <TabView renderActiveOnly={false} scrollable>
         {selectedSites.map((site, index) => (
           <TabPanel key={site.name} header={site.name}>

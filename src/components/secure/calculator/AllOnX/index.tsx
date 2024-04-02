@@ -53,7 +53,7 @@ interface AllOnXCalculatorProps {
 const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   isCustom = false,
 }) => {
-  const calculatorName = "All-on-X Calculator";
+  const calculatorName = "All-on-X Calculator" as string;
 
   const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
 
@@ -387,7 +387,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   return (
     <div className="flex-grow-1">
       <div className="px-2 my-4 wrapper md:px-0 md:my-8">
-        <div className="px-3 py-5 flex flex-column m:p-5 border-round bg-white shadow-1">
+        <div className="px-3 py-5 flex flex-column m:p-5 border-round shadow-1">
           {!isCustom && (
             <>
               <h3 className="mt-0 mb-3 text-center">
@@ -491,8 +491,8 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
           />
         </div>
       )}
-      {isAllSitesAnswered == false && selectedSites.length > 0 && (
-        <FeedbackDialogWrapper label={calculatorName} />
+      {isAllSitesAnswered === false && selectedSites.length > 0 && (
+        <FeedbackDialogWrapper calculatorName={calculatorName} />
       )}
       <HelpfulFeedbackDialog
         visible={feedbkackShow}
