@@ -120,7 +120,7 @@ const Quiz: React.FC<QuizProps> = ({
         {onGoBack && (
           <Button
             icon="pi pi-arrow-left"
-            className="absolute left-0 ml-2 mt-5 px-5 md:ml-4 text-6xl"
+            className="absolute left-0 ml-2 mt-5 px-5 md:ml-4 text-6xl bg-light-green"
             disabled={disabled}
             onClick={onGoBack}
           />
@@ -137,7 +137,7 @@ const Quiz: React.FC<QuizProps> = ({
           onChange={handleSearchChange}
           placeholder="Search all available options..."
           className="w-full"
-          inputClassName="w-full"
+          inputClassName="w-full bg-transparent"
           completeMethod={handleAutoCompleteMethod}
           onSelect={handleSelect}
           itemTemplate={dropdownOptionTemplate}
@@ -165,7 +165,7 @@ const Quiz: React.FC<QuizProps> = ({
             >
               <div
                 className={cx(
-                  "border-3 border-300 hover:border-teal-300 border-round-xl w-full p-0 flex justify-content-center cursor-pointer",
+                  "border-3 border-light-green hover:border-dark-green border-round-xl w-full p-0 flex justify-content-center cursor-pointer",
                   { "quiz-card--selected": currentAnswer === answer }
                 )}
                 style={{ height: 200 }}

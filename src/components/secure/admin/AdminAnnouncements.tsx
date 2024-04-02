@@ -1,4 +1,3 @@
-import classNames from "classnames/bind";
 import parse from "html-react-parser";
 import { FilterMatchMode } from "primereact/api";
 import { Button } from "primereact/button";
@@ -19,8 +18,6 @@ import {
   useDeleteAnnouncementMutation,
 } from "@/redux/hooks/apiHooks";
 import { ANNOUNCEMENT_ITEM } from "@/types/calculators";
-
-const cx = classNames.bind({});
 
 const AdminAnnouncementsManagement: React.FC = () => {
   const toast = useRef(null);
@@ -266,12 +263,13 @@ const AdminAnnouncementsManagement: React.FC = () => {
         <span className="text-2xl font-semibold">Announcements Management</span>
         <Button
           label="Publish new one"
+          size="small"
           className="ml-3 text-md px-3 py-3"
           onClick={onCreateAnnouncement}
         />
       </div>
 
-      <div className="flex-grow-1">
+      <div className="flex-grow-1 border-1 border-light-green">
         <DataTable
           stripedRows
           size="small"

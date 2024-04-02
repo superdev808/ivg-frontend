@@ -35,7 +35,7 @@ const ProtectedLayout: React.FC<ProtectedLayoutProps> = ({ children }) => {
   }, [data]);
 
   return (
-    <div className="flex flex-column flex-grow-1">
+    <div className="flex flex-column flex-grow-1 bg-beige">
       <Messages ref={msgs} />
       {children}
     </div>

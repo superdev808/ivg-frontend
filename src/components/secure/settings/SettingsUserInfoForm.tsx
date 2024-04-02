@@ -125,14 +125,16 @@ export default function SettingsUserInfoForm() {
 
   return (
     <>
-      <form className="px-3" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex mx-3 md:-mx-3" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid">
           <div className="col-12">
-            <div className="text-2xl text-center md:text-left">Profile</div>
+            <div className="text-2xl text-center text-light-green md:text-left">
+              Profile
+            </div>
           </div>
 
           <div className="col-12">
-            <span className="text-gray-600">
+            <span className="text-light-green">
               Update your profile, contact detials, and preferences to
               personalize your experience
             </span>
@@ -140,7 +142,7 @@ export default function SettingsUserInfoForm() {
 
           <div className="col-12 md:col-3">
             <div className="pt-4 pb-2 md:pb-4">
-              <div className="flex flex-column border-1 border-300 border-round-xl align-items-center pt-4">
+              <div className="flex flex-column border-1 border-light-green border-round-xl align-items-center pt-4">
                 {user?.logo ? (
                   <Image
                     src={user.logo}
@@ -163,7 +165,7 @@ export default function SettingsUserInfoForm() {
                   disabled={isLoadingLogo}
                   icon={isLoadingLogo && "pi pi-spin pi-spinner"}
                   label="Update"
-                  className="bg-transparent text-600 text-secondary"
+                  className="bg-transparent text-light-green"
                 />
               </div>
             </div>
@@ -171,9 +173,8 @@ export default function SettingsUserInfoForm() {
 
           <div className="col-12 md:col-6">
             <div className="flex flex-column justify-content-center text-center pb-6 h-full md:text-left md:pl-2 md:pb-0">
-              <div className="text-lg">
-                <span className="text-gray-600">Location:</span>{" "}
-                {user.organizationState}
+              <div className="text-lg text-light-green">
+                <span>Location:</span> {user.organizationState}
               </div>
             </div>
           </div>
@@ -195,12 +196,14 @@ export default function SettingsUserInfoForm() {
                     value={field.value}
                     className={cx([
                       { "p-invalid": fieldState.error },
-                      "w-full",
+                      "w-full bg-transparent",
                     ])}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
 
-                  <label htmlFor={field.name}>First Name</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    First Name
+                  </label>
                 </span>
 
                 {FormErrorMessage({
@@ -227,11 +230,13 @@ export default function SettingsUserInfoForm() {
                     value={field.value}
                     className={cx([
                       { "p-invalid": fieldState.error },
-                      "w-full",
+                      "w-full bg-transparent",
                     ])}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
-                  <label htmlFor={field.name}>Last Name</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Last Name
+                  </label>
                 </span>
 
                 {FormErrorMessage({
@@ -266,12 +271,14 @@ export default function SettingsUserInfoForm() {
                     mask="(999) 999-9999"
                     className={cx([
                       { "p-invalid": fieldState.error },
-                      "w-full",
+                      "w-full bg-transparent",
                     ])}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
 
-                  <label htmlFor={field.name}>Phone Number</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Phone Number
+                  </label>
                 </span>
 
                 {FormErrorMessage({
@@ -298,12 +305,14 @@ export default function SettingsUserInfoForm() {
                     value={field.value}
                     className={cx([
                       { "p-invalid": fieldState.error },
-                      "w-full",
+                      "w-full bg-transparent",
                     ])}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
 
-                  <label htmlFor={field.name}>Organization Name</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Organization Name
+                  </label>
                 </span>
 
                 {FormErrorMessage({
@@ -321,13 +330,13 @@ export default function SettingsUserInfoForm() {
                 rounded
                 icon={isLoadingReset && "pi pi-spin pi-spinner"}
                 label="Change your password"
-                className="text-red-600 w-fit"
+                className="text-dark-brown w-fit"
                 onClick={(e) => onReset(e)}
               />
 
               <span className="align-self-center">
                 {resetMessage && (
-                  <div className="text-600 text-secondary">{resetMessage}</div>
+                  <div className="text-light-green">{resetMessage}</div>
                 )}
               </span>
             </div>
@@ -336,7 +345,7 @@ export default function SettingsUserInfoForm() {
           <div className="col-12">
             <div className="flex flex-column justify-content-center align-items-center gap-3 pb-4 md:flex-row md:justify-content-end md:gap-4 md:pb-0">
               {updateMessage && (
-                <div className="text-600 text-secondary align-self-center">
+                <div className="text-light-green align-self-center">
                   {updateMessage}
                 </div>
               )}

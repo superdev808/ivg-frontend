@@ -371,7 +371,7 @@ const Result: React.FC<ResultProps> = ({
 
           <div
             className={cx(
-              "bg-white flex flex-column justify-content-around gap-3 shadow-6 p-4 border-round-md",
+              "flex flex-column justify-content-around gap-3 shadow-6 p-4 border-round-md border-2 border-light-green",
               "quiz"
             )}
           >

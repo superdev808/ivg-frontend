@@ -1,62 +1,58 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import ResetForm from './ResetForm';
-import { ResetHeader } from './ResetHeader';
-import { usePostValidateTokenMutation } from '@/redux/hooks/apiHooks';
-import { useSearchParams } from 'next/navigation';
+import ResetForm from "./ResetForm";
+import { ResetHeader } from "./ResetHeader";
+import { usePostValidateTokenMutation } from "@/redux/hooks/apiHooks";
+import { useSearchParams } from "next/navigation";
 
-import { ResetInvalid } from './ResetInvalid';
-import { set } from 'lodash';
-import { ResetSuccess } from './ResetSuccess';
+import { ResetInvalid } from "./ResetInvalid";
+import { ResetSuccess } from "./ResetSuccess";
 
 export const ResetComponent = () => {
-	const searchParams = useSearchParams();
-	const [token, setToken] = useState<string | null>(null);
-	const [postValidateToken, result] = usePostValidateTokenMutation();
-	const [success, setSuccess] = useState(false);
+  const searchParams = useSearchParams();
+  const [token, setToken] = useState<string | null>(null);
+  const [postValidateToken] = usePostValidateTokenMutation();
+  const [success, setSuccess] = useState(false);
 
-	useEffect(() => {
-		const token = searchParams.get('token') || '';
+  useEffect(() => {
+    const token = searchParams.get("token") || "";
 
-		postValidateToken({ token: token })
-			.unwrap()
-			.then((res) => {
-				if (res.valid) {
-					setToken(token);
-				} else {
-					setToken('');
-				}
-			})
-			.catch((err) => {
-				setToken('');
-			});
-	}, []);
+    postValidateToken({ token: token })
+      .unwrap()
+      .then((res) => {
+        if (res.valid) {
+          setToken(token);
+        } else {
+          setToken("");
+        }
+      })
+      .catch(() => {
+        setToken("");
+      });
+  }, [searchParams, postValidateToken]);
 
-	const currentDisplay = () => {
-		
-		if (success) return <ResetSuccess />;
-		if (token === '') return <><ResetInvalid /></>
-		return (
-			<>
-				<ResetHeader />
-				<ResetForm token={token} setSuccess={setSuccess} />
-			</>
-		);
+  const currentDisplay = () => {
+    if (success) return <ResetSuccess />;
 
-	}
+    if (token === "") return <ResetInvalid />;
 
-	if (token === null) return <></>;
+    return (
+      <>
+        <ResetHeader />
+        <ResetForm token={token} setSuccess={setSuccess} />
+      </>
+    );
+  };
 
-	return (
-		<>
-			<div className="background-gradient"></div>
-			<div className="container ">
-				<div className="wrapper h-full flex flex-column align-items-center justify-content-center">
-				{currentDisplay()}
-				</div>
-			</div>
-		</>
-	);
+  if (token === null) return null;
+
+  return (
+    <div className="flex flex-1 bg-beige pb-8 px-4">
+      <div className="wrapper flex flex-1 flex-column align-items-center justify-content-center">
+        {currentDisplay()}
+      </div>
+    </div>
+  );
 };

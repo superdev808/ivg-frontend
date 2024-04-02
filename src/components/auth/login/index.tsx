@@ -6,15 +6,12 @@ import LoginForm from "./LoginForm";
 import LoginHeader from "./LoginHeader";
 
 const LoginComponent: React.FC = () => (
-  <>
-    <div className="background-gradient" />
-    <div className="container">
-      <div className="wrapper h-full flex flex-column align-items-center justify-content-center">
-        <LoginHeader />
-        <LoginForm />
-      </div>
+  <div className="flex flex-1 bg-beige pb-8 px-4">
+    <div className="wrapper flex flex-1 flex-column align-items-center justify-content-center">
+      <LoginHeader />
+      <LoginForm />
     </div>
-  </>
+  </div>
 );
 
 export default LoginComponent;

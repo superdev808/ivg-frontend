@@ -1,14 +1,16 @@
+.mainSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .calculatorButton {
-  background-color: white !important;
+  background-color: transparent !important;
   color: #023932 !important;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--light-brown) !important;
 
-  &:hover {
-    border: 1px solid var(--primary-color) !important;
-  }
-
+  &:hover,
   &--highlighted {
-    border: 1px solid var(--secondary-color) !important;
+    border: 1px solid var(--dark-green) !important;
   }
 }
 

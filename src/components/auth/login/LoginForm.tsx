@@ -146,13 +146,15 @@ const LoginForm: React.FC = () => {
                   <InputText
                     id={field.name}
                     value={field.value}
-                    className={cx({
-                      "p-invalid": fieldState.error,
-                      "w-full": true,
-                    })}
+                    className={cx(
+                      { "p-invalid": fieldState.error },
+                      "w-full bg-beige"
+                    )}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
-                  <label htmlFor={field.name}>Email</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Email
+                  </label>
                 </span>
 
                 {getFormErrorMessage(field.name)}
@@ -185,14 +187,16 @@ const LoginForm: React.FC = () => {
                   <InputText
                     type={!showPassword ? "password" : "text"}
                     id={field.name}
-                    className={cx({
-                      "p-invalid": fieldState.error,
-                      "w-full": true,
-                    })}
+                    className={cx(
+                      { "p-invalid": fieldState.error },
+                      "w-full bg-beige"
+                    )}
                     {...field}
                   />
 
-                  <label htmlFor={field.name}>Password</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Password
+                  </label>
                 </span>
                 {getFormErrorMessage(field.name)}
               </>
@@ -211,9 +215,9 @@ const LoginForm: React.FC = () => {
             <label htmlFor="rememberme">Remember me</label>
           </div>
 
-          <span className="font-medium no-underline ml-2 text-secondary text-right cursor-pointer">
+          <span className="font-medium no-underline ml-2 text-dark-green text-right cursor-pointer">
             <Link
-              className="text-secondary no-underline"
+              className="text-dark-green no-underline"
               href="/forgot-password"
             >
               Forgot your password?
