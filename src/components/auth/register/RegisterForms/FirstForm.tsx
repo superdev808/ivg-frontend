@@ -12,9 +12,7 @@ import { usePostCheckEmailMutation } from "@/redux/hooks/apiHooks";
 
 import RegisterFooter from "./Footer";
 
-import styles from "../Register.module.scss";
-
-const cx = classNames.bind(styles);
+const cx = classNames.bind({});
 
 type FormValues = {
   firstName: string;
@@ -90,11 +88,11 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
       className="grid m-0 p-0 justify-content-center h-full"
       onSubmit={handleSubmit((e) => handleCheckEmail(e))}
     >
-      <span className="col-12 text-center text-2xl text-secondary">
+      <span className="col-12 text-center text-2xl text-dark-green">
         Create your account
       </span>
 
-      <span className="col-12 text-center p-0 text-gray-600 mb-6">
+      <span className="col-12 text-center p-0 text-light-green mb-4">
         Please fill the form below to create an account.
       </span>
 
@@ -113,13 +111,15 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
               <span className="p-float-label">
                 <InputText
                   id={field.name}
-                  className={cx({
-                    "p-invalid": fieldState.error,
-                    "w-full": true,
-                  })}
+                  className={cx(
+                    { "p-invalid": fieldState.error },
+                    "w-full bg-beige"
+                  )}
                   {...field}
                 />
-                <label htmlFor={field.name}>First Name</label>
+                <label className="bg-beige" htmlFor={field.name}>
+                  First Name
+                </label>
               </span>
 
               {fieldState.error && (
@@ -142,13 +142,17 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
               <span className="p-float-label">
                 <InputText
                   id={field.name}
-                  className={cx({
-                    "p-invalid": fieldState.error,
-                    "w-full": true,
-                  })}
+                  className={cx(
+                    {
+                      "p-invalid": fieldState.error,
+                    },
+                    "w-full bg-beige"
+                  )}
                   {...field}
                 />
-                <label htmlFor={field.name}>Last Name</label>
+                <label className="bg-beige" htmlFor={field.name}>
+                  Last Name
+                </label>
               </span>
 
               {fieldState.error && (
@@ -175,11 +179,16 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                   id={field.name}
                   value={field.value}
                   mask="(999) 999-9999"
-                  className={cx({ "p-invalid": fieldState.error }, "w-full")}
+                  className={cx(
+                    { "p-invalid": fieldState.error },
+                    "w-full bg-beige"
+                  )}
                   onChange={(e) => field.onChange(e.target.value)}
                 />
 
-                <label htmlFor={field.name}>Phone Number</label>
+                <label className="bg-beige" htmlFor={field.name}>
+                  Phone Number
+                </label>
               </span>
 
               {fieldState.error && (
@@ -212,13 +221,17 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                     clearErrors("email");
                     setEmailNotTaken(true);
                   }}
-                  className={cx({
-                    "p-invalid": fieldState.error,
-                    "w-full": true,
-                  })}
+                  className={cx(
+                    {
+                      "p-invalid": fieldState.error,
+                    },
+                    "w-full bg-beige"
+                  )}
                   {...field}
                 />
-                <label htmlFor={field.name}>Email</label>
+                <label className="bg-beige" htmlFor={field.name}>
+                  Email
+                </label>
               </span>
 
               {fieldState.error ? (
@@ -226,7 +239,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                   <FormErrorMessage message={errors[field.name]?.message} />
                 </div>
               ) : (
-                <span className="mt-2 mb-4 text-gray-500 text-sm">
+                <span className="mt-2 mb-4 text-light-green text-sm">
                   Please use an email associated with your dental practice, lab,
                   school, etc. in order for us to validate your involvement.
                 </span>
@@ -266,13 +279,17 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                 <InputText
                   type={!showPassword ? "password" : "text"}
                   id={field.name}
-                  className={cx({
-                    "p-invalid": fieldState.error,
-                    "w-full": true,
-                  })}
+                  className={cx(
+                    {
+                      "p-invalid": fieldState.error,
+                    },
+                    "w-full bg-beige"
+                  )}
                   {...field}
                 />
-                <label htmlFor={field.name}>Password</label>
+                <label className="bg-beige" htmlFor={field.name}>
+                  Password
+                </label>
               </span>
 
               {fieldState.error ? (
@@ -280,7 +297,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                   <FormErrorMessage message={errors[field.name]?.message} />
                 </div>
               ) : (
-                <span className="mt-2 mb-4 text-gray-500 text-sm">
+                <span className="mt-2 mb-4 text-light-green text-sm">
                   Min. 8 characters, 1 letter, 1 number and 1 special character
                 </span>
               )}
@@ -309,13 +326,13 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                 onChange={(e) => field.onChange(e.checked)}
               />
 
-              <span className="text-center text-600 text-sm">
+              <span className="text-center text-light-green text-sm">
                 I accept the{" "}
                 <Link
                   href="/agreement"
-                  className="text-600 font-bold"
+                  className="text-light-green font-bold"
                   target="_blank"
-                  style={{ textDecorationColor: "var(--gray-600)" }}
+                  style={{ textDecorationColor: "var(--light-green)" }}
                 >
                   Terms of Use
                 </Link>{" "}
@@ -323,8 +340,8 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                 <Link
                   href="/privacy-policy"
                   target="_blank"
-                  className="text-600 font-bold"
-                  style={{ textDecorationColor: "var(--gray-600)" }}
+                  className="text-light-green font-bold"
+                  style={{ textDecorationColor: "var(--light-green)" }}
                 >
                   Privacy Notice
                 </Link>
@@ -349,9 +366,9 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
       </div>
 
       <div className="col-12 flex justify-content-center mt-4">
-        <span className="text-center p-0 text-gray-600">
+        <span className="text-center p-0 text-light-green">
           Already have an account?{" "}
-          <Link href="/login" className="no-underline text-secondary">
+          <Link href="/login" className="no-underline text-dark-green">
             Sign In
           </Link>
         </span>

@@ -1,15 +1,14 @@
-import styles from './Loading.module.scss'
-import classNames from 'classnames/bind';
+import classNames from "classnames/bind";
+
+import styles from "./Loading.module.scss";
+
 const cx = classNames.bind(styles);
 
-
-const Loading = () => {
-  return <div className={cx('loader')}>
- <div className="background-gradient"></div>
-    <div className={cx("one")}></div>
-    <div className={cx("two")}></div>
-
-
+const Loading: React.FC = () => (
+  <div className={cx("loader")}>
+    <div className={cx("one")} />
+    <div className={cx("two")} />
   </div>
-}
-export default  Loading
+);
+
+export default Loading;

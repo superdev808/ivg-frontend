@@ -109,75 +109,71 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
     isLoading || (input[level] && !Boolean(answerOptions[level]?.length));
 
   return (
-    <>
-      <div className="flex w-full justify-content-center mb-8">
-        <div className="w-12 flex px-2 py-2 border-round bg-white flex-column">
-          <div className="grid">
-            {questions.map((quiz, index) => {
-              if (index !== level) {
-                return null;
-              }
+    <div className="flex w-full justify-content-center mb-8 bg-beige text-light-green">
+      <div className="w-12 flex px-2 py-2 border-round flex-column">
+        <div className="grid">
+          {questions.map((quiz, index) => {
+            if (index !== level) {
+              return null;
+            }
 
+            if (
+              answerOptions[index] &&
+              answerOptions[index].length === 1 &&
+              answerOptions[index][0] === ""
+            ) {
               if (
-                answerOptions[index] &&
-                answerOptions[index].length === 1 &&
-                answerOptions[index][0] === ""
+                index <= level &&
+                level < input.length &&
+                answers[index] !== ""
               ) {
-                if (
-                  index <= level &&
-                  level < input.length &&
-                  answers[index] !== ""
-                ) {
-                  handleSelectAnswer(index)("");
-                }
-                return null;
+                handleSelectAnswer(index)("");
               }
+              return null;
+            }
 
-              return (
-                <Quiz
-                  key={`quiz-${index}`}
-                  calculatorName={getCalculatorName(calculatorType)}
-                  question={quiz.text}
-                  answers={answerOptions[index]}
-                  currentAnswer={answers[index]}
-                  disabled={showLoader}
-                  progress={Math.floor((index / input.length) * 100)}
-                  onSelectAnswer={handleSelectAnswer(index)}
-                  onGoBack={index > 0 ? handleBack(index) : undefined}
-                />
-              );
-            })}
-          </div>
-
-          {items.length > 0 ? (
-            <DetailView
-              calculatorType={calculatorType}
-              items={items}
-              fields={output}
-              questions={input}
-              answers={answers}
-              onGoBack={handleBackFromResult}
-            />
-          ) : (
-            <FeedbackDialogWrapper
-              calculatorName={getCalculatorName(calculatorType)}
-              userAnswers={
-                input.map((inputItem, index) => ({
-                  ...inputItem,
-                  answer: answers[index]
-                }))
-              }
-            />
-          )}
-
-          {showLoader && (
-            <div className="w-12 flex justify-content-center">
-              <ProgressSpinner className="w-1" />
-            </div>
-          )}
+            return (
+              <Quiz
+                key={`quiz-${index}`}
+                calculatorName={getCalculatorName(calculatorType)}
+                question={quiz.text}
+                answers={answerOptions[index]}
+                currentAnswer={answers[index]}
+                disabled={showLoader}
+                progress={Math.floor((index / input.length) * 100)}
+                onSelectAnswer={handleSelectAnswer(index)}
+                onGoBack={index > 0 ? handleBack(index) : undefined}
+              />
+            );
+          })}
         </div>
+
+        {items.length > 0 ? (
+          <DetailView
+            calculatorType={calculatorType}
+            items={items}
+            fields={output}
+            questions={input}
+            answers={answers}
+            onGoBack={handleBackFromResult}
+          />
+        ) : (
+          <FeedbackDialogWrapper
+            calculatorName={getCalculatorName(calculatorType)}
+            userAnswers={input.map((inputItem, index) => ({
+              ...inputItem,
+              answer: answers[index],
+            }))}
+          />
+        )}
+
+        {showLoader && (
+          <div className="w-12 flex justify-content-center">
+            <ProgressSpinner className="w-1" />
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

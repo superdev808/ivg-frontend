@@ -3,11 +3,13 @@ import Link from "next/link";
 
 const RegisterComplete: React.FC = () => (
   <div className="flex flex-column justify-content-center align-items-center h-full text-center">
-    <span className="text-6xl mb-6">Thank you for registering!</span>
+    <span className="text-6xl text-dark-green mb-6">
+      Thank you for registering!
+    </span>
 
     <i className="pi pi-check-circle text-8xl" />
 
-    <div className="text-2xl my-6">
+    <div className="text-2xl my-6 text-light-green">
       Your account has been created and a verification email has been sent to
       your registered email address. Please click verification link included in
       the email to activate your account.
@@ -16,7 +18,7 @@ const RegisterComplete: React.FC = () => (
     <Link href="/login">
       <Button
         label="Return to login"
-        className=" p-button-rounded bg-secondary "
+        className="p-button-rounded bg-secondary"
       />
     </Link>
   </div>

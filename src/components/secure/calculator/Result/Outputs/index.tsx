@@ -31,7 +31,7 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
         info.map((item, itemIdx) => (
           <div
             key={`${label}-${itemIdx}`}
-            className="flex flex-column justify-content-between gap-4 p-3 border-2 border-gray-300 border-round-md md:flex-row md:align-items-center"
+            className="flex flex-column justify-content-between gap-4 p-3 border-2 border-light-green border-round-md md:flex-row md:align-items-center"
           >
             <div
               className={cx("flex flex-column gap-2", {
@@ -96,7 +96,7 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
                   </Link>
                 ) : (
                   <div
-                    className="text-center text-gray-500"
+                    className="text-center text-light-green"
                     style={{ width: 172 }}
                   >
                     Please contact your

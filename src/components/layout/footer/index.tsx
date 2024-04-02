@@ -33,7 +33,7 @@ const Footer: React.FC<FooterProps> = ({ extendFooter }) => (
         <span
           className={cx(
             "centerSection",
-            "text-red-700 border-1 border-red-700 border-round p-2 bg-red-100 z-0"
+            "text-dark-brown border-1 border-dark-brown border-round p-2 z-0"
           )}
         >
           This is a development build.

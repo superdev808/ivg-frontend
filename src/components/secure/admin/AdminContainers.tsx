@@ -34,7 +34,7 @@ const AdminContainers: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-column justify-content-center flex-grow-1">
+    <div className="flex flex-column justify-content-center flex-grow-1 bg-beige">
       <div className="grid m-0 flex-grow-1 p-3">
         <div className="col-2 border-right-1">
           <AdminMenu

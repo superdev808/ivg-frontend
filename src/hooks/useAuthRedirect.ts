@@ -103,7 +103,7 @@ const useAuthRedirect = () => {
     } else if (activePath === PRIVATE_ROUTES.HOME) {
       setLayoutStyle(layoutStyles.simple);
     } else {
-      setLayoutStyle(layoutStyles.default);
+      setLayoutStyle(layoutStyles.simple);
     }
 
     checkAuthStatus();

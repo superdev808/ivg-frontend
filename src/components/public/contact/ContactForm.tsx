@@ -119,7 +119,7 @@ export const ContactComponent = () => {
                         value={field.value}
                         className={cx(
                           { "p-invalid": fieldState.error },
-                          "w-full"
+                          "w-full bg-transparent"
                         )}
                         onChange={(e) => field.onChange(e.target.value)}
                       />
@@ -152,7 +152,7 @@ export const ContactComponent = () => {
                         value={field.value}
                         className={cx(
                           { "p-invalid": fieldState.error },
-                          "w-full"
+                          "w-full bg-transparent"
                         )}
                         onChange={(e) => field.onChange(e.target.value)}
                       />
@@ -185,7 +185,7 @@ export const ContactComponent = () => {
                         mask="(999) 999-9999"
                         className={cx(
                           { "p-invalid": fieldState.error },
-                          "w-full"
+                          "w-full bg-transparent"
                         )}
                         onChange={(e) => field.onChange(e.target.value)}
                       />
@@ -216,7 +216,7 @@ export const ContactComponent = () => {
                         mask="99999"
                         className={cx(
                           { "p-invalid": fieldState.error },
-                          "w-full"
+                          "w-full bg-transparent"
                         )}
                         onChange={(e) => field.onChange(e.target.value)}
                       />
@@ -292,7 +292,7 @@ export const ContactComponent = () => {
                         cols={30}
                         className={cx(
                           { "p-invalid": fieldState.error },
-                          "w-full"
+                          "w-full bg-transparent"
                         )}
                       />
 

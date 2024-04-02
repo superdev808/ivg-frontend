@@ -73,7 +73,7 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
           <div
             key={savedResult.id}
             className={cx(
-              `border-2 border-gray-400 px-2 py-3 text-center
+              `border-2 border-light-green px-2 py-3 text-center
       flex flex-column gap-4 align-items-center
       md:text-left md:px-3 md:py-5 md:flex-row`,
               { "cursor-pointer": !isLoading, "cursor-wait": isLoading }

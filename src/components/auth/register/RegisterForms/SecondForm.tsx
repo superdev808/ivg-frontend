@@ -85,10 +85,10 @@ const SecondForm: React.FC<SecondFormProps> = ({
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="col-12 m-0 p-0 grid flex-column">
-        <span className="col-12 text-center text-2xl text-secondary">
+        <span className="col-12 text-center text-2xl text-dark-green">
           A few more questions
         </span>
-        <span className="col-12 text-center p-0 text-gray-600 mb-4">
+        <span className="col-12 text-center p-0 text-light-green mb-4">
           To get started, tell us a little about yourself.
         </span>
 
@@ -225,13 +225,15 @@ const SecondForm: React.FC<SecondFormProps> = ({
                 <span className="p-float-label">
                   <InputText
                     id={field.name}
-                    className={cx({
-                      "p-invalid": fieldState.error,
-                      "w-full": true,
-                    })}
+                    className={cx(
+                      { "p-invalid": fieldState.error },
+                      "w-full bg-beige"
+                    )}
                     {...field}
                   />
-                  <label htmlFor={field.name}>Name</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Name
+                  </label>
                 </span>
               </div>
             )}
@@ -251,10 +253,15 @@ const SecondForm: React.FC<SecondFormProps> = ({
                     optionValue="value"
                     filter
                     clearIcon
-                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
+                    className={cx(
+                      { "p-invalid": fieldState.error },
+                      "w-full bg-beige"
+                    )}
                   />
 
-                  <label htmlFor={field.name}>Location</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Location
+                  </label>
                 </span>
               </div>
             )}
@@ -273,13 +280,15 @@ const SecondForm: React.FC<SecondFormProps> = ({
                 <span className="p-float-label">
                   <InputText
                     id={field.name}
-                    className={cx({
-                      "p-invalid": fieldState.error,
-                      "w-full": true,
-                    })}
+                    className={cx(
+                      { "p-invalid": fieldState.error },
+                      "w-full bg-beige"
+                    )}
                     {...field}
                   />
-                  <label htmlFor={field.name}>License/School Number</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    License/School Number
+                  </label>
                 </span>
               </div>
             )}
