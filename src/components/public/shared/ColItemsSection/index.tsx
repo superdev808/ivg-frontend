@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { Image } from "primereact/image";
+import React from "react";
 
 import styles from "./ColItemsSection.module.scss";
 
@@ -10,7 +10,7 @@ interface ThreeColSectionProps {
   items: {
     title: string;
     description: string;
-    image: string;
+    image: React.ReactNode;
   }[];
   reverse?: boolean;
   dark?: boolean;
@@ -25,14 +25,16 @@ export const ColItemsSection: React.FC<ThreeColSectionProps> = ({
   subtitle,
 }) => (
   <div
-    className={cx("col-container", "border-round overflow-hidden", {
+    className={cx("col-container", "border-round overflow-hidden bg-beige", {
       "bg-secondary": dark,
     })}
   >
     <div className="flex flex-column mb-6 align-items-center justify-content-center">
       <div className="flex flex-column mt-4 mb-2 md:mb-8 text-center">
         <span
-          className={cx("public-section-title mb-4", { "text-white": dark })}
+          className={cx("public-section-title text-dark-green mb-4", {
+            "text-white": dark,
+          })}
         >
           {title}
         </span>
@@ -41,7 +43,7 @@ export const ColItemsSection: React.FC<ThreeColSectionProps> = ({
           <span
             className={cx(
               "public-section-content-xl",
-              "px-6 mb-4 text-center",
+              "px-6 mb-4 text-center text-light-green",
               { "text-white": dark }
             )}
           >
@@ -57,12 +59,13 @@ export const ColItemsSection: React.FC<ThreeColSectionProps> = ({
               key={`item_${index}`}
               className={cx(
                 "col-item",
-                "col-12 md:col-3 flex flex-column align-items-center text-center px-3 py-4"
+                "col-12 md:col-3 flex flex-column align-items-center text-center px-3 py-4",
+                { dark }
               )}
             >
               <span
                 className={cx(
-                  "public-section-label-2xl",
+                  "public-section-label-2xl text-grey-800",
                   { "flex-order-1": reverse },
                   { "text-white": dark }
                 )}
@@ -70,7 +73,11 @@ export const ColItemsSection: React.FC<ThreeColSectionProps> = ({
                 {item.title}
               </span>
 
-              <div className={cx("relative mt-4", { "flex-order-0": reverse })}>
+              <div
+                className={cx("relative mt-4", {
+                  "flex-order-0": reverse,
+                })}
+              >
                 <div
                   className={cx(
                     "public-blur-shadow",
@@ -79,16 +86,12 @@ export const ColItemsSection: React.FC<ThreeColSectionProps> = ({
                   )}
                 />
 
-                <Image
-                  src={item.image}
-                  imageClassName="h-auto w-5rem md:w-6rem md:h-6rem"
-                  alt={item.title}
-                />
+                {item.image}
               </div>
 
               <span
                 className={cx(
-                  "mt-4 md:mt-6 text-center public-section-content-xl",
+                  "mt-4 md:mt-6 text-center text-dark-green public-section-content-xl",
                   { "text-white": dark }
                 )}
               >

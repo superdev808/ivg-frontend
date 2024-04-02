@@ -4,6 +4,8 @@ import { useAppSelector } from "@/redux/hooks/hooks";
 
 import { HeroSection } from "../shared/HeroSection";
 
+import styles from "./Home.module.scss";
+
 export const HomeHeroSection = () => {
   const router = useRouter();
 
@@ -21,7 +23,11 @@ export const HomeHeroSection = () => {
           ? { label: "Join for FREE", onClick: handleJoin }
           : undefined
       }
-      image={{ src: "/images/home/landing-analytics.png" }}
+      image={{
+        src: "/images/home/landing-analytics.png",
+        className: styles["hero-image"],
+      }}
+      light
     />
   );
 };

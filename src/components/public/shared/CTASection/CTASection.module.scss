@@ -1,10 +1,15 @@
 .cta-container {
-  background: rgba(var(--secondary-color-rgb), 1);
+  background-color: rgba(var(--secondary-color-rgb), 1);
   background-image: url("/images/common/elephant.svg");
   background-size: 45%;
   background-repeat: no-repeat;
   background-position: bottom right;
   line-height: 1.25;
+
+  &.light {
+    background-color: var(--light-brown);
+    background-image: url("/images/common/elephant-brown.svg");
+  }
 }
 
 @media screen and (min-width: 768px) {

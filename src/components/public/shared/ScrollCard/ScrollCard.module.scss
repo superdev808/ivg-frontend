@@ -13,11 +13,11 @@
   align-items: center;
   text-align: center;
   display: flex;
-  background: rgba(var(--primary-color-rgb), 0.15);
+  background: var(--light-brown);
   padding: 1rem;
   border-radius: 5px;
   font-size: 1.2rem;
-  color: var(--secondary-color);
+  color: var(--dark-green);
   width: 80%;
   height: 125px;
 }

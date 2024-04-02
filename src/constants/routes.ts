@@ -1,7 +1,7 @@
 export enum PUBLIC_ROUTES {
   HOME = "/",
   CONTACT = "/contact/",
-  PRODUCT = "/product/",
+  ABOUT = "/about/",
   FORBIDDEN = "/error/403/",
   PRIVACY = "/privacy-policy/",
   PRIVACYCA = "/privacy-policy-ca/",

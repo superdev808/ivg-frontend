@@ -1,15 +1,21 @@
 .hero-container {
   padding: 5rem 0;
   box-sizing: border-box;
-  height: 660px;
-  background-color: var(--secondary-color);
+  height: 760px;
   display: flex;
   justify-content: center;
-  background: radial-gradient(circle, #31574d, #023932 300px);
   z-index: 1;
 
   @media screen and (max-width: 768px) {
     height: initial;
+  }
+
+  &:not(.light) {
+    background: radial-gradient(circle, #31574d, #023932 300px);
+  }
+
+  &.light {
+    background-color: var(--beige);
   }
 }
 

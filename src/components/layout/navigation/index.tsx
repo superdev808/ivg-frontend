@@ -22,10 +22,10 @@ const cx = classNames.bind(styles);
 
 export interface NavigationProps {
   authenticated?: boolean;
-  transparentBg?: boolean;
+  light?: boolean;
 }
 
-const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
+const Navigation = ({ authenticated, light }: NavigationProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -47,7 +47,7 @@ const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
   };
 
   const navLinks: NavLink[] = [
-    { id: "product", title: "Product", link: "/product", visibility: "public" },
+    { id: "about", title: "About", link: "/about", visibility: "public" },
 
     // Protected Links
     {
@@ -172,7 +172,7 @@ const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
   return (
     <div
       className={cx("z-2 w-full py-2 absolute top-1", {
-        "nav-background": !transparentBg,
+        "dark-background": !light,
       })}
     >
       <Navbar
@@ -181,6 +181,7 @@ const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
         avatarLinks={avatarLinks}
         avatar={avatar}
         authenticated={authenticated}
+        light={light}
       />
     </div>
   );

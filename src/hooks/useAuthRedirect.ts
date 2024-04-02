@@ -16,17 +16,17 @@ import { useAppSelector } from "@/redux/hooks/hooks";
 
 interface LayoutStyle {
   hidden?: boolean;
-  transparentBg?: boolean;
+  light?: boolean;
   extendFooter?: boolean;
 }
 
 const layoutStyles = {
   default: {
-    transparentBg: false,
+    light: false,
     extendFooter: false,
   },
   simple: {
-    transparentBg: true,
+    light: true,
     extendFooter: true,
   },
   hidden: {
@@ -96,7 +96,7 @@ const useAuthRedirect = () => {
       setLayoutStyle(layoutStyles.hidden);
     } else if (activePath === PUBLIC_ROUTES.CONTACT) {
       setLayoutStyle({
-        transparentBg: false,
+        light: false,
         extendFooter: true,
       });
     } else if (

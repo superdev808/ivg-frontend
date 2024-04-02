@@ -126,6 +126,10 @@ td {
   }
 }
 
+.btn-light-brown {
+  @include styleclass("text-light-green border-light-green bg-light-brown");
+}
+
 // SWIPER
 .swiper-button-prev,
 .swiper-button-next {

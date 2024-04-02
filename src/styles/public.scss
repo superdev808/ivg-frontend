@@ -40,11 +40,11 @@
 // TYPOGRAPHY
 
 .public-section-title {
-  @include styleclass("text-4xl md:text-6xl font-bold text-gray-800");
+  @include styleclass("text-4xl md:text-6xl font-bold");
 }
 
 .public-section-content {
-  $public-section-content-text: "text-lg text-left md:text-center line-height-3 text-gray-600";
+  $public-section-content-text: "text-lg text-left md:text-center line-height-3";
 
   @include styleclass($public-section-content-text);
 
@@ -58,9 +58,9 @@
 }
 
 .public-section-label {
-  $public-section-label-text: "text-lg md:text-xl text-gray-800 font-semibold mb-4";
+  $public-section-label-text: "text-lg md:text-xl font-semibold mb-4";
 
-  @include styleclass("text-lg md:text-xl text-gray-800 font-semibold mb-4");
+  @include styleclass($public-section-label-text);
 
   &-2xl {
     @include styleclass($public-section-label-text + " md:text-2xl");

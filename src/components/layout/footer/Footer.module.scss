@@ -1,7 +1,16 @@
 .socialButton {
-	color: var(--secondary-color);
-    font-size: 32px;
-	&:hover {
-		color: 1px solid var(--primary-color) !important;
-	}
+  color: var(--secondary-color);
+  font-size: 32px;
+
+  &:hover {
+    color: 1px solid var(--primary-color) !important;
+  }
+
+  &.light {
+    color: var(--light-green);
+
+    &:hover {
+      color: 1px solid var(--light-green) !important;
+    }
+  }
 }
