@@ -79,7 +79,7 @@ const Navbar: React.FC<NavbarProps> = ({
     >
       <div className="flex items-center justify-content-between">
         <div className="flex align-items-center gap-3 lg:gap-6">
-          <Logo light={light} />
+          <Logo light={!light} />
 
           <div
             className={cx("navbarNav", "hidden gap-3 md:flex lg:gap-6", {

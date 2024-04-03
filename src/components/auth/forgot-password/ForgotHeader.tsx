@@ -12,7 +12,7 @@ export const ForgotHeader = () => (
       }}
     >
       <Image
-        src="/images/logo/Ivory-Guide-Logo-Horizontal-Light.svg"
+        src="/images/logo/Ivory-Guide-Logo-Horizontal-Dark.svg"
         alt="Logo"
         width="150"
         height="30"

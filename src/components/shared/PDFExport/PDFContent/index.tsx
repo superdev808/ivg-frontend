@@ -64,7 +64,7 @@ const PDFContent: React.FC<PDFContentProps> = ({
       <div className="flex mx-4 mt-3 mb-3 justify-content-between">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/logo/Ivory-Guide-Logo-Horizontal-Light.png"
+          src="/images/logo/Ivory-Guide-Logo-Horizontal-DarkGreen.png"
           alt="logo"
           width="auto"
           height={63}

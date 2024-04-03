@@ -9,7 +9,7 @@ const RegisterContent: React.FC = () => (
       <div className="col-12 flex align-items-center md:align-items-start justify-content-center md:justify-content-start">
         <Link href="/" className="md:mt-4">
           <Image
-            src="/images/logo/Ivory-Guide-Logo-Horizontal.svg"
+            src="/images/logo/Ivory-Guide-Logo-Horizontal-Light.svg"
             alt="Logo"
             width="250"
             className="relative mb-3"

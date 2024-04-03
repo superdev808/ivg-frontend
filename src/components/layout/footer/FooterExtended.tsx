@@ -4,7 +4,7 @@ import { Button } from "primereact/button";
 
 import { socialButtons } from "@/helpers/util";
 
-import Logo from "../../../../public/images/logo/Ivory-Guide-Logo-Stack-Light.svg";
+import Logo from "../../../../public/images/logo/Ivory-Guide-Logo-Stack.svg";
 
 import styles from "./Footer.module.scss";
 

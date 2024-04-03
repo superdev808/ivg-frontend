@@ -110,7 +110,7 @@ export const DemoForm = () => {
           }}
         >
           <Image
-            src="/Ivory-Guide-Logo-Horizontal.svg"
+            src="/Ivory-Guide-Logo-Horizontal-Light.svg"
             alt="Logo"
             width="150"
             height="30"

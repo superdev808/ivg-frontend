@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { useAppSelector } from "@/redux/hooks/hooks";
 
-import LogoIcon from "../../../../../public/images/logo/Ivory-Guide-Logo-Horizontal.svg";
 import LogoLightIcon from "../../../../../public/images/logo/Ivory-Guide-Logo-Horizontal-Light.svg";
+import LogoDarkIcon from "../../../../../public/images/logo/Ivory-Guide-Logo-Horizontal-Dark.svg";
 
 interface LogoProps {
   light?: boolean;
@@ -14,7 +14,7 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ light }) => {
   const { authenticated } = useAppSelector((state) => state.auth);
 
-  const LogoComponent = light ? LogoLightIcon : LogoIcon;
+  const LogoComponent = light ? LogoLightIcon : LogoDarkIcon;
 
   return (
     <Link href={authenticated ? "/home" : "/"}>

@@ -12,7 +12,7 @@ import {
   MultiSavedResult as MultiSavedResultType,
 } from "@/types/calculators";
 
-const LOGO_URL = "/images/logo/Ivory-Guide-Logo-Horizontal-Light.svg";
+const LOGO_URL = "/images/logo/Ivory-Guide-Logo-Horizontal-Dark.svg";
 
 /**
  * Single saved result
