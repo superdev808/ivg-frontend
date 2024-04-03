@@ -238,7 +238,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
               )}
               <Button
                 label="Upload"
-                className="p-button-primary bg-secondary border-round-3xl"
+                className="p-button-primary border-round-3xl"
                 loading={isLoading}
                 type="submit"
               />

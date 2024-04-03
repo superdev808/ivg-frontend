@@ -1,6 +1,10 @@
 "use client";
 
-import cx from "classnames";
+import classNames from "classnames/bind";
+
+import styles from "./Admin.module.scss";
+
+const cx = classNames.bind(styles);
 
 export interface MenuItem {
   id: string;
@@ -28,11 +32,10 @@ const AdminMenu: React.FC<AdminMenuProps> = ({
         <div
           key={item.id}
           className={cx(
-            "menu-item",
-            "flex align-items-center gap-2 cursor-pointer text-lg w-fit hover:text-primary",
+            "menuLink",
+            "flex align-items-center gap-2 cursor-pointer text-lg w-fit",
             {
-              "text-light-green": active !== item.id,
-              "text-dark-green": active === item.id,
+              "menuLink--active": active === item.id,
             }
           )}
           onClick={() => onSelect && onSelect(item)}

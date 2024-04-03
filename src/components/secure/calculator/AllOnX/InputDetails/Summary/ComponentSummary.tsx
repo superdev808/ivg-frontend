@@ -47,7 +47,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
     }
 
     return (
-      <div className="text-center text-gray-500">
+      <div className="text-center text-light-green">
         Please contact your
         <br />
         distributor to purchase.

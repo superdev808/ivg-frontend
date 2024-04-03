@@ -149,15 +149,15 @@ const Navigation = ({ authenticated, light }: NavigationProps) => {
       url: "/settings/saved-results",
     },
     {
-      label: "Help",
-      icon: "pi pi-question",
-      url: "/help",
-    },
-    {
       label: "Administration",
       icon: "pi pi-cog",
       url: "/admin",
       visible: role === USER_ROLES.ADMIN,
+    },
+    {
+      label: "Help",
+      icon: "pi pi-question",
+      url: "/help",
     },
     {
       separator: true,

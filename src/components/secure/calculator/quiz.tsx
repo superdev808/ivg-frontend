@@ -115,8 +115,6 @@ const Quiz: React.FC<QuizProps> = ({
     }
   }, [answers]);
 
-  console.log("++++", calculatorName, question);
-
   const questionDescription = getCalculatorQuestionDescription(
     calculatorName,
     question
@@ -174,7 +172,8 @@ const Quiz: React.FC<QuizProps> = ({
             >
               <div
                 className={cx(
-                  "border-3 border-light-green hover:border-dark-green border-round-xl w-full p-0 flex justify-content-center cursor-pointer",
+                  "quiz-card",
+                  "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer",
                   { "quiz-card--selected": currentAnswer === answer }
                 )}
                 style={{ height: 200 }}
