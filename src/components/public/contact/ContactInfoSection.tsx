@@ -5,7 +5,7 @@ import styles from "./Contact.module.scss";
 const cx = classNames.bind(styles);
 
 export const ContactInfoSection = () => (
-  <div className="flex justify-content-center pt-10 bg-beige mb-0 md:pt-4">
+  <div className="flex justify-content-center pt-10  mb-0 md:pt-4">
     <div style={{ maxWidth: 800 }}>
       <p
         className={cx(

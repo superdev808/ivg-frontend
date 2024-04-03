@@ -9,7 +9,7 @@ import SettingsUserInfoForm from "./SettingsUserInfoForm";
 const cx = classNames.bind(styles);
 
 const SettingsContainers: React.FC = () => (
-  <div className="container flex justify-content-center bg-beige">
+  <div className="container flex justify-content-center">
     <div className={cx("settings", "wrapper mt-4 p-0 justify-content-center")}>
       <SettingsUserInfoForm />
     </div>

@@ -251,7 +251,7 @@ export const FAQContentSection = () => {
         <span className="pt-4 z-1">{`We are here to help you. If you don't see your question here, please contact us.`}</span>
       </div>
 
-      <div className="flex justify-content-center relative overflow-hidden bg-beige text-light-green">
+      <div className="flex justify-content-center relative overflow-hidden text-light-green">
         <div className="px-3 w-full flex flex-column gap-4 my-4 md:px-0 md:gap-6 md:w-8">
           {sections.map((section, sectionIdx) => (
             <>

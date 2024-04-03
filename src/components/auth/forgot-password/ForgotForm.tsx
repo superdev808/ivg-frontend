@@ -54,7 +54,9 @@ export default function ForgotForm({
   };
   return (
     <>
-      <div className="w-25rem my-4">{<Messages ref={errorMsgs} />}</div>
+      <div className="w-25rem my-4">
+        <Messages ref={errorMsgs} />
+      </div>
 
       <form className="w-full md:w-4" onSubmit={handleSubmit(handleSend)}>
         <div className="mb-3">
@@ -67,20 +69,18 @@ export default function ForgotForm({
                 <label
                   htmlFor={field.name}
                   className={classNames({ "p-error": errors[field.name] })}
-                ></label>
+                />
                 <span className="p-float-label">
                   <InputText
                     id={field.name}
                     value={field.value}
                     className={classNames(
                       { "p-invalid": fieldState.error },
-                      "w-full bg-beige"
+                      "w-full"
                     )}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
-                  <label className="bg-beige" htmlFor={field.name}>
-                    Email
-                  </label>
+                  <label htmlFor={field.name}>Email</label>
                 </span>
                 <FormErrorMessage message={errors[field.name]?.message} />
               </>

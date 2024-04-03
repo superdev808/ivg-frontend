@@ -102,7 +102,7 @@ export const Calculators = () => {
   };
 
   return (
-    <div className="flex-grow-1 bg-beige px-3 md:px-8">
+    <div className="flex-grow-1 px-3 md:px-8">
       <h2 className="mt-0 mb-5 text-center">Calculators</h2>
 
       <div className="mt-0 mb-4">

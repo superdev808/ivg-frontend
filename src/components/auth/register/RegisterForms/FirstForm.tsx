@@ -111,10 +111,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
               <span className="p-float-label">
                 <InputText
                   id={field.name}
-                  className={cx(
-                    { "p-invalid": fieldState.error },
-                    "w-full bg-beige"
-                  )}
+                  className={cx({ "p-invalid": fieldState.error }, "w-full")}
                   {...field}
                 />
                 <label className="bg-beige" htmlFor={field.name}>
@@ -146,7 +143,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                     {
                       "p-invalid": fieldState.error,
                     },
-                    "w-full bg-beige"
+                    "w-full"
                   )}
                   {...field}
                 />
@@ -179,10 +176,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                   id={field.name}
                   value={field.value}
                   mask="(999) 999-9999"
-                  className={cx(
-                    { "p-invalid": fieldState.error },
-                    "w-full bg-beige"
-                  )}
+                  className={cx({ "p-invalid": fieldState.error }, "w-full")}
                   onChange={(e) => field.onChange(e.target.value)}
                 />
 
@@ -225,7 +219,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                     {
                       "p-invalid": fieldState.error,
                     },
-                    "w-full bg-beige"
+                    "w-full"
                   )}
                   {...field}
                 />
@@ -283,7 +277,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                     {
                       "p-invalid": fieldState.error,
                     },
-                    "w-full bg-beige"
+                    "w-full"
                   )}
                   {...field}
                 />

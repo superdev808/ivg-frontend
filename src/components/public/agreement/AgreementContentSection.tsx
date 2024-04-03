@@ -14,7 +14,7 @@ export const AgreementContentSection = () => {
           TERMS OF USE AGREEMENT FOR IVORY GUIDE, LLC
         </span>
       </div>
-      <div className="flex justify-content-center text-light-green bg-beige">
+      <div className="flex justify-content-center text-light-green">
         <div
           className={cx(
             "wrapper",

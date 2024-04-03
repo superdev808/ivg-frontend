@@ -105,12 +105,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ token, setSuccess }) => {
                   <InputText
                     type={!showPassword ? "password" : "text"}
                     id={field.name}
-                    className={cx(
-                      {
-                        "p-invalid": fieldState.error,
-                      },
-                      "w-full bg-beige"
-                    )}
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
                     {...field}
                   />
                   <label className="bg-beige" htmlFor={field.name}>
@@ -141,12 +136,7 @@ const ResetForm: React.FC<ResetFormProps> = ({ token, setSuccess }) => {
                   <InputText
                     type={!showPassword ? "password" : "text"}
                     id={field.name}
-                    className={cx(
-                      {
-                        "p-invalid": fieldState.error,
-                      },
-                      "w-full bg-beige"
-                    )}
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
                     {...field}
                   />
                   <label className="bg-beige" htmlFor={field.name}>

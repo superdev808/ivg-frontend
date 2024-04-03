@@ -225,10 +225,7 @@ const SecondForm: React.FC<SecondFormProps> = ({
                 <span className="p-float-label">
                   <InputText
                     id={field.name}
-                    className={cx(
-                      { "p-invalid": fieldState.error },
-                      "w-full bg-beige"
-                    )}
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
                     {...field}
                   />
                   <label className="bg-beige" htmlFor={field.name}>
@@ -253,10 +250,7 @@ const SecondForm: React.FC<SecondFormProps> = ({
                     optionValue="value"
                     filter
                     clearIcon
-                    className={cx(
-                      { "p-invalid": fieldState.error },
-                      "w-full bg-beige"
-                    )}
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
                   />
 
                   <label className="bg-beige" htmlFor={field.name}>
@@ -280,10 +274,7 @@ const SecondForm: React.FC<SecondFormProps> = ({
                 <span className="p-float-label">
                   <InputText
                     id={field.name}
-                    className={cx(
-                      { "p-invalid": fieldState.error },
-                      "w-full bg-beige"
-                    )}
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
                     {...field}
                   />
                   <label className="bg-beige" htmlFor={field.name}>

@@ -98,7 +98,7 @@ export const ContactComponent = () => {
 
   return (
     <>
-      <div className="flex justify-content-center bg-beige">
+      <div className="flex justify-content-center">
         <div style={{ maxWidth: 900 }}>
           <form className="w-full p-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid justify-content-between mb-3">
@@ -119,12 +119,14 @@ export const ContactComponent = () => {
                         value={field.value}
                         className={cx(
                           { "p-invalid": fieldState.error },
-                          "w-full bg-transparent"
+                          "w-full"
                         )}
                         onChange={(e) => field.onChange(e.target.value)}
                       />
 
-                      <label htmlFor={field.name}>Name</label>
+                      <label className="bg-beige" htmlFor={field.name}>
+                        Name
+                      </label>
                     </span>
 
                     <FormErrorMessage message={errors[field.name]?.message} />
@@ -152,12 +154,14 @@ export const ContactComponent = () => {
                         value={field.value}
                         className={cx(
                           { "p-invalid": fieldState.error },
-                          "w-full bg-transparent"
+                          "w-full"
                         )}
                         onChange={(e) => field.onChange(e.target.value)}
                       />
 
-                      <label htmlFor={field.name}>Email</label>
+                      <label className="bg-beige" htmlFor={field.name}>
+                        Email
+                      </label>
                     </span>
 
                     <FormErrorMessage message={errors[field.name]?.message} />
@@ -185,12 +189,14 @@ export const ContactComponent = () => {
                         mask="(999) 999-9999"
                         className={cx(
                           { "p-invalid": fieldState.error },
-                          "w-full bg-transparent"
+                          "w-full"
                         )}
                         onChange={(e) => field.onChange(e.target.value)}
                       />
 
-                      <label htmlFor={field.name}>Phone Number</label>
+                      <label className="bg-beige" htmlFor={field.name}>
+                        Phone Number
+                      </label>
                     </span>
 
                     <FormErrorMessage message={errors[field.name]?.message} />
@@ -216,12 +222,14 @@ export const ContactComponent = () => {
                         mask="99999"
                         className={cx(
                           { "p-invalid": fieldState.error },
-                          "w-full bg-transparent"
+                          "w-full"
                         )}
                         onChange={(e) => field.onChange(e.target.value)}
                       />
 
-                      <label htmlFor={field.name}>Zip Code</label>
+                      <label className="bg-beige" htmlFor={field.name}>
+                        Zip Code
+                      </label>
                     </span>
 
                     <FormErrorMessage message={errors[field.name]?.message} />
@@ -254,7 +262,7 @@ export const ContactComponent = () => {
                             value={practice.value}
                             checked={field.value === practice.value}
                           />
-                          <label htmlFor="f5" className="mr-3">
+                          <label className="bg-beige mr-3" htmlFor="f5">
                             {practice.label}
                           </label>
                         </div>
@@ -292,11 +300,13 @@ export const ContactComponent = () => {
                         cols={30}
                         className={cx(
                           { "p-invalid": fieldState.error },
-                          "w-full bg-transparent"
+                          "w-full"
                         )}
                       />
 
-                      <label htmlFor={field.name}>Message</label>
+                      <label className="bg-beige" htmlFor={field.name}>
+                        Message
+                      </label>
                     </span>
 
                     <FormErrorMessage message={errors[field.name]?.message} />
@@ -367,11 +377,7 @@ export const ContactComponent = () => {
         showHeader={false}
         blockScroll
         draggable={false}
-        className="bg-beige"
         visible={visible}
-        style={{
-          background: "var(--beige)",
-        }}
         modal
         onHide={handleCloseModal}
       >

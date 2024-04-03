@@ -249,7 +249,9 @@ export default function SettingsUserInfoForm() {
           <div className="col-12 md:col-6">
             <span className="p-float-label w-full">
               <InputText className="w-full mb-3" value={user?.email} disabled />
-              <label htmlFor="email">Email</label>
+              <label className="bg-beige" htmlFor="email">
+                Email
+              </label>
             </span>
           </div>
 

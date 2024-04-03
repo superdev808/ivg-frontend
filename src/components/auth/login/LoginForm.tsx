@@ -146,10 +146,7 @@ const LoginForm: React.FC = () => {
                   <InputText
                     id={field.name}
                     value={field.value}
-                    className={cx(
-                      { "p-invalid": fieldState.error },
-                      "w-full bg-beige"
-                    )}
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
                   <label className="bg-beige" htmlFor={field.name}>
@@ -187,10 +184,7 @@ const LoginForm: React.FC = () => {
                   <InputText
                     type={!showPassword ? "password" : "text"}
                     id={field.name}
-                    className={cx(
-                      { "p-invalid": fieldState.error },
-                      "w-full bg-beige"
-                    )}
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
                     {...field}
                   />
 

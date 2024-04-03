@@ -15,7 +15,7 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ extendFooter }) => (
-  <div className="relative overflow-hidden bg-beige text-light-green line-height-2 px-3 md:px-8">
+  <div className="relative overflow-hidde text-light-green line-height-2 px-3 md:px-8">
     {extendFooter && <FooterExtended />}
 
     <div

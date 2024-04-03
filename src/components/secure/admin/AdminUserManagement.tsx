@@ -431,7 +431,7 @@ const AdminUserManagement: React.FC = () => {
         </span>
       </div>
 
-      <div className="border-1 border-light-green">
+      <div className="border-1 border-light-green border-round-2xl overflow-hidden">
         <DataTable
           stripedRows
           size="small"

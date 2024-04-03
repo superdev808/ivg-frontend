@@ -290,7 +290,7 @@ const Questionnaire: React.FC<InputProps> = ({
     isLoading || (input[level] && !Boolean(answerOptions[level]?.length));
 
   return (
-    <div className="mt-3 relative bg-beige" style={{ minHeight: 700 }}>
+    <div className="mt-3 relative" style={{ minHeight: 700 }}>
       <Toast ref={toastRef} position="top-right" />
 
       <QuestionNavbar

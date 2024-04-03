@@ -24,7 +24,7 @@ const RegisterContent: React.FC = () => (
       </div>
     </div>
 
-    <div className="col-12 md:col-7 m-0 p-0 h-screen relative overflow-hidden overflow-y-auto justify-content-end bg-beige">
+    <div className="col-12 md:col-7 m-0 p-0 h-screen relative overflow-hidden overflow-y-auto justify-content-end">
       <RegisterFormComponent />
     </div>
   </div>
