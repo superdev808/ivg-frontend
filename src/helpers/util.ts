@@ -2718,29 +2718,337 @@ export const calculatorIO = [
     type: "ToothBorneBridge",
     label: "Tooth-Borne Bridge",
     description: "",
-    input: [],
-    output: [],
+    input: [
+      {
+        name: "Maxilla / Mandible",
+        text: "Maxilla / Mandible",
+      },
+      {
+        name: "Region",
+        text: "Region",
+      },
+      {
+        name: "Number of Units",
+        text: "Number of Units",
+      },
+      {
+        name: "Are aesthetics a top priority?",
+        text: "Are aesthetics a top priority?",
+      },
+      {
+        name: "Does the preparation have retention and resistance form?",
+        text: "Does the preparation have retention and resistance form?",
+      },
+      {
+        name: "Are neighboring teeth translucent?",
+        text: "Are neighboring teeth translucent?",
+      },
+      {
+        name: "Does the patient have a high occlusal load?",
+        text: "Does the patient have a high occlusal load?",
+      },
+      {
+        name: "Does this site have limited occlusal space?",
+        text: "Does this site have limited occlusal space?",
+      },
+      {
+        name: "Is the stump shade light or dark?",
+        text: "Is the stump shade light or dark?",
+      },
+    ],
+    output: [
+      {
+        name: "Recommended Bridge Material",
+        text: "Recommended Bridge Material",
+      },
+      {
+        name: "Recommended Bridge Material Reasoning",
+        text: "Recommended Bridge Material Reasoning",
+      },
+      {
+        name: "Recommended Bridge Material Supporting Article",
+        text: "Recommended Bridge Material Supporting Article",
+      },
+      {
+        name: "Second Material Choice",
+        text: "Second Material Choice",
+      },
+      {
+        name: "Third Material Choice",
+        text: "Third Material Choice",
+      },
+    ],
   },
   {
     type: "ToothBorneCrown",
     label: "Tooth-Borne Crown",
     description: "",
-    input: [],
-    output: [],
+    input: [
+      {
+        name: "Maxilla / Mandible",
+        text: "Maxilla / Mandible",
+      },
+      {
+        name: "Tooth Category",
+        text: "Tooth Category",
+      },
+      {
+        name: "Are aesthetics a top priority?",
+        text: "Are aesthetics a top priority?",
+      },
+      {
+        name: "Does the preparation have retention and resistance form?",
+        text: "Does the preparation have retention and resistance form?",
+      },
+      {
+        name: "Are neighboring teeth translucent?",
+        text: "Are neighboring teeth translucent?",
+      },
+      {
+        name: "Does the patient have a high occlusal load?",
+        text: "Does the patient have a high occlusal load?",
+      },
+      {
+        name: "Does this site have limited occlusal space?",
+        text: "Does this site have limited occlusal space?",
+      },
+      {
+        name: "Is the stump shade light or dark?",
+        text: "Is the stump shade light or dark?",
+      },
+    ],
+    output: [
+      {
+        name: "Recommended Crown Material",
+        text: "Recommended Crown Material",
+      },
+      {
+        name: "Recommended Crown Material Reasoning",
+        text: "Recommended Crown Material Reasoning",
+      },
+      {
+        name: "Recommended Crown Material Supporting Article",
+        text: "Recommended Crown Material Supporting Article",
+      },
+      {
+        name: "Second Material Choice",
+        text: "Second Material Choice",
+      },
+      {
+        name: "Third Material Choice",
+        text: "Third Material Choice",
+      },
+    ],
   },
   {
     type: "ImplantBorneBridge",
     label: "Implant-Borne Bridge",
     description: "",
-    input: [],
-    output: [],
+    input: [
+      {
+        name: "Maxilla / Mandible",
+        text: "Maxilla / Mandible",
+      },
+      {
+        name: "Region",
+        text: "Region",
+      },
+      {
+        name: "Number of Units",
+        text: "Number of Units",
+      },
+      {
+        name: "Are aesthetics a top priority?",
+        text: "Are aesthetics a top priority?",
+      },
+      {
+        name: "Does the patient have a thin gingival biotype?",
+        text: "Does the patient have a thin gingival biotype?",
+      },
+      {
+        name: "Are neighboring teeth translucent?",
+        text: "Are neighboring teeth translucent?",
+      },
+      {
+        name: "Does the patient have a high occlusal load?",
+        text: "Does the patient have a high occlusal load?",
+      },
+      {
+        name: "Does this site have limited occlusal space?",
+        text: "Does this site have limited occlusal space?",
+      },
+      {
+        name: "Does the patient practice good oral hygiene?",
+        text: "Does the patient practice good oral hygiene?",
+      },
+      {
+        name: "Is the implant angulated?",
+        text: "Is the implant angulated?",
+      },
+      {
+        name: "Does the patient have allergies or sensitivities?",
+        text: "Does the patient have allergies or sensitivities?",
+      },
+    ],
+    output: [
+      {
+        name: "Recommended Single Unit Abutment Material",
+        text: "Recommended Single Unit Abutment Material",
+      },
+      {
+        name: "Recommended Single Unit Abutment Reasoning",
+        text: "Recommended Single Unit Abutment Reasoning",
+      },
+      {
+        name: "Recommended Single Unit Abutment Supporting Article",
+        text: "Recommended Single Unit Abutment Supporting Article",
+      },
+      {
+        name: "Recommended Multi-Unit Abutment (MUA) Material",
+        text: "Recommended Multi-Unit Abutment (MUA) Material",
+      },
+      {
+        name: "Recommended Multi-Unit Abutment (MUA) Material Reasoning",
+        text: "Recommended Multi-Unit Abutment (MUA) Material Reasoning",
+      },
+      {
+        name: "Recommended Multi-Unit Abutment (MUA) Material Supporting Article",
+        text: "Recommended Multi-Unit Abutment (MUA) Material Supporting Article",
+      },
+      {
+        name: "Recommended Restoration Design",
+        text: "Recommended Restoration Design",
+      },
+      {
+        name: "Recommended Restoration Design Reasoning",
+        text: "Recommended Restoration Design Reasoning",
+      },
+      {
+        name: "Recommended Restoration Design Supporting Article",
+        text: "Recommended Restoration Design Supporting Article",
+      },
+      {
+        name: "Recommended Implant Bridge Material",
+        text: "Recommended Implant Bridge Material",
+      },
+      {
+        name: "Recommended Implant Bridge Material Reasoning",
+        text: "Recommended Implant Bridge Material Reasoning",
+      },
+      {
+        name: "Recommended Implant Bridge Material Supporting Article",
+        text: "Recommended Implant Bridge Material Supporting Article",
+      },
+      {
+        name: "Second Recommended Single Unit Abutment Material",
+        text: "Second Recommended Single Unit Abutment Material",
+      },
+      {
+        name: "Second Recommended Restoration Design",
+        text: "Second Recommended Restoration Design",
+      },
+      {
+        name: "Second Recommended Implant Bridge Material",
+        text: "Second Recommended Implant Bridge Material",
+      },
+    ],
   },
   {
     type: "ImplantBorneCrown",
     label: "Implant-Borne Crown",
     description: "",
-    input: [],
-    output: [],
+    input: [
+      {
+        name: "Maxilla / Mandible",
+        text: "Maxilla / Mandible",
+      },
+      {
+        name: "Tooth Category",
+        text: "Tooth Category",
+      },
+      {
+        name: "Are aesthetics a top priority?",
+        text: "Are aesthetics a top priority?",
+      },
+      {
+        name: "Does the patient have a thin gingival biotype?",
+        text: "Does the patient have a thin gingival biotype?",
+      },
+      {
+        name: "Are neighboring teeth translucent?",
+        text: "Are neighboring teeth translucent?",
+      },
+      {
+        name: "Does the patient have a high occlusal load?",
+        text: "Does the patient have a high occlusal load?",
+      },
+      {
+        name: "Does this site have limited occlusal space?",
+        text: "Does this site have limited occlusal space?",
+      },
+      {
+        name: "Does the patient practice good oral hygiene?",
+        text: "Does the patient practice good oral hygiene?",
+      },
+      {
+        name: "Is the implant angulated?",
+        text: "Is the implant angulated?",
+      },
+      {
+        name: "Does the patient have allergies or sensitivities?",
+        text: "Does the patient have allergies or sensitivities?",
+      },
+    ],
+    output: [
+      {
+        name: "Recommended Abutment Material",
+        text: "Recommended Abutment Material",
+      },
+      {
+        name: "Recommended Abutment Material Reasoning",
+        text: "Recommended Abutment Material Reasoning",
+      },
+      {
+        name: "Recommended Abutment Material Supporting Article",
+        text: "Recommended Abutment Material Supporting Article",
+      },
+      {
+        name: "Recommended Restoration Design",
+        text: "Recommended Restoration Design",
+      },
+      {
+        name: "Recommended Restoration Design Reasoning",
+        text: "Recommended Restoration Design Reasoning",
+      },
+      {
+        name: "Recommended Restoration Design Supporting Article",
+        text: "Recommended Restoration Design Supporting Article",
+      },
+      {
+        name: "Recommended Crown Material",
+        text: "Recommended Crown Material",
+      },
+      {
+        name: "Recommended Crown Material Reasoning",
+        text: "Recommended Crown Material Reasoning",
+      },
+      {
+        name: "Recommended Crown Material Supporting Article",
+        text: "Recommended Crown Material Supporting Article",
+      },
+      {
+        name: "Second Abutment Material Choice",
+        text: "Second Abutment Material Choice",
+      },
+      {
+        name: "Second Restoration Design Choice",
+        text: "Second Restoration Design Choice",
+      },
+      {
+        name: "Second Crown Material Choice",
+        text: "Second Crown Material Choice",
+      },
+    ],
   },
 ];
 

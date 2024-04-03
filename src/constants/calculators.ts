@@ -1377,6 +1377,290 @@ export const CALCULATORS: CollectionsIO = {
       outputFrom: "StockAbutments",
     },
   ],
+  "Implant-Borne Bridge": [
+    {
+      name: "Maxilla / Mandible",
+      text: "Maxilla / Mandible [Implant-Borne Bridge]",
+      calculator: "ImplantBorneBridge",
+    },
+    {
+      name: "Region",
+      text: "Region [Implant-Borne Bridge]",
+      description:
+        "The region of the bridge will determine the balance between of aesthetics and strength.",
+      calculator: "ImplantBorneBridge",
+    },
+    {
+      name: "Number of Units",
+      text: "Number of Units [Implant-Borne Bridge]",
+      description:
+        "The number of units within the bridge will impact the balance between of aesthetics and strength.",
+      calculator: "ImplantBorneBridge",
+    },
+    {
+      name: "Are aesthetics a top priority?",
+      text: "Are aesthetics a top priority? [Implant-Borne Bridge]",
+      description:
+        "Prioritizing natural looking teeth will require more aesthetic restoration materials.",
+      calculator: "ImplantBorneBridge",
+    },
+    {
+      name: "Does the patient have a thin gingival biotype?",
+      text: "Does the patient have a thin gingival biotype? [Implant-Borne Bridge]",
+      description:
+        "Thin gingival biotypes will show underlying abutment colors and require the additional support to prevent recession.",
+      calculator: "ImplantBorneBridge",
+    },
+    {
+      name: "Are neighboring teeth translucent?",
+      text: "Are neighboring teeth translucent? [Implant-Borne Bridge]",
+      description:
+        "Translucent neighboring teeth will require matching with more translucent materials.",
+      calculator: "ImplantBorneBridge",
+    },
+    {
+      name: "Does the patient have a high occlusal load?",
+      text: "Does the patient have a high occlusal load? [Implant-Borne Bridge]",
+      description:
+        "Patients with high occlusal loads will need high strength restoration materials.",
+      calculator: "ImplantBorneBridge",
+    },
+    {
+      name: "Does this site have limited occlusal space?",
+      text: "Does this site have limited occlusal space? [Implant-Borne Bridge]",
+      description:
+        "Patients with limited occlusal space will need restoration materials with minimal thickness.",
+      calculator: "ImplantBorneBridge",
+    },
+    {
+      name: "Does the patient practice good oral hygiene?",
+      text: "Does the patient practice good oral hygiene? [Implant-Borne Bridge]",
+      description:
+        "Bad oral hygiene requires hygienic materials to minimize peri-implantitis.",
+      calculator: "ImplantBorneBridge",
+    },
+    {
+      name: "Is the implant angulated?",
+      text: "Is the implant angulated? [Implant-Borne Bridge]",
+      description: "Angulated implants may require custom abutments.",
+      calculator: "ImplantBorneBridge",
+    },
+    {
+      name: "Does the patient have allergies or sensitivities?",
+      text: "Does the patient have allergies or sensitivities? [Implant-Borne Bridge]",
+      description:
+        "Patients with allergies or sensitives will requires biocompatible materials.",
+      calculator: "ImplantBorneBridge",
+    },
+    {
+      name: "",
+      text: "",
+      calculator: "ImplantBorneBridge",
+      outputFrom: "ImplantBorneBridge",
+    },
+  ],
+  "Implant-Borne Crown": [
+    {
+      name: "Maxilla / Mandible",
+      text: "Maxilla / Mandible [Implant-Borne Crown]",
+      calculator: "ImplantBorneCrown",
+    },
+    {
+      name: "Tooth Category",
+      text: "Tooth Category [Implant-Borne Crown]",
+      calculator: "ImplantBorneCrown",
+    },
+    {
+      name: "Are aesthetics a top priority?",
+      text: "Are aesthetics a top priority? [Implant-Borne Crown]",
+      description:
+        "Prioritizing natural looking teeth will require more aesthetic restoration materials.",
+      calculator: "ImplantBorneCrown",
+    },
+    {
+      name: "Does the patient have a thin gingival biotype?",
+      text: "Does the patient have a thin gingival biotype? [Implant-Borne Crown]",
+      description:
+        "Thin gingival biotypes will show underlying abutment colors and require the additional support to prevent recession.",
+      calculator: "ImplantBorneCrown",
+    },
+    {
+      name: "Are neighboring teeth translucent?",
+      text: "Are neighboring teeth translucent? [Implant-Borne Crown]",
+      description:
+        "Translucent neighboring teeth will require matching with more translucent materials.",
+      calculator: "ImplantBorneCrown",
+    },
+    {
+      name: "Does the patient have a high occlusal load?",
+      text: "Does the patient have a high occlusal load? [Implant-Borne Crown]",
+      description:
+        "Patients with high occlusal loads will need high strength restoration materials.",
+      calculator: "ImplantBorneCrown",
+    },
+    {
+      name: "Does this site have limited occlusal space?",
+      text: "Does this site have limited occlusal space? [Implant-Borne Crown]",
+      description:
+        "Patients with limited occlusal space will need restoration materials with minimal thickness.",
+      calculator: "ImplantBorneCrown",
+    },
+    {
+      name: "Does the patient practice good oral hygiene?",
+      text: "Does the patient practice good oral hygiene? [Implant-Borne Crown]",
+      description:
+        "Bad oral hygiene requires hygienic materials to minimize peri-implantitis.",
+      calculator: "ImplantBorneCrown",
+    },
+    {
+      name: "Is the implant angulated?",
+      text: "Is the implant angulated? [Implant-Borne Crown]",
+      description: "Angulated implants may require custom abutments.",
+      calculator: "ImplantBorneCrown",
+    },
+    {
+      name: "Does the patient have allergies or sensitivities?",
+      text: "Does the patient have allergies or sensitivities? [Implant-Borne Crown]",
+      description:
+        "Patients with allergies or sensitives will requires biocompatible materials.",
+      calculator: "ImplantBorneCrown",
+    },
+    {
+      name: "",
+      text: "",
+      calculator: "ImplantBorneCrown",
+      outputFrom: "ImplantBorneCrown",
+    },
+  ],
+  "Tooth-Borne Bridge": [
+    {
+      name: "Maxilla / Mandible",
+      text: "Maxilla / Mandible [Tooth-Borne Bridge]",
+      calculator: "ToothBorneBridge",
+    },
+    {
+      name: "Region",
+      text: "Region [Tooth-Borne Bridge]",
+      description:
+        "The region of the bridge will determine the balance between of aesthetics and strength.",
+      calculator: "ToothBorneBridge",
+    },
+    {
+      name: "Number of Units",
+      text: "Number of Units [Tooth-Borne Bridge]",
+      description:
+        "The number of units within the bridge will impact the balance between of aesthetics and strength.",
+      calculator: "ToothBorneBridge",
+    },
+    {
+      name: "Are aesthetics a top priority?",
+      text: "Are aesthetics a top priority? [Tooth-Borne Bridge]",
+      description:
+        "Prioritizing natural looking teeth will require more aesthetic restoration materials.",
+      calculator: "ToothBorneBridge",
+    },
+    {
+      name: "Does the preparation have retention and resistance form?",
+      text: "Does the preparation have retention and resistance form? [Tooth-Borne Bridge]",
+      description:
+        "Preparations lacking these qualities are more likely to become uncemented.",
+      calculator: "ToothBorneBridge",
+    },
+    {
+      name: "Are neighboring teeth translucent?",
+      text: "Are neighboring teeth translucent? [Tooth-Borne Bridge]",
+      description:
+        "Translucent neighboring teeth will require matching with more translucent materials.",
+      calculator: "ToothBorneBridge",
+    },
+    {
+      name: "Does the patient have a high occlusal load?",
+      text: "Does the patient have a high occlusal load? [Tooth-Borne Bridge]",
+      description:
+        "Patients with high occlusal loads will need high strength restoration materials.",
+      calculator: "ToothBorneBridge",
+    },
+    {
+      name: "Does this site have limited occlusal space?",
+      text: "Does this site have limited occlusal space? [Tooth-Borne Bridge]",
+      description:
+        "Patients with limited occlusal space will need restoration materials with minimal thickness.",
+      calculator: "ToothBorneBridge",
+    },
+    {
+      name: "Is the stump shade light or dark?",
+      text: "Is the stump shade light or dark? [Tooth-Borne Bridge]",
+      description:
+        "Darker teeth require masking through low translucency materials and / or opaque cements.",
+      calculator: "ToothBorneBridge",
+    },
+    {
+      name: "",
+      text: "",
+      calculator: "ToothBorneBridge",
+      outputFrom: "ToothBorneBridge",
+    },
+  ],
+  "Tooth-Borne Crown": [
+    {
+      name: "Maxilla / Mandible",
+      text: "Maxilla / Mandible [Tooth-Borne Crown]",
+      calculator: "ToothBorneCrown",
+    },
+    {
+      name: "Tooth Category",
+      text: "Tooth Category [Tooth-Borne Crown]",
+      calculator: "ToothBorneCrown",
+    },
+    {
+      name: "Are aesthetics a top priority?",
+      text: "Are aesthetics a top priority? [Tooth-Borne Crown]",
+      description:
+        "Prioritizing natural looking teeth will require more aesthetic restoration materials.",
+      calculator: "ToothBorneCrown",
+    },
+    {
+      name: "Does the preparation have retention and resistance form?",
+      text: "Does the preparation have retention and resistance form? [Tooth-Borne Crown]",
+      description:
+        "Preparations lacking these qualities are more likely to become uncemented.",
+      calculator: "ToothBorneCrown",
+    },
+    {
+      name: "Are neighboring teeth translucent?",
+      text: "Are neighboring teeth translucent? [Tooth-Borne Crown]",
+      description:
+        "Translucent neighboring teeth will require matching with more translucent materials.",
+      calculator: "ToothBorneCrown",
+    },
+    {
+      name: "Does the patient have a high occlusal load?",
+      text: "Does the patient have a high occlusal load? [Tooth-Borne Crown]",
+      description:
+        "Patients with high occlusal loads will need high strength restoration materials.",
+      calculator: "ToothBorneCrown",
+    },
+    {
+      name: "Does this site have limited occlusal space?",
+      text: "Does this site have limited occlusal space? [Tooth-Borne Crown]",
+      description:
+        "Patients with limited occlusal space will need restoration materials with minimal thickness.",
+      calculator: "ToothBorneCrown",
+    },
+    {
+      name: "Is the stump shade light or dark?",
+      text: "Is the stump shade light or dark? [Tooth-Borne Crown]",
+      description:
+        "Darker teeth require masking through low translucency materials and / or opaque cements.",
+      calculator: "ToothBorneCrown",
+    },
+    {
+      name: "",
+      text: "",
+      calculator: "ToothBorneCrown",
+      outputFrom: "ToothBorneCrown",
+    },
+  ],
 };
 
 export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
@@ -1455,6 +1739,10 @@ export const CALCULATOR_NAME_COLLECTION_MAPPINGS: { [key: string]: string } = {
   "Implant Screws": "ImplantScrews",
   "Healing Abutments": "HealingAbutments",
   "Stock Abutments": "StockAbutments",
+  "Tooth-Borne Bridge": "ToothBorneBridge",
+  "Tooth-Borne Crown": "ToothBorneCrown",
+  "Implant-Borne Bridge": "ImplantBorneBridge",
+  "Implant-Borne Crown": "ImplantBorneCrown",
 };
 
 export const PROCEDURES: Procedure[] = [
@@ -1691,5 +1979,31 @@ export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
     description:
       "This tool enables you to combine multiple Implant Component to identify and procure products, and easily share which components were used with colleagues or patients.",
     subItems: [],
+  },
+  {
+    label: "Recommended Product Materials",
+    description: "",
+    subItems: [
+      {
+        label: "ToothBorneBridge",
+        text: "Tooth-Borne Bridge",
+        description: "",
+      },
+      {
+        label: "ToothBorneCrown",
+        text: "Tooth-Borne Crown",
+        description: "",
+      },
+      {
+        label: "ImplantBorneBridge",
+        text: "Implant-Borne Bridge",
+        description: "",
+      },
+      {
+        label: "ImplantBorneCrown",
+        text: "Implant-Borne Crown",
+        description: "",
+      },
+    ],
   },
 ];
