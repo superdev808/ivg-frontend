@@ -155,7 +155,7 @@ const Navbar: React.FC<NavbarProps> = ({
         className={cx("sidebar", "align-items-end")}
         pt={{
           closeIcon: {
-            className: "text-white",
+            className: "text-beige",
           },
         }}
       >
@@ -170,7 +170,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 key={item.id}
                 onClick={() => onClick(item)}
               >
-                <p>{item.title}</p>
+                <p className="text-beige">{item.title}</p>
               </Link>
             ))}
         </div>

@@ -40,7 +40,7 @@ export const ResetInvalid = () => {
         </span>
 
         <span className="text-light-green font-medium text-xl my-2 line-height-2">
-          <Link href="/forgot-password" className="text-secondary">
+          <Link href="/forgot-password" className="text-dark-green">
             Click here
           </Link>{" "}
           to get a new link. If you already set the password, please click below
@@ -49,7 +49,7 @@ export const ResetInvalid = () => {
 
         <span className="text-light-green font-medium text-xl my-4 line-height-2">
           Still stuck? Please{" "}
-          <Link href="/contact" className="text-secondary">
+          <Link href="/contact" className="text-dark-green">
             contact us
           </Link>{" "}
           if you need additional assistance.

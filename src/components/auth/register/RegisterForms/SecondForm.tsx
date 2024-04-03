@@ -300,7 +300,7 @@ const SecondForm: React.FC<SecondFormProps> = ({
                 <div className="col-12 grid justify-content-between">
                   {referralSource.map((source) => (
                     <div
-                      className=" flex"
+                      className="flex"
                       style={{ width: 140 }}
                       key={`referral_${source.value.toString()}`}
                     >

@@ -430,8 +430,8 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
             />
           )}
 
-          <div className="grid border-top-1 surface-border">
-            <div className="flex flex-column col-12">
+          <div className="border-top-1 border-light-green">
+            <div className="flex flex-column">
               {(!isCustom ||
                 (isCustom &&
                   procedureInputsAndResponse?.input &&

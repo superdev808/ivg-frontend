@@ -34,7 +34,7 @@ const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
   visible,
   setVisible,
   calculatorName,
-  userAnswers
+  userAnswers,
 }) => {
   const [feedbackCategory, setFeedbackCategory] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -72,7 +72,6 @@ const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
     formData.append("timestamp", new Date().toString());
     formData.append("calculatorName", calculatorName || "");
     formData.append("userAnswers", JSON.stringify(userAnswers || []));
-
 
     setLoading(true);
 
@@ -157,13 +156,13 @@ const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
           ))}
 
           <div className="col-12 mt-2">
-            <label htmlFor={"message"}>Message *</label>
+            <label htmlFor="message">Message *</label>
             <span className="p-float-label w-full mt-2">
               <InputTextarea
-                id={"message"}
+                id="message"
                 rows={4}
                 cols={30}
-                className={"w-full"}
+                className="w-full"
                 onChange={handleMessageChange}
                 value={message}
               />

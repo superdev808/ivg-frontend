@@ -137,10 +137,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                     options={CALCULATORS}
                     optionLabel="label"
                     optionValue="id"
-                    className={cx(
-                      { "p-invalid": fieldState.error },
-                      "w-full bg-transparent"
-                    )}
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
                   />
 
                   <label htmlFor={field.name}>Calculator</label>
@@ -171,7 +168,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                     disabled={isLoading}
                     className={cx([
                       { "p-invalid": fieldState.error },
-                      "w-full bg-transparent",
+                      "w-full",
                     ])}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
@@ -204,7 +201,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                     disabled={isLoading}
                     className={cx([
                       { "p-invalid": fieldState.error },
-                      "w-full bg-transparent",
+                      "w-full",
                     ])}
                     onChange={(e) => field.onChange(e.target.value)}
                   />

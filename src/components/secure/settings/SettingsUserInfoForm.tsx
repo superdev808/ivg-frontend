@@ -155,7 +155,7 @@ export default function SettingsUserInfoForm() {
                       user?.firstName?.charAt(0) + user?.lastName?.charAt(0)
                     }
                     shape="circle"
-                    className="bg-orange-100"
+                    className="bg-light-brown"
                     style={{ width: 100, height: 100, fontSize: "3rem" }}
                   />
                 )}
@@ -196,7 +196,7 @@ export default function SettingsUserInfoForm() {
                     value={field.value}
                     className={cx([
                       { "p-invalid": fieldState.error },
-                      "w-full bg-transparent",
+                      "w-full",
                     ])}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
@@ -230,7 +230,7 @@ export default function SettingsUserInfoForm() {
                     value={field.value}
                     className={cx([
                       { "p-invalid": fieldState.error },
-                      "w-full bg-transparent",
+                      "w-full",
                     ])}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
@@ -273,7 +273,7 @@ export default function SettingsUserInfoForm() {
                     mask="(999) 999-9999"
                     className={cx([
                       { "p-invalid": fieldState.error },
-                      "w-full bg-transparent",
+                      "w-full",
                     ])}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
@@ -307,7 +307,7 @@ export default function SettingsUserInfoForm() {
                     value={field.value}
                     className={cx([
                       { "p-invalid": fieldState.error },
-                      "w-full bg-transparent",
+                      "w-full",
                     ])}
                     onChange={(e) => field.onChange(e.target.value)}
                   />

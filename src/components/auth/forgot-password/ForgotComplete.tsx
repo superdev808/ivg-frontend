@@ -48,7 +48,7 @@ export const ForgotComplete: React.FC<ForgotCompleteProps> = ({
         <Link href={`/login`}>
           <Button
             label="Return to login"
-            className=" p-button-rounded bg-secondary "
+            className="p-button-rounded bg-secondary"
           />
         </Link>
       </div>

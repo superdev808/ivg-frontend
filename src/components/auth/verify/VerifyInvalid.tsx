@@ -15,8 +15,8 @@ export const VerifyInvalid: React.FC = () => (
       <Image
         src="/images/logo/Ivory-Guide-Logo-Horizontal-Light.svg"
         alt="Logo"
-        width={"150"}
-        height={"30"}
+        width="150"
+        height="30"
         className="relative mb-3"
       />
     </Link>

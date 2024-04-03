@@ -78,7 +78,7 @@ export default function SettingsUserOrgForm() {
                 <Avatar
                   label={organization?.organizationName.charAt(0).toUpperCase()}
                   shape="circle"
-                  className="bg-orange-100"
+                  className="bg-light-brown"
                   style={{ width: "100px", height: "100px", fontSize: "3rem" }}
                 />
               ) : (
@@ -97,8 +97,8 @@ export default function SettingsUserOrgForm() {
                 }}
                 disabled={isLoading}
                 icon={isLoading ? "pi pi-spin pi-spinner" : ""}
-                label={"Update"}
-                className=" bg-transparent text-600 text-secondary mx-4"
+                label="Update"
+                className="bg-transparent text-secondary mx-4"
               />
             </div>
 

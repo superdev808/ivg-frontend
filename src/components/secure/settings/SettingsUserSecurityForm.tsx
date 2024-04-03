@@ -49,13 +49,11 @@ export default function SettingsUserSecurityForm() {
               disabled={updateMessage !== ""}
               onClick={(e) => onSubmit(e)}
               icon={isLoading ? "pi pi-spin pi-spinner" : ""}
-              label={"Change your password"}
-              className=" p-button-rounded bg-secondary "
+              label="Change your password"
+              className="p-button-rounded bg-secondary"
             />
             {updateMessage && (
-              <div className="text-600 text-secondary mx-4">
-                {updateMessage}
-              </div>
+              <div className="text-dark-green mx-4">{updateMessage}</div>
             )}
           </div>
         </div>

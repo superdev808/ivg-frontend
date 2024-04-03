@@ -93,8 +93,8 @@ export default function ForgotForm({
             disabled={isLoading}
             type="submit"
             icon={isLoading ? "pi pi-spin pi-spinner" : ""}
-            label={"Send"}
-            className=" p-button-rounded bg-secondary w-full"
+            label="Send"
+            className="p-button-rounded bg-secondary w-full"
           />
         </div>
       </form>

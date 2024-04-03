@@ -7,10 +7,10 @@
   word-wrap: break-word;
   background-color: var(--primary-color);
   border-radius: 5px;
-  color: var(--secondary-color);
+  color: var(--dark-green);
 
   &:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--dark-green);
     color: white;
   }
 }
@@ -34,7 +34,7 @@
 }
 
 .content-text {
-  color: var(--secondary-color);
+  color: var(--dark-green);
   font-size: 24px;
   font-family: var(--font-family);
   font-weight: 300;

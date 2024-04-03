@@ -6,11 +6,11 @@ import { event as gaEvent } from "@/lib/gtag";
 
 import FeedbackDialog, { FeedbackUserTrackingProps } from "./FeedbackDialog";
 
-export interface FeedbackDialogWrapperProps extends FeedbackUserTrackingProps { }
+export interface FeedbackDialogWrapperProps extends FeedbackUserTrackingProps {}
 
 const FeedbackDialogWrapper: React.FC<FeedbackDialogWrapperProps> = ({
   calculatorName,
-  userAnswers
+  userAnswers,
 }) => {
   const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
 
@@ -18,7 +18,9 @@ const FeedbackDialogWrapper: React.FC<FeedbackDialogWrapperProps> = ({
     gaEvent({
       action: "Feedback",
       category: "Button",
-      label: calculatorName ? `${calculatorName}\n${JSON.stringify(userAnswers, null, 2)}` : "",
+      label: calculatorName
+        ? `${calculatorName}\n${JSON.stringify(userAnswers, null, 2)}`
+        : "",
     });
     setFeedbackShow(true);
   };

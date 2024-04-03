@@ -16,7 +16,7 @@ body {
   font-weight: normal;
   font-style: normal;
   background-color: var(--beige);
-  color: var(--secondary-color);
+  color: var(--dark-green);
 }
 
 /* ===== Scrollbar CSS ===== */
@@ -116,7 +116,7 @@ td {
 .btn-secondary {
   @include styleclass("bg-secondary focus:bg-primary justify-content-center");
   &:hover {
-    background: rgba(var(--secondary-color-rgb), 0.85) !important;
+    background: rgba(var(--dark-green), 0.85) !important;
   }
 }
 

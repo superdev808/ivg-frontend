@@ -62,7 +62,7 @@ export const WorkflowsHowSection = () => {
                   <Image
                     src={item.image}
                     alt={`public_workflow_${index}`}
-                    width={"100%"}
+                    width="100%"
                   />
                 </div>
               </div>
@@ -88,7 +88,7 @@ export const WorkflowsHowSection = () => {
                 <Image
                   src="/workflow-1.png"
                   alt="landing page middle image"
-                  width={"100%"}
+                  width="100%"
                   className="relative"
                 />
               </div>
@@ -102,7 +102,7 @@ export const WorkflowsHowSection = () => {
                 <Image
                   src="/workflow-2.png"
                   alt="landing page middle image"
-                  width={"100%"}
+                  width="100%"
                   className="relative"
                 />
               </div>
@@ -143,7 +143,7 @@ export const WorkflowsHowSection = () => {
                 <Image
                   src="/workflow-3.png"
                   alt="landing page middle image"
-                  width={"100%"}
+                  width="100%"
                   className="relative"
                 />
               </div>

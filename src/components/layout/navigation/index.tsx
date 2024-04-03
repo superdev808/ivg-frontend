@@ -117,7 +117,7 @@ const Navigation = ({ authenticated, light }: NavigationProps) => {
     <Avatar
       label={getInitials(userName)}
       size="normal"
-      className="bg-orange-100 font-bold text-700"
+      className="bg-light-brown font-bold text-dark-green"
       shape="circle"
     />
   );

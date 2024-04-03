@@ -61,7 +61,7 @@ const PDFContent: React.FC<PDFContentProps> = ({
 
   return (
     <>
-      <div className={cx("bg-color", "px-0 py-3")} />
+      <div className={cx("bg-dark-green", "px-0 py-3")} />
       <div className="flex mx-4 mt-3 mb-3 justify-content-between">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

@@ -69,7 +69,7 @@ const SavedResultsContainer: React.FC = () => {
                     <i className="pi pi-search" />
                     <InputText
                       placeholder="Search"
-                      className="w-full bg-transparent"
+                      className="w-full"
                       value={search}
                       disabled={isLoading}
                       onChange={(evt) => setSearch(evt.target.value)}

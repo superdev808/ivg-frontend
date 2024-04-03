@@ -26,7 +26,7 @@ const LoginHeader: React.FC = () => (
     </div>
 
     <span className="text-light-green font-medium line-height-3">
-      {"Don't have an account?"}
+      Don&apos;t have an account?
     </span>
 
     <Link
