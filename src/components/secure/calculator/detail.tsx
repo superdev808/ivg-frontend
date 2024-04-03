@@ -16,6 +16,7 @@ import "swiper/css/pagination";
 
 import HelpfulFeedbackDialog from "./Feedback/HelpfulFeedbackDialog";
 import Result from "./Result";
+import HelpfulButton from "./Helpful";
 
 interface DetailViewProps {
   calculatorType: string;
@@ -139,21 +140,10 @@ const DetailView: React.FC<DetailViewProps> = ({
         </div>
       )}
 
-      <div
-        className={`fixed text-2xl m-1 left-50 bg-light-green text-beige p-3 pb-6 border-round-3xl m-0`}
-        style={{
-          transform: "translate(-50%, -50%)",
-          bottom: "-90px",
-          zIndex: "100",
-        }}
-      >
-        <i className="pi pi-thumbs-up text-3xl mr-3" onClick={onClickThumbUp} />
-        Was this helpful?
-        <i
-          className="pi pi-thumbs-down text-3xl ml-3"
-          onClick={onClickFeedback}
-        />
-      </div>
+      <HelpfulButton
+        onClickThumbUp={onClickThumbUp}
+        onClickThumbDown={onClickFeedback}
+      />
 
       <HelpfulFeedbackDialog
         visible={feedbkackShow}

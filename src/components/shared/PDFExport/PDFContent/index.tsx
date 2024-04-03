@@ -10,7 +10,6 @@ import {
   ComponentSummary as ComponentSummaryType,
   InputSummary as InputSummaryType,
   Patient,
-  SiteData,
   TotalQuantities,
 } from "@/types/calculators";
 
@@ -61,11 +60,11 @@ const PDFContent: React.FC<PDFContentProps> = ({
 
   return (
     <>
-      <div className={cx("bg-dark-green", "px-0 py-3")} />
+      <div className="bg-dark-green px-0 py-3" />
       <div className="flex mx-4 mt-3 mb-3 justify-content-between">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/logo/Ivory-Guide-PDF-Logo.png"
+          src="/images/logo/Ivory-Guide-Logo-Horizontal-Light.png"
           alt="logo"
           width="auto"
           height={63}

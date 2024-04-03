@@ -308,7 +308,7 @@ const Questionnaire: React.FC<InputProps> = ({
         />
       )}
 
-      <div className="grid">
+      <div className="px-2 grid">
         {questions.map((quiz, index) => {
           if (index !== level) {
             return null;
