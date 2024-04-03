@@ -92,7 +92,9 @@ const AdminEditUser: React.FC<AdminEditUserProps> = ({
                     onChange={(e) => field.onChange(e.target.value)}
                   />
 
-                  <label htmlFor={field.name}>First Name</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    First Name
+                  </label>
                 </span>
 
                 {FormErrorMessage({ message: errors[field.name]?.message })}
@@ -122,7 +124,9 @@ const AdminEditUser: React.FC<AdminEditUserProps> = ({
                     onChange={(e) => field.onChange(e.target.value)}
                   />
 
-                  <label htmlFor={field.name}>Last Name</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Last Name
+                  </label>
                 </span>
 
                 {FormErrorMessage({ message: errors[field.name]?.message })}
@@ -152,7 +156,9 @@ const AdminEditUser: React.FC<AdminEditUserProps> = ({
                     onChange={(e) => field.onChange(e.target.value)}
                   />
 
-                  <label htmlFor={field.name}>Email</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Email
+                  </label>
                 </span>
 
                 {FormErrorMessage({ message: errors[field.name]?.message })}
@@ -175,7 +181,9 @@ const AdminEditUser: React.FC<AdminEditUserProps> = ({
                     className={cx({ "p-invalid": fieldState.error }, "w-full")}
                   />
 
-                  <label htmlFor={field.name}>Role</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Role
+                  </label>
                 </span>
 
                 {FormErrorMessage({ message: errors[field.name]?.message })}
@@ -196,7 +204,9 @@ const AdminEditUser: React.FC<AdminEditUserProps> = ({
                     className={cx({ "p-invalid": fieldState.error }, "w-full")}
                   />
 
-                  <label htmlFor={field.name}>Verified</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Verified
+                  </label>
                 </span>
 
                 {FormErrorMessage({ message: errors[field.name]?.message })}

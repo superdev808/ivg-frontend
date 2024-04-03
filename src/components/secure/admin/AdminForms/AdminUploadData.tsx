@@ -140,7 +140,9 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                     className={cx({ "p-invalid": fieldState.error }, "w-full")}
                   />
 
-                  <label htmlFor={field.name}>Calculator</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Calculator
+                  </label>
                 </span>
 
                 {FormErrorMessage({ message: errors[field.name]?.message })}
@@ -173,7 +175,9 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                     onChange={(e) => field.onChange(e.target.value)}
                   />
 
-                  <label htmlFor={field.name}>Spreadsheet ID</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Spreadsheet ID
+                  </label>
                 </span>
 
                 {FormErrorMessage({ message: errors[field.name]?.message })}
@@ -206,7 +210,9 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                     onChange={(e) => field.onChange(e.target.value)}
                   />
 
-                  <label htmlFor={field.name}>Page Name</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Page Name
+                  </label>
                 </span>
 
                 {FormErrorMessage({ message: errors[field.name]?.message })}

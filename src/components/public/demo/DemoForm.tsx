@@ -151,7 +151,9 @@ export const DemoForm = () => {
                     })}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
-                  <label htmlFor={field.name}>Email</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Email
+                  </label>
                 </span>
                 {getFormErrorMessage(field.name)}
               </>
@@ -181,7 +183,9 @@ export const DemoForm = () => {
                     })}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
-                  <label htmlFor={field.name}>Password</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Password
+                  </label>
                 </span>
                 {getFormErrorMessage(field.name)}
               </>

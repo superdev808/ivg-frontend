@@ -80,7 +80,9 @@ export default function ForgotForm({
                     )}
                     onChange={(e) => field.onChange(e.target.value)}
                   />
-                  <label htmlFor={field.name}>Email</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Email
+                  </label>
                 </span>
                 <FormErrorMessage message={errors[field.name]?.message} />
               </>
