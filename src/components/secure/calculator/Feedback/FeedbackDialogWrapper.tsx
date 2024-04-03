@@ -28,7 +28,7 @@ const FeedbackDialogWrapper: React.FC<FeedbackDialogWrapperProps> = ({
   return (
     <>
       <div
-        className="fixed text-2xl m-1 bg-green-300 border-round-3xl m-0 p-3 pl-5"
+        className="fixed text-2xl m-1 bg-light-green text-beige border-round-3xl m-0 p-3 pl-5"
         style={{
           transform: "rotate(180deg)",
           writingMode: "vertical-rl",

@@ -1,5 +1,7 @@
-import styles from "./Privacy.module.scss";
 import classNames from "classnames/bind";
+
+import styles from "./Privacy.module.scss";
+
 const cx = classNames.bind(styles);
 
 export const PrivacyContentSection = () => (
@@ -577,10 +579,7 @@ export const PrivacyContentSection = () => (
           <span>
             In addition to the information provided in this privacy policy,
             additional information for California residents can be found at{" "}
-            <a
-              href="https://www.ivoryguide.com/privacy-policy-ca"
-              className="text-dark-green"
-            >
+            <a href="/privacy-policy-ca" className="text-dark-green">
               https://www.ivoryguide.com/privacy-policy-ca
             </a>
             .

@@ -10,7 +10,7 @@ export const PrivacyCAContentSection = () => (
       className={cx("section-header", "p-4 md:p-6 bg-dark-green text-beige")}
     >
       <span className="text-2xl md:text-5xl font-bold z-1">
-        ADDITIONAL INFORMATION FOR CALIFORNIA RESIDENTS
+        ADDITIONAL INFORMATION FOR CALIFORNIA RESIDENTS1
       </span>
     </div>
     <div className="flex justify-content-center text-light-green">
@@ -453,7 +453,7 @@ export const PrivacyCAContentSection = () => (
             about the personal information that we have about you, please
             contact us at{" "}
           </span>
-          <a href="mailto:support@ivoryguide.com">
+          <a href="mailto:support@ivoryguide.com" className="text-dark-green">
             <span>support@ivoryguide.com</span>
           </a>
           <span>.</span>

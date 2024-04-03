@@ -140,7 +140,7 @@ const DetailView: React.FC<DetailViewProps> = ({
       )}
 
       <div
-        className="fixed text-2xl m-1 left-50 bg-green-300 p-3 pb-6 border-round-3xl m-0"
+        className={`fixed text-2xl m-1 left-50 bg-light-green text-beige p-3 pb-6 border-round-3xl m-0`}
         style={{
           transform: "translate(-50%, -50%)",
           bottom: "-90px",

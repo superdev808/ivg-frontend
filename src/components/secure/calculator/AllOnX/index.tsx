@@ -40,7 +40,7 @@ import CustomCombinationsInputs from "./CustomCombinationsInputs";
 import InputDetails from "./InputDetails";
 import HelpfulFeedbackDialog from "../Feedback/HelpfulFeedbackDialog";
 import FeedbackDialogWrapper from "../Feedback/FeedbackDialogWrapper";
-
+import HelpfulButton from "../Helpful";
 interface AllOnXCalculatorProps {
   isCustom?: boolean;
 }
@@ -472,24 +472,10 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       </div>
 
       {isAllSitesAnswered && selectedSites.length > 0 && (
-        <div
-          className="fixed text-2xl m-1 left-50 bg-green-300 p-3 pb-6 border-round-3xl m-0"
-          style={{
-            transform: "translate(-50%, -50%)",
-            bottom: "-90px",
-            zIndex: "100",
-          }}
-        >
-          <i
-            className="pi pi-thumbs-up text-3xl mr-3"
-            onClick={onClickThumbUp}
-          />
-          Was this helpful?
-          <i
-            className="pi pi-thumbs-down text-3xl ml-3"
-            onClick={onClickFeedback}
-          />
-        </div>
+        <HelpfulButton
+          onClickThumbUp={onClickThumbUp}
+          onClickThumbDown={onClickFeedback}
+        />
       )}
       {isAllSitesAnswered === false && selectedSites.length > 0 && (
         <FeedbackDialogWrapper calculatorName={calculatorName} />

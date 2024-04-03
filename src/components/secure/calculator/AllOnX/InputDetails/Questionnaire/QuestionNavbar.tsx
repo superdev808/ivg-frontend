@@ -58,7 +58,7 @@ const QuestionNavbar: React.FC<QuestionNavbarProps> = ({
           headerClassName={
             idx === allQuestions.length - 1
               ? ""
-              : "border-right-1 border-gray-300"
+              : "border-right-1 border-light-green"
           }
         />
       ))}
