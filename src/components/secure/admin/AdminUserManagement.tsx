@@ -28,7 +28,9 @@ import { EditUser } from "@/types/UserTypes";
 
 import AdminEditUser from "./AdminForms/AdminEditUser";
 
-const cx = classNames.bind({});
+import styles from "./Admin.module.scss";
+
+const cx = classNames.bind(styles);
 
 const AdminUserManagement: React.FC = () => {
   const { data, refetch } = useGetUsersListQuery({});
@@ -227,7 +229,7 @@ const AdminUserManagement: React.FC = () => {
     <div className="px-4">
       <div
         className={cx(
-          { "text-green-400": value, "text-red-400": !value },
+          { "text-light-green": value, "text-light-brown": !value },
           "border-round w-5 font-bold p-1"
         )}
       >
@@ -261,7 +263,7 @@ const AdminUserManagement: React.FC = () => {
         onHide={() => setSelectedUser(null)}
       >
         <p
-          className="cursor-pointer hover:text-gray-600"
+          className={cx("navLink")}
           onClick={(e) => {
             onEditUser();
             (menuPanel.current as OverlayPanel).toggle(e);
@@ -272,7 +274,7 @@ const AdminUserManagement: React.FC = () => {
 
         {!selectedUser?.verified && (
           <p
-            className="cursor-pointer hover:text-gray-600"
+            className={cx("navLink")}
             onClick={() => {
               onSendVerificationEmail(selectedUser as EditUser);
             }}
@@ -282,7 +284,7 @@ const AdminUserManagement: React.FC = () => {
         )}
 
         <p
-          className="cursor-pointer hover:text-gray-600"
+          className={cx("navLink")}
           onClick={() => {
             onSendResetPassword(selectedUser as EditUser);
           }}
@@ -291,12 +293,7 @@ const AdminUserManagement: React.FC = () => {
         </p>
 
         <p
-          className={cx(
-            "cursor-pointer",
-            { "text-red-500 hover:text-red-600": selectedUser?.active },
-            { "text-green-500 hover:text-green-600": !selectedUser?.active },
-            "hover:text-gray-600"
-          )}
+          className={cx("navLink")}
           onClick={() => {
             if (selectedUser?.active === true) {
               onDeactivateUser(selectedUser as EditUser);

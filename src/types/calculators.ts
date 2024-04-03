@@ -32,6 +32,35 @@ export interface ItemInsights {
   manufacturerRecommendations?: string;
   torqueValue?: string;
   notes?: string;
+  recommendedSingleUnitAbutmentMaterial?: string;
+  recommendedSingleUnitAbutmentReasoning?: string;
+  recommendedSingleUnitAbutmentSupportingArticle?: string;
+  recommendedMUAMaterial?: string;
+  recommendedMUAMaterialReasoning?: string;
+  recommendedMUAMaterialSupportingArticle?: string;
+  recommendedRestorationDesign?: string;
+  recommendedRestorationDesignReasoning?: string;
+  recommendedRestorationDesignSupportingArticle?: string;
+  recommendedImplantBridgeMaterial?: string;
+  recommendedImplantBridgeMaterialReasoning?: string;
+  recommendedImplantBridgeMaterialSupportingArticle?: string;
+  secondRecommendedSingleUnitAbutmentMaterial?: string;
+  secondRecommendedRestorationDesign?: string;
+  secondRecommendedImplantBridgeMaterial?: string;
+  recommendedAbutmentMaterial?: string;
+  recommendedAbutmentMaterialReasoning?: string;
+  recommendedAbutmentMaterialSupportingArticle?: string;
+  recommendedCrownMaterial?: string;
+  recommendedCrownMaterialReasoning?: string;
+  recommendedCrownMaterialSupportingArticle?: string;
+  secondAbutmentMaterialChoice?: string;
+  secondRestorationDesignChoice?: string;
+  secondCrownMaterialChoice?: string;
+  recommendedBridgeMaterial?: string;
+  recommendedBridgeMaterialReasoning?: string;
+  recommendedBridgeMaterialSupportingArticle?: string;
+  secondMaterialChoice?: string;
+  thirdMaterialChoice?: string;
 }
 export interface ItemData {
   id?: string;
@@ -73,6 +102,7 @@ export interface InputOutputValues {
   outputFrom?: string;
   isCommon?: boolean;
   displayCalculatorName?: string;
+  description?: string;
 }
 
 export interface AutoPopulateData {

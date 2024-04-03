@@ -139,7 +139,7 @@ export const Calculators = () => {
               onClick={() => handleClickCalculatorGroup(groupItem, index)}
             >
               <h3 className="m-0">{groupItem.label}</h3>
-              <p>{groupItem.description}</p>
+              {groupItem.description && <p>{groupItem.description}</p>}
             </Button>
           ))}
         </div>

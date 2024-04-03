@@ -512,6 +512,240 @@ export const parseItems = (
     ];
   }
 
+  if (calculatorType === "ImplantBorneBridge") {
+    return [
+      {
+        label: "Implant-Borne Bridge",
+        info: [
+          {
+            recommendedSingleUnitAbutmentMaterial: trim(
+              item["Recommended Single Unit Abutment Material"]
+            ),
+            recommendedSingleUnitAbutmentReasoning: trim(
+              item["Recommended Single Unit Abutment Reasoning"]
+            ),
+            recommendedSingleUnitAbutmentSupportingArticle: trim(
+              item["Recommended Single Unit Abutment Supporting Article"]
+            ),
+            quantity: 1,
+          },
+        ],
+      },
+
+      {
+        label: "Implant-Borne Bridge",
+        info: [
+          {
+            recommendedMUAMaterial: trim(
+              item["Recommended Multi-Unit Abutment (MUA) Material"]
+            ),
+            recommendedMUAMaterialReasoning: trim(
+              item["Recommended Multi-Unit Abutment (MUA) Material Reasoning"]
+            ),
+            recommendedMUAMaterialSupportingArticle: trim(
+              item[
+                "Recommended Multi-Unit Abutment (MUA) Material Supporting Article"
+              ]
+            ),
+            quantity: 1,
+          },
+        ],
+      },
+
+      {
+        label: "Implant-Borne Bridge",
+        info: [
+          {
+            recommendedRestorationDesign: trim(
+              item["Recommended Restoration Design"]
+            ),
+            recommendedRestorationDesignReasoning: trim(
+              item["Recommended Restoration Design Reasoning"]
+            ),
+            recommendedRestorationDesignSupportingArticle: trim(
+              item["Recommended Restoration Design Supporting Article"]
+            ),
+            quantity: 1,
+          },
+        ],
+      },
+
+      {
+        label: "Implant-Borne Bridge",
+        info: [
+          {
+            recommendedImplantBridgeMaterial: trim(
+              item["Recommended Implant Bridge Material"]
+            ),
+            recommendedImplantBridgeMaterialReasoning: trim(
+              item["Recommended Implant Bridge Material Reasoning"]
+            ),
+            recommendedImplantBridgeMaterialSupportingArticle: trim(
+              item["Recommended Implant Bridge Material Supporting Article"]
+            ),
+            quantity: 1,
+          },
+        ],
+      },
+
+      {
+        label: "Implant-Borne Bridge",
+        info: [
+          {
+            secondRecommendedSingleUnitAbutmentMaterial: trim(
+              item["Second Recommended Single Unit Abutment Material"]
+            ),
+            secondRecommendedRestorationDesign: trim(
+              item["Second Recommended Restoration Design"]
+            ),
+            secondRecommendedImplantBridgeMaterial: trim(
+              item["Second Recommended Implant Bridge Material"]
+            ),
+            quantity: 1,
+          },
+        ],
+      },
+    ];
+  }
+
+  if (calculatorType === "ImplantBorneCrown") {
+    return [
+      {
+        label: "Implant-Borne Crown",
+        info: [
+          {
+            recommendedAbutmentMaterial: trim(
+              item["Recommended Abutment Material"]
+            ),
+            recommendedAbutmentMaterialReasoning: trim(
+              item["Recommended Abutment Material Reasoning"]
+            ),
+            recommendedAbutmentMaterialSupportingArticle: trim(
+              item["Recommended Abutment Material Supporting Article"]
+            ),
+            quantity: 1,
+          },
+        ],
+      },
+
+      {
+        label: "Implant-Borne Crown",
+        info: [
+          {
+            recommendedRestorationDesign: trim(
+              item["Recommended Restoration Design"]
+            ),
+            recommendedRestorationDesignReasoning: trim(
+              item["Recommended Restoration Design Reasoning"]
+            ),
+            recommendedRestorationDesignSupportingArticle: trim(
+              item["Recommended Restoration Design Supporting Article"]
+            ),
+            quantity: 1,
+          },
+        ],
+      },
+
+      {
+        label: "Implant-Borne Crown",
+        info: [
+          {
+            recommendedCrownMaterial: trim(item["Recommended Crown Material"]),
+            recommendedCrownMaterialReasoning: trim(
+              item["Recommended Crown Material Reasoning"]
+            ),
+            recommendedCrownMaterialSupportingArticle: trim(
+              item["Recommended Crown Material Supporting Article"]
+            ),
+            quantity: 1,
+          },
+        ],
+      },
+
+      {
+        label: "Implant-Borne Crown",
+        info: [
+          {
+            secondAbutmentMaterialChoice: trim(
+              item["Second Abutment Material Choice"]
+            ),
+            secondRestorationDesignChoice: trim(
+              item["Second Restoration Design Choice"]
+            ),
+            secondCrownMaterialChoice: trim(
+              item["Second Crown Material Choice"]
+            ),
+            quantity: 1,
+          },
+        ],
+      },
+    ];
+  }
+
+  if (calculatorType === "ToothBorneBridge") {
+    return [
+      {
+        label: "Tooth-Borne Bridge",
+        info: [
+          {
+            recommendedBridgeMaterial: trim(
+              item["Recommended Bridge Material"]
+            ),
+            recommendedBridgeMaterialReasoning: trim(
+              item["Recommended Bridge Material Reasoning"]
+            ),
+            recommendedBridgeMaterialSupportingArticle: trim(
+              item["Recommended Bridge Material Supporting Article"]
+            ),
+            quantity: 1,
+          },
+        ],
+      },
+
+      {
+        label: "Tooth-Borne Bridge",
+        info: [
+          {
+            secondMaterialChoice: trim(item["Second Material Choice"]),
+            thirdMaterialChoice: trim(item["Third Material Choice"]),
+            quantity: 1,
+          },
+        ],
+      },
+    ];
+  }
+
+  if (calculatorType === "ToothBorneCrown") {
+    return [
+      {
+        label: "Tooth-Borne Crown",
+        info: [
+          {
+            recommendedCrownMaterial: trim(item["Recommended Crown Material"]),
+            recommendedCrownMaterialReasoning: trim(
+              item["Recommended Crown Material Reasoning"]
+            ),
+            recommendedCrownMaterialSupportingArticle: trim(
+              item["Recommended Crown Material Supporting Article"]
+            ),
+            quantity: 1,
+          },
+        ],
+      },
+
+      {
+        label: "Tooth-Borne Crown",
+        info: [
+          {
+            secondMaterialChoice: trim(item["Second Material Choice"]),
+            thirdMaterialChoice: trim(item["Third Material Choice"]),
+            quantity: 1,
+          },
+        ],
+      },
+    ];
+  }
+
   return [];
 };
 
@@ -530,4 +764,19 @@ export const getQuizByCalculator = (
     ...quiz,
     question: (quiz.question || "").split("[")[0],
   }));
+};
+
+export const getCalculatorQuestionDescription = (
+  calculatorName?: string,
+  questionName?: string
+) => {
+  if (!calculatorName || !questionName) {
+    return "";
+  }
+
+  return (
+    CALCULATORS[calculatorName]?.find(
+      (question) => question.name === questionName
+    )?.description || ""
+  );
 };

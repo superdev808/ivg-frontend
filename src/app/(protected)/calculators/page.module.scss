@@ -6,11 +6,11 @@
 .calculatorButton {
   background-color: transparent !important;
   color: #023932 !important;
-  border: 1px solid var(--light-brown) !important;
+  border: 1px solid var(--light-green) !important;
 
   &:hover,
   &--highlighted {
-    border: 1px solid var(--dark-green) !important;
+    border-color: var(--dark-brown) !important;
   }
 }
 

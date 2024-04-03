@@ -65,6 +65,183 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
                   <b>Notes:</b> {item.notes}
                 </div>
               )}
+
+              {item.recommendedSingleUnitAbutmentMaterial && (
+                <div>
+                  <b>Recommended Single Unit Abutment Material:</b>{" "}
+                  {item.recommendedSingleUnitAbutmentMaterial}
+                </div>
+              )}
+              {item.recommendedSingleUnitAbutmentReasoning && (
+                <div>
+                  <b>Reasoning:</b>{" "}
+                  {item.recommendedSingleUnitAbutmentReasoning}
+                </div>
+              )}
+              {item.recommendedSingleUnitAbutmentSupportingArticle && (
+                <div>
+                  <b>Supporting Article:</b>{" "}
+                  {item.recommendedSingleUnitAbutmentSupportingArticle}
+                </div>
+              )}
+
+              {item.recommendedMUAMaterial && (
+                <div>
+                  <b>Recommended Multi-Unit Abutment (MUA) Material:</b>{" "}
+                  {item.recommendedMUAMaterial}
+                </div>
+              )}
+              {item.recommendedMUAMaterialReasoning && (
+                <div>
+                  <b>Reasoning:</b> {item.recommendedMUAMaterialReasoning}
+                </div>
+              )}
+              {item.recommendedMUAMaterialSupportingArticle && (
+                <div>
+                  <b>Supporting Article:</b>{" "}
+                  {item.recommendedMUAMaterialSupportingArticle}
+                </div>
+              )}
+
+              {item.recommendedRestorationDesign && (
+                <div>
+                  <b>Recommended Restoration Design:</b>{" "}
+                  {item.recommendedRestorationDesign}
+                </div>
+              )}
+              {item.recommendedRestorationDesignReasoning && (
+                <div>
+                  <b>Reasoning:</b> {item.recommendedRestorationDesignReasoning}
+                </div>
+              )}
+              {item.recommendedRestorationDesignSupportingArticle && (
+                <div>
+                  <b>Supporting Article:</b>{" "}
+                  {item.recommendedRestorationDesignSupportingArticle}
+                </div>
+              )}
+
+              {item.recommendedImplantBridgeMaterial && (
+                <div>
+                  <b>Recommended Implant Bridge Material:</b>{" "}
+                  {item.recommendedImplantBridgeMaterial}
+                </div>
+              )}
+              {item.recommendedImplantBridgeMaterialReasoning && (
+                <div>
+                  <b>Reasoning:</b>{" "}
+                  {item.recommendedImplantBridgeMaterialReasoning}
+                </div>
+              )}
+              {item.recommendedImplantBridgeMaterialSupportingArticle && (
+                <div>
+                  <b>Supporting Article:</b>{" "}
+                  {item.recommendedImplantBridgeMaterialSupportingArticle}
+                </div>
+              )}
+
+              {item.secondRecommendedSingleUnitAbutmentMaterial && (
+                <div>
+                  <b>Second Recommended Single Unit Abutment Material:</b>{" "}
+                  {item.secondRecommendedSingleUnitAbutmentMaterial}
+                </div>
+              )}
+              {item.secondRecommendedRestorationDesign && (
+                <div>
+                  <b>Second Recommended Restoration Design:</b>{" "}
+                  {item.secondRecommendedRestorationDesign}
+                </div>
+              )}
+              {item.secondRecommendedImplantBridgeMaterial && (
+                <div>
+                  <b>Second Recommended Implant Bridge Material:</b>{" "}
+                  {item.secondRecommendedImplantBridgeMaterial}
+                </div>
+              )}
+
+              {item.recommendedAbutmentMaterial && (
+                <div>
+                  <b>Recommended Abutment Material:</b>{" "}
+                  {item.recommendedAbutmentMaterial}
+                </div>
+              )}
+              {item.recommendedAbutmentMaterialReasoning && (
+                <div>
+                  <b>Reasoning:</b> {item.recommendedAbutmentMaterialReasoning}
+                </div>
+              )}
+              {item.recommendedAbutmentMaterialSupportingArticle && (
+                <div>
+                  <b>Supporting Article:</b>{" "}
+                  {item.recommendedAbutmentMaterialSupportingArticle}
+                </div>
+              )}
+
+              {item.recommendedCrownMaterial && (
+                <div>
+                  <b>Recommended Crown Material:</b>{" "}
+                  {item.recommendedCrownMaterial}
+                </div>
+              )}
+              {item.recommendedCrownMaterialReasoning && (
+                <div>
+                  <b>Reasoning:</b> {item.recommendedCrownMaterialReasoning}
+                </div>
+              )}
+              {item.recommendedCrownMaterialSupportingArticle && (
+                <div>
+                  <b>Supporting Article:</b>{" "}
+                  {item.recommendedCrownMaterialSupportingArticle}
+                </div>
+              )}
+
+              {item.secondAbutmentMaterialChoice && (
+                <div>
+                  <b>Second Abutment Material Choice:</b>{" "}
+                  {item.secondAbutmentMaterialChoice}
+                </div>
+              )}
+              {item.secondRestorationDesignChoice && (
+                <div>
+                  <b>Second Restoration Design Choice:</b>{" "}
+                  {item.secondRestorationDesignChoice}
+                </div>
+              )}
+              {item.secondCrownMaterialChoice && (
+                <div>
+                  <b>Second Crown Material Choice:</b>{" "}
+                  {item.secondCrownMaterialChoice}
+                </div>
+              )}
+
+              {item.recommendedBridgeMaterial && (
+                <div>
+                  <b>Recommended Bridge Material:</b>{" "}
+                  {item.recommendedBridgeMaterial}
+                </div>
+              )}
+              {item.recommendedBridgeMaterialReasoning && (
+                <div>
+                  <b>Reasoning:</b> {item.recommendedBridgeMaterialReasoning}
+                </div>
+              )}
+              {item.recommendedBridgeMaterialSupportingArticle && (
+                <div>
+                  <b>Supporting Article:</b>{" "}
+                  {item.recommendedBridgeMaterialSupportingArticle}
+                </div>
+              )}
+
+              {item.secondMaterialChoice && (
+                <div>
+                  <b>Second Material Choice:</b> {item.secondMaterialChoice}
+                </div>
+              )}
+              {item.thirdMaterialChoice && (
+                <div>
+                  <b>Third Material Choice:</b> {item.thirdMaterialChoice}
+                </div>
+              )}
             </div>
 
             {!invalidPurchaseCalcs.includes(label) && (
