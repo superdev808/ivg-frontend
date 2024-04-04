@@ -1,0 +1,9 @@
+.material-popup {
+  background-color: var(--light-green);
+  color: var(--beige);
+
+  &::before,
+  &::after {
+    display: none;
+  }
+}

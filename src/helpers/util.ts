@@ -3298,7 +3298,13 @@ export const socialButtons = [
   },
 ];
 
-export const invalidPurchaseCalcs = ["Implant Torque Guide"];
+export const CALCS_WITHOUT_PURCHASE = [
+  "Implant Torque Guide",
+  "Implant-Borne Bridge",
+  "Implant-Borne Crown",
+  "Tooth-Borne Bridge",
+  "Tooth-Borne Crown",
+];
 
 export const CALCULATORS = calculatorIO
   .filter((calc) => !calc.disabled)

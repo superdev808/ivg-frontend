@@ -521,10 +521,8 @@ export const parseItems = (
             recommendedSingleUnitAbutmentMaterial: trim(
               item["Recommended Single Unit Abutment Material"]
             ),
-            recommendedSingleUnitAbutmentReasoning: trim(
-              item["Recommended Single Unit Abutment Reasoning"]
-            ),
-            recommendedSingleUnitAbutmentSupportingArticle: trim(
+            reasoning: trim(item["Recommended Single Unit Abutment Reasoning"]),
+            supportingArticle: trim(
               item["Recommended Single Unit Abutment Supporting Article"]
             ),
             quantity: 1,
@@ -539,10 +537,10 @@ export const parseItems = (
             recommendedMUAMaterial: trim(
               item["Recommended Multi-Unit Abutment (MUA) Material"]
             ),
-            recommendedMUAMaterialReasoning: trim(
+            reasoning: trim(
               item["Recommended Multi-Unit Abutment (MUA) Material Reasoning"]
             ),
-            recommendedMUAMaterialSupportingArticle: trim(
+            supportingArticle: trim(
               item[
                 "Recommended Multi-Unit Abutment (MUA) Material Supporting Article"
               ]
@@ -559,10 +557,8 @@ export const parseItems = (
             recommendedRestorationDesign: trim(
               item["Recommended Restoration Design"]
             ),
-            recommendedRestorationDesignReasoning: trim(
-              item["Recommended Restoration Design Reasoning"]
-            ),
-            recommendedRestorationDesignSupportingArticle: trim(
+            reasoning: trim(item["Recommended Restoration Design Reasoning"]),
+            supportingArticle: trim(
               item["Recommended Restoration Design Supporting Article"]
             ),
             quantity: 1,
@@ -577,10 +573,10 @@ export const parseItems = (
             recommendedImplantBridgeMaterial: trim(
               item["Recommended Implant Bridge Material"]
             ),
-            recommendedImplantBridgeMaterialReasoning: trim(
+            reasoning: trim(
               item["Recommended Implant Bridge Material Reasoning"]
             ),
-            recommendedImplantBridgeMaterialSupportingArticle: trim(
+            supportingArticle: trim(
               item["Recommended Implant Bridge Material Supporting Article"]
             ),
             quantity: 1,
@@ -617,10 +613,8 @@ export const parseItems = (
             recommendedAbutmentMaterial: trim(
               item["Recommended Abutment Material"]
             ),
-            recommendedAbutmentMaterialReasoning: trim(
-              item["Recommended Abutment Material Reasoning"]
-            ),
-            recommendedAbutmentMaterialSupportingArticle: trim(
+            reasoning: trim(item["Recommended Abutment Material Reasoning"]),
+            supportingArticle: trim(
               item["Recommended Abutment Material Supporting Article"]
             ),
             quantity: 1,
@@ -635,10 +629,8 @@ export const parseItems = (
             recommendedRestorationDesign: trim(
               item["Recommended Restoration Design"]
             ),
-            recommendedRestorationDesignReasoning: trim(
-              item["Recommended Restoration Design Reasoning"]
-            ),
-            recommendedRestorationDesignSupportingArticle: trim(
+            reasoning: trim(item["Recommended Restoration Design Reasoning"]),
+            supportingArticle: trim(
               item["Recommended Restoration Design Supporting Article"]
             ),
             quantity: 1,
@@ -651,10 +643,8 @@ export const parseItems = (
         info: [
           {
             recommendedCrownMaterial: trim(item["Recommended Crown Material"]),
-            recommendedCrownMaterialReasoning: trim(
-              item["Recommended Crown Material Reasoning"]
-            ),
-            recommendedCrownMaterialSupportingArticle: trim(
+            reasoning: trim(item["Recommended Crown Material Reasoning"]),
+            supportingArticle: trim(
               item["Recommended Crown Material Supporting Article"]
             ),
             quantity: 1,
@@ -691,10 +681,8 @@ export const parseItems = (
             recommendedBridgeMaterial: trim(
               item["Recommended Bridge Material"]
             ),
-            recommendedBridgeMaterialReasoning: trim(
-              item["Recommended Bridge Material Reasoning"]
-            ),
-            recommendedBridgeMaterialSupportingArticle: trim(
+            reasoning: trim(item["Recommended Bridge Material Reasoning"]),
+            supportingArticle: trim(
               item["Recommended Bridge Material Supporting Article"]
             ),
             quantity: 1,
@@ -722,10 +710,8 @@ export const parseItems = (
         info: [
           {
             recommendedCrownMaterial: trim(item["Recommended Crown Material"]),
-            recommendedCrownMaterialReasoning: trim(
-              item["Recommended Crown Material Reasoning"]
-            ),
-            recommendedCrownMaterialSupportingArticle: trim(
+            reasoning: trim(item["Recommended Crown Material Reasoning"]),
+            supportingArticle: trim(
               item["Recommended Crown Material Supporting Article"]
             ),
             quantity: 1,
