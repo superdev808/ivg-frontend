@@ -116,7 +116,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               {socialButtons.map((button) => (
                 <Link key={button.ariaLabel} href={button.link} target="_blank">
                   <Button
-                    className="text-light-green border-light-green"
+                    className="border-light-green"
                     rounded
                     outlined
                     text
@@ -128,7 +128,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
 
             <div className="flex flex-column justify-content-center align-items-center md:align-items-start lg:pl-0 xl:px-8">
-              <span className="text-light-green text-4xl sm:text-5xl lg:text-6xl font-semibold text-center md:text-left">
+              <span className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-center md:text-left">
                 {title}
               </span>
               <span className="text-white text-lg md:text-xl text-right md:text-left">

@@ -120,7 +120,7 @@ export const DemoForm = () => {
         <div className="text-dark-green text-3xl font-medium mb-3">
           Welcome Back
         </div>
-        <span className="text-light-green font-medium line-height-3">
+        <span className="font-medium line-height-3">
           Don&apos;t have an account?
         </span>
         <a className="font-medium no-underline ml-2 text-primary-500 cursor-pointer">

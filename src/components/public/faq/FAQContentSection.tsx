@@ -251,7 +251,7 @@ export const FAQContentSection = () => {
         <span className="pt-4 z-1">{`We are here to help you. If you don't see your question here, please contact us.`}</span>
       </div>
 
-      <div className="flex justify-content-center relative overflow-hidden text-light-green">
+      <div className="flex justify-content-center relative overflow-hidden">
         <div className="px-3 w-full flex flex-column gap-4 my-4 md:px-0 md:gap-6 md:w-8">
           {sections.map((section, sectionIdx) => (
             <>
@@ -283,8 +283,7 @@ export const FAQContentSection = () => {
                           // @ts-ignore
                           headeraction: {
                             className: cx({
-                              "bg-beige text-light-green":
-                                opened !== accordionId,
+                              "bg-beige": opened !== accordionId,
                               "bg-light-green text-beige":
                                 opened === accordionId,
                             }),
@@ -298,7 +297,7 @@ export const FAQContentSection = () => {
                           </div>
                         }
                       >
-                        <p className="m-0 px-3 pt-3 text-light-green text-sm md:text-base">
+                        <p className="m-0 px-3 pt-3 text-sm md:text-base">
                           {item.answer}
                         </p>
                       </AccordionTab>

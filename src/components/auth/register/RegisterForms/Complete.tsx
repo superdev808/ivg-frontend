@@ -9,7 +9,7 @@ const RegisterComplete: React.FC = () => (
 
     <i className="pi pi-check-circle text-8xl" />
 
-    <div className="text-2xl my-6 text-light-green">
+    <div className="text-2xl my-6">
       Your account has been created and a verification email has been sent to
       your registered email address. Please click verification link included in
       the email to activate your account.

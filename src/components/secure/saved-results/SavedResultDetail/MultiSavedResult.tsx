@@ -111,7 +111,7 @@ const MultiSavedResultDetail: React.FC<MultiResultDetailProps> = ({
       message: "Do you want to delete this record?",
       header: "Delete Confirmation",
       icon: "pi pi-info-circle",
-      acceptClassName: "p-button-danger",
+      acceptClassName: "p-button-secondary",
       accept: onDelete,
     });
   };

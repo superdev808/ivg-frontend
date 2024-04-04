@@ -14,7 +14,7 @@ export const PrivacyContentSection = () => (
       </span>
     </div>
 
-    <div className="flex justify-content-center text-light-green">
+    <div className="flex justify-content-center">
       <div
         className={cx(
           "wrapper",

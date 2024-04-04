@@ -88,7 +88,7 @@ const SecondForm: React.FC<SecondFormProps> = ({
         <span className="col-12 text-center text-2xl text-dark-green">
           A few more questions
         </span>
-        <span className="col-12 text-center p-0 text-light-green mb-4">
+        <span className="col-12 text-center p-0 mb-4">
           To get started, tell us a little about yourself.
         </span>
 

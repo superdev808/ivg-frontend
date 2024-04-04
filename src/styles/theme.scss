@@ -83,7 +83,7 @@
 }
 
 .p-error {
-  color: #b00020;
+  color: var(--dark-brown);
 }
 
 .pi {
@@ -308,7 +308,7 @@
   margin-left: 0.5rem;
 }
 .p-autocomplete.p-invalid.p-component > .p-inputtext {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-autocomplete-panel {
@@ -348,7 +348,7 @@
 }
 
 .p-calendar.p-invalid.p-component > .p-inputtext {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-datepicker {
@@ -622,7 +622,7 @@
   border-bottom-right-radius: 4px;
 }
 .p-cascadeselect.p-invalid.p-component {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-cascadeselect-panel {
@@ -741,7 +741,7 @@
   color: var(--beige);
 }
 .p-checkbox.p-invalid > .p-checkbox-box {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-input-filled .p-checkbox .p-checkbox-box {
@@ -793,7 +793,7 @@
   margin: 0;
 }
 .p-chips.p-invalid.p-component > .p-inputtext {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-colorpicker-preview {
@@ -857,7 +857,7 @@
   right: 2.357rem;
 }
 .p-dropdown.p-invalid.p-component {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-dropdown-panel {
@@ -1159,7 +1159,7 @@
 }
 
 .p-inputnumber.p-invalid.p-component > .p-inputtext {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-inputswitch {
@@ -1203,24 +1203,24 @@
   background: rgba(63, 81, 181, 0.5);
 }
 .p-inputswitch.p-invalid .p-inputswitch-slider {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-inputtext {
   font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial,
     Lucida Grande, sans-serif;
   font-size: 1rem;
-  color: var(--dark-green);
+  color: var(--light-green);
   background: var(--beige);
   padding: 0.75rem 0.75rem;
-  border: 1px solid var(--dark-green);
+  border: 1px solid var(--light-green);
   transition: background-color 0.2s, border-color 0.2s, color 0.2s,
     box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
   appearance: none;
   border-radius: 4px;
 }
 .p-inputtext:enabled:hover {
-  border-color: var(--dark-green);
+  border-color: var(--light-green);
 }
 .p-inputtext:enabled:focus {
   outline: 0 none;
@@ -1229,7 +1229,7 @@
   border-color: var(--dark-brown);
 }
 .p-inputtext.p-invalid.p-component {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 .p-inputtext.p-inputtext-sm {
   font-size: 0.875rem;
@@ -1247,7 +1247,7 @@
 }
 
 .p-float-label > label.p-error {
-  color: #b00020;
+  color: var(--dark-brown);
 }
 
 .p-input-icon-left > i:first-of-type,
@@ -1372,7 +1372,7 @@
   background: rgba(0, 0, 0, 0.04);
 }
 .p-listbox.p-invalid {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-mention-panel {
@@ -1455,7 +1455,7 @@
   right: 2.357rem;
 }
 .p-multiselect.p-invalid.p-component {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-inputwrapper-filled.p-multiselect.p-multiselect-chip .p-multiselect-label {
@@ -1576,7 +1576,7 @@
 }
 
 .p-password.p-invalid.p-component > .p-inputtext {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-password-panel {
@@ -1641,7 +1641,7 @@
   color: var(--dark-green);
 }
 .p-radiobutton.p-invalid > .p-radiobutton-box {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 .p-radiobutton:focus {
   outline: 0 none;
@@ -1676,7 +1676,7 @@
   height: 1rem;
 }
 .p-rating .p-rating-item .p-rating-icon.p-rating-cancel {
-  color: #b00020;
+  color: var(--dark-brown);
 }
 .p-rating .p-rating-item:focus {
   outline: 0 none;
@@ -1694,7 +1694,7 @@
 .p-rating:not(.p-disabled):not(.p-readonly)
   .p-rating-item:hover
   .p-rating-icon.p-rating-cancel {
-  color: #b00020;
+  color: var(--dark-brown);
 }
 
 .p-selectbutton .p-button {
@@ -1740,7 +1740,7 @@
   color: rgba(0, 0, 0, 0.6);
 }
 .p-selectbutton.p-invalid > .p-button {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-slider {
@@ -1823,7 +1823,7 @@
   border-bottom-right-radius: 4px;
 }
 .p-treeselect.p-invalid.p-component {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-inputwrapper-filled.p-treeselect.p-treeselect-chip .p-treeselect-label {
@@ -1954,7 +1954,7 @@
   color: rgba(0, 0, 0, 0.6);
 }
 .p-togglebutton.p-button.p-invalid > .p-button {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 
 .p-button {
@@ -6169,20 +6169,20 @@
 .p-menu {
   padding: 0.5rem 0;
   background: var(--beige);
-  color: var(--dark-green);
+  color: var(--light-green);
   border: 1px solid #e5e5e5;
   border-radius: 4px;
   width: 12.5rem;
 }
 .p-menu .p-menuitem-link {
   padding: 0.75rem 0.75rem;
-  color: var(--dark-green);
+  color: var(--light-green);
   border-radius: 0;
   transition: none;
   user-select: none;
 }
 .p-menu .p-menuitem-link .p-menuitem-text {
-  color: var(--dark-green);
+  color: var(--light-green);
 }
 .p-menu .p-menuitem-link .p-menuitem-icon {
   color: rgba(0, 0, 0, 0.6);
@@ -7781,13 +7781,13 @@
 }
 .p-input-filled .p-autocomplete.p-invalid > .p-inputtext {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-autocomplete.p-invalid > .p-inputtext:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-autocomplete.p-invalid > .p-inputtext:enabled:focus {
   box-shadow: none;
@@ -7795,14 +7795,14 @@
 }
 .p-input-filled .p-autocomplete.p-invalid > .p-autocomplete-multiple-container {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled
   .p-autocomplete.p-invalid
   > .p-autocomplete-multiple-container:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled
   .p-autocomplete.p-invalid
@@ -7811,18 +7811,18 @@
   .p-autocomplete.p-invalid
   > .p-autocomplete-multiple-container:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-autocomplete.p-invalid > .p-inputtext:enabled:focus {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 .p-autocomplete.p-invalid
   > .p-autocomplete-multiple-container:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-breadcrumb .p-menuitem-link {
@@ -8544,18 +8544,18 @@
 }
 
 .p-calendar.p-invalid .p-inputtext:enabled:focus {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 .p-calendar.p-invalid.p-calendar-w-btn {
-  border-color: #b00020;
+  border-color: var(--dark-brown);
 }
 .p-calendar.p-invalid.p-calendar-w-btn .p-inputtext:enabled:focus {
   box-shadow: none;
 }
 .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled).p-inputwrapper-focus {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-input-filled .p-calendar-w-btn {
@@ -8604,13 +8604,13 @@
 }
 .p-input-filled .p-calendar.p-invalid .p-inputtext {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-calendar.p-invalid .p-inputtext:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-calendar.p-invalid .p-inputtext:enabled:focus {
   box-shadow: none;
@@ -8618,19 +8618,19 @@
 }
 .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled).p-focus,
 .p-input-filled
   .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn .p-inputtext,
 .p-input-filled
@@ -8724,24 +8724,24 @@
 }
 .p-input-filled .p-cascadeselect.p-invalid {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-cascadeselect.p-invalid:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-cascadeselect.p-invalid:not(.p-disabled).p-focus,
 .p-input-filled
   .p-cascadeselect.p-invalid:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-cascadeselect.p-invalid:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-checkbox {
@@ -8890,14 +8890,14 @@
 }
 .p-input-filled .p-chips.p-invalid .p-chips-multiple-container {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled
   .p-chips.p-invalid
   .p-chips-multiple-container:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled
   .p-chips.p-invalid
@@ -8906,13 +8906,13 @@
   .p-chips.p-invalid
   .p-chips-multiple-container:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-chips.p-invalid .p-chips-multiple-container:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-datatable .p-sortable-column {
@@ -8999,23 +8999,23 @@
 }
 .p-input-filled .p-dropdown.p-invalid {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-dropdown.p-invalid:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-dropdown.p-invalid:not(.p-disabled).p-focus,
 .p-input-filled .p-dropdown.p-invalid:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-dropdown.p-invalid:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 
 .fc {
@@ -9128,8 +9128,8 @@
     inset 0 0 0 1px var(--dark-brown);
 }
 .p-inputtext:enabled:focus.p-invalid {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-input-filled .p-inputtext {
@@ -9165,13 +9165,13 @@
 }
 .p-input-filled .p-inputtext.p-invalid.p-component {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-inputtext.p-invalid.p-component:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-inputtext.p-invalid.p-component:enabled:focus {
   box-shadow: none;
@@ -9218,19 +9218,19 @@
 }
 
 .p-inputnumber.p-invalid .p-inputtext:enabled:focus {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-input-filled .p-inputnumber.p-invalid .p-inputtext {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-inputnumber.p-invalid .p-inputtext:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-inputnumber.p-invalid .p-inputtext:enabled:focus {
   box-shadow: none;
@@ -9445,23 +9445,23 @@
 }
 .p-input-filled .p-multiselect.p-invalid {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-multiselect.p-invalid:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-multiselect.p-invalid:not(.p-disabled).p-focus,
 .p-input-filled .p-multiselect.p-invalid:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-multiselect.p-invalid:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-overlaypanel .p-overlaypanel-content {
@@ -9487,13 +9487,13 @@
 
 .p-input-filled .p-password.p-invalid > .p-inputtext {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-password.p-invalid > .p-inputtext:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-password.p-invalid > .p-inputtext:enabled:focus {
   box-shadow: none;
@@ -9501,8 +9501,8 @@
 }
 
 .p-password.p-invalid > .p-inputtext:enabled:focus {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-panel {
@@ -10019,23 +10019,23 @@
 }
 .p-input-filled .p-treeselect.p-invalid {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-treeselect.p-invalid:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-treeselect.p-invalid:not(.p-disabled).p-focus,
 .p-input-filled .p-treeselect.p-invalid:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, #b00020, #b00020),
-    linear-gradient(to bottom, #b00020, #b00020);
+  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+    linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-treeselect.p-invalid:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020,
-    inset 0 0 0 1px #b00020, inset 0 0 0 1px #b00020;
+  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-treetable .p-sortable-column {
@@ -10095,7 +10095,7 @@
 }
 
 .p-inputtext {
-  border-color: var(--dark-green);
+  border-color: var(--light-green);
   border-radius: var(--border-radius);
   // box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }

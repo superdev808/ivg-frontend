@@ -22,7 +22,7 @@ export const ResetHeader = () => (
     <div className="text-dark-green text-3xl font-medium mb-3">
       Reset new password
     </div>
-    <span className="text-light-green font-medium line-height-3">
+    <span className="font-medium line-height-3">
       Password must be at least 8 characters and include an uppercase letter, a
       lowercase letter, a number, and a symbol.
     </span>

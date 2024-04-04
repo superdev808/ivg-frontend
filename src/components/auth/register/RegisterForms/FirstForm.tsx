@@ -92,7 +92,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
         Create your account
       </span>
 
-      <span className="col-12 text-center p-0 text-light-green mb-4">
+      <span className="col-12 text-center p-0 mb-4">
         Please fill the form below to create an account.
       </span>
 
@@ -233,7 +233,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                   <FormErrorMessage message={errors[field.name]?.message} />
                 </div>
               ) : (
-                <span className="mt-2 mb-4 text-light-green text-sm">
+                <span className="mt-2 mb-4 text-sm">
                   Please use an email associated with your dental practice, lab,
                   school, etc. in order for us to validate your involvement.
                 </span>
@@ -291,7 +291,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                   <FormErrorMessage message={errors[field.name]?.message} />
                 </div>
               ) : (
-                <span className="mt-2 mb-4 text-light-green text-sm">
+                <span className="mt-2 mb-4 text-sm">
                   Min. 8 characters, 1 letter, 1 number and 1 special character
                 </span>
               )}
@@ -320,7 +320,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
                 onChange={(e) => field.onChange(e.checked)}
               />
 
-              <span className="text-center text-light-green text-sm">
+              <span className="text-center text-sm">
                 I accept the{" "}
                 <Link
                   href="/agreement"
@@ -360,7 +360,7 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
       </div>
 
       <div className="col-12 flex justify-content-center mt-4">
-        <span className="text-center p-0 text-light-green">
+        <span className="text-center p-0">
           Already have an account?{" "}
           <Link href="/login" className="no-underline text-dark-green">
             Sign In

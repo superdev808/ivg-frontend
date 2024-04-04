@@ -25,7 +25,7 @@ const LoginHeader: React.FC = () => (
       Welcome Back
     </div>
 
-    <span className="text-light-green font-medium line-height-3">
+    <span className="font-medium line-height-3">
       Don&apos;t have an account?
     </span>
 

@@ -24,7 +24,7 @@ export const ForgotHeader = () => (
       Forgot your password?
     </div>
 
-    <span className="text-light-green font-medium line-height-3">
+    <span className="font-medium line-height-3">
       Enter your email below and we will send you a reset link.
     </span>
   </div>

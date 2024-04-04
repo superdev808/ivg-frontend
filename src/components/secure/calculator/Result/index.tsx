@@ -378,7 +378,10 @@ const Result: React.FC<ResultProps> = ({
             {getQuizByCalculator(quiz, calculatorName).map(
               ({ question, answer }) => (
                 <div key={question} className="flex align-items-center gap-1">
-                  <div className="text-left" style={{ maxWidth: "50%" }}>
+                  <div
+                    className="text-left text-dark-green"
+                    style={{ maxWidth: "50%" }}
+                  >
                     {question}
                   </div>
                   <div className="flex-1 text-right">{answer}</div>

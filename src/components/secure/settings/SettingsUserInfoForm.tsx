@@ -128,21 +128,17 @@ export default function SettingsUserInfoForm() {
       <form className="flex mx-3 md:-mx-3" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid">
           <div className="col-12">
-            <div className="text-2xl text-center text-dark-green md:text-left">
-              Profile
-            </div>
+            <div className="text-2xl text-center md:text-left">Profile</div>
           </div>
 
           <div className="col-12">
-            <span className="text-dark-green">
-              Update your profile, contact detials, and preferences to
-              personalize your experience
-            </span>
+            Update your profile, contact detials, and preferences to personalize
+            your experience
           </div>
 
           <div className="col-12 md:col-3">
             <div className="pt-4 pb-2 md:pb-4">
-              <div className="flex flex-column border-1 border-dark-green border-round-xl align-items-center pt-4">
+              <div className="flex flex-column border-1 border-light-green border-round-xl align-items-center pt-4">
                 {user?.logo ? (
                   <Image
                     src={user.logo}
@@ -165,7 +161,7 @@ export default function SettingsUserInfoForm() {
                   disabled={isLoadingLogo}
                   icon={isLoadingLogo && "pi pi-spin pi-spinner"}
                   label="Update"
-                  className="bg-transparent text-dark-green"
+                  className="bg-transparent"
                 />
               </div>
             </div>
@@ -173,7 +169,7 @@ export default function SettingsUserInfoForm() {
 
           <div className="col-12 md:col-6">
             <div className="flex flex-column justify-content-center text-center pb-6 h-full md:text-left md:pl-2 md:pb-0">
-              <div className="text-lg text-dark-green">
+              <div className="text-lg">
                 <span>Location:</span> {user.organizationState}
               </div>
             </div>
@@ -336,20 +332,14 @@ export default function SettingsUserInfoForm() {
                 onClick={(e) => onReset(e)}
               />
 
-              <span className="align-self-center">
-                {resetMessage && (
-                  <div className="text-dark-green">{resetMessage}</div>
-                )}
-              </span>
+              <span className="align-self-center">{resetMessage}</span>
             </div>
           </div>
 
           <div className="col-12">
             <div className="flex flex-column justify-content-center align-items-center gap-3 pb-4 md:flex-row md:justify-content-end md:gap-4 md:pb-0">
               {updateMessage && (
-                <div className="text-dark-green align-self-center">
-                  {updateMessage}
-                </div>
+                <div className="align-self-center">{updateMessage}</div>
               )}
 
               <Button

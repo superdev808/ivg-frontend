@@ -30,13 +30,13 @@ export const ForgotComplete: React.FC<ForgotCompleteProps> = ({
       <div className="text-dark-green text-6xl font-medium mb-3">
         Check your email
       </div>
-      <span className="text-light-green font-medium text-xl my-4">
+      <span className="font-medium text-xl my-4">
         We sent password reset instructions to:
       </span>
 
       <span className="font-medium text-2xl my-4">{requestedEmail}</span>
 
-      <span className="text-light-green font-medium text-xl my-4">
+      <span className="font-medium text-xl my-4">
         If it doesn&apos;t arrive soon, check your spam folder. Please{" "}
         <Link href="/contact" className="text-dark-green">
           contact us
