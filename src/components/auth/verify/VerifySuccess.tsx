@@ -29,7 +29,7 @@ export const VerifySuccess: React.FC = () => (
       <i className="pi pi-thumbs-up text-8xl text-dark-green" />
     </span>
 
-    <span className="text-light-green font-medium text-xl my-4 line-height-2">
+    <span className="font-medium text-xl my-4 line-height-2">
       Thank you for verifying your account. Click below to sign in to your
       account.
     </span>

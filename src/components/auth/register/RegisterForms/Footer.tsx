@@ -1,5 +1,5 @@
 const RegisterFooter = () => (
-  <div className="flex justify-content-center text-center text-light-green">
+  <div className="flex justify-content-center text-center">
     <span>
       © {new Date().getFullYear()} Ivory Guide, LLC and its subsidiaries. All
       rights reserved.

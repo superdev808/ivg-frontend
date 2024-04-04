@@ -51,7 +51,7 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
       message: "Do you want to delete this record?",
       header: "Delete Confirmation",
       icon: "pi pi-info-circle",
-      acceptClassName: "p-button-danger",
+      acceptClassName: "p-button-secondary",
       accept: () => onDelete(resultId),
     });
   };
@@ -73,9 +73,9 @@ const SavedResultsList: React.FC<SavedResultsListProps> = ({
           <div
             key={savedResult.id}
             className={cx(
-              `border-2 border-light-green px-2 py-3 text-center
-      flex flex-column gap-4 align-items-center
-      md:text-left md:px-3 md:py-5 md:flex-row`,
+              `border-1 border-light-green border-round px-2 py-3 text-center
+              flex flex-column gap-4 align-items-center
+              md:text-left md:px-3 md:py-5 md:flex-row`,
               { "cursor-pointer": !isLoading, "cursor-wait": isLoading }
             )}
             onClick={() => handleGoToDetailPage(savedResult.id)}

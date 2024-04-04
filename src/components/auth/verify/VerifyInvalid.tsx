@@ -29,11 +29,11 @@ export const VerifyInvalid: React.FC = () => (
       <i className="pi pi-times-circle text-8xl text-dark-brown" />
     </span>
 
-    <span className="text-light-green font-medium text-xl my-4 line-height-2">
+    <span className="font-medium text-xl my-4 line-height-2">
       The link you are using to verify your account is already expired.
     </span>
 
-    <span className="text-light-green font-medium text-xl my-2 line-height-2">
+    <span className="font-medium text-xl my-2 line-height-2">
       <Link href="/forgot-password" className="text-dark-green">
         Click here
       </Link>{" "}
@@ -41,7 +41,7 @@ export const VerifyInvalid: React.FC = () => (
       below to sign in with your valid credentials.
     </span>
 
-    <span className="text-light-green font-medium text-xl my-4 line-height-2">
+    <span className="font-medium text-xl my-4 line-height-2">
       Still stuck? Please{" "}
       <Link href="/contact" className="text-dark-green">
         contact us

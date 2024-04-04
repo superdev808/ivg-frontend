@@ -15,7 +15,7 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ extendFooter }) => (
-  <div className="relative overflow-hidde text-light-green line-height-2 px-3 md:px-8">
+  <div className="relative overflow-hidde line-height-2 px-3 md:px-8">
     {extendFooter && <FooterExtended />}
 
     <div
@@ -43,7 +43,7 @@ const Footer: React.FC<FooterProps> = ({ extendFooter }) => (
       <div>
         <Link
           href="/agreement"
-          className="font-bold text-light-green"
+          className="text-light-green font-bold"
           target="_blank"
         >
           Terms of Use
@@ -52,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ extendFooter }) => (
         <Link
           href="/privacy-policy"
           target="_blank"
-          className="font-bold text-light-green"
+          className="text-light-green font-bold"
         >
           Privacy Notice
         </Link>

@@ -109,7 +109,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
     isLoading || (input[level] && !Boolean(answerOptions[level]?.length));
 
   return (
-    <div className="flex w-full justify-content-center mb-8 text-light-green">
+    <div className="flex w-full justify-content-center mb-8">
       <div className="w-12 flex px-2 py-2 border-round flex-column">
         <div className="grid">
           {questions.map((quiz, index) => {

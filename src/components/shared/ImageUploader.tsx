@@ -110,7 +110,7 @@ const ImageUploader = ({
       headerClassName="text-dark-green"
       breakpoints={{ "960px": "75vw", "641px": "100vw" }}
     >
-      <span className="text-sm text-light-green">
+      <span className="text-sm">
         Please attach a clear image of your logo. PNG, JPG, and JPEG file are
         allowed.
       </span>

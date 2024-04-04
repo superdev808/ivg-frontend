@@ -15,7 +15,7 @@ const HelpfulButton: React.FC<HelpfulButtonProps> = ({
   onClickThumbDown,
 }) => (
   <div
-    className={`fixed text-2xl m-1 left-50 bg-light-green text-beige
+    className={`fixed text-2xl m-1 left-50 bg-light-brown
       flex align-items-center gap-3 p-3 pb-6 border-round-3xl m-0`}
     style={{
       transform: "translate(-50%, -50%)",

@@ -1,10 +1,15 @@
 "use client";
 
+import classNames from "classnames/bind";
 import React, { useState } from "react";
 
 import { event as gaEvent } from "@/lib/gtag";
 
 import FeedbackDialog, { FeedbackUserTrackingProps } from "./FeedbackDialog";
+
+import styles from "./Feedback.module.scss";
+
+const cx = classNames.bind(styles);
 
 export interface FeedbackDialogWrapperProps extends FeedbackUserTrackingProps {}
 
@@ -28,7 +33,10 @@ const FeedbackDialogWrapper: React.FC<FeedbackDialogWrapperProps> = ({
   return (
     <>
       <div
-        className="fixed text-2xl m-1 bg-light-green text-beige border-round-3xl m-0 p-3 pl-5"
+        className={cx(
+          "feedbackButton",
+          "fixed text-2xl m-1 bg-light-brown border-round-3xl m-0 p-3 pl-5"
+        )}
         style={{
           transform: "rotate(180deg)",
           writingMode: "vertical-rl",

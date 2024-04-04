@@ -31,10 +31,7 @@ export const ColItemsSection: React.FC<ThreeColSectionProps> = ({
 
         {subtitle && (
           <span
-            className={cx(
-              "public-section-content-xl",
-              "px-6 mb-4 text-center text-light-green"
-            )}
+            className={cx("public-section-content-xl", "px-6 mb-4 text-center")}
           >
             {subtitle}
           </span>

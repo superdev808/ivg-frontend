@@ -245,14 +245,14 @@ export const ContactComponent = () => {
                 rules={{ required: "Role is required." }}
                 render={({ field }) => (
                   <div className="flex flex-column px-2 align-content-center">
-                    <span className="mb-3 text-light-green text-lg text-center">
+                    <span className="mb-3 text-lg text-center">
                       Please choose your role.
                     </span>
 
                     <div className="flex flex-column flex-wrap md:flex-row">
                       {practices.map((practice, index) => (
                         <div
-                          className="flex align-items-center mb-2 gap-2 text-light-green"
+                          className="flex align-items-center mb-2 gap-2"
                           key={`practice_${index}`}
                         >
                           <RadioButton
@@ -381,7 +381,7 @@ export const ContactComponent = () => {
         modal
         onHide={handleCloseModal}
       >
-        <div className="flex flex-column align-content-center text-center text-light-green p-4">
+        <div className="flex flex-column align-content-center text-center p-4">
           <div className="flex justify-content-end">
             <Button
               icon="pi pi-times"

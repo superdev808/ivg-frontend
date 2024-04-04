@@ -33,7 +33,7 @@ export const ResetSuccess = () => {
       <span className="my-4">
         <i className="pi pi-check-circle text-8xl text-dark-green" />
       </span>
-      <span className="text-light-green font-medium text-xl my-4 line-height-2">
+      <span className="font-medium text-xl my-4 line-height-2">
         Your password has been successfully changed. Click below to sign in with
         your new credentials.
       </span>
