@@ -24,9 +24,20 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   const [answers, setAnswers] = useState<any[]>([]);
   const [items, setItems] = useState<any[]>([]);
   const [canProceed, setCanProceed] = useState<boolean>(true);
-  const { calcInfoMap } = useCalculatorsInfo();
+  const { calcInfoMap, findColumnFromColIndex } = useCalculatorsInfo();
 
   const calculatorType = decodeURI(option);
+
+  const formattedItems = useMemo(() => {
+    return items.map(item => {
+      let newItem: any = {};
+      Object.keys(item).forEach(itemColIndex => {
+        newItem[(findColumnFromColIndex(calculatorType, itemColIndex)?.colName) || ""] = item[itemColIndex];
+      })
+      return newItem;
+    })
+  }, [items, calculatorType, findColumnFromColIndex])
+
 
   const { isLoading } = useQuery(
     [input, level, answers, option, canProceed],
@@ -65,7 +76,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
       const { data: newAnswerOptions } = await response.json();
 
       const originalAnswerOptions: any[] = answerOptions.slice(0, level);
-      if (!input[level]) {
+      if (level == input.length) {
         setItems(newAnswerOptions || []);
         return;
       }
@@ -148,7 +159,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
         {items.length > 0 ? (
           <DetailView
             calculatorType={calculatorType}
-            items={items}
+            items={formattedItems}
             fields={output}
             questions={input}
             answers={answers}

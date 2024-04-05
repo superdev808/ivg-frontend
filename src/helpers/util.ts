@@ -1,5 +1,3 @@
-import { CALCULATOR_IO } from "@/constants/calculators";
-
 export function isUrl(str: string) {
   const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
   return urlRegex.test(str);

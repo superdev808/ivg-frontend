@@ -7,11 +7,11 @@ import TeethSelector, {
   TeethSelectorVariant,
 } from "@/components/shared/TeethSelector";
 import { CALCULATOR_IMAGES } from "@/constants/calculators";
-import { getCalculatorName } from "@/helpers/util";
 import {
   SingleSavedResult as SingleSavedResultType,
   MultiSavedResult as MultiSavedResultType,
 } from "@/types/calculators";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 const LOGO_URL = "/images/logo/Ivory-Guide-Logo-Horizontal-Dark.svg";
 
@@ -30,6 +30,7 @@ export const SingleSavedResult: React.FC<SingleSavedResultProps> = ({
   const { name, calculatorType } = savedResult;
 
   const itemImage = CALCULATOR_IMAGES[calculatorType] || LOGO_URL;
+  const { calcInfoMap } = useCalculatorsInfo();
 
   const handleGoToCalculator = (evt: React.SyntheticEvent) => {
     evt.stopPropagation();
@@ -53,7 +54,7 @@ export const SingleSavedResult: React.FC<SingleSavedResultProps> = ({
         </div>
         <Button
           link
-          label={getCalculatorName(calculatorType)}
+          label={calcInfoMap[calculatorType].label}
           className="px-0 py-0 w-fit border-noround text-dark-green"
           onClick={handleGoToCalculator}
         />

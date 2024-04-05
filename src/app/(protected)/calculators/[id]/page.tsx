@@ -1,11 +1,10 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useMemo } from "react";
 
 import CalculatorContainer from "@/components/secure/calculator";
 import AllOnXCalculator from "@/components/secure/calculator/AllOnX";
-import { CALCULATOR_IO, CALCULATOR_MAPPINGS } from "@/constants/calculators";
+import { CALCULATOR_MAPPINGS } from "@/constants/calculators";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 export default function CalculatorPage() {

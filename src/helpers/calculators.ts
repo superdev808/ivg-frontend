@@ -15,7 +15,6 @@ import {
   PROCEDURE_INPUTS_AND_RESPONSE,
   QUANTITY_MULTIPLES_LIST,
 } from "@/constants/calculators";
-import { getCalculatorName } from "@/helpers/util";
 import {
   CollectionsIO,
   InputAndResponse,
@@ -287,12 +286,11 @@ export const getResultName = (calculatorType: string, items: ItemData[]) => {
 
 export const prepareExportProps = (
   calculatorType: string,
+  calculatorName: string,
   patientInfo: Patient,
   quiz: InputDetail[],
   items: ItemData[]
 ) => {
-  const calculatorName = getCalculatorName(calculatorType);
-
   const componentDetails = {
     [calculatorType]: items,
   };
@@ -319,7 +317,8 @@ export const prepareExportProps = (
 
 export const parseItems = (
   item: Record<string, string>,
-  calculatorType: string
+  calculatorType: string,
+  calculatorName: string
 ): ItemData[] => {
   if (calculatorType === "BoneReduction") {
     return [
@@ -459,7 +458,7 @@ export const parseItems = (
   ) {
     return [
       {
-        label: getCalculatorName(calculatorType),
+        label: calculatorName,
         info: [
           {
             itemName: trim(item["Item Name"]),

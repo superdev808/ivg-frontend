@@ -12,7 +12,6 @@ import React, { useEffect, useState, useMemo } from "react";
 
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
 import { BRAND_IMAGES } from "@/constants/calculators";
-import { getCalculatorQuestionDescription } from "@/helpers/calculators";
 
 import styles from "./quiz.module.scss";
 import { InputOutputValues } from "@/types/calculators";

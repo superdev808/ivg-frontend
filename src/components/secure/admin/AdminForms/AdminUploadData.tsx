@@ -8,8 +8,8 @@ import { Controller, useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 
 import { FormErrorMessage } from "@/components/shared/FormErrorMessage";
-import { CALCULATORS } from "@/constants/calculators";
 import { useUploadCalculatorDataMutation } from "@/redux/hooks/apiHooks";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 const POLLING_INTERVAL = 3000;
 
@@ -19,16 +19,23 @@ interface FormValues {
   pageName: string;
 }
 
-interface AdminUploadDataFormProps {}
+interface AdminUploadDataFormProps { }
 
-const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
+const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({ }) => {
   const [uploadCalculatorData, { isLoading: isSaving }] =
     useUploadCalculatorDataMutation();
+
 
   const toastRef = useRef(null);
 
   const pollingRef = useRef<any>(null);
   const [uploadingProgress, setUploadingProgress] = useState<any>(null);
+  const { calcInfoMap } = useCalculatorsInfo();
+
+  const calculatorOptions = Object.keys(calcInfoMap).filter(calcType => !calcInfoMap[calcType].disabled).map(calcType => ({
+    id: calcType,
+    label: calcInfoMap[calcType].label
+  }))
 
   useEffect(() => {
     return () => {
@@ -134,7 +141,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                   <Dropdown
                     {...field}
                     disabled={isLoading}
-                    options={CALCULATORS}
+                    options={calculatorOptions}
                     optionLabel="label"
                     optionValue="id"
                     className={cx({ "p-invalid": fieldState.error }, "w-full")}

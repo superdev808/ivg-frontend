@@ -39,14 +39,14 @@ const DetailView: React.FC<DetailViewProps> = ({
 
   const [results, setResults] = useState<ItemData[][]>([]);
   const { calcInfoMap } = useCalculatorsInfo()
+  const calculatorName = calcInfoMap[calculatorType].label;
 
   const toastRef = useRef(null);
 
   useEffect(() => {
-    setResults(props.items.map((item) => parseItems(item, calculatorType)));
-  }, [props.items, calculatorType]);
+    setResults(props.items.map((item) => parseItems(item, calculatorType, calculatorName)));
+  }, [props.items, calculatorType, calculatorName]);
 
-  const calculatorName = calcInfoMap[calculatorType].label;
 
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
