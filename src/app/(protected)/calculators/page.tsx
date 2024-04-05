@@ -11,7 +11,7 @@ import {
   CALCULATOR_GROUP_ITEMS,
 } from "@/constants/calculators";
 import { event as gaEvent } from "@/lib/gtag";
-import { CALCULATOR_GROUP_ITEM } from "@/types/calculators";
+import { CalculatorGroupItem } from "@/types/calculators";
 
 import styles from "./page.module.scss";
 
@@ -85,7 +85,7 @@ export const Calculators = () => {
   };
 
   const handleClickCalculatorGroup = (
-    groupItem: CALCULATOR_GROUP_ITEM,
+    groupItem: CalculatorGroupItem,
     index: number
   ) => {
     gaEvent({

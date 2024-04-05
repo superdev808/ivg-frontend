@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import { Image } from "primereact/image";
 import { useEffect } from "react";
 
-import { socialButtons } from "@/helpers/util";
+import { SOCIAL_BUTTONS } from "@/constants";
 import { useAppDispatch } from "@/redux/hooks/hooks";
 
 import styles from "./HeroSection.module.scss";
@@ -113,7 +113,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="col-12 md:col-6">
           <div className="h-full flex align-items-center gap-6 md:pl-4 lg:gap-8">
             <div className="hidden md:flex flex-column justify-content-center gap-5">
-              {socialButtons.map((button) => (
+              {SOCIAL_BUTTONS.map((button) => (
                 <Link key={button.ariaLabel} href={button.link} target="_blank">
                   <Button
                     className="border-light-green"

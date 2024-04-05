@@ -4,7 +4,7 @@ import { ConfirmPopup } from "primereact/confirmpopup";
 import { InputNumber } from "primereact/inputnumber";
 import React, { useMemo } from "react";
 
-import { CALCS_WITHOUT_PURCHASE } from "@/constants/calculators";
+import { INFORMATIONAL_CALCULATOR_NAMES } from "@/constants/calculators";
 import { isValidUrl } from "@/helpers/calculators";
 import { ItemData } from "@/types/calculators";
 
@@ -41,7 +41,7 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
               <GenericOutput label={label} item={item} />
             )}
 
-            {!CALCS_WITHOUT_PURCHASE.includes(label) && (
+            {!INFORMATIONAL_CALCULATOR_NAMES.includes(label) && (
               <div className="flex align-items-center gap-4">
                 <InputNumber
                   value={item.quantity}

@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import Link from "next/link";
 import { Button } from "primereact/button";
 
-import { socialButtons } from "@/helpers/util";
+import { SOCIAL_BUTTONS } from "@/constants";
 
 import Logo from "../../../../public/images/logo/Ivory-Guide-Logo-Stack.svg";
 
@@ -15,7 +15,7 @@ const FooterExtended: React.FC = () => (
     <Logo style={{ width: 200, height: 100 }} />
 
     <div className={cx("centerSection", "flex justify-content-center gap-3")}>
-      {socialButtons.map((button) => (
+      {SOCIAL_BUTTONS.map((button) => (
         <Link key={button.ariaLabel} href={button.link} target="_blank">
           <Button
             pt={{

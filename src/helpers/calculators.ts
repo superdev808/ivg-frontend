@@ -8,9 +8,9 @@ import uniqBy from "lodash/uniqBy";
 
 import {
   CALCULATOR_NAME_COLLECTION_MAPPINGS,
-  CALCULATORS,
+  CALCULATOR_COLLECTIONS,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
-  MATERIAL_CALCULATORS,
+  MATERIAL_CALCULATOR_NAMES,
   MUA_OPTIONS,
   PROCEDURE_INPUTS_AND_RESPONSE,
   QUANTITY_MULTIPLES_LIST,
@@ -103,7 +103,7 @@ export const getProcedureCollections = (
         break;
     }
   } else {
-    collections = Object.keys(CALCULATORS);
+    collections = Object.keys(CALCULATOR_COLLECTIONS);
   }
 
   return collections.sort();
@@ -181,7 +181,7 @@ export const getProcedureInputsAndResponse = (
 
   const customResults: InputAndResponse = prepareInputsAndResponse(
     selectedCollections,
-    CALCULATORS
+    CALCULATOR_COLLECTIONS
   );
 
   return customResults;
@@ -203,7 +203,7 @@ export const getComponentSummary = (
     const componentDetail = cloneDeep(sitesData[siteName].componentDetails);
 
     responseOrder.forEach((calculatorName) => {
-      if (MATERIAL_CALCULATORS.includes(calculatorName)) {
+      if (MATERIAL_CALCULATOR_NAMES.includes(calculatorName)) {
         componentDetail[
           CALCULATOR_NAME_COLLECTION_MAPPINGS[calculatorName]
         ]?.forEach((response) => {
@@ -750,7 +750,7 @@ export const getQuizByCalculator = (
   quiz: InputDetail[],
   calculatorName: string
 ) => {
-  const allQuestions = (CALCULATORS[calculatorName] || []).map(
+  const allQuestions = (CALCULATOR_COLLECTIONS[calculatorName] || []).map(
     (elem) => elem.name
   );
 
@@ -772,7 +772,7 @@ export const getCalculatorQuestionDescription = (
   }
 
   return (
-    CALCULATORS[calculatorName]?.find(
+    CALCULATOR_COLLECTIONS[calculatorName]?.find(
       (question) => question.name === questionName
     )?.description || ""
   );

@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import React from "react";
 
-import { CALCS_WITHOUT_PURCHASE } from "@/constants/calculators";
+import { INFORMATIONAL_CALCULATOR_NAMES } from "@/constants/calculators";
 import { ItemInsights } from "@/types/calculators";
 
 import styles from "./style.module.scss";
@@ -17,7 +17,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({ label, item }) => {
   return (
     <div
       className={cx("flex flex-column gap-2", {
-        "w-12": CALCS_WITHOUT_PURCHASE.includes(label),
+        "w-12": INFORMATIONAL_CALCULATOR_NAMES.includes(label),
       })}
     >
       {item.itemName && <div>{item.itemName}</div>}

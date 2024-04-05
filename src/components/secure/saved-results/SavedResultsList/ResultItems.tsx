@@ -6,7 +6,8 @@ import React, { useMemo } from "react";
 import TeethSelector, {
   TeethSelectorVariant,
 } from "@/components/shared/TeethSelector";
-import { getCalculatorName, productImages } from "@/helpers/util";
+import { CALCULATOR_IMAGES } from "@/constants/calculators";
+import { getCalculatorName } from "@/helpers/util";
 import {
   SingleSavedResult as SingleSavedResultType,
   MultiSavedResult as MultiSavedResultType,
@@ -28,7 +29,7 @@ export const SingleSavedResult: React.FC<SingleSavedResultProps> = ({
 
   const { name, calculatorType } = savedResult;
 
-  const itemImage = productImages[calculatorType] || LOGO_URL;
+  const itemImage = CALCULATOR_IMAGES[calculatorType] || LOGO_URL;
 
   const handleGoToCalculator = (evt: React.SyntheticEvent) => {
     evt.stopPropagation();

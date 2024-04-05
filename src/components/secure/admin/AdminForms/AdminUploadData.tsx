@@ -8,7 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 
 import { FormErrorMessage } from "@/components/shared/FormErrorMessage";
-import { CALCULATORS } from "@/helpers/util";
+import { CALCULATORS } from "@/constants/calculators";
 import { useUploadCalculatorDataMutation } from "@/redux/hooks/apiHooks";
 
 const POLLING_INTERVAL = 3000;
