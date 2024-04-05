@@ -1838,138 +1838,28 @@ export const CALCULATOR_GROUP_ITEMS: CalculatorGroupItem[] = [
     description:
       "These calculators enable quick identification and procurement of a range of Impression Components, Abutments, CAD / CAM Restorations, and Prosthetic and Surgical Instruments to meet all your implant needs.",
     subItems: [
-      {
-        label: "DrillKitAndSequence",
-        text: "Drill Kits and Drill Sequences",
-        description:
-          "This calculator displays surgical drill kits, drills, and drill sequences based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "RestorativeDirectToImplant",
-        text: "Drivers (Restorative, Direct to Implant)",
-        description:
-          "This calculator displays restorative drivers for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "RestorativeMultiUnitAbutments",
-        text: "Drivers (Restorative, on Multi-Unit Abutments)",
-        description:
-          "This calculator displays restorative drivers for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "HealingAbutments",
-        text: "Healing Abutments",
-        description:
-          "This calculator displays healing abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "Implants",
-        text: "Implants",
-        description:
-          "This calculator displays implants based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "ImplantScrews",
-        text: "Implant Screws",
-        description:
-          "This calculator displays screws based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "ImplantTorquesGuide",
-        text: "Implant Torque Guide",
-        description:
-          "Find the right torque value for your desired component, product, or procedure.",
-      },
-      {
-        label: "ImplantAnalogs",
-        text: "Implant Analogs",
-        description:
-          "This calculator displays implant analogs for stone (lab) and digital (IOS) models based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "ImpressingCopingsDirectToImplants",
-        text: "Impression Copings (Direct to Implant)",
-        description:
-          "This calculator displays impression copings for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "ImpressingCopingsMUAs",
-        text: "Impression Copings (Multi-Unit Abutments)",
-        description:
-          "This calculator displays impression copings for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "MUAs",
-        text: "Multi-Unit Abutments",
-        description:
-          "This calculator displays multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "Scanbodies",
-        text: "Scanbodies (Single Unit)",
-        description:
-          "This calculator displays scanbodies for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "ScanbodyMUAs",
-        text: "Scanbodies (Multi-Unit Abutments)",
-        description:
-          "This calculator displays scanbodies for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "ScanbodyDriversDirectToImplants",
-        text: "Scanbody Drivers (Direct to Implant)",
-        description:
-          "This calculator displays scanbody drivers for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "ScanbodyDriversMUAs",
-        text: "Scanbody Drivers (MUAs)",
-        description:
-          "This calculator displays scanbody drivers for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "StockAbutments",
-        text: "Stock Abutments",
-        description:
-          "This calculator displays stock abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "TemporaryCopingsDirectToImplants",
-        text: "Temporary Copings (Direct to Implant)",
-        description:
-          "This calculator displays temporary copings for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "TemporaryCopingsMUAs",
-        text: "Temporary Copings (Multi-Unit Abutments)",
-        description:
-          "This calculator displays temporary copings for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "TiBasesDirectToImplants",
-        text: "Ti Bases (Direct to Implant)",
-        description:
-          "This calculator displays Ti Bases for single implants based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "TiBasesMUAs",
-        text: "Ti Bases (Multi-Unit Abutments)",
-        description:
-          "This calculator displays Ti Bases for multi-unit abutments based on desired implant brand and size, as well as links to purchase this equipment.",
-      },
-      {
-        label: "BoneReduction",
-        text: "Bone Reduction Instruments",
-        description:
-          "This calculator provides recommended instruments to perform bone reduction and denture conversions.",
-      },
-      {
-        label: "ChairSidePickUp",
-        text: "Chairside Pick-Up Materials",
-        description:
-          "This calculator provides recommended materials to perform chairside pick-ups on the day of surgery.",
-      },
+      "DrillKitAndSequence",
+      "RestorativeDirectToImplant",
+      "RestorativeMultiUnitAbutments",
+      "HealingAbutments",
+      "Implants",
+      "ImplantScrews",
+      "ImplantTorquesGuide",
+      "ImplantAnalogs",
+      "ImpressingCopingsDirectToImplants",
+      "ImpressingCopingsMUAs",
+      "MUAs",
+      "Scanbodies",
+      "ScanbodyMUAs",
+      "ScanbodyDriversDirectToImplants",
+      "ScanbodyDriversMUAs",
+      "StockAbutments",
+      "TemporaryCopingsDirectToImplants",
+      "TemporaryCopingsMUAs",
+      "TiBasesDirectToImplants",
+      "TiBasesMUAs",
+      "BoneReduction",
+      "ChairSidePickUp",
     ],
   },
   {
@@ -1988,26 +1878,10 @@ export const CALCULATOR_GROUP_ITEMS: CalculatorGroupItem[] = [
     label: "Recommended Product Materials",
     description: "",
     subItems: [
-      {
-        label: "ToothBorneBridge",
-        text: "Tooth-Borne Bridge",
-        description: "",
-      },
-      {
-        label: "ToothBorneCrown",
-        text: "Tooth-Borne Crown",
-        description: "",
-      },
-      {
-        label: "ImplantBorneBridge",
-        text: "Implant-Borne Bridge",
-        description: "",
-      },
-      {
-        label: "ImplantBorneCrown",
-        text: "Implant-Borne Crown",
-        description: "",
-      },
+      "ToothBorneBridge",
+      "ToothBorneCrown",
+      "ImplantBorneBridge",
+      "ImplantBorneCrown",
     ],
   },
 ];

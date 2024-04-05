@@ -155,11 +155,7 @@ export interface MultiSavedResult {
 export interface CalculatorGroupItem {
   label: string;
   description: string;
-  subItems: Array<{
-    label: string;
-    text: string;
-    description: string;
-  }>;
+  subItems: Array<string>;
 }
 
 export interface AnnouncementItem {

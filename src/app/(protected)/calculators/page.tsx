@@ -14,6 +14,8 @@ import { event as gaEvent } from "@/lib/gtag";
 import { CalculatorGroupItem } from "@/types/calculators";
 
 import styles from "./page.module.scss";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
+import _ from "lodash";
 
 const cx = classNames.bind(styles);
 
@@ -24,17 +26,11 @@ export const Calculators = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
   const searchBoxRef = useRef(null);
+  const { calcInfoMap } = useCalculatorsInfo();
 
   const calcItems = CALCULATOR_GROUP_ITEMS.reduce(
-    (accumulator: any, currentValue: any) => {
-      const newValue = { ...accumulator };
-      currentValue.subItems.forEach((item: any) => {
-        newValue[item.label] = item.text;
-      });
-
-      return newValue;
-    },
-    {}
+    (accumulator: string[], currentValue: CalculatorGroupItem) => [...accumulator, ...currentValue.subItems],
+    []
   );
 
   const handleSearch = (str = "") => {
@@ -47,13 +43,7 @@ export const Calculators = () => {
 
     str = str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regExp = new RegExp(str, "ig");
-    const newCalcItemLabels: string[] = [];
-
-    for (const modelName of Object.keys(calcItems)) {
-      if (regExp.test(modelName) || regExp.test(calcItems[modelName])) {
-        newCalcItemLabels.push(modelName);
-      }
-    }
+    let newCalcTypes: string[] = Object.keys(calcItems).filter(calcType => (regExp.test(calcType) || regExp.test(calcInfoMap[calcType].label)));
 
     fetch(`${process.env.NEXT_PUBLIC_APP_SERVER_URL}/search?text=${str}`, {
       method: "GET",
@@ -65,17 +55,13 @@ export const Calculators = () => {
       .then((result) => {
         const { data } = result;
 
-        for (const item of data) {
-          if (!newCalcItemLabels.includes(item)) {
-            newCalcItemLabels.push(item);
-          }
-        }
+        newCalcTypes = _.uniq([...newCalcTypes, data]);
       })
       .catch((ex) => {
         console.log("Error Happening: ", ex.message);
       })
       .finally(() => {
-        setSearchResult(newCalcItemLabels);
+        setSearchResult(newCalcTypes);
         setLoading(false);
 
         if (searchBoxRef.current) {
@@ -115,13 +101,13 @@ export const Calculators = () => {
 
       {searchResult.length > 0 && (
         <div className="mb-4">
-          {searchResult.map((searchLabel, index) => (
+          {searchResult.map((searchedCalcType, index) => (
             <Button
               className={cx("calculatorButton", "p-3 m-2")}
               key={`searched-calc-${index}`}
-              label={calcItems[searchLabel] || searchLabel}
+              label={calcInfoMap[searchedCalcType].label || searchedCalcType}
               onClick={() => {
-                router.push(`/calculators/${searchLabel}`);
+                router.push(`/calculators/${searchedCalcType}`);
               }}
             />
           ))}
@@ -148,7 +134,7 @@ export const Calculators = () => {
           {selectedGroup >= 0 && (
             <div className="flex flex-column gap-2">
               {CALCULATOR_GROUP_ITEMS[selectedGroup].subItems.map(
-                (calcItem, index) => (
+                (calcType, index) => (
                   <Button
                     className={cx(
                       "calculatorButton",
@@ -156,12 +142,12 @@ export const Calculators = () => {
                     )}
                     key={`calcItem-${index}`}
                     onClick={() => {
-                      router.push(`/calculators/${calcItem.label}`);
+                      router.push(`/calculators/${calcType}`);
                     }}
                   >
-                    <h4 className="m-0">{calcItem.text || calcItem.label}</h4>
-                    {calcItem.description && (
-                      <p className="mb-0 mt-2">{calcItem.description}</p>
+                    <h4 className="m-0">{calcInfoMap[calcType].label || calcType}</h4>
+                    {calcInfoMap[calcType].description && (
+                      <p className="mb-0 mt-2">{calcInfoMap[calcType].description}</p>
                     )}
                   </Button>
                 )

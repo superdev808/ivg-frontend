@@ -308,6 +308,18 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
+    getCalculatorInfo: builder.query<any, any>({
+      query: () => ({
+        url: "/calculatorInfo",
+        method: "GET",
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+      transformResponse: (res: Response) => {
+        return res.status === "Success" ? res.data : res.status;
+      },
+    }),
   }),
   overrideExisting: true,
 });
