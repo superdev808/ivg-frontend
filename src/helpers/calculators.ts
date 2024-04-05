@@ -765,18 +765,3 @@ export const getQuizByCalculator = (
 
   return filteredQuiz;
 };
-
-export const getCalculatorQuestionDescription = (
-  calculatorName?: string,
-  questionName?: string
-) => {
-  if (!calculatorName || !questionName) {
-    return "";
-  }
-
-  return (
-    CALCULATOR_COLLECTIONS[calculatorName]?.find(
-      (question) => question.name === questionName
-    )?.description || ""
-  );
-};

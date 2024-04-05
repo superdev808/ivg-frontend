@@ -28,7 +28,7 @@ export default function CalculatorPage() {
           <div className="w-full">
             <div className="flex flex-column align-items-center justify-content-center">
               <CalculatorContainer
-                option={searchParams.id as string}
+                option={tabId as string}
                 input={selectedType?.input || []}
                 output={selectedType?.output || []}
               />

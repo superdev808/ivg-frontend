@@ -2,20 +2,16 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import React, { useMemo, useState } from "react";
 import { useQuery } from "react-query";
 
-import { getCalculatorName } from "@/helpers/util";
-
 import DetailView from "./detail";
 import FeedbackDialogWrapper from "./Feedback/FeedbackDialogWrapper";
 import Quiz from "./quiz";
+import { InputOutputValues } from "@/types/calculators";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
-interface QuizOption {
-  name: string;
-  text: string;
-}
 interface CalculatorContainerProps {
   option: string;
-  input: QuizOption[];
-  output: QuizOption[];
+  input: InputOutputValues[];
+  output: InputOutputValues[];
 }
 
 const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
@@ -28,6 +24,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   const [answers, setAnswers] = useState<any[]>([]);
   const [items, setItems] = useState<any[]>([]);
   const [canProceed, setCanProceed] = useState<boolean>(true);
+  const { calcInfoMap } = useCalculatorsInfo();
 
   const calculatorType = decodeURI(option);
 
@@ -45,7 +42,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
       const quiz = {} as any;
 
       answers.forEach((answer, index) => {
-        quiz[input[index].name] = answer;
+        quiz[input[index].colIndex] = answer;
       });
 
       const response = await fetch(
@@ -58,9 +55,9 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
           body: JSON.stringify({
             type: option,
             quiz,
-            fields: input[level]?.name
-              ? [input[level]?.name]
-              : output.map((item) => item.name),
+            fields: level < input.length
+              ? [input[level]?.colIndex]
+              : output.map((item) => item.colIndex),
           }),
         }
       );
@@ -135,8 +132,8 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
             return (
               <Quiz
                 key={`quiz-${index}`}
-                calculatorName={getCalculatorName(calculatorType)}
-                question={quiz.text}
+                calculatorName={calcInfoMap[calculatorType].label}
+                question={quiz}
                 answers={answerOptions[index]}
                 currentAnswer={answers[index]}
                 disabled={showLoader}
@@ -159,7 +156,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
           />
         ) : (
           <FeedbackDialogWrapper
-            calculatorName={getCalculatorName(calculatorType)}
+            calculatorName={calcInfoMap[calculatorType].label}
             userAnswers={input.map((inputItem, index) => ({
               ...inputItem,
               answer: answers[index],

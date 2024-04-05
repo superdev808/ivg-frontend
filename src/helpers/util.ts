@@ -22,10 +22,3 @@ export const formatTime = (date?: Date | null | string) =>
     minute: "numeric",
     second: "numeric",
   }).format(date ? new Date(date) : new Date());
-
-export const getCalculatorName = (calculatorType: string) => {
-  const selectedCalculator = CALCULATOR_IO.find(
-    (item) => item.type === calculatorType
-  );
-  return selectedCalculator?.label || calculatorType;
-};

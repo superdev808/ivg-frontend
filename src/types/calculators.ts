@@ -84,13 +84,14 @@ export interface TotalQuantities {
 }
 
 export interface InputOutputValues {
-  name: string;
-  text: string;
-  calculator: string;
-  outputFrom?: string;
-  isCommon?: boolean;
-  displayCalculatorName?: string;
-  description?: string;
+  colIndex: string;
+  colName: string;
+  colText: string;
+  groupId: string;
+  groupName: string;
+  groupText: string;
+  isCommon: boolean;
+  calculatorType: string;
 }
 
 export interface AutoPopulateData {
@@ -167,4 +168,14 @@ export interface AnnouncementItem {
 export interface Summary extends ItemInsights {
   description: string;
   brand: string;
+}
+
+export interface CalculatorInfoMap {
+  [key: string]: {
+    type: string;
+    label: string;
+    description?: string;
+    input: InputOutputValues[];
+    output: InputOutputValues[];
+  };
 }

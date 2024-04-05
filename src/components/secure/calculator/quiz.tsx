@@ -15,12 +15,13 @@ import { BRAND_IMAGES } from "@/constants/calculators";
 import { getCalculatorQuestionDescription } from "@/helpers/calculators";
 
 import styles from "./quiz.module.scss";
+import { InputOutputValues } from "@/types/calculators";
 
 const cx = classNames.bind(styles);
 
 interface QuizProps {
   calculatorName?: string;
-  question: string;
+  question: InputOutputValues;
   currentAnswer: string;
   answers: string[];
   disabled?: boolean;
@@ -115,11 +116,6 @@ const Quiz: React.FC<QuizProps> = ({
     }
   }, [answers]);
 
-  const questionDescription = getCalculatorQuestionDescription(
-    calculatorName,
-    question
-  );
-
   return (
     <>
       <div className="col-12 flex flex-column justify-content-center align-items-center relative">
@@ -133,8 +129,8 @@ const Quiz: React.FC<QuizProps> = ({
         )}
 
         {calculatorName && <h1 className="underline">{calculatorName}</h1>}
-        <h1>{question.endsWith("?") ? question : `Select ${question}`}</h1>
-        {questionDescription && <h3 className="mt-0">{questionDescription}</h3>}
+        <h1>{question.colName.endsWith("?") ? question.colName : `Select ${question.colName}`}</h1>
+        {question.colText && <h3 className="mt-0">{question.colText}</h3>}
       </div>
 
       <div className="col-12 sm:col-8 sm:col-offset-2 xl:col-4 xl:col-offset-4 md:mb-6">
