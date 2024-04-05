@@ -278,7 +278,7 @@
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: var(--primary-color);
+  border-color: var(--light-green);
 }
 .p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-input-token {
   padding: 0.375rem 0;
@@ -298,7 +298,7 @@
   padding: 0.375rem 0.75rem;
   margin-right: 0.5rem;
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
   border-radius: 4px;
 }
 .p-autocomplete
@@ -336,7 +336,7 @@
   background: rgba(0, 0, 0, 0.04);
 }
 .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item-group {
@@ -417,7 +417,7 @@
   .p-datepicker-header
   .p-datepicker-title
   .p-datepicker-month:enabled:hover {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
   margin-right: 0.5rem;
@@ -444,7 +444,7 @@
   border: 1px solid transparent;
 }
 .p-datepicker table td > span.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 .p-datepicker table td > span:focus {
@@ -458,7 +458,7 @@
   border-color: rgb(0, 0, 0);
 }
 .p-datepicker table td.p-datepicker-today > span.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 .p-datepicker .p-datepicker-buttonbar {
@@ -512,7 +512,7 @@
   border-radius: 4px;
 }
 .p-datepicker .p-monthpicker .p-monthpicker-month.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 .p-datepicker .p-yearpicker {
@@ -524,7 +524,7 @@
   border-radius: 4px;
 }
 .p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 .p-datepicker.p-datepicker-multiple-month .p-datepicker-group {
@@ -600,7 +600,7 @@
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: var(--primary-color);
+  border-color: var(--light-green);
 }
 .p-cascadeselect .p-cascadeselect-label {
   background: transparent;
@@ -661,7 +661,7 @@
 .p-cascadeselect-panel
   .p-cascadeselect-items
   .p-cascadeselect-item.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 .p-cascadeselect-panel
@@ -733,7 +733,7 @@
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: var(--primary-color);
+  border-color: var(--light-green);
 }
 .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
   border-color: var(--dark-green);
@@ -748,7 +748,7 @@
   background-color: #f5f5f5;
 }
 .p-input-filled .p-checkbox .p-checkbox-box.p-highlight {
-  background: var(--primary-color);
+  background: var(--light-green);
 }
 .p-input-filled .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
   background-color: #ececec;
@@ -756,7 +756,7 @@
 .p-input-filled
   .p-checkbox:not(.p-checkbox-disabled)
   .p-checkbox-box.p-highlight:hover {
-  background: var(--primary-color);
+  background: var(--light-green);
 }
 
 .p-chips .p-chips-multiple-container {
@@ -769,7 +769,7 @@
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: var(--primary-color);
+  border-color: var(--light-green);
 }
 .p-chips .p-chips-multiple-container .p-chips-token {
   padding: 0.375rem 0.75rem;
@@ -817,7 +817,7 @@
 
 .p-dropdown {
   background: var(--beige);
-  border: 1px solid rgba(0, 0, 0, 0.38);
+  border: 1px solid var(--light-green);
   transition: background-color 0.2s, border-color 0.2s, color 0.2s,
     box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
   border-radius: 4px;
@@ -911,7 +911,7 @@
   border-radius: 0;
 }
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 .p-dropdown-panel
@@ -1064,17 +1064,17 @@
 .p-editor-container .ql-snow.ql-toolbar button.ql-active,
 .p-editor-container .ql-snow.ql-toolbar .ql-picker-label.ql-active,
 .p-editor-container .ql-snow.ql-toolbar .ql-picker-item.ql-selected {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-editor-container .ql-snow.ql-toolbar button.ql-active .ql-stroke,
 .p-editor-container .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
 .p-editor-container .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke {
-  stroke: var(--primary-color);
+  stroke: var(--light-green);
 }
 .p-editor-container .ql-snow.ql-toolbar button.ql-active .ql-fill,
 .p-editor-container .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
 .p-editor-container .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill {
-  fill: var(--primary-color);
+  fill: var(--light-green);
 }
 .p-editor-container .ql-snow.ql-toolbar button.ql-active .ql-picker-label,
 .p-editor-container
@@ -1085,7 +1085,7 @@
   .ql-snow.ql-toolbar
   .ql-picker-item.ql-selected
   .ql-picker-label {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 
 .p-inputgroup-addon {
@@ -1196,7 +1196,7 @@
   background: rgba(63, 81, 181, 0.5);
 }
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:before {
-  background: var(--primary-color);
+  background: var(--light-green);
 }
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover
   .p-inputswitch-slider {
@@ -1346,7 +1346,7 @@
   border-radius: 0;
 }
 .p-listbox .p-listbox-list .p-listbox-item.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 .p-listbox .p-listbox-list .p-listbox-item:focus {
@@ -1400,7 +1400,7 @@
   background: rgba(0, 0, 0, 0.04);
 }
 .p-mention-panel .p-mention-items .p-mention-item.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 
@@ -1418,7 +1418,7 @@
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: var(--primary-color);
+  border-color: var(--light-green);
 }
 .p-multiselect.p-multiselect-clearable .p-multiselect-label {
   padding-right: 1.75rem;
@@ -1535,7 +1535,7 @@
   border-radius: 0;
 }
 .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 .p-multiselect-panel
@@ -1623,7 +1623,7 @@
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: var(--primary-color);
+  border-color: var(--light-green);
 }
 .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
   width: 10px;
@@ -1666,7 +1666,7 @@
   gap: 0.5rem;
 }
 .p-rating .p-rating-item .p-rating-icon {
-  color: var(--primary-color);
+  color: var(--light-green);
   transition: background-color 0.2s, border-color 0.2s, color 0.2s,
     box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
   font-size: 1rem;
@@ -1684,12 +1684,12 @@
   box-shadow: none;
 }
 .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-rating:not(.p-disabled):not(.p-readonly)
   .p-rating-item:hover
   .p-rating-icon {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-rating:not(.p-disabled):not(.p-readonly)
   .p-rating-item:hover
@@ -1700,7 +1700,7 @@
 .p-selectbutton .p-button {
   background: var(--beige);
   border: 1px solid var(--light-green);
-  color: var(--dark-green);
+  color: var(--light-green);
   transition: background-color 0.2s, border-color 0.2s, color 0.2s,
     box-shadow 0.2s, background-size 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
 }
@@ -1765,7 +1765,7 @@
 .p-slider .p-slider-handle {
   height: 20px;
   width: 20px;
-  background: var(--primary-color);
+  background: var(--light-green);
   border: 0 none;
   border-radius: 50%;
   transition: background-color 0.2s, border-color 0.2s, color 0.2s,
@@ -1777,10 +1777,10 @@
   box-shadow: none;
 }
 .p-slider .p-slider-range {
-  background: var(--primary-color);
+  background: var(--light-green);
 }
 .p-slider:not(.p-disabled) .p-slider-handle:hover {
-  background: var(--primary-color);
+  background: var(--light-green);
   border-color: 0 none;
 }
 
@@ -1798,7 +1798,7 @@
   outline: 0 none;
   outline-offset: 0;
   box-shadow: none;
-  border-color: var(--primary-color);
+  border-color: var(--light-green);
 }
 .p-treeselect .p-treeselect-label {
   padding: 0.75rem 0.75rem;
@@ -1987,13 +1987,13 @@
 .p-button.p-button-outlined:enabled:hover,
 .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):hover {
   background: rgba(63, 81, 181, 0.04);
-  color: var(--primary-color);
+  color: var(--light-green);
   border: 0 none;
 }
 .p-button.p-button-outlined:enabled:active,
 .p-button.p-button-outlined:not(button):not(a):not(.p-disabled):active {
   background: rgba(63, 81, 181, 0.16);
-  color: var(--primary-color);
+  color: var(--light-green);
   border: 0 none;
 }
 .p-button.p-button-outlined.p-button-plain {
@@ -2073,7 +2073,7 @@
   min-width: 1rem;
   height: 1rem;
   line-height: 1rem;
-  color: var(--primary-color);
+  color: var(--light-green);
   background-color: var(--beige);
 }
 .p-button.p-button-raised {
@@ -2977,14 +2977,14 @@
 }
 
 .p-button.p-button-link {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: transparent;
   border: transparent;
 }
 .p-button.p-button-link:enabled:hover,
 .p-button.p-button-link:not(button):not(a):not(.p-disabled):hover {
   background: transparent;
-  color: var(--primary-color);
+  color: var(--light-green);
   border-color: transparent;
 }
 .p-button.p-button-link:enabled:hover .p-button-label,
@@ -3001,7 +3001,7 @@
 .p-button.p-button-link:enabled:active,
 .p-button.p-button-link:not(button):not(a):not(.p-disabled):active {
   background: transparent;
-  color: var(--primary-color);
+  color: var(--light-green);
   border-color: transparent;
 }
 
@@ -3010,20 +3010,20 @@
 }
 .p-splitbutton.p-button-outlined > .p-button {
   background-color: transparent;
-  color: var(--primary-color);
+  color: var(--light-green);
   border: 0 none;
 }
 .p-splitbutton.p-button-outlined > .p-button:enabled:hover,
 .p-splitbutton.p-button-outlined
   > .p-button:not(button):not(a):not(.p-disabled):hover {
   background: rgba(63, 81, 181, 0.04);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-splitbutton.p-button-outlined > .p-button:enabled:active,
 .p-splitbutton.p-button-outlined
   > .p-button:not(button):not(a):not(.p-disabled):active {
   background: rgba(63, 81, 181, 0.16);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-splitbutton.p-button-outlined.p-button-plain > .p-button {
   color: rgba(0, 0, 0, 0.6);
@@ -3043,21 +3043,21 @@
 }
 .p-splitbutton.p-button-text > .p-button {
   background-color: transparent;
-  color: var(--primary-color);
+  color: var(--light-green);
   border-color: transparent;
 }
 .p-splitbutton.p-button-text > .p-button:enabled:hover,
 .p-splitbutton.p-button-text
   > .p-button:not(button):not(a):not(.p-disabled):hover {
   background: rgba(63, 81, 181, 0.04);
-  color: var(--primary-color);
+  color: var(--light-green);
   border-color: transparent;
 }
 .p-splitbutton.p-button-text > .p-button:enabled:active,
 .p-splitbutton.p-button-text
   > .p-button:not(button):not(a):not(.p-disabled):active {
   background: rgba(63, 81, 181, 0.16);
-  color: var(--primary-color);
+  color: var(--light-green);
   border-color: transparent;
 }
 .p-splitbutton.p-button-text.p-button-plain > .p-button {
@@ -3436,7 +3436,7 @@
 }
 .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 
 .p-datatable .p-paginator-top {
@@ -3450,7 +3450,7 @@
 .p-datatable .p-datatable-header {
   background: var(--beige);
   color: var(--dark-green);
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   padding: 0.75rem 0.75rem;
   font-weight: 500;
@@ -3458,7 +3458,7 @@
 .p-datatable .p-datatable-footer {
   background: var(--beige);
   color: var(--dark-green);
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   padding: 0.75rem 0.75rem;
   font-weight: 500;
@@ -3466,24 +3466,24 @@
 .p-datatable .p-datatable-thead > tr > th {
   text-align: left;
   padding: 0.75rem 0.75rem;
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   font-weight: 500;
-  color: var(--dark-green);
+  color: var(--light-green);
   background: var(--beige);
   transition: none;
 }
 .p-datatable .p-datatable-tfoot > tr > td {
   text-align: left;
   padding: 0.75rem 0.75rem;
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   font-weight: 500;
-  color: var(--dark-green);
+  color: var(--light-green);
   background: var(--beige);
 }
 .p-datatable .p-sortable-column .p-sortable-column-icon {
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--light-green);
   margin-left: 0.5rem;
 }
 .p-datatable .p-sortable-column .p-sortable-column-badge {
@@ -3491,7 +3491,7 @@
   height: 1.143rem;
   min-width: 1.143rem;
   line-height: 1.143rem;
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
   margin-left: 0.5rem;
 }
@@ -3507,10 +3507,10 @@
 }
 .p-datatable .p-sortable-column.p-highlight {
   background: var(--beige);
-  color: var(--dark-green);
+  color: var(--dark-brown);
 }
 .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
-  color: var(--dark-green);
+  color: var(--dark-brown);
 }
 .p-datatable .p-sortable-column.p-highlight:not(.p-sortable-disabled):hover {
   background: rgba(0, 0, 0, 0.04);
@@ -3527,12 +3527,12 @@
 }
 .p-datatable .p-datatable-tbody > tr {
   background: var(--beige);
-  color: var(--dark-green);
+  color: var(--light-green);
   transition: none;
 }
 .p-datatable .p-datatable-tbody > tr > td {
   text-align: left;
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   padding: 0.75rem 0.75rem;
 }
@@ -3572,11 +3572,11 @@
 }
 .p-datatable .p-datatable-tbody > tr > td.p-highlight {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-datatable .p-datatable-tbody > tr.p-highlight {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-top > td {
   box-shadow: inset 0 2px 0 0 rgba(63, 81, 181, 0.12);
@@ -3617,7 +3617,7 @@
   color: var(--dark-green);
 }
 .p-datatable .p-column-resizer-helper {
-  background: var(--primary-color);
+  background: var(--light-green);
 }
 .p-datatable .p-datatable-scrollable-header,
 .p-datatable .p-datatable-scrollable-footer {
@@ -3740,19 +3740,19 @@
 }
 .p-datatable.p-datatable-striped .p-datatable-tbody > tr.p-row-odd.p-highlight {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-datatable.p-datatable-striped
   .p-datatable-tbody
   > tr.p-row-odd.p-highlight
   .p-row-toggler {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-datatable.p-datatable-striped
   .p-datatable-tbody
   > tr.p-row-odd.p-highlight
   .p-row-toggler:hover {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-datatable.p-datatable-striped
   .p-datatable-tbody
@@ -3806,7 +3806,7 @@
 .p-dataview .p-dataview-header {
   background: var(--beige);
   color: var(--dark-green);
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   padding: 0.75rem 0.75rem;
   font-weight: 500;
@@ -3824,7 +3824,7 @@
 .p-dataview .p-dataview-footer {
   background: var(--beige);
   color: var(--dark-green);
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   padding: 0.75rem 0.75rem;
   font-weight: 500;
@@ -3850,7 +3850,7 @@
 .p-datascroller .p-datascroller-header {
   background: var(--beige);
   color: var(--dark-green);
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   padding: 0.75rem 0.75rem;
   font-weight: 500;
@@ -3868,7 +3868,7 @@
 .p-datascroller .p-datascroller-footer {
   background: var(--beige);
   color: var(--dark-green);
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   padding: 0.75rem 0.75rem;
   font-weight: 500;
@@ -3903,7 +3903,7 @@
 .p-column-filter-menu-button.p-column-filter-menu-button-active,
 .p-column-filter-menu-button.p-column-filter-menu-button-active:hover {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-column-filter-menu-button:focus {
   outline: 0 none;
@@ -3955,7 +3955,7 @@
 .p-column-filter-overlay
   .p-column-filter-row-items
   .p-column-filter-row-item.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 .p-column-filter-overlay
@@ -4034,7 +4034,7 @@
 .fc.fc-unthemed .fc-view-container .fc-event {
   background: rgba(63, 81, 181, 0.12);
   border: 1px solid rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .fc.fc-unthemed .fc-view-container .fc-divider {
   background: var(--beige);
@@ -4042,7 +4042,7 @@
 }
 .fc.fc-unthemed .fc-toolbar .fc-button {
   color: var(--beige);
-  background: var(--primary-color);
+  background: var(--light-green);
   border: 0 none;
   font-size: 1rem;
   transition: background-color 0.2s, border-color 0.2s, color 0.2s,
@@ -4220,7 +4220,7 @@
   border-top: 0 none;
 }
 .fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-block-event {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
   border-color: rgba(63, 81, 181, 0.12);
 }
@@ -4228,7 +4228,7 @@
   .fc-view-harness
   .fc-event.fc-daygrid-block-event
   .fc-event-main {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .fc.fc-theme-standard
   .fc-view-harness
@@ -4246,7 +4246,7 @@
 }
 .fc.fc-theme-standard .fc-toolbar .fc-button {
   color: var(--beige);
-  background: var(--primary-color);
+  background: var(--light-green);
   border: 0 none;
   font-size: 1rem;
   transition: background-color 0.2s, border-color 0.2s, color 0.2s,
@@ -4271,7 +4271,7 @@
 .fc.fc-theme-standard .fc-toolbar .fc-button:disabled {
   opacity: 0.38;
   color: var(--beige);
-  background: var(--primary-color);
+  background: var(--light-green);
   border: 0 none;
 }
 .fc.fc-theme-standard .fc-toolbar .fc-button .fc-icon-chevron-left {
@@ -4363,7 +4363,7 @@
   border-bottom-right-radius: 4px;
 }
 .fc.fc-theme-standard .fc-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 
@@ -4422,7 +4422,7 @@
   box-shadow: none;
 }
 .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 .p-orderlist.p-orderlist-striped
@@ -4445,7 +4445,7 @@
 }
 .p-organizationchart .p-organizationchart-node-content.p-highlight {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-organizationchart
   .p-organizationchart-node-content.p-highlight
@@ -4552,9 +4552,9 @@
   border-radius: 50%;
 }
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-  background: rgba(63, 81, 181, 0.12);
-  border-color: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  background: var(--dark-brown);
+  border-color: var(--dark-brown);
+  color: var(--beige);
 }
 .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
   background: rgba(0, 0, 0, 0.04);
@@ -4617,7 +4617,7 @@
   box-shadow: none;
 }
 .p-picklist .p-picklist-list .p-picklist-item.p-highlight {
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
 }
 
@@ -4687,7 +4687,7 @@
 }
 .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-tree
   .p-tree-container
@@ -4699,7 +4699,7 @@
   .p-treenode
   .p-treenode-content.p-highlight
   .p-treenode-icon {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-tree
   .p-tree-container
@@ -4711,7 +4711,7 @@
   .p-treenode
   .p-treenode-content.p-highlight
   .p-treenode-icon:hover {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-tree
   .p-tree-container
@@ -4763,7 +4763,7 @@
 .p-treetable .p-treetable-header {
   background: var(--beige);
   color: var(--dark-green);
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   padding: 0.75rem 0.75rem;
   font-weight: 500;
@@ -4771,7 +4771,7 @@
 .p-treetable .p-treetable-footer {
   background: var(--beige);
   color: var(--dark-green);
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   padding: 0.75rem 0.75rem;
   font-weight: 500;
@@ -4779,7 +4779,7 @@
 .p-treetable .p-treetable-thead > tr > th {
   text-align: left;
   padding: 0.75rem 0.75rem;
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   font-weight: 500;
   color: var(--dark-green);
@@ -4789,7 +4789,7 @@
 .p-treetable .p-treetable-tfoot > tr > td {
   text-align: left;
   padding: 0.75rem 0.75rem;
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   font-weight: 500;
   color: var(--dark-green);
@@ -4807,7 +4807,7 @@
   height: 1.143rem;
   min-width: 1.143rem;
   line-height: 1.143rem;
-  color: var(--primary-color);
+  color: var(--light-green);
   background: rgba(63, 81, 181, 0.12);
   margin-left: 0.5rem;
 }
@@ -4834,7 +4834,7 @@
 }
 .p-treetable .p-treetable-tbody > tr > td {
   text-align: left;
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--light-green);
   border-width: 0 0 1px 0;
   padding: 0.75rem 0.75rem;
 }
@@ -4877,13 +4877,13 @@
 }
 .p-treetable .p-treetable-tbody > tr.p-highlight {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-treetable .p-treetable-tbody > tr.p-highlight .p-treetable-toggler {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-treetable .p-treetable-tbody > tr.p-highlight .p-treetable-toggler:hover {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-treetable.p-treetable-selectable
   .p-treetable-tbody
@@ -4905,7 +4905,7 @@
   color: var(--dark-green);
 }
 .p-treetable .p-column-resizer-helper {
-  background: var(--primary-color);
+  background: var(--light-green);
 }
 .p-treetable .p-treetable-scrollable-header,
 .p-treetable .p-treetable-scrollable-footer {
@@ -4944,19 +4944,19 @@
 }
 .p-treetable.p-treetable-striped .p-treetable-tbody > tr.p-row-odd.p-highlight {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-treetable.p-treetable-striped
   .p-treetable-tbody
   > tr.p-row-odd.p-highlight
   .p-row-toggler {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-treetable.p-treetable-striped
   .p-treetable-tbody
   > tr.p-row-odd.p-highlight
   .p-row-toggler:hover {
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-treetable.p-treetable-striped
   .p-treetable-tbody
@@ -5502,7 +5502,7 @@
   padding: 0.75rem;
 }
 .p-overlaypanel .p-overlaypanel-close {
-  background: var(--primary-color);
+  background: var(--light-green);
   color: var(--beige);
   width: 2rem;
   height: 2rem;
@@ -6849,7 +6849,7 @@
 }
 .p-steps .p-steps-item.p-highlight .p-steps-number {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-steps .p-steps-item.p-highlight .p-steps-title {
   font-weight: 500;
@@ -6910,7 +6910,7 @@
 .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
   background: var(--beige);
   border-color: rgba(0, 0, 0, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 
 .p-tieredmenu {
@@ -7289,7 +7289,7 @@
 }
 .p-galleria .p-galleria-indicators .p-galleria-indicator.p-highlight button {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-galleria.p-galleria-indicators-bottom .p-galleria-indicator,
 .p-galleria.p-galleria-indicators-top .p-galleria-indicator {
@@ -7319,7 +7319,7 @@
   .p-galleria-indicator.p-highlight
   button {
   background: rgba(63, 81, 181, 0.12);
-  color: var(--primary-color);
+  color: var(--light-green);
 }
 .p-galleria .p-galleria-thumbnail-container {
   background: rgba(0, 0, 0, 0.9);
@@ -7494,7 +7494,7 @@
 }
 
 .p-tag {
-  background: var(--primary-color);
+  background: var(--light-green);
   color: var(--beige);
   font-size: 0.75rem;
   font-weight: 700;
@@ -7551,7 +7551,7 @@
 .p-progressbar .p-progressbar-value {
   border: 0 none;
   margin: 0;
-  background: var(--primary-color);
+  background: var(--light-green);
 }
 .p-progressbar .p-progressbar-label {
   color: var(--beige);
@@ -7571,7 +7571,7 @@
 }
 
 .p-badge {
-  background: var(--primary-color);
+  background: var(--light-green);
   color: var(--beige);
   font-size: 0.75rem;
   font-weight: 700;
@@ -7613,7 +7613,7 @@
 }
 
 .p-tag {
-  background: var(--primary-color);
+  background: var(--light-green);
   color: var(--beige);
   font-size: 0.75rem;
   font-weight: 700;
@@ -7689,7 +7689,7 @@
   .p-autocomplete-multiple-container:not(.p-disabled).p-focus {
   box-shadow: inset 0 0 0 1px var(--primary-color),
     inset 0 0 0 1px var(--primary-color), inset 0 0 0 1px var(--primary-color),
-    inset 0 0 0 1px var(--primary-color);
+    inset 0 0 0 1px var(--light-green);
 }
 
 .p-input-filled
@@ -7780,12 +7780,20 @@
 }
 .p-input-filled .p-autocomplete.p-invalid > .p-inputtext {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-autocomplete.p-invalid > .p-inputtext:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-autocomplete.p-invalid > .p-inputtext:enabled:focus {
@@ -7794,13 +7802,21 @@
 }
 .p-input-filled .p-autocomplete.p-invalid > .p-autocomplete-multiple-container {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled
   .p-autocomplete.p-invalid
   > .p-autocomplete-multiple-container:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled
@@ -7810,18 +7826,24 @@
   .p-autocomplete.p-invalid
   > .p-autocomplete-multiple-container:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-autocomplete.p-invalid > .p-inputtext:enabled:focus {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 .p-autocomplete.p-invalid
   > .p-autocomplete-multiple-container:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-breadcrumb .p-menuitem-link {
@@ -8510,10 +8532,10 @@
   border-color: var(--dark-green);
 }
 .p-calendar-w-btn:not(.p-disabled).p-inputwrapper-focus {
-  border-color: var(--primary-color);
+  border-color: var(--light-green);
   box-shadow: inset 0 0 0 1px var(--primary-color),
     inset 0 0 0 1px var(--primary-color), inset 0 0 0 1px var(--primary-color),
-    inset 0 0 0 1px var(--primary-color);
+    inset 0 0 0 1px var(--light-green);
 }
 
 .p-datepicker .p-datepicker-header {
@@ -8543,8 +8565,9 @@
 }
 
 .p-calendar.p-invalid .p-inputtext:enabled:focus {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 .p-calendar.p-invalid.p-calendar-w-btn {
   border-color: var(--dark-brown);
@@ -8553,8 +8576,9 @@
   box-shadow: none;
 }
 .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled).p-inputwrapper-focus {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-input-filled .p-calendar-w-btn {
@@ -8603,12 +8627,20 @@
 }
 .p-input-filled .p-calendar.p-invalid .p-inputtext {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-calendar.p-invalid .p-inputtext:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-calendar.p-invalid .p-inputtext:enabled:focus {
@@ -8617,18 +8649,30 @@
 }
 .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled).p-focus,
 .p-input-filled
   .p-calendar.p-invalid.p-calendar-w-btn:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-calendar.p-invalid.p-calendar-w-btn .p-inputtext,
@@ -8658,7 +8702,7 @@
 .p-cascadeselect:not(.p-disabled).p-focus {
   box-shadow: inset 0 0 0 1px var(--primary-color),
     inset 0 0 0 1px var(--primary-color), inset 0 0 0 1px var(--primary-color),
-    inset 0 0 0 1px var(--primary-color);
+    inset 0 0 0 1px var(--light-green);
 }
 
 .p-cascadeselect-item-content .p-ink {
@@ -8723,24 +8767,37 @@
 }
 .p-input-filled .p-cascadeselect.p-invalid {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-cascadeselect.p-invalid:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-cascadeselect.p-invalid:not(.p-disabled).p-focus,
 .p-input-filled
   .p-cascadeselect.p-invalid:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-cascadeselect.p-invalid:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-checkbox {
@@ -8814,7 +8871,7 @@
 .p-chips .p-chips-multiple-container:not(.p-disabled).p-focus {
   box-shadow: inset 0 0 0 1px var(--primary-color),
     inset 0 0 0 1px var(--primary-color), inset 0 0 0 1px var(--primary-color),
-    inset 0 0 0 1px var(--primary-color);
+    inset 0 0 0 1px var(--light-green);
 }
 
 .p-input-filled .p-chips-multiple-container {
@@ -8889,13 +8946,21 @@
 }
 .p-input-filled .p-chips.p-invalid .p-chips-multiple-container {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled
   .p-chips.p-invalid
   .p-chips-multiple-container:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled
@@ -8905,13 +8970,18 @@
   .p-chips.p-invalid
   .p-chips-multiple-container:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-chips.p-invalid .p-chips-multiple-container:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-datatable .p-sortable-column {
@@ -8928,10 +8998,10 @@
 }
 
 .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-top > td {
-  box-shadow: inset 0 2px 0 0 var(--primary-color);
+  box-shadow: inset 0 2px 0 0 var(--light-green);
 }
 .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
-  box-shadow: inset 0 -2px 0 0 var(--primary-color);
+  box-shadow: inset 0 -2px 0 0 var(--light-green);
 }
 
 .p-dropdown .p-inputtext,
@@ -8998,23 +9068,36 @@
 }
 .p-input-filled .p-dropdown.p-invalid {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-dropdown.p-invalid:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-dropdown.p-invalid:not(.p-disabled).p-focus,
 .p-input-filled .p-dropdown.p-invalid:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-dropdown.p-invalid:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 
 .fc {
@@ -9127,8 +9210,9 @@
     inset 0 0 0 1px var(--dark-brown);
 }
 .p-inputtext:enabled:focus.p-invalid {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-input-filled .p-inputtext {
@@ -9164,12 +9248,20 @@
 }
 .p-input-filled .p-inputtext.p-invalid.p-component {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-inputtext.p-invalid.p-component:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-inputtext.p-invalid.p-component:enabled:focus {
@@ -9217,18 +9309,27 @@
 }
 
 .p-inputnumber.p-invalid .p-inputtext:enabled:focus {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-input-filled .p-inputnumber.p-invalid .p-inputtext {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-inputnumber.p-invalid .p-inputtext:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-inputnumber.p-invalid .p-inputtext:enabled:focus {
@@ -9345,7 +9446,7 @@
 .p-multiselect:not(.p-disabled).p-focus {
   box-shadow: inset 0 0 0 1px var(--primary-color),
     inset 0 0 0 1px var(--primary-color), inset 0 0 0 1px var(--primary-color),
-    inset 0 0 0 1px var(--primary-color);
+    inset 0 0 0 1px var(--light-green);
 }
 
 .p-multiselect-panel .p-multiselect-items .p-multiselect-item .p-ink {
@@ -9444,23 +9545,36 @@
 }
 .p-input-filled .p-multiselect.p-invalid {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-multiselect.p-invalid:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-multiselect.p-invalid:not(.p-disabled).p-focus,
 .p-input-filled .p-multiselect.p-invalid:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-multiselect.p-invalid:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-overlaypanel .p-overlaypanel-content {
@@ -9481,17 +9595,26 @@
   background: rgba(0, 0, 0, 0.12);
 }
 .p-paginator .p-paginator-element:focus.p-highlight {
-  background: rgba(63, 81, 181, 0.24);
+  background: var(--dark-brown);
+  color: var(--beige);
 }
 
 .p-input-filled .p-password.p-invalid > .p-inputtext {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-password.p-invalid > .p-inputtext:enabled:hover {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-password.p-invalid > .p-inputtext:enabled:focus {
@@ -9500,8 +9623,9 @@
 }
 
 .p-password.p-invalid > .p-inputtext:enabled:focus {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-panel {
@@ -9862,7 +9986,7 @@
   background: rgba(0, 0, 0, 0.12);
 }
 .p-steps .p-steps-item.p-highlight .p-steps-number {
-  background-color: var(--primary-color);
+  background-color: var(--light-green);
   color: var(--beige);
 }
 .p-steps .p-steps-item.p-highlight .p-steps-title {
@@ -9930,7 +10054,7 @@
 .p-treeselect:not(.p-disabled).p-focus {
   box-shadow: inset 0 0 0 1px var(--primary-color),
     inset 0 0 0 1px var(--primary-color), inset 0 0 0 1px var(--primary-color),
-    inset 0 0 0 1px var(--primary-color);
+    inset 0 0 0 1px var(--light-green);
 }
 
 .p-treeselect-item .p-ink {
@@ -10018,23 +10142,36 @@
 }
 .p-input-filled .p-treeselect.p-invalid {
   border-color: transparent;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-treeselect.p-invalid:not(.p-disabled):hover {
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 .p-input-filled .p-treeselect.p-invalid:not(.p-disabled).p-focus,
 .p-input-filled .p-treeselect.p-invalid:not(.p-disabled).p-inputwrapper-focus {
   box-shadow: none;
-  background-image: linear-gradient(to bottom, var(--dark-brown), var(--dark-brown)),
+  background-image: linear-gradient(
+      to bottom,
+      var(--dark-brown),
+      var(--dark-brown)
+    ),
     linear-gradient(to bottom, var(--dark-brown), var(--dark-brown));
 }
 
 .p-treeselect.p-invalid:not(.p-disabled).p-focus {
-  box-shadow: inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
-    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown);
+  box-shadow: inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown), inset 0 0 0 1px var(--dark-brown),
+    inset 0 0 0 1px var(--dark-brown);
 }
 
 .p-treetable .p-sortable-column {
@@ -10071,7 +10208,7 @@
   position: absolute;
   bottom: 0;
   height: 2px;
-  background-color: var(--primary-color);
+  background-color: var(--light-green);
   transition: 500ms cubic-bezier(0.35, 0, 0.25, 1);
 }
 
