@@ -30,7 +30,7 @@ const getProgessValue = (index: number, input: InputOutputValues[]) => {
   return Math.floor((availableIndex / totalQuestionCount) * 100);
 };
 
-interface InputProps {
+interface QuestionnaireProps {
   site: Site;
   input: InputOutputValues[];
   option: string;
@@ -53,7 +53,7 @@ interface InputProps {
   onAllAnswered: (site: Site) => void;
 }
 
-const Questionnaire: React.FC<InputProps> = ({
+const Questionnaire: React.FC<QuestionnaireProps> = ({
   site,
   input,
   option,
@@ -308,7 +308,7 @@ const Questionnaire: React.FC<InputProps> = ({
         />
       )}
 
-      <div className="px-2 grid">
+      <div className="px-4 grid">
         {questions.map((quiz, index) => {
           if (index !== level) {
             return null;

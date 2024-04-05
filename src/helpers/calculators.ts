@@ -754,13 +754,16 @@ export const getQuizByCalculator = (
     (elem) => elem.name
   );
 
-  const filteredQuiz = quiz.filter((quiz) =>
+  const quizWithoutCalculatorName = quiz.map((quiz) => ({
+    ...quiz,
+    question: trim((quiz.question || "").split("[")[0]),
+  }));
+
+  const filteredQuiz = quizWithoutCalculatorName.filter((quiz) =>
     allQuestions.includes(quiz.question)
   );
-  return filteredQuiz.map((quiz) => ({
-    ...quiz,
-    question: (quiz.question || "").split("[")[0],
-  }));
+
+  return filteredQuiz;
 };
 
 export const getCalculatorQuestionDescription = (

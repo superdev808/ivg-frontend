@@ -61,7 +61,7 @@ const GenericComponentSummary: React.FC<GenericComponentSummaryProps> = ({
               <td>{data.description}</td>
               <td>
                 {isValidUrl(link) ? (
-                  <a href={link} target="_blank">
+                  <a href={link} target="_blank" className="text-light-green">
                     {data.itemName}
                   </a>
                 ) : (

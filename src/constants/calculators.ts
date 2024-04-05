@@ -5285,3 +5285,39 @@ export const CALCULATOR_IMAGES: Record<string, string> = {
   Default:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/No+Image+BW.jpg",
 };
+
+export const CALCULATOR_GENERIC_OUTPUT_MAPPING: Record<string, string> = {
+  itemNumber: "Item Number",
+  manufacturer: "Manufacturer",
+  manufacturerRecommendations: "Manufacturer Recommendations",
+  torqueValue: "Torque Value",
+  notes: "Notes",
+};
+
+export const MATERIAL_CALCULATOR_GENERIC_OUTPUT_MAPPING: Record<
+  string,
+  string
+> = {
+  secondRecommendedSingleUnitAbutmentMaterial:
+    "Second Recommended Single Unit Abutment Material",
+  secondRecommendedRestorationDesign: "Second Recommended Restoration Design",
+  secondRecommendedImplantBridgeMaterial:
+    "Second Recommended Implant Bridge Material",
+  secondAbutmentMaterialChoice: "Second Abutment Material Choice",
+  secondRestorationDesignChoice: "Second Restoration Design Choice",
+  secondCrownMaterialChoice: "Second Crown Material Choice",
+  secondMaterialChoice: "Second Material Choice",
+  thirdMaterialChoice: "Third Material Choice",
+};
+
+export const MATERIAL_CALCULATOR_POPUP_OUTPUT_MAPPING: Record<string, string> =
+  {
+    recommendedSingleUnitAbutmentMaterial:
+      "Recommended Single Unit Abutment Material",
+    recommendedMUAMaterial: "Recommended Multi-Unit Abutment (MUA) Material",
+    recommendedRestorationDesign: "Recommended Restoration Design",
+    recommendedImplantBridgeMaterial: "Recommended Implant Bridge Material",
+    recommendedAbutmentMaterial: "Recommended Abutment Material",
+    recommendedCrownMaterial: "Recommended Crown Material",
+    recommendedBridgeMaterial: "Recommended Bridge Material",
+  };

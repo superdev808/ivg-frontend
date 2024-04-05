@@ -1,8 +1,10 @@
 import classNames from "classnames/bind";
+import keys from "lodash/keys";
 import Link from "next/link";
 import { confirmPopup } from "primereact/confirmpopup";
 import React from "react";
 
+import { MATERIAL_CALCULATOR_POPUP_OUTPUT_MAPPING } from "@/constants/calculators";
 import { ItemInsights } from "@/types/calculators";
 
 import styles from "./style.module.scss";
@@ -50,52 +52,19 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ item }) => {
           className="pi pi-question-circle text-light-green cursor-pointer"
           onClick={handleOpenPopup}
         />
-        {item.recommendedSingleUnitAbutmentMaterial && (
-          <div>
-            <b>Recommended Single Unit Abutment Material:</b>{" "}
-            {item.recommendedSingleUnitAbutmentMaterial}
-          </div>
-        )}
-
-        {item.recommendedMUAMaterial && (
-          <div>
-            <b>Recommended Multi-Unit Abutment (MUA) Material:</b>{" "}
-            {item.recommendedMUAMaterial}
-          </div>
-        )}
-
-        {item.recommendedRestorationDesign && (
-          <div>
-            <b>Recommended Restoration Design:</b>{" "}
-            {item.recommendedRestorationDesign}
-          </div>
-        )}
-
-        {item.recommendedImplantBridgeMaterial && (
-          <div>
-            <b>Recommended Implant Bridge Material:</b>{" "}
-            {item.recommendedImplantBridgeMaterial}
-          </div>
-        )}
-
-        {item.recommendedAbutmentMaterial && (
-          <div>
-            <b>Recommended Abutment Material:</b>{" "}
-            {item.recommendedAbutmentMaterial}
-          </div>
-        )}
-
-        {item.recommendedCrownMaterial && (
-          <div>
-            <b>Recommended Crown Material:</b> {item.recommendedCrownMaterial}
-          </div>
-        )}
-
-        {item.recommendedBridgeMaterial && (
-          <div>
-            <b>Recommended Bridge Material:</b> {item.recommendedBridgeMaterial}
-          </div>
-        )}
+        {keys(MATERIAL_CALCULATOR_POPUP_OUTPUT_MAPPING).map((key) => {
+          const value = item[key as keyof ItemInsights];
+          return (
+            <React.Fragment key={key}>
+              {value && (
+                <div>
+                  <b>{MATERIAL_CALCULATOR_POPUP_OUTPUT_MAPPING[key]}:</b>{" "}
+                  {value}
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
       </div>
     </>
   );
