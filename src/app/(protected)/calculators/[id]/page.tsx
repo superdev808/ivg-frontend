@@ -1,14 +1,11 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import CalculatorContainer from "@/components/secure/calculator";
 import AllOnXCalculator from "@/components/secure/calculator/AllOnX";
-import FeedbackDialog from "@/components/secure/calculator/Feedback/FeedbackDialog";
-import { CALCULATOR_MAPPINGS } from "@/constants/calculators";
-import { event as gaEvent } from "@/lib/gtag";
-import { calculatorIO as tabItems } from "@/helpers/util";
+import { CALCULATOR_IO, CALCULATOR_MAPPINGS } from "@/constants/calculators";
 
 export default function CalculatorPage() {
   // const router = useRouter();
@@ -16,7 +13,7 @@ export default function CalculatorPage() {
   const tabId = decodeURIComponent(searchParams.id as string);
 
   const selectedType = useMemo(() => {
-    return tabItems.find((item) => item.type === tabId);
+    return CALCULATOR_IO.find((item) => item.type === tabId);
   }, [tabId]);
 
   const componentMapping: { [key: string]: JSX.Element } = {

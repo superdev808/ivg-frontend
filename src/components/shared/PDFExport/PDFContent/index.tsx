@@ -127,6 +127,7 @@ const PDFContent: React.FC<PDFContentProps> = ({
 
       <div className="px-4">
         <ComponentSummary
+          calculatorName={calculatorName}
           summary={componentSummary}
           totalQuantities={totalQuantities}
         />

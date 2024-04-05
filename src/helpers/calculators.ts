@@ -7,12 +7,13 @@ import union from "lodash/union";
 import uniqBy from "lodash/uniqBy";
 
 import {
-  CALCULATORS,
   CALCULATOR_NAME_COLLECTION_MAPPINGS,
+  CALCULATOR_COLLECTIONS,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
-  QUANTITY_MULTIPLES_LIST,
+  MATERIAL_CALCULATOR_NAMES,
   MUA_OPTIONS,
   PROCEDURE_INPUTS_AND_RESPONSE,
+  QUANTITY_MULTIPLES_LIST,
 } from "@/constants/calculators";
 import { getCalculatorName } from "@/helpers/util";
 import {
@@ -102,7 +103,7 @@ export const getProcedureCollections = (
         break;
     }
   } else {
-    collections = Object.keys(CALCULATORS);
+    collections = Object.keys(CALCULATOR_COLLECTIONS);
   }
 
   return collections.sort();
@@ -180,7 +181,7 @@ export const getProcedureInputsAndResponse = (
 
   const customResults: InputAndResponse = prepareInputsAndResponse(
     selectedCollections,
-    CALCULATORS
+    CALCULATOR_COLLECTIONS
   );
 
   return customResults;
@@ -202,6 +203,16 @@ export const getComponentSummary = (
     const componentDetail = cloneDeep(sitesData[siteName].componentDetails);
 
     responseOrder.forEach((calculatorName) => {
+      if (MATERIAL_CALCULATOR_NAMES.includes(calculatorName)) {
+        componentDetail[
+          CALCULATOR_NAME_COLLECTION_MAPPINGS[calculatorName]
+        ]?.forEach((response) => {
+          items.push(response);
+        });
+
+        return;
+      }
+
       componentDetail[
         CALCULATOR_NAME_COLLECTION_MAPPINGS[calculatorName]
       ]?.forEach((response) => {
@@ -739,17 +750,20 @@ export const getQuizByCalculator = (
   quiz: InputDetail[],
   calculatorName: string
 ) => {
-  const allQuestions = (CALCULATORS[calculatorName] || []).map(
+  const allQuestions = (CALCULATOR_COLLECTIONS[calculatorName] || []).map(
     (elem) => elem.name
   );
 
-  const filteredQuiz = quiz.filter((quiz) =>
+  const quizWithoutCalculatorName = quiz.map((quiz) => ({
+    ...quiz,
+    question: trim((quiz.question || "").split("[")[0]),
+  }));
+
+  const filteredQuiz = quizWithoutCalculatorName.filter((quiz) =>
     allQuestions.includes(quiz.question)
   );
-  return filteredQuiz.map((quiz) => ({
-    ...quiz,
-    question: (quiz.question || "").split("[")[0],
-  }));
+
+  return filteredQuiz;
 };
 
 export const getCalculatorQuestionDescription = (
@@ -761,7 +775,7 @@ export const getCalculatorQuestionDescription = (
   }
 
   return (
-    CALCULATORS[calculatorName]?.find(
+    CALCULATOR_COLLECTIONS[calculatorName]?.find(
       (question) => question.name === questionName
     )?.description || ""
   );

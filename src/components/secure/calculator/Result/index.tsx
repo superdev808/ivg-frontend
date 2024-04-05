@@ -11,8 +11,9 @@ import { useRef, useState } from "react";
 import PatientInfo from "@/components/shared/PatientInfo";
 import PDFContent from "@/components/shared/PDFExport/PDFContent";
 import SaveDialog from "@/components/shared/SaveDialog";
+import { CALCULATOR_IMAGES } from "@/constants/calculators";
 import { getQuizByCalculator, prepareExportProps } from "@/helpers/calculators";
-import { getCalculatorName, productImages } from "@/helpers/util";
+import { getCalculatorName } from "@/helpers/util";
 import { event as gaEvent } from "@/lib/gtag";
 import {
   useGetUserInfoQuery,
@@ -67,7 +68,8 @@ const Result: React.FC<ResultProps> = ({
   const calculatorName = getCalculatorName(calculatorType);
   const filename = patientInfo?.filename || `${calculatorName}-Summary`;
 
-  const image = productImages[calculatorType] || productImages["Default"];
+  const image =
+    CALCULATOR_IMAGES[calculatorType] || CALCULATOR_IMAGES["Default"];
 
   const isSaved = Boolean(id);
 

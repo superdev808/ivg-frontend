@@ -24,9 +24,7 @@ const AdminMenu: React.FC<AdminMenuProps> = ({
   onSelect,
 }) => (
   <div>
-    <div className="text-2xl font-semibold mb-5 text-dark-green">
-      Administrator Settings
-    </div>
+    <div className="text-2xl font-semibold mb-5">Administrator Settings</div>
     <div className="flex flex-column gap-4">
       {menuItems.map((item) => (
         <div

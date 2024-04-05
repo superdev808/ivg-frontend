@@ -423,9 +423,7 @@ const AdminUserManagement: React.FC = () => {
   return (
     <>
       <div className="mb-3">
-        <span className="text-2xl font-semibold text-dark-green">
-          User Management
-        </span>
+        <span className="text-2xl font-semibold">User Management</span>
       </div>
 
       <div className="border-1 border-light-green border-round-2xl overflow-hidden">

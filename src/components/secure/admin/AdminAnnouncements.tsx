@@ -17,7 +17,7 @@ import {
   useCreateAnnouncementMutation,
   useDeleteAnnouncementMutation,
 } from "@/redux/hooks/apiHooks";
-import { ANNOUNCEMENT_ITEM } from "@/types/calculators";
+import { AnnouncementItem } from "@/types/calculators";
 
 const AdminAnnouncementsManagement: React.FC = () => {
   const toast = useRef(null);
@@ -92,7 +92,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
     (menuPanel.current as OverlayPanel).toggle(e);
   };
 
-  const onDeleteAnnouncement = async (announcementItem: ANNOUNCEMENT_ITEM) => {
+  const onDeleteAnnouncement = async (announcementItem: AnnouncementItem) => {
     confirmDialog({
       message: "Are you sure you want to delete?",
       header: "Confirmation",
@@ -137,7 +137,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
 
   const menuPanel = useRef<OverlayPanel>(null);
   const [selectedAnnouncement, setSelectedAnnouncement] =
-    useState<ANNOUNCEMENT_ITEM | null>(null);
+    useState<AnnouncementItem | null>(null);
 
   const [filters, setFilters] = useState<DataTableFilterMeta>({
     content: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -183,7 +183,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
     </div>
   );
 
-  const actionsBodyTemplate = (row: ANNOUNCEMENT_ITEM) => (
+  const actionsBodyTemplate = (row: AnnouncementItem) => (
     <>
       <Button
         icon="pi pi-ellipsis-v"
@@ -213,7 +213,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
         <p
           className="cursor-pointer hover:text-gray-600"
           onClick={() => {
-            onDeleteAnnouncement(selectedAnnouncement as ANNOUNCEMENT_ITEM);
+            onDeleteAnnouncement(selectedAnnouncement as AnnouncementItem);
           }}
         >
           Delete
@@ -226,7 +226,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
     {
       field: "content",
       header: "Content",
-      body: (row: ANNOUNCEMENT_ITEM) => (
+      body: (row: AnnouncementItem) => (
         <div className="h-8rem w-full overflow-y-auto inline-block flex align-items-center">
           <span>{parse(row.content)}</span>
         </div>
@@ -237,7 +237,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
     {
       field: "published_at",
       header: "Published at",
-      body: (row: ANNOUNCEMENT_ITEM) => (
+      body: (row: AnnouncementItem) => (
         <span>
           {row.published_at.toLocaleDateString("en-US", {
             year: "numeric",
@@ -252,7 +252,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
     },
     {
       field: "actions",
-      body: (row: ANNOUNCEMENT_ITEM) => actionsBodyTemplate(row),
+      body: (row: AnnouncementItem) => actionsBodyTemplate(row),
       sortable: false,
     },
   ];

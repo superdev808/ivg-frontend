@@ -152,7 +152,7 @@ export interface MultiSavedResult {
   type: "all-on-x" | "combined";
 }
 
-export interface CALCULATOR_GROUP_ITEM {
+export interface CalculatorGroupItem {
   label: string;
   description: string;
   subItems: Array<{
@@ -162,8 +162,13 @@ export interface CALCULATOR_GROUP_ITEM {
   }>;
 }
 
-export interface ANNOUNCEMENT_ITEM {
+export interface AnnouncementItem {
   _id: string;
   content: string;
   published_at: Date;
+}
+
+export interface Summary extends ItemInsights {
+  description: string;
+  brand: string;
 }

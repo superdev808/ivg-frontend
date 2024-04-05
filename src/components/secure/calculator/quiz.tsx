@@ -11,8 +11,8 @@ import { Image } from "primereact/image";
 import React, { useEffect, useState, useMemo } from "react";
 
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
+import { BRAND_IMAGES } from "@/constants/calculators";
 import { getCalculatorQuestionDescription } from "@/helpers/calculators";
-import { calculatorImages } from "@/helpers/util";
 
 import styles from "./quiz.module.scss";
 
@@ -71,7 +71,7 @@ const Quiz: React.FC<QuizProps> = ({
   }, [filteredAnswers]);
 
   const dropdownOptionTemplate = (option: string) => {
-    const image = calculatorImages[String(option).toLowerCase()];
+    const image = BRAND_IMAGES[String(option).toLowerCase()];
 
     return (
       <div className="flex align-items-center justify-content-center">
@@ -158,7 +158,7 @@ const Quiz: React.FC<QuizProps> = ({
 
       <div className="flex align-items-start justify-content-around flex-wrap w-12">
         {options.map((answer, index) => {
-          const image = calculatorImages[`${answer}`.toLowerCase()];
+          const image = BRAND_IMAGES[`${answer}`.toLowerCase()];
 
           return (
             <div
