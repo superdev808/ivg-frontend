@@ -7,12 +7,13 @@ import union from "lodash/union";
 import uniqBy from "lodash/uniqBy";
 
 import {
-  CALCULATORS,
   CALCULATOR_NAME_COLLECTION_MAPPINGS,
+  CALCULATORS,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
-  QUANTITY_MULTIPLES_LIST,
+  MATERIAL_CALCULATORS,
   MUA_OPTIONS,
   PROCEDURE_INPUTS_AND_RESPONSE,
+  QUANTITY_MULTIPLES_LIST,
 } from "@/constants/calculators";
 import { getCalculatorName } from "@/helpers/util";
 import {
@@ -202,6 +203,16 @@ export const getComponentSummary = (
     const componentDetail = cloneDeep(sitesData[siteName].componentDetails);
 
     responseOrder.forEach((calculatorName) => {
+      if (MATERIAL_CALCULATORS.includes(calculatorName)) {
+        componentDetail[
+          CALCULATOR_NAME_COLLECTION_MAPPINGS[calculatorName]
+        ]?.forEach((response) => {
+          items.push(response);
+        });
+
+        return;
+      }
+
       componentDetail[
         CALCULATOR_NAME_COLLECTION_MAPPINGS[calculatorName]
       ]?.forEach((response) => {

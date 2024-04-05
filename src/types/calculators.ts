@@ -167,3 +167,8 @@ export interface ANNOUNCEMENT_ITEM {
   content: string;
   published_at: Date;
 }
+
+export interface Summary extends ItemInsights {
+  description: string;
+  brand: string;
+}

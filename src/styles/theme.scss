@@ -1242,7 +1242,7 @@
 
 .p-float-label > label {
   left: 0.75rem;
-  color: var(--dark-green);
+  color: var(--light-green);
   transition-duration: 0.2s;
 }
 
@@ -6185,7 +6185,6 @@
   color: var(--light-green);
 }
 .p-menu .p-menuitem-link .p-menuitem-icon {
-  color: rgba(0, 0, 0, 0.6);
   margin-right: 0.5rem;
 }
 .p-menu .p-menuitem-link .p-submenu-icon {
@@ -6198,7 +6197,7 @@
   color: var(--dark-green);
 }
 .p-menu .p-menuitem-link:not(.p-disabled):hover .p-menuitem-icon {
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--dark-green);
 }
 .p-menu .p-menuitem-link:not(.p-disabled):hover .p-submenu-icon {
   color: rgba(0, 0, 0, 0.6);

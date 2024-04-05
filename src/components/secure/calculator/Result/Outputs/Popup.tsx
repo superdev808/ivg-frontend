@@ -9,11 +9,11 @@ import styles from "./style.module.scss";
 
 const cx = classNames.bind(styles);
 
-interface MaterialOutputProps {
+interface PopupOutputProps {
   item: ItemInsights;
 }
 
-const MaterialOutput: React.FC<MaterialOutputProps> = ({ item }) => {
+const PopupOutput: React.FC<PopupOutputProps> = ({ item }) => {
   const handleOpenPopup = (event: any) => {
     confirmPopup({
       target: event.currentTarget,
@@ -101,4 +101,4 @@ const MaterialOutput: React.FC<MaterialOutputProps> = ({ item }) => {
   );
 };
 
-export default MaterialOutput;
+export default PopupOutput;

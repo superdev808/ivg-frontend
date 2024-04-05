@@ -2007,3 +2007,28 @@ export const CALCULATOR_GROUP_ITEMS: CALCULATOR_GROUP_ITEM[] = [
     ],
   },
 ];
+
+export const CALCS_WITHOUT_PURCHASE = [
+  "Implant Torque Guide",
+  "Implant-Borne Bridge",
+  "Implant-Borne Crown",
+  "Tooth-Borne Bridge",
+  "Tooth-Borne Crown",
+];
+
+export const MATERIAL_CALCULATORS = [
+  "Implant-Borne Bridge",
+  "Implant-Borne Crown",
+  "Tooth-Borne Bridge",
+  "Tooth-Borne Crown",
+];
+
+export const MATERIAL_CALCULATOR_DATA_KEYS = [
+  "recommendedSingleUnitAbutmentMaterial",
+  "recommendedMUAMaterial",
+  "recommendedRestorationDesign",
+  "recommendedImplantBridgeMaterial",
+  "recommendedAbutmentMaterial",
+  "recommendedCrownMaterial",
+  "recommendedBridgeMaterial",
+];

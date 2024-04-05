@@ -45,8 +45,8 @@ const InputSummary: React.FC<InputSummaryProps> = ({
           </thead>
 
           <tbody>
-            {inputSummary.map(({ site, inputDetails }) => (
-              <tr key={site}>
+            {inputSummary.map(({ site, inputDetails }, idx) => (
+              <tr key={`${site}-${idx}`}>
                 {!hideSite && (
                   <td>{(site || "").replace("Site", "").trim()}</td>
                 )}
