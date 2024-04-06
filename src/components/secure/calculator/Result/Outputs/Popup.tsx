@@ -27,7 +27,7 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ data }) => {
       },
       footer: <></>,
       message: (
-        <div className="flex flex-column align-items-center gap-4 text-center text-beige -ml-3">
+        <div className="flex flex-column align-items-center gap-2 text-center text-beige -ml-3">
           {
             Object.entries(data).map(([label, text]) => (
               <>
