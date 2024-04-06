@@ -2,22 +2,18 @@ import cloneDeep from "lodash/cloneDeep";
 import findIndex from "lodash/findIndex";
 import find from "lodash/find";
 import get from "lodash/get";
-import trim from "lodash/trim";
 import union from "lodash/union";
 import uniqBy from "lodash/uniqBy";
 
 import {
-  CALCULATOR_NAME_COLLECTION_MAPPINGS,
-  CALCULATOR_COLLECTIONS,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
-  MATERIAL_CALCULATOR_NAMES,
+  MATERIAL_CALCULATOR_TYPES,
   MUA_OPTIONS,
   PROCEDURE_INPUTS_AND_RESPONSE,
   QUANTITY_MULTIPLES_LIST,
 } from "@/constants/calculators";
 import {
   CalculatorInfoMap,
-  CollectionsIO,
   InputAndResponse,
   InputDetail,
   InputOutputValues,
@@ -147,20 +143,16 @@ export const getComponentSummary = (
   Object.keys(sitesData).forEach((siteName) => {
     const componentDetail = cloneDeep(sitesData[siteName].componentDetails);
 
-    responseOrder.forEach((calculatorName) => {
-      if (MATERIAL_CALCULATOR_NAMES.includes(calculatorName)) {
-        componentDetail[
-          CALCULATOR_NAME_COLLECTION_MAPPINGS[calculatorName]
-        ]?.forEach((response) => {
+    responseOrder.forEach((calculatorType) => {
+      if (MATERIAL_CALCULATOR_TYPES.includes(calculatorType)) {
+        componentDetail[calculatorType]?.forEach((response) => {
           items.push(response);
         });
 
         return;
       }
 
-      componentDetail[
-        CALCULATOR_NAME_COLLECTION_MAPPINGS[calculatorName]
-      ]?.forEach((response) => {
+      componentDetail[calculatorType]?.forEach((response) => {
         const itemIndex = findIndex(
           items,
           (item) => item.label === response.label
@@ -214,22 +206,6 @@ export const getComponentSummary = (
   return summaryData;
 };
 
-export const getResultName = (calculatorType: string, items: ItemData[]) => {
-  let key = "Item Name";
-
-  if (calculatorType === "BoneReduction") {
-    key = "Bur Kit Name (Bone Reduction)";
-  } else if (calculatorType === "ChairSidePickUp") {
-    key = "Luting Agent Name";
-  } else if (calculatorType === "DrillKitAndSequence") {
-    key = "Drill Kit Name";
-  }
-
-  const item = find(items, { label: key });
-
-  return get(item, ["info", 0, "itemName"]) || "";
-};
-
 export const prepareExportProps = (
   calculatorType: string,
   calculatorName: string,
@@ -253,6 +229,7 @@ export const prepareExportProps = (
   return {
     inputSummary: [{ name: "Site 1", inputDetails: quiz, componentDetails }],
     componentSummary,
+    calculatorType,
     calculatorName,
     patientInfo,
     showTeethSelection: false,

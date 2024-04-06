@@ -18,7 +18,7 @@ interface SummaryProps {
   showTeethSelection: boolean;
   responseOrder: string[];
   totalQuantities: TotalQuantities[];
-  onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onUpdateQuantity: (quantity: number, groupId: string) => void;
 }
 
 const Summary: React.FC<SummaryProps> = ({

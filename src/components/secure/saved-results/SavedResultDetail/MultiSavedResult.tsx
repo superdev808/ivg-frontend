@@ -116,15 +116,15 @@ const MultiSavedResultDetail: React.FC<MultiResultDetailProps> = ({
     });
   };
 
-  const handleUpdateQuantity = (quantity: number, itemName: string) => {
+  const handleUpdateQuantity = (quantity: number, groupId: string) => {
     const newTotalQuantities = cloneDeep(totalQuantities);
 
     const index = newTotalQuantities.findIndex(
-      (item) => item.itemName === itemName
+      (item) => item.id === groupId
     );
 
     if (index === -1) {
-      newTotalQuantities.push({ itemName, quantity });
+      newTotalQuantities.push({ id: groupId, quantity });
     } else {
       newTotalQuantities[index].quantity = quantity;
     }

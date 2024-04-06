@@ -27,6 +27,7 @@ export interface Site {
 
 interface PDFContentProps {
   calculatorName: string;
+  calculatorType: string;
   patientInfo?: Patient | null;
   showTeethSelection: boolean;
   totalQuantities: TotalQuantities[];
@@ -37,6 +38,7 @@ interface PDFContentProps {
 
 const PDFContent: React.FC<PDFContentProps> = ({
   calculatorName,
+  calculatorType,
   patientInfo,
   showTeethSelection,
   totalQuantities,
@@ -127,7 +129,7 @@ const PDFContent: React.FC<PDFContentProps> = ({
 
       <div className="px-4">
         <ComponentSummary
-          calculatorName={calculatorName}
+          calculatorType={calculatorType}
           summary={componentSummary}
           totalQuantities={totalQuantities}
         />

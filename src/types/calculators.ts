@@ -104,10 +104,6 @@ export interface InputAndResponse {
   responseOrder: string[];
 }
 
-export interface CollectionsIO {
-  [key: string]: InputOutputValues[];
-}
-
 export interface ProcedureInputsAndResponse {
   [key: string]: string[];
 }

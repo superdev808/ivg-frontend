@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 
-import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/constants/calculators";
 import { ComponentDetail, InputDetail, ItemData } from "@/types/calculators";
 
 import Result from "../../Result";

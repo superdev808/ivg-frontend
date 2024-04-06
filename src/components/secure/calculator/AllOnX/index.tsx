@@ -14,7 +14,6 @@ import {
   serializeColInfo,
 } from "@/helpers/calculators";
 import {
-  CALCULATOR_NAME_COLLECTION_MAPPINGS,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
   PROCEDURES,
   MUA_OPTIONS,
@@ -153,6 +152,27 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     setProcedureInputsAndResponse(procedureInputsAndResponse);
   }, [calcInfoMap, selectedCollections]);
 
+  const handleAdditionalInputs = useCallback((value: string, target: string) => {
+    setAdditionalInputs((prev: KeyValuePair) => {
+      let state = { ...prev };
+      if (
+        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
+        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value
+      ) {
+        delete state[MUA_OPTIONS[0].name];
+      }
+      if (
+        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
+        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
+      ) {
+        state = { ...state, [MUA_OPTIONS[0].name]: MUA_OPTIONS[0].value };
+      }
+      return { ...state, [target]: value };
+    });
+    setSelectedSites([]);
+    setSitesData({});
+  }, []);
+
   const handleAllAnswered = useCallback((site: Site) => {
     setAllAnsweredSites(allAnsweredSites => [...allAnsweredSites, site]);
   }, []);
@@ -170,7 +190,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
         DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name
       );
     }
-  }, []);
+  }, [handleAdditionalInputs]);
 
   const handleSiteChange = useCallback((tooth: number, isAnonymous?: boolean): void => {
     setSelectedSites(prevSelectedSites => {
@@ -222,49 +242,51 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     })
   }, [selectedSites]);
 
-  const handleInputSelect = (
+  const handleInputSelect = useCallback((
     site: Site,
     question: InputOutputValues,
     answer: string
   ) => {
-    let data: SiteData = cloneDeep(sitesData);
-    const inputDetails: InputDetail[] = cloneDeep(data[site.name].inputDetails);
-    const indexOfQuestion: number = inputDetails.findIndex(
-      (input) => input.id === serializeColInfo(question)
-    );
-    if (indexOfQuestion > -1) {
-      inputDetails[indexOfQuestion].answer = answer;
-      inputDetails.splice(indexOfQuestion + 1);
-    } else {
-      inputDetails.push({
-        id: serializeColInfo(question),
-        question: question.colName || question.colText,
-        answer,
-      });
-    }
+    setSitesData((prevSitesData) => {
+      let data: SiteData = cloneDeep(prevSitesData);
+      const inputDetails: InputDetail[] = cloneDeep(data[site.name].inputDetails);
+      const indexOfQuestion: number = inputDetails.findIndex(
+        (input) => input.id === serializeColInfo(question)
+      );
+      if (indexOfQuestion > -1) {
+        inputDetails[indexOfQuestion].answer = answer;
+        inputDetails.splice(indexOfQuestion + 1);
+      } else {
+        inputDetails.push({
+          id: serializeColInfo(question),
+          question: question.colName || question.colText,
+          answer,
+        });
+      }
 
-    //remove next collection responses
-    const calculators: string[] = procedureInputsAndResponse?.responseOrder || [];
-    const componentDetails: ComponentDetail = cloneDeep(
-      data[site.name].componentDetails
-    );
-    const indexOfCollection: number = calculators.indexOf(question.calculatorType);
-    if (indexOfCollection !== -1) {
-      const keysToRemove: string[] = calculators.slice(indexOfCollection);
-      keysToRemove.map((col: string) => {
-        delete componentDetails[col];
-      });
-    }
+      //remove next collection responses
+      const calculators: string[] = procedureInputsAndResponse?.responseOrder || [];
+      const componentDetails: ComponentDetail = cloneDeep(
+        data[site.name].componentDetails
+      );
+      const indexOfCollection: number = calculators.indexOf(question.calculatorType);
+      if (indexOfCollection !== -1) {
+        const keysToRemove: string[] = calculators.slice(indexOfCollection);
+        keysToRemove.map((col: string) => {
+          delete componentDetails[col];
+        });
+      }
 
-    const updatedData = {
-      ...data,
-      [site.name]: {
-        inputDetails,
-        componentDetails,
-      },
-    };
-    setSitesData(updatedData);
-  };
+      const updatedData = {
+        ...data,
+        [site.name]: {
+          inputDetails,
+          componentDetails,
+        },
+      };
+      return updatedData;
+    })
+  }, [procedureInputsAndResponse]);
 
   const handleQuizResponse = useCallback((
     site: Site,
@@ -328,27 +350,6 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       }
     })
   }, [selectedSites]);
-
-  const handleAdditionalInputs = useCallback((value: string, target: string) => {
-    setAdditionalInputs((prev: KeyValuePair) => {
-      let state = { ...prev };
-      if (
-        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
-        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value
-      ) {
-        delete state[MUA_OPTIONS[0].name];
-      }
-      if (
-        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
-        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
-      ) {
-        state = { ...state, [MUA_OPTIONS[0].name]: MUA_OPTIONS[0].value };
-      }
-      return { ...state, [target]: value };
-    });
-    setSelectedSites([]);
-    setSitesData({});
-  }, []);
 
   const handleSiteSpecificReport = useCallback((value: string) => {
     setSiteSpecificReport(value);

@@ -1,24 +1,24 @@
 import React from "react";
 
-import { MATERIAL_CALCULATOR_NAMES } from "@/constants/calculators";
+import { MATERIAL_CALCULATOR_TYPES } from "@/constants/calculators";
 import { Summary, TotalQuantities } from "@/types/calculators";
 
 import GenericComponentSummary from "./Generic";
 import MaterialComponentSummary from "./Material";
 
 interface ComponentSummaryProps {
-  calculatorName: string;
+  calculatorType: string;
   summary: Summary[];
   totalQuantities: TotalQuantities[];
 }
 
 const ComponentSummary: React.FC<ComponentSummaryProps> = ({
-  calculatorName,
+  calculatorType,
   summary,
   totalQuantities,
 }) => {
   const isMaterialCalculator =
-    MATERIAL_CALCULATOR_NAMES.includes(calculatorName);
+    MATERIAL_CALCULATOR_TYPES.includes(calculatorType);
 
   return (
     <>
