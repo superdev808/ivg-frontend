@@ -1664,62 +1664,39 @@ export const CALCULATOR_COLLECTIONS: CollectionsIO = {
 };
 
 export const PROCEDURE_INPUTS_AND_RESPONSE: ProcedureInputsAndResponse = {
-  [PROCEDURE_COMBINATIONS.SURGERY]: {
-    "Drill Kits and Drill Sequences":
-      CALCULATOR_COLLECTIONS["Drill Kits and Drill Sequences"],
-    "Bone Reduction Instruments":
-      CALCULATOR_COLLECTIONS["Bone Reduction Instruments"],
-    "Drivers (Restorative, Direct to Implant)":
-      CALCULATOR_COLLECTIONS["Drivers (Restorative, Direct to Implant)"],
-    "Chairside Pick-Up Materials":
-      CALCULATOR_COLLECTIONS["Chairside Pick-Up Materials"],
-    Implants: CALCULATOR_COLLECTIONS["Implants"],
-  },
-  [PROCEDURE_COMBINATIONS.RESTORATIVE_DIRECT_TO_IMPLANT]: {
-    "Scanbodies (Single Unit)":
-      CALCULATOR_COLLECTIONS["Scanbodies (Single Unit)"],
-    "Scanbody Drivers (Direct to Implant)":
-      CALCULATOR_COLLECTIONS["Scanbody Drivers (Direct to Implant)"],
-    "Impression Copings (Direct to Implant)":
-      CALCULATOR_COLLECTIONS["Impression Copings (Direct to Implant)"],
-    "Temporary Copings (Direct to Implant)":
-      CALCULATOR_COLLECTIONS["Temporary Copings (Direct to Implant)"],
-    "Ti Bases (Direct to Implant)":
-      CALCULATOR_COLLECTIONS["Ti Bases (Direct to Implant)"],
-    "Drivers (Restorative, Direct to Implant)":
-      CALCULATOR_COLLECTIONS["Drivers (Restorative, Direct to Implant)"],
-  },
-  [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_NOT_PLACED]: {
-    "Scanbodies (Multi-Unit Abutments)":
-      CALCULATOR_COLLECTIONS["Scanbodies (Multi-Unit Abutments)"],
-    "Scanbody Drivers (MUAs)":
-      CALCULATOR_COLLECTIONS["Scanbody Drivers (MUAs)"],
-    "Impression Copings (Multi-Unit Abutments)":
-      CALCULATOR_COLLECTIONS["Impression Copings (Multi-Unit Abutments)"],
-    "Temporary Copings (Multi-Unit Abutments)":
-      CALCULATOR_COLLECTIONS["Temporary Copings (Multi-Unit Abutments)"],
-    "Ti Bases (Multi-Unit Abutments)":
-      CALCULATOR_COLLECTIONS["Ti Bases (Multi-Unit Abutments)"],
-    "Multi-Unit Abutments": CALCULATOR_COLLECTIONS["Multi-Unit Abutments"],
-    "Drivers (Restorative, on Multi-Unit Abutments)":
-      CALCULATOR_COLLECTIONS["Drivers (Restorative, on Multi-Unit Abutments)"],
-    "Drivers (Restorative, Direct to Implant)":
-      CALCULATOR_COLLECTIONS["Drivers (Restorative, Direct to Implant)"],
-  },
-  [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_PLACED]: {
-    "Scanbodies (Multi-Unit Abutments)":
-      CALCULATOR_COLLECTIONS["Scanbodies (Multi-Unit Abutments)"],
-    "Scanbody Drivers (MUAs)":
-      CALCULATOR_COLLECTIONS["Scanbody Drivers (MUAs)"],
-    "Impression Copings (Multi-Unit Abutments)":
-      CALCULATOR_COLLECTIONS["Impression Copings (Multi-Unit Abutments)"],
-    "Temporary Copings (Multi-Unit Abutments)":
-      CALCULATOR_COLLECTIONS["Temporary Copings (Multi-Unit Abutments)"],
-    "Ti Bases (Multi-Unit Abutments)":
-      CALCULATOR_COLLECTIONS["Ti Bases (Multi-Unit Abutments)"],
-    "Drivers (Restorative, Direct to Implant)":
-      CALCULATOR_COLLECTIONS["Drivers (Restorative, Direct to Implant)"],
-  },
+  [PROCEDURE_COMBINATIONS.SURGERY]: [
+    "DrillKitAndSequence",
+    "BoneReduction",
+    "RestorativeDirectToImplant",
+    "ChairSidePickUp",
+    "Implants",
+  ],
+  [PROCEDURE_COMBINATIONS.RESTORATIVE_DIRECT_TO_IMPLANT]: [
+    "Scanbodies",
+    "ScanbodyDriversDirectToImplants",
+    "ImpressingCopingsDirectToImplants",
+    "TemporaryCopingsDirectToImplants",
+    "TiBasesDirectToImplants",
+    "RestorativeDirectToImplant",
+  ],
+  [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_NOT_PLACED]: [
+    "ScanbodyMUAs",
+    "ScanbodyDriversMUAs",
+    "ImpressingCopingsMUAs",
+    "TemporaryCopingsMUAs",
+    "TiBasesMUAs",
+    "MUAs",
+    "RestorativeMultiUnitAbutments",
+    "RestorativeDirectToImplant",
+  ],
+  [PROCEDURE_COMBINATIONS.RESTORATIVE_ON_MUAS_MUAS_PLACED]: [
+    "ScanbodyMUAs",
+    "ScanbodyDriversMUAs",
+    "ImpressingCopingsMUAs",
+    "TemporaryCopingsMUAs",
+    "TiBasesMUAs",
+    "RestorativeDirectToImplant",
+  ],
 };
 
 export const CALCULATOR_NAME_COLLECTION_MAPPINGS: Record<string, string> = {
@@ -2107,39 +2084,3 @@ export const CALCULATOR_IMAGES: Record<string, string> = {
   Default:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/No+Image+BW.jpg",
 };
-
-export const CALCULATOR_GENERIC_OUTPUT_MAPPING: Record<string, string> = {
-  itemNumber: "Item Number",
-  manufacturer: "Manufacturer",
-  manufacturerRecommendations: "Manufacturer Recommendations",
-  torqueValue: "Torque Value",
-  notes: "Notes",
-};
-
-export const MATERIAL_CALCULATOR_GENERIC_OUTPUT_MAPPING: Record<
-  string,
-  string
-> = {
-  secondRecommendedSingleUnitAbutmentMaterial:
-    "Second Recommended Single Unit Abutment Material",
-  secondRecommendedRestorationDesign: "Second Recommended Restoration Design",
-  secondRecommendedImplantBridgeMaterial:
-    "Second Recommended Implant Bridge Material",
-  secondAbutmentMaterialChoice: "Second Abutment Material Choice",
-  secondRestorationDesignChoice: "Second Restoration Design Choice",
-  secondCrownMaterialChoice: "Second Crown Material Choice",
-  secondMaterialChoice: "Second Material Choice",
-  thirdMaterialChoice: "Third Material Choice",
-};
-
-export const MATERIAL_CALCULATOR_POPUP_OUTPUT_MAPPING: Record<string, string> =
-  {
-    recommendedSingleUnitAbutmentMaterial:
-      "Recommended Single Unit Abutment Material",
-    recommendedMUAMaterial: "Recommended Multi-Unit Abutment (MUA) Material",
-    recommendedRestorationDesign: "Recommended Restoration Design",
-    recommendedImplantBridgeMaterial: "Recommended Implant Bridge Material",
-    recommendedAbutmentMaterial: "Recommended Abutment Material",
-    recommendedCrownMaterial: "Recommended Crown Material",
-    recommendedBridgeMaterial: "Recommended Bridge Material",
-  };

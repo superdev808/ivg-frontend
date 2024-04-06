@@ -12,7 +12,7 @@ import PatientInfo from "@/components/shared/PatientInfo";
 import PDFContent from "@/components/shared/PDFExport/PDFContent";
 import SaveDialog from "@/components/shared/SaveDialog";
 import { CALCULATOR_IMAGES } from "@/constants/calculators";
-import { getQuizByCalculator, prepareExportProps } from "@/helpers/calculators";
+import { prepareExportProps } from "@/helpers/calculators";
 import { event as gaEvent } from "@/lib/gtag";
 import {
   useGetUserInfoQuery,
@@ -378,7 +378,7 @@ const Result: React.FC<ResultProps> = ({
               "quiz"
             )}
           >
-            {getQuizByCalculator(quiz, calculatorName).map(
+            {quiz.map(
               ({ question, answer }) => (
                 <div key={question} className="flex align-items-center gap-1">
                   <div

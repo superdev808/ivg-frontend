@@ -41,6 +41,7 @@ import InputDetails from "./InputDetails";
 import HelpfulFeedbackDialog from "../Feedback/HelpfulFeedbackDialog";
 import FeedbackDialogWrapper from "../Feedback/FeedbackDialogWrapper";
 import HelpfulButton from "../Helpful";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 interface AllOnXCalculatorProps {
   isCustom?: boolean;
 }
@@ -102,6 +103,8 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   const [totalQuantities, setTotalQuantities] = useState<TotalQuantities[]>([]);
   const [allAnsweredSites, setAllAnsweredSites] = useState<Site[]>([]);
 
+  const { calcInfoMap } = useCalculatorsInfo()
+
   const isAllSitesAnswered = selectedSites.reduce(
     (acc: boolean, site: Site) => {
       if (acc == false) return false;
@@ -128,6 +131,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
 
   useEffect(() => {
     const newCollections = getProcedureCollections(
+      calcInfoMap,
       procedure,
       additionalInputs,
       isCustom
@@ -138,23 +142,21 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     if (!isCustom) {
       setSelectedCollections(newCollections);
     }
-  }, [procedure, additionalInputs, isCustom]);
+  }, [procedure, additionalInputs, isCustom, calcInfoMap]);
 
   useEffect(() => {
     const procedureInputsAndResponse = getProcedureInputsAndResponse(
-      procedure,
-      additionalInputs,
+      calcInfoMap,
       selectedCollections,
-      isCustom
     );
     setProcedureInputsAndResponse(procedureInputsAndResponse);
-  }, [additionalInputs, isCustom, procedure, selectedCollections]);
+  }, [calcInfoMap, selectedCollections]);
 
-  const handleAllAnswered = (site: Site) => {
-    setAllAnsweredSites([...allAnsweredSites, site]);
-  };
+  const handleAllAnswered = useCallback((site: Site) => {
+    setAllAnsweredSites(allAnsweredSites => [...allAnsweredSites, site]);
+  }, []);
 
-  const handleProcedureChange = (e: SelectButtonChangeEvent) => {
+  const handleProcedureChange = useCallback((e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
     setSelectedSites([]);
     setSitesData({});
@@ -167,44 +169,57 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
         DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name
       );
     }
-  };
+  }, []);
 
-  const handleSiteChange = (tooth: number, isAnonymous?: boolean): void => {
-    let _selectedSites: Site[] = isAnonymous ? [] : [...selectedSites];
-    const isSelected: Site[] = _selectedSites.filter(
-      (site: Site) => site.key === tooth
-    );
-    if (isSelected.length === 0) {
-      const newSite: Site = isAnonymous
-        ? { name: `General Details`, key: tooth }
-        : { name: `Site ${tooth}`, key: tooth };
-      _selectedSites.push(newSite);
-      //Add new site data
-      if (!isAnonymous) {
-        const newSiteData = {
-          [`Site ${tooth}`]: { inputDetails: [], componentDetails: {} },
-        };
-        setSitesData((prev) => {
-          return { ...prev, ...newSiteData };
-        });
-        _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
-      } else {
-        const newSiteData = {
-          "General Details": { inputDetails: [], componentDetails: {} },
-        };
-        setSitesData(newSiteData);
-      }
-    } else {
-      _selectedSites = _selectedSites.filter(
-        (site: Site) => site.key !== tooth
+  const handleSiteChange = useCallback((tooth: number, isAnonymous?: boolean): void => {
+    setSelectedSites(prevSelectedSites => {
+      let _selectedSites: Site[] = isAnonymous ? [] : [...prevSelectedSites];
+      const isSelected: Site[] = _selectedSites.filter(
+        (site: Site) => site.key === tooth
       );
-      // remove site data
-      let _sitesData = { ...sitesData };
-      delete _sitesData[`Site ${tooth}`];
-      setSitesData(_sitesData);
-    }
-    setSelectedSites(_selectedSites);
-  };
+      if (isSelected.length === 0) {
+        const newSite: Site = isAnonymous
+          ? { name: `General Details`, key: tooth }
+          : { name: `Site ${tooth}`, key: tooth };
+        _selectedSites.push(newSite);
+        //Add new site data
+        if (!isAnonymous) {
+          _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
+        }
+      } else {
+        _selectedSites = _selectedSites.filter(
+          (site: Site) => site.key !== tooth
+        );
+      }
+      return _selectedSites;
+    })
+
+    setSitesData((prev) => {
+      let _selectedSites: Site[] = isAnonymous ? [] : [...selectedSites];
+      const isSelected: Site[] = _selectedSites.filter(
+        (site: Site) => site.key === tooth
+      );
+      if (isSelected.length === 0) {
+        //Add new site data
+        if (!isAnonymous) {
+          const newSiteData = {
+            [`Site ${tooth}`]: { inputDetails: [], componentDetails: {} },
+          };
+          return { ...prev, ...newSiteData };
+        } else {
+          const newSiteData = {
+            "General Details": { inputDetails: [], componentDetails: {} },
+          };
+          return newSiteData;
+        }
+      } else {
+        // remove site data
+        let _sitesData = { ...prev };
+        delete _sitesData[`Site ${tooth}`];
+        return _sitesData;
+      }
+    })
+  }, [selectedSites]);
 
   const handleInputSelect = (
     site: Site,
@@ -437,13 +452,13 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   procedureInputsAndResponse?.input &&
                   procedureInputsAndResponse?.input.length > 0 &&
                   siteSpecificReport ===
-                    SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
-                <TeethSelector
-                  showLabel
-                  selectedSites={selectedSites}
-                  onSiteChange={handleSiteChange}
-                />
-              )}
+                  SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
+                  <TeethSelector
+                    showLabel
+                    selectedSites={selectedSites}
+                    onSiteChange={handleSiteChange}
+                  />
+                )}
 
               {selectedSites.length > 0 && (
                 <InputDetails

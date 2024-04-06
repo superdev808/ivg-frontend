@@ -1,4 +1,3 @@
-import trim from "lodash/trim";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -21,7 +20,7 @@ import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 interface DetailViewProps {
   calculatorType: string;
   items: Array<Record<string, string>>;
-  fields: InputOutputValues[];
+  outputFields: InputOutputValues[];
   questions: InputOutputValues[];
   answers: string[];
   onGoBack: () => void;
@@ -29,7 +28,7 @@ interface DetailViewProps {
 
 const DetailView: React.FC<DetailViewProps> = ({
   calculatorType,
-  fields,
+  outputFields,
   questions,
   answers,
   onGoBack,
@@ -44,14 +43,14 @@ const DetailView: React.FC<DetailViewProps> = ({
   const toastRef = useRef(null);
 
   useEffect(() => {
-    setResults(props.items.map((item) => parseItems(item, calculatorType, calculatorName)));
-  }, [props.items, calculatorType, calculatorName]);
+    setResults(props.items.map((item) => parseItems(item, outputFields)));
+  }, [props.items, outputFields]);
 
 
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
       if (answers[idx]) {
-        acc.push({ question: trim(question.colText), answer: trim(answers[idx]) });
+        acc.push({ question: question.colText, answer: answers[idx] });
       }
 
       return acc;

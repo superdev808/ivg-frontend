@@ -22,34 +22,12 @@ export interface InputDetail {
   answer: string;
 }
 
-export interface ItemInsights {
-  id?: string;
-  itemName?: string;
-  itemNumber?: string;
-  link?: string;
-  quantity?: number;
-  manufacturer?: string;
-  manufacturerRecommendations?: string;
-  torqueValue?: string;
-  notes?: string;
-  reasoning?: string;
-  supportingArticle?: string;
-  recommendedSingleUnitAbutmentMaterial?: string;
-  recommendedMUAMaterial?: string;
-  recommendedRestorationDesign?: string;
-  recommendedImplantBridgeMaterial?: string;
-  secondRecommendedSingleUnitAbutmentMaterial?: string;
-  secondRecommendedRestorationDesign?: string;
-  secondRecommendedImplantBridgeMaterial?: string;
-  recommendedAbutmentMaterial?: string;
-  recommendedCrownMaterial?: string;
-  secondAbutmentMaterialChoice?: string;
-  secondRestorationDesignChoice?: string;
-  secondCrownMaterialChoice?: string;
-  recommendedBridgeMaterial?: string;
-  secondMaterialChoice?: string;
-  thirdMaterialChoice?: string;
+export type ItemInsights = {
+  quantity: number;
+  id: string;
+  [key: string]: any;
 }
+
 export interface ItemData {
   id?: string;
   label: string;
@@ -92,6 +70,8 @@ export interface InputOutputValues {
   groupText: string;
   isCommon: boolean;
   calculatorType: string;
+
+  displayCalculatorName?: string;
 }
 
 export interface AutoPopulateData {
@@ -131,7 +111,7 @@ export interface CollectionsIO {
 }
 
 export interface ProcedureInputsAndResponse {
-  [key: string]: CollectionsIO;
+  [key: string]: string[];
 }
 
 export interface SingleSavedResult {

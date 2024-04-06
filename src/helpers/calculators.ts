@@ -16,11 +16,13 @@ import {
   QUANTITY_MULTIPLES_LIST,
 } from "@/constants/calculators";
 import {
+  CalculatorInfoMap,
   CollectionsIO,
   InputAndResponse,
   InputDetail,
   InputOutputValues,
   ItemData,
+  ItemInsights,
   KeyValuePair,
   PROCEDURE,
   Patient,
@@ -40,7 +42,9 @@ export const isValidUrl = (urlString = "") => {
   return Boolean(urlPattern.test(urlString.trim()));
 };
 
-const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
+const getRestorativeCollections = (
+  additionalInputs: KeyValuePair
+): string[] => {
   // Restorative (Direct to Implant)
   if (
     additionalInputs[DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name] ===
@@ -65,10 +69,11 @@ const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
     return PROCEDURE_INPUTS_AND_RESPONSE.RESTORATIVE_ON_MUAS_MUAS_PLACED;
   }
   // No match found
-  return {};
+  return [];
 };
 
 export const getProcedureCollections = (
+  calcInfoMap: CalculatorInfoMap,
   procedure: PROCEDURE,
   additionalInputs: KeyValuePair,
   isCustom: boolean
@@ -78,23 +83,17 @@ export const getProcedureCollections = (
   if (!isCustom) {
     switch (procedure) {
       case PROCEDURE.SURGERY:
-        collections = Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY);
+        collections = PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
         break;
 
       case PROCEDURE.RESTORATIVE:
-        const response: CollectionsIO =
-          getRestorativeCollections(additionalInputs);
-        collections = Object.keys(response);
+        collections = getRestorativeCollections(additionalInputs);
         break;
 
       case PROCEDURE.SURGERY_AND_RESTORATIVE:
-        const surgeryCollections: CollectionsIO =
-          PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
-        const restorativeCollections: CollectionsIO =
-          getRestorativeCollections(additionalInputs);
         collections = union([
-          ...Object.keys(surgeryCollections),
-          ...Object.keys(restorativeCollections),
+          ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY,
+          ...getRestorativeCollections(additionalInputs),
         ]);
         break;
 
@@ -102,24 +101,25 @@ export const getProcedureCollections = (
         break;
     }
   } else {
-    collections = Object.keys(CALCULATOR_COLLECTIONS);
+    collections = Object.keys(calcInfoMap);
   }
 
   return collections.sort();
 };
 
-const prepareInputsAndResponse = (
-  selectedCollections: string[],
-  collections: CollectionsIO
-) => {
+export const getProcedureInputsAndResponse = (
+  calcInfoMap: CalculatorInfoMap,
+  selectedCollections: string[]
+): InputAndResponse => {
   let inputs: InputOutputValues[] = [];
   let responseOrder: string[] = [];
 
   selectedCollections.map((selectedCollection: string) => {
     let isDisplayNameAssigned: boolean = false;
-    collections[selectedCollection]?.map((input: InputOutputValues) => {
+    calcInfoMap[selectedCollection].input.map((input) => {
       const filteredInputs: InputOutputValues[] = inputs.filter(
-        (item: InputOutputValues) => item.name && item.name === input.name
+        (item: InputOutputValues) =>
+          item.colName && item.colName === input.colName
       );
       if (
         filteredInputs.length <= 0 ||
@@ -136,54 +136,6 @@ const prepareInputsAndResponse = (
   });
 
   return { input: inputs, responseOrder };
-};
-
-export const getProcedureInputsAndResponse = (
-  procedure: PROCEDURE,
-  additionalInputs: KeyValuePair,
-  selectedCollections: string[],
-  isCustom: boolean
-) => {
-  if (!isCustom) {
-    switch (procedure) {
-      case PROCEDURE.SURGERY:
-        const surgeryResults: InputAndResponse = prepareInputsAndResponse(
-          selectedCollections,
-          PROCEDURE_INPUTS_AND_RESPONSE.SURGERY
-        );
-        return surgeryResults;
-
-      case PROCEDURE.RESTORATIVE:
-        const collections: CollectionsIO =
-          getRestorativeCollections(additionalInputs);
-        const restorativeResults: InputAndResponse = prepareInputsAndResponse(
-          selectedCollections,
-          collections
-        );
-        return restorativeResults;
-
-      case PROCEDURE.SURGERY_AND_RESTORATIVE:
-        const restorativeCollections: CollectionsIO =
-          getRestorativeCollections(additionalInputs);
-        const combineCollections: CollectionsIO = {
-          ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY,
-          ...restorativeCollections,
-        };
-        const combineProcedureResults: InputAndResponse =
-          prepareInputsAndResponse(selectedCollections, combineCollections);
-        return combineProcedureResults;
-
-      default:
-        return { input: [], responseOrder: [] };
-    }
-  }
-
-  const customResults: InputAndResponse = prepareInputsAndResponse(
-    selectedCollections,
-    CALCULATOR_COLLECTIONS
-  );
-
-  return customResults;
 };
 
 export const getComponentSummary = (
@@ -317,450 +269,44 @@ export const prepareExportProps = (
 
 export const parseItems = (
   item: Record<string, string>,
-  calculatorType: string,
-  calculatorName: string
+  outputCalcInfo: InputOutputValues[]
 ): ItemData[] => {
-  if (calculatorType === "BoneReduction") {
-    return [
-      {
-        label: "Bur Kit Name (Bone Reduction)",
-        info: [
-          {
-            itemName: trim(item["Bur Kit Name (Bone Reduction)"]),
-            itemNumber: trim(item["Item Number"]),
-            link: trim(item["Bur Kit (Bone Reduction) Link to Purchase"]),
-            quantity: 1,
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-      {
-        label: "Bur Kit (Denture Conversion) Name",
-        info: [
-          {
-            itemName: trim(item["Bur Kit (Denture Conversion) Name"]),
-            link: trim(item["Bur Kit (Denture Conversion) Link to Purchase"]),
-            quantity: 1,
-            notes: trim(item["Notes_1"]),
-          },
-        ],
-      },
-    ];
-  }
+  const findColumnFromColIndex = (colIndex: string) =>
+    outputCalcInfo.find((item) => item.colIndex == colIndex);
 
-  if (calculatorType === "ChairSidePickUp") {
-    return [
-      {
-        label: "Luting Agent Name",
-        info: [
-          {
-            itemName: trim(item["Luting Agent Name"]),
-            link: trim(item["Luting Agent Link to Purchase"]),
-            quantity: 1,
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-      {
-        label: "Teflon Tape",
-        info: [
-          {
-            itemName: trim(item["Teflon Tape"]),
-            link: trim(item["Teflon Tape Link to Purchase"]),
-            quantity: 1,
-            notes: trim(item["Notes_1"]),
-          },
-        ],
-      },
-      {
-        label: "Material to Close Screw Access Hole Name",
-        info: [
-          {
-            itemName: trim(item["Material to Close Screw Access Hole Name"]),
-            link: trim(
-              item["Material to Close Screw Access Hole Link to Purchase"]
-            ),
-            quantity: 1,
-            notes: trim(item["Notes_2"]),
-          },
-        ],
-      },
-    ];
-  }
+  let resultInfo: ItemData[] = [],
+    i,
+    j;
+  let columnInfos = Object.keys(item)
+    .map((colIndex) => findColumnFromColIndex(colIndex))
+    .sort((left, right) => {
+      let leftGroupId = left?.groupId || "",
+        rightGroupId = right?.groupId || "";
+      return leftGroupId == rightGroupId
+        ? 0
+        : leftGroupId < rightGroupId
+        ? -1
+        : 1;
+    }) as InputOutputValues[];
+  for (i = 0; i < columnInfos.length; i = j) {
+    let newItem: ItemData = {
+      label: columnInfos[i].groupName,
+      info: [],
+    };
+    let newInfo: ItemInsights = { id: columnInfos[i].groupId, quantity: 1 };
 
-  if (calculatorType === "DrillKitAndSequence") {
-    const res: ItemData[] = [
-      {
-        label: "Implant Drill Kit Name",
-        info: [
-          {
-            itemName: trim(item["Drill Kit Name"]),
-            itemNumber: trim(item["Drill Kit Item Number"]),
-            link: trim(item["Drill Kit Link to Purchase"]),
-            quantity: 1,
-          },
-        ],
-      },
-    ];
-
-    const arr = ["(Extra Short)", "(Short)", "(Standard / Medium)", "(Long)"];
-
-    for (let i = 1; i < 20; i++) {
-      arr.forEach((size) => {
-        const itemKey = `Drill ${i} ${size}`;
-        const linkKey = `${itemKey} Link to Purchase`;
-        const itemNumberKey = `${itemKey} Item Number`;
-        const manfacturerKey = `${itemKey} Manufacturer Recommendations`;
-
-        const link = trim(item[linkKey]) || "";
-        const itemNumber = item[itemNumberKey] || "";
-        const recommendations = trim(item[manfacturerKey]) || "";
-
-        if (itemNumber) {
-          res.push({
-            label: itemKey,
-            info: [
-              {
-                itemName: itemKey,
-                itemNumber,
-                link,
-                manufacturerRecommendations: recommendations,
-                quantity: 1,
-              },
-            ],
-          });
-        }
-      });
+    for (
+      j = i;
+      j < columnInfos.length &&
+      columnInfos[i].groupId == columnInfos[j].groupId;
+      ++j
+    ) {
+      let showText = `${columnInfos[j].groupText || "EMPTY"}___${columnInfos[j].colName}___${columnInfos[j].groupId}`;
+      newInfo[showText] = item[columnInfos[j].colIndex];
     }
+    newItem.info.push(newInfo);
 
-    return res;
+    resultInfo.push(newItem);
   }
-
-  if (
-    [
-      "RestorativeDirectToImplant",
-      "RestorativeMultiUnitAbutments",
-      "HealingAbutments",
-      "Implants",
-      "ImplantScrews",
-      "ImplantAnalogs",
-      "ImpressingCopingsDirectToImplants",
-      "ImpressingCopingsMUAs",
-      "MUAs",
-      "ScanbodyDriversDirectToImplants",
-      "ScanbodyDriversMUAs",
-      "StockAbutments",
-      "TemporaryCopingsDirectToImplants",
-      "TemporaryCopingsMUAs",
-      "TiBasesDirectToImplants",
-      "TiBasesMUAs",
-    ].includes(calculatorType)
-  ) {
-    return [
-      {
-        label: calculatorName,
-        info: [
-          {
-            itemName: trim(item["Item Name"]),
-            itemNumber: trim(item["Item Number"]),
-            link: trim(item["Link to Purchase"]),
-            quantity: 1,
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "Scanbodies") {
-    return [
-      {
-        label: "Master Scanbody",
-        info: [
-          {
-            itemName: trim(item["Item Name"]),
-            itemNumber: trim(item["Scanbody Item Number"]),
-            link: trim(item["Link to Purchase"]),
-            manufacturer: trim(item["Manufacturer"]),
-            quantity: 1,
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "ScanbodyMUAs") {
-    return [
-      {
-        label: "Master Scanbody",
-        info: [
-          {
-            itemName: trim(item["Item Name"]),
-            itemNumber: trim(item["Item Number"]),
-            link: trim(item["Link to Purchase"]),
-            manufacturer: trim(item["Manufacturer Name"]),
-            quantity: 1,
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "ImplantTorquesGuide") {
-    return [
-      {
-        label: "Implant Torque Guide",
-        info: [
-          {
-            torqueValue: trim(item["Torque Value"]),
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "ImplantBorneBridge") {
-    return [
-      {
-        label: "Implant-Borne Bridge",
-        info: [
-          {
-            recommendedSingleUnitAbutmentMaterial: trim(
-              item["Recommended Single Unit Abutment Material"]
-            ),
-            reasoning: trim(item["Recommended Single Unit Abutment Reasoning"]),
-            supportingArticle: trim(
-              item["Recommended Single Unit Abutment Supporting Article"]
-            ),
-            quantity: 1,
-          },
-        ],
-      },
-
-      {
-        label: "Implant-Borne Bridge",
-        info: [
-          {
-            recommendedMUAMaterial: trim(
-              item["Recommended Multi-Unit Abutment (MUA) Material"]
-            ),
-            reasoning: trim(
-              item["Recommended Multi-Unit Abutment (MUA) Material Reasoning"]
-            ),
-            supportingArticle: trim(
-              item[
-                "Recommended Multi-Unit Abutment (MUA) Material Supporting Article"
-              ]
-            ),
-            quantity: 1,
-          },
-        ],
-      },
-
-      {
-        label: "Implant-Borne Bridge",
-        info: [
-          {
-            recommendedRestorationDesign: trim(
-              item["Recommended Restoration Design"]
-            ),
-            reasoning: trim(item["Recommended Restoration Design Reasoning"]),
-            supportingArticle: trim(
-              item["Recommended Restoration Design Supporting Article"]
-            ),
-            quantity: 1,
-          },
-        ],
-      },
-
-      {
-        label: "Implant-Borne Bridge",
-        info: [
-          {
-            recommendedImplantBridgeMaterial: trim(
-              item["Recommended Implant Bridge Material"]
-            ),
-            reasoning: trim(
-              item["Recommended Implant Bridge Material Reasoning"]
-            ),
-            supportingArticle: trim(
-              item["Recommended Implant Bridge Material Supporting Article"]
-            ),
-            quantity: 1,
-          },
-        ],
-      },
-
-      {
-        label: "Implant-Borne Bridge",
-        info: [
-          {
-            secondRecommendedSingleUnitAbutmentMaterial: trim(
-              item["Second Recommended Single Unit Abutment Material"]
-            ),
-            secondRecommendedRestorationDesign: trim(
-              item["Second Recommended Restoration Design"]
-            ),
-            secondRecommendedImplantBridgeMaterial: trim(
-              item["Second Recommended Implant Bridge Material"]
-            ),
-            quantity: 1,
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "ImplantBorneCrown") {
-    return [
-      {
-        label: "Implant-Borne Crown",
-        info: [
-          {
-            recommendedAbutmentMaterial: trim(
-              item["Recommended Abutment Material"]
-            ),
-            reasoning: trim(item["Recommended Abutment Material Reasoning"]),
-            supportingArticle: trim(
-              item["Recommended Abutment Material Supporting Article"]
-            ),
-            quantity: 1,
-          },
-        ],
-      },
-
-      {
-        label: "Implant-Borne Crown",
-        info: [
-          {
-            recommendedRestorationDesign: trim(
-              item["Recommended Restoration Design"]
-            ),
-            reasoning: trim(item["Recommended Restoration Design Reasoning"]),
-            supportingArticle: trim(
-              item["Recommended Restoration Design Supporting Article"]
-            ),
-            quantity: 1,
-          },
-        ],
-      },
-
-      {
-        label: "Implant-Borne Crown",
-        info: [
-          {
-            recommendedCrownMaterial: trim(item["Recommended Crown Material"]),
-            reasoning: trim(item["Recommended Crown Material Reasoning"]),
-            supportingArticle: trim(
-              item["Recommended Crown Material Supporting Article"]
-            ),
-            quantity: 1,
-          },
-        ],
-      },
-
-      {
-        label: "Implant-Borne Crown",
-        info: [
-          {
-            secondAbutmentMaterialChoice: trim(
-              item["Second Abutment Material Choice"]
-            ),
-            secondRestorationDesignChoice: trim(
-              item["Second Restoration Design Choice"]
-            ),
-            secondCrownMaterialChoice: trim(
-              item["Second Crown Material Choice"]
-            ),
-            quantity: 1,
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "ToothBorneBridge") {
-    return [
-      {
-        label: "Tooth-Borne Bridge",
-        info: [
-          {
-            recommendedBridgeMaterial: trim(
-              item["Recommended Bridge Material"]
-            ),
-            reasoning: trim(item["Recommended Bridge Material Reasoning"]),
-            supportingArticle: trim(
-              item["Recommended Bridge Material Supporting Article"]
-            ),
-            quantity: 1,
-          },
-        ],
-      },
-
-      {
-        label: "Tooth-Borne Bridge",
-        info: [
-          {
-            secondMaterialChoice: trim(item["Second Material Choice"]),
-            thirdMaterialChoice: trim(item["Third Material Choice"]),
-            quantity: 1,
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "ToothBorneCrown") {
-    return [
-      {
-        label: "Tooth-Borne Crown",
-        info: [
-          {
-            recommendedCrownMaterial: trim(item["Recommended Crown Material"]),
-            reasoning: trim(item["Recommended Crown Material Reasoning"]),
-            supportingArticle: trim(
-              item["Recommended Crown Material Supporting Article"]
-            ),
-            quantity: 1,
-          },
-        ],
-      },
-
-      {
-        label: "Tooth-Borne Crown",
-        info: [
-          {
-            secondMaterialChoice: trim(item["Second Material Choice"]),
-            thirdMaterialChoice: trim(item["Third Material Choice"]),
-            quantity: 1,
-          },
-        ],
-      },
-    ];
-  }
-
-  return [];
-};
-
-export const getQuizByCalculator = (
-  quiz: InputDetail[],
-  calculatorName: string
-) => {
-  const allQuestions = (CALCULATOR_COLLECTIONS[calculatorName] || []).map(
-    (elem) => elem.name
-  );
-
-  const quizWithoutCalculatorName = quiz.map((quiz) => ({
-    ...quiz,
-    question: trim((quiz.question || "").split("[")[0]),
-  }));
-
-  const filteredQuiz = quizWithoutCalculatorName.filter((quiz) =>
-    allQuestions.includes(quiz.question)
-  );
-
-  return filteredQuiz;
+  return resultInfo;
 };

@@ -9,16 +9,10 @@ const useCalculatorsInfo = () => {
     skip: false,
   })
 
-  const findColumnFromColIndex = useCallback((calcType: string, colIndex: string) => {
-    let { input, output } = calcInfoMap[calcType];
-    return [...input, ...output].find(item => item.colIndex == colIndex);
-  }, [calcInfoMap]);
-
   return {
     calcInfoMap,
     isCalcInfoLoading,
     isCalcInfoError,
-    findColumnFromColIndex
   }
 }
 
