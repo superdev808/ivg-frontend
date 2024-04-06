@@ -7,15 +7,17 @@ import styles from "./style.module.scss";
 
 const cx = classNames.bind(styles);
 
+export const REASONING_TEXT = "Reasoning";
+export const SUPPORT_ARTICLES_TEXT = "Supporting Article";
+
 interface PopupOutputProps {
-  label: string;
-  text: string;
+  data: {
+    [key: string]: string;
+  }
 }
 
-export const REASONING_TEXT = "Reasoning";
-export const SUPPORT_ARTICLES_TEXT = "Supporting Articles";
 
-const PopupOutput: React.FC<PopupOutputProps> = ({ label, text }) => {
+const PopupOutput: React.FC<PopupOutputProps> = ({ data }) => {
   const handleOpenPopup = (event: any) => {
     confirmPopup({
       target: event.currentTarget,
@@ -26,20 +28,26 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ label, text }) => {
       footer: <></>,
       message: (
         <div className="flex flex-column align-items-center gap-4 text-center text-beige -ml-3">
-          {label.startsWith(REASONING_TEXT) && (
-            <div>
-              <b>{label}:</b> {text}
-            </div>
-          )}
-          {label.startsWith(SUPPORT_ARTICLES_TEXT) && (
-            <Link
-              className="text-beige"
-              href={text}
-              target="_blank"
-            >
-              {label}
-            </Link>
-          )}
+          {
+            Object.entries(data).map(([label, text]) => (
+              <>
+                {label.startsWith(REASONING_TEXT) && (
+                  <div>
+                    <b>{REASONING_TEXT}:</b> {text}
+                  </div>
+                )}
+                {label.startsWith(SUPPORT_ARTICLES_TEXT) && (
+                  <Link
+                    className="text-beige"
+                    href={text}
+                    target="_blank"
+                  >
+                    {SUPPORT_ARTICLES_TEXT}
+                  </Link>
+                )}
+              </>
+            ))
+          }
         </div>
       ),
     });

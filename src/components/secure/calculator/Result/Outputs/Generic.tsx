@@ -16,6 +16,13 @@ interface GenericOutputProps {
   item: ItemInsights;
 }
 
+const filterPopups = (shouldInclude: boolean) => (key: string) => {
+  if (key == "id" || key == "quantity")
+    return false;
+  const { groupText, groupId, colName } = deserializeColInfo(key);
+  return (groupText.startsWith(REASONING_TEXT) || groupText.startsWith(SUPPORT_ARTICLES_TEXT)) ? shouldInclude : !shouldInclude;
+}
+
 const GenericOutput: React.FC<GenericOutputProps> = ({ label, item }) => {
   return (
     <div
@@ -23,7 +30,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({ label, item }) => {
         "w-12": INFORMATIONAL_CALCULATOR_NAMES.includes(label),
       })}
     >
-      {Object.keys(item).map((key) => {
+      {Object.keys(item).filter(filterPopups(false)).map((key) => {
         const { groupText, groupId, colName } = deserializeColInfo(key);
         const value = item[key];
 
@@ -31,24 +38,16 @@ const GenericOutput: React.FC<GenericOutputProps> = ({ label, item }) => {
           return null;
 
         return (
-          <React.Fragment key={key}>
-            {(groupText.startsWith(REASONING_TEXT) || groupText.startsWith(SUPPORT_ARTICLES_TEXT)
-              ? <PopupOutput label={groupText} text={value} />
-              : (
-                < div
-                  className={
-                    cx({
-                      "text-center text-2xl": key === "torqueValue",
-                    })}
-                >
-                  {groupText && <b>{groupText}:</b>}
-                  {value}
-                </div>
-              ))
-            }
-          </React.Fragment>
+          <div
+            key={key}
+            className={cx({ "text-center text-2xl": key === "torqueValue" })}
+          >
+            {groupText && <b>{groupText}:</b>}
+            {value}
+          </div>
         );
       })}
+      <PopupOutput data={Object.keys(item).filter(filterPopups(true)).reduce((result, curKey) => ({...result, [curKey]: item[curKey]}), {})} />
     </div>
   );
 };
