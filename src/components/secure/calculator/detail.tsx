@@ -50,20 +50,20 @@ const DetailView: React.FC<DetailViewProps> = ({
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
       if (answers[idx]) {
-        acc.push({ question: question.colText, answer: answers[idx] });
+        acc.push({ question: question.colName || question.colText, answer: answers[idx] });
       }
 
       return acc;
     }, [] as { question: string; answer: string }[]);
   }, [questions, answers]);
 
-  const handleUpdateQuantity = (quantity: number, itemName: string) => {
+  const handleUpdateQuantity = (quantity: number, id: string) => {
     setResults((prevState) =>
       prevState.map((result) =>
         result.map((item) => ({
           ...item,
           info:
-            item.info[0].itemName === itemName
+            item.info[0].id === id
               ? [{ ...item.info[0], quantity }]
               : item.info,
         }))

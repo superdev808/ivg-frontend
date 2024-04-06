@@ -34,7 +34,7 @@ interface InputDetailsProps {
     response: ItemData[],
     collection: string
   ) => void;
-  onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onUpdateQuantity: (quantity: number, groupId: string) => void;
   onAllAnswered: (site: Site) => void;
 }
 

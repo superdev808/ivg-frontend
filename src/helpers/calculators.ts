@@ -115,7 +115,6 @@ export const getProcedureInputsAndResponse = (
   let responseOrder: string[] = [];
 
   selectedCollections.map((selectedCollection: string) => {
-    let isDisplayNameAssigned: boolean = false;
     calcInfoMap[selectedCollection].input.map((input) => {
       const filteredInputs: InputOutputValues[] = inputs.filter(
         (item: InputOutputValues) =>
@@ -124,13 +123,8 @@ export const getProcedureInputsAndResponse = (
       if (
         filteredInputs.length <= 0 ||
         (filteredInputs.length && !filteredInputs[0].isCommon)
-      ) {
-        if (!isDisplayNameAssigned) {
-          input = { ...input, displayCalculatorName: selectedCollection };
-          isDisplayNameAssigned = true;
-        }
+      )
         inputs = [...inputs, input];
-      }
     });
     responseOrder.push(selectedCollection);
   });
@@ -267,6 +261,21 @@ export const prepareExportProps = (
   };
 };
 
+export const serializeColInfo = (colInfo: InputOutputValues) => {
+  return `${colInfo.groupText || "EMPTY"}___${colInfo.colName}___${
+    colInfo.groupId
+  }`;
+};
+
+export const deserializeColInfo = (serializedColInfo: string) => {
+  const [groupText, colName, groupId] = serializedColInfo.split("___");
+  return {
+    groupText: groupText == "EMPTY" ? "" : groupText,
+    colName,
+    groupId,
+  };
+};
+
 export const parseItems = (
   item: Record<string, string>,
   outputCalcInfo: InputOutputValues[]
@@ -301,7 +310,7 @@ export const parseItems = (
       columnInfos[i].groupId == columnInfos[j].groupId;
       ++j
     ) {
-      let showText = `${columnInfos[j].groupText || "EMPTY"}___${columnInfos[j].colName}___${columnInfos[j].groupId}`;
+      let showText = serializeColInfo(columnInfos[j]);
       newInfo[showText] = item[columnInfos[j].colIndex];
     }
     newItem.info.push(newInfo);

@@ -7,6 +7,7 @@ import {
 import { ItemInsights } from "@/types/calculators";
 import PopupOutput, { REASONING_TEXT, SUPPORT_ARTICLES_TEXT } from "./Popup";
 import styles from "./style.module.scss";
+import { deserializeColInfo } from "@/helpers/calculators";
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +24,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({ label, item }) => {
       })}
     >
       {Object.keys(item).map((key) => {
-        const [groupText, colName, groupId] = key.split("___");
+        const { groupText, groupId, colName } = deserializeColInfo(key);
         const value = item[key];
 
         if (!value)
@@ -40,7 +41,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({ label, item }) => {
                       "text-center text-2xl": key === "torqueValue",
                     })}
                 >
-                  {groupText !== "EMPTY" && <b>{groupText}:</b>}
+                  {groupText && <b>{groupText}:</b>}
                   {value}
                 </div>
               ))

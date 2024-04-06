@@ -17,18 +17,8 @@ import ComponentDetails from "../../ComponentDetails";
 
 import AutoPopulatePromt from "./AutoPopulatePromt";
 import QuestionNavbar from "./QuestionNavbar";
-
-const getProgessValue = (index: number, input: InputOutputValues[]) => {
-  const totalQuestionCount = input.filter(
-    (elem) => elem.text || elem.name
-  ).length;
-
-  const availableIndex = input
-    .slice(0, index)
-    .filter((elem) => elem.text || elem.name).length;
-
-  return Math.floor((availableIndex / totalQuestionCount) * 100);
-};
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
+import { parseItems } from "@/helpers/calculators";
 
 interface QuestionnaireProps {
   site: Site;
@@ -49,7 +39,7 @@ interface QuestionnaireProps {
     response: ItemData[],
     collection: string
   ) => void;
-  onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onUpdateQuantity: (quantity: number, groupId: string) => void;
   onAllAnswered: (site: Site) => void;
 }
 
@@ -80,6 +70,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
     useState<boolean>(false);
   const [canProceed, setCanProceed] = useState<boolean>(true);
   const toastRef = useRef(null);
+  const { calcInfoMap } = useCalculatorsInfo()
 
   useEffect(() => {
     if (showAutoPopulatePrompt) {
@@ -108,7 +99,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   ]);
 
   const { isLoading } = useQuery(
-    [input, level, answers, option, site, canProceed],
+    [input, level, answers, option, site, canProceed, calcInfoMap],
     async () => {
       if (!canProceed) {
         return;
@@ -118,39 +109,36 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
         return;
       }
 
-      if (!input[level]) {
-        return;
-      }
+      // if (!input[level]) {
+      //   return;
+      // }
 
       const quiz = {} as any;
+      const inspectedCalculatorType = input[level].calculatorType;
+      const inspectedCalculatorInput = calcInfoMap[inspectedCalculatorType].input;
+      const inspectedCalculatorOutput = calcInfoMap[inspectedCalculatorType].output;
+      let inspectedCalculatorLevel = 0;
 
       answers.forEach((answer, index) => {
-        if (quiz[input[level]?.name]) {
-          delete quiz[input[level]?.name];
-        }
-
-        if (
-          answer &&
-          (input[index].isCommon ||
-            input[index].calculator === input[level].calculator)
-        ) {
-          quiz[input[index].name] = answer;
+        if (input[index].isCommon || input[index].calculatorType === inspectedCalculatorType) {
+          quiz[input[index].colIndex] = answer;
+          inspectedCalculatorLevel += 1;
         }
       });
-
       try {
-        const response: Response = await fetch(
-          `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/allOnXCalculator`,
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/materials`,
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              type: input[level]?.calculator,
-              output: input[level]?.outputFrom,
+              type: encodeURIComponent(inspectedCalculatorType),
               quiz,
-              fields: [input[level]?.name].filter(Boolean),
+              fields: inspectedCalculatorLevel < inspectedCalculatorInput.length
+                ? [input[level]?.colIndex]
+                : inspectedCalculatorOutput.map((item) => item.colIndex),
             }),
           }
         );
@@ -168,20 +156,18 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
           });
           return;
         }
+        const { data: newAnswerOptions } = await response.json();
 
-        const {
-          data: { result: newAnswerOptions, quizResponse = null },
-        } = await response.json();
+        const originalAnswerOptions: any[] = answerOptions.slice(0, level);
 
-        const originalAnswerOptions: string[][] = answerOptions.slice(0, level);
-
-        if (newAnswerOptions.length) {
-          setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
+        if (inspectedCalculatorLevel == inspectedCalculatorInput.length) {
+          onQuizResponse(site, newAnswerOptions.map((item: Record<string, string>) => parseItems(item, inspectedCalculatorOutput)).flat(), inspectedCalculatorType);
+          setAnswerOptions([...originalAnswerOptions, [""]]);
+          return;
         }
-
-        if (quizResponse) {
-          onQuizResponse(site, quizResponse, input[level]?.outputFrom ?? "");
-        }
+        // if (newAnswerOptions.length) {
+        setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
+        // }
       } catch (error: any) {
         (toastRef.current as any).show({
           severity: "error",
@@ -198,13 +184,6 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
     return autoQuestions || input.slice(0, level + 1);
   }, [input, level, autoQuestions]);
 
-  const getCalculatorNameByQuestion = (index: number) => {
-    const question = questions
-      .slice(0, index + 1)
-      .findLast((question) => question.displayCalculatorName);
-    return question?.displayCalculatorName;
-  };
-
   const handleSelectAnswer = (index: number) => (value: string) => {
     setCanProceed(true);
     setAutoQuestions(null);
@@ -212,24 +191,22 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
     if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value) {
       setIsAutoPopulatedAnswersChanged(true);
     }
-    if (value === "" && questions[index].name === "") {
-      new Promise((resolve) => {
-        setLevel(index);
-        setTimeout(() => resolve(true), 1000);
-      }).then(() => {
-        setLevel(index + 1);
-      });
-    } else {
-      setLevel(index + 1);
-    }
+    // if (value === "" && questions[index].name === "") {
+    //   new Promise((resolve) => {
+    //     setLevel(index);
+    //     setTimeout(() => resolve(true), 1000);
+    //   }).then(() => {
+    //     setLevel(index + 1);
+    //   });
+    // } else {
+    setLevel(index + 1);
+    // }
 
     const newAnswers = answers.slice(0, index);
     newAnswers[index] = value;
     setAnswers(newAnswers);
 
-    if (!(questions[index].name === "" && questions[index].text === "")) {
-      onInputSelect(site, questions[index], newAnswers[index]);
-    }
+    onInputSelect(site, questions[index], newAnswers[index]);
   };
 
   const handleAutoPopulateChange = (value: string) => {
@@ -261,19 +238,13 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   };
 
   const quiz = useMemo(() => {
-    const res: { question: string; answer: string }[] = [];
-
-    answers.forEach((answer, answerIdx) => {
-      if (answer) {
-        res.push({
-          question: input[answerIdx].text || input[answerIdx].name,
-          answer,
-        });
+    return questions.reduce((acc, question, idx) => {
+      if (answers[idx]) {
+        acc.push({ question: question.colName || question.colText, answer: answers[idx] });
       }
-    });
-
-    return res;
-  }, [answers, input]);
+      return acc;
+    }, [] as { question: string; answer: string }[]);
+  }, [questions, answers]);
 
   const answeredAllQuestions = Boolean(
     input.length > 0 && answers.length === input.length
@@ -309,18 +280,18 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
       )}
 
       <div className="px-4 grid">
-        {questions.map((quiz, index) => {
+        {level < input.length && questions.map((quiz, index) => {
           if (index !== level) {
             return null;
           }
 
           if (
-            answerOptions[index] &&
+            // answerOptions[index] &&
             answerOptions[index].length === 1 &&
             answerOptions[index][0] === ""
           ) {
             if (
-              index <= level &&
+              // index <= level &&
               level < input.length &&
               answers[index] !== ""
             ) {
@@ -329,19 +300,15 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
             return null;
           }
 
-          if (!quiz.text || !quiz.name || !answerOptions[index]) {
-            return null;
-          }
-
           return (
             <Quiz
               key={`quiz-${index}`}
-              question={quiz.name}
-              calculatorName={getCalculatorNameByQuestion(index)}
+              question={quiz}
+              calculatorName={calcInfoMap[input[index].calculatorType].label}
               answers={answerOptions[index]}
               currentAnswer={answers[index]}
               disabled={showLoader}
-              progress={getProgessValue(index, input)}
+              progress={Math.floor((index / input.length) * 100)}
               onSelectAnswer={handleSelectAnswer(index)}
             />
           );

@@ -11,6 +11,7 @@ import TeethSelector from "@/components/shared/TeethSelector";
 import {
   getProcedureCollections,
   getProcedureInputsAndResponse,
+  serializeColInfo,
 } from "@/helpers/calculators";
 import {
   CALCULATOR_NAME_COLLECTION_MAPPINGS,
@@ -229,28 +230,25 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     let data: SiteData = cloneDeep(sitesData);
     const inputDetails: InputDetail[] = cloneDeep(data[site.name].inputDetails);
     const indexOfQuestion: number = inputDetails.findIndex(
-      (input) => input.question === question.text
+      (input) => input.id === serializeColInfo(question)
     );
     if (indexOfQuestion > -1) {
       inputDetails[indexOfQuestion].answer = answer;
       inputDetails.splice(indexOfQuestion + 1);
     } else {
       inputDetails.push({
-        question: question.text,
+        id: serializeColInfo(question),
+        question: question.colName || question.colText,
         answer,
       });
     }
 
     //remove next collection responses
-    const responseOrder: string[] =
-      procedureInputsAndResponse?.responseOrder || [];
-    const calculators: string[] = responseOrder.map(
-      (key: string) => CALCULATOR_NAME_COLLECTION_MAPPINGS[key]
-    );
+    const calculators: string[] = procedureInputsAndResponse?.responseOrder || [];
     const componentDetails: ComponentDetail = cloneDeep(
       data[site.name].componentDetails
     );
-    const indexOfCollection: number = calculators.indexOf(question.calculator);
+    const indexOfCollection: number = calculators.indexOf(question.calculatorType);
     if (indexOfCollection !== -1) {
       const keysToRemove: string[] = calculators.slice(indexOfCollection);
       keysToRemove.map((col: string) => {
@@ -268,67 +266,70 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     setSitesData(updatedData);
   };
 
-  const handleQuizResponse = (
+  const handleQuizResponse = useCallback((
     site: Site,
     response: ItemData[],
     collection: string
   ) => {
-    let data: SiteData = cloneDeep(sitesData);
-    let componentDetails: ComponentDetail = cloneDeep(
-      data[site.name].componentDetails
-    );
+    setSitesData((prevSitesData) => {
+      let data: SiteData = cloneDeep(prevSitesData);
+      let componentDetails: ComponentDetail = cloneDeep(
+        data[site.name].componentDetails
+      );
 
-    if (
-      !(
-        has(componentDetails, collection) &&
-        isEqual(componentDetails[collection], response)
-      )
-    ) {
-      componentDetails = { ...componentDetails, [collection]: response };
-      const updatedData = {
-        ...data,
-        [site.name]: {
-          inputDetails: data[site.name].inputDetails,
-          componentDetails,
-        },
-      };
-      setSitesData(updatedData);
-    }
-  };
+      if (
+        !(
+          has(componentDetails, collection) &&
+          isEqual(componentDetails[collection], response)
+        )
+      ) {
+        componentDetails = { ...componentDetails, [collection]: response };
+        const updatedData = {
+          ...data,
+          [site.name]: {
+            inputDetails: data[site.name].inputDetails,
+            componentDetails,
+          },
+        };
+        return updatedData;
+      }
+      return prevSitesData;
+    })
+  }, []);
 
-  const handleAutoPopulate = (dataToPopulate: AutoPopulateData | null) => {
+  const handleAutoPopulate = useCallback((dataToPopulate: AutoPopulateData | null) => {
     setAutoPopulateData(dataToPopulate);
 
-    if (dataToPopulate) {
-      const newSitesData: SiteData = cloneDeep(sitesData);
-      const siteNameToPopulate = dataToPopulate.site.name;
-      const data = { ...newSitesData[siteNameToPopulate] };
+    setSitesData((prevSitesData) => {
+      if (dataToPopulate) {
+        const newSitesData: SiteData = cloneDeep(prevSitesData);
+        const siteNameToPopulate = dataToPopulate.site.name;
+        const data = { ...newSitesData[siteNameToPopulate] };
 
-      Object.keys(newSitesData).forEach((siteName: string) => {
-        if (siteName !== siteNameToPopulate) {
-          newSitesData[siteName] = data;
-        }
-      });
+        Object.keys(newSitesData).forEach((siteName: string) => {
+          if (siteName !== siteNameToPopulate) {
+            newSitesData[siteName] = data;
+          }
+        });
+        return newSitesData;
+      } else {
+        const newSitesData: SiteData = cloneDeep(prevSitesData);
+        const firstSiteName = selectedSites[0].name;
 
-      setSitesData(newSitesData);
-    } else {
-      const newSitesData: SiteData = cloneDeep(sitesData);
-      const firstSiteName = selectedSites[0].name;
+        Object.keys(newSitesData).forEach((siteName: string) => {
+          if (siteName !== firstSiteName) {
+            newSitesData[siteName] = {
+              inputDetails: [],
+              componentDetails: {},
+            };
+          }
+        });
+        return newSitesData
+      }
+    })
+  }, [selectedSites]);
 
-      Object.keys(newSitesData).forEach((siteName: string) => {
-        if (siteName !== firstSiteName) {
-          newSitesData[siteName] = {
-            inputDetails: [],
-            componentDetails: {},
-          };
-        }
-      });
-
-      setSitesData(newSitesData);
-    }
-  };
-
-  const handleAdditionalInputs = (value: string, target: string) => {
+  const handleAdditionalInputs = useCallback((value: string, target: string) => {
     setAdditionalInputs((prev: KeyValuePair) => {
       let state = { ...prev };
       if (
@@ -347,9 +348,9 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     });
     setSelectedSites([]);
     setSitesData({});
-  };
+  }, []);
 
-  const handleSiteSpecificReport = (value: string) => {
+  const handleSiteSpecificReport = useCallback((value: string) => {
     setSiteSpecificReport(value);
     if (value === SITE_SPECIFIC_REPORT_OPTIONS[1].value) {
       handleSiteChange(1, true);
@@ -357,47 +358,47 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       setSelectedSites([]);
       setSitesData({});
     }
-  };
+  }, [handleSiteChange]);
 
-  const handleCollectionChange = (e: CheckboxChangeEvent) => {
-    let _selectedCollections: string[] = [...selectedCollections];
+  const handleCollectionChange = useCallback((e: CheckboxChangeEvent) => {
+    setSelectedCollections((prevSelectedCollections) => {
+      let _selectedCollections: string[] = [...prevSelectedCollections];
 
-    if (
-      siteSpecificReport === SITE_SPECIFIC_REPORT_OPTIONS[1].value &&
-      !selectedCollections.length
-    ) {
-      handleSiteChange(1, true);
-    }
-    if (e.checked) {
-      _selectedCollections.push(e.value);
-    } else {
-      _selectedCollections = _selectedCollections.filter(
-        (collection) => collection !== e.value
-      );
-    }
+      if (
+        siteSpecificReport === SITE_SPECIFIC_REPORT_OPTIONS[1].value &&
+        !prevSelectedCollections.length
+      ) {
+        handleSiteChange(1, true);
+      }
+      if (e.checked) {
+        _selectedCollections.push(e.value);
+      } else {
+        _selectedCollections = _selectedCollections.filter(
+          (collection) => collection !== e.value
+        );
+      }
 
-    if (_selectedCollections.length === 0) {
-      setSelectedSites([]);
-      setSitesData({});
-    }
-    setSelectedCollections(_selectedCollections);
-  };
+      if (_selectedCollections.length === 0) {
+        setSelectedSites([]);
+        setSitesData({});
+      }
+      return _selectedCollections;
+    })
+  }, [handleSiteChange, siteSpecificReport]);
 
-  const handleUpdateQuantity = (quantity: number, itemName: string) => {
-    const newTotalQuantities = cloneDeep(totalQuantities);
+  const handleUpdateQuantity = useCallback((quantity: number, groupId: string) => {
+    setTotalQuantities((prevTotalQuantities) => {
+      const newTotalQuantities = cloneDeep(prevTotalQuantities);
+      const index = newTotalQuantities.findIndex((item) => item.id === groupId);
 
-    const index = newTotalQuantities.findIndex(
-      (item) => item.itemName === itemName
-    );
-
-    if (index === -1) {
-      newTotalQuantities.push({ itemName, quantity });
-    } else {
-      newTotalQuantities[index].quantity = quantity;
-    }
-
-    setTotalQuantities(newTotalQuantities);
-  };
+      if (index === -1) {
+        newTotalQuantities.push({ id: groupId, quantity });
+      } else {
+        newTotalQuantities[index].quantity = quantity;
+      }
+      return newTotalQuantities;
+    })
+  }, []);
 
   return (
     <div className="flex-grow-1">

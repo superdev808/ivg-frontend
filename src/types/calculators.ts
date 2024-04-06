@@ -26,7 +26,7 @@ export type ItemInsights = {
   quantity: number;
   id: string;
   [key: string]: any;
-}
+};
 
 export interface ItemData {
   id?: string;
@@ -57,7 +57,7 @@ export interface KeyValuePair {
 }
 
 export interface TotalQuantities {
-  itemName: string;
+  id: string;
   quantity: number;
 }
 
@@ -70,8 +70,6 @@ export interface InputOutputValues {
   groupText: string;
   isCommon: boolean;
   calculatorType: string;
-
-  displayCalculatorName?: string;
 }
 
 export interface AutoPopulateData {

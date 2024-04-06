@@ -4,12 +4,13 @@ import { CALCULATOR_NAME_COLLECTION_MAPPINGS } from "@/constants/calculators";
 import { ComponentDetail, InputDetail, ItemData } from "@/types/calculators";
 
 import Result from "../../Result";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 interface ComponentDetailsProps {
   componentDetails: ComponentDetail;
   responseOrder: string[];
   quiz: InputDetail[];
-  onUpdateQuantity: (value: number, itemName: string) => void;
+  onUpdateQuantity: (value: number, groupId: string) => void;
 }
 
 const ComponentDetails: React.FC<ComponentDetailsProps> = ({
@@ -18,6 +19,7 @@ const ComponentDetails: React.FC<ComponentDetailsProps> = ({
   quiz,
   onUpdateQuantity,
 }) => {
+  const { calcInfoMap } = useCalculatorsInfo();
   const results = useMemo(() => {
     const response: Array<{
       calculatorType: string;
@@ -25,16 +27,14 @@ const ComponentDetails: React.FC<ComponentDetailsProps> = ({
       items: ItemData[];
     }> = [];
 
-    responseOrder.forEach((key) => {
-      const calculatorType = CALCULATOR_NAME_COLLECTION_MAPPINGS[key];
-
+    responseOrder.forEach((calculatorType) => {
       if (!calculatorType || !componentDetails[calculatorType]) {
         return;
       }
 
       const item = {
         calculatorType,
-        name: key,
+        name: calcInfoMap[calculatorType].label,
         items: componentDetails[calculatorType],
       };
 
@@ -42,7 +42,7 @@ const ComponentDetails: React.FC<ComponentDetailsProps> = ({
     });
 
     return response;
-  }, [componentDetails, responseOrder]);
+  }, [componentDetails, responseOrder, calcInfoMap]);
 
   return (
     <div className="w-full flex flex-column justify-content-center gap-8 mt-4">

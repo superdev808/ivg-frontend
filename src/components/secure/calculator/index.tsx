@@ -69,10 +69,10 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
         setItems(newAnswerOptions || []);
         return;
       }
-      if (newAnswerOptions.length) {
-        setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
-        setItems([]);
-      }
+      // if (newAnswerOptions.length) {
+      setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
+      setItems([]);
+      // }
     },
     { refetchOnWindowFocus: false }
   );
@@ -109,18 +109,18 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
     <div className="flex w-full justify-content-center mb-8">
       <div className="w-12 flex px-2 py-2 border-round flex-column">
         <div className="grid">
-          {questions.map((quiz, index) => {
+          {level < input.length && questions.map((quiz, index) => {
             if (index !== level) {
               return null;
             }
 
             if (
-              answerOptions[index] &&
-              answerOptions[index].length === 1 &&
+              // answerOptions[index] &&
+              answerOptions[index]?.length === 1 &&
               answerOptions[index][0] === ""
             ) {
               if (
-                index <= level &&
+                // index <= level &&
                 level < input.length &&
                 answers[index] !== ""
               ) {

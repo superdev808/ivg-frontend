@@ -36,7 +36,7 @@ interface ResultProps {
   calculatorType: string;
   hideMenu?: boolean;
   className?: string;
-  onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onUpdateQuantity: (quantity: number, groupId: string) => void;
 }
 
 const Result: React.FC<ResultProps> = ({

@@ -15,7 +15,6 @@ const InputSummary: React.FC<InputSummary> = ({ summary }) => {
 
     return inputDetails
       .filter((item) => Boolean(item.answer))
-      .map((item) => item.question);
   }, [summary]);
 
   if (questions.length === 0) {
@@ -25,7 +24,7 @@ const InputSummary: React.FC<InputSummary> = ({ summary }) => {
   const renderCell = (item: InputSummaryType, column: ColumnBodyOptions) => {
     const inputDetails = item.inputDetails;
     const answer =
-      inputDetails.find((elem) => elem.question === column.field)?.answer || "";
+      inputDetails.find((elem) => elem.id === column.field)?.answer || "";
     return answer;
   };
 
@@ -42,9 +41,9 @@ const InputSummary: React.FC<InputSummary> = ({ summary }) => {
         <Column field="site" header="Site" />
         {questions.map((question) => (
           <Column
-            key={question}
-            field={question}
-            header={question}
+            key={question.id}
+            field={question.id}
+            header={question.question}
             body={renderCell}
           />
         ))}

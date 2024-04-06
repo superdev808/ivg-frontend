@@ -12,7 +12,7 @@ import GenericOutput from "./Generic";
 
 interface OutputsProps {
   items: ItemData[];
-  onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onUpdateQuantity: (quantity: number, groupId: string) => void;
 }
 
 const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
@@ -41,7 +41,7 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
                 <InputNumber
                   value={item.quantity}
                   onValueChange={({ value }) =>
-                    onUpdateQuantity(value as number, item.itemName || "")
+                    onUpdateQuantity(value as number, item.id)
                   }
                   showButtons
                   buttonLayout="horizontal"
