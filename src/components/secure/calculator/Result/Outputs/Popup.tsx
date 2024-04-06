@@ -53,7 +53,7 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ data }) => {
     });
   };
 
-  return (
+  return Object.keys(data).length > 0 && (
     <i
       className="pi pi-question-circle text-light-green cursor-pointer"
       onClick={handleOpenPopup}
