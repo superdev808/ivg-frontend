@@ -4,6 +4,7 @@ import { confirmPopup } from "primereact/confirmpopup";
 import React from "react";
 
 import styles from "./style.module.scss";
+import { isValidUrl } from "@/helpers/calculators";
 
 const cx = classNames.bind(styles);
 
@@ -31,12 +32,12 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ data }) => {
           {
             Object.entries(data).map(([label, text]) => (
               <>
-                {label.startsWith(REASONING_TEXT) && (
+                {(label.startsWith(REASONING_TEXT) || !isValidUrl(text)) && (
                   <div>
                     <b>{REASONING_TEXT}:</b> {text}
                   </div>
                 )}
-                {label.startsWith(SUPPORT_ARTICLES_TEXT) && (
+                {(label.startsWith(SUPPORT_ARTICLES_TEXT) || isValidUrl(text)) && (
                   <Link
                     className="text-beige"
                     href={text}

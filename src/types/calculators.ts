@@ -142,6 +142,27 @@ export interface AnnouncementItem {
 export interface Summary extends ItemInsights {
   description: string;
   brand: string;
+  itemName?: string;
+  itemNumber?: string;
+  link?: string;
+  manufacturer?: string;
+  notes?: string;
+// for material calculators
+  recommendedSingleUnitAbutmentMaterial?: string;
+  recommendedMUAMaterial?: string;
+  recommendedRestorationDesign?: string;
+  recommendedImplantBridgeMaterial?: string;
+  secondRecommendedSingleUnitAbutmentMaterial?: string;
+  secondRecommendedRestorationDesign?: string;
+  secondRecommendedImplantBridgeMaterial?: string;
+  recommendedAbutmentMaterial?: string;
+  recommendedCrownMaterial?: string;
+  secondAbutmentMaterialChoice?: string;
+  secondRestorationDesignChoice?: string;
+  secondCrownMaterialChoice?: string;
+  recommendedBridgeMaterial?: string;
+  secondMaterialChoice?: string;
+  thirdMaterialChoice?: string;
 }
 
 export interface CalculatorInfoMap {

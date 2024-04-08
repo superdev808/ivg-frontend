@@ -31,7 +31,7 @@ export const Calculators = () => {
   const calcItems = CALCULATOR_GROUP_ITEMS.reduce(
     (accumulator: string[], currentValue: CalculatorGroupItem) => [...accumulator, ...currentValue.subItems],
     []
-  );
+  ).filter(calcType => calcType in calcInfoMap);
 
   const handleSearch = (str = "") => {
     if (!str) {
@@ -43,7 +43,7 @@ export const Calculators = () => {
 
     str = str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regExp = new RegExp(str, "ig");
-    let newCalcTypes: string[] = Object.keys(calcItems).filter(calcType => (regExp.test(calcType) || regExp.test(calcInfoMap[calcType].label)));
+    let newCalcTypes: string[] = calcItems.filter(calcType => (regExp.test(calcType) || regExp.test(calcInfoMap[calcType].label)));
 
     fetch(`${process.env.NEXT_PUBLIC_APP_SERVER_URL}/search?text=${str}`, {
       method: "GET",
@@ -55,7 +55,7 @@ export const Calculators = () => {
       .then((result) => {
         const { data } = result;
 
-        newCalcTypes = _.uniq([...newCalcTypes, data]);
+        newCalcTypes = _.uniq([...newCalcTypes, ...data]);
       })
       .catch((ex) => {
         console.log("Error Happening: ", ex.message);

@@ -6,6 +6,7 @@ import union from "lodash/union";
 import uniqBy from "lodash/uniqBy";
 
 import {
+  CALCULATOR_OUTPUT_MAPPING,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
   MATERIAL_CALCULATOR_TYPES,
   MUA_OPTIONS,
@@ -23,6 +24,7 @@ import {
   PROCEDURE,
   Patient,
   SiteData,
+  Summary,
 } from "@/types/calculators";
 
 export const isValidUrl = (urlString = "") => {
@@ -131,7 +133,7 @@ export const getProcedureInputsAndResponse = (
 export const getComponentSummary = (
   sitesData: SiteData,
   responseOrder: string[]
-) => {
+): Summary[] => {
   const items: ItemData[] = [];
 
   const brand =
@@ -140,8 +142,30 @@ export const getComponentSummary = (
       (item: InputDetail) => item.question === "Implant Brand"
     )?.answer || "";
 
+  console.log("Before Summary Data:", sitesData, responseOrder);
+
   Object.keys(sitesData).forEach((siteName) => {
     const componentDetail = cloneDeep(sitesData[siteName].componentDetails);
+
+    responseOrder.forEach((calculatorType) => {
+      componentDetail[calculatorType]?.forEach((response) => {
+        response.info.forEach((info, index) => {
+          let newInfo: ItemInsights = { id: info.id, quantity: info.quantity };
+          Object.keys(info).forEach((key) => {
+            let i,
+              { colName, groupId, groupText } = deserializeColInfo(key);
+            for (let i = 0; i < CALCULATOR_OUTPUT_MAPPING.length; ++i)
+              if (CALCULATOR_OUTPUT_MAPPING[i][1].test(groupText) || CALCULATOR_OUTPUT_MAPPING[i][1].test(colName)) {
+                newInfo[CALCULATOR_OUTPUT_MAPPING[i][0]] = info[key];
+                if (/name/gi.test(key)) newInfo.description = colName;
+                break;
+              }
+            if (i == CALCULATOR_OUTPUT_MAPPING.length) newInfo[key] = info[key];
+          });
+          response.info[index] = newInfo;
+        });
+      });
+    });
 
     responseOrder.forEach((calculatorType) => {
       if (MATERIAL_CALCULATOR_TYPES.includes(calculatorType)) {
@@ -153,15 +177,12 @@ export const getComponentSummary = (
       }
 
       componentDetail[calculatorType]?.forEach((response) => {
-        const itemIndex = findIndex(
-          items,
-          (item) => item.label === response.label
-        );
+        const itemIndex = findIndex(items, (item) => item.id === response.id);
 
         if (itemIndex > -1) {
           items[itemIndex].info.forEach((info, i) => {
             const indexOfInfo = response.info.findIndex(
-              (res) => info.itemName === res.itemName && info.link === res.link
+              (res) => info.id === res.id && info.link === res.link
             );
 
             if (indexOfInfo > -1) {
@@ -177,7 +198,7 @@ export const getComponentSummary = (
             } else {
               items[itemIndex].info = uniqBy(
                 [...items[itemIndex].info, ...response.info],
-                "itemName"
+                "id"
               );
             }
           });
@@ -185,7 +206,7 @@ export const getComponentSummary = (
           if (items[itemIndex].info.length !== response.info.length) {
             items[itemIndex].info = uniqBy(
               [...items[itemIndex].info, ...response.info],
-              "itemName"
+              "id"
             );
           }
         } else {
@@ -195,13 +216,11 @@ export const getComponentSummary = (
     });
   });
 
-  const summaryData = items.flatMap((category: ItemData) =>
-    category.info.map((item) => ({
-      description: category.label,
-      ...item,
-      brand,
-    }))
+  const summaryData = items.flatMap(
+    (category: ItemData) => category.info as Summary[]
   );
+
+  console.log("After Summary Data:", summaryData);
 
   return summaryData;
 };
@@ -224,7 +243,7 @@ export const prepareExportProps = (
     },
   };
 
-  const componentSummary = getComponentSummary(sitesData, [calculatorName]);
+  const componentSummary = getComponentSummary(sitesData, [calculatorType]);
 
   return {
     inputSummary: [{ name: "Site 1", inputDetails: quiz, componentDetails }],
@@ -238,18 +257,25 @@ export const prepareExportProps = (
   };
 };
 
-export const serializeColInfo = (colInfo: InputOutputValues) => {
+export const serializeColInfo = (
+  colInfo: Pick<
+    InputOutputValues,
+    "colName" | "groupText" | "groupId" | "calculatorType"
+  >
+) => {
   return `${colInfo.groupText || "EMPTY"}___${colInfo.colName}___${
     colInfo.groupId
-  }`;
+  }___${colInfo.calculatorType}`;
 };
 
 export const deserializeColInfo = (serializedColInfo: string) => {
-  const [groupText, colName, groupId] = serializedColInfo.split("___");
+  const [groupText, colName, groupId, calculatorType] =
+    serializedColInfo.split("___");
   return {
     groupText: groupText == "EMPTY" ? "" : groupText,
     colName,
     groupId,
+    calculatorType,
   };
 };
 
@@ -276,6 +302,7 @@ export const parseItems = (
     }) as InputOutputValues[];
   for (i = 0; i < columnInfos.length; i = j) {
     let newItem: ItemData = {
+      id: `${columnInfos[i].groupId} (${columnInfos[i].calculatorType})`,
       label: columnInfos[i].groupName,
       info: [],
     };

@@ -198,6 +198,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
           {patientInfo && (
             <PDFContent
               calculatorName={calculatorName}
+              calculatorType={calculatorName}
               patientInfo={patientInfo}
               showTeethSelection={showTeethSelection}
               totalQuantities={totalQuantities}

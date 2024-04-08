@@ -7,7 +7,8 @@ import {
 import { ItemInsights } from "@/types/calculators";
 import PopupOutput, { REASONING_TEXT, SUPPORT_ARTICLES_TEXT } from "./Popup";
 import styles from "./style.module.scss";
-import { deserializeColInfo } from "@/helpers/calculators";
+import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
+import Link from "next/link";
 
 const cx = classNames.bind(styles);
 
@@ -42,12 +43,20 @@ const GenericOutput: React.FC<GenericOutputProps> = ({ label, item }) => {
             key={key}
             className={cx({ "text-center text-2xl": key === "torqueValue" })}
           >
-            {groupText && <b>{groupText}:</b>}
-            {value}
+            {groupText && <b>{groupText}: </b>}
+            {typeof value == 'string' && isValidUrl(value) ?
+              <Link
+                href={value}
+                target="_blank"
+              >
+                Click here
+              </Link>
+              : value
+            }
           </div>
         );
       })}
-      <PopupOutput data={Object.keys(item).filter(filterPopups(true)).reduce((result, curKey) => ({...result, [curKey]: item[curKey]}), {})} />
+      <PopupOutput data={Object.keys(item).filter(filterPopups(true)).reduce((result, curKey) => ({ ...result, [curKey]: item[curKey] }), {})} />
     </div>
   );
 };

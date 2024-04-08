@@ -406,3 +406,52 @@ export const CALCULATOR_IMAGES: Record<string, string> = {
   Default:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/No+Image+BW.jpg",
 };
+
+// Please be careful when adding new mappings to this array
+// The app finds the first element matching the regexp so you should care the order.
+export const CALCULATOR_OUTPUT_MAPPING: [string, RegExp][] = [
+  // For "MATERIAL_CALCULATOR_GENERIC_OUTPUT_MAPPING"
+  [
+    "secondRecommendedSingleUnitAbutmentMaterial",
+    /Second Recommended Single Unit Abutment Material/gi,
+  ],
+  [
+    "secondRecommendedRestorationDesign",
+    /Second Recommended Restoration Design/gi,
+  ],
+  [
+    "secondRecommendedImplantBridgeMaterial",
+    /Second Recommended Implant Bridge Material/gi,
+  ],
+  ["secondAbutmentMaterialChoice", /Second Abutment Material Choice/gi],
+  ["secondRestorationDesignChoice", /Second Restoration Design Choice/gi],
+  ["secondCrownMaterialChoice", /Second Crown Material Choice/gi],
+  ["secondMaterialChoice", /Second Material Choice/gi],
+  ["thirdMaterialChoice", /Third Material Choice/gi],
+
+  // For "MATERIAL_CALCULATOR_POPUP_OUTPUT_MAPPING"
+  [
+    "recommendedSingleUnitAbutmentMaterial",
+    /Recommended Single Unit Abutment Material/gi,
+  ],
+  [
+    "recommendedMUAMaterial",
+    /Recommended Multi-Unit Abutment (MUA) Material/gi,
+  ],
+  ["recommendedRestorationDesign", /Recommended Restoration Design/gi],
+  ["recommendedImplantBridgeMaterial", /Recommended Implant Bridge Material/gi],
+  ["recommendedAbutmentMaterial", /Recommended Abutment Material/gi],
+  ["recommendedCrownMaterial", /Recommended Crown Material/gi],
+  ["recommendedBridgeMaterial", /Recommended Bridge Material/gi],
+
+  // For "CALCULATOR_GENERIC_OUTPUT_MAPPING"
+  ["itemName", /name/gi],
+  ["itemNumber", /number/gi],
+  ["manufacturer", /manufacturer/gi],
+  ["manufacturerRecommendations", /Manufacturer Recommendations/gi],
+  ["torqueValue", /Torque Value/gi],
+  ["notes", /Notes/gi],
+
+  ["reasoning", /reasoning/gi],
+  ["supportingArticle", /supporting article/gi],
+];
