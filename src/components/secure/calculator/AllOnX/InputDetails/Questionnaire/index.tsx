@@ -1,6 +1,6 @@
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from "primereact/toast";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
 
 import { AUTO_POPULATE_OPTIONS } from "@/constants/calculators";
@@ -10,6 +10,7 @@ import {
   Site,
   SiteData,
   ItemData,
+  InputDetail,
 } from "@/types/calculators";
 
 import Quiz from "../../../quiz";
@@ -99,13 +100,15 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   ]);
 
   const { isLoading } = useQuery(
-    [input, level, answers, option, site, canProceed, calcInfoMap],
+    [input, level, option, site, canProceed, calcInfoMap],
     async () => {
       if (!canProceed) {
         return;
       }
 
-      if (level > input.length || autoPopulateData !== null) {
+      // console.log(input, level, answers, option, site);
+
+      if (level >= input.length || autoPopulateData !== null) {
         return;
       }
 
@@ -184,32 +187,22 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
     return autoQuestions || input.slice(0, level + 1);
   }, [input, level, autoQuestions]);
 
-  const handleSelectAnswer = (index: number) => (value: string) => {
+  const handleSelectAnswer = useCallback((index: number) => (value: string) => {
     setCanProceed(true);
     setAutoQuestions(null);
 
     if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value) {
       setIsAutoPopulatedAnswersChanged(true);
     }
-    // if (value === "" && questions[index].name === "") {
-    //   new Promise((resolve) => {
-    //     setLevel(index);
-    //     setTimeout(() => resolve(true), 1000);
-    //   }).then(() => {
-    //     setLevel(index + 1);
-    //   });
-    // } else {
     setLevel(index + 1);
-    // }
 
     const newAnswers = answers.slice(0, index);
     newAnswers[index] = value;
-    setAnswers(newAnswers);
-
     onInputSelect(site, questions[index], newAnswers[index]);
-  };
+    setAnswers(newAnswers);
+  }, [autoPopulate, questions, site, onInputSelect, answers])
 
-  const handleAutoPopulateChange = (value: string) => {
+  const handleAutoPopulateChange = useCallback((value: string) => {
     setAutoPopulate(value);
     setIsAutoPopulatedAnswersChanged(false);
 
@@ -218,9 +211,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
     } else {
       onAutoPopulate(null);
     }
-  };
+  }, [answerOptions, answers, site, questions, onAutoPopulate]);
 
-  const handleChange = (index: number) => {
+  const handleChange = useCallback((index: number) => {
     const answersWithIndex = answers
       .map((answer, idx) => ({ answer, idx }))
       .filter((elem) => Boolean(elem.answer));
@@ -231,19 +224,19 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
       setCanProceed(false);
       setLevel(convertedIdx);
     }
-  };
+  }, [answers]);
 
-  const handleShowSummary = () => {
+  const handleShowSummary = useCallback(() => {
     setLevel(input.length);
-  };
+  }, [input.length]);
 
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
       if (answers[idx]) {
-        acc.push({ question: question.colName || question.colText, answer: answers[idx] });
+        acc.push({ id: (question.isCommon ? '' : question.calculatorType), question: question.colName, answer: answers[idx] });
       }
       return acc;
-    }, [] as { question: string; answer: string }[]);
+    }, [] as InputDetail[]);
   }, [questions, answers]);
 
   const answeredAllQuestions = Boolean(
@@ -260,6 +253,23 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   const showLoader =
     isLoading || (input[level] && !Boolean(answerOptions[level]?.length));
 
+  useEffect(() => {
+    if (!(level < questions.length) || showLoader)
+      return;
+    if (
+      (answerOptions[level]?.length === 1 &&
+        answerOptions[level][0] === "") || input[level].colName == ""
+    ) {
+      if (
+        level < input.length &&
+        answers[level] !== ""
+      ) {
+        handleSelectAnswer(level)("")
+      }
+    }
+  }, [answerOptions, answers, level, input, handleSelectAnswer, questions.length, showLoader]);
+
+
   return (
     <div className="mt-3 relative" style={{ minHeight: 700 }}>
       <Toast ref={toastRef} position="top-right" />
@@ -272,67 +282,44 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
         onChange={handleChange}
       />
 
-      {showLoader && (
+      {showLoader ? (
         <ProgressSpinner
           className="w-1 absolute top-50 left-50"
           style={{ transform: "translate(-50%, -50%)" }}
         />
-      )}
+      ) :
+        (<div className="px-4 grid">
+          {level < questions.length && <Quiz
+            key={`quiz-${level}`}
+            question={questions[level]}
+            calculatorName={calcInfoMap[input[level].calculatorType].label}
+            answers={answerOptions[level]}
+            currentAnswer={answers[level]}
+            disabled={showLoader}
+            progress={Math.floor((level / input.length) * 100)}
+            onSelectAnswer={handleSelectAnswer(level)}
+          />}
 
-      <div className="px-4 grid">
-        {level < input.length && questions.map((quiz, index) => {
-          if (index !== level) {
-            return null;
-          }
-
-          if (
-            // answerOptions[index] &&
-            answerOptions[index].length === 1 &&
-            answerOptions[index][0] === ""
-          ) {
-            if (
-              // index <= level &&
-              level < input.length &&
-              answers[index] !== ""
-            ) {
-              handleSelectAnswer(index)("");
-            }
-            return null;
-          }
-
-          return (
-            <Quiz
-              key={`quiz-${index}`}
-              question={quiz}
-              calculatorName={calcInfoMap[input[index].calculatorType].label}
-              answers={answerOptions[index]}
-              currentAnswer={answers[index]}
-              disabled={showLoader}
-              progress={Math.floor((index / input.length) * 100)}
-              onSelectAnswer={handleSelectAnswer(index)}
-            />
-          );
-        })}
-
-        {showAutoPopulatePrompt && answeredAllQuestions && (
-          <AutoPopulatePromt
-            autoPopulate={autoPopulate}
-            onAutoPopulateChange={handleAutoPopulateChange}
-            showRefreshButton={isAutoPopulatedAnswersChanged}
-          />
-        )}
-
-        {answeredAllQuestions &&
-          showSummary &&
-          sitesData[site.name]?.componentDetails && (
-            <ComponentDetails
-              quiz={quiz}
-              componentDetails={sitesData[site.name]?.componentDetails}
-              responseOrder={responseOrder}
-              onUpdateQuantity={onUpdateQuantity}
+          {showAutoPopulatePrompt && answeredAllQuestions && (
+            <AutoPopulatePromt
+              autoPopulate={autoPopulate}
+              onAutoPopulateChange={handleAutoPopulateChange}
+              showRefreshButton={isAutoPopulatedAnswersChanged}
             />
           )}
-      </div>
+
+          {answeredAllQuestions &&
+            showSummary &&
+            sitesData[site.name]?.componentDetails && (
+              <ComponentDetails
+                quiz={quiz}
+                componentDetails={sitesData[site.name]?.componentDetails}
+                responseOrder={responseOrder}
+                onUpdateQuantity={onUpdateQuantity}
+              />
+            )}
+        </div>
+        )}
     </div>
   );
 };

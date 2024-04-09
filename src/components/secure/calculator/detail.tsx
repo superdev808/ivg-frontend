@@ -50,7 +50,7 @@ const DetailView: React.FC<DetailViewProps> = ({
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
       if (answers[idx]) {
-        acc.push({ question: question.colName || question.colText, answer: answers[idx] });
+        acc.push({ question: question.colName, answer: answers[idx] });
       }
 
       return acc;

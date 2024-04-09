@@ -109,25 +109,47 @@ export const getProcedureInputsAndResponse = (
   calcInfoMap: CalculatorInfoMap,
   selectedCollections: string[]
 ): InputAndResponse => {
-  let inputs: InputOutputValues[] = [];
-  let responseOrder: string[] = [];
+  let selectedInputs = selectedCollections
+    .map((selectedCollection: string) => [
+      ...calcInfoMap[selectedCollection].input,
+      {
+        calculatorType: selectedCollection,
+        colName: "",
+        colText: "",
+        colIndex: "",
+        groupId: "",
+        groupName: "",
+        groupText: "",
+        isCommon: false,
+      },
+    ])
+    .flat();
+  let resultInputs: InputOutputValues[] = [];
+  let colNameCountMap: Record<string, number> = {};
 
-  selectedCollections.map((selectedCollection: string) => {
-    calcInfoMap[selectedCollection].input.map((input) => {
-      const filteredInputs: InputOutputValues[] = inputs.filter(
-        (item: InputOutputValues) =>
-          item.colName && item.colName === input.colName
-      );
-      if (
-        filteredInputs.length <= 0 ||
-        (filteredInputs.length && !filteredInputs[0].isCommon)
-      )
-        inputs = [...inputs, input];
-    });
-    responseOrder.push(selectedCollection);
+  selectedInputs.forEach((input) => {
+    if (input.colName == "") return;
+    let prevValue = colNameCountMap[input.colName] || 0;
+    colNameCountMap[input.colName] = (input.isCommon ? 0 : prevValue) + 1;
   });
 
-  return { input: inputs, responseOrder };
+  selectedInputs.forEach((input) => {
+    if (input.colName == "") {
+      resultInputs.push(input);
+      return;
+    }
+    let newInput = { ...input };
+    if (colNameCountMap[input.colName] > 1) {
+      newInput.colName = `${input.colName} [${input.calculatorType}]`;
+      resultInputs.push(newInput);
+    } else if (colNameCountMap[input.colName] == 1) {
+      resultInputs.push(newInput);
+      colNameCountMap[input.colName] = 0;
+    }
+  });
+  console.log("getProcedureInputsandresponse", resultInputs);
+
+  return { input: resultInputs, responseOrder: [...selectedCollections] };
 };
 
 export const getComponentSummary = (
@@ -142,8 +164,6 @@ export const getComponentSummary = (
       (item: InputDetail) => item.question === "Implant Brand"
     )?.answer || "";
 
-  console.log("Before Summary Data:", sitesData, responseOrder);
-
   Object.keys(sitesData).forEach((siteName) => {
     const componentDetail = cloneDeep(sitesData[siteName].componentDetails);
 
@@ -155,7 +175,10 @@ export const getComponentSummary = (
             let i,
               { colName, groupId, groupText } = deserializeColInfo(key);
             for (let i = 0; i < CALCULATOR_OUTPUT_MAPPING.length; ++i)
-              if (CALCULATOR_OUTPUT_MAPPING[i][1].test(groupText) || CALCULATOR_OUTPUT_MAPPING[i][1].test(colName)) {
+              if (
+                CALCULATOR_OUTPUT_MAPPING[i][1].test(groupText) ||
+                CALCULATOR_OUTPUT_MAPPING[i][1].test(colName)
+              ) {
                 newInfo[CALCULATOR_OUTPUT_MAPPING[i][0]] = info[key];
                 if (/name/gi.test(key)) newInfo.description = colName;
                 break;
@@ -219,8 +242,6 @@ export const getComponentSummary = (
   const summaryData = items.flatMap(
     (category: ItemData) => category.info as Summary[]
   );
-
-  console.log("After Summary Data:", summaryData);
 
   return summaryData;
 };
@@ -315,11 +336,13 @@ export const parseItems = (
       ++j
     ) {
       let showText = serializeColInfo(columnInfos[j]);
-      newInfo[showText] = item[columnInfos[j].colIndex];
+      if (item[columnInfos[j].colIndex])
+        newInfo[showText] = item[columnInfos[j].colIndex];
     }
-    newItem.info.push(newInfo);
-
-    resultInfo.push(newItem);
+    if (Object.keys(newInfo).length > 2) {
+      newItem.info.push(newInfo);
+      resultInfo.push(newItem);
+    }
   }
   return resultInfo;
 };

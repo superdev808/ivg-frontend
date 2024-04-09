@@ -22,7 +22,7 @@ const QuestionNavbar: React.FC<QuestionNavbarProps> = ({
     return questions
       .map((question, questionIdx) => {
         const answer = answers[questionIdx];
-        const questionName = question.text || question.name;
+        const questionName = question.colName;
 
         if (answer) {
           return questionName;
