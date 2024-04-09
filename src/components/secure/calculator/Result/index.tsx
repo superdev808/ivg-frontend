@@ -379,20 +379,17 @@ const Result: React.FC<ResultProps> = ({
             )}
           >
             {quiz.map(
-              ({ id, question, answer }) => {
-                console.log(id);
-                return (id == '' || id == calculatorType) && (
-                  <div key={question} className="flex align-items-center gap-1">
-                    <div
-                      className="text-left text-dark-green"
-                      style={{ maxWidth: "50%" }}
-                    >
-                      {question}
-                    </div>
-                    <div className="flex-1 text-right">{answer}</div>
+              ({ id, question, answer }) => (id == undefined || id == '' || id == calculatorType) && (
+                <div key={question} className="flex align-items-center gap-1">
+                  <div
+                    className="text-left text-dark-green"
+                    style={{ maxWidth: "50%" }}
+                  >
+                    {question}
                   </div>
-                );
-              }
+                  <div className="flex-1 text-right">{answer}</div>
+                </div>
+              )
             )}
           </div>
         </div>

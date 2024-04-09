@@ -73,6 +73,8 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   const toastRef = useRef(null);
   const { calcInfoMap } = useCalculatorsInfo()
 
+
+  const sitesCount = Object.keys(sitesData).length;
   useEffect(() => {
     if (showAutoPopulatePrompt) {
       return;
@@ -86,17 +88,15 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
       setAutoQuestions(questions);
 
       setLevel(questions.length);
-    } else if (Object.keys(sitesData).length > 1) {
+    } else if (sitesCount > 1) {
       setAutoQuestions(null);
       setLevel(0);
       setAnswers([]);
     }
   }, [
     autoPopulateData,
-    site,
-    sitesData,
     showAutoPopulatePrompt,
-    onAutoPopulate,
+    sitesCount
   ]);
 
   const { isLoading } = useQuery(
@@ -106,15 +106,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
         return;
       }
 
-      // console.log(input, level, answers, option, site);
-
-      if (level >= input.length || autoPopulateData !== null) {
-        return;
-      }
-
-      // if (!input[level]) {
-      //   return;
-      // }
+      if (level >= input.length || autoPopulateData !== null) return;
 
       const quiz = {} as any;
       const inspectedCalculatorType = input[level].calculatorType;
@@ -260,12 +252,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
       (answerOptions[level]?.length === 1 &&
         answerOptions[level][0] === "") || input[level].colName == ""
     ) {
-      if (
-        level < input.length &&
-        answers[level] !== ""
-      ) {
-        handleSelectAnswer(level)("")
-      }
+      handleSelectAnswer(level)("")
     }
   }, [answerOptions, answers, level, input, handleSelectAnswer, questions.length, showLoader]);
 

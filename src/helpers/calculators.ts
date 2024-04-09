@@ -147,8 +147,6 @@ export const getProcedureInputsAndResponse = (
       colNameCountMap[input.colName] = 0;
     }
   });
-  console.log("getProcedureInputsandresponse", resultInputs);
-
   return { input: resultInputs, responseOrder: [...selectedCollections] };
 };
 
@@ -242,6 +240,8 @@ export const getComponentSummary = (
   const summaryData = items.flatMap(
     (category: ItemData) => category.info as Summary[]
   );
+
+  console.log(summaryData);
 
   return summaryData;
 };
