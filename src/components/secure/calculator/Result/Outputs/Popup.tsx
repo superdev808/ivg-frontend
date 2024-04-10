@@ -1,21 +1,24 @@
 import classNames from "classnames/bind";
-import keys from "lodash/keys";
 import Link from "next/link";
 import { confirmPopup } from "primereact/confirmpopup";
 import React from "react";
 
-import { MATERIAL_CALCULATOR_POPUP_OUTPUT_MAPPING } from "@/constants/calculators";
-import { ItemInsights } from "@/types/calculators";
-
 import styles from "./style.module.scss";
+import { isValidUrl } from "@/helpers/calculators";
 
 const cx = classNames.bind(styles);
 
+export const REASONING_TEXT = "Reasoning";
+export const SUPPORT_ARTICLES_TEXT = "Supporting Article";
+
 interface PopupOutputProps {
-  item: ItemInsights;
+  data: {
+    [key: string]: string;
+  }
 }
 
-const PopupOutput: React.FC<PopupOutputProps> = ({ item }) => {
+
+const PopupOutput: React.FC<PopupOutputProps> = ({ data }) => {
   const handleOpenPopup = (event: any) => {
     confirmPopup({
       target: event.currentTarget,
@@ -25,48 +28,37 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ item }) => {
       },
       footer: <></>,
       message: (
-        <div className="flex flex-column align-items-center gap-4 text-center text-beige -ml-3">
-          {item.reasoning && (
-            <div>
-              <b>Reasoning</b>: {item.reasoning}
-            </div>
-          )}
-          {item.supportingArticle && (
-            <Link
-              className="text-beige"
-              href={item.supportingArticle}
-              target="_blank"
-            >
-              Supporting Article
-            </Link>
-          )}
+        <div className="flex flex-column align-items-center gap-2 text-center text-beige -ml-3">
+          {
+            Object.entries(data).map(([label, text]) => (
+              <>
+                {(label.startsWith(REASONING_TEXT) || !isValidUrl(text)) && (
+                  <div>
+                    <b>{REASONING_TEXT}:</b> {text}
+                  </div>
+                )}
+                {(label.startsWith(SUPPORT_ARTICLES_TEXT) || isValidUrl(text)) && (
+                  <Link
+                    className="text-beige"
+                    href={text}
+                    target="_blank"
+                  >
+                    {SUPPORT_ARTICLES_TEXT}
+                  </Link>
+                )}
+              </>
+            ))
+          }
         </div>
       ),
     });
   };
 
-  return (
-    <>
-      <div className="flex gap-2">
-        <i
-          className="pi pi-question-circle text-light-green cursor-pointer"
-          onClick={handleOpenPopup}
-        />
-        {keys(MATERIAL_CALCULATOR_POPUP_OUTPUT_MAPPING).map((key) => {
-          const value = item[key as keyof ItemInsights];
-          return (
-            <React.Fragment key={key}>
-              {value && (
-                <div>
-                  <b>{MATERIAL_CALCULATOR_POPUP_OUTPUT_MAPPING[key]}:</b>{" "}
-                  {value}
-                </div>
-              )}
-            </React.Fragment>
-          );
-        })}
-      </div>
-    </>
+  return Object.keys(data).length > 0 && (
+    <i
+      className="pi pi-question-circle text-light-green cursor-pointer"
+      onClick={handleOpenPopup}
+    />
   );
 };
 

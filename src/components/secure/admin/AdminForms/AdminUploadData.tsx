@@ -8,27 +8,35 @@ import { Controller, useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 
 import { FormErrorMessage } from "@/components/shared/FormErrorMessage";
-import { CALCULATORS } from "@/constants/calculators";
 import { useUploadCalculatorDataMutation } from "@/redux/hooks/apiHooks";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 const POLLING_INTERVAL = 3000;
 
 interface FormValues {
   calculatorId: string;
   spreadsheetId: string;
-  pageName: string;
+  pageDataName: string;
+  pageHeaderName: string;
 }
 
-interface AdminUploadDataFormProps {}
+interface AdminUploadDataFormProps { }
 
-const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
+const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({ }) => {
   const [uploadCalculatorData, { isLoading: isSaving }] =
     useUploadCalculatorDataMutation();
+
 
   const toastRef = useRef(null);
 
   const pollingRef = useRef<any>(null);
   const [uploadingProgress, setUploadingProgress] = useState<any>(null);
+  const { calcInfoMap } = useCalculatorsInfo();
+
+  const calculatorOptions = Object.keys(calcInfoMap).filter(calcType => !calcInfoMap[calcType].disabled).map(calcType => ({
+    id: calcType,
+    label: calcInfoMap[calcType].label
+  }))
 
   useEffect(() => {
     return () => {
@@ -48,7 +56,8 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
     defaultValues: {
       calculatorId: "",
       spreadsheetId: "",
-      pageName: "",
+      pageHeaderName: "",
+      pageDataName: "",
     },
   });
 
@@ -56,7 +65,8 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
     const payload = {
       calculatorId: trim(data.calculatorId),
       spreadsheetId: trim(data.spreadsheetId),
-      pageName: trim(data.pageName),
+      pageDataName: trim(data.pageDataName),
+      pageHeaderName: trim(data.pageHeaderName),
     };
 
     try {
@@ -134,7 +144,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                   <Dropdown
                     {...field}
                     disabled={isLoading}
-                    options={CALCULATORS}
+                    options={calculatorOptions}
                     optionLabel="label"
                     optionValue="id"
                     className={cx({ "p-invalid": fieldState.error }, "w-full")}
@@ -186,7 +196,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
           />
 
           <Controller
-            name="pageName"
+            name="pageDataName"
             control={control}
             rules={{
               required: "Please provide Page Name.",
@@ -211,7 +221,42 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                   />
 
                   <label className="bg-beige" htmlFor={field.name}>
-                    Page Name
+                    Data Page Name
+                  </label>
+                </span>
+
+                {FormErrorMessage({ message: errors[field.name]?.message })}
+              </div>
+            )}
+          />
+
+          <Controller
+            name="pageHeaderName"
+            control={control}
+            rules={{
+              required: "Please provide Page Name.",
+            }}
+            render={({ field, fieldState }) => (
+              <div className="col-12 md:col-6">
+                <label
+                  htmlFor={field.name}
+                  className={cx({ "p-error": errors[field.name] })}
+                />
+
+                <span className="p-float-label w-full">
+                  <InputText
+                    id={field.name}
+                    value={field.value}
+                    disabled={isLoading}
+                    className={cx([
+                      { "p-invalid": fieldState.error },
+                      "w-full",
+                    ])}
+                    onChange={(e) => field.onChange(e.target.value)}
+                  />
+
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Data Header Name
                   </label>
                 </span>
 

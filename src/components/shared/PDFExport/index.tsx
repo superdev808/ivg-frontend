@@ -49,7 +49,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
   const handleSave = async (name: string) => {
     const compWithUpdatedQuantity = componentSummary.map((comp) => {
       const quantity = totalQuantities.find(
-        (elem) => elem.itemName === comp.itemName
+        (elem) => elem.id === comp.id
       )?.quantity;
 
       return {
@@ -198,6 +198,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
           {patientInfo && (
             <PDFContent
               calculatorName={calculatorName}
+              calculatorType={calculatorName}
               patientInfo={patientInfo}
               showTeethSelection={showTeethSelection}
               totalQuantities={totalQuantities}

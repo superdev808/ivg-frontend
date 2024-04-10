@@ -1,5 +1,3 @@
-import { CALCULATOR_IO } from "@/constants/calculators";
-
 export function isUrl(str: string) {
   const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
   return urlRegex.test(str);
@@ -22,10 +20,3 @@ export const formatTime = (date?: Date | null | string) =>
     minute: "numeric",
     second: "numeric",
   }).format(date ? new Date(date) : new Date());
-
-export const getCalculatorName = (calculatorType: string) => {
-  const selectedCalculator = CALCULATOR_IO.find(
-    (item) => item.type === calculatorType
-  );
-  return selectedCalculator?.label || calculatorType;
-};

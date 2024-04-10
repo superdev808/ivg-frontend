@@ -139,10 +139,10 @@ const AdminAnnouncementsManagement: React.FC = () => {
   const [selectedAnnouncement, setSelectedAnnouncement] =
     useState<AnnouncementItem | null>(null);
 
-  const [filters, setFilters] = useState<DataTableFilterMeta>({
+  const filters = useMemo(() => ({
     content: { value: null, matchMode: FilterMatchMode.CONTAINS },
     published_at: { value: null, matchMode: FilterMatchMode.BETWEEN },
-  });
+  }), []);
 
   const showToast = (
     response: { label: string; message: string },
@@ -283,7 +283,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
           filterDisplay="row"
           pt={{ wrapper: { className: "h-auto" } }}
         >
-          {columns.map((col, i) => (
+          {columns.map((col) => (
             <Column
               sortable={col.sortable}
               key={col.field}

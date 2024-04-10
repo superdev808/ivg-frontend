@@ -10,7 +10,7 @@ import { ComponentSummary as ComponentSummaryType } from "@/types/calculators";
 
 interface ComponentSummaryProps {
   summary: ComponentSummaryType[];
-  onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onUpdateQuantity: (quantity: number, groupId: string) => void;
 }
 
 const ComponentSummary: React.FC<ComponentSummaryProps> = ({
@@ -64,7 +64,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
       <InputNumber
         value={item.quantity}
         onValueChange={({ value }) =>
-          onUpdateQuantity(value || 0, item.itemName || "")
+          onUpdateQuantity(value || 0, item.id || "")
         }
         showButtons
         buttonLayout="horizontal"

@@ -45,7 +45,7 @@ const GenericComponentSummary: React.FC<GenericComponentSummaryProps> = ({
       <tbody>
         {summary.map((data, summaryIdx) => {
           const indexOfItem = totalQuantities.findIndex(
-            (item) => item.itemName === data.itemName
+            (item) => item.id === data.id
           );
           const quantity =
             indexOfItem !== -1

@@ -12,8 +12,7 @@ import PatientInfo from "@/components/shared/PatientInfo";
 import PDFContent from "@/components/shared/PDFExport/PDFContent";
 import SaveDialog from "@/components/shared/SaveDialog";
 import { CALCULATOR_IMAGES } from "@/constants/calculators";
-import { getQuizByCalculator, prepareExportProps } from "@/helpers/calculators";
-import { getCalculatorName } from "@/helpers/util";
+import { deserializeColInfo, prepareExportProps } from "@/helpers/calculators";
 import { event as gaEvent } from "@/lib/gtag";
 import {
   useGetUserInfoQuery,
@@ -25,6 +24,7 @@ import { InputDetail, ItemData, Patient } from "@/types/calculators";
 import Outputs from "./Outputs";
 
 import styles from "./style.module.scss";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 const cx = classNames.bind(styles);
 
@@ -36,7 +36,7 @@ interface ResultProps {
   calculatorType: string;
   hideMenu?: boolean;
   className?: string;
-  onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onUpdateQuantity: (quantity: number, groupId: string) => void;
 }
 
 const Result: React.FC<ResultProps> = ({
@@ -52,6 +52,7 @@ const Result: React.FC<ResultProps> = ({
   const { refetch } = useGetUserInfoQuery({});
   const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
   const [updateSavedResult] = useUpdateSavedResultMutation();
+  const { calcInfoMap } = useCalculatorsInfo()
 
   const [showSaveDialog, setShowSaveDialog] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<"init" | "started" | "pending">(
@@ -65,7 +66,7 @@ const Result: React.FC<ResultProps> = ({
   const contentRef = useRef(null);
   const toastRef = useRef(null);
 
-  const calculatorName = getCalculatorName(calculatorType);
+  const calculatorName = calcInfoMap[calculatorType].label;
   const filename = patientInfo?.filename || `${calculatorName}-Summary`;
 
   const image =
@@ -377,8 +378,8 @@ const Result: React.FC<ResultProps> = ({
               "quiz"
             )}
           >
-            {getQuizByCalculator(quiz, calculatorName).map(
-              ({ question, answer }) => (
+            {quiz.map(
+              ({ id, question, answer }) => (id == undefined || id == '' || id == calculatorType) && (
                 <div key={question} className="flex align-items-center gap-1">
                   <div
                     className="text-left text-dark-green"
@@ -400,7 +401,7 @@ const Result: React.FC<ResultProps> = ({
         <div ref={contentRef}>
           {patientInfo && (
             <PDFContent
-              {...prepareExportProps(calculatorType, patientInfo, quiz, items)}
+              {...prepareExportProps(calculatorType, calculatorName, patientInfo, quiz, items)}
             />
           )}
         </div>

@@ -9,11 +9,10 @@ import { isValidUrl } from "@/helpers/calculators";
 import { ItemData } from "@/types/calculators";
 
 import GenericOutput from "./Generic";
-import PopupOutput from "./Popup";
 
 interface OutputsProps {
   items: ItemData[];
-  onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onUpdateQuantity: (quantity: number, groupId: string) => void;
 }
 
 const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
@@ -35,18 +34,14 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
             key={`${label}-${itemIdx}`}
             className="flex flex-column justify-content-between gap-4 p-3 border-2 border-light-green border-round-md md:flex-row md:align-items-center"
           >
-            {item.reasoning || item.supportingArticle ? (
-              <PopupOutput item={item} />
-            ) : (
-              <GenericOutput label={label} item={item} />
-            )}
+            <GenericOutput label={label} item={item} />
 
             {!INFORMATIONAL_CALCULATOR_NAMES.includes(label) && (
               <div className="flex align-items-center gap-4">
                 <InputNumber
                   value={item.quantity}
                   onValueChange={({ value }) =>
-                    onUpdateQuantity(value as number, item.itemName || "")
+                    onUpdateQuantity(value as number, item.id)
                   }
                   showButtons
                   buttonLayout="horizontal"

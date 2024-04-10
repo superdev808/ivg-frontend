@@ -1,15 +1,14 @@
-import classNames from "classnames/bind";
-import keys from "lodash/keys";
 import React from "react";
+import classNames from "classnames/bind";
 
 import {
-  CALCULATOR_GENERIC_OUTPUT_MAPPING,
   INFORMATIONAL_CALCULATOR_NAMES,
-  MATERIAL_CALCULATOR_GENERIC_OUTPUT_MAPPING,
 } from "@/constants/calculators";
 import { ItemInsights } from "@/types/calculators";
-
+import PopupOutput, { REASONING_TEXT, SUPPORT_ARTICLES_TEXT } from "./Popup";
 import styles from "./style.module.scss";
+import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
+import Link from "next/link";
 
 const cx = classNames.bind(styles);
 
@@ -18,36 +17,46 @@ interface GenericOutputProps {
   item: ItemInsights;
 }
 
-const GenericOutput: React.FC<GenericOutputProps> = ({ label, item }) => {
-  const OUTPUT_MAPPING = {
-    ...CALCULATOR_GENERIC_OUTPUT_MAPPING,
-    ...MATERIAL_CALCULATOR_GENERIC_OUTPUT_MAPPING,
-  };
+const filterPopups = (shouldInclude: boolean) => (key: string) => {
+  if (key == "id" || key == "quantity")
+    return false;
+  const { groupText, groupId, colName } = deserializeColInfo(key);
+  return (groupText.startsWith(REASONING_TEXT) || groupText.startsWith(SUPPORT_ARTICLES_TEXT)) ? shouldInclude : !shouldInclude;
+}
 
+const GenericOutput: React.FC<GenericOutputProps> = ({ label, item }) => {
   return (
     <div
       className={cx("flex flex-column gap-2", {
         "w-12": INFORMATIONAL_CALCULATOR_NAMES.includes(label),
       })}
     >
-      {item.itemName && <div>{item.itemName}</div>}
-      {keys(OUTPUT_MAPPING).map((key) => {
-        const value = item[key as keyof ItemInsights];
+      {Object.keys(item).filter(filterPopups(false)).map((key) => {
+        const { groupText, groupId, colName } = deserializeColInfo(key);
+        const value = item[key];
+
+        if (!value)
+          return null;
 
         return (
-          <React.Fragment key={key}>
-            {value && (
-              <div
-                className={cx({
-                  "text-center text-2xl": key === "torqueValue",
-                })}
+          <div
+            key={key}
+            className={cx({ "text-center text-2xl": key === "torqueValue" })}
+          >
+            {groupText && <b>{groupText}: </b>}
+            {typeof value == 'string' && isValidUrl(value) ?
+              <Link
+                href={value}
+                target="_blank"
               >
-                <b>{OUTPUT_MAPPING[key]}:</b> {value}
-              </div>
-            )}
-          </React.Fragment>
+                Click here
+              </Link>
+              : value
+            }
+          </div>
         );
       })}
+      <PopupOutput data={Object.keys(item).filter(filterPopups(true)).reduce((result, curKey) => ({ ...result, [curKey]: item[curKey] }), {})} />
     </div>
   );
 };

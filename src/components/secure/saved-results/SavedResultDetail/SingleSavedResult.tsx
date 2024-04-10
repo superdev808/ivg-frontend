@@ -4,8 +4,9 @@ import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import React, { useEffect, useState } from "react";
 
 import Result from "@/components/secure/calculator/Result";
-import { formatDate, getCalculatorName } from "@/helpers/util";
+import { formatDate } from "@/helpers/util";
 import { ItemData, SingleSavedResult } from "@/types/calculators";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 interface SingleResultDetailProps {
   savedResult: SingleSavedResult;
@@ -21,6 +22,7 @@ const SingleSavedResultDetail: React.FC<SingleResultDetailProps> = ({
   const router = useRouter();
 
   const [items, setItems] = useState<ItemData[]>([]);
+  const { calcInfoMap } = useCalculatorsInfo()
 
   const { id, calculatorType, quiz, date, name } = savedResult;
 
@@ -46,12 +48,12 @@ const SingleSavedResultDetail: React.FC<SingleResultDetailProps> = ({
     });
   };
 
-  const handleUpdateQuantity = (quantity: number, itemName: string) => {
+  const handleUpdateQuantity = (quantity: number, groupId: string) => {
     setItems((prevState) =>
       prevState.map((item) => ({
         ...item,
         info:
-          item.info[0].itemName === itemName
+          item.info[0].id === groupId
             ? [{ ...item.info[0], quantity }]
             : item.info,
       }))
@@ -70,7 +72,7 @@ const SingleSavedResultDetail: React.FC<SingleResultDetailProps> = ({
             onClick={handleGoBack}
           />
 
-          <h2>{getCalculatorName(calculatorType)} Calculator</h2>
+          <h2>{calcInfoMap[calculatorType].label} Calculator</h2>
 
           <div className="flex align-items-center gap-2">
             Saved Date: {formatDate(date)}{" "}

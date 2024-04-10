@@ -3,67 +3,61 @@ import keys from "lodash/keys";
 import React from "react";
 
 import { isValidUrl } from "@/helpers/calculators";
-import { ItemInsights } from "@/types/calculators";
+import { Summary } from "@/types/calculators";
 
 import styles from "../InputSummary/styles.module.scss";
 
 const cx = classNames.bind(styles);
 
 interface SummaryTable {
-  mapping: Record<string, string>;
-  item: ItemInsights;
-  isPopup?: boolean;
+  item: Summary;
 }
 
-const SummaryTable: React.FC<SummaryTable> = ({ mapping, item, isPopup }) => {
+const camelCaseToWords = (str: string) => str.replace(/([A-Z])/g, ' $1')
+  .replace(/\b(\w)/g, (match) => match.toUpperCase())
+
+const SummaryTable: React.FC<SummaryTable> = ({ item }) => {
+  const filteredKeys = keys(item).filter(key => key !== "id");
   return (
     <table className={cx("striped-table")}>
       <thead>
         <tr>
-          {keys(mapping).map((key) => {
-            const value = item[key as keyof ItemInsights];
+          {filteredKeys.map((key) => {
+            if (key == "id")
+              return null;
+            const value = item[key as keyof Summary];
             return (
               <React.Fragment key={key}>
-                {value && <th>{mapping[key]}</th>}
+                {value && <th>{camelCaseToWords(key)}</th>}
               </React.Fragment>
             );
           })}
-          {isPopup && (
-            <>
-              <th>Reasoning</th>
-              <th>Supporting Article</th>
-            </>
-          )}
         </tr>
       </thead>
       <tbody>
         <tr>
-          {keys(mapping).map((key) => {
-            const value = item[key as keyof ItemInsights];
+          {filteredKeys.map((key) => {
+            if (key == "id")
+              return null;
+            const value = item[key as keyof Summary];
             return (
               <React.Fragment key={key}>
-                {value && <td>{value}</td>}
+                {value && <td>
+                  {typeof value == 'string' && isValidUrl(value)
+                    ?
+                    <a
+                      href={value}
+                      target="_blank"
+                      className="text-light-green"
+                    >
+                      {camelCaseToWords(key)}
+                    </a>
+                    : value
+                  }
+                </td>}
               </React.Fragment>
             );
           })}
-          {isPopup && (
-            <>
-              <td>{item.reasoning}</td>
-              <td>
-                {isValidUrl(item.supportingArticle) ? (
-                  <a
-                    href={item.supportingArticle}
-                    target="_blank"
-                    className="text-light-green"
-                  >
-                    Supporting Article
-                  </a>
-                ) : (
-                  item.supportingArticle
-                )}
-              </td>
-            </>
-          )}
         </tr>
       </tbody>
     </table>

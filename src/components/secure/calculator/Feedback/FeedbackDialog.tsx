@@ -8,14 +8,11 @@ import { useState, useRef } from "react";
 
 import { getCookie } from "@/helpers/cookie";
 import { FeedbackDialogWrapperProps } from "./FeedbackDialogWrapper";
+import { InputOutputValues } from "@/types/calculators";
 
 export interface FeedbackUserTrackingProps {
   calculatorName?: string;
-  userAnswers?: {
-    name: string;
-    text: string;
-    answer: string;
-  }[];
+  userAnswers?: (InputOutputValues & { answer: string; })[];
 }
 
 interface FeedbackDialogProps extends FeedbackUserTrackingProps {
@@ -71,7 +68,7 @@ const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
     formData.append("message", message);
     formData.append("timestamp", new Date().toString());
     formData.append("calculatorName", calculatorName || "");
-    formData.append("userAnswers", JSON.stringify(userAnswers || []));
+    formData.append("userAnswers", JSON.stringify(userAnswers?.map(({ colName, colText, answer }) => ({ colName, colText, answer })) || []));
 
     setLoading(true);
 

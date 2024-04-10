@@ -2,6 +2,7 @@ import { User } from "@/types/UserTypes";
 import { Response } from "@/types/ApiResponseTypes";
 import { CheckEmail } from "@/types/UserTypes";
 import { apiSlice } from "./apiSlice";
+import { CalculatorInfoMap } from "@/types/calculators";
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -300,6 +301,18 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: "/uploadCalculatorData",
         method: "POST",
         body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+      transformResponse: (res: Response) => {
+        return res.status === "Success" ? res.data : res.status;
+      },
+    }),
+    getCalculatorInfo: builder.query<CalculatorInfoMap, any>({
+      query: () => ({
+        url: "/calculatorInfo",
+        method: "GET",
       }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue;

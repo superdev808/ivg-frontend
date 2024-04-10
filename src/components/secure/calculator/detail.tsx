@@ -1,4 +1,3 @@
-import trim from "lodash/trim";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -6,9 +5,8 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { parseItems } from "@/helpers/calculators";
-import { getCalculatorName } from "@/helpers/util";
 import { event as gaEvent } from "@/lib/gtag";
-import { ItemData } from "@/types/calculators";
+import { InputOutputValues, ItemData } from "@/types/calculators";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -17,19 +15,20 @@ import "swiper/css/pagination";
 import HelpfulFeedbackDialog from "./Feedback/HelpfulFeedbackDialog";
 import Result from "./Result";
 import HelpfulButton from "./Helpful";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 interface DetailViewProps {
   calculatorType: string;
   items: Array<Record<string, string>>;
-  fields: Array<{ name: string; text: string }>;
-  questions: Array<{ name: string; text: string }>;
+  outputFields: InputOutputValues[];
+  questions: InputOutputValues[];
   answers: string[];
   onGoBack: () => void;
 }
 
 const DetailView: React.FC<DetailViewProps> = ({
   calculatorType,
-  fields,
+  outputFields,
   questions,
   answers,
   onGoBack,
@@ -38,34 +37,33 @@ const DetailView: React.FC<DetailViewProps> = ({
   const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
 
   const [results, setResults] = useState<ItemData[][]>([]);
+  const { calcInfoMap } = useCalculatorsInfo()
+  const calculatorName = calcInfoMap[calculatorType].label;
 
   const toastRef = useRef(null);
 
   useEffect(() => {
-    setResults(props.items.map((item) => parseItems(item, calculatorType)));
-  }, [props.items, calculatorType]);
+    setResults(props.items.map((item) => parseItems(item, outputFields)));
+  }, [props.items, outputFields]);
 
-  const calculatorName = useMemo(() => {
-    return getCalculatorName(calculatorType);
-  }, [calculatorType]);
 
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
       if (answers[idx]) {
-        acc.push({ question: trim(question.text), answer: trim(answers[idx]) });
+        acc.push({ question: question.colName, answer: answers[idx] });
       }
 
       return acc;
     }, [] as { question: string; answer: string }[]);
   }, [questions, answers]);
 
-  const handleUpdateQuantity = (quantity: number, itemName: string) => {
+  const handleUpdateQuantity = (quantity: number, id: string) => {
     setResults((prevState) =>
       prevState.map((result) =>
         result.map((item) => ({
           ...item,
           info:
-            item.info[0].itemName === itemName
+            item.info[0].id === id
               ? [{ ...item.info[0], quantity }]
               : item.info,
         }))
@@ -148,7 +146,7 @@ const DetailView: React.FC<DetailViewProps> = ({
       <HelpfulFeedbackDialog
         visible={feedbkackShow}
         setVisible={setFeedbackShow}
-        calculatorName={getCalculatorName(calculatorType)}
+        calculatorName={calculatorName}
         quiz={quiz}
       />
 
