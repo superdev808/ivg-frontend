@@ -88,11 +88,12 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
       setAutoQuestions(questions);
 
       setLevel(questions.length);
-    } else if (sitesCount > 1) {
-      setAutoQuestions(null);
-      setLevel(0);
-      setAnswers([]);
     }
+    // else if (sitesCount > 1) {
+    //   setAutoQuestions(null);
+    //   setLevel(0);
+    //   setAnswers([]);
+    // }
   }, [
     autoPopulateData,
     showAutoPopulatePrompt,
@@ -182,6 +183,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   const handleSelectAnswer = useCallback((index: number) => (value: string) => {
     setCanProceed(true);
     setAutoQuestions(null);
+    onAutoPopulate(null);
 
     if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value) {
       setIsAutoPopulatedAnswersChanged(true);

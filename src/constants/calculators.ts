@@ -454,4 +454,6 @@ export const CALCULATOR_OUTPUT_MAPPING: [string, RegExp][] = [
 
   ["reasoning", /reasoning/gi],
   ["supportingArticle", /supporting article/gi],
+  ["link", /Click to purchase/gi],
+  ["link", /Link to purchase/gi],
 ];
