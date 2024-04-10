@@ -6,14 +6,17 @@ import React, { useMemo } from "react";
 
 import { INFORMATIONAL_CALCULATOR_NAMES } from "@/constants/calculators";
 import { isValidUrl } from "@/helpers/calculators";
-import { ItemData } from "@/types/calculators";
+import { ItemData, ItemInsights } from "@/types/calculators";
 
 import GenericOutput from "./Generic";
+
+export const PURCHASE_LINKS_TEXT = [/Click to Purchase/ig, /Link to Purchase/ig];
 
 interface OutputsProps {
   items: ItemData[];
   onUpdateQuantity: (quantity: number, groupId: string) => void;
 }
+
 
 const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
   const filteredItems = useMemo(() => {
@@ -29,8 +32,16 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
       <ConfirmPopup />
 
       {filteredItems.map(({ label, info }) =>
-        info.map((item, itemIdx) => (
-          <div
+        info.map((_item, itemIdx) => {
+          let item: ItemInsights = { ..._item };
+          Object.keys(item).forEach(key => {
+            if (PURCHASE_LINKS_TEXT.filter(keyRegEx => keyRegEx.test(key)).length > 0) {
+                item.link = _item[key];
+                delete item[key];
+            }
+          })
+
+          return (          <div
             key={`${label}-${itemIdx}`}
             className="flex flex-column justify-content-between gap-4 p-3 border-2 border-light-green border-round-md md:flex-row md:align-items-center"
           >
@@ -73,7 +84,8 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
               </div>
             )}
           </div>
-        ))
+        )
+      })
       )}
     </div>
   );

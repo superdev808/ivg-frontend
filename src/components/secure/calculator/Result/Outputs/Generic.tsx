@@ -18,7 +18,7 @@ interface GenericOutputProps {
 }
 
 const filterPopups = (shouldInclude: boolean) => (key: string) => {
-  if (key == "id" || key == "quantity")
+  if (key == "id" || key == "quantity" || key == "link")
     return false;
   const { groupText, groupId, colName } = deserializeColInfo(key);
   return (groupText.startsWith(REASONING_TEXT) || groupText.startsWith(SUPPORT_ARTICLES_TEXT)) ? shouldInclude : !shouldInclude;
