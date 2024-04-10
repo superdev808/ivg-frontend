@@ -183,19 +183,16 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   const handleSelectAnswer = useCallback((index: number) => (value: string) => {
     setCanProceed(true);
     setAutoQuestions(null);
-    setAutoPopulate(AUTO_POPULATE_OPTIONS[1].value);
-    onAutoPopulate(null);
 
-    if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value) {
+    if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value)
       setIsAutoPopulatedAnswersChanged(true);
-    }
     setLevel(index + 1);
 
     const newAnswers = answers.slice(0, index);
     newAnswers[index] = value;
     onInputSelect(site, questions[index], newAnswers[index]);
     setAnswers(newAnswers);
-  }, [autoPopulate, questions, site, onInputSelect, answers, onAutoPopulate])
+  }, [autoPopulate, questions, site, onInputSelect, answers])
 
   const handleAutoPopulateChange = useCallback((value: string) => {
     setAutoPopulate(value);

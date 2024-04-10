@@ -105,8 +105,6 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
 
   const { calcInfoMap } = useCalculatorsInfo();
 
-  console.log(sitesData);
-
   const isAllSitesAnswered = selectedSites.reduce(
     (acc: boolean, site: Site) => {
       if (acc == false) return false;
@@ -318,20 +316,20 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       });
       setSitesData(newSitesData);
     } else {
-      const newSitesData: SiteData = cloneDeep(sitesData);
-      const firstSiteName = selectedSites[0].name;
+      // const newSitesData: SiteData = cloneDeep(sitesData);
+      // const firstSiteName = selectedSites[0].name;
 
-      Object.keys(newSitesData).forEach((siteName: string) => {
-        if (siteName !== firstSiteName) {
-          newSitesData[siteName] = {
-            inputDetails: [],
-            componentDetails: {},
-          };
-        }
-      });
-      setSitesData(newSitesData);
+      // Object.keys(newSitesData).forEach((siteName: string) => {
+      //   if (siteName !== firstSiteName) {
+      //     newSitesData[siteName] = {
+      //       inputDetails: [],
+      //       componentDetails: {},
+      //     };
+      //   }
+      // });
+      // setSitesData(newSitesData);
     }
-  }, [selectedSites, sitesData]);
+  }, [sitesData]);
 
   const handleSiteSpecificReport = useCallback((value: string) => {
     setSiteSpecificReport(value);
