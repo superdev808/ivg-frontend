@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { FormErrorMessage } from "@/components/shared/FormErrorMessage";
 import { useUploadCalculatorDataMutation } from "@/redux/hooks/apiHooks";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
+import NewCalculatorDialog from "./NewCalculatorDialog";
 
 const POLLING_INTERVAL = 3000;
 
@@ -130,7 +131,11 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({ }) => {
   const isLoading = isSaving || pollingRef.current;
 
   return (
-    <>
+    <div className="flex flex-column flex-grow-1">
+      <div className="mb-3 flex align-items-center">
+        <span className="text-2xl font-semibold">Caluclator Management</span>
+        <NewCalculatorDialog toastRef={toastRef} />
+      </div>
       <Toast ref={toastRef} position="top-right" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid">
@@ -291,7 +296,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({ }) => {
           </div>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

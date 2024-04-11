@@ -20,3 +20,8 @@ export const formatTime = (date?: Date | null | string) =>
     minute: "numeric",
     second: "numeric",
   }).format(date ? new Date(date) : new Date());
+
+export const toPascalCase = (str: string) =>
+  (str.match(/[a-zA-Z0-9]+/g) || [])
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join("");
