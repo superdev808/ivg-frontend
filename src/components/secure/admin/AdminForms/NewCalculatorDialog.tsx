@@ -2,20 +2,15 @@ import cx from "classnames";
 import trim from "lodash/trim";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
 import { Controller, useForm } from "react-hook-form";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Toast, ToastMessage } from "primereact/toast";
-
-
 import { FormErrorMessage } from "@/components/shared/FormErrorMessage";
 import { useUploadNewCalculatorMutation } from "@/redux/hooks/apiHooks";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 import { toPascalCase } from "@/helpers/util";
-import { AutoComplete, AutoCompleteChangeEvent, AutoCompleteCompleteEvent } from "primereact/autocomplete";
-
-const POLLING_INTERVAL = 3000;
+import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
+import { InputTextarea } from "primereact/inputtextarea";
 
 interface FormValues {
   label: string;
@@ -92,6 +87,8 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
     control,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -99,6 +96,7 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
       description: "",
     },
   });
+
   return (
     <>
       <Button
@@ -116,7 +114,7 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
         footer={
           <>
             <Button
-              label="Publish"
+              label={suggestions.length == 1 ? "Update" : "Add"}
               className="p-button p-button-primary"
               icon="pi pi-check"
               onClick={handleSubmit(onSubmit)}
@@ -131,8 +129,7 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
           </>
         }
       >
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-column">
           <Controller
             name="label"
             control={control}
@@ -140,18 +137,33 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
               required: "Please provide calculator name.",
             }}
             render={({ field, fieldState }) => {
+              const findSuggestions = (label: string) => Object.keys(calcInfoMap).filter(calcType => calcInfoMap[calcType].label.toLowerCase().includes(label.toLowerCase()));
               const search = (event: AutoCompleteCompleteEvent) => {
-                setSuggestions(Object.keys(calcInfoMap).filter(calcType => calcInfoMap[calcType].label.includes(event.query)));
+                setSuggestions(findSuggestions(event.query));
               }
               return (
-                <div className="col-12 md:col-6">
+                <div className="flex-1">
                   <label
                     htmlFor={field.name}
                     className={cx({ "p-error": errors[field.name] })}
                   />
 
                   <span className="p-float-label w-full">
-                    <AutoComplete id={field.name} value={field.value} disabled={isUploading} suggestions={suggestions.map((calcType) => calcInfoMap[calcType].label)} completeMethod={search} onChange={(e) => field.onChange(e.target.value)} dropdown />
+                    <AutoComplete
+                      id={field.name}
+                      value={field.value}
+                      disabled={isUploading}
+                      suggestions={suggestions.map((calcType) => calcInfoMap[calcType].label)}
+                      completeMethod={search}
+                      onChange={(e) => {
+                        field.onChange(e.target.value);
+                        let newSuggestions = findSuggestions(e.target.value);
+                        setSuggestions(newSuggestions);
+                        if (newSuggestions.length == 1 && calcInfoMap[newSuggestions[0]].label == e.target.value)
+                          setValue('description', calcInfoMap[newSuggestions[0]].description || "");
+                      }}
+                      dropdown
+                    />
 
                     <label className="bg-beige" htmlFor={field.name}>
                       Calculator Name
@@ -168,14 +180,14 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
             name="description"
             control={control}
             render={({ field, fieldState }) => (
-              <div className="col-12 md:col-6">
+              <div className="flex-1">
                 <label
                   htmlFor={field.name}
                   className={cx({ "p-error": errors[field.name] })}
                 />
 
                 <span className="p-float-label w-full">
-                  <InputText
+                  <InputTextarea
                     id={field.name}
                     value={field.value}
                     disabled={isUploading}
@@ -184,6 +196,8 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
                       "w-full",
                     ])}
                     onChange={(e) => field.onChange(e.target.value)}
+                    rows={5}
+                    autoResize={true}
                   />
 
                   <label className="bg-beige" htmlFor={field.name}>
