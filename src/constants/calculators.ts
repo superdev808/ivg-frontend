@@ -359,48 +359,49 @@ export const BRAND_IMAGES: Record<string, string> = {
 };
 
 export const CALCULATOR_IMAGES: Record<string, string> = {
-  BoneReduction:
+  BoneReductionInstruments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Meisinger+Drill+Kit+ALV18.png",
-  ChairSidePickUp:
+  ChairsidePickUpMaterials:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Chairside+Pickup+Lufting.png",
   Implants:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Straumann+BL++Implant+RC+D+4.1mm+EL+8mm+0214508.png",
-  MUAs: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/MultiUnitAbutment_custom_truabutment_final.png",
+  MultiUnitAbutments:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/MultiUnitAbutment_custom_truabutment_final.png",
   HealingAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Healing+Abutment+D+4.5mm+H+3mm+2213.png",
   ImplantAnalogs:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+IOS+Model+Implant+Replica+Conical+RP+38190.png",
-  ImplantTorquesGuide:
+  ImplantTorqueGuide:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Neodent+CM+Implant+Driver+Torque+Wrench+Long+105074.png",
-  ImpressingCopingsMUAs:
+  ImpressionCopingsMultiUnitAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Impression+Coping+Open+Tray+Multi-Unit+29089.png",
-  ImpressingCopingsDirectToImplants:
+  ImpressionCopingsDirectToImplant:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Temporary+Coping+Multi-Unit+29046.png",
-  TemporaryCopingsDirectToImplants:
+  TemporaryCopingsDirectToImplant:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Temporary+Coping+Multi-Unit+29046.png",
-  TemporaryCopingsMUAs:
+  TemporaryCopingsMultiUnitAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Temporary+Coping+Multi-Unit+29046.png",
-  TiBasesMUAs:
+  TiBasesMultiUnitAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+30d+MUA+Plus+Conical+RP+H+3.5mm+38895.png",
   CoverScrew:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Straumann+RN+Closure+Cap+D+3.5mm+H+0mm+048371S.png",
   ImplantScrews:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Straumann+NC+Variobase+Abutment+Screw+0252921.png",
-  TiBasesDirectToImplants:
+  TiBasesDirectToImplant:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Zimmer+TSV+BellaTek+Express+Abutment+D4.5mm+H+4.75mm+Hexed+TE451.png",
-  RestorativeDirectToImplant:
+  DriversRestorativeDirectToImplant:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Neodent+CM+Implant+Driver+Torque+Wrench+Long+105074.png",
-  RestorativeMultiUnitAbutments:
+  DriversRestorativeOnMultiUnitAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Neodent+CM+Implant+Driver+Torque+Wrench+Long+105074.png",
-  Scanbodies:
+  ScanbodiesSingleUnit:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Scanbody+DTI+Generic.png",
-  ScanbodyMUAs:
+  ScanbodiesMultiUnitAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Scanbody+MUA+Generic.png",
   ScanbodyDriversMUAs:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Elos+Accurate+Screwdriver+Manual+Mini+0.9+Hex.png",
-  ScanbodyDriversDirectToImplants:
+  ScanbodyDriversDirectToImplant:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Nobel+Elos+Accurate+Screwdriver+Manual+Mini+0.9+Hex.png",
-  DrillKitAndSequence:
+  DrillKitsAndDrillSequences:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Drill+Kit+Generic.png",
   StockAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Stock+Abutment+Generic.png",
