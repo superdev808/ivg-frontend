@@ -280,8 +280,8 @@ const Result: React.FC<ResultProps> = ({
 
       <div className={cx("flex flex-column gap-4", className)}>
         <div
-          className={`flex flex-column gap-4 justify-content-between
-          lg:flex-row lg:align-items-center`}
+          className={`flex flex-column justify-content-center
+          lg:flex-row`}
         >
           <div className="flex align-items-center gap-2">
             {editMode !== "init" ? (
@@ -331,20 +331,20 @@ const Result: React.FC<ResultProps> = ({
           </div>
 
           {!hideMenu && (
-            <div className="flex align-items-center flex-shrink-0 gap-2">
+            <div className="flex align-items-center flex-shrink-0 gap-2 justify-content-center lg:align-items-center">
               <Button
-                className="px-3 py-2"
+                className="p-button p-button-lg px-3 py-2"
                 label="Email"
                 onClick={() => showPatientInfoDialog("export")}
               />
               <Button
-                className="px-3 py-2"
+                className="p-button p-button-lg px-3 py-2"
                 label="Export"
                 onClick={() => showPatientInfoDialog("download")}
               />
               {!isSaved && (
                 <Button
-                  className="px-3 py-2"
+                  className="p-button p-button-lg px-3 py-2"
                   label="Save"
                   loading={isSavingResult}
                   onClick={() => setShowSaveDialog(true)}
@@ -354,7 +354,30 @@ const Result: React.FC<ResultProps> = ({
           )}
         </div>
 
+        <Outputs items={items} onUpdateQuantity={onUpdateQuantity} />
+
         <div className="flex justify-content-between align-items-center gap-4 flex-column pb-6 lg:flex-row">
+          <div
+            className={cx(
+              "flex flex-column justify-content-around gap-3 shadow-6 p-4 border-round-md border-2 border-light-green",
+              "quiz"
+            )}
+          >
+            <h3 className="underline">Input Summary</h3>
+            {quiz.map(
+              ({ id, question, answer }) => (id == undefined || id == '' || id == calculatorType) && (
+                <div key={question} className="flex flex-1 align-items-center gap-1">
+                  <div
+                    className="text-left text-dark-green"
+                    style={{ maxWidth: "50%" }}
+                  >
+                    {question}
+                  </div>
+                  <div className="text-right">{answer}</div>
+                </div>
+              )
+            )}
+          </div>
           {image && (
             <div
               className={cx(
@@ -371,30 +394,7 @@ const Result: React.FC<ResultProps> = ({
               />
             </div>
           )}
-
-          <div
-            className={cx(
-              "flex flex-column justify-content-around gap-3 shadow-6 p-4 border-round-md border-2 border-light-green",
-              "quiz"
-            )}
-          >
-            {quiz.map(
-              ({ id, question, answer }) => (id == undefined || id == '' || id == calculatorType) && (
-                <div key={question} className="flex align-items-center gap-1">
-                  <div
-                    className="text-left text-dark-green"
-                    style={{ maxWidth: "50%" }}
-                  >
-                    {question}
-                  </div>
-                  <div className="flex-1 text-right">{answer}</div>
-                </div>
-              )
-            )}
-          </div>
         </div>
-
-        <Outputs items={items} onUpdateQuantity={onUpdateQuantity} />
       </div>
 
       <div className="hidden">

@@ -32,12 +32,12 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ data }) => {
           {
             Object.entries(data).map(([label, text]) => (
               <>
-                {(label.startsWith(REASONING_TEXT) || !isValidUrl(text)) && (
+                {!isValidUrl(text)&& (
                   <div>
                     <b>{REASONING_TEXT}:</b> {text}
                   </div>
                 )}
-                {(label.startsWith(SUPPORT_ARTICLES_TEXT) || isValidUrl(text)) && (
+                {isValidUrl(text) && (
                   <Link
                     className="text-beige"
                     href={text}
