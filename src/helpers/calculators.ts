@@ -241,8 +241,6 @@ export const getComponentSummary = (
     (category: ItemData) => category.info as Summary[]
   );
 
-  console.log(summaryData);
-
   return summaryData;
 };
 

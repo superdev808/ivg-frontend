@@ -1,6 +1,7 @@
 "use client";
 
 import classNames from "classnames/bind";
+import uniq from "lodash/uniq";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
 import React, { useState, useRef } from "react";
@@ -10,12 +11,13 @@ import {
   CALCULATOR_MAPPINGS,
   CALCULATOR_GROUP_ITEMS,
 } from "@/constants/calculators";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 import { event as gaEvent } from "@/lib/gtag";
 import { CalculatorGroupItem } from "@/types/calculators";
 
 import styles from "./page.module.scss";
-import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
-import _ from "lodash";
+
+import NewCalculatorPage from "./new-page";
 
 const cx = classNames.bind(styles);
 
@@ -29,9 +31,12 @@ export const Calculators = () => {
   const { calcInfoMap } = useCalculatorsInfo();
 
   const calcItems = CALCULATOR_GROUP_ITEMS.reduce(
-    (accumulator: string[], currentValue: CalculatorGroupItem) => [...accumulator, ...currentValue.subItems],
+    (accumulator: string[], currentValue: CalculatorGroupItem) => [
+      ...accumulator,
+      ...currentValue.subItems,
+    ],
     []
-  ).filter(calcType => calcType in calcInfoMap);
+  ).filter((calcType) => calcType in calcInfoMap);
 
   const handleSearch = (str = "") => {
     if (!str) {
@@ -43,7 +48,10 @@ export const Calculators = () => {
 
     str = str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regExp = new RegExp(str, "ig");
-    let newCalcTypes: string[] = calcItems.filter(calcType => (regExp.test(calcType) || regExp.test(calcInfoMap[calcType].label)));
+    let newCalcTypes: string[] = calcItems.filter(
+      (calcType) =>
+        regExp.test(calcType) || regExp.test(calcInfoMap[calcType].label)
+    );
 
     fetch(`${process.env.NEXT_PUBLIC_APP_SERVER_URL}/search?text=${str}`, {
       method: "GET",
@@ -55,7 +63,7 @@ export const Calculators = () => {
       .then((result) => {
         const { data } = result;
 
-        newCalcTypes = _.uniq([...newCalcTypes, ...data]);
+        newCalcTypes = uniq([...newCalcTypes, ...data]);
       })
       .catch((ex) => {
         console.log("Error Happening: ", ex.message);
@@ -145,9 +153,13 @@ export const Calculators = () => {
                       router.push(`/calculators/${calcType}`);
                     }}
                   >
-                    <h4 className="m-0">{calcInfoMap[calcType].label || calcType}</h4>
+                    <h4 className="m-0">
+                      {calcInfoMap[calcType].label || calcType}
+                    </h4>
                     {calcInfoMap[calcType].description && (
-                      <p className="mb-0 mt-2">{calcInfoMap[calcType].description}</p>
+                      <p className="mb-0 mt-2">
+                        {calcInfoMap[calcType].description}
+                      </p>
                     )}
                   </Button>
                 )
@@ -161,5 +173,6 @@ export const Calculators = () => {
 };
 
 export default function CalculatorsPage() {
-  return <Calculators />;
+  // return <Calculators />;
+  return <NewCalculatorPage />;
 }
