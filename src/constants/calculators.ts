@@ -159,6 +159,7 @@ export const CALCULATOR_GROUP_ITEMS: CalculatorGroupItem[] = [
       "TiBasesMultiUnitAbutments",
       "BoneReductionInstruments",
       "ChairsidePickUpMaterials",
+      "BondingEtching",
     ],
   },
   {

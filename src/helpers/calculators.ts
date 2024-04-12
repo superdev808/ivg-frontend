@@ -281,22 +281,23 @@ export const prepareExportProps = (
 export const serializeColInfo = (
   colInfo: Pick<
     InputOutputValues,
-    "colName" | "groupText" | "groupId" | "calculatorType"
+    "colName" | "groupText" | "groupId" | "calculatorType" | "groupName"
   >
 ) => {
   return `${colInfo.groupText || "EMPTY"}___${colInfo.colName}___${
     colInfo.groupId
-  }___${colInfo.calculatorType}`;
+  }___${colInfo.groupName}___${colInfo.calculatorType}`;
 };
 
 export const deserializeColInfo = (serializedColInfo: string) => {
-  const [groupText, colName, groupId, calculatorType] =
+  const [groupText, colName, groupId, groupName, calculatorType] =
     serializedColInfo.split("___");
   return {
     groupText: groupText == "EMPTY" ? "" : groupText,
     colName,
     groupId,
     calculatorType,
+    groupName,
   };
 };
 
@@ -344,5 +345,6 @@ export const parseItems = (
       resultInfo.push(newItem);
     }
   }
+  console.log(resultInfo);
   return resultInfo;
 };
