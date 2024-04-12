@@ -25,13 +25,16 @@ const filterPopups = (shouldInclude: boolean) => (key: string) => {
 }
 
 const GenericOutput: React.FC<GenericOutputProps> = ({ label, item }) => {
+  const groupName = deserializeColInfo(Object.keys(item).filter(key => key && filterPopups(false)(key))[0]).groupName;
   return (
     <div
       className={cx("flex flex-column gap-2", {
         "w-12": INFORMATIONAL_CALCULATOR_NAMES.includes(label),
       })}
     >
-      <h4>{deserializeColInfo(Object.keys(item).filter(key => key && filterPopups(false)(key))[0]).groupName}</h4>
+      {groupName &&
+        <h4>{groupName}</h4>
+      }
       {Object.keys(item).filter(filterPopups(false)).map((key) => {
         const { groupText } = deserializeColInfo(key);
         const value = item[key];

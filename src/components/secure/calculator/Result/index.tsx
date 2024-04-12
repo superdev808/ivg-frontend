@@ -359,7 +359,7 @@ const Result: React.FC<ResultProps> = ({
         <div className="flex justify-content-between align-items-center gap-4 flex-column pb-6 lg:flex-row">
           <div
             className={cx(
-              "flex flex-column justify-content-around gap-3 shadow-6 p-4 border-round-md border-2 border-light-green",
+              "flex-1 flex flex-column justify-content-around gap-4 shadow-6 p-4 border-round-md border-2 border-light-green",
               "quiz"
             )}
           >
@@ -368,8 +368,7 @@ const Result: React.FC<ResultProps> = ({
               ({ id, question, answer }) => (id == undefined || id == '' || id == calculatorType) && (
                 <div key={question} className="flex flex-1 align-items-center gap-1">
                   <div
-                    className="text-left text-dark-green"
-                    style={{ maxWidth: "50%" }}
+                    className="flex-1 text-left text-dark-green"
                   >
                     {question}
                   </div>
