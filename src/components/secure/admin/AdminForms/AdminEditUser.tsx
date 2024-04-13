@@ -36,6 +36,7 @@ const AdminEditUser: React.FC<AdminEditUserProps> = ({
       email: "",
       role: "",
       organizationName: "",
+      organizationState: "",
       active: false,
       verified: false,
       verificationEmailSent: "",

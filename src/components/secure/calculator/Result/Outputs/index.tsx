@@ -43,7 +43,7 @@ const Outputs: React.FC<OutputsProps> = ({ items, onUpdateQuantity }) => {
 
           return (          <div
             key={`${label}-${itemIdx}`}
-            className="flex flex-column justify-content-between gap-4 p-3 border-2 border-light-green border-round-md md:flex-row md:align-items-center"
+            className="flex flex-column justify-content-between gap-4 p-3 border-2 border-light-green border-round-md line-height-3 md:flex-row md:align-items-center"
           >
             <GenericOutput label={label} item={item} />
 

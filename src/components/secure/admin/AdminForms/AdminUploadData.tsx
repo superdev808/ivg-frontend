@@ -34,10 +34,10 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({ }) => {
   const [uploadingProgress, setUploadingProgress] = useState<any>(null);
   const { calcInfoMap } = useCalculatorsInfo();
 
-  const calculatorOptions = Object.keys(calcInfoMap).filter(calcType => !calcInfoMap[calcType].disabled).map(calcType => ({
+  const calculatorOptions = Object.keys(calcInfoMap).filter(calcType => !calcInfoMap[calcType].disabled).sort().map(calcType => ({
     id: calcType,
     label: calcInfoMap[calcType].label
-  }))
+  }));
 
   useEffect(() => {
     return () => {
