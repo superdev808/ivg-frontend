@@ -354,7 +354,7 @@ const Result: React.FC<ResultProps> = ({
           )}
         </div>
 
-        <Outputs items={items} onUpdateQuantity={onUpdateQuantity} />
+        <Outputs calculatorType={calculatorType} items={items} onUpdateQuantity={onUpdateQuantity} />
 
         <div className="flex justify-content-between align-items-center gap-4 flex-column pb-6 lg:flex-row">
           <div

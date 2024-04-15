@@ -160,6 +160,11 @@ export const CALCULATOR_GROUP_ITEMS: CalculatorGroupItem[] = [
       "BoneReductionInstruments",
       "ChairsidePickUpMaterials",
       "BondingEtching",
+      "ScanRequirements",
+      "PhysicalImpression",
+      "IsolationTechniques",
+      "ToothPreparation",
+      "DentalSupplies",
     ],
   },
   {
@@ -186,12 +191,16 @@ export const CALCULATOR_GROUP_ITEMS: CalculatorGroupItem[] = [
   },
 ];
 
-export const INFORMATIONAL_CALCULATOR_NAMES = [
-  "Implant Torque Guide",
-  "Implant-Borne Bridge",
-  "Implant-Borne Crown",
-  "Tooth-Borne Bridge",
-  "Tooth-Borne Crown",
+export const INFORMATIONAL_CALCULATOR_TYPES = [
+  "ImplantBorneBridge",
+  "ImplantBorneCrown",
+  "ToothBorneBridge",
+  "ToothBorneCrown",
+  "BondingEtching",
+  "ScanRequirements",
+  "PhysicalImpression",
+  "IsolationTechniques",
+  "ToothPreparation",
 ];
 
 export const MATERIAL_CALCULATOR_TYPES = [

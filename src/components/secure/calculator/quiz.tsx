@@ -15,6 +15,8 @@ import { BRAND_IMAGES } from "@/constants/calculators";
 
 import styles from "./quiz.module.scss";
 import { InputOutputValues } from "@/types/calculators";
+import PopupOutput, { SHOULD_DISPLAY_TEXT_ONLY } from "./Result/Outputs/Popup";
+import { ConfirmPopup } from "primereact/confirmpopup";
 
 const cx = classNames.bind(styles);
 
@@ -128,8 +130,21 @@ const Quiz: React.FC<QuizProps> = ({
         )}
 
         {calculatorName && <h1 className="underline">{calculatorName}</h1>}
-        <h1>{question.colName.endsWith("?") ? question.colName : `Select ${question.colName}`}</h1>
-        {question.colText && <h3 className="mt-0">{question.colText}</h3>}
+        <h1>
+          {question.colText && (
+            <>
+              <PopupOutput
+                data={{
+                  [SHOULD_DISPLAY_TEXT_ONLY]: question.colText,
+                }}
+              />
+              {"  "}
+            </>
+          )}
+          {question.colName.endsWith("?")
+            ? question.colName
+            : `Select ${question.colName}`}
+        </h1>
       </div>
 
       <div className="col-12 sm:col-8 sm:col-offset-2 xl:col-4 xl:col-offset-4 md:mb-6">
