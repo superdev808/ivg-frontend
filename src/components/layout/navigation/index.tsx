@@ -52,7 +52,7 @@ const Navigation = ({ authenticated, light }: NavigationProps) => {
     // Protected Links
     {
       id: "calculators",
-      title: "Calculators",
+      title: "Calculators + Workflows",
       link: "/calculators",
       visibility: "authenticated",
     },

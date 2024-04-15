@@ -414,6 +414,16 @@ export const CALCULATOR_IMAGES: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Drill+Kit+Generic.png",
   StockAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Stock+Abutment+Generic.png",
+  // ToothBorneBridge: "",
+  // ToothBorneCrown: "",
+  // ImplantBorneBridge: "",
+  // ImplantBorneCrown: "",
+  // ScanRequirements: "",
+  // BondingEtching: "",
+  // IsolationTechniques: "",
+  // ToothPreparation: "",
+  // PhysicalImpression: "",
+  // LocatorAbutments: "",
   Default:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/No+Image+BW.jpg",
 };
