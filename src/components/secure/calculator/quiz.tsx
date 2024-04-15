@@ -53,9 +53,10 @@ const Quiz: React.FC<QuizProps> = ({
 
   const options = useMemo(() => {
     const availableOptions =
-      filteredAnswers.length > 6
-        ? filteredAnswers.slice(0, 6)
-        : filteredAnswers;
+      // filteredAnswers.length > 6
+      //   ? filteredAnswers.slice(0, 6)
+      //   : filteredAnswers;
+      filteredAnswers;
 
     if (availableOptions.length === 0) {
       return [];

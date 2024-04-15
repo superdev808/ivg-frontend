@@ -93,10 +93,11 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    postSendResetPassword: builder.mutation({
-      query: () => ({
+    postSendResetPassword: builder.mutation<any, { id?: string; }>({
+      query: (body) => ({
         url: "/send-reset-password",
         method: "POST",
+        body,
       }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue;
