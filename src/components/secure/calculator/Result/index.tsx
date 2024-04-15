@@ -12,7 +12,7 @@ import PatientInfo from "@/components/shared/PatientInfo";
 import PDFContent from "@/components/shared/PDFExport/PDFContent";
 import SaveDialog from "@/components/shared/SaveDialog";
 import { CALCULATOR_IMAGES } from "@/constants/calculators";
-import { deserializeColInfo, prepareExportProps } from "@/helpers/calculators";
+import { prepareExportProps } from "@/helpers/calculators";
 import { event as gaEvent } from "@/lib/gtag";
 import {
   useGetUserInfoQuery,
@@ -354,22 +354,21 @@ const Result: React.FC<ResultProps> = ({
           )}
         </div>
 
-        <Outputs items={items} onUpdateQuantity={onUpdateQuantity} />
+        <Outputs calculatorType={calculatorType} items={items} onUpdateQuantity={onUpdateQuantity} />
 
         <div className="flex justify-content-between align-items-center gap-4 flex-column pb-6 lg:flex-row">
           <div
             className={cx(
-              "flex flex-column justify-content-around gap-3 shadow-6 p-4 border-round-md border-2 border-light-green",
+              "flex-1 flex flex-column justify-content-around gap-4 shadow-6 p-4 border-round-md border-2 border-light-green",
               "quiz"
             )}
           >
-            <h3 className="underline">Input Summary</h3>
+            <h3 className="underline mb-0">Input Summary</h3>
             {quiz.map(
               ({ id, question, answer }) => (id == undefined || id == '' || id == calculatorType) && (
                 <div key={question} className="flex flex-1 align-items-center gap-1">
                   <div
-                    className="text-left text-dark-green"
-                    style={{ maxWidth: "50%" }}
+                    className="flex-1 text-left text-dark-green"
                   >
                     {question}
                   </div>

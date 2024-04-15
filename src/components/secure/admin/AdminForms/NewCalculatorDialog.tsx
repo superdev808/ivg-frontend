@@ -3,13 +3,16 @@ import trim from "lodash/trim";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { Controller, useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Toast, ToastMessage } from "primereact/toast";
 import { FormErrorMessage } from "@/components/shared/FormErrorMessage";
 import { useUploadNewCalculatorMutation } from "@/redux/hooks/apiHooks";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 import { toPascalCase } from "@/helpers/util";
-import { AutoComplete, AutoCompleteCompleteEvent } from "primereact/autocomplete";
+import {
+  AutoComplete,
+  AutoCompleteCompleteEvent,
+} from "primereact/autocomplete";
 import { InputTextarea } from "primereact/inputtextarea";
 
 interface FormValues {
@@ -21,7 +24,9 @@ interface NewCalculatorDialogProps {
   toastRef?: any;
 }
 
-const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) => {
+const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({
+  toastRef,
+}) => {
   const [uploadNewCalculator, { isLoading: isUploading }] =
     useUploadNewCalculatorMutation();
 
@@ -31,9 +36,17 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
 
   const [suggestions, setSuggestions] = useState<Array<string>>([]);
 
+  const findSuggestions = useCallback(
+    (label: string) =>
+      Object.keys(calcInfoMap).sort().filter((calcType) =>
+        calcInfoMap[calcType].label.toLowerCase().includes(label.toLowerCase())
+      ),
+    [calcInfoMap]
+  );
+
   useEffect(() => {
-    setSuggestions(Object.keys(calcInfoMap).map(calcType => calcInfoMap[calcType].type));
-  }, [calcInfoMap]);
+    setSuggestions(findSuggestions(""));
+  }, [findSuggestions]);
 
   const showToast = (
     response: { label: string; message: string },
@@ -52,13 +65,11 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
     const payload = {
       label: trim(data.label),
       description: trim(data.description),
-      type: trim(toPascalCase(data.label))
+      type: trim(toPascalCase(data.label)),
     };
 
     try {
-      const response = await uploadNewCalculator(
-        payload
-      ).unwrap();
+      const response = await uploadNewCalculator(payload).unwrap();
 
       showToast(
         {
@@ -73,9 +84,10 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
       showToast(
         {
           label: "Error",
-          message: typeof (error as any)?.data?.message === "string"
-            ? (error as any)?.data?.message
-            : "Failed to add new calculator."
+          message:
+            typeof (error as any)?.data?.message === "string"
+              ? (error as any)?.data?.message
+              : "Failed to add new calculator.",
         },
         toastRef,
         "error"
@@ -137,10 +149,9 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
               required: "Please provide calculator name.",
             }}
             render={({ field, fieldState }) => {
-              const findSuggestions = (label: string) => Object.keys(calcInfoMap).filter(calcType => calcInfoMap[calcType].label.toLowerCase().includes(label.toLowerCase()));
               const search = (event: AutoCompleteCompleteEvent) => {
                 setSuggestions(findSuggestions(event.query));
-              }
+              };
               return (
                 <div className="flex-1">
                   <label
@@ -153,14 +164,22 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
                       id={field.name}
                       value={field.value}
                       disabled={isUploading}
-                      suggestions={suggestions.map((calcType) => calcInfoMap[calcType].label)}
+                      suggestions={suggestions.map(
+                        (calcType) => calcInfoMap[calcType].label
+                      )}
                       completeMethod={search}
                       onChange={(e) => {
                         field.onChange(e.target.value);
                         let newSuggestions = findSuggestions(e.target.value);
                         setSuggestions(newSuggestions);
-                        if (newSuggestions.length == 1 && calcInfoMap[newSuggestions[0]].label == e.target.value)
-                          setValue('description', calcInfoMap[newSuggestions[0]].description || "");
+                        if (
+                          newSuggestions.length == 1 &&
+                          calcInfoMap[newSuggestions[0]].label == e.target.value
+                        )
+                          setValue(
+                            "description",
+                            calcInfoMap[newSuggestions[0]].description || ""
+                          );
                       }}
                       dropdown
                     />
@@ -172,7 +191,7 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
 
                   {FormErrorMessage({ message: errors[field.name]?.message })}
                 </div>
-              )
+              );
             }}
           />
 
@@ -212,7 +231,7 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({ toastRef }) =
         </form>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
 export default NewCalculatorDialog;

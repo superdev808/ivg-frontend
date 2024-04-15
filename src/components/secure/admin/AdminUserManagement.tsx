@@ -50,6 +50,7 @@ const AdminUserManagement: React.FC = () => {
     lastName: { value: null, matchMode: FilterMatchMode.CONTAINS },
     email: { value: null, matchMode: FilterMatchMode.CONTAINS },
     organizationName: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    organizationState: { value: null, matchMode: FilterMatchMode.EQUALS },
     role: { value: null, matchMode: FilterMatchMode.CONTAINS },
     verified: { value: null, matchMode: FilterMatchMode.EQUALS },
     active: { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -339,7 +340,7 @@ const AdminUserManagement: React.FC = () => {
       optionLabel="label"
       optionValue="value"
       placeholder="Any"
-      className="p-column-filter border-round-xl"
+      className="p-column-filter border-round-xl w-full"
     />
   );
 
@@ -378,7 +379,7 @@ const AdminUserManagement: React.FC = () => {
     {
       field: "role",
       header: "Role",
-      body: (row: EditUser) => <span>{row.role}</span>,
+      body: (row: EditUser) => <span className="pl-4 pr-8">{row.role}</span>,
       sortable: true,
       filter: true,
       filterElement: roleFilterTemplate,
@@ -387,6 +388,13 @@ const AdminUserManagement: React.FC = () => {
       field: "organizationName",
       header: "Organization",
       body: (row: EditUser) => <span>{row.organizationName}</span>,
+      sortable: true,
+      filter: true,
+    },
+    {
+      field: "organizationState",
+      header: "Location",
+      body: (row: EditUser) => <span className="px-4">{row.organizationState}</span>,
       sortable: true,
       filter: true,
     },
@@ -440,6 +448,7 @@ const AdminUserManagement: React.FC = () => {
             "lastName",
             "email",
             "organizationName",
+            "organizationState",
             "role",
           ]}
           filters={filters}
