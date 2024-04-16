@@ -7,6 +7,7 @@ import {
   RadioButtonOption,
   Site,
   CalculatorGroupItem,
+  EXPLORE_DATA,
 } from "@/types/calculators";
 
 export const CALCULATOR_MAPPINGS: KeyValuePair = {
@@ -477,4 +478,323 @@ export const CALCULATOR_OUTPUT_MAPPING: [string, RegExp][] = [
   ["supportingArticle", /supporting article/gi],
   ["link", /Click to purchase/gi],
   ["link", /Link to purchase/gi],
+];
+
+export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
+  {
+    name: "Procedures",
+    description:
+      "Clinical recommendations and techniques to maximize the success of each case",
+    sections: [
+      {
+        name: "Calculators",
+        items: [
+          {
+            name: "Choosing the right restoration materials",
+            openByDefault: true,
+            items: [
+              {
+                name: "Crowns",
+                items: [
+                  {
+                    name: "Implant Crown",
+                    href: "/calculators/ImplantBorneCrown",
+                  },
+                  {
+                    name: "Tooth Borne Crown",
+                    href: "/calculators/ToothBorneCrown",
+                  },
+                ],
+              },
+              {
+                name: "Bridges",
+                items: [
+                  {
+                    name: "Implant Bridge",
+                    href: "/calculators/ImplantBorneBridge",
+                  },
+                  {
+                    name: "Tooth Borne Bridge",
+                    href: "/calculators/ToothBorneBridge",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Workflows",
+        items: [
+          {
+            name: "Intraoral Scanning",
+            items: [
+              {
+                name: "Scan Requirements",
+                href: "/calculators/ScanRequirements",
+              },
+            ],
+          },
+          {
+            name: "Chairside Procedures",
+            openByDefault: true,
+            items: [
+              {
+                name: "How to cement and bond",
+                href: "/calculators/BondingEtching",
+              },
+              {
+                name: "Isolation Techniques and Tips",
+                href: "/calculators/IsolationTechniques",
+              },
+              {
+                name: "Keys to Successful Tooth Preparation",
+                href: "/calculators/ToothPreparation",
+              },
+              {
+                name: "Best Practices for Taking Physical Impressions",
+                href: "/calculators/PhysicalImpression",
+              },
+            ],
+          },
+          {
+            name: "Troubleshooting Case Issues",
+            openByDefault: true,
+            items: [
+              {
+                name: "Crowns",
+                items: [{ name: "Implant-Borne" }, { name: "Tooth-Borne" }],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Components",
+    description:
+      "Your guide to using compatible components for all of your procedures.",
+    sections: [
+      {
+        name: "Calculators",
+        items: [
+          {
+            name: "Restorations on Implants",
+            openByDefault: true,
+            items: [
+              {
+                name: "Scanbodies",
+                items: [
+                  {
+                    name: "Single-Unit Implant (Implant Level)",
+                    href: "/calculators/ScanbodiesSingleUnit",
+                  },
+                  {
+                    name: "Multi-Unit Abutments (Abutment Level)",
+                    href: "/calculators/ScanbodiesMultiUnitAbutments",
+                  },
+                  { name: "Lab / Model Scanbodies" },
+                ],
+              },
+              {
+                name: "Scanbody Drivers",
+                items: [
+                  {
+                    name: "Single-Unit Implant (Implant Level)",
+                    href: "/calculators/ScanbodyDriversDirectToImplant",
+                  },
+                  {
+                    name: "Multi-Unit Abutments (Abutment Level)",
+                    href: "/calculators/ScanbodyDriversMUAs",
+                  },
+                ],
+              },
+              {
+                name: "Implant Drivers",
+                items: [
+                  {
+                    name: "Single-Unit Implant (Implant Level)",
+                    href: "/calculators/DriversRestorativeDirectToImplant",
+                  },
+                  {
+                    name: "Multi-Unit Abutments (Abutment Level)",
+                    href: "/calculators/DriversRestorativeOnMultiUnitAbutments",
+                  },
+                ],
+              },
+              {
+                name: "Implant Screws",
+                isHighlighted: true,
+                href: "/calculators/ImplantScrews",
+              },
+              {
+                name: "Implant Analogs",
+                isHighlighted: true,
+                href: "/calculators/ImplantAnalogs",
+              },
+              {
+                name: "Impression Copings",
+                items: [
+                  {
+                    name: "Single Unit Implant (Implant Level)",
+                    href: "/calculators/ImpressionCopingsDirectToImplant",
+                  },
+                  {
+                    name: "Multi-Unit Abutments (Abutment Level)",
+                    href: "/calculators/ImpressionCopingsMultiUnitAbutments",
+                  },
+                ],
+              },
+              {
+                name: "Temporary Copings",
+                items: [
+                  {
+                    name: "Single Unit Implant (Implant Level)",
+                    href: "/calculators/TemporaryCopingsDirectToImplant",
+                  },
+                  {
+                    name: "Multi-Unit Abutments (Abutment Level)",
+                    href: "/calculators/TemporaryCopingsMultiUnitAbutments",
+                  },
+                ],
+              },
+              {
+                name: "Abutments",
+                items: [
+                  { name: "Locator Abutments" },
+                  {
+                    name: "Multi-Unit Abutments (Abutment Level)",
+                    href: "/calculators/MultiUnitAbutments",
+                  },
+                  {
+                    name: "Stock Abutments",
+                    href: "/calculators/StockAbutments",
+                  },
+                  {
+                    name: "Titanium (Ti) Bases",
+                    items: [
+                      {
+                        name: "Single Unit Implant (Implant Level)",
+                        href: "/calculators/TiBasesDirectToImplant",
+                      },
+                      {
+                        name: "Multi-Unit Abutments (Abutment Level)",
+                        href: "/calculators/TiBasesMultiUnitAbutments",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: "Implant Surgery",
+            openByDefault: true,
+            items: [
+              {
+                name: "All-on-X Ordering Guide",
+                href: "/calculators/All-on-X Ordering Guide",
+              },
+              {
+                name: "Choosing Compatible Drill Kits and Drills",
+                href: "/calculators/DrillKitsAndDrillSequences",
+              },
+              {
+                name: "Healing Abutments",
+                href: "/calculators/HealingAbutments",
+              },
+              { name: "Implants", href: "/calculators/Implants" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Recommended Supplies",
+    sections: [
+      {
+        name: "Calculators",
+        items: [
+          {
+            name: "Restorations on Implants",
+            openByDefault: true,
+            items: [
+              {
+                name: "Materials",
+                items: [
+                  {
+                    name: "Chairside Pick-Up",
+                    href: "/calculators/ChairsidePickUpMaterials",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: "Implant Surgery",
+            openByDefault: true,
+            items: [
+              {
+                name: "Instruments",
+                items: [
+                  {
+                    name: "Bone Reduction Burs",
+                    href: "/calculators/BoneReductionInstruments",
+                  },
+                  {
+                    name: "Choosing Compatible Drill Kits and Drills",
+                    href: "/calculators/DrillKitsAndDrillSequences",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "Common Supplies",
+        items: [
+          { name: "Adhesives / Liners" },
+          { name: "Anesthesia" },
+          { name: "Bite Registration" },
+          { name: "Bleaching" },
+          { name: "Bonding and Cementing" },
+          { name: "Bone Reduction" },
+          { name: "Building up Impression Trays" },
+          { name: "Casting" },
+          { name: "Chairside Pick-Up" },
+          { name: "Denture Fabrication" },
+          { name: "Diagnosis" },
+          { name: "Dissolving Agent" },
+          { name: "Endodontics" },
+          { name: "First Aid" },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Customize and Favorites",
+    description:
+      "Build your own combination of calculators for easy purchase, export, and sharing; or use one pre-built by the Ivory Guide clinical team.",
+    sections: [
+      {
+        name: "Custom",
+        items: [
+          {
+            name: "All-on-X Ordering Guide",
+            isHighlighted: true,
+            href: "/calculators/All-on-X Ordering Guide",
+          },
+          {
+            name: "Custom",
+            isHighlighted: true,
+            href: "/calculators/Custom Combinations",
+          },
+        ],
+      },
+      { name: "Favorites" },
+    ],
+  },
 ];

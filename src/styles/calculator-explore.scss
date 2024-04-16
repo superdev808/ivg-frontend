@@ -1,0 +1,30 @@
+.calculator-explore-tab-view {
+  .p-tabview-nav {
+    justify-content: center;
+    background: var(--dark-green);
+
+    li .p-tabview-nav-link {
+      background: var(--dark-green);
+      color: var(--beige);
+      border-width: 0;
+      border-radius: 10px 10px 0 0;
+    }
+
+    li .p-tabview-nav-link:focus {
+      background: var(--beige);
+    }
+
+    li .p-tabview-nav-link:hover {
+      color: var(--dark-brown);
+    }
+
+    li.p-tabview-selected > .p-tabview-nav-link {
+      background: var(--beige);
+      color: var(--dark-green);
+    }
+
+    .p-tabview-ink-bar {
+      display: none;
+    }
+  }
+}

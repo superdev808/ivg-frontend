@@ -1,0 +1,39 @@
+.divider {
+  height: 100%;
+  width: 20px;
+  background-color: var(--light-green);
+}
+
+.sections {
+  display: flex;
+  justify-content: center;
+
+  @media screen and (max-width: 991px) {
+    flex-direction: column;
+  }
+}
+
+.section {
+  min-width: 500px;
+  border-style: solid;
+  border-color: var(--light-green);
+  border-width: 0;
+
+  &:not(:last-of-type) {
+    border-right-width: 5px;
+  }
+
+  @media screen and (max-width: 991px) {
+    min-width: initial;
+
+    &:not(:last-of-type) {
+      border-right-width: 0;
+      border-bottom-width: 5px;
+      padding-bottom: 20px;
+    }
+
+    &:not(:first-of-type) {
+      padding-top: 20px;
+    }
+  }
+}

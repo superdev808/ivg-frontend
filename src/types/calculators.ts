@@ -147,7 +147,7 @@ export interface Summary extends ItemInsights {
   link?: string;
   manufacturer?: string;
   notes?: string;
-// for material calculators
+  // for material calculators
   recommendedSingleUnitAbutmentMaterial?: string;
   recommendedMUAMaterial?: string;
   recommendedRestorationDesign?: string;
@@ -174,4 +174,23 @@ export interface CalculatorInfoMap {
     input: InputOutputValues[];
     output: InputOutputValues[];
   };
+}
+
+export interface EXPLORE_DATA_ITEM {
+  name: string;
+  href?: string;
+  isHighlighted?: true;
+  openByDefault?: boolean;
+  items?: EXPLORE_DATA_ITEM[];
+}
+
+export interface EXPLORE_DATA_SECTION {
+  name: string;
+  items?: EXPLORE_DATA_ITEM[];
+}
+
+export interface EXPLORE_DATA {
+  name: string;
+  description?: string;
+  sections: EXPLORE_DATA_SECTION[];
 }

@@ -16,6 +16,7 @@ import { prepareExportProps } from "@/helpers/calculators";
 import { event as gaEvent } from "@/lib/gtag";
 import {
   useGetUserInfoQuery,
+  useSaveCalculatorMutation,
   useSaveResultMutation,
   useUpdateSavedResultMutation,
 } from "@/redux/hooks/apiHooks";
@@ -50,9 +51,11 @@ const Result: React.FC<ResultProps> = ({
   onUpdateQuantity,
 }) => {
   const { refetch } = useGetUserInfoQuery({});
+  const [saveCalculator, { isLoading: isSavingCalculator }] =
+    useSaveCalculatorMutation();
   const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
   const [updateSavedResult] = useUpdateSavedResultMutation();
-  const { calcInfoMap } = useCalculatorsInfo()
+  const { calcInfoMap } = useCalculatorsInfo();
 
   const [showSaveDialog, setShowSaveDialog] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<"init" | "started" | "pending">(
@@ -173,7 +176,13 @@ const Result: React.FC<ResultProps> = ({
     setVisible(true);
   };
 
-  const handleSave = async (name: string) => {
+  const handleCloseSaveDialog = () => {
+    setShowSaveDialog(false);
+  };
+
+  const handleSaveResult = async (name: string) => {
+    handleCloseSaveDialog();
+
     const payload = {
       calculatorType,
       items,
@@ -204,11 +213,30 @@ const Result: React.FC<ResultProps> = ({
     }
   };
 
-  const handleCloseSaveDialog = (resultName?: string) => {
-    setShowSaveDialog(false);
+  const handleSaveCalculator = async () => {
+    handleCloseSaveDialog();
 
-    if (resultName) {
-      handleSave(resultName);
+    const payload = { calculatorType };
+
+    try {
+      await saveCalculator(payload).unwrap();
+      refetch();
+
+      (toastRef.current as any).show({
+        severity: "success",
+        summary: "Success",
+        detail: "Saved calculator successfully",
+        life: 3000,
+        className: "mt-8",
+      });
+    } catch (error) {
+      (toastRef.current as any).show({
+        severity: "error",
+        summary: "Error",
+        detail: "Failed to save calculator",
+        life: 3000,
+        className: "mt-8",
+      });
     }
   };
 
@@ -275,6 +303,9 @@ const Result: React.FC<ResultProps> = ({
       <SaveDialog
         visible={showSaveDialog}
         defaultValue={name || calculatorName}
+        showSaveCalculator
+        onSaveCalculator={handleSaveCalculator}
+        onSaveResult={handleSaveResult}
         onClose={handleCloseSaveDialog}
       />
 
@@ -346,7 +377,7 @@ const Result: React.FC<ResultProps> = ({
                 <Button
                   className="p-button p-button-lg px-3 py-2"
                   label="Save"
-                  loading={isSavingResult}
+                  loading={isSavingCalculator || isSavingResult}
                   onClick={() => setShowSaveDialog(true)}
                 />
               )}
@@ -354,7 +385,11 @@ const Result: React.FC<ResultProps> = ({
           )}
         </div>
 
-        <Outputs calculatorType={calculatorType} items={items} onUpdateQuantity={onUpdateQuantity} />
+        <Outputs
+          calculatorType={calculatorType}
+          items={items}
+          onUpdateQuantity={onUpdateQuantity}
+        />
 
         <div className="flex justify-content-between align-items-center gap-4 flex-column pb-6 lg:flex-row">
           <div
@@ -363,18 +398,20 @@ const Result: React.FC<ResultProps> = ({
               "quiz"
             )}
           >
-            <h3 className="underline mb-0">Input Summary</h3>
+            <h3 className="underline m-0">Input Summary</h3>
             {quiz.map(
-              ({ id, question, answer }) => (id == undefined || id == '' || id == calculatorType) && (
-                <div key={question} className="flex flex-1 align-items-center gap-1">
+              ({ id, question, answer }) =>
+                (!id || id === calculatorType) && (
                   <div
-                    className="flex-1 text-left text-dark-green"
+                    key={question}
+                    className="flex flex-1 align-items-center gap-1"
                   >
-                    {question}
+                    <div className="flex-1 text-left text-dark-green">
+                      {question}
+                    </div>
+                    <div className="text-right">{answer}</div>
                   </div>
-                  <div className="text-right">{answer}</div>
-                </div>
-              )
+                )
             )}
           </div>
           {image && (
@@ -400,7 +437,13 @@ const Result: React.FC<ResultProps> = ({
         <div ref={contentRef}>
           {patientInfo && (
             <PDFContent
-              {...prepareExportProps(calculatorType, calculatorName, patientInfo, quiz, items)}
+              {...prepareExportProps(
+                calculatorType,
+                calculatorName,
+                patientInfo,
+                quiz,
+                items
+              )}
             />
           )}
         </div>
