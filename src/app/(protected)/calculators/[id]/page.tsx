@@ -13,9 +13,13 @@ export default function CalculatorPage() {
   const search = useSearchParams();
   const { calcInfoMap } = useCalculatorsInfo();
   const tabId = decodeURIComponent(params.id as string);
-  const defaultAnswers = (search.get("default") || "")
-    .split(",")
-    .map(decodeURIComponent);
+  console.log("BBB", tabId);
+  const defaultParam = search.get("default");
+  const defaultAnswers = defaultParam
+    ? defaultParam.split(",").map(decodeURIComponent)
+    : [];
+
+  console.log("AAA", defaultAnswers);
 
   const selectedType = calcInfoMap[tabId];
 
