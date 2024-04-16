@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 import CalculatorContainer from "@/components/secure/calculator";
 import AllOnXCalculator from "@/components/secure/calculator/AllOnX";
@@ -9,9 +9,13 @@ import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 export default function CalculatorPage() {
   // const router = useRouter();
-  const searchParams = useParams();
+  const params = useParams();
+  const search = useSearchParams();
   const { calcInfoMap } = useCalculatorsInfo();
-  const tabId = decodeURIComponent(searchParams.id as string);
+  const tabId = decodeURIComponent(params.id as string);
+  const defaultAnswers = (search.get("default") || "")
+    .split(",")
+    .map(decodeURIComponent);
 
   const selectedType = calcInfoMap[tabId];
 
@@ -27,6 +31,7 @@ export default function CalculatorPage() {
           <div className="w-full">
             <div className="flex flex-column align-items-center justify-content-center">
               <CalculatorContainer
+                defaultAnswers={defaultAnswers}
                 option={tabId as string}
                 input={selectedType?.input || []}
                 output={selectedType?.output || []}

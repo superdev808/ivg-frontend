@@ -1,9 +1,13 @@
 "use client";
 
+import classNames from "classnames/bind";
+import styles from "./page.module.scss";
+const cx = classNames.bind(styles);
+
 import uniq from "lodash/uniq";
 import { useRouter } from "next/navigation";
 import { TabView, TabPanel } from "primereact/tabview";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import SearchBox from "@/components/ui/searchbox";
 import {
@@ -12,20 +16,25 @@ import {
 } from "@/constants/calculators";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 import { useGetUserInfoQuery } from "@/redux/hooks/apiHooks";
-import { CalculatorGroupItem } from "@/types/calculators";
+import { CalculatorGroupItem, EXPLORE_DATA } from "@/types/calculators";
 
 import TabContent from "./tab-content";
+import { Button } from "primereact/button";
+import {
+  formatToExploreDataItems,
+  updateExploreAllData,
+} from "@/helpers/calculators";
 
 const CalculatorPage: React.FC = () => {
   const router = useRouter();
 
-  const { data, isLoading, refetch } = useGetUserInfoQuery({});
-
-  const [selectedGroup, setSelectedGroup] = useState<number>(-1);
+  const { data } = useGetUserInfoQuery({});
   const [loading, setLoading] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
   const searchBoxRef = useRef(null);
   const { calcInfoMap } = useCalculatorsInfo();
+  const [exploreAllData, setExploreAllData] =
+    useState<EXPLORE_DATA[]>(EXPLORE_ALL_DATA);
 
   const userInfo = data?.data;
 
@@ -92,6 +101,43 @@ const CalculatorPage: React.FC = () => {
       });
   };
 
+  useEffect(() => {
+    const COMMON_SUPPLIES = "DentalSupplies",
+      COMMON_SUPPLIES_TITLE = "Common Supplies";
+    const inputKeys: string[] =
+      calcInfoMap[COMMON_SUPPLIES]?.input.map((item) => item.colIndex) || [];
+    fetch(`${process.env.NEXT_PUBLIC_APP_SERVER_URL}/materials`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: COMMON_SUPPLIES,
+        quiz: {},
+        fields: inputKeys,
+      }),
+    })
+      .then((response) => response.json())
+      .then(({ data }) => {
+        const commonSuppliesDataItems = formatToExploreDataItems(
+          data as any[],
+          inputKeys,
+          `/calculators/${COMMON_SUPPLIES}?default=`
+        );
+        console.log(commonSuppliesDataItems);
+        setExploreAllData((_exploreAllData) =>
+          updateExploreAllData(
+            _exploreAllData,
+            COMMON_SUPPLIES_TITLE,
+            commonSuppliesDataItems
+          )
+        );
+      })
+      .catch((err) => {
+        console.log(`Common Supplies error occured`, err);
+      });
+  }, [calcInfoMap]);
+
   return (
     <div className="flex flex-column">
       <div className="bg-dark-green py-4 px-4">
@@ -104,10 +150,24 @@ const CalculatorPage: React.FC = () => {
             inputRef={searchBoxRef}
           />
         </div>
+        {searchResult.length > 0 && (
+          <div className="mb-4">
+            {searchResult.map((searchedCalcType, index) => (
+              <Button
+                className={cx("calculatorButton", "p-3 m-2")}
+                key={`searched-calc-${index}`}
+                label={calcInfoMap[searchedCalcType].label || searchedCalcType}
+                onClick={() => {
+                  router.push(`/calculators/${searchedCalcType}`);
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <TabView className="calculator-explore-tab-view">
-        {EXPLORE_ALL_DATA.map((datum) => (
+        {exploreAllData.map((datum) => (
           <TabPanel key={datum.name} header={datum.name}>
             <TabContent
               datum={datum}
