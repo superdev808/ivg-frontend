@@ -15,6 +15,8 @@ import {
 } from "@/constants/calculators";
 import {
   CalculatorInfoMap,
+  EXPLORE_DATA,
+  EXPLORE_DATA_ITEM,
   InputAndResponse,
   InputDetail,
   InputOutputValues,
@@ -26,6 +28,7 @@ import {
   SiteData,
   Summary,
 } from "@/types/calculators";
+import _, { uniq } from "lodash";
 
 export const isValidUrl = (urlString = "") => {
   const urlPattern = new RegExp(
@@ -279,12 +282,17 @@ export const prepareExportProps = (
 export const serializeColInfo = (
   colInfo: Pick<
     InputOutputValues,
-    "colName" | "groupText" | "groupId" | "calculatorType" | "groupName" | "colIndex"
+    | "colName"
+    | "groupText"
+    | "groupId"
+    | "calculatorType"
+    | "groupName"
+    | "colIndex"
   >
 ) => {
-  return `${colInfo.groupText || "EMPTY"}___${colInfo.colIndex}___${colInfo.colName}___${
-    colInfo.groupId
-  }___${colInfo.groupName}___${colInfo.calculatorType}`;
+  return `${colInfo.groupText || "EMPTY"}___${colInfo.colIndex}___${
+    colInfo.colName
+  }___${colInfo.groupId}___${colInfo.groupName}___${colInfo.calculatorType}`;
 };
 
 export const deserializeColInfo = (serializedColInfo: string) => {
@@ -346,4 +354,46 @@ export const parseItems = (
   }
   console.log(resultInfo);
   return resultInfo;
+};
+
+export const formatToExploreDataItems = (
+  response: any[],
+  keys: string[],
+  prefix: string
+): EXPLORE_DATA_ITEM[] => {
+  const [firstKey, ...restKeys] = keys;
+  return uniq(response.map((item) => item[firstKey]))
+    .sort()
+    .map((firstValue: string) => {
+      let result: EXPLORE_DATA_ITEM = {
+        name: firstValue,
+      };
+      if (restKeys.length == 0) {
+        result.href = `${prefix}${encodeURIComponent(firstValue)}`;
+        return result;
+      }
+      let inspectedItems = response.filter(
+        (item) => item[firstKey] === firstValue
+      );
+      result.items = formatToExploreDataItems(
+        inspectedItems,
+        restKeys,
+        `${prefix}${encodeURIComponent(firstValue)},`
+      );
+      return result;
+    });
+};
+
+export const updateExploreAllData = (
+  allData: EXPLORE_DATA[],
+  itemName: string,
+  data: EXPLORE_DATA_ITEM[]
+) => {
+  let finalData = _.cloneDeep(allData);
+  for (let i = 0; i < finalData.length; ++i) {
+    for (let j = 0; j < finalData[i].sections.length; ++j)
+      if (finalData[i].sections[j].name == itemName)
+        finalData[i].sections[j].items = data;
+  }
+  return finalData;
 };

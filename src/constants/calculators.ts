@@ -563,7 +563,13 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
             items: [
               {
                 name: "Crowns",
-                items: [{ name: "Implant-Borne" }, { name: "Tooth-Borne" }],
+                items: [
+                  {
+                    name: "Implant-Borne",
+                    href: "/calculators/ImplantBorneCrown",
+                  },
+                  { name: "Tooth-Borne", href: "/calculators/ToothBorneCrown" },
+                ],
               },
             ],
           },
