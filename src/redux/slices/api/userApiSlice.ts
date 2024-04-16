@@ -321,6 +321,19 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
+    saveCalculator: builder.mutation({
+      query: (body) => ({
+        url: "/saveCalculator",
+        method: "POST",
+        body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+      transformResponse: (res: Response) => {
+        return res.status === "Success" ? res.data : res.status;
+      },
+    }),
   }),
   overrideExisting: true,
 });

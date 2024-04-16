@@ -27,6 +27,7 @@ export const {
   useDeleteAnnouncementMutation,
   useUploadCalculatorDataMutation,
   useGetCalculatorInfoQuery,
+  useSaveCalculatorMutation,
 } = userApiSlice;
 
 export const { usePostSubmitContactFormMutation } = publicApiSlice;

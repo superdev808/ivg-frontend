@@ -11,9 +11,13 @@ const cx = classNames.bind(styles);
 
 interface TabContentProps {
   datum: EXPLORE_DATA;
+  favoriteCalculators: EXPLORE_DATA_ITEM[];
 }
 
-const TabContent: React.FC<TabContentProps> = ({ datum }) => {
+const TabContent: React.FC<TabContentProps> = ({
+  datum,
+  favoriteCalculators,
+}) => {
   const renderItems = (items: EXPLORE_DATA_ITEM[]) =>
     items.map((item, itemIndex) => (
       <ItemsList item={item} renderItems={renderItems} key={itemIndex} />
@@ -38,7 +42,13 @@ const TabContent: React.FC<TabContentProps> = ({ datum }) => {
           >
             <div className="font-bold underline text-2xl">{section.name}</div>
 
-            {section.items && (
+            {section.name === "Favorites" && (
+              <div className="flex flex-column gap-4">
+                {renderItems(favoriteCalculators)}
+              </div>
+            )}
+
+            {section.name !== "Favorites" && section.items && (
               <div className="flex flex-column gap-4">
                 {renderItems(section.items)}
               </div>

@@ -507,16 +507,33 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
         items: [
           {
             name: "Intraoral Scanning",
-            items: [{ name: "Scan Requirements" }],
+            items: [
+              {
+                name: "Scan Requirements",
+                href: "/calculators/ScanRequirements",
+              },
+            ],
           },
           {
             name: "Chairside Procedures",
             openByDefault: true,
             items: [
-              { name: "How to cement and bond" },
-              { name: "Isolation Techniques and Tips" },
-              { name: "Keys to Successful Tooth Preparation" },
-              { name: "Best Practices for Taking Physical Impressions" },
+              {
+                name: "How to cement and bond",
+                href: "/calculators/BondingEtching",
+              },
+              {
+                name: "Isolation Techniques and Tips",
+                href: "/calculators/IsolationTechniques",
+              },
+              {
+                name: "Keys to Successful Tooth Preparation",
+                href: "/calculators/ToothPreparation",
+              },
+              {
+                name: "Best Practices for Taking Physical Impressions",
+                href: "/calculators/PhysicalImpression",
+              },
             ],
           },
           {
@@ -625,7 +642,10 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                 name: "Abutments",
                 items: [
                   { name: "Locator Abutments" },
-                  { name: "Multi-Unit Abutments (Abutment Level)" },
+                  {
+                    name: "Multi-Unit Abutments (Abutment Level)",
+                    href: "/calculators/MultiUnitAbutments",
+                  },
                   {
                     name: "Stock Abutments",
                     href: "/calculators/StockAbutments",

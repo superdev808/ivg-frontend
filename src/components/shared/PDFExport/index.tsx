@@ -46,7 +46,13 @@ const PDFExport: React.FC<PDFExportProps> = ({
 
   const filename = patientInfo?.filename || `${calculatorName}-Summary`;
 
-  const handleSave = async (name: string) => {
+  const handleCloseSaveDialog = () => {
+    setShowSaveDialog(false);
+  };
+
+  const handleSaveResult = async (name: string) => {
+    handleCloseSaveDialog();
+
     const compWithUpdatedQuantity = componentSummary.map((comp) => {
       const quantity = totalQuantities.find(
         (elem) => elem.id === comp.id
@@ -161,14 +167,6 @@ const PDFExport: React.FC<PDFExportProps> = ({
     }
   };
 
-  const handleCloseSaveDialog = (resultName?: string) => {
-    setShowSaveDialog(false);
-
-    if (resultName) {
-      handleSave(resultName);
-    }
-  };
-
   const handleSubmit = (data: Patient) => {
     setVisible(false);
 
@@ -251,6 +249,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
           isCustom ? "Custom Combinations" : "All-on-X Ordering Guide"
         }
         visible={showSaveDialog}
+        onSaveResult={handleSaveResult}
         onClose={handleCloseSaveDialog}
       />
     </div>

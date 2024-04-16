@@ -1,34 +1,33 @@
 "use client";
 
-import classNames from "classnames/bind";
 import uniq from "lodash/uniq";
 import { useRouter } from "next/navigation";
-import { Button } from "primereact/button";
-import React, { useState, useRef } from "react";
+import { TabView, TabPanel } from "primereact/tabview";
+import React, { useMemo, useRef, useState } from "react";
 
 import SearchBox from "@/components/ui/searchbox";
 import {
-  CALCULATOR_MAPPINGS,
   CALCULATOR_GROUP_ITEMS,
+  EXPLORE_ALL_DATA,
 } from "@/constants/calculators";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
-import { event as gaEvent } from "@/lib/gtag";
+import { useGetUserInfoQuery } from "@/redux/hooks/apiHooks";
 import { CalculatorGroupItem } from "@/types/calculators";
 
-import styles from "./page.module.scss";
+import TabContent from "./tab-content";
 
-import NewCalculatorPage from "./new-page";
-
-const cx = classNames.bind(styles);
-
-export const Calculators = () => {
+const CalculatorPage: React.FC = () => {
   const router = useRouter();
+
+  const { data, isLoading, refetch } = useGetUserInfoQuery({});
 
   const [selectedGroup, setSelectedGroup] = useState<number>(-1);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
   const searchBoxRef = useRef(null);
   const { calcInfoMap } = useCalculatorsInfo();
+
+  const userInfo = data?.data;
 
   const calcItems = CALCULATOR_GROUP_ITEMS.reduce(
     (accumulator: string[], currentValue: CalculatorGroupItem) => [
@@ -37,6 +36,21 @@ export const Calculators = () => {
     ],
     []
   ).filter((calcType) => calcType in calcInfoMap);
+
+  const favoriteCalculators = useMemo(() => {
+    if (!userInfo?.savedCalculators || userInfo.savedCalculators.length === 0) {
+      return [];
+    }
+
+    return userInfo.savedCalculators
+      .map((calc: string) => calcInfoMap[calc])
+      .filter(Boolean)
+      .map((calc: { type: string; label: string }) => ({
+        name: calc.label,
+        isHighlighted: true,
+        href: `/calculators/${calc.type}`,
+      }));
+  }, [userInfo, calcInfoMap]);
 
   const handleSearch = (str = "") => {
     if (!str) {
@@ -78,101 +92,32 @@ export const Calculators = () => {
       });
   };
 
-  const handleClickCalculatorGroup = (
-    groupItem: CalculatorGroupItem,
-    index: number
-  ) => {
-    gaEvent({
-      action: groupItem.label,
-      category: "Button",
-      label: `Calculator ${groupItem.label}`,
-    });
-
-    if (Object.values(CALCULATOR_MAPPINGS).includes(groupItem.label)) {
-      router.push(`/calculators/${groupItem.label}`);
-    } else {
-      setSelectedGroup(index);
-    }
-  };
-
   return (
-    <div className="flex-grow-1 px-3 md:px-8">
-      <h2 className="mt-0 mb-5 text-center">Calculators</h2>
+    <div className="flex flex-column">
+      <div className="bg-dark-green py-4 px-4">
+        <div className="text-beige text-center text-4xl">Explore All</div>
 
-      <div className="mt-0 mb-4">
-        <SearchBox
-          handleSearch={handleSearch}
-          loading={loading}
-          inputRef={searchBoxRef}
-        />
+        <div className="mt-4">
+          <SearchBox
+            handleSearch={handleSearch}
+            loading={loading}
+            inputRef={searchBoxRef}
+          />
+        </div>
       </div>
 
-      {searchResult.length > 0 && (
-        <div className="mb-4">
-          {searchResult.map((searchedCalcType, index) => (
-            <Button
-              className={cx("calculatorButton", "p-3 m-2")}
-              key={`searched-calc-${index}`}
-              label={calcInfoMap[searchedCalcType].label || searchedCalcType}
-              onClick={() => {
-                router.push(`/calculators/${searchedCalcType}`);
-              }}
+      <TabView className="calculator-explore-tab-view">
+        {EXPLORE_ALL_DATA.map((datum) => (
+          <TabPanel key={datum.name} header={datum.name}>
+            <TabContent
+              datum={datum}
+              favoriteCalculators={favoriteCalculators}
             />
-          ))}
-        </div>
-      )}
-
-      <div className={cx("mainSection", "border-top-1 border-light-green")}>
-        <div className="flex flex-column gap-2 py-4 pr-4 border-right-1 border-light-green">
-          {CALCULATOR_GROUP_ITEMS.map((groupItem, index) => (
-            <Button
-              className={cx("calculatorButton", "p-4 flex flex-column w-full", {
-                "calculatorButton--highlighted": index === selectedGroup,
-              })}
-              key={`groupItem-${index}`}
-              onClick={() => handleClickCalculatorGroup(groupItem, index)}
-            >
-              <h3 className="m-0">{groupItem.label}</h3>
-              {groupItem.description && <p>{groupItem.description}</p>}
-            </Button>
-          ))}
-        </div>
-
-        <div className={cx("p-4", "calculatorButtonSection")}>
-          {selectedGroup >= 0 && (
-            <div className="flex flex-column gap-2">
-              {CALCULATOR_GROUP_ITEMS[selectedGroup].subItems.map(
-                (calcType, index) => (
-                  <Button
-                    className={cx(
-                      "calculatorButton",
-                      "p-4 w-full flex flex-column"
-                    )}
-                    key={`calcItem-${index}`}
-                    onClick={() => {
-                      router.push(`/calculators/${calcType}`);
-                    }}
-                  >
-                    <h4 className="m-0">
-                      {calcInfoMap[calcType].label || calcType}
-                    </h4>
-                    {calcInfoMap[calcType].description && (
-                      <p className="mb-0 mt-2">
-                        {calcInfoMap[calcType].description}
-                      </p>
-                    )}
-                  </Button>
-                )
-              )}
-            </div>
-          )}
-        </div>
-      </div>
+          </TabPanel>
+        ))}
+      </TabView>
     </div>
   );
 };
 
-export default function CalculatorsPage() {
-  // return <Calculators />;
-  return <NewCalculatorPage />;
-}
+export default CalculatorPage;

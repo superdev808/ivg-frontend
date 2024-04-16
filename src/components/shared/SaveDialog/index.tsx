@@ -1,3 +1,4 @@
+import { noop } from "lodash";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
@@ -5,13 +6,19 @@ import React, { useEffect, useState } from "react";
 
 interface SaveDialogProps {
   visible: boolean;
+  showSaveCalculator?: boolean;
   defaultValue?: string;
-  onClose: (_?: string) => void;
+  onSaveCalculator?: () => void;
+  onSaveResult: (_: string) => void;
+  onClose: () => void;
 }
 
 const SaveDialog: React.FC<SaveDialogProps> = ({
   visible,
+  showSaveCalculator = false,
   defaultValue = "",
+  onSaveCalculator = noop,
+  onSaveResult,
   onClose,
 }) => {
   const [value, setValue] = useState<string>("");
@@ -37,14 +44,23 @@ const SaveDialog: React.FC<SaveDialogProps> = ({
           onChange={(evt) => setValue(evt.target.value)}
         />
 
-        <div className="flex justify-content-end gap-2">
-          <Button
-            label="Save"
-            size="small"
-            disabled={!value}
-            onClick={() => onClose(value)}
-          />
-          <Button label="Cancel" size="small" onClick={() => onClose()} />
+        <div className="flex justify-content-between">
+          {showSaveCalculator && (
+            <Button
+              label="Add Calculator to Favorites"
+              size="small"
+              onClick={onSaveCalculator}
+            />
+          )}
+          <div className="flex gap-2">
+            <Button
+              label="Save"
+              size="small"
+              disabled={!value}
+              onClick={() => onSaveResult(value)}
+            />
+            <Button label="Cancel" size="small" onClick={onClose} />
+          </div>
         </div>
       </div>
     </Dialog>
