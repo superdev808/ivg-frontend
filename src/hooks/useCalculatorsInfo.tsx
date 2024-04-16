@@ -6,6 +6,7 @@ const useCalculatorsInfo = () => {
     data: calcInfoMap = {},
     isLoading: isCalcInfoLoading,
     isError: isCalcInfoError,
+    refetch: refetchCalcInfo,
   } = useGetCalculatorInfoQuery(
     {},
     {
@@ -19,6 +20,7 @@ const useCalculatorsInfo = () => {
     calcInfoMap,
     isCalcInfoLoading,
     isCalcInfoError,
+    refetchCalcInfo,
   };
 };
 

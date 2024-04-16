@@ -27,6 +27,7 @@ export const {
   useDeleteAnnouncementMutation,
   useUploadCalculatorDataMutation,
   useGetCalculatorInfoQuery,
+  useUploadNewCalculatorMutation,
   useSaveCalculatorMutation,
 } = userApiSlice;
 

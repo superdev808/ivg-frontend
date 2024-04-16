@@ -8,6 +8,7 @@ import Navigation from "@/components/layout/navigation";
 import { ForbiddenContent } from "@/components/public/error/ForbiddenContent";
 import useAuthRedirect from "@/hooks/useAuthRedirect";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
+import { ConfirmPopup } from "primereact/confirmpopup";
 
 export default function ProtectedLayout({ children }: PropsWithChildren) {
   const { isLoading, layoutStyle } = useAuthRedirect();
@@ -17,11 +18,11 @@ export default function ProtectedLayout({ children }: PropsWithChildren) {
     return <Loading />;
   }
 
-  if (isCalcInfoError)
-    return <ForbiddenContent />
+  if (isCalcInfoError) return <ForbiddenContent />;
 
   return (
     <>
+      <ConfirmPopup />
       <Navigation authenticated light={layoutStyle.light} />
       {children}
       <Footer

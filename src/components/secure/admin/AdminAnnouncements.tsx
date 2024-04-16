@@ -328,7 +328,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
             />
             <Button
               label="Cancel"
-              className="p-button p-button-secondary"
+              className="p-button p-button-outlined"
               icon="pi pi-times"
               onClick={() => setContentDialogVisible(false)}
             />

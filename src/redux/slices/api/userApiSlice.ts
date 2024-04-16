@@ -93,10 +93,11 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    postSendResetPassword: builder.mutation({
-      query: () => ({
+    postSendResetPassword: builder.mutation<any, { id?: string }>({
+      query: (body) => ({
         url: "/send-reset-password",
         method: "POST",
+        body,
       }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue;
@@ -313,6 +314,19 @@ export const userApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: "/calculatorInfo",
         method: "GET",
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+      transformResponse: (res: Response) => {
+        return res.status === "Success" ? res.data : res.status;
+      },
+    }),
+    uploadNewCalculator: builder.mutation({
+      query: (body) => ({
+        url: "/uploadNewCalculator",
+        method: "POST",
+        body,
       }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue;
