@@ -21,12 +21,11 @@ interface FormValues {
   pageHeaderName: string;
 }
 
-interface AdminUploadDataFormProps { }
+interface AdminUploadDataFormProps {}
 
-const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({ }) => {
+const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
   const [uploadCalculatorData, { isLoading: isSaving }] =
     useUploadCalculatorDataMutation();
-
 
   const toastRef = useRef(null);
 
@@ -34,10 +33,13 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({ }) => {
   const [uploadingProgress, setUploadingProgress] = useState<any>(null);
   const { calcInfoMap } = useCalculatorsInfo();
 
-  const calculatorOptions = Object.keys(calcInfoMap).filter(calcType => !calcInfoMap[calcType].disabled).sort().map(calcType => ({
-    id: calcType,
-    label: calcInfoMap[calcType].label
-  }));
+  const calculatorOptions = Object.keys(calcInfoMap)
+    .filter((calcType) => !calcInfoMap[calcType].disabled)
+    .sort()
+    .map((calcType) => ({
+      id: calcType,
+      label: calcInfoMap[calcType].label,
+    }));
 
   useEffect(() => {
     return () => {
@@ -111,6 +113,13 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({ }) => {
             setUploadingProgress(null);
             clearInterval(pollingRef.current);
             pollingRef.current = null;
+            (toastRef?.current as any)?.show({
+              severity: "error",
+              summary: "Error",
+              detail: "Please check sheets again",
+              life: 5000,
+            });
+            reset();
           });
       }, POLLING_INTERVAL);
     } catch (error) {
