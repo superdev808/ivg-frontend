@@ -9,42 +9,40 @@ import styles from "../InputSummary/styles.module.scss";
 
 const cx = classNames.bind(styles);
 
-interface SummaryTable {
-  item: Summary;
+interface SummaryTableProps {
+  items: Summary[];
 }
 
-const camelCaseToWords = (str: string) => str.replace(/([A-Z])/g, ' $1')
-  .replace(/\b(\w)/g, (match) => match.toUpperCase())
+const camelCaseToWords = (str: string) =>
+  str
+    .replace(/([A-Z])/g, " $1")
+    .replace(/\b(\w)/g, (match) => match.toUpperCase());
 
-const SummaryTable: React.FC<SummaryTable> = ({ item }) => {
-  const filteredKeys = keys(item).filter(key => key !== "id");
+const EXCLUDE_KEYS = ["id", "quantity"];
+
+const SummaryTable: React.FC<SummaryTableProps> = ({ items }) => {
+  const filteredKeys = keys(items[0])
+    .filter((key) => !EXCLUDE_KEYS.includes(key))
+    .filter(Boolean);
+
   return (
     <table className={cx("striped-table")}>
       <thead>
         <tr>
-          {filteredKeys.map((key) => {
-            if (key == "id")
-              return null;
-            const value = item[key as keyof Summary];
-            return (
-              <React.Fragment key={key}>
-                {value && <th>{camelCaseToWords(key)}</th>}
-              </React.Fragment>
-            );
-          })}
+          {filteredKeys.map((key) => (
+            <th key={key}>{camelCaseToWords(key)}</th>
+          ))}
         </tr>
       </thead>
       <tbody>
-        <tr>
-          {filteredKeys.map((key) => {
-            if (key == "id")
-              return null;
-            const value = item[key as keyof Summary];
-            return (
-              <React.Fragment key={key}>
-                {value && <td>
-                  {typeof value == 'string' && isValidUrl(value)
-                    ?
+        {items.map((item, idx) => (
+          <tr key={idx}>
+            {filteredKeys.map((key) => {
+              const value = item[key as keyof Summary];
+
+              return (
+                <td key={key}>
+                  {isValidUrl(value) ? (
                     <a
                       href={value}
                       target="_blank"
@@ -52,13 +50,14 @@ const SummaryTable: React.FC<SummaryTable> = ({ item }) => {
                     >
                       {camelCaseToWords(key)}
                     </a>
-                    : value
-                  }
-                </td>}
-              </React.Fragment>
-            );
-          })}
-        </tr>
+                  ) : (
+                    value || ""
+                  )}
+                </td>
+              );
+            })}
+          </tr>
+        ))}
       </tbody>
     </table>
   );

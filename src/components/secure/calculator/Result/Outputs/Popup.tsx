@@ -3,14 +3,15 @@ import Link from "next/link";
 import { confirmPopup } from "primereact/confirmpopup";
 import React from "react";
 
+import {
+  REASONING_TEXT,
+  SHOULD_DISPLAY_TEXT_ONLY,
+  SUPPORT_ARTICLES_TEXT,
+} from "@/constants/calculators";
+
 import styles from "./style.module.scss";
-import { isValidUrl } from "@/helpers/calculators";
 
 const cx = classNames.bind(styles);
-
-export const REASONING_TEXT = "Reasoning";
-export const SUPPORT_ARTICLES_TEXT = "Supporting Article";
-export const SHOULD_DISPLAY_TEXT_ONLY = "ShouldDisplayTextOnly";
 
 interface PopupOutputProps {
   data: {

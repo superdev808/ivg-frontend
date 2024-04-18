@@ -2,8 +2,8 @@ import classNames from "classnames/bind";
 import trim from "lodash/trim";
 import React, { useMemo } from "react";
 
-import { Summary, TotalQuantities } from "@/types/calculators";
 import { isValidUrl } from "@/helpers/calculators";
+import { Summary, TotalQuantities } from "@/types/calculators";
 
 import styles from "../InputSummary/styles.module.scss";
 

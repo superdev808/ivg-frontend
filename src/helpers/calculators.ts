@@ -156,11 +156,15 @@ export const getComponentSummary = (
 ): Summary[] => {
   const items: ItemData[] = [];
 
+  const inputs = get(Object.values(sitesData), "0.inputDetails");
+
   const brand =
-    find(
-      get(Object.values(sitesData), "0.inputDetails"),
-      (item: InputDetail) => item.question === "Implant Brand"
-    )?.answer || "";
+    find(inputs, (item: InputDetail) => item.question === "Implant Brand")
+      ?.answer || "";
+
+  const manufacturer =
+    find(inputs, (item: InputDetail) => item.question === "Manufacturer")
+      ?.answer || "";
 
   Object.keys(sitesData).forEach((siteName) => {
     const componentDetail = cloneDeep(sitesData[siteName].componentDetails);
@@ -168,21 +172,41 @@ export const getComponentSummary = (
     responseOrder.forEach((calculatorType) => {
       componentDetail[calculatorType]?.forEach((response) => {
         response.info.forEach((info, index) => {
-          let newInfo: ItemInsights = { id: info.id, quantity: info.quantity };
+          const newInfo: ItemInsights = {
+            id: info.id,
+            quantity: info.quantity,
+            brand,
+            manufacturer,
+          };
+
           Object.keys(info).forEach((key) => {
-            let i,
-              { colName, groupText } = deserializeColInfo(key);
-            for (let i = 0; i < CALCULATOR_OUTPUT_MAPPING.length; ++i)
+            const { colName, groupText } = deserializeColInfo(key);
+
+            let i = 0;
+            for (i = 0; i < CALCULATOR_OUTPUT_MAPPING.length; ++i)
               if (
                 CALCULATOR_OUTPUT_MAPPING[i][1].test(groupText) ||
                 CALCULATOR_OUTPUT_MAPPING[i][1].test(colName)
               ) {
-                newInfo[CALCULATOR_OUTPUT_MAPPING[i][0]] = info[key];
-                if (/name/gi.test(key)) newInfo.description = colName;
+                const outputKey =
+                  CALCULATOR_OUTPUT_MAPPING[i][2] ||
+                  CALCULATOR_OUTPUT_MAPPING[i][0];
+                newInfo[outputKey] = info[key];
+
+                if (/name/gi.test(key)) {
+                  newInfo.description = colName;
+                }
                 break;
               }
-            if (i == CALCULATOR_OUTPUT_MAPPING.length) newInfo[key] = info[key];
+
+            if (
+              i === CALCULATOR_OUTPUT_MAPPING.length &&
+              !["id", "quantity"].includes(key)
+            ) {
+              newInfo["itemName"] = info[key];
+            }
           });
+
           response.info[index] = newInfo;
         });
       });
@@ -279,12 +303,17 @@ export const prepareExportProps = (
 export const serializeColInfo = (
   colInfo: Pick<
     InputOutputValues,
-    "colName" | "groupText" | "groupId" | "calculatorType" | "groupName" | "colIndex"
+    | "colName"
+    | "groupText"
+    | "groupId"
+    | "calculatorType"
+    | "groupName"
+    | "colIndex"
   >
 ) => {
-  return `${colInfo.groupText || "EMPTY"}___${colInfo.colIndex}___${colInfo.colName}___${
-    colInfo.groupId
-  }___${colInfo.groupName}___${colInfo.calculatorType}`;
+  return `${colInfo.groupText || "EMPTY"}___${colInfo.colIndex}___${
+    colInfo.colName
+  }___${colInfo.groupId}___${colInfo.groupName}___${colInfo.calculatorType}`;
 };
 
 export const deserializeColInfo = (serializedColInfo: string) => {
@@ -344,6 +373,5 @@ export const parseItems = (
       resultInfo.push(newItem);
     }
   }
-  console.log(resultInfo);
   return resultInfo;
 };
