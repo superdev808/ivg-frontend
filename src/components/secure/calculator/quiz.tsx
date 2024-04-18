@@ -11,12 +11,15 @@ import { Image } from "primereact/image";
 import React, { useEffect, useState, useMemo } from "react";
 
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
-import { BRAND_IMAGES } from "@/constants/calculators";
+import {
+  BRAND_IMAGES,
+  SHOULD_DISPLAY_TEXT_ONLY,
+} from "@/constants/calculators";
+import { InputOutputValues } from "@/types/calculators";
+
+import PopupOutput from "./Result/Outputs/Popup";
 
 import styles from "./quiz.module.scss";
-import { InputOutputValues } from "@/types/calculators";
-import PopupOutput, { SHOULD_DISPLAY_TEXT_ONLY } from "./Result/Outputs/Popup";
-import { ConfirmPopup } from "primereact/confirmpopup";
 
 const cx = classNames.bind(styles);
 

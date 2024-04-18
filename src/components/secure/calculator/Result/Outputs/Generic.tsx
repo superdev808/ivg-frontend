@@ -1,12 +1,18 @@
-import React from "react";
 import classNames from "classnames/bind";
-
-import { INFORMATIONAL_CALCULATOR_TYPES } from "@/constants/calculators";
-import { ItemInsights } from "@/types/calculators";
-import PopupOutput, { REASONING_TEXT, SUPPORT_ARTICLES_TEXT } from "./Popup";
-import styles from "./style.module.scss";
-import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
 import Link from "next/link";
+import React from "react";
+
+import {
+  INFORMATIONAL_CALCULATOR_TYPES,
+  REASONING_TEXT,
+  SUPPORT_ARTICLES_TEXT,
+} from "@/constants/calculators";
+import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
+import { ItemInsights } from "@/types/calculators";
+
+import PopupOutput from "./Popup";
+
+import styles from "./style.module.scss";
 
 const cx = classNames.bind(styles);
 
@@ -18,14 +24,18 @@ interface GenericOutputProps {
 
 const filterPopups = (shouldInclude: boolean) => (key: string) => {
   if (key == "id" || key == "quantity" || key == "link") return false;
-  const { groupText, groupId, colName } = deserializeColInfo(key);
+  const { groupText } = deserializeColInfo(key);
   return groupText.startsWith(REASONING_TEXT) ||
     groupText.startsWith(SUPPORT_ARTICLES_TEXT)
     ? shouldInclude
     : !shouldInclude;
 };
 
-const GenericOutput: React.FC<GenericOutputProps> = ({ label, item, calculatorType }) => {
+const GenericOutput: React.FC<GenericOutputProps> = ({
+  label,
+  item,
+  calculatorType,
+}) => {
   const { groupName } = deserializeColInfo(
     Object.keys(item).filter((key) => key && filterPopups(false)(key))[0]
   );
@@ -58,7 +68,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({ label, item, calculatorTy
     >
       {groupName && <h4>{groupName}</h4>}
       {transformedItems.map((subgroupItem) => (
-        <div className="flex gap-2" key={subgroupItem['id']}>
+        <div className="flex gap-2" key={subgroupItem["id"]}>
           <PopupOutput
             data={Object.keys(subgroupItem)
               .filter(filterPopups(true))

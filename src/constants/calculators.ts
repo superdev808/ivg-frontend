@@ -431,53 +431,70 @@ export const CALCULATOR_IMAGES: Record<string, string> = {
 
 // Please be careful when adding new mappings to this array
 // The app finds the first element matching the regexp so you should care the order.
-export const CALCULATOR_OUTPUT_MAPPING: [string, RegExp][] = [
+export const CALCULATOR_OUTPUT_MAPPING: [string, RegExp, string][] = [
+  // For "CALCULATOR_GENERIC_OUTPUT_MAPPING"
+  ["itemName", /name/gi, ""],
+  ["itemNumber", /number/gi, ""],
+  ["manufacturer", /manufacturer/gi, ""],
+  ["manufacturerRecommendations", /Manufacturer Recommendations/gi, ""],
+  ["torqueValue", /Torque Value/gi, ""],
+  ["notes", /Notes/gi, ""],
+
+  ["reasoning", /reasoning/gi, ""],
+  ["supportingArticle", /supporting article/gi, ""],
+  ["link", /Click to purchase/gi, ""],
+  ["link", /Link to purchase/gi, ""],
+
   // For "MATERIAL_CALCULATOR_GENERIC_OUTPUT_MAPPING"
   [
     "secondRecommendedSingleUnitAbutmentMaterial",
     /Second Recommended Single Unit Abutment Material/gi,
+    "",
   ],
   [
     "secondRecommendedRestorationDesign",
     /Second Recommended Restoration Design/gi,
+    "",
   ],
   [
     "secondRecommendedImplantBridgeMaterial",
     /Second Recommended Implant Bridge Material/gi,
+    "",
   ],
-  ["secondAbutmentMaterialChoice", /Second Abutment Material Choice/gi],
-  ["secondRestorationDesignChoice", /Second Restoration Design Choice/gi],
-  ["secondCrownMaterialChoice", /Second Crown Material Choice/gi],
-  ["secondMaterialChoice", /Second Material Choice/gi],
-  ["thirdMaterialChoice", /Third Material Choice/gi],
+  ["secondAbutmentMaterialChoice", /Second Abutment Material Choice/gi, ""],
+  ["secondRestorationDesignChoice", /Second Restoration Design Choice/gi, ""],
+  ["secondCrownMaterialChoice", /Second Crown Material Choice/gi, ""],
+  ["secondMaterialChoice", /Second Material Choice/gi, ""],
+  ["thirdMaterialChoice", /Third Material Choice/gi, ""],
 
   // For "MATERIAL_CALCULATOR_POPUP_OUTPUT_MAPPING"
   [
     "recommendedSingleUnitAbutmentMaterial",
     /Recommended Single Unit Abutment Material/gi,
+    "material",
   ],
   [
     "recommendedMUAMaterial",
-    /Recommended Multi-Unit Abutment (MUA) Material/gi,
+    /Recommended Multi\-Unit Abutment \(MUA\) Material/gi,
+    "material",
   ],
-  ["recommendedRestorationDesign", /Recommended Restoration Design/gi],
-  ["recommendedImplantBridgeMaterial", /Recommended Implant Bridge Material/gi],
-  ["recommendedAbutmentMaterial", /Recommended Abutment Material/gi],
-  ["recommendedCrownMaterial", /Recommended Crown Material/gi],
-  ["recommendedBridgeMaterial", /Recommended Bridge Material/gi],
-
-  // For "CALCULATOR_GENERIC_OUTPUT_MAPPING"
-  ["itemName", /name/gi],
-  ["itemNumber", /number/gi],
-  ["manufacturer", /manufacturer/gi],
-  ["manufacturerRecommendations", /Manufacturer Recommendations/gi],
-  ["torqueValue", /Torque Value/gi],
-  ["notes", /Notes/gi],
-
-  ["reasoning", /reasoning/gi],
-  ["supportingArticle", /supporting article/gi],
-  ["link", /Click to purchase/gi],
-  ["link", /Link to purchase/gi],
+  [
+    "recommendedRestorationDesign",
+    /Recommended Restoration Design/gi,
+    "material",
+  ],
+  [
+    "recommendedImplantBridgeMaterial",
+    /Recommended Implant Bridge Material/gi,
+    "material",
+  ],
+  [
+    "recommendedAbutmentMaterial",
+    /Recommended Abutment Material/gi,
+    "material",
+  ],
+  ["recommendedCrownMaterial", /Recommended Crown Material/gi, "material"],
+  ["recommendedBridgeMaterial", /Recommended Bridge Material/gi, "material"],
 ];
 
 export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
@@ -804,3 +821,7 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
     ],
   },
 ];
+
+export const REASONING_TEXT = "Reasoning";
+export const SUPPORT_ARTICLES_TEXT = "Supporting Article";
+export const SHOULD_DISPLAY_TEXT_ONLY = "ShouldDisplayTextOnly";
