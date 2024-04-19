@@ -802,7 +802,7 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
   },
   {
     id: "favorites",
-    name: "Customize and Favorites",
+    name: "Customize + Favorites",
     description:
       "Build your own combination of calculators for easy purchase, export, and sharing; or use one pre-built by the Ivory Guide clinical team.",
     sections: [

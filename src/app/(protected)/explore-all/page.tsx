@@ -170,10 +170,10 @@ const CalculatorPage: NextPage = () => {
         </div>
 
         {searchResult.length > 0 && (
-          <div className="mb-4">
+          <div className="flex flex-wrap gap-3 mb-4 mt-3">
             {searchResult.map((searchedCalcType, index) => (
               <Button
-                className={cx("calculatorButton", "p-3 m-2")}
+                className={cx("calculatorButton", "p-3")}
                 key={`searched-calc-${index}`}
                 label={calcInfoMap[searchedCalcType].label || searchedCalcType}
                 onClick={() => {
