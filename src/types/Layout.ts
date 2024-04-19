@@ -1,8 +1,4 @@
-interface NavLinkSubItem {
-  id: string;
-  link: string;
-  title: string;
-}
+import { MenuItem } from "primereact/menuitem";
 
 export interface NavLink {
   id: string;
@@ -17,5 +13,5 @@ export interface NavLink {
     | "hidden";
   onClick?: any;
   className?: string;
-  items?: NavLinkSubItem[];
+  items?: MenuItem[];
 }

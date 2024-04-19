@@ -57,28 +57,28 @@ const Navigation = ({ authenticated, light }: NavigationProps) => {
       items: [
         {
           id: "home",
-          title: "Home",
-          link: "/calculators",
+          label: "Home",
+          url: "/calculators",
         },
         {
           id: "exploreAll",
-          title: "Explore All",
-          link: "/explore-all",
+          label: "Explore All",
+          url: "/explore-all",
         },
         {
           id: "submitRequest",
-          title: "Submit Request",
-          link: "/request",
+          label: "Submit Request",
+          url: "/request",
         },
         {
           id: "savedOutputs",
-          title: "Saved Outputs",
-          link: "/results",
+          label: "Saved Outputs",
+          url: "/settings/saved-results/",
         },
         {
           id: "favorites",
-          title: "Favorites",
-          link: "/explore-all",
+          label: "Favorites",
+          url: "/explore-all/?tab=favorites",
         },
       ],
     },

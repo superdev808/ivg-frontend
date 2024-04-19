@@ -36,6 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({
   const pathName = usePathname();
 
   const avatarMenu = useRef<Menu>(null);
+  const subMenu = useRef<Menu>(null);
 
   const onClick = (item: NavLink) => {
     if (item.onClick) {
@@ -86,19 +87,44 @@ const Navbar: React.FC<NavbarProps> = ({
               light,
             })}
           >
-            {navLinks.filter(navLinksFilter).map((item) => (
-              <div key={`${item.id}_full`}>
-                <Link href={item.link || ""}>
-                  <p
-                    className={cx({
-                      active: pathName.includes(item.link || "unknown"),
-                    })}
+            {navLinks.filter(navLinksFilter).map((item) => {
+              if (item.link) {
+                return (
+                  <div key={`${item.id}_full`}>
+                    <Link href={item.link || ""}>
+                      <p
+                        className={cx({
+                          active: pathName.includes(item.link || "unknown"),
+                        })}
+                      >
+                        {item.title}
+                      </p>
+                    </Link>
+                  </div>
+                );
+              }
+
+              return (
+                <div key={`${item.id}_full`}>
+                  <Menu
+                    model={item.items}
+                    popup
+                    ref={subMenu}
+                    popupAlignment="left"
+                    className="mt-2 w-full md:w-15rem"
+                  />
+
+                  <div
+                    className="cursor-pointer"
+                    onClick={(event) => {
+                      subMenu.current?.toggle(event);
+                    }}
                   >
                     {item.title}
-                  </p>
-                </Link>
-              </div>
-            ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
