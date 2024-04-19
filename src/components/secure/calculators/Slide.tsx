@@ -46,7 +46,12 @@ const Slide: React.FC<SlideProps> = ({ item, showInfoOnLeft, content }) => {
           <div className={cx("slide__description", "font-light")}>
             {item.description}
           </div>
-          <Button className="bg-secondary px-6 py-3 text-xl">Try now</Button>
+          <Button
+            className="bg-secondary px-6 py-3 text-xl"
+            onClick={handleClick}
+          >
+            Try now
+          </Button>
         </>
       )}
     </div>
@@ -82,7 +87,6 @@ const Slide: React.FC<SlideProps> = ({ item, showInfoOnLeft, content }) => {
         "slide",
         "flex flex-column md:flex-row justify-content-center align-items-center bg-light-brown px-2 md:px-8 py-4   md:py-8"
       )}
-      onClick={handleClick}
     >
       {showInfoOnLeft ? (
         <>
