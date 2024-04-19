@@ -106,21 +106,23 @@ const Navbar: React.FC<NavbarProps> = ({
 
               return (
                 <div key={`${item.id}_full`}>
-                  <Menu
-                    model={item.items}
-                    popup
-                    ref={subMenu}
-                    popupAlignment="left"
-                    className="mt-2 w-full md:w-15rem"
-                  />
-
                   <div
-                    className="cursor-pointer"
-                    onClick={(event) => {
-                      subMenu.current?.toggle(event);
-                    }}
+                    className={cx(
+                      "menu-trigger",
+                      "cursor-pointer relative py-2"
+                    )}
                   >
                     {item.title}
+                    {item.items && item.items.length > 0 && (
+                      <Link
+                        href={item.link || ""}
+                        className={cx("menu", "bg-beige font-normal ")}
+                      >
+                        {item.items.map((elem) => (
+                          <div key={elem.id}>{elem.label}</div>
+                        ))}
+                      </Link>
+                    )}
                   </div>
                 </div>
               );
