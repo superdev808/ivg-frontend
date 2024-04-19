@@ -10253,11 +10253,8 @@
   }
   &.bg-secondary {
     &:disabled {
-      background-color: var(--primary-color) !important;
+      background-color: var(--light-green) !important;
       border: none !important;
-    }
-    & * {
-      color: white;
     }
     &:hover {
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;

@@ -348,6 +348,16 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
+    submitRequest: builder.mutation({
+      query: (body) => ({
+        url: "/submitRequest",
+        method: "POST",
+        body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+    }),
   }),
   overrideExisting: true,
 });
