@@ -23,6 +23,7 @@ export enum PRIVATE_ROUTES {
   SETTINGS = "/settings/",
   HELP = "/help/",
   ADMIN = "/admin/",
+  EXPLORE = "/explore-all/",
 }
 
 export const REDIRECT_TO_AUTH = PRIVATE_ROUTES.CALCULATORS;

@@ -53,8 +53,34 @@ const Navigation = ({ authenticated, light }: NavigationProps) => {
     {
       id: "calculators",
       title: "Calculators + Workflows",
-      link: "/calculators",
       visibility: "authenticated",
+      items: [
+        {
+          id: "home",
+          label: "Home",
+          url: "/calculators",
+        },
+        {
+          id: "exploreAll",
+          label: "Explore All",
+          url: "/explore-all",
+        },
+        {
+          id: "submitRequest",
+          label: "Submit Request",
+          url: "/request",
+        },
+        {
+          id: "savedOutputs",
+          label: "Saved Outputs",
+          url: "/settings/saved-results/",
+        },
+        {
+          id: "favorites",
+          label: "Favorites",
+          url: "/explore-all/?tab=favorites",
+        },
+      ],
     },
     // {id: 'workflows',title: 'Workflows', link: '/workflows', icon: PrimeIcons.SITEMAP, auth: true},
   ];
