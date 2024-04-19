@@ -68,7 +68,7 @@ const Navigation = ({ authenticated, light }: NavigationProps) => {
         {
           id: "submitRequest",
           label: "Submit Request",
-          url: "/request",
+          url: "/requests",
         },
         {
           id: "savedOutputs",

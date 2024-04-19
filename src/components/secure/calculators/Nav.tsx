@@ -25,10 +25,12 @@ const Nav: React.FC = () => {
         onClick={handleClickRelease}
       />
 
-      <Button
-        label="Submit Requests"
-        className="bg-secondary px-2 md:px-6 md:text-xl"
-      />
+      <Link href="/requests">
+        <Button
+          label="Submit Requests"
+          className="bg-secondary px-2 md:px-6 md:text-xl"
+        />
+      </Link>
     </div>
   );
 };
