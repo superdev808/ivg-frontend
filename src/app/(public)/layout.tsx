@@ -24,10 +24,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
       )}
       {children}
       {!layoutStyle.hidden && (
-        <Footer
-          light={layoutStyle.light}
-          extendFooter={layoutStyle.extendFooter}
-        />
+        <Footer extendFooter={layoutStyle.extendFooter} />
       )}
     </>
   );

@@ -1,3 +1,9 @@
+interface NavLinkSubItem {
+  id: string;
+  link: string;
+  title: string;
+}
+
 export interface NavLink {
   id: string;
   link?: string;
@@ -11,4 +17,5 @@ export interface NavLink {
     | "hidden";
   onClick?: any;
   className?: string;
+  items?: NavLinkSubItem[];
 }

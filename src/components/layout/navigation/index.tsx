@@ -53,8 +53,34 @@ const Navigation = ({ authenticated, light }: NavigationProps) => {
     {
       id: "calculators",
       title: "Calculators + Workflows",
-      link: "/calculators",
       visibility: "authenticated",
+      items: [
+        {
+          id: "home",
+          title: "Home",
+          link: "/calculators",
+        },
+        {
+          id: "exploreAll",
+          title: "Explore All",
+          link: "/explore-all",
+        },
+        {
+          id: "submitRequest",
+          title: "Submit Request",
+          link: "/request",
+        },
+        {
+          id: "savedOutputs",
+          title: "Saved Outputs",
+          link: "/results",
+        },
+        {
+          id: "favorites",
+          title: "Favorites",
+          link: "/explore-all",
+        },
+      ],
     },
     // {id: 'workflows',title: 'Workflows', link: '/workflows', icon: PrimeIcons.SITEMAP, auth: true},
   ];

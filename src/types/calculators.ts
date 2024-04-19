@@ -190,6 +190,7 @@ export interface EXPLORE_DATA_SECTION {
 }
 
 export interface EXPLORE_DATA {
+  id: string;
   name: string;
   description?: string;
   sections: EXPLORE_DATA_SECTION[];
