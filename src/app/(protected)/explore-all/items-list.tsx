@@ -4,7 +4,9 @@ import React, { useMemo, useState } from "react";
 
 import { EXPLORE_DATA_ITEM } from "@/types/calculators";
 
-const cx = classNames.bind({});
+import styles from "./items-list.module.scss";
+
+const cx = classNames.bind(styles);
 
 interface ItemsListProps {
   item: EXPLORE_DATA_ITEM;
@@ -35,6 +37,8 @@ const ItemsList: React.FC<ItemsListProps> = ({ item, renderItems }) => {
       <div
         className={cx("cursor-pointer", {
           "font-bold": hasItems || item.isHighlighted,
+          "item-with-children": hasItems,
+          "item-without-children": !hasItems,
         })}
         onClick={handleToggle}
       >
