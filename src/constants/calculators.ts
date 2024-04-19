@@ -502,7 +502,7 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
     id: "procedures",
     name: "Procedures",
     description:
-      "Clinical recommendations and techniques to maximize the success of each case",
+      "Clinical recommendations and techniques to maximize the success of each case.",
     sections: [
       {
         name: "Calculators",
@@ -515,11 +515,11 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                 name: "Crowns",
                 items: [
                   {
-                    name: "Implant Crown",
+                    name: "Implant-Borne",
                     href: "/calculators/ImplantBorneCrown",
                   },
                   {
-                    name: "Tooth Borne Crown",
+                    name: "Tooth-Borne",
                     href: "/calculators/ToothBorneCrown",
                   },
                 ],
@@ -528,11 +528,11 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                 name: "Bridges",
                 items: [
                   {
-                    name: "Implant Bridge",
+                    name: "Implant-Borne",
                     href: "/calculators/ImplantBorneBridge",
                   },
                   {
-                    name: "Tooth Borne Bridge",
+                    name: "Tooth-Borne",
                     href: "/calculators/ToothBorneBridge",
                   },
                 ],
