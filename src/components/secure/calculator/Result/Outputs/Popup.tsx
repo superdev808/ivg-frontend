@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
 import { confirmPopup } from "primereact/confirmpopup";
-import React from "react";
+import React, { useState } from "react";
 
 import {
   REASONING_TEXT,
@@ -21,6 +21,8 @@ interface PopupOutputProps {
 }
 
 const PopupOutput: React.FC<PopupOutputProps> = ({ className, data }) => {
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+
   const handleOpenPopup = (event: any) => {
     confirmPopup({
       target: event.currentTarget,
@@ -52,15 +54,26 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ className, data }) => {
           ))}
         </div>
       ),
+      onShow: () => setIsOpened(true),
+      onHide: () => setIsOpened(false),
     });
   };
+
+  const hasContent = Object.keys(data).length > 0;
+
+  if (!hasContent) {
+    return null;
+  }
+
   return (
-    Object.keys(data).length > 0 && (
+    <div>
       <i
-        className={cx("pi pi-question-circle cursor-pointer", className)}
+        className={cx("pi pi-question-circle cursor-pointer", className, {
+          "bg-dark-green text-beige border-round-3xl": isOpened,
+        })}
         onClick={handleOpenPopup}
       />
-    )
+    </div>
   );
 };
 
