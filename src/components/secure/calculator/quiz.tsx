@@ -134,19 +134,21 @@ const Quiz: React.FC<QuizProps> = ({
         )}
 
         {calculatorName && <h1 className="underline">{calculatorName}</h1>}
-        <h1 className="flex align-items-center gap-3 text-center">
-          {question.colText && (
-            <PopupOutput
-              className="text-2xl"
-              data={{
-                [SHOULD_DISPLAY_TEXT_ONLY]: question.colText,
-              }}
-            />
-          )}
-          {question.colName.endsWith("?")
-            ? question.colName
-            : `Select ${question.colName}`}
-        </h1>
+        {suggestions.length > 0 && (
+          <h1 className="flex align-items-center gap-3 text-center">
+            {question.colText && (
+              <PopupOutput
+                className="text-2xl"
+                data={{
+                  [SHOULD_DISPLAY_TEXT_ONLY]: question.colText,
+                }}
+              />
+            )}
+            {question.colName.endsWith("?")
+              ? question.colName
+              : `Select ${question.colName}`}
+          </h1>
+        )}
       </div>
 
       {suggestions.length > 6 && (
