@@ -16,34 +16,22 @@ import { useAppSelector } from "@/redux/hooks/hooks";
 
 interface LayoutStyle {
   hidden?: boolean;
-  light?: boolean;
+  navLight?: boolean;
   extendFooter?: boolean;
 }
-
-const layoutStyles = {
-  default: {
-    light: false,
-    extendFooter: false,
-  },
-  simple: {
-    light: true,
-    extendFooter: true,
-  },
-  hidden: {
-    hidden: true,
-  },
-};
 
 const useAuthRedirect = () => {
   const activePath = usePathname();
   const router = useRouter();
+
   const { isLoading: authLoading, authenticated } = useAppSelector(
     (state) => state.auth
   );
 
-  const [layoutStyle, setLayoutStyle] = useState<LayoutStyle>(
-    layoutStyles.default
-  );
+  const [layoutStyle, setLayoutStyle] = useState<LayoutStyle>({
+    navLight: true,
+    extendFooter: false,
+  });
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -93,17 +81,13 @@ const useAuthRedirect = () => {
         activePath as PUBLIC_AUTH_ROUTES
       )
     ) {
-      setLayoutStyle(layoutStyles.hidden);
-    } else if (activePath === PUBLIC_ROUTES.CONTACT) {
-      setLayoutStyle(layoutStyles.simple);
+      setLayoutStyle({ hidden: true });
     } else if (
-      Object.values(PUBLIC_ROUTES).includes(activePath as PUBLIC_ROUTES)
+      activePath === PUBLIC_ROUTES.INDEX ||
+      activePath === PUBLIC_ROUTES.HOME ||
+      activePath === PUBLIC_ROUTES.ABOUT
     ) {
-      setLayoutStyle(layoutStyles.simple);
-    } else if (activePath === PRIVATE_ROUTES.HOME) {
-      setLayoutStyle(layoutStyles.simple);
-    } else {
-      setLayoutStyle(layoutStyles.simple);
+      setLayoutStyle({ navLight: true, extendFooter: true });
     }
 
     checkAuthStatus();
