@@ -3,7 +3,7 @@
 import classNames from "classnames/bind";
 import uniq from "lodash/uniq";
 import { NextPage } from "next";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "primereact/button";
 import { TabView, TabPanel } from "primereact/tabview";
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -159,30 +159,34 @@ const CalculatorPage: NextPage = () => {
   return (
     <div className="flex flex-column">
       <div className="bg-dark-green py-4 px-4">
-        <div className="text-beige text-center text-4xl">Explore All</div>
+        <div className={cx("content")}>
+          <div className="text-beige text-center text-4xl">Explore All</div>
 
-        <div className="mt-4">
-          <SearchBox
-            handleSearch={handleSearch}
-            loading={loading}
-            inputRef={searchBoxRef}
-          />
-        </div>
-
-        {searchResult.length > 0 && (
-          <div className="flex flex-wrap gap-3 mb-4 mt-3">
-            {searchResult.map((searchedCalcType, index) => (
-              <Button
-                className={cx("calculatorButton", "p-3")}
-                key={`searched-calc-${index}`}
-                label={calcInfoMap[searchedCalcType].label || searchedCalcType}
-                onClick={() => {
-                  router.push(`/calculators/${searchedCalcType}`);
-                }}
-              />
-            ))}
+          <div className="mt-4">
+            <SearchBox
+              handleSearch={handleSearch}
+              loading={loading}
+              inputRef={searchBoxRef}
+            />
           </div>
-        )}
+
+          {searchResult.length > 0 && (
+            <div className="flex flex-wrap gap-3 mb-4 mt-3">
+              {searchResult.map((searchedCalcType, index) => (
+                <Button
+                  className={cx("calculatorButton", "p-3")}
+                  key={`searched-calc-${index}`}
+                  label={
+                    calcInfoMap[searchedCalcType].label || searchedCalcType
+                  }
+                  onClick={() => {
+                    router.push(`/calculators/${searchedCalcType}`);
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <TabView
