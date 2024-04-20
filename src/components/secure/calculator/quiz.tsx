@@ -134,7 +134,7 @@ const Quiz: React.FC<QuizProps> = ({
         )}
 
         {calculatorName && <h1 className="underline">{calculatorName}</h1>}
-        <h1 className="flex align-items-center gap-2">
+        <h1 className="flex align-items-center gap-3 text-center">
           {question.colText && (
             <PopupOutput
               className="text-2xl"
@@ -149,20 +149,22 @@ const Quiz: React.FC<QuizProps> = ({
         </h1>
       </div>
 
-      <div className="col-12 sm:col-8 sm:col-offset-2 xl:col-4 xl:col-offset-4 md:mb-6">
-        <AutoComplete
-          value={searchValue}
-          suggestions={suggestions}
-          onChange={handleSearchChange}
-          placeholder="Search all available options..."
-          className="w-full"
-          inputClassName="w-full"
-          completeMethod={handleAutoCompleteMethod}
-          onSelect={handleSelect}
-          itemTemplate={dropdownOptionTemplate}
-          dropdown
-        />
-      </div>
+      {suggestions.length > 6 && (
+        <div className="col-12 sm:col-8 sm:col-offset-2 xl:col-4 xl:col-offset-4 md:mb-6">
+          <AutoComplete
+            value={searchValue}
+            suggestions={suggestions}
+            onChange={handleSearchChange}
+            placeholder="Search all available options..."
+            className="w-full"
+            inputClassName="w-full"
+            completeMethod={handleAutoCompleteMethod}
+            onSelect={handleSelect}
+            itemTemplate={dropdownOptionTemplate}
+            dropdown
+          />
+        </div>
+      )}
 
       <div className="relative md:absolute flex align-items-center justify-content-center w-full md:w-2 md:col-offset-10">
         <PieChartProgressBar percentage={progress || 0} />
