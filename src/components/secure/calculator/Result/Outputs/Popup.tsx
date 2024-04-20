@@ -14,12 +14,13 @@ import styles from "./style.module.scss";
 const cx = classNames.bind(styles);
 
 interface PopupOutputProps {
+  className?: string;
   data: {
     [key: string]: string;
   };
 }
 
-const PopupOutput: React.FC<PopupOutputProps> = ({ data }) => {
+const PopupOutput: React.FC<PopupOutputProps> = ({ className, data }) => {
   const handleOpenPopup = (event: any) => {
     confirmPopup({
       target: event.currentTarget,
@@ -56,11 +57,7 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ data }) => {
   return (
     Object.keys(data).length > 0 && (
       <i
-        className="pi pi-question-circle text-light-green cursor-pointer pt-1"
-        style={{
-          width: 16,
-          height: 16,
-        }}
+        className={cx("pi pi-question-circle cursor-pointer", className)}
         onClick={handleOpenPopup}
       />
     )

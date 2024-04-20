@@ -146,11 +146,12 @@
     border-radius: 4px;
   }
 
-  .menu > div {
+  .menu > a {
+    display: block;
     padding: 12px 16px;
   }
 
-  .menu > div:hover {
+  .menu > a:hover {
     color: var(--dark-green);
     background-color: rgba(0, 0, 0, 0.04);
   }

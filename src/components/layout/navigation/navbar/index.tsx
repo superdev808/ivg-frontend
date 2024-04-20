@@ -114,14 +114,13 @@ const Navbar: React.FC<NavbarProps> = ({
                   >
                     {item.title}
                     {item.items && item.items.length > 0 && (
-                      <Link
-                        href={item.link || ""}
-                        className={cx("menu", "bg-beige font-normal ")}
-                      >
+                      <div className={cx("menu", "bg-beige font-normal")}>
                         {item.items.map((elem) => (
-                          <div key={elem.id}>{elem.label}</div>
+                          <Link href={elem.url || ""} key={elem.id}>
+                            {elem.label}
+                          </Link>
                         ))}
-                      </Link>
+                      </div>
                     )}
                   </div>
                 </div>
