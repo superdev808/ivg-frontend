@@ -72,8 +72,7 @@ const Result: React.FC<ResultProps> = ({
   const calculatorName = calcInfoMap[calculatorType].label;
   const filename = patientInfo?.filename || `${calculatorName}-Summary`;
 
-  const image =
-    CALCULATOR_IMAGES[calculatorType] || CALCULATOR_IMAGES["Default"];
+  const image = CALCULATOR_IMAGES[calculatorType];
 
   const isSaved = Boolean(id);
 
@@ -391,11 +390,19 @@ const Result: React.FC<ResultProps> = ({
           onUpdateQuantity={onUpdateQuantity}
         />
 
-        <div className="flex justify-content-between align-items-center gap-4 flex-column pb-6 lg:flex-row">
+        <div
+          className={cx(
+            "flex align-items-center gap-4 flex-column pb-6 lg:flex-row",
+            {
+              "justify-content-between": image,
+              "justify-content-center": !image,
+            }
+          )}
+        >
           <div
             className={cx(
-              "flex-1 flex flex-column justify-content-around gap-4 shadow-6 p-4 border-round-md border-2 border-light-green",
-              "quiz"
+              "flex flex-column justify-content-around gap-4 shadow-6 p-4 border-round-md border-2 border-light-green",
+              { quizWithoutImage: !image, quizWithImage: image }
             )}
           >
             <h3 className="underline m-0">Input Summary</h3>
