@@ -175,12 +175,14 @@ export const getComponentSummary = (
     responseOrder.forEach((calculatorType) => {
       componentDetail[calculatorType]?.forEach((response) => {
         response.info.forEach((info, index) => {
-          const newInfo: ItemInsights = {
-            id: info.id,
-            quantity: info.quantity,
-            brand,
-            manufacturer,
-          };
+          const newInfo: ItemInsights = Object.assign(
+            {
+              id: info.id,
+              quantity: info.quantity,
+            },
+            brand && { brand },
+            manufacturer && { manufacturer }
+          );
 
           Object.keys(info).forEach((key) => {
             const { colName, groupText } = deserializeColInfo(key);
@@ -196,9 +198,6 @@ export const getComponentSummary = (
                   CALCULATOR_OUTPUT_MAPPING[i][0];
                 newInfo[outputKey] = info[key];
 
-                if (/name/gi.test(key)) {
-                  newInfo.description = colName;
-                }
                 break;
               }
 
