@@ -392,7 +392,7 @@ const Result: React.FC<ResultProps> = ({
 
         <div
           className={cx(
-            "flex align-items-center gap-4 flex-column pb-6 lg:flex-row",
+            "flex align-items-center gap-4 flex-column text-dark-green pb-6 lg:flex-row",
             {
               "justify-content-between": image,
               "justify-content-center": !image,

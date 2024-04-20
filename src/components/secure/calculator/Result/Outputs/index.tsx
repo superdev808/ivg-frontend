@@ -34,7 +34,7 @@ const Outputs: React.FC<OutputsProps> = ({
   }
 
   return (
-    <div className="flex flex-column gap-4">
+    <div className="flex flex-column gap-4 text-dark-green">
       {filteredItems.map(({ label, info }) =>
         info.map((_item, itemIdx) => {
           let item: ItemInsights = { ..._item };
