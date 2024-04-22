@@ -72,8 +72,7 @@ const Result: React.FC<ResultProps> = ({
   const calculatorName = calcInfoMap[calculatorType].label;
   const filename = patientInfo?.filename || `${calculatorName}-Summary`;
 
-  const image =
-    CALCULATOR_IMAGES[calculatorType] || CALCULATOR_IMAGES["Default"];
+  const image = CALCULATOR_IMAGES[calculatorType];
 
   const isSaved = Boolean(id);
 
@@ -364,21 +363,24 @@ const Result: React.FC<ResultProps> = ({
           {!hideMenu && (
             <div className="flex align-items-center flex-shrink-0 gap-2 justify-content-center lg:align-items-center">
               <Button
-                className="p-button p-button-lg px-3 py-2"
+                className="p-button p-button-lg px-5 py-2"
                 label="Email"
                 onClick={() => showPatientInfoDialog("export")}
+                style={{ fontSize: 28 }}
               />
               <Button
-                className="p-button p-button-lg px-3 py-2"
+                className="p-button p-button-lg px-5 py-2"
                 label="Export"
                 onClick={() => showPatientInfoDialog("download")}
+                style={{ fontSize: 28 }}
               />
               {!isSaved && (
                 <Button
-                  className="p-button p-button-lg px-3 py-2"
+                  className="p-button p-button-lg px-5 py-2"
                   label="Save"
                   loading={isSavingCalculator || isSavingResult}
                   onClick={() => setShowSaveDialog(true)}
+                  style={{ fontSize: 28 }}
                 />
               )}
             </div>
@@ -391,12 +393,15 @@ const Result: React.FC<ResultProps> = ({
           onUpdateQuantity={onUpdateQuantity}
         />
 
-        <div className="flex justify-content-between align-items-center gap-4 flex-column pb-6 lg:flex-row">
+        <div className="flex justify-content-center align-items-center gap-4 flex-column pb-6 lg:flex-row">
           <div
             className={cx(
-              "flex-1 flex flex-column justify-content-around gap-4 shadow-6 p-4 border-round-md border-2 border-light-green",
+              "flex flex-column justify-content-around gap-4 shadow-6 p-4 border-round-md border-2 border-extreme-light-green",
               "quiz"
             )}
+            style={{
+              maxWidth: "50%",
+            }}
           >
             <h3 className="underline m-0">Input Summary</h3>
             {quiz.map(
@@ -404,7 +409,7 @@ const Result: React.FC<ResultProps> = ({
                 (!id || id === calculatorType) && (
                   <div
                     key={question}
-                    className="flex flex-1 align-items-center gap-1"
+                    className="flex flex-1 align-items-center gap-3"
                   >
                     <div className="flex-1 text-left text-dark-green">
                       {question}

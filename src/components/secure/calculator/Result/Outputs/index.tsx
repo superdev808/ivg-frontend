@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "primereact/button";
 import { InputNumber } from "primereact/inputnumber";
 import React, { useMemo } from "react";
+import cx from "classnames";
 
 import { INFORMATIONAL_CALCULATOR_TYPES } from "@/constants/calculators";
 import { isValidUrl } from "@/helpers/calculators";
@@ -35,7 +36,7 @@ const Outputs: React.FC<OutputsProps> = ({
 
   return (
     <div className="flex flex-column gap-4">
-      {filteredItems.map(({ label, info }) =>
+      {filteredItems.map(({ label, info }, filteredItemIndex) =>
         info.map((_item, itemIdx) => {
           let item: ItemInsights = { ..._item };
           Object.keys(item).forEach((key) => {
@@ -51,7 +52,10 @@ const Outputs: React.FC<OutputsProps> = ({
           return (
             <div
               key={`${label}-${itemIdx}`}
-              className="flex flex-column justify-content-between gap-4 p-3 border-2 border-light-green border-round-md line-height-3 md:flex-row md:align-items-center"
+              className={cx(
+                "flex flex-column justify-content-between gap-4 p-3 border-round-md line-height-3 md:flex-row md:align-items-center",
+                filteredItemIndex === 0 ? "border-dark-brown border-3" : "border-light-green border-2"
+              )}
             >
               <GenericOutput
                 label={label}
