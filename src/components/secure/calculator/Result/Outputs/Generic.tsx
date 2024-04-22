@@ -65,7 +65,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
         "w-12": INFORMATIONAL_CALCULATOR_TYPES.includes(calculatorType),
       })}
     >
-      {groupName && <h4>{groupName}</h4>}
+      {groupName && <h4 className="m-0 text-xl">{groupName}</h4>}
       {transformedItems.map((subgroupItem) => (
         <div className="flex gap-2 align-items-start" key={subgroupItem["id"]}>
           <div style={{ paddingTop: 2 }}>

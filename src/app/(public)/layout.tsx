@@ -20,7 +20,10 @@ export default function PublicLayout({ children }: PropsWithChildren) {
   return (
     <>
       {!layoutStyle.hidden && (
-        <Navigation authenticated={authenticated} light={layoutStyle.light} />
+        <Navigation
+          authenticated={authenticated}
+          light={layoutStyle.navLight}
+        />
       )}
       {children}
       {!layoutStyle.hidden && (

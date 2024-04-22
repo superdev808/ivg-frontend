@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
 import { confirmPopup } from "primereact/confirmpopup";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 import { SHOULD_DISPLAY_TEXT_ONLY } from "@/constants/calculators";
 
@@ -11,6 +11,7 @@ import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
 const cx = classNames.bind(styles);
 
 interface PopupOutputProps {
+  className?: string;
   data: {
     [key: string]: string;
   };

@@ -5,12 +5,11 @@
 
 .calculatorButton {
   background-color: transparent !important;
-  color: var(--light-green) !important;
-  border: 1px solid var(--light-green) !important;
+  color: var(--beige) !important;
+  border: 1px solid var(--beige) !important;
 
   &:hover,
   &--highlighted {
-    color: var(--dark-brown) !important;
     border-color: var(--dark-brown) !important;
   }
 }
@@ -18,4 +17,9 @@
 .calculatorButtonSection {
   max-height: 500px;
   overflow-y: auto;
+}
+
+.content {
+  max-width: 880px;
+  margin: 0 auto;
 }

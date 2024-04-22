@@ -35,7 +35,7 @@ const Outputs: React.FC<OutputsProps> = ({
   }
 
   return (
-    <div className="flex flex-column gap-4">
+    <div className="flex flex-column gap-4 text-dark-green">
       {filteredItems.map(({ label, info }, filteredItemIndex) =>
         info.map((_item, itemIdx) => {
           let item: ItemInsights = { ..._item };
@@ -54,7 +54,9 @@ const Outputs: React.FC<OutputsProps> = ({
               key={`${label}-${itemIdx}`}
               className={cx(
                 "flex flex-column justify-content-between gap-4 p-3 border-round-md line-height-3 md:flex-row md:align-items-center",
-                filteredItemIndex === 0 ? "border-dark-brown border-3" : "border-light-green border-2"
+                filteredItemIndex === 0
+                  ? "border-dark-brown border-3"
+                  : "border-light-green border-2"
               )}
             >
               <GenericOutput

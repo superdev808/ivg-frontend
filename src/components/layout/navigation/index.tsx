@@ -71,8 +71,8 @@ const Navigation = ({ authenticated, light }: NavigationProps) => {
           url: "/requests",
         },
         {
-          id: "savedOutputs",
-          label: "Saved Outputs",
+          id: "savedResults",
+          label: "Saved Results",
           url: "/settings/saved-results/",
         },
         {

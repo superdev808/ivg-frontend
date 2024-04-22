@@ -1,3 +1,9 @@
+.tab-content {
+  max-width: 880px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
 .divider {
   height: 100%;
   width: 20px;
@@ -14,10 +20,12 @@
 }
 
 .section {
-  min-width: 500px;
+  min-width: 440px;
   border-style: solid;
   border-color: var(--light-green);
   border-width: 0;
+  max-height: 400px;
+  overflow-y: scroll;
 
   &:not(:last-of-type) {
     border-right-width: 5px;
@@ -29,11 +37,11 @@
     &:not(:last-of-type) {
       border-right-width: 0;
       border-bottom-width: 5px;
-      padding-bottom: 20px;
+      padding-bottom: 40px;
     }
 
     &:not(:first-of-type) {
-      padding-top: 20px;
+      padding-top: 40px;
     }
   }
 }

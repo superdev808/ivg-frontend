@@ -134,3 +134,23 @@
     object-fit: contain;
   }
 }
+
+.nav-button {
+  width: 260px;
+
+  @media screen and (max-width: 992px) {
+    width: 240px;
+  }
+
+  @media screen and (max-width: 786px) {
+    width: 220px;
+  }
+
+  @media screen and (max-width: 690px) {
+    width: 200px;
+  }
+
+  @media screen and (max-width: 630px) {
+    width: 180px;
+  }
+}

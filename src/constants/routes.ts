@@ -1,5 +1,6 @@
 export enum PUBLIC_ROUTES {
-  HOME = "/",
+  INDEX = "/",
+  HOME = "/home/",
   CONTACT = "/contact/",
   ABOUT = "/about/",
   FORBIDDEN = "/error/403/",

@@ -20,12 +20,12 @@ const GenericComponentSummary: React.FC<GenericComponentSummaryProps> = ({
 }) => {
   const showManufacturer = useMemo(() => {
     return summary.some(
-      (item) => item.manufacturer && item.manufacturer !== item.brand
+      (item) =>
+        item.manufacturer && item.brand && item.manufacturer !== item.brand
     );
   }, [summary]);
 
   const columns = [
-    "Description",
     "Name",
     "Number",
     showManufacturer ? "Manufacturer" : "",
@@ -58,7 +58,6 @@ const GenericComponentSummary: React.FC<GenericComponentSummaryProps> = ({
               key={`${data.description}-${summaryIdx}`}
               className={cx(summaryIdx % 2 === 0 ? "even" : "odd")}
             >
-              <td>{data.description}</td>
               <td>
                 {isValidUrl(link) ? (
                   <a href={link} target="_blank" className="text-light-green">
@@ -71,7 +70,9 @@ const GenericComponentSummary: React.FC<GenericComponentSummaryProps> = ({
               <td>{data.itemNumber}</td>
               {showManufacturer && (
                 <td>
-                  {data.manufacturer && data.manufacturer !== data.brand
+                  {data.manufacturer &&
+                  data.brand &&
+                  data.manufacturer !== data.brand
                     ? data.manufacturer
                     : ""}
                 </td>
