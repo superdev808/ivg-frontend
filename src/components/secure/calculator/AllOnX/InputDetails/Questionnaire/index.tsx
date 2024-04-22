@@ -212,11 +212,13 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
 
     const convertedIdx = answersWithIndex[index]?.idx;
 
+    
     if (convertedIdx !== undefined) {
+      handleAutoPopulateChange(AUTO_POPULATE_OPTIONS[1].value);
       setCanProceed(false);
       setLevel(convertedIdx);
     }
-  }, [answers]);
+  }, [answers, handleAutoPopulateChange]);
 
   const handleShowSummary = useCallback(() => {
     setLevel(input.length);
