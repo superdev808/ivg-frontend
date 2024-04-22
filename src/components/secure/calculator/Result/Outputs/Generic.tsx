@@ -110,7 +110,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
                         className="pi pi-check text-light-green mr-2 font-bold"
                         style={{ width: 16, height: 16 }}
                       />
-                      {groupText && <b>{groupText} </b>}
+                      {groupText && <>{groupText}</>}
                     </>
                   ) : (
                     <>
