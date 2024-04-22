@@ -619,7 +619,6 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                     name: "Multi-Unit Abutments (Abutment Level)",
                     href: "/calculators/ScanbodiesMultiUnitAbutments",
                   },
-                  { name: "Lab / Model Scanbodies" },
                 ],
               },
               {
@@ -826,6 +825,10 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
   },
 ];
 
-export const REASONING_TEXT = "Reasoning";
-export const SUPPORT_ARTICLES_TEXT = "Supporting Article";
+export const POPUP_TEXTS = [
+  "Reasoning",
+  "Supporting Article",
+  "Notes",
+  "Recommendation",
+];
 export const SHOULD_DISPLAY_TEXT_ONLY = "ShouldDisplayTextOnly";

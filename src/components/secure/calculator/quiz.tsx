@@ -64,14 +64,11 @@ const Quiz: React.FC<QuizProps> = ({
       return [];
     }
 
-    if (availableOptions[0].endsWith(" mm")) {
-      return orderBy(
-        availableOptions,
-        (option) => Number(option.split(" ")[0]),
-        ["asc"]
-      );
-    }
-
+    if (/^\d/gi.test(availableOptions[0])) {
+      return orderBy(availableOptions, (option) => parseFloat(option), ["asc"]);
+    } // else {
+    //   return orderBy(availableOptions, (option) => option, ["asc"]);
+    // }
     return availableOptions;
   }, [filteredAnswers]);
 
@@ -133,13 +130,14 @@ const Quiz: React.FC<QuizProps> = ({
         )}
 
         {calculatorName && <h1 className="underline">{calculatorName}</h1>}
-        <h1>
+        <h1 className="flex gap-4 align-items-center">
           {question.colText && (
             <>
               <PopupOutput
                 data={{
                   [SHOULD_DISPLAY_TEXT_ONLY]: question.colText,
                 }}
+                size={48}
               />
               {"  "}
             </>
