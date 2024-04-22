@@ -4,10 +4,13 @@
     background: var(--dark-green);
 
     li .p-tabview-nav-link {
+      display: flex;
+      justify-content: center;
       background: var(--dark-green);
       color: var(--beige);
       border-width: 0;
       border-radius: 10px 10px 0 0;
+      width: 220px;
     }
 
     li .p-tabview-nav-link:focus {

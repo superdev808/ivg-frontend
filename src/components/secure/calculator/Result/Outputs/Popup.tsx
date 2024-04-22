@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
 import { confirmPopup } from "primereact/confirmpopup";
-import React from "react";
+import React, { useState } from "react";
 
 import {
   REASONING_TEXT,
@@ -14,12 +14,15 @@ import styles from "./style.module.scss";
 const cx = classNames.bind(styles);
 
 interface PopupOutputProps {
+  className?: string;
   data: {
     [key: string]: string;
   };
 }
 
-const PopupOutput: React.FC<PopupOutputProps> = ({ data }) => {
+const PopupOutput: React.FC<PopupOutputProps> = ({ className, data }) => {
+  const [isOpened, setIsOpened] = useState<boolean>(false);
+
   const handleOpenPopup = (event: any) => {
     confirmPopup({
       target: event.currentTarget,
@@ -51,19 +54,26 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ data }) => {
           ))}
         </div>
       ),
+      onShow: () => setIsOpened(true),
+      onHide: () => setIsOpened(false),
     });
   };
+
+  const hasContent = Object.keys(data).length > 0;
+
+  if (!hasContent) {
+    return null;
+  }
+
   return (
-    Object.keys(data).length > 0 && (
+    <div>
       <i
-        className="pi pi-question-circle text-light-green cursor-pointer pt-1"
-        style={{
-          width: 16,
-          height: 16,
-        }}
+        className={cx("pi pi-question-circle cursor-pointer", className, {
+          "bg-dark-green text-beige border-round-3xl": isOpened,
+        })}
         onClick={handleOpenPopup}
       />
-    )
+    </div>
   );
 };
 

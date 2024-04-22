@@ -393,11 +393,19 @@ const Result: React.FC<ResultProps> = ({
           onUpdateQuantity={onUpdateQuantity}
         />
 
-        <div className="flex justify-content-center align-items-center gap-4 flex-column pb-6 lg:flex-row">
+        <div
+          className={cx(
+            "flex align-items-center gap-4 flex-column text-dark-green pb-6 lg:flex-row",
+            {
+              "justify-content-between": image,
+              "justify-content-center": !image,
+            }
+          )}
+        >
           <div
             className={cx(
-              "flex flex-column justify-content-around gap-4 shadow-6 p-4 border-round-md border-2 border-extreme-light-green",
-              "quiz"
+              "flex flex-column justify-content-around gap-4 shadow-6 p-4 border-round-md border-2 border-light-green",
+              { quizWithoutImage: !image, quizWithImage: image }
             )}
             style={{
               maxWidth: "50%",

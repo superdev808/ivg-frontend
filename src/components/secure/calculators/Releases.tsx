@@ -22,7 +22,7 @@ const ITEMS = [
     description:
       "Browse and order products from our list of all the most commonly used items your office needs, vetted by industry experts.",
     image: "/images/calculators/supplies.png",
-    link: "/explore/?tab=supplies",
+    link: "/explore-all/?tab=supplies",
   },
 ];
 

@@ -24,14 +24,14 @@ const TabContent: React.FC<TabContentProps> = ({
     ));
 
   return (
-    <div className="px-3 pt-2">
+    <div className={cx("tab-content", "px-3 pt-2")}>
       {datum.description && (
         <div className="text-xl text-center white-space-preline text-dark-green font-semibold">
           {datum.description}
         </div>
       )}
 
-      <div className={cx("sections", "mt-6")}>
+      <div className={cx("sections", "mt-3 md:mt-6")}>
         {datum.sections.map((section) => (
           <div
             key={section.name}
@@ -43,8 +43,10 @@ const TabContent: React.FC<TabContentProps> = ({
             <div className="font-bold underline text-2xl">{section.name}</div>
 
             {section.name === "Favorites" && (
-              <div className="flex flex-column gap-4">
-                {renderItems(favoriteCalculators)}
+              <div className="flex flex-column gap-4 white-space-preline">
+                {favoriteCalculators.length === 0
+                  ? "Add your Favorites to this list using the Save button\nat the end of any Calculator or Workflow!"
+                  : renderItems(favoriteCalculators)}
               </div>
             )}
 

@@ -18,7 +18,7 @@ const camelCaseToWords = (str: string) =>
     .replace(/([A-Z])/g, " $1")
     .replace(/\b(\w)/g, (match) => match.toUpperCase());
 
-const EXCLUDE_KEYS = ["id", "quantity"];
+const EXCLUDE_KEYS = ["id", "quantity", "brand", "manufacturer"];
 
 const SummaryTable: React.FC<SummaryTableProps> = ({ items }) => {
   const filteredKeys = keys(items[0])

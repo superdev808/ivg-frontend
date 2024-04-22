@@ -23,7 +23,7 @@ export default function ProtectedLayout({ children }: PropsWithChildren) {
   return (
     <>
       <ConfirmPopup />
-      <Navigation authenticated light={layoutStyle.light} />
+      <Navigation authenticated light={layoutStyle.navLight} />
       {children}
       <Footer extendFooter={layoutStyle.extendFooter} />
     </>

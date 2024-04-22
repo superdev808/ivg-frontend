@@ -23,7 +23,8 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
     }
 
     return summary.some(
-      (item) => item.manufacturer && item.manufacturer !== item.brand
+      (item) =>
+        item.manufacturer && item.brand && item.manufacturer !== item.brand
     );
   }, [summary]);
 
@@ -32,7 +33,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
   }
 
   const renderManufacturer = (item: ComponentSummaryType) => {
-    return item.manufacturer && item.manufacturer !== item.brand
+    return item.manufacturer && item.brand && item.manufacturer !== item.brand
       ? item.manufacturer
       : "";
   };
