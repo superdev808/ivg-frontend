@@ -56,10 +56,9 @@ const Quiz: React.FC<QuizProps> = ({
 
   const options = useMemo(() => {
     const availableOptions =
-      // filteredAnswers.length > 6
-      //   ? filteredAnswers.slice(0, 6)
-      //   : filteredAnswers;
-      filteredAnswers;
+      filteredAnswers.length > 6
+        ? filteredAnswers.slice(0, 6)
+        : filteredAnswers;
 
     if (availableOptions.length === 0) {
       return [];
@@ -152,18 +151,20 @@ const Quiz: React.FC<QuizProps> = ({
       </div>
 
       <div className="col-12 sm:col-8 sm:col-offset-2 xl:col-4 xl:col-offset-4 md:mb-6">
-        <AutoComplete
-          value={searchValue}
-          suggestions={suggestions}
-          onChange={handleSearchChange}
-          placeholder="Search all available options..."
-          className="w-full"
-          inputClassName="w-full"
-          completeMethod={handleAutoCompleteMethod}
-          onSelect={handleSelect}
-          itemTemplate={dropdownOptionTemplate}
-          dropdown
-        />
+        {answers?.length > 6 && (
+          <AutoComplete
+            value={searchValue}
+            suggestions={suggestions}
+            onChange={handleSearchChange}
+            placeholder="Search all available options..."
+            className="w-full"
+            inputClassName="w-full"
+            completeMethod={handleAutoCompleteMethod}
+            onSelect={handleSelect}
+            itemTemplate={dropdownOptionTemplate}
+            dropdown
+          />
+        )}
       </div>
 
       <div className="relative md:absolute flex align-items-center justify-content-center w-full md:w-2 md:col-offset-10">
