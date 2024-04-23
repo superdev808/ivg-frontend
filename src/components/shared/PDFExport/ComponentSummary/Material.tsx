@@ -12,7 +12,6 @@ interface MaterialComponentSummaryProps {
 const MaterialComponentSummary: React.FC<MaterialComponentSummaryProps> = ({
   summary,
 }) => {
-  console.log(summary);
   const { reasoning, other } = useMemo(() => {
     return summary.reduce(
       (acc, elem) => {

@@ -3,7 +3,6 @@ import classNames from "classnames/bind";
 import html2pdf from "html2pdf.js";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { Image } from "primereact/image";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { useRef, useState } from "react";

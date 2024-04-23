@@ -1,10 +1,10 @@
 import React from "react";
 
+import { LINEAR_WORKFLOWS } from "@/constants/calculators";
 import { InputDetail } from "@/types/calculators";
 
 import GenericInputSummary from "./Generic";
 import LinearWorkflowInputSummary from "./LinearWorkflow";
-import { LINEAR_WORKFLOWS } from "@/constants/calculators";
 
 interface InputSummaryProps {
   calculatorType: string;

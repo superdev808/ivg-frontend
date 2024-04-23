@@ -4,9 +4,9 @@ import { confirmPopup } from "primereact/confirmpopup";
 import React, { useState } from "react";
 
 import { SHOULD_DISPLAY_TEXT_ONLY } from "@/constants/calculators";
+import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
 
 import styles from "./style.module.scss";
-import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +20,7 @@ interface PopupOutputProps {
 
 const PopupOutput: React.FC<PopupOutputProps> = ({ data, size = 16 }) => {
   const [opened, setOpened] = useState(false);
+
   const handleOpenPopup = (event: any) => {
     confirmPopup({
       target: event.currentTarget,
@@ -58,6 +59,7 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ data, size = 16 }) => {
       onHide: () => setOpened(false),
     });
   };
+
   return Object.keys(data).length > 0 ? (
     <i
       className={cx(

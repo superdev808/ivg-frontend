@@ -417,16 +417,26 @@ export const CALCULATOR_IMAGES: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Drill+Kit+Generic.png",
   StockAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Stock+Abutment+Generic.png",
-  // ToothBorneBridge: "",
-  // ToothBorneCrown: "",
-  // ImplantBorneBridge: "",
-  // ImplantBorneCrown: "",
-  // ScanRequirements: "",
-  // BondingEtching: "",
-  // IsolationTechniques: "",
-  // ToothPreparation: "",
-  // PhysicalImpression: "",
-  // LocatorAbutments: "",
+  ToothBorneBridge:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Bridge.png",
+  ToothBorneCrown:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Crown.png",
+  ImplantBorneBridge:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Bridge+Implant.png",
+  ImplantBorneCrown:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Crown+Implant.png",
+  ScanRequirements:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/scan+requirements.png",
+  BondingEtching:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/how+to+cement.png",
+  IsolationTechniques:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/isolation+techniques.png",
+  ToothPreparation:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/tooth+preparation.png",
+  PhysicalImpression:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/physical+impressions.png",
+  LocatorAbutments:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/locator+abutment.png",
   Default:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/No+Image+BW.jpg",
 };

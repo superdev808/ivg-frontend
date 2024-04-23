@@ -13,10 +13,5 @@
 
 .quizWithImage {
   min-height: 300px;
-  flex: 2 !important;
-
-  @media screen and (max-width: 992px) {
-    flex: 1 !important;
-    width: 100%;
-  }
+  flex: 1.5 !important;
 }
