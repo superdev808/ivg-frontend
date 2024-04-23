@@ -11,3 +11,13 @@ export const getUserRole = () => {
   }
   return null;
 };
+
+export const getUserOrganizationName = () => {
+  const token = getCookie("appToken");
+  const decoded = decode(token);
+  const organizationName = get(decoded, "organizationName");
+  if (organizationName) {
+    return organizationName;
+  }
+  return null;
+}

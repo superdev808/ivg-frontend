@@ -171,6 +171,7 @@ export interface CalculatorInfoMap {
     label: string;
     description?: string;
     disabled?: boolean;
+    isCustom?: boolean;
     input: InputOutputValues[];
     output: InputOutputValues[];
   };

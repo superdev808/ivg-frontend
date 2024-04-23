@@ -6,6 +6,7 @@ import React from "react";
 import { SITE_SPECIFIC_REPORT_OPTIONS } from "@/constants/calculators";
 
 import styles from "./styles.module.scss";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +24,9 @@ const CustomCombinationsInputs: React.FC<CustomCombinationsInputsParams> = ({
   siteSpecificReport,
   onCollectionChange,
   onChangeSiteSpecificReport,
-}) => (
+}) => {
+  const { calcInfoMap } = useCalculatorsInfo();
+  return (
   <div className="pb-4">
     <div className="flex flex-column w-12 mb-3">
       <h2 className="mt-0 mb-3 text-center">Custom Combinations</h2>
@@ -47,7 +50,7 @@ const CustomCombinationsInputs: React.FC<CustomCombinationsInputsParams> = ({
               checked={selectedCollections.includes(collection)}
             />
             <label htmlFor={`${collection}-${index}`} className="ml-2">
-              {collection}
+              {calcInfoMap[collection].label}
             </label>
           </div>
         ))}
@@ -75,6 +78,6 @@ const CustomCombinationsInputs: React.FC<CustomCombinationsInputsParams> = ({
       </div>
     </div>
   </div>
-);
+)};
 
 export default CustomCombinationsInputs;

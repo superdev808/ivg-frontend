@@ -3,13 +3,10 @@ import Link from "next/link";
 import { confirmPopup } from "primereact/confirmpopup";
 import React, { useState } from "react";
 
-import {
-  REASONING_TEXT,
-  SHOULD_DISPLAY_TEXT_ONLY,
-  SUPPORT_ARTICLES_TEXT,
-} from "@/constants/calculators";
+import { SHOULD_DISPLAY_TEXT_ONLY } from "@/constants/calculators";
 
 import styles from "./style.module.scss";
+import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
 
 const cx = classNames.bind(styles);
 
@@ -18,11 +15,11 @@ interface PopupOutputProps {
   data: {
     [key: string]: string;
   };
+  size?: number;
 }
 
-const PopupOutput: React.FC<PopupOutputProps> = ({ className, data }) => {
-  const [isOpened, setIsOpened] = useState<boolean>(false);
-
+const PopupOutput: React.FC<PopupOutputProps> = ({ data, size = 16 }) => {
+  const [opened, setOpened] = useState(false);
   const handleOpenPopup = (event: any) => {
     confirmPopup({
       target: event.currentTarget,
@@ -33,47 +30,54 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ className, data }) => {
       footer: <></>,
       message: (
         <div className="flex flex-column align-items-center gap-2 text-center text-beige -ml-3">
-          {Object.entries(data).map(([label, text]) => (
-            <div key={label}>
-              {label.includes(REASONING_TEXT) && (
-                <div>
-                  <b>{REASONING_TEXT}:</b> {text}
-                </div>
-              )}
-              {label.includes(SUPPORT_ARTICLES_TEXT) && (
-                <Link
-                  className="text-beige justify-self-center"
-                  href={text}
-                  target="_blank"
-                >
-                  {SUPPORT_ARTICLES_TEXT}
-                </Link>
-              )}
-              {label.includes(SHOULD_DISPLAY_TEXT_ONLY) && text}
-            </div>
-          ))}
+          {Object.entries(data).map(([label, text]) => {
+            const { groupText } = deserializeColInfo(label);
+            return (
+              <div key={label}>
+                {!label.includes(SHOULD_DISPLAY_TEXT_ONLY) &&
+                  (isValidUrl(text) ? (
+                    <Link
+                      className="text-beige justify-self-center"
+                      href={text}
+                      target="_blank"
+                    >
+                      {groupText}
+                    </Link>
+                  ) : (
+                    <div>
+                      <b>{groupText}:</b> {text}
+                    </div>
+                  ))}
+                {label.includes(SHOULD_DISPLAY_TEXT_ONLY) && text}
+              </div>
+            );
+          })}
         </div>
       ),
-      onShow: () => setIsOpened(true),
-      onHide: () => setIsOpened(false),
+      onShow: () => setOpened(true),
+      onHide: () => setOpened(false),
     });
   };
-
-  const hasContent = Object.keys(data).length > 0;
-
-  if (!hasContent) {
-    return null;
-  }
-
-  return (
-    <div>
-      <i
-        className={cx("pi pi-question-circle cursor-pointer", className, {
-          "bg-dark-green text-beige border-round-3xl": isOpened,
-        })}
-        onClick={handleOpenPopup}
-      />
-    </div>
+  return Object.keys(data).length > 0 ? (
+    <i
+      className={cx(
+        "pi text-light-green cursor-pointer pi-question-circle border-round-full",
+        { "text-light-green bg-secondary": opened }
+      )}
+      style={{
+        fontSize: size,
+        width: size,
+        height: size,
+      }}
+      onClick={handleOpenPopup}
+    />
+  ) : (
+    <div
+      style={{
+        width: size,
+        height: size,
+      }}
+    />
   );
 };
 
