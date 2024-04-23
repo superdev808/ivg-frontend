@@ -48,11 +48,27 @@ const Quiz: React.FC<QuizProps> = ({
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState<string>("");
 
+  const isActionQuestion = useMemo(() => {
+    return question.colName.startsWith("Action");
+  }, [question]);
+
   const filteredAnswers = useMemo(() => {
     return (
       answers?.filter((answer) => answer.includes(selectedSuggestion)) || []
     );
   }, [answers, selectedSuggestion]);
+
+  const questionName = useMemo(() => {
+    if (question.colName.endsWith("?")) {
+      return question.colName;
+    }
+
+    if (question.colName.startsWith("Action")) {
+      return `Action: ${answers?.[0] || ""}`;
+    }
+
+    return `Select ${question.colName}`;
+  }, [question, answers]);
 
   const options = useMemo(() => {
     const availableOptions =
@@ -131,7 +147,12 @@ const Quiz: React.FC<QuizProps> = ({
 
         {calculatorName && <h1 className="underline">{calculatorName}</h1>}
         {suggestions.length > 0 && (
-          <h1 className="flex align-items-center gap-3 text-center">
+          <h1
+            className={cx(
+              "heading",
+              "flex align-items-center gap-3 text-center"
+            )}
+          >
             {question.colText && (
               <PopupOutput
                 className="text-2xl"
@@ -141,9 +162,7 @@ const Quiz: React.FC<QuizProps> = ({
                 size={48}
               />
             )}
-            {question.colName.endsWith("?")
-              ? question.colName
-              : `Select ${question.colName}`}
+            {questionName}
           </h1>
         )}
       </div>
@@ -169,49 +188,78 @@ const Quiz: React.FC<QuizProps> = ({
         <PieChartProgressBar percentage={progress || 0} />
       </div>
 
-      <div className="flex align-items-start justify-content-around flex-wrap w-12">
-        {options.map((answer, index) => {
-          const image = BRAND_IMAGES[`${answer}`.toLowerCase()];
-
-          return (
+      {!disabled && (
+        <div className="flex align-items-start justify-content-around flex-wrap w-12">
+          {isActionQuestion ? (
             <div
-              key={`${question}-${answer}-${index}`}
               className="m-2 w-12 md:w-3 flex flex-column"
               onClick={() => {
                 if (!disabled) {
-                  onSelectAnswer(answer);
+                  onSelectAnswer(answers[0]);
                 }
               }}
             >
               <div
                 className={cx(
                   "quiz-card",
-                  "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer",
-                  { "quiz-card--selected": currentAnswer === answer }
+                  "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer"
                 )}
-                style={{ height: 200 }}
+                style={{ height: 50 }}
               >
-                {image ? (
-                  <Image
-                    src={image}
-                    width="100%"
-                    height="100%"
-                    imageClassName="p-4"
-                    imageStyle={{ objectFit: "contain" }}
-                    alt={answer}
-                  />
-                ) : (
-                  <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
-                    {answer}
-                  </div>
-                )}
+                <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
+                  Next
+                </div>
               </div>
-
-              {image && <p className="w-full text-3xl text-center">{answer}</p>}
             </div>
-          );
-        })}
-      </div>
+          ) : (
+            <>
+              {options.map((answer, index) => {
+                const image = BRAND_IMAGES[`${answer}`.toLowerCase()];
+
+                return (
+                  <div
+                    key={`${question}-${answer}-${index}`}
+                    className="m-2 w-12 md:w-3 flex flex-column"
+                    onClick={() => {
+                      if (!disabled) {
+                        onSelectAnswer(answer);
+                      }
+                    }}
+                  >
+                    <div
+                      className={cx(
+                        "quiz-card",
+                        "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer",
+                        { "quiz-card--selected": currentAnswer === answer }
+                      )}
+                      style={{ height: 200 }}
+                    >
+                      {image ? (
+                        <Image
+                          src={image}
+                          width="100%"
+                          height="100%"
+                          imageClassName="p-4"
+                          imageStyle={{ objectFit: "contain" }}
+                          alt={answer}
+                        />
+                      ) : (
+                        <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
+                          {answer}
+                        </div>
+                      )}
+                    </div>
+
+                    {image && (
+                      <p className="w-full text-3xl text-center">{answer}</p>
+                    )}
+                  </div>
+                );
+              })}
+            </>
+          )}
+        </div>
+      )}
     </>
   );
 };

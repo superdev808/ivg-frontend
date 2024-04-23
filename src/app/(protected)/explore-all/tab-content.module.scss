@@ -24,7 +24,7 @@
   border-style: solid;
   border-color: var(--light-green);
   border-width: 0;
-  max-height: 400px;
+  height: 400px;
   overflow-y: scroll;
 
   &:not(:last-of-type) {

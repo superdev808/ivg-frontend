@@ -211,6 +211,8 @@ export const MATERIAL_CALCULATOR_TYPES = [
   "ToothBorneCrown",
 ];
 
+export const LINEAR_WORKFLOWS = ["ImplantBorneCrownIssues"];
+
 export const BRAND_IMAGES: Record<string, string> = {
   "ab dental":
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/AB+Dental.png",
@@ -584,9 +586,9 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                 items: [
                   {
                     name: "Implant-Borne",
-                    href: "/calculators/ImplantBorneCrown",
+                    href: "/calculators/ImplantBorneCrownIssues",
                   },
-                  { name: "Tooth-Borne", href: "/calculators/ToothBorneCrown" },
+                  // { name: "Tooth-Borne", href: "/calculators/ToothBorneCrown" },
                 ],
               },
             ],
