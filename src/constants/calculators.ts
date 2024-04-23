@@ -686,7 +686,10 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
               {
                 name: "Abutments",
                 items: [
-                  { name: "Locator Abutments" },
+                  {
+                    name: "Locator Abutments",
+                    href: "/calculators/LocatorAbutments",
+                  },
                   {
                     name: "Multi-Unit Abutments (Abutment Level)",
                     href: "/calculators/MultiUnitAbutments",
