@@ -17,6 +17,7 @@ import ComponentSummary from "../ComponentSummary";
 import InputSummary from "../InputSummary";
 
 import styles from "./styles.module.scss";
+import { LINEAR_WORKFLOWS } from "@/constants/calculators";
 
 const cx = classNames.bind(styles);
 
@@ -107,7 +108,11 @@ const PDFContent: React.FC<PDFContentProps> = ({
         <div className="flex flex-column">
           <div className="py-2">
             Please see summary for{" "}
-            <span className="font-semibold">{calculatorName}</span> calculator.
+            <span className="font-semibold">{calculatorName}</span>{" "}
+            {LINEAR_WORKFLOWS.includes(calculatorType)
+              ? "workflow"
+              : "calculator"}
+            .
           </div>
         </div>
 
@@ -123,16 +128,22 @@ const PDFContent: React.FC<PDFContentProps> = ({
         )}
       </div>
 
-      <div className="px-4 py-1">
-        <InputSummary inputSummary={inputSummary} hideSite={hideSite} />
-      </div>
-
       <div className="px-4">
-        <ComponentSummary
-          calculatorType={calculatorType}
-          summary={componentSummary}
-          totalQuantities={totalQuantities}
-        />
+        <div className="py-2">
+          <InputSummary
+            calculatorType={calculatorType}
+            inputSummary={inputSummary}
+            hideSite={hideSite}
+          />
+        </div>
+
+        {!LINEAR_WORKFLOWS.includes(calculatorType) && (
+          <ComponentSummary
+            calculatorType={calculatorType}
+            summary={componentSummary}
+            totalQuantities={totalQuantities}
+          />
+        )}
 
         <div className="flex flex-column pt-5 greet">
           <div>Thank You,</div>

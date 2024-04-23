@@ -157,7 +157,7 @@ const CalculatorPage: NextPage = () => {
   }, [calcInfoMap]);
 
   return (
-    <div className="flex flex-column">
+    <div className="flex flex-column flex-1">
       <div className="bg-dark-green py-4 px-4">
         <div className={cx("content")}>
           <div className="text-beige text-center text-4xl">Explore All</div>

@@ -1,29 +1,35 @@
 import React from "react";
 
-import { LINEAR_WORKFLOWS } from "@/constants/calculators";
-import { InputSummary as InputSummaryType } from "@/types/calculators";
+import { InputDetail } from "@/types/calculators";
 
 import GenericInputSummary from "./Generic";
 import LinearWorkflowInputSummary from "./LinearWorkflow";
+import { LINEAR_WORKFLOWS } from "@/constants/calculators";
 
 interface InputSummaryProps {
   calculatorType: string;
-  inputSummary: InputSummaryType[];
-  hideSite?: boolean;
+  image?: string;
+  name: string;
+  quiz: InputDetail[];
 }
 
 const InputSummary: React.FC<InputSummaryProps> = ({
   calculatorType,
-  inputSummary,
-  hideSite,
+  image,
+  quiz,
+  name,
 }) => {
   if (LINEAR_WORKFLOWS.includes(calculatorType)) {
-    return <LinearWorkflowInputSummary inputSummary={inputSummary} />;
+    return <LinearWorkflowInputSummary quiz={quiz} />;
   }
 
   return (
-    <GenericInputSummary inputSummary={inputSummary} hideSite={hideSite} />
+    <GenericInputSummary
+      calculatorType={calculatorType}
+      image={image}
+      quiz={quiz}
+      name={name}
+    />
   );
 };
-
 export default InputSummary;
