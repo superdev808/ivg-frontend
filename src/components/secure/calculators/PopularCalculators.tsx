@@ -28,7 +28,7 @@ const ITEMS: Item[] = [
     title: "Crown Material Selection",
     description:
       "Every restoration is unique. Let Ivory Guide help you determine the ideal material for your patient’s crown.",
-    image: "/images/calculators/supplies.png",
+    image: "/images/calculators/crown-material.png",
     link: "/calculators/ToothBorneCrown",
   },
 ];
