@@ -195,7 +195,17 @@ const CalculatorPage: NextPage = () => {
         onTabChange={({ index }) => setActiveTab(index)}
       >
         {exploreAllData.map((datum) => (
-          <TabPanel key={datum.name} header={datum.name}>
+          <TabPanel
+            key={datum.name}
+            header={
+              <>
+                {datum.name === "Procedures" && (
+                  <span className="calculator-beta-tag uppercase">Beta</span>
+                )}
+                {datum.name}
+              </>
+            }
+          >
             <TabContent
               datum={datum}
               favoriteCalculators={favoriteCalculators}
