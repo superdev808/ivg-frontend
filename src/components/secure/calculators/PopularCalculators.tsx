@@ -1,10 +1,11 @@
 import React from "react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css/autoplay";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 import Slide, { Item } from "./Slide";
 
@@ -40,8 +41,9 @@ const PopularCalculators: React.FC = () => (
       slidesPerView={1}
       loop
       navigation
+      autoplay={{ delay: 8000 }}
       pagination={{ clickable: true }}
-      modules={[Navigation, Pagination]}
+      modules={[Autoplay, Navigation, Pagination]}
     >
       {ITEMS.map((item, idx) => (
         <SwiperSlide key={idx}>
