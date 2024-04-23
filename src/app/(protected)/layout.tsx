@@ -9,10 +9,12 @@ import { ForbiddenContent } from "@/components/public/error/ForbiddenContent";
 import useAuthRedirect from "@/hooks/useAuthRedirect";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 import { ConfirmPopup } from "primereact/confirmpopup";
+import { usePathname } from "next/navigation";
 
 export default function ProtectedLayout({ children }: PropsWithChildren) {
   const { isLoading, layoutStyle } = useAuthRedirect();
   const { isCalcInfoLoading, isCalcInfoError } = useCalculatorsInfo();
+  const pathname = usePathname();
 
   if (isLoading || isCalcInfoLoading) {
     return <Loading />;
@@ -25,7 +27,7 @@ export default function ProtectedLayout({ children }: PropsWithChildren) {
       <ConfirmPopup />
       <Navigation authenticated light={layoutStyle.navLight} />
       {children}
-      <Footer extendFooter={layoutStyle.extendFooter} />
+      <Footer extendFooter={layoutStyle.extendFooter && /^\/calculators(\/?)$/ig.test(pathname)} />
     </>
   );
 }

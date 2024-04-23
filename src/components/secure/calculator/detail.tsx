@@ -99,6 +99,8 @@ const DetailView: React.FC<DetailViewProps> = ({
     setFeedbackShow(true);
   };
 
+  console.log(results);
+  
   return (
     <>
       <div className="relative md:p-2 md:text-center">

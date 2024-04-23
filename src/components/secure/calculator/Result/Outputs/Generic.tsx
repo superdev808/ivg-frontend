@@ -4,8 +4,7 @@ import React from "react";
 
 import {
   INFORMATIONAL_CALCULATOR_TYPES,
-  REASONING_TEXT,
-  SUPPORT_ARTICLES_TEXT,
+  POPUP_TEXTS,
 } from "@/constants/calculators";
 import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
 import { ItemInsights } from "@/types/calculators";
@@ -25,8 +24,8 @@ interface GenericOutputProps {
 const filterPopups = (shouldInclude: boolean) => (key: string) => {
   if (key == "id" || key == "quantity" || key == "link") return false;
   const { groupText } = deserializeColInfo(key);
-  return groupText.startsWith(REASONING_TEXT) ||
-    groupText.startsWith(SUPPORT_ARTICLES_TEXT)
+  return POPUP_TEXTS.filter((popupText) => groupText.startsWith(popupText))
+    .length > 0
     ? shouldInclude
     : !shouldInclude;
 };
@@ -68,19 +67,20 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
     >
       {groupName && <h4 className="m-0 text-xl">{groupName}</h4>}
       {transformedItems.map((subgroupItem) => (
-        <div className="flex gap-2" key={subgroupItem["id"]}>
-          <PopupOutput
-            className="mt-1"
-            data={Object.keys(subgroupItem)
-              .filter(filterPopups(true))
-              .reduce(
-                (result, curKey) => ({
-                  ...result,
-                  [curKey]: subgroupItem[curKey],
-                }),
-                {}
-              )}
-          />
+        <div className="flex gap-2 align-items-start" key={subgroupItem["id"]}>
+          <div style={{ paddingTop: 2 }}>
+            <PopupOutput
+              data={Object.keys(subgroupItem)
+                .filter(filterPopups(true))
+                .reduce(
+                  (result, curKey) => ({
+                    ...result,
+                    [curKey]: subgroupItem[curKey],
+                  }),
+                  {}
+                )}
+            />
+          </div>
           {Object.keys(subgroupItem)
             .filter(filterPopups(false))
             .map((key) => {
@@ -92,17 +92,31 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
               return (
                 <div
                   key={key}
-                  className={cx({
+                  className={cx("flex-1", {
                     "text-center text-2xl": key === "torqueValue",
                   })}
                 >
-                  {groupText && <b>{groupText}: </b>}
                   {typeof value == "string" && isValidUrl(value) ? (
-                    <Link href={value} target="_blank">
-                      Click here
+                    <Link
+                      href={value}
+                      target="_blank"
+                      className="no-underline text-dark-green"
+                    >
+                      Link to {groupText}
                     </Link>
+                  ) : typeof value === "string" && /required/gi.test(value) ? (
+                    <>
+                      <i
+                        className="pi pi-check text-light-green mr-2 font-bold"
+                        style={{ width: 16, height: 16 }}
+                      />
+                      {groupText && <>{groupText}</>}
+                    </>
                   ) : (
-                    value
+                    <>
+                      {groupText && <b>{groupText}: </b>}
+                      {value}
+                    </>
                   )}
                 </div>
               );

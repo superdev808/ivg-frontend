@@ -31,16 +31,12 @@ import {
 import _, { uniq } from "lodash";
 
 export const isValidUrl = (urlString = "") => {
-  const urlPattern = new RegExp(
-    "^(https?:\\/\\/)?" + // validate protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // validate query string
-      "(\\#[-a-z\\d_]*)?$",
-    "i"
-  ); // validate fragment locator
-  return Boolean(urlPattern.test(urlString.trim()));
+  try {
+    new URL(urlString);
+    return true;
+  } catch (err) {
+    return false;
+  }
 };
 
 const getRestorativeCollections = (
@@ -102,7 +98,7 @@ export const getProcedureCollections = (
         break;
     }
   } else {
-    collections = Object.keys(calcInfoMap);
+    collections = Object.keys(calcInfoMap).filter(collection => calcInfoMap[collection].isCustom);
   }
 
   return collections.sort();
@@ -344,13 +340,15 @@ export const parseItems = (
   let columnInfos = Object.keys(item)
     .map((colIndex) => findColumnFromColIndex(colIndex))
     .sort((left, right) => {
-      let leftGroupId = left?.groupId || "",
-        rightGroupId = right?.groupId || "";
-      return leftGroupId == rightGroupId
-        ? 0
-        : leftGroupId < rightGroupId
-        ? -1
-        : 1;
+      // let leftGroupId = left?.groupId || "",
+      //   rightGroupId = right?.groupId || "";
+      // return leftGroupId == rightGroupId
+      //   ? 0
+      //   : leftGroupId < rightGroupId
+      //   ? -1
+      //   : 1;
+      // We asuume that the same groupping columns would be placed nearby each other
+      return parseInt(left?.colIndex || "0") - parseInt(right?.colIndex || "0");
     }) as InputOutputValues[];
   for (i = 0; i < columnInfos.length; i = j) {
     let newItem: ItemData = {

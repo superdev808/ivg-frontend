@@ -64,14 +64,11 @@ const Quiz: React.FC<QuizProps> = ({
       return [];
     }
 
-    if (availableOptions[0].endsWith(" mm")) {
-      return orderBy(
-        availableOptions,
-        (option) => Number(option.split(" ")[0]),
-        ["asc"]
-      );
-    }
-
+    if (/^\d/gi.test(availableOptions[0])) {
+      return orderBy(availableOptions, (option) => parseFloat(option), ["asc"]);
+    } // else {
+    //   return orderBy(availableOptions, (option) => option, ["asc"]);
+    // }
     return availableOptions;
   }, [filteredAnswers]);
 
@@ -141,6 +138,7 @@ const Quiz: React.FC<QuizProps> = ({
                 data={{
                   [SHOULD_DISPLAY_TEXT_ONLY]: question.colText,
                 }}
+                size={48}
               />
             )}
             {question.colName.endsWith("?")
