@@ -408,7 +408,7 @@ const Result: React.FC<ResultProps> = ({
               { quizWithoutImage: !image, quizWithImage: image }
             )}
             style={{
-              maxWidth: "50%",
+              maxWidth: "70%",
             }}
           >
             <h3 className="underline m-0">Input Summary</h3>
@@ -422,7 +422,7 @@ const Result: React.FC<ResultProps> = ({
                     <div className="flex-1 text-left text-dark-green">
                       {question}
                     </div>
-                    <div className="text-right">{answer}</div>
+                    <div className="flex-1 text-right">{answer}</div>
                   </div>
                 )
             )}

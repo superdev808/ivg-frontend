@@ -115,8 +115,12 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
     if (!(level < questions.length) || showLoader) return;
     if (level < defaultAnswers.length)
       handleSelectAnswer(level)(defaultAnswers[level]);
-    if (answerOptions[level]?.length === 1 && answerOptions[level][0] === "") {
-      handleSelectAnswer(level)("");
+    if (
+      answerOptions[level]?.length === 1 &&
+      (answerOptions[level][0] === "" ||
+        /description/gi.test(questions[level].groupId))
+    ) {
+      handleSelectAnswer(level)(answerOptions[level][0]);
     }
   }, [
     defaultAnswers,
@@ -125,7 +129,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
     level,
     input,
     handleSelectAnswer,
-    questions.length,
+    questions,
     showLoader,
   ]);
 
