@@ -312,7 +312,7 @@ const Result: React.FC<ResultProps> = ({
       <div className={cx("flex flex-column gap-4", className)}>
         <div
           className={`flex flex-column justify-content-center
-          lg:flex-row`}
+          align-items-center gap-2 lg:flex-row`}
         >
           <div className="flex align-items-center gap-2">
             {editMode !== "init" ? (

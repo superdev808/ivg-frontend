@@ -4,7 +4,9 @@ import React from "react";
 
 import { InputDetail } from "@/types/calculators";
 
-const cx = classNames.bind({});
+import styles from "../style.module.scss";
+
+const cx = classNames.bind(styles);
 
 interface GenericInputSummaryProps {
   calculatorType: string;
@@ -34,9 +36,6 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
           "flex flex-column justify-content-around gap-4 shadow-6 p-4 border-round-md border-2 border-light-green",
           { quizWithoutImage: !image, quizWithImage: image }
         )}
-        style={{
-          maxWidth: "50%",
-        }}
       >
         <h3 className="underline m-0">Input Summary</h3>
         {quiz.map(
