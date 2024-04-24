@@ -46,6 +46,7 @@ const Quiz: React.FC<QuizProps> = ({
 }) => {
   const [searchValue, setSearchVaule] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [showAll, setShowAll] = useState<boolean>(false);
   const [selectedSuggestion, setSelectedSuggestion] = useState<string>("");
 
   const isActionQuestion = useMemo(() => {
@@ -71,10 +72,14 @@ const Quiz: React.FC<QuizProps> = ({
   }, [question, answers]);
 
   const options = useMemo(() => {
-    const availableOptions =
-      filteredAnswers.length > 6
-        ? filteredAnswers.slice(0, 6)
-        : filteredAnswers;
+    let availableOptions = filteredAnswers;
+
+    if (!showAll) {
+      availableOptions =
+        availableOptions.length > 6
+          ? availableOptions.slice(0, 6)
+          : availableOptions;
+    }
 
     if (availableOptions.length === 0) {
       return [];
@@ -86,7 +91,7 @@ const Quiz: React.FC<QuizProps> = ({
     //   return orderBy(availableOptions, (option) => option, ["asc"]);
     // }
     return availableOptions;
-  }, [filteredAnswers]);
+  }, [filteredAnswers, showAll]);
 
   const dropdownOptionTemplate = (option: string) => {
     const image = BRAND_IMAGES[String(option).toLowerCase()];
@@ -125,6 +130,10 @@ const Quiz: React.FC<QuizProps> = ({
 
   const handleSelect = (e: AutoCompleteSelectEvent) => {
     setSelectedSuggestion(e.value);
+  };
+
+  const handleDisplayAll = () => {
+    setShowAll((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -173,7 +182,7 @@ const Quiz: React.FC<QuizProps> = ({
             value={searchValue}
             suggestions={suggestions}
             onChange={handleSearchChange}
-            placeholder="Search all available options..."
+            placeholder={`Search all ${answers.length} available options...`}
             className="w-full"
             inputClassName="w-full"
             completeMethod={handleAutoCompleteMethod}
@@ -189,76 +198,95 @@ const Quiz: React.FC<QuizProps> = ({
       </div>
 
       {!disabled && (
-        <div className="flex align-items-start justify-content-around flex-wrap w-12">
+        <>
           {isActionQuestion ? (
-            <div
-              className="m-2 w-12 md:w-3 flex flex-column"
-              onClick={() => {
-                if (!disabled) {
-                  onSelectAnswer(answers[0]);
-                }
-              }}
-            >
+            <div className="flex align-items-start justify-content-around flex-wrap w-12">
               <div
-                className={cx(
-                  "quiz-card",
-                  "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer"
-                )}
-                style={{ height: 50 }}
+                className="m-2 w-12 md:w-3 flex flex-column"
+                onClick={() => {
+                  if (!disabled) {
+                    onSelectAnswer(answers[0]);
+                  }
+                }}
               >
-                <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
-                  Next
+                <div
+                  className={cx(
+                    "quiz-card",
+                    "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer bg-white"
+                  )}
+                  style={{ height: 50 }}
+                >
+                  <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
+                    Next
+                  </div>
                 </div>
               </div>
             </div>
           ) : (
             <>
-              {options.map((answer, index) => {
-                const image = BRAND_IMAGES[`${answer}`.toLowerCase()];
+              <div className="flex align-items-start justify-content-around flex-wrap w-12">
+                {options.map((answer, index) => {
+                  const image = BRAND_IMAGES[`${answer}`.toLowerCase()];
 
-                return (
-                  <div
-                    key={`${question}-${answer}-${index}`}
-                    className="m-2 w-12 md:w-3 flex flex-column"
-                    onClick={() => {
-                      if (!disabled) {
-                        onSelectAnswer(answer);
-                      }
-                    }}
-                  >
+                  return (
                     <div
-                      className={cx(
-                        "quiz-card",
-                        "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer",
-                        { "quiz-card--selected": currentAnswer === answer }
-                      )}
-                      style={{ height: 200 }}
+                      key={`${question}-${answer}-${index}`}
+                      className="m-2 w-12 md:w-3 flex flex-column"
+                      onClick={() => {
+                        if (!disabled) {
+                          onSelectAnswer(answer);
+                        }
+                      }}
                     >
-                      {image ? (
-                        <Image
-                          src={image}
-                          width="100%"
-                          height="100%"
-                          imageClassName="p-4"
-                          imageStyle={{ objectFit: "contain" }}
-                          alt={answer}
-                        />
-                      ) : (
-                        <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
-                          {answer}
-                        </div>
+                      <div
+                        className={cx(
+                          "quiz-card",
+                          "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer bg-white",
+                          { "quiz-card--selected": currentAnswer === answer }
+                        )}
+                        style={{ height: 200 }}
+                      >
+                        {image ? (
+                          <Image
+                            src={image}
+                            width="100%"
+                            height="100%"
+                            imageClassName="p-4"
+                            imageStyle={{ objectFit: "contain" }}
+                            alt={answer}
+                          />
+                        ) : (
+                          <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
+                            {answer}
+                          </div>
+                        )}
+                      </div>
+
+                      {image && (
+                        <p className="w-full text-3xl text-center">{answer}</p>
                       )}
                     </div>
+                  );
+                })}
+              </div>
 
-                    {image && (
-                      <p className="w-full text-3xl text-center">{answer}</p>
-                    )}
+              {answers?.length > 6 && (
+                <div className="flex align-items-start justify-content-around flex-wrap w-12">
+                  <div className="m-2 w-12 md:w-3 flex flex-column" />
+                  <div className="m-2 w-12 md:w-3 flex flex-column">
+                    <Button
+                      label={
+                        showAll ? "Hide" : `Display All (${answers.length})`
+                      }
+                      onClick={handleDisplayAll}
+                    />
                   </div>
-                );
-              })}
+                  <div className="m-2 w-12 md:w-3 flex flex-column" />
+                </div>
+              )}
             </>
           )}
-        </div>
+        </>
       )}
     </>
   );
