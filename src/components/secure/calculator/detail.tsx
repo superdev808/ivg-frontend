@@ -37,7 +37,7 @@ const DetailView: React.FC<DetailViewProps> = ({
   const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
 
   const [results, setResults] = useState<ItemData[][]>([]);
-  const { calcInfoMap } = useCalculatorsInfo()
+  const { calcInfoMap } = useCalculatorsInfo();
   const calculatorName = calcInfoMap[calculatorType].label;
 
   const toastRef = useRef(null);
@@ -45,7 +45,6 @@ const DetailView: React.FC<DetailViewProps> = ({
   useEffect(() => {
     setResults(props.items.map((item) => parseItems(item, outputFields)));
   }, [props.items, outputFields]);
-
 
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
@@ -99,8 +98,6 @@ const DetailView: React.FC<DetailViewProps> = ({
     setFeedbackShow(true);
   };
 
-  console.log(results);
-  
   return (
     <>
       <div className="relative md:p-2 md:text-center">
