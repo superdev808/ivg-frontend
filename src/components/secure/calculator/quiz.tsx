@@ -60,15 +60,11 @@ const Quiz: React.FC<QuizProps> = ({
   }, [answers, selectedSuggestion]);
 
   const questionName = useMemo(() => {
-    if (question.colName.endsWith("?")) {
-      return question.colName;
-    }
-
     if (question.colName.startsWith("Action")) {
       return `Action: ${answers?.[0] || ""}`;
     }
 
-    return `Select ${question.colName}`;
+    return question.colName;
   }, [question, answers]);
 
   const options = useMemo(() => {
