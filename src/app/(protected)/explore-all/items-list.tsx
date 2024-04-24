@@ -35,7 +35,7 @@ const ItemsList: React.FC<ItemsListProps> = ({ item, renderItems }) => {
   return (
     <div className="flex flex-column gap-1">
       <div
-        className={cx("cursor-pointer", {
+        className={cx("cursor-pointer text-xl", {
           "font-bold": hasItems || item.isHighlighted,
           "item-with-children": hasItems,
           "item-without-children": !hasItems,

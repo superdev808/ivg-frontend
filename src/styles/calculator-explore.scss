@@ -2,6 +2,7 @@
   .p-tabview-nav {
     justify-content: center;
     background: var(--dark-green);
+    font-size: 22px;
 
     li > .p-tabview-nav-link {
       display: flex;
@@ -9,8 +10,7 @@
       background: var(--dark-green);
       color: var(--beige);
       border-width: 0;
-      border-radius: 10px 10px 0 0;
-      width: 220px;
+      width: 290px;
     }
 
     li > .p-tabview-nav-link:focus {
@@ -36,6 +36,7 @@
     li.p-tabview-selected > .p-tabview-nav-link {
       background: var(--beige);
       color: var(--dark-green);
+      border-radius: 10px 10px 0 0;
     }
 
     li.p-tabview-selected > .p-tabview-nav-link .calculator-beta-tag {

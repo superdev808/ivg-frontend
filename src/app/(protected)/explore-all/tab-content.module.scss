@@ -1,5 +1,5 @@
 .tab-content {
-  max-width: 880px;
+  max-width: 1020px;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -13,9 +13,16 @@
 .sections {
   display: flex;
   justify-content: center;
+  width: 100%;
 
   @media screen and (max-width: 991px) {
+    display: flex !important;
     flex-direction: column;
+  }
+
+  &.multi {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -27,11 +34,20 @@
   height: 400px;
   overflow-y: scroll;
 
+  &:first-of-type {
+    padding-right: 180px;
+  }
+
+  &:last-of-type {
+    padding-left: 180px;
+  }
+
   &:not(:last-of-type) {
     border-right-width: 5px;
   }
 
   @media screen and (max-width: 991px) {
+    height: auto;
     min-width: initial;
 
     &:not(:last-of-type) {
@@ -42,6 +58,14 @@
 
     &:not(:first-of-type) {
       padding-top: 40px;
+    }
+
+    &:first-of-type {
+      padding-right: 0;
+    }
+
+    &:last-of-type {
+      padding-left: 0;
     }
   }
 }
