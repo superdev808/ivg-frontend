@@ -244,6 +244,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       inputDetails.push({
         id: serializeColInfo(question),
         question: question.colName,
+        questionText: question.groupText,
         answer,
       });
     }

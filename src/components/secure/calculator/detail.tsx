@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import { parseItems } from "@/helpers/calculators";
 import { event as gaEvent } from "@/lib/gtag";
-import { InputOutputValues, ItemData } from "@/types/calculators";
+import { InputDetail, InputOutputValues, ItemData } from "@/types/calculators";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -49,11 +49,11 @@ const DetailView: React.FC<DetailViewProps> = ({
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
       if (answers[idx]) {
-        acc.push({ question: question.colName, answer: answers[idx] });
+        acc.push({ question: question.colName, questionText: question.groupText, answer: answers[idx] });
       }
 
       return acc;
-    }, [] as { question: string; answer: string }[]);
+    }, [] as InputDetail[]);
   }, [questions, answers]);
 
   const handleUpdateQuantity = (quantity: number, id: string) => {

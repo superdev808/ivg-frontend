@@ -39,14 +39,14 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
       >
         <h3 className="underline m-0">Input Summary</h3>
         {quiz.map(
-          ({ id, question, answer }) =>
+          ({ id, question, questionText, answer }) =>
             (!id || id === calculatorType) && (
               <div
                 key={question}
                 className="flex flex-1 align-items-center gap-3"
               >
                 <div className="flex-1 text-left text-dark-green">
-                  {question}
+                  {questionText}
                 </div>
                 <div className="text-right">{answer}</div>
               </div>
