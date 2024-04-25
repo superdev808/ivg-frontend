@@ -573,7 +573,7 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
             openByDefault: true,
             items: [
               {
-                name: "How to cement and bond",
+                name: "How to Cement and Bond",
                 href: "/calculators/BondingEtching",
               },
               {
@@ -597,10 +597,10 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
               {
                 name: "Crowns",
                 items: [
-                  // {
-                  //   name: "Implant-Borne",
-                  //   href: "/calculators/ImplantBorneCrownIssues",
-                  // },
+                  {
+                    name: "Implant-Borne",
+                    href: "/calculators/ImplantBorneCrownIssues",
+                  },
                   {
                     name: "Tooth-Borne",
                     href: "/calculators/ToothBorneCrownIssues",

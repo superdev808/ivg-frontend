@@ -50,7 +50,7 @@ const Quiz: React.FC<QuizProps> = ({
   const [selectedSuggestion, setSelectedSuggestion] = useState<string>("");
 
   const isActionQuestion = useMemo(() => {
-    return /^action/ig.test(question.groupText);
+    return /^action/gi.test(question.groupText);
   }, [question]);
 
   const filteredAnswers = useMemo(() => {
@@ -60,7 +60,7 @@ const Quiz: React.FC<QuizProps> = ({
   }, [answers, selectedSuggestion]);
 
   const questionName = useMemo(() => {
-    if (/^action/ig.test(question.groupText)) {
+    if (/^action/gi.test(question.groupText)) {
       return `Action: ${answers?.[0] || ""}`;
     }
 
@@ -155,7 +155,7 @@ const Quiz: React.FC<QuizProps> = ({
           <h1
             className={cx(
               "heading",
-              "flex align-items-center gap-3 text-center"
+              "flex gap-3 line-height-3 md:align-items-center md:text-center"
             )}
           >
             {question.colText && (
