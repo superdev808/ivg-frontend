@@ -55,7 +55,7 @@ const CalculatorPage: NextPage = () => {
     if (tabIndex !== activeTab) {
       setActiveTab(tabIndex);
     }
-  }, [router, tabInUrl, activeTab]);
+  }, [router, tabInUrl]); // eslint-disable-line
 
   const calcItems = CALCULATOR_GROUP_ITEMS.reduce(
     (accumulator: string[], currentValue: CalculatorGroupItem) => [
