@@ -1,6 +1,12 @@
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Toast } from "primereact/toast";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useQuery } from "react-query";
 
 import { AUTO_POPULATE_OPTIONS } from "@/constants/calculators";
@@ -71,8 +77,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
     useState<boolean>(false);
   const [canProceed, setCanProceed] = useState<boolean>(true);
   const toastRef = useRef(null);
-  const { calcInfoMap } = useCalculatorsInfo()
-
+  const { calcInfoMap } = useCalculatorsInfo();
 
   const sitesCount = Object.keys(sitesData).length;
   useEffect(() => {
@@ -94,11 +99,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
     //   setLevel(0);
     //   setAnswers([]);
     // }
-  }, [
-    autoPopulateData,
-    showAutoPopulatePrompt,
-    sitesCount
-  ]);
+  }, [autoPopulateData, showAutoPopulatePrompt, sitesCount]);
 
   const { isLoading } = useQuery(
     [input, level, option, site, canProceed, calcInfoMap],
@@ -111,12 +112,17 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
 
       const quiz = {} as any;
       const inspectedCalculatorType = input[level].calculatorType;
-      const inspectedCalculatorInput = calcInfoMap[inspectedCalculatorType].input;
-      const inspectedCalculatorOutput = calcInfoMap[inspectedCalculatorType].output;
+      const inspectedCalculatorInput =
+        calcInfoMap[inspectedCalculatorType].input;
+      const inspectedCalculatorOutput =
+        calcInfoMap[inspectedCalculatorType].output;
       let inspectedCalculatorLevel = 0;
 
       answers.forEach((answer, index) => {
-        if (input[index].isCommon || input[index].calculatorType === inspectedCalculatorType) {
+        if (
+          input[index].isCommon ||
+          input[index].calculatorType === inspectedCalculatorType
+        ) {
           quiz[input[index].colIndex] = answer;
           inspectedCalculatorLevel += 1;
         }
@@ -132,9 +138,10 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
             body: JSON.stringify({
               type: encodeURIComponent(inspectedCalculatorType),
               quiz,
-              fields: inspectedCalculatorLevel < inspectedCalculatorInput.length
-                ? [input[level]?.colIndex]
-                : inspectedCalculatorOutput.map((item) => item.colIndex),
+              fields:
+                inspectedCalculatorLevel < inspectedCalculatorInput.length
+                  ? [input[level]?.colIndex]
+                  : inspectedCalculatorOutput.map((item) => item.colIndex),
             }),
           }
         );
@@ -157,7 +164,15 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
         const originalAnswerOptions: any[] = answerOptions.slice(0, level);
 
         if (inspectedCalculatorLevel == inspectedCalculatorInput.length) {
-          onQuizResponse(site, newAnswerOptions.map((item: Record<string, string>) => parseItems(item, inspectedCalculatorOutput)).flat(), inspectedCalculatorType);
+          onQuizResponse(
+            site,
+            newAnswerOptions
+              .map((item: Record<string, string>) =>
+                parseItems(item, inspectedCalculatorOutput)
+              )
+              .flat(),
+            inspectedCalculatorType
+          );
           setAnswerOptions([...originalAnswerOptions, [""]]);
           return;
         }
@@ -180,45 +195,53 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
     return autoQuestions || input.slice(0, level + 1);
   }, [input, level, autoQuestions]);
 
-  const handleSelectAnswer = useCallback((index: number) => (value: string) => {
-    setCanProceed(true);
-    setAutoQuestions(null);
+  const handleSelectAnswer = useCallback(
+    (index: number) => (value: string) => {
+      setCanProceed(true);
+      setAutoQuestions(null);
 
-    if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value)
-      setIsAutoPopulatedAnswersChanged(true);
-    setLevel(index + 1);
+      if (autoPopulate === AUTO_POPULATE_OPTIONS[0].value)
+        setIsAutoPopulatedAnswersChanged(true);
+      setLevel(index + 1);
 
-    const newAnswers = answers.slice(0, index);
-    newAnswers[index] = value;
-    onInputSelect(site, questions[index], newAnswers[index]);
-    setAnswers(newAnswers);
-  }, [autoPopulate, questions, site, onInputSelect, answers])
+      const newAnswers = answers.slice(0, index);
+      newAnswers[index] = value;
+      onInputSelect(site, questions[index], newAnswers[index]);
+      setAnswers(newAnswers);
+    },
+    [autoPopulate, questions, site, onInputSelect, answers]
+  );
 
-  const handleAutoPopulateChange = useCallback((value: string) => {
-    setAutoPopulate(value);
-    setIsAutoPopulatedAnswersChanged(false);
+  const handleAutoPopulateChange = useCallback(
+    (value: string) => {
+      setAutoPopulate(value);
+      setIsAutoPopulatedAnswersChanged(false);
 
-    if (value === AUTO_POPULATE_OPTIONS[0].value) {
-      onAutoPopulate({ site, questions, answerOptions, answers });
-    } else {
-      onAutoPopulate(null);
-    }
-  }, [answerOptions, answers, site, questions, onAutoPopulate]);
+      if (value === AUTO_POPULATE_OPTIONS[0].value) {
+        onAutoPopulate({ site, questions, answerOptions, answers });
+      } else {
+        onAutoPopulate(null);
+      }
+    },
+    [answerOptions, answers, site, questions, onAutoPopulate]
+  );
 
-  const handleChange = useCallback((index: number) => {
-    const answersWithIndex = answers
-      .map((answer, idx) => ({ answer, idx }))
-      .filter((elem) => Boolean(elem.answer));
+  const handleChange = useCallback(
+    (index: number) => {
+      const answersWithIndex = answers
+        .map((answer, idx) => ({ answer, idx }))
+        .filter((elem) => Boolean(elem.answer));
 
-    const convertedIdx = answersWithIndex[index]?.idx;
+      const convertedIdx = answersWithIndex[index]?.idx;
 
-    
-    if (convertedIdx !== undefined) {
-      handleAutoPopulateChange(AUTO_POPULATE_OPTIONS[1].value);
-      setCanProceed(false);
-      setLevel(convertedIdx);
-    }
-  }, [answers, handleAutoPopulateChange]);
+      if (convertedIdx !== undefined) {
+        handleAutoPopulateChange(AUTO_POPULATE_OPTIONS[1].value);
+        setCanProceed(false);
+        setLevel(convertedIdx);
+      }
+    },
+    [answers, handleAutoPopulateChange]
+  );
 
   const handleShowSummary = useCallback(() => {
     setLevel(input.length);
@@ -227,7 +250,12 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
       if (answers[idx]) {
-        acc.push({ id: (question.isCommon ? '' : question.calculatorType), question: question.colName, answer: answers[idx] });
+        acc.push({
+          id: question.isCommon ? "" : question.calculatorType,
+          question: question.colName,
+          questionText: question.groupText,
+          answer: answers[idx],
+        });
       }
       return acc;
     }, [] as InputDetail[]);
@@ -248,16 +276,22 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
     isLoading || (input[level] && !Boolean(answerOptions[level]?.length));
 
   useEffect(() => {
-    if (!(level < questions.length) || showLoader)
-      return;
+    if (!(level < questions.length) || showLoader) return;
     if (
-      (answerOptions[level]?.length === 1 &&
-        answerOptions[level][0] === "") || input[level].colName == ""
+      (answerOptions[level]?.length === 1 && answerOptions[level][0] === "") ||
+      input[level].colName == ""
     ) {
-      handleSelectAnswer(level)("")
+      handleSelectAnswer(level)("");
     }
-  }, [answerOptions, answers, level, input, handleSelectAnswer, questions.length, showLoader]);
-
+  }, [
+    answerOptions,
+    answers,
+    level,
+    input,
+    handleSelectAnswer,
+    questions.length,
+    showLoader,
+  ]);
 
   return (
     <div className="mt-3 relative" style={{ minHeight: 700 }}>
@@ -276,18 +310,20 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
           className="w-1 absolute top-50 left-50"
           style={{ transform: "translate(-50%, -50%)" }}
         />
-      ) :
-        (<div className="px-4 grid">
-          {level < questions.length && <Quiz
-            key={`quiz-${level}`}
-            question={questions[level]}
-            calculatorName={calcInfoMap[input[level].calculatorType].label}
-            answers={answerOptions[level]}
-            currentAnswer={answers[level]}
-            disabled={showLoader}
-            progress={Math.floor((level / input.length) * 100)}
-            onSelectAnswer={handleSelectAnswer(level)}
-          />}
+      ) : (
+        <div className="px-4 grid">
+          {level < questions.length && (
+            <Quiz
+              key={`quiz-${level}`}
+              question={questions[level]}
+              calculatorName={calcInfoMap[input[level].calculatorType].label}
+              answers={answerOptions[level]}
+              currentAnswer={answers[level]}
+              disabled={showLoader}
+              progress={Math.floor((level / input.length) * 100)}
+              onSelectAnswer={handleSelectAnswer(level)}
+            />
+          )}
 
           {showAutoPopulatePrompt && answeredAllQuestions && (
             <AutoPopulatePromt
@@ -308,7 +344,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
               />
             )}
         </div>
-        )}
+      )}
     </div>
   );
 };

@@ -19,6 +19,7 @@ export interface Procedure {
 export interface InputDetail {
   id?: string;
   question: string;
+  questionText: string;
   answer: string;
 }
 

@@ -158,11 +158,11 @@ export const getComponentSummary = (
   const inputs = get(Object.values(sitesData), "0.inputDetails");
 
   const brand =
-    find(inputs, (item: InputDetail) => item.question === "Implant Brand")
+    find(inputs, (item: InputDetail) => item.questionText === "Implant Brand")
       ?.answer || "";
 
   const manufacturer =
-    find(inputs, (item: InputDetail) => item.question === "Manufacturer")
+    find(inputs, (item: InputDetail) => item.questionText === "Manufacturer")
       ?.answer || "";
 
   Object.keys(sitesData).forEach((siteName) => {

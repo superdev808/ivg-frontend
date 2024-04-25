@@ -14,7 +14,7 @@ const LinearWorkflowInputSummary: React.FC<LinearWorkflowInputSummaryProps> = ({
 }) => (
   <>
     {quiz.map((question) => {
-      const isAction = question.question.startsWith("Action");
+      const isAction = /^action/ig.test(question.questionText);
 
       return (
         <div
@@ -34,7 +34,7 @@ const LinearWorkflowInputSummary: React.FC<LinearWorkflowInputSummaryProps> = ({
           ) : (
             <>
               <div>
-                <b>Question:</b> {question.question}
+                <b>Question:</b> {question.questionText}
               </div>
               <div>
                 <b>Response:</b> {question.answer}

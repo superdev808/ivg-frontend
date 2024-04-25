@@ -50,7 +50,7 @@ const Quiz: React.FC<QuizProps> = ({
   const [selectedSuggestion, setSelectedSuggestion] = useState<string>("");
 
   const isActionQuestion = useMemo(() => {
-    return question.colName.startsWith("Action");
+    return /^action/ig.test(question.groupText);
   }, [question]);
 
   const filteredAnswers = useMemo(() => {
@@ -60,11 +60,11 @@ const Quiz: React.FC<QuizProps> = ({
   }, [answers, selectedSuggestion]);
 
   const questionName = useMemo(() => {
-    if (question.colName.startsWith("Action")) {
+    if (/^action/ig.test(question.groupText)) {
       return `Action: ${answers?.[0] || ""}`;
     }
 
-    return question.colName;
+    return question.groupText;
   }, [question, answers]);
 
   const options = useMemo(() => {
@@ -226,7 +226,7 @@ const Quiz: React.FC<QuizProps> = ({
 
                   return (
                     <div
-                      key={`${question}-${answer}-${index}`}
+                      key={`${question.colName}-${answer}-${index}`}
                       className="m-2 w-12 md:w-3 flex flex-column"
                       onClick={() => {
                         if (!disabled) {

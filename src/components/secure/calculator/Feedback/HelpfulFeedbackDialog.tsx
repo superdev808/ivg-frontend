@@ -48,7 +48,7 @@ const HelpfulFeedbackDialog: React.FC<HelpfulFeedbackDialogProps> = ({
 
   const handleSubmit = async () => {
     const quizData: any = {};
-    quiz.forEach(({ question, answer }) => {
+    quiz.forEach(({ question, questionText, answer }) => {
       quizData[question] = answer;
     });
     const formData = new FormData();
