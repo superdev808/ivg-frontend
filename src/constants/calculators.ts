@@ -421,15 +421,15 @@ export const CALCULATOR_IMAGES: Record<string, string> = {
   StockAbutments:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Stock+Abutment+Generic.png",
   ToothBorneBridge:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Bridge.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/tooth-borne+bridge.png",
   ToothBorneCrown:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Crown.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/tooth-borne+crown.png",
   ImplantBorneBridge:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Bridge+Implant.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/implant-borne+bridge.png",
   ImplantBorneCrown:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/Crown+Implant.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/implant-borne+crown.png",
   ScanRequirements:
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/scan+requirements.png",
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/generic+scanner.png",
   BondingEtching:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/how+to+cement.png",
   IsolationTechniques:
