@@ -211,7 +211,10 @@ export const MATERIAL_CALCULATOR_TYPES = [
   "ToothBorneCrown",
 ];
 
-export const LINEAR_WORKFLOWS = ["ImplantBorneCrownIssues"];
+export const LINEAR_WORKFLOWS = [
+  "ImplantBorneCrownIssues",
+  "ToothBorneCrownIssues",
+];
 
 export const BRAND_IMAGES: Record<string, string> = {
   "ab dental":
@@ -594,11 +597,14 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
               {
                 name: "Crowns",
                 items: [
+                  // {
+                  //   name: "Implant-Borne",
+                  //   href: "/calculators/ImplantBorneCrownIssues",
+                  // },
                   {
-                    name: "Implant-Borne",
-                    href: "/calculators/ImplantBorneCrownIssues",
+                    name: "Tooth-Borne",
+                    href: "/calculators/ToothBorneCrownIssues",
                   },
-                  // { name: "Tooth-Borne", href: "/calculators/ToothBorneCrown" },
                 ],
               },
             ],
