@@ -27,7 +27,7 @@ export const HomeHeroSection = () => {
           : undefined
       }
       image={{
-        src: "/images/home/landing-analytics.png",
+        src: "/images/home/landing-analytics.jpg",
         className: cx("hero-image"),
       }}
     />
