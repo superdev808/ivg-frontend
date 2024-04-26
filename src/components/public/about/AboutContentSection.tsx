@@ -5,6 +5,7 @@ import { Image } from "primereact/image";
 import { ColItemsSection } from "../shared/ColItemsSection";
 import { CTASection } from "../shared/CTASection";
 import { ScrollCard } from "../shared/ScrollCard";
+import { Line1, Line2, Line3, Line4 } from "../shared/ScrollCard/Lines";
 
 import AdvantageFracture from "../../../../public/images/about/advantage_fracture.svg";
 import AdvantageOverwhelmed from "../../../../public/images/about/advantage_overwhelmed.svg";
@@ -100,7 +101,7 @@ export const AboutContentSection = () => {
             <div className="col-12 xl:col">
               <ScrollCard
                 description="Easy to navigate, interactive interface"
-                cardClassName={cx("card-1")}
+                svgLine={<Line1 />}
               />
             </div>
             <div className="xl:col-4" />
@@ -108,7 +109,7 @@ export const AboutContentSection = () => {
               <ScrollCard
                 description="Allows users to save, export and email result summaries"
                 rtl
-                cardClassName={cx("card-2")}
+                svgLine={<Line2 />}
               />
             </div>
           </div>
@@ -119,7 +120,7 @@ export const AboutContentSection = () => {
             <div className="col-12 xl:col">
               <ScrollCard
                 description="Allows for planning of complicated treatment procedures with ease"
-                cardClassName={cx("card-3")}
+                svgLine={<Line3 />}
               />
             </div>
             <div className="xl:col-4" />
@@ -127,7 +128,7 @@ export const AboutContentSection = () => {
               <ScrollCard
                 description="Provides quick links to purchase necessary components"
                 rtl
-                cardClassName={cx("card-4")}
+                svgLine={<Line4 />}
               />
             </div>
           </div>
