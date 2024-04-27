@@ -34,7 +34,6 @@ const ItemsList: React.FC<ItemsListProps> = ({ item, renderItems }) => {
 
   const hasItems = useMemo(() => {
     if (!Array.isArray(item.items)) return false;
-    const IS_DEV_MODE = process.env.NEXT_PUBLIC_DEV_MODE;
     return hasChildrenCalculator(item, calcInfoMap);
   }, [item, calcInfoMap]);
 
