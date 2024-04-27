@@ -6,13 +6,14 @@ import React, { useMemo } from "react";
 import TeethSelector, {
   TeethSelectorVariant,
 } from "@/components/shared/TeethSelector";
-import { getCalculatorName, productImages } from "@/helpers/util";
+import { CALCULATOR_IMAGES } from "@/constants/calculators";
 import {
   SingleSavedResult as SingleSavedResultType,
   MultiSavedResult as MultiSavedResultType,
 } from "@/types/calculators";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
-const LOGO_URL = "/images/logo/Ivory-Guide-Logo-Horizontal.svg";
+const LOGO_URL = "/images/logo/Ivory-Guide-Logo-Horizontal-Dark.svg";
 
 /**
  * Single saved result
@@ -28,7 +29,8 @@ export const SingleSavedResult: React.FC<SingleSavedResultProps> = ({
 
   const { name, calculatorType } = savedResult;
 
-  const itemImage = productImages[calculatorType] || LOGO_URL;
+  const itemImage = CALCULATOR_IMAGES[calculatorType] || LOGO_URL;
+  const { calcInfoMap } = useCalculatorsInfo();
 
   const handleGoToCalculator = (evt: React.SyntheticEvent) => {
     evt.stopPropagation();
@@ -47,13 +49,13 @@ export const SingleSavedResult: React.FC<SingleSavedResultProps> = ({
           <Button
             link
             label={name}
-            className="ml-1 px-0 py-0 w-fit border-noround"
+            className="ml-1 px-0 py-0 w-fit border-noround text-dark-green"
           />
         </div>
         <Button
           link
-          label={getCalculatorName(calculatorType)}
-          className="px-0 py-0 w-fit border-noround"
+          label={calcInfoMap[calculatorType].label}
+          className="px-0 py-0 w-fit border-noround text-dark-green"
           onClick={handleGoToCalculator}
         />
       </div>
@@ -121,7 +123,7 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
           <Button
             link
             label={name}
-            className="ml-1 px-0 py-0 w-fit border-noround"
+            className="ml-1 px-0 py-0 w-fit border-noround text-dark-green"
           />
         </div>
         <Button
@@ -131,7 +133,7 @@ export const MultiSavedResult: React.FC<MultiSavedResultProps> = ({
               ? "All-on-X Ordering Guide"
               : "Custom Combinations"
           }
-          className="px-0 py-0 w-fit border-noround"
+          className="px-0 py-0 w-fit border-noround text-dark-green"
           onClick={handleGoToCalculator}
         />
       </div>

@@ -18,7 +18,7 @@ export const FAQContentSection = () => {
       <Button
         link
         label={email}
-        className="px-0 pt-0 border-noround"
+        className="px-0 pt-0 border-noround text-dark-green"
         style={{ paddingBottom: 1 }}
       />
     </Link>
@@ -244,9 +244,7 @@ export const FAQContentSection = () => {
 
   return (
     <>
-      <div className="bg-secondary h-5rem" />
-
-      <div className={cx("section-header")}>
+      <div className={cx("section-header", "bg-light-green text-beige")}>
         <span className="text-2xl md:text-5xl font-bold z-1">
           Frequently Asked Questions
         </span>
@@ -254,8 +252,6 @@ export const FAQContentSection = () => {
       </div>
 
       <div className="flex justify-content-center relative overflow-hidden">
-        <div className={cx("background-radial-gradient")} />
-
         <div className="px-3 w-full flex flex-column gap-4 my-4 md:px-0 md:gap-6 md:w-8">
           {sections.map((section, sectionIdx) => (
             <>
@@ -287,7 +283,9 @@ export const FAQContentSection = () => {
                           // @ts-ignore
                           headeraction: {
                             className: cx({
-                              "bg-primary": opened === accordionId,
+                              "bg-beige": opened !== accordionId,
+                              "bg-light-green text-beige":
+                                opened === accordionId,
                             }),
                           },
                           headerTitle: { className: "w-full pr-1" },
@@ -316,9 +314,9 @@ export const FAQContentSection = () => {
         title="What are we missing?"
         text={
           <>
-            Request an additional Calculator or feature&nbsp;
+            Request an additional Calculator or feature{" "}
             <Link href="/contact">
-              <span className="font-bold text-primary underline">here</span>
+              <span className="font-bold text-dark-green underline">here</span>
             </Link>
             .
           </>

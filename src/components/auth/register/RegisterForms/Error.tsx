@@ -9,7 +9,7 @@ const RegisterError: React.FC = () => (
     </span>
 
     <span className="text-center">
-      <i className="pi pi-times-circle text-8xl text-red-500" />
+      <i className="pi pi-times-circle text-8xl text-dark-brown" />
     </span>
 
     <div className="text-xl text-center my-6 text-center">

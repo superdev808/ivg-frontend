@@ -11,9 +11,9 @@ import TeethSelector from "@/components/shared/TeethSelector";
 import {
   getProcedureCollections,
   getProcedureInputsAndResponse,
+  serializeColInfo,
 } from "@/helpers/calculators";
 import {
-  CALCULATOR_NAME_COLLECTION_MAPPINGS,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
   PROCEDURES,
   MUA_OPTIONS,
@@ -40,7 +40,8 @@ import CustomCombinationsInputs from "./CustomCombinationsInputs";
 import InputDetails from "./InputDetails";
 import HelpfulFeedbackDialog from "../Feedback/HelpfulFeedbackDialog";
 import FeedbackDialogWrapper from "../Feedback/FeedbackDialogWrapper";
-
+import HelpfulButton from "../Helpful";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 interface AllOnXCalculatorProps {
   isCustom?: boolean;
 }
@@ -53,7 +54,7 @@ interface AllOnXCalculatorProps {
 const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   isCustom = false,
 }) => {
-  const calculatorName = "All-on-X Calculator";
+  const calculatorName = "All-on-X Calculator" as string;
 
   const [feedbkackShow, setFeedbackShow] = useState<boolean>(false);
 
@@ -102,6 +103,8 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   const [totalQuantities, setTotalQuantities] = useState<TotalQuantities[]>([]);
   const [allAnsweredSites, setAllAnsweredSites] = useState<Site[]>([]);
 
+  const { calcInfoMap } = useCalculatorsInfo();
+
   const isAllSitesAnswered = selectedSites.reduce(
     (acc: boolean, site: Site) => {
       if (acc == false) return false;
@@ -128,6 +131,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
 
   useEffect(() => {
     const newCollections = getProcedureCollections(
+      calcInfoMap,
       procedure,
       additionalInputs,
       isCustom
@@ -138,23 +142,40 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     if (!isCustom) {
       setSelectedCollections(newCollections);
     }
-  }, [procedure, additionalInputs, isCustom]);
+  }, [procedure, additionalInputs, isCustom, calcInfoMap]);
 
   useEffect(() => {
     const procedureInputsAndResponse = getProcedureInputsAndResponse(
-      procedure,
-      additionalInputs,
+      calcInfoMap,
       selectedCollections,
-      isCustom
     );
     setProcedureInputsAndResponse(procedureInputsAndResponse);
-  }, [additionalInputs, isCustom, procedure, selectedCollections]);
+  }, [calcInfoMap, selectedCollections]);
 
-  const handleAllAnswered = (site: Site) => {
+  const handleAdditionalInputs = useCallback((value: string, target: string) => {
+    let state = { ...additionalInputs };
+    if (
+      target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
+      value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value
+    ) {
+      delete state[MUA_OPTIONS[0].name];
+    }
+    if (
+      target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
+      value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
+    ) {
+      state = { ...state, [MUA_OPTIONS[0].name]: MUA_OPTIONS[0].value };
+    }
+    setAdditionalInputs({ ...state, [target]: value });
+    setSelectedSites([]);
+    setSitesData({});
+  }, [additionalInputs]);
+
+  const handleAllAnswered = useCallback((site: Site) => {
     setAllAnsweredSites([...allAnsweredSites, site]);
-  };
+  }, [allAnsweredSites]);
 
-  const handleProcedureChange = (e: SelectButtonChangeEvent) => {
+  const handleProcedureChange = useCallback((e: SelectButtonChangeEvent) => {
     setProcedure(e.value);
     setSelectedSites([]);
     setSitesData({});
@@ -167,9 +188,9 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
         DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name
       );
     }
-  };
+  }, [handleAdditionalInputs]);
 
-  const handleSiteChange = (tooth: number, isAnonymous?: boolean): void => {
+  const handleSiteChange = useCallback((tooth: number, isAnonymous?: boolean): void => {
     let _selectedSites: Site[] = isAnonymous ? [] : [...selectedSites];
     const isSelected: Site[] = _selectedSites.filter(
       (site: Site) => site.key === tooth
@@ -187,7 +208,7 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
         setSitesData((prev) => {
           return { ...prev, ...newSiteData };
         });
-        _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
+        // _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
       } else {
         const newSiteData = {
           "General Details": { inputDetails: [], componentDetails: {} },
@@ -204,9 +225,9 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       setSitesData(_sitesData);
     }
     setSelectedSites(_selectedSites);
-  };
+  }, [selectedSites, sitesData]);
 
-  const handleInputSelect = (
+  const handleInputSelect = useCallback((
     site: Site,
     question: InputOutputValues,
     answer: string
@@ -214,31 +235,31 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
     let data: SiteData = cloneDeep(sitesData);
     const inputDetails: InputDetail[] = cloneDeep(data[site.name].inputDetails);
     const indexOfQuestion: number = inputDetails.findIndex(
-      (input) => input.question === question.text
+      (input) => input.id === serializeColInfo(question)
     );
     if (indexOfQuestion > -1) {
       inputDetails[indexOfQuestion].answer = answer;
       inputDetails.splice(indexOfQuestion + 1);
     } else {
       inputDetails.push({
-        question: question.text,
+        id: serializeColInfo(question),
+        question: question.colName,
+        questionText: question.groupText,
         answer,
       });
     }
 
     //remove next collection responses
-    const responseOrder: string[] =
-      procedureInputsAndResponse?.responseOrder || [];
-    const calculators: string[] = responseOrder.map(
-      (key: string) => CALCULATOR_NAME_COLLECTION_MAPPINGS[key]
-    );
+    const calculators: string[] = procedureInputsAndResponse?.responseOrder || [];
     const componentDetails: ComponentDetail = cloneDeep(
       data[site.name].componentDetails
     );
-    const indexOfCollection: number = calculators.indexOf(question.calculator);
+    const indexOfCollection: number = calculators.indexOf(question.calculatorType);
     if (indexOfCollection !== -1) {
       const keysToRemove: string[] = calculators.slice(indexOfCollection);
       keysToRemove.map((col: string) => {
+        if (question.colName === "" && question.calculatorType == col)
+          return;
         delete componentDetails[col];
       });
     }
@@ -251,9 +272,9 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       },
     };
     setSitesData(updatedData);
-  };
+  }, [procedureInputsAndResponse, sitesData]);
 
-  const handleQuizResponse = (
+  const handleQuizResponse = useCallback((
     site: Site,
     response: ItemData[],
     collection: string
@@ -279,9 +300,9 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       };
       setSitesData(updatedData);
     }
-  };
+  }, [sitesData]);
 
-  const handleAutoPopulate = (dataToPopulate: AutoPopulateData | null) => {
+  const handleAutoPopulate = useCallback((dataToPopulate: AutoPopulateData | null) => {
     setAutoPopulateData(dataToPopulate);
 
     if (dataToPopulate) {
@@ -294,47 +315,24 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
           newSitesData[siteName] = data;
         }
       });
-
       setSitesData(newSitesData);
     } else {
-      const newSitesData: SiteData = cloneDeep(sitesData);
-      const firstSiteName = selectedSites[0].name;
+      // const newSitesData: SiteData = cloneDeep(sitesData);
+      // const firstSiteName = selectedSites[0].name;
 
-      Object.keys(newSitesData).forEach((siteName: string) => {
-        if (siteName !== firstSiteName) {
-          newSitesData[siteName] = {
-            inputDetails: [],
-            componentDetails: {},
-          };
-        }
-      });
-
-      setSitesData(newSitesData);
+      // Object.keys(newSitesData).forEach((siteName: string) => {
+      //   if (siteName !== firstSiteName) {
+      //     newSitesData[siteName] = {
+      //       inputDetails: [],
+      //       componentDetails: {},
+      //     };
+      //   }
+      // });
+      // setSitesData(newSitesData);
     }
-  };
+  }, [sitesData]);
 
-  const handleAdditionalInputs = (value: string, target: string) => {
-    setAdditionalInputs((prev: KeyValuePair) => {
-      let state = { ...prev };
-      if (
-        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
-        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value
-      ) {
-        delete state[MUA_OPTIONS[0].name];
-      }
-      if (
-        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
-        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
-      ) {
-        state = { ...state, [MUA_OPTIONS[0].name]: MUA_OPTIONS[0].value };
-      }
-      return { ...state, [target]: value };
-    });
-    setSelectedSites([]);
-    setSitesData({});
-  };
-
-  const handleSiteSpecificReport = (value: string) => {
+  const handleSiteSpecificReport = useCallback((value: string) => {
     setSiteSpecificReport(value);
     if (value === SITE_SPECIFIC_REPORT_OPTIONS[1].value) {
       handleSiteChange(1, true);
@@ -342,9 +340,9 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       setSelectedSites([]);
       setSitesData({});
     }
-  };
+  }, [handleSiteChange]);
 
-  const handleCollectionChange = (e: CheckboxChangeEvent) => {
+  const handleCollectionChange = useCallback((e: CheckboxChangeEvent) => {
     let _selectedCollections: string[] = [...selectedCollections];
 
     if (
@@ -366,28 +364,24 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       setSitesData({});
     }
     setSelectedCollections(_selectedCollections);
-  };
+  }, [handleSiteChange, siteSpecificReport, selectedCollections]);
 
-  const handleUpdateQuantity = (quantity: number, itemName: string) => {
+  const handleUpdateQuantity = useCallback((quantity: number, groupId: string) => {
     const newTotalQuantities = cloneDeep(totalQuantities);
-
-    const index = newTotalQuantities.findIndex(
-      (item) => item.itemName === itemName
-    );
+    const index = newTotalQuantities.findIndex((item) => item.id === groupId);
 
     if (index === -1) {
-      newTotalQuantities.push({ itemName, quantity });
+      newTotalQuantities.push({ id: groupId, quantity });
     } else {
       newTotalQuantities[index].quantity = quantity;
     }
-
     setTotalQuantities(newTotalQuantities);
-  };
+  }, []);
 
   return (
     <div className="flex-grow-1">
       <div className="px-2 my-4 wrapper md:px-0 md:my-8">
-        <div className="px-3 py-5 flex flex-column m:p-5 border-round bg-white shadow-1">
+        <div className="px-3 py-5 flex flex-column m:p-5 border-round shadow-1">
           {!isCustom && (
             <>
               <h3 className="mt-0 mb-3 text-center">
@@ -430,20 +424,20 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
             />
           )}
 
-          <div className="grid border-top-1 surface-border">
-            <div className="flex flex-column col-12">
+          <div className="border-top-1 border-light-green">
+            <div className="flex flex-column">
               {(!isCustom ||
                 (isCustom &&
                   procedureInputsAndResponse?.input &&
                   procedureInputsAndResponse?.input.length > 0 &&
                   siteSpecificReport ===
-                    SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
-                <TeethSelector
-                  showLabel
-                  selectedSites={selectedSites}
-                  onSiteChange={handleSiteChange}
-                />
-              )}
+                  SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
+                  <TeethSelector
+                    showLabel
+                    selectedSites={selectedSites}
+                    onSiteChange={handleSiteChange}
+                  />
+                )}
 
               {selectedSites.length > 0 && (
                 <InputDetails
@@ -472,27 +466,13 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
       </div>
 
       {isAllSitesAnswered && selectedSites.length > 0 && (
-        <div
-          className="fixed text-2xl m-1 left-50 bg-green-300 p-3 pb-6 border-round-3xl m-0"
-          style={{
-            transform: "translate(-50%, -50%)",
-            bottom: "-90px",
-            zIndex: "100",
-          }}
-        >
-          <i
-            className="pi pi-thumbs-up text-3xl mr-3"
-            onClick={onClickThumbUp}
-          />
-          Was this helpful?
-          <i
-            className="pi pi-thumbs-down text-3xl ml-3"
-            onClick={onClickFeedback}
-          />
-        </div>
+        <HelpfulButton
+          onClickThumbUp={onClickThumbUp}
+          onClickThumbDown={onClickFeedback}
+        />
       )}
-      {isAllSitesAnswered == false && selectedSites.length > 0 && (
-        <FeedbackDialogWrapper label={calculatorName} />
+      {isAllSitesAnswered === false && selectedSites.length > 0 && (
+        <FeedbackDialogWrapper calculatorName={calculatorName} />
       )}
       <HelpfulFeedbackDialog
         visible={feedbkackShow}

@@ -2,6 +2,7 @@ import { User } from "@/types/UserTypes";
 import { Response } from "@/types/ApiResponseTypes";
 import { CheckEmail } from "@/types/UserTypes";
 import { apiSlice } from "./apiSlice";
+import { CalculatorInfoMap } from "@/types/calculators";
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -92,10 +93,11 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    postSendResetPassword: builder.mutation({
-      query: () => ({
+    postSendResetPassword: builder.mutation<any, { id?: string }>({
+      query: (body) => ({
         url: "/send-reset-password",
         method: "POST",
+        body,
       }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue;
@@ -242,10 +244,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    getAnnouncementsList:  builder.query<any, any>({
+    getAnnouncementsList: builder.query<any, any>({
       query: () => ({
         url: "/announcements/get_all",
-        method: "GET"
+        method: "GET",
       }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue;
@@ -254,10 +256,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    getLatestAnnouncement:  builder.query<any, any>({
+    getLatestAnnouncement: builder.query<any, any>({
       query: () => ({
         url: "/announcements/get_latest",
-        method: "GET"
+        method: "GET",
       }),
       transformErrorResponse(baseQueryReturnValue) {
         return baseQueryReturnValue;
@@ -266,7 +268,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
-    createAnnouncement: builder.mutation<any, { content: string, _id?: string }>({
+    createAnnouncement: builder.mutation<
+      any,
+      { content: string; _id?: string }
+    >({
       query: (body) => ({
         url: "/announcements/create",
         method: "POST",
@@ -290,6 +295,67 @@ export const userApiSlice = apiSlice.injectEndpoints({
       },
       transformResponse: (res: Response) => {
         return res.status === "Success" ? res.data : res.status;
+      },
+    }),
+    uploadCalculatorData: builder.mutation({
+      query: (body) => ({
+        url: "/uploadCalculatorData",
+        method: "POST",
+        body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+      transformResponse: (res: Response) => {
+        return res.status === "Success" ? res.data : res.status;
+      },
+    }),
+    getCalculatorInfo: builder.query<CalculatorInfoMap, any>({
+      query: () => ({
+        url: "/calculatorInfo",
+        method: "GET",
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+      transformResponse: (res: Response) => {
+        return res.status === "Success" ? res.data : res.status;
+      },
+    }),
+    uploadNewCalculator: builder.mutation({
+      query: (body) => ({
+        url: "/uploadNewCalculator",
+        method: "POST",
+        body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+      transformResponse: (res: Response) => {
+        return res.status === "Success" ? res.data : res.status;
+      },
+    }),
+    saveCalculator: builder.mutation({
+      query: (body) => ({
+        url: "/saveCalculator",
+        method: "POST",
+        body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+      transformResponse: (res: Response) => {
+        return res.status === "Success" ? res.data : res.status;
+      },
+    }),
+    submitRequest: builder.mutation({
+      query: (body) => ({
+        url: "/submitRequest",
+        method: "POST",
+        body,
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
       },
     }),
   }),

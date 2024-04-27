@@ -1,37 +1,34 @@
-'use client';
+"use client";
 
-import React from 'react';
+import { useSearchParams } from "next/navigation";
+import React from "react";
 
-import { useGetVerifyUserQuery } from '@/redux/hooks/apiHooks';
-import { useSearchParams } from 'next/navigation';
+import { useGetVerifyUserQuery } from "@/redux/hooks/apiHooks";
 
-import { VerifySuccess } from './VerifySuccess';
-import { VerifyInvalid } from './VerifyInvalid';
+import { VerifySuccess } from "./VerifySuccess";
+import { VerifyInvalid } from "./VerifyInvalid";
 
 export const VerifyComponent = () => {
-	const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
 
-	const { isLoading, isSuccess, isError } = useGetVerifyUserQuery(searchParams.get('token') || '', {});
+  const { isLoading, isSuccess, isError } = useGetVerifyUserQuery(
+    searchParams.get("token") || "",
+    {}
+  );
 
-	const currentDisplay = () => {
-		if (isSuccess) return <VerifySuccess />;
-		if (isError)
-			return (
-				<>
-					<VerifyInvalid />
-				</>
-			);
-		return <></>;
-	};
+  const currentDisplay = () => {
+    if (isSuccess) return <VerifySuccess />;
+    if (isError) return <VerifyInvalid />;
+    return null;
+  };
 
-	if (isLoading) return <></>;
+  if (isLoading) return null;
 
-	return (
-		<>
-			<div className="background-gradient"></div>
-			<div className="container ">
-				<div className="wrapper h-full flex flex-column align-items-center justify-content-center">{currentDisplay()}</div>
-			</div>
-		</>
-	);
+  return (
+    <div className="flex flex-1 pb-8 px-4">
+      <div className="wrapper flex flex-1 flex-column align-items-center justify-content-center">
+        {currentDisplay()}
+      </div>
+    </div>
+  );
 };

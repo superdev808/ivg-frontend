@@ -1,0 +1,11 @@
+.item-with-children {
+  &:hover {
+    color: var(--light-green);
+  }
+}
+
+.item-without-children {
+  &:hover {
+    text-decoration: underline;
+  }
+}

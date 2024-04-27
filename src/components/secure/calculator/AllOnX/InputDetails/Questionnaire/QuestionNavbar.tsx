@@ -22,7 +22,7 @@ const QuestionNavbar: React.FC<QuestionNavbarProps> = ({
     return questions
       .map((question, questionIdx) => {
         const answer = answers[questionIdx];
-        const questionName = question.text || question.name;
+        const questionName = question.colName;
 
         if (answer) {
           return questionName;
@@ -58,7 +58,7 @@ const QuestionNavbar: React.FC<QuestionNavbarProps> = ({
           headerClassName={
             idx === allQuestions.length - 1
               ? ""
-              : "border-right-1 border-gray-300"
+              : "border-right-1 border-light-green"
           }
         />
       ))}

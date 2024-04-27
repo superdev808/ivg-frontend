@@ -1,0 +1,53 @@
+.notice {
+  width: 45%;
+
+  @media screen and (max-width: 992px) {
+    width: 75%;
+  }
+}
+
+.form {
+  width: 60%;
+
+  @media screen and (max-width: 992px) {
+    width: 75%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--dark-green);
+    padding: 8px 12px;
+    width: 280px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &.active {
+      background-color: var(--light-brown);
+    }
+  }
+
+  .textarea {
+    width: 70%;
+    border: 1px solid var(--dark-green);
+    outline-color: var(--dark-green);
+    border-radius: 8px;
+    resize: none;
+    padding: 12px;
+    height: 120px;
+    background-color: var(--beige);
+    font-family: var(--font-family);
+    font-size: 16px;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}

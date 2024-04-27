@@ -21,6 +21,7 @@ interface NavbarProps {
   avatarLinks: MenuItem[];
   avatar: JSX.Element;
   authenticated?: boolean;
+  light?: boolean;
 }
 
 const Navbar: React.FC<NavbarProps> = ({
@@ -29,11 +30,13 @@ const Navbar: React.FC<NavbarProps> = ({
   avatarLinks,
   avatar,
   authenticated,
+  light,
 }) => {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const pathName = usePathname();
 
   const avatarMenu = useRef<Menu>(null);
+  const subMenu = useRef<Menu>(null);
 
   const onClick = (item: NavLink) => {
     if (item.onClick) {
@@ -45,7 +48,11 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const renderHambuger = () => (
     <div
-      className={cx("hamburger", { open: showSidebar }, "md:hidden")}
+      className={cx(
+        "hamburger",
+        { open: showSidebar, light: !light },
+        "md:hidden"
+      )}
       onClick={() => setShowSidebar(!showSidebar)}
     >
       <span />
@@ -61,7 +68,8 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const sidebarLinksFilter = (li: NavLink) =>
     li.visibility === "public" ||
-    (authenticated && ["authenticated", "authenticatedSidebar"].includes(li.visibility)) ||
+    (authenticated &&
+      ["authenticated", "authenticatedSidebar"].includes(li.visibility)) ||
     (!authenticated && li.visibility === "unauthenticated");
 
   return (
@@ -72,27 +80,61 @@ const Navbar: React.FC<NavbarProps> = ({
     >
       <div className="flex items-center justify-content-between">
         <div className="flex align-items-center gap-3 lg:gap-6">
-          <Logo />
+          <Logo light={!light} />
 
-          <div className={cx("navbarNav", "hidden gap-3 md:flex lg:gap-6")}>
-            {navLinks.filter(navLinksFilter).map((item) => (
-              <div key={`${item.id}_full`}>
-                <Link href={item.link || ""}>
-                  <p
-                    className={cx({
-                      active: pathName.includes(item.link || "unknown"),
-                    })}
+          <div
+            className={cx("navbarNav", "hidden gap-3 md:flex lg:gap-6", {
+              light,
+            })}
+          >
+            {navLinks.filter(navLinksFilter).map((item) => {
+              if (item.link) {
+                return (
+                  <div key={`${item.id}_full`}>
+                    <Link href={item.link || ""}>
+                      <p
+                        className={cx({
+                          active: pathName.includes(item.link || "unknown"),
+                        })}
+                      >
+                        {item.title}
+                      </p>
+                    </Link>
+                  </div>
+                );
+              }
+
+              return (
+                <div key={`${item.id}_full`}>
+                  <div
+                    className={cx(
+                      "menu-trigger",
+                      "cursor-pointer relative py-2"
+                    )}
                   >
                     {item.title}
-                  </p>
-                </Link>
-              </div>
-            ))}
+                    {item.items && item.items.length > 0 && (
+                      <div className={cx("menu", "bg-beige font-normal")}>
+                        {item.items.map((elem) => (
+                          <Link href={elem.url || ""} key={elem.id}>
+                            {elem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
         <div className="flex align-items-center">
-          <div className={cx("navbarNav", "hidden gap-3 md:flex lg:gap-6")}>
+          <div
+            className={cx("navbarNav", "hidden gap-3 md:flex lg:gap-6", {
+              light,
+            })}
+          >
             {rightNavLinks.filter(navLinksFilter).map((item) => (
               <div key={`${item.id}_full`} className={cx(item.className)}>
                 <Link href={item.link || "/"} onClick={() => onClick(item)}>
@@ -140,7 +182,7 @@ const Navbar: React.FC<NavbarProps> = ({
         className={cx("sidebar", "align-items-end")}
         pt={{
           closeIcon: {
-            className: "text-white",
+            className: "text-beige",
           },
         }}
       >
@@ -155,7 +197,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 key={item.id}
                 onClick={() => onClick(item)}
               >
-                <p>{item.title}</p>
+                <p className="text-beige">{item.title}</p>
               </Link>
             ))}
         </div>

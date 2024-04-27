@@ -22,7 +22,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
       {!layoutStyle.hidden && (
         <Navigation
           authenticated={authenticated}
-          transparentBg={layoutStyle.transparentBg}
+          light={layoutStyle.navLight}
         />
       )}
       {children}

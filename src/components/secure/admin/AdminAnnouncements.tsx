@@ -1,4 +1,3 @@
-import classNames from "classnames/bind";
 import parse from "html-react-parser";
 import { FilterMatchMode } from "primereact/api";
 import { Button } from "primereact/button";
@@ -18,9 +17,7 @@ import {
   useCreateAnnouncementMutation,
   useDeleteAnnouncementMutation,
 } from "@/redux/hooks/apiHooks";
-import { ANNOUNCEMENT_ITEM } from "@/types/calculators";
-
-const cx = classNames.bind({});
+import { AnnouncementItem } from "@/types/calculators";
 
 const AdminAnnouncementsManagement: React.FC = () => {
   const toast = useRef(null);
@@ -95,7 +92,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
     (menuPanel.current as OverlayPanel).toggle(e);
   };
 
-  const onDeleteAnnouncement = async (announcementItem: ANNOUNCEMENT_ITEM) => {
+  const onDeleteAnnouncement = async (announcementItem: AnnouncementItem) => {
     confirmDialog({
       message: "Are you sure you want to delete?",
       header: "Confirmation",
@@ -140,12 +137,12 @@ const AdminAnnouncementsManagement: React.FC = () => {
 
   const menuPanel = useRef<OverlayPanel>(null);
   const [selectedAnnouncement, setSelectedAnnouncement] =
-    useState<ANNOUNCEMENT_ITEM | null>(null);
+    useState<AnnouncementItem | null>(null);
 
-  const [filters, setFilters] = useState<DataTableFilterMeta>({
+  const filters = useMemo(() => ({
     content: { value: null, matchMode: FilterMatchMode.CONTAINS },
     published_at: { value: null, matchMode: FilterMatchMode.BETWEEN },
-  });
+  }), []);
 
   const showToast = (
     response: { label: string; message: string },
@@ -186,7 +183,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
     </div>
   );
 
-  const actionsBodyTemplate = (row: ANNOUNCEMENT_ITEM) => (
+  const actionsBodyTemplate = (row: AnnouncementItem) => (
     <>
       <Button
         icon="pi pi-ellipsis-v"
@@ -216,7 +213,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
         <p
           className="cursor-pointer hover:text-gray-600"
           onClick={() => {
-            onDeleteAnnouncement(selectedAnnouncement as ANNOUNCEMENT_ITEM);
+            onDeleteAnnouncement(selectedAnnouncement as AnnouncementItem);
           }}
         >
           Delete
@@ -229,7 +226,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
     {
       field: "content",
       header: "Content",
-      body: (row: ANNOUNCEMENT_ITEM) => (
+      body: (row: AnnouncementItem) => (
         <div className="h-8rem w-full overflow-y-auto inline-block flex align-items-center">
           <span>{parse(row.content)}</span>
         </div>
@@ -240,7 +237,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
     {
       field: "published_at",
       header: "Published at",
-      body: (row: ANNOUNCEMENT_ITEM) => (
+      body: (row: AnnouncementItem) => (
         <span>
           {row.published_at.toLocaleDateString("en-US", {
             year: "numeric",
@@ -255,7 +252,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
     },
     {
       field: "actions",
-      body: (row: ANNOUNCEMENT_ITEM) => actionsBodyTemplate(row),
+      body: (row: AnnouncementItem) => actionsBodyTemplate(row),
       sortable: false,
     },
   ];
@@ -266,12 +263,13 @@ const AdminAnnouncementsManagement: React.FC = () => {
         <span className="text-2xl font-semibold">Announcements Management</span>
         <Button
           label="Publish new one"
+          size="small"
           className="ml-3 text-md px-3 py-3"
           onClick={onCreateAnnouncement}
         />
       </div>
 
-      <div className="flex-grow-1">
+      <div className="flex-grow-1 border-1 border-light-green">
         <DataTable
           stripedRows
           size="small"
@@ -285,7 +283,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
           filterDisplay="row"
           pt={{ wrapper: { className: "h-auto" } }}
         >
-          {columns.map((col, i) => (
+          {columns.map((col) => (
             <Column
               sortable={col.sortable}
               key={col.field}
@@ -330,7 +328,7 @@ const AdminAnnouncementsManagement: React.FC = () => {
             />
             <Button
               label="Cancel"
-              className="p-button p-button-secondary"
+              className="p-button p-button-outlined"
               icon="pi pi-times"
               onClick={() => setContentDialogVisible(false)}
             />

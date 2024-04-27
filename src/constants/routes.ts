@@ -1,7 +1,8 @@
 export enum PUBLIC_ROUTES {
-  HOME = "/",
+  INDEX = "/",
+  HOME = "/home/",
   CONTACT = "/contact/",
-  PRODUCT = "/product/",
+  ABOUT = "/about/",
   FORBIDDEN = "/error/403/",
   PRIVACY = "/privacy-policy/",
   PRIVACYCA = "/privacy-policy-ca/",
@@ -23,6 +24,8 @@ export enum PRIVATE_ROUTES {
   SETTINGS = "/settings/",
   HELP = "/help/",
   ADMIN = "/admin/",
+  EXPLORE = "/explore-all/",
+  REQUESTS = "/requests/",
 }
 
 export const REDIRECT_TO_AUTH = PRIVATE_ROUTES.CALCULATORS;

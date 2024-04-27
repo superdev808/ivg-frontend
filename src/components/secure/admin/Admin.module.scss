@@ -1,0 +1,18 @@
+.navLink {
+  color: var(--light-green);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--light-brown);
+  }
+}
+
+.menuLink {
+  color: var(--light-green);
+  cursor: pointer;
+
+  &:hover,
+  &--active {
+    color: var(--dark-brown);
+  }
+}

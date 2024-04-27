@@ -1,0 +1,41 @@
+.section-container {
+  margin: 3rem 0;
+}
+
+@media screen and (min-width: 768px) {
+  .section-container {
+    margin: 8rem 0;
+  }
+}
+
+.video {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  padding: 20px 0 0 20px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 20px;
+    bottom: 20px;
+    border: 4px solid var(--light-brown);
+    z-index: -1;
+  }
+
+  & > iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 0;
+    height: 300px;
+
+    &::after {
+      display: none;
+    }
+  }
+}

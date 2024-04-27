@@ -2,11 +2,16 @@
   height: 300px;
 }
 
-.quiz {
-  width: 400px;
+.quizWithoutImage {
+  width: 60%;
   min-height: 300px;
 
-  @media screen and (max-width: 991px) {
+  @media screen and (max-width: 1200px) {
     width: 100%;
   }
+}
+
+.quizWithImage {
+  min-height: 300px;
+  flex: 1.5 !important;
 }

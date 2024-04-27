@@ -8,14 +8,11 @@ import { useState, useRef } from "react";
 
 import { getCookie } from "@/helpers/cookie";
 import { FeedbackDialogWrapperProps } from "./FeedbackDialogWrapper";
+import { InputOutputValues } from "@/types/calculators";
 
 export interface FeedbackUserTrackingProps {
   calculatorName?: string;
-  userAnswers?: {
-    name: string;
-    text: string;
-    answer: string;
-  }[];
+  userAnswers?: (InputOutputValues & { answer: string; })[];
 }
 
 interface FeedbackDialogProps extends FeedbackUserTrackingProps {
@@ -34,7 +31,7 @@ const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
   visible,
   setVisible,
   calculatorName,
-  userAnswers
+  userAnswers,
 }) => {
   const [feedbackCategory, setFeedbackCategory] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -71,8 +68,7 @@ const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
     formData.append("message", message);
     formData.append("timestamp", new Date().toString());
     formData.append("calculatorName", calculatorName || "");
-    formData.append("userAnswers", JSON.stringify(userAnswers || []));
-
+    formData.append("userAnswers", JSON.stringify(userAnswers?.map(({ colName, colText, answer }) => ({ colName, colText, answer })) || []));
 
     setLoading(true);
 
@@ -157,13 +153,13 @@ const FeedbackDialog: React.FC<FeedbackDialogProps> = ({
           ))}
 
           <div className="col-12 mt-2">
-            <label htmlFor={"message"}>Message *</label>
+            <label htmlFor="message">Message *</label>
             <span className="p-float-label w-full mt-2">
               <InputTextarea
-                id={"message"}
+                id="message"
                 rows={4}
                 cols={30}
-                className={"w-full"}
+                className="w-full"
                 onChange={handleMessageChange}
                 value={message}
               />

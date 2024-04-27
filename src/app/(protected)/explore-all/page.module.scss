@@ -1,0 +1,25 @@
+.mainSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.calculatorButton {
+  background-color: transparent !important;
+  color: var(--beige) !important;
+  border: 1px solid var(--beige) !important;
+
+  &:hover,
+  &--highlighted {
+    border-color: var(--dark-brown) !important;
+  }
+}
+
+.calculatorButtonSection {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.content {
+  max-width: 1160px;
+  margin: 0 auto;
+}

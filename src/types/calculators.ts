@@ -19,20 +19,16 @@ export interface Procedure {
 export interface InputDetail {
   id?: string;
   question: string;
+  questionText: string;
   answer: string;
 }
 
-export interface ItemInsights {
-  id?: string;
-  itemName?: string;
-  itemNumber?: string;
-  link?: string;
-  quantity?: number;
-  manufacturer?: string;
-  manufacturerRecommendations?: string;
-  torqueValue?: string;
-  notes?: string;
-}
+export type ItemInsights = {
+  quantity: number;
+  id: string;
+  [key: string]: any;
+};
+
 export interface ItemData {
   id?: string;
   label: string;
@@ -62,17 +58,19 @@ export interface KeyValuePair {
 }
 
 export interface TotalQuantities {
-  itemName: string;
+  id: string;
   quantity: number;
 }
 
 export interface InputOutputValues {
-  name: string;
-  text: string;
-  calculator: string;
-  outputFrom?: string;
-  isCommon?: boolean;
-  displayCalculatorName?: string;
+  colIndex: string;
+  colName: string;
+  colText: string;
+  groupId: string;
+  groupName: string;
+  groupText: string;
+  isCommon: boolean;
+  calculatorType: string;
 }
 
 export interface AutoPopulateData {
@@ -107,12 +105,8 @@ export interface InputAndResponse {
   responseOrder: string[];
 }
 
-export interface CollectionsIO {
-  [key: string]: InputOutputValues[];
-}
-
 export interface ProcedureInputsAndResponse {
-  [key: string]: CollectionsIO;
+  [key: string]: string[];
 }
 
 export interface SingleSavedResult {
@@ -134,18 +128,72 @@ export interface MultiSavedResult {
   type: "all-on-x" | "combined";
 }
 
-export interface CALCULATOR_GROUP_ITEM {
+export interface CalculatorGroupItem {
   label: string;
   description: string;
-  subItems: Array<{
-    label: string;
-    text: string;
-    description: string;
-  }>;
+  subItems: Array<string>;
 }
 
-export interface ANNOUNCEMENT_ITEM {
+export interface AnnouncementItem {
   _id: string;
   content: string;
   published_at: Date;
+}
+
+export interface Summary extends ItemInsights {
+  description: string;
+  brand: string;
+  itemName?: string;
+  itemNumber?: string;
+  link?: string;
+  manufacturer?: string;
+  notes?: string;
+  // for material calculators
+  recommendedSingleUnitAbutmentMaterial?: string;
+  recommendedMUAMaterial?: string;
+  recommendedRestorationDesign?: string;
+  recommendedImplantBridgeMaterial?: string;
+  secondRecommendedSingleUnitAbutmentMaterial?: string;
+  secondRecommendedRestorationDesign?: string;
+  secondRecommendedImplantBridgeMaterial?: string;
+  recommendedAbutmentMaterial?: string;
+  recommendedCrownMaterial?: string;
+  secondAbutmentMaterialChoice?: string;
+  secondRestorationDesignChoice?: string;
+  secondCrownMaterialChoice?: string;
+  recommendedBridgeMaterial?: string;
+  secondMaterialChoice?: string;
+  thirdMaterialChoice?: string;
+}
+
+export interface CalculatorInfoMap {
+  [key: string]: {
+    type: string;
+    label: string;
+    description?: string;
+    disabled?: boolean;
+    isCustom?: boolean;
+    input: InputOutputValues[];
+    output: InputOutputValues[];
+  };
+}
+
+export interface EXPLORE_DATA_ITEM {
+  name: string;
+  href?: string;
+  isHighlighted?: true;
+  openByDefault?: boolean;
+  items?: EXPLORE_DATA_ITEM[];
+}
+
+export interface EXPLORE_DATA_SECTION {
+  name: string;
+  items?: EXPLORE_DATA_ITEM[];
+}
+
+export interface EXPLORE_DATA {
+  id: string;
+  name: string;
+  description?: string;
+  sections: EXPLORE_DATA_SECTION[];
 }

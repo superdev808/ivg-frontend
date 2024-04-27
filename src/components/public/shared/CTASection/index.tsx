@@ -13,16 +13,18 @@ interface CTASectionProps {
 export const CTASection: React.FC<CTASectionProps> = ({ title, text }) => (
   <div
     className={cx(
-      "w-full flex justify-content-center text-white py-3 z-2",
-      "cta-container"
+      "cta-container",
+      "w-full flex justify-content-center text-white py-3 z-2"
     )}
   >
     <div className="flex flex-column align-items-center px-4 md:py-6 text-center">
-      <span className="my-2 px-2 text-2xl md:text-6xl font-bold text-primary">
+      <span className="my-2 px-2 text-2xl md:text-6xl font-bold text-dark-green">
         {title}
       </span>
 
-      <span className="my-1 mx-2 text-lg md:text-xl text-center">{text}</span>
+      <span className="my-1 mx-2 text-lg md:text-xl text-center text-dark-green">
+        {text}
+      </span>
     </div>
   </div>
 );

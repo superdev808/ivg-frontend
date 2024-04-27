@@ -98,7 +98,7 @@ export const ContactComponent = () => {
 
   return (
     <>
-      <div className={cx("section-container", "mt-2")}>
+      <div className="flex justify-content-center">
         <div style={{ maxWidth: 900 }}>
           <form className="w-full p-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid justify-content-between mb-3">
@@ -124,7 +124,9 @@ export const ContactComponent = () => {
                         onChange={(e) => field.onChange(e.target.value)}
                       />
 
-                      <label htmlFor={field.name}>Name</label>
+                      <label className="bg-beige" htmlFor={field.name}>
+                        Name
+                      </label>
                     </span>
 
                     <FormErrorMessage message={errors[field.name]?.message} />
@@ -157,7 +159,9 @@ export const ContactComponent = () => {
                         onChange={(e) => field.onChange(e.target.value)}
                       />
 
-                      <label htmlFor={field.name}>Email</label>
+                      <label className="bg-beige" htmlFor={field.name}>
+                        Email
+                      </label>
                     </span>
 
                     <FormErrorMessage message={errors[field.name]?.message} />
@@ -190,7 +194,9 @@ export const ContactComponent = () => {
                         onChange={(e) => field.onChange(e.target.value)}
                       />
 
-                      <label htmlFor={field.name}>Phone Number</label>
+                      <label className="bg-beige" htmlFor={field.name}>
+                        Phone Number
+                      </label>
                     </span>
 
                     <FormErrorMessage message={errors[field.name]?.message} />
@@ -221,7 +227,9 @@ export const ContactComponent = () => {
                         onChange={(e) => field.onChange(e.target.value)}
                       />
 
-                      <label htmlFor={field.name}>Zip Code</label>
+                      <label className="bg-beige" htmlFor={field.name}>
+                        Zip Code
+                      </label>
                     </span>
 
                     <FormErrorMessage message={errors[field.name]?.message} />
@@ -237,7 +245,7 @@ export const ContactComponent = () => {
                 rules={{ required: "Role is required." }}
                 render={({ field }) => (
                   <div className="flex flex-column px-2 align-content-center">
-                    <span className="mb-3 text-600 text-lg text-center">
+                    <span className="mb-3 text-lg text-center">
                       Please choose your role.
                     </span>
 
@@ -254,7 +262,7 @@ export const ContactComponent = () => {
                             value={practice.value}
                             checked={field.value === practice.value}
                           />
-                          <label htmlFor="f5" className="mr-3">
+                          <label className="bg-beige mr-3" htmlFor="f5">
                             {practice.label}
                           </label>
                         </div>
@@ -296,7 +304,9 @@ export const ContactComponent = () => {
                         )}
                       />
 
-                      <label htmlFor={field.name}>Message</label>
+                      <label className="bg-beige" htmlFor={field.name}>
+                        Message
+                      </label>
                     </span>
 
                     <FormErrorMessage message={errors[field.name]?.message} />
@@ -334,13 +344,12 @@ export const ContactComponent = () => {
                 type="submit"
                 disabled={sendStatus === "sending" || sendStatus === "sent"}
                 className={cx(
-                  "btn-secondary",
-                  "xl:w-3 w-12 text-xl hover:text-secondary"
+                  "btn-light-brown",
+                  "xl:w-3 w-12 text-xl text-center hover:text-secondary block"
                 )}
               >
                 {sendStatus === "sending" ? (
                   <>
-                    {" "}
                     <i
                       className="pi pi-spin pi-spinner"
                       style={{ fontSize: "2rem", marginRight: "1rem" }}
@@ -355,7 +364,7 @@ export const ContactComponent = () => {
               </Button>
 
               {sendStatus === "error" && (
-                <small className="p-error mt-2">
+                <small className="text-dark-brown mt-2">
                   There was an error, please try again.
                 </small>
               )}
@@ -368,11 +377,7 @@ export const ContactComponent = () => {
         showHeader={false}
         blockScroll
         draggable={false}
-        className="bg-primary"
         visible={visible}
-        style={{
-          background: "var(--primary-color)",
-        }}
         modal
         onHide={handleCloseModal}
       >
@@ -383,6 +388,9 @@ export const ContactComponent = () => {
               outlined
               rounded
               onClick={handleCloseModal}
+              style={{
+                color: "var(--light-green)",
+              }}
               className="border-0 mt-2"
             />
           </div>

@@ -22,10 +22,10 @@ const cx = classNames.bind(styles);
 
 export interface NavigationProps {
   authenticated?: boolean;
-  transparentBg?: boolean;
+  light?: boolean;
 }
 
-const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
+const Navigation = ({ authenticated, light }: NavigationProps) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -47,14 +47,40 @@ const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
   };
 
   const navLinks: NavLink[] = [
-    { id: "product", title: "Product", link: "/product", visibility: "public" },
+    { id: "about", title: "About", link: "/about", visibility: "public" },
 
     // Protected Links
     {
       id: "calculators",
-      title: "Calculators",
-      link: "/calculators",
+      title: "Calculators + Workflows",
       visibility: "authenticated",
+      items: [
+        {
+          id: "home",
+          label: "Home",
+          url: "/calculators",
+        },
+        {
+          id: "exploreAll",
+          label: "Explore All",
+          url: "/explore-all",
+        },
+        {
+          id: "submitRequest",
+          label: "Submit Request",
+          url: "/requests",
+        },
+        {
+          id: "savedResults",
+          label: "Saved Results",
+          url: "/settings/saved-results/",
+        },
+        {
+          id: "favorites",
+          label: "Favorites",
+          url: "/explore-all/?tab=favorites",
+        },
+      ],
     },
     // {id: 'workflows',title: 'Workflows', link: '/workflows', icon: PrimeIcons.SITEMAP, auth: true},
   ];
@@ -117,7 +143,7 @@ const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
     <Avatar
       label={getInitials(userName)}
       size="normal"
-      className="bg-orange-100 font-bold text-700"
+      className="bg-light-brown font-bold"
       shape="circle"
     />
   );
@@ -149,15 +175,15 @@ const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
       url: "/settings/saved-results",
     },
     {
-      label: "Help",
-      icon: "pi pi-question",
-      url: "/help",
-    },
-    {
       label: "Administration",
       icon: "pi pi-cog",
       url: "/admin",
       visible: role === USER_ROLES.ADMIN,
+    },
+    {
+      label: "Help",
+      icon: "pi pi-question",
+      url: "/help",
     },
     {
       separator: true,
@@ -171,8 +197,9 @@ const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
 
   return (
     <div
-      className={cx("z-2 w-full py-2 absolute top-1", {
-        "nav-background": !transparentBg,
+      className={cx("z-2 w-full py-2", {
+        "nav-light": light,
+        "nav-dark": !light,
       })}
     >
       <Navbar
@@ -181,6 +208,7 @@ const Navigation = ({ authenticated, transparentBg }: NavigationProps) => {
         avatarLinks={avatarLinks}
         avatar={avatar}
         authenticated={authenticated}
+        light={light}
       />
     </div>
   );

@@ -1,23 +1,24 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useParams, useSearchParams } from "next/navigation";
 
 import CalculatorContainer from "@/components/secure/calculator";
 import AllOnXCalculator from "@/components/secure/calculator/AllOnX";
-import FeedbackDialog from "@/components/secure/calculator/Feedback/FeedbackDialog";
 import { CALCULATOR_MAPPINGS } from "@/constants/calculators";
-import { event as gaEvent } from "@/lib/gtag";
-import { calculatorIO as tabItems } from "@/helpers/util";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 export default function CalculatorPage() {
   // const router = useRouter();
-  const searchParams = useParams();
-  const tabId = decodeURIComponent(searchParams.id as string);
+  const params = useParams();
+  const search = useSearchParams();
+  const { calcInfoMap } = useCalculatorsInfo();
+  const tabId = decodeURIComponent(params.id as string);
+  const defaultParam = search.get("default");
+  const defaultAnswers = defaultParam
+    ? defaultParam.split(",").map(decodeURIComponent)
+    : [];
 
-  const selectedType = useMemo(() => {
-    return tabItems.find((item) => item.type === tabId);
-  }, [tabId]);
+  const selectedType = calcInfoMap[tabId];
 
   const componentMapping: { [key: string]: JSX.Element } = {
     [CALCULATOR_MAPPINGS.ALL_ON_X_CALCULATOR]: <AllOnXCalculator />,
@@ -31,7 +32,8 @@ export default function CalculatorPage() {
           <div className="w-full">
             <div className="flex flex-column align-items-center justify-content-center">
               <CalculatorContainer
-                option={searchParams.id as string}
+                defaultAnswers={defaultAnswers}
+                option={tabId as string}
                 input={selectedType?.input || []}
                 output={selectedType?.output || []}
               />

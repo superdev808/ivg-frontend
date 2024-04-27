@@ -2,45 +2,46 @@ import cloneDeep from "lodash/cloneDeep";
 import findIndex from "lodash/findIndex";
 import find from "lodash/find";
 import get from "lodash/get";
-import trim from "lodash/trim";
 import union from "lodash/union";
 import uniqBy from "lodash/uniqBy";
 
 import {
-  CALCULATORS,
-  CALCULATOR_NAME_COLLECTION_MAPPINGS,
+  CALCULATOR_OUTPUT_MAPPING,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
-  QUANTITY_MULTIPLES_LIST,
+  MATERIAL_CALCULATOR_TYPES,
   MUA_OPTIONS,
   PROCEDURE_INPUTS_AND_RESPONSE,
+  QUANTITY_MULTIPLES_LIST,
 } from "@/constants/calculators";
-import { getCalculatorName } from "@/helpers/util";
 import {
-  CollectionsIO,
+  CalculatorInfoMap,
+  EXPLORE_DATA,
+  EXPLORE_DATA_ITEM,
   InputAndResponse,
   InputDetail,
   InputOutputValues,
   ItemData,
+  ItemInsights,
   KeyValuePair,
   PROCEDURE,
   Patient,
   SiteData,
+  Summary,
 } from "@/types/calculators";
+import _, { uniq } from "lodash";
 
 export const isValidUrl = (urlString = "") => {
-  const urlPattern = new RegExp(
-    "^(https?:\\/\\/)?" + // validate protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // validate query string
-      "(\\#[-a-z\\d_]*)?$",
-    "i"
-  ); // validate fragment locator
-  return Boolean(urlPattern.test(urlString.trim()));
+  try {
+    new URL(urlString);
+    return true;
+  } catch (err) {
+    return false;
+  }
 };
 
-const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
+const getRestorativeCollections = (
+  additionalInputs: KeyValuePair
+): string[] => {
   // Restorative (Direct to Implant)
   if (
     additionalInputs[DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name] ===
@@ -65,10 +66,11 @@ const getRestorativeCollections = (additionalInputs: KeyValuePair) => {
     return PROCEDURE_INPUTS_AND_RESPONSE.RESTORATIVE_ON_MUAS_MUAS_PLACED;
   }
   // No match found
-  return {};
+  return [];
 };
 
 export const getProcedureCollections = (
+  calcInfoMap: CalculatorInfoMap,
   procedure: PROCEDURE,
   additionalInputs: KeyValuePair,
   isCustom: boolean
@@ -78,23 +80,17 @@ export const getProcedureCollections = (
   if (!isCustom) {
     switch (procedure) {
       case PROCEDURE.SURGERY:
-        collections = Object.keys(PROCEDURE_INPUTS_AND_RESPONSE.SURGERY);
+        collections = PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
         break;
 
       case PROCEDURE.RESTORATIVE:
-        const response: CollectionsIO =
-          getRestorativeCollections(additionalInputs);
-        collections = Object.keys(response);
+        collections = getRestorativeCollections(additionalInputs);
         break;
 
       case PROCEDURE.SURGERY_AND_RESTORATIVE:
-        const surgeryCollections: CollectionsIO =
-          PROCEDURE_INPUTS_AND_RESPONSE.SURGERY;
-        const restorativeCollections: CollectionsIO =
-          getRestorativeCollections(additionalInputs);
         collections = union([
-          ...Object.keys(surgeryCollections),
-          ...Object.keys(restorativeCollections),
+          ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY,
+          ...getRestorativeCollections(additionalInputs),
         ]);
         break;
 
@@ -102,118 +98,134 @@ export const getProcedureCollections = (
         break;
     }
   } else {
-    collections = Object.keys(CALCULATORS);
+    collections = Object.keys(calcInfoMap).filter(collection => calcInfoMap[collection].isCustom);
   }
 
   return collections.sort();
 };
 
-const prepareInputsAndResponse = (
-  selectedCollections: string[],
-  collections: CollectionsIO
-) => {
-  let inputs: InputOutputValues[] = [];
-  let responseOrder: string[] = [];
+export const getProcedureInputsAndResponse = (
+  calcInfoMap: CalculatorInfoMap,
+  selectedCollections: string[]
+): InputAndResponse => {
+  let selectedInputs = selectedCollections
+    .map((selectedCollection: string) => [
+      ...calcInfoMap[selectedCollection].input,
+      {
+        calculatorType: selectedCollection,
+        colName: "",
+        colText: "",
+        colIndex: "",
+        groupId: "",
+        groupName: "",
+        groupText: "",
+        isCommon: false,
+      },
+    ])
+    .flat();
+  let resultInputs: InputOutputValues[] = [];
+  let colNameCountMap: Record<string, number> = {};
 
-  selectedCollections.map((selectedCollection: string) => {
-    let isDisplayNameAssigned: boolean = false;
-    collections[selectedCollection]?.map((input: InputOutputValues) => {
-      const filteredInputs: InputOutputValues[] = inputs.filter(
-        (item: InputOutputValues) => item.name && item.name === input.name
-      );
-      if (
-        filteredInputs.length <= 0 ||
-        (filteredInputs.length && !filteredInputs[0].isCommon)
-      ) {
-        if (!isDisplayNameAssigned) {
-          input = { ...input, displayCalculatorName: selectedCollection };
-          isDisplayNameAssigned = true;
-        }
-        inputs = [...inputs, input];
-      }
-    });
-    responseOrder.push(selectedCollection);
+  selectedInputs.forEach((input) => {
+    if (input.colName == "") return;
+    let prevValue = colNameCountMap[input.colName] || 0;
+    colNameCountMap[input.colName] = (input.isCommon ? 0 : prevValue) + 1;
   });
 
-  return { input: inputs, responseOrder };
-};
-
-export const getProcedureInputsAndResponse = (
-  procedure: PROCEDURE,
-  additionalInputs: KeyValuePair,
-  selectedCollections: string[],
-  isCustom: boolean
-) => {
-  if (!isCustom) {
-    switch (procedure) {
-      case PROCEDURE.SURGERY:
-        const surgeryResults: InputAndResponse = prepareInputsAndResponse(
-          selectedCollections,
-          PROCEDURE_INPUTS_AND_RESPONSE.SURGERY
-        );
-        return surgeryResults;
-
-      case PROCEDURE.RESTORATIVE:
-        const collections: CollectionsIO =
-          getRestorativeCollections(additionalInputs);
-        const restorativeResults: InputAndResponse = prepareInputsAndResponse(
-          selectedCollections,
-          collections
-        );
-        return restorativeResults;
-
-      case PROCEDURE.SURGERY_AND_RESTORATIVE:
-        const restorativeCollections: CollectionsIO =
-          getRestorativeCollections(additionalInputs);
-        const combineCollections: CollectionsIO = {
-          ...PROCEDURE_INPUTS_AND_RESPONSE.SURGERY,
-          ...restorativeCollections,
-        };
-        const combineProcedureResults: InputAndResponse =
-          prepareInputsAndResponse(selectedCollections, combineCollections);
-        return combineProcedureResults;
-
-      default:
-        return { input: [], responseOrder: [] };
+  selectedInputs.forEach((input) => {
+    if (input.colName == "") {
+      resultInputs.push(input);
+      return;
     }
-  }
-
-  const customResults: InputAndResponse = prepareInputsAndResponse(
-    selectedCollections,
-    CALCULATORS
-  );
-
-  return customResults;
+    let newInput = { ...input };
+    if (colNameCountMap[input.colName] > 1) {
+      newInput.colName = `${input.colName} [${input.calculatorType}]`;
+      resultInputs.push(newInput);
+    } else if (colNameCountMap[input.colName] == 1) {
+      resultInputs.push(newInput);
+      colNameCountMap[input.colName] = 0;
+    }
+  });
+  return { input: resultInputs, responseOrder: [...selectedCollections] };
 };
 
 export const getComponentSummary = (
   sitesData: SiteData,
   responseOrder: string[]
-) => {
+): Summary[] => {
   const items: ItemData[] = [];
 
+  const inputs = get(Object.values(sitesData), "0.inputDetails");
+
   const brand =
-    find(
-      get(Object.values(sitesData), "0.inputDetails"),
-      (item: InputDetail) => item.question === "Implant Brand"
-    )?.answer || "";
+    find(inputs, (item: InputDetail) => item.questionText === "Implant Brand")
+      ?.answer || "";
+
+  const manufacturer =
+    find(inputs, (item: InputDetail) => item.questionText === "Manufacturer")
+      ?.answer || "";
 
   Object.keys(sitesData).forEach((siteName) => {
     const componentDetail = cloneDeep(sitesData[siteName].componentDetails);
 
-    responseOrder.forEach((calculatorName) => {
-      componentDetail[
-        CALCULATOR_NAME_COLLECTION_MAPPINGS[calculatorName]
-      ]?.forEach((response) => {
-        const itemIndex = findIndex(
-          items,
-          (item) => item.label === response.label
-        );
+    responseOrder.forEach((calculatorType) => {
+      componentDetail[calculatorType]?.forEach((response) => {
+        response.info.forEach((info, index) => {
+          const newInfo: ItemInsights = Object.assign(
+            {
+              id: info.id,
+              quantity: info.quantity,
+            },
+            brand && { brand },
+            manufacturer && { manufacturer }
+          );
+
+          Object.keys(info).forEach((key) => {
+            const { colName, groupText } = deserializeColInfo(key);
+
+            let i = 0;
+            for (i = 0; i < CALCULATOR_OUTPUT_MAPPING.length; ++i)
+              if (
+                CALCULATOR_OUTPUT_MAPPING[i][1].test(groupText) ||
+                CALCULATOR_OUTPUT_MAPPING[i][1].test(colName)
+              ) {
+                const outputKey =
+                  CALCULATOR_OUTPUT_MAPPING[i][2] ||
+                  CALCULATOR_OUTPUT_MAPPING[i][0];
+                newInfo[outputKey] = info[key];
+
+                break;
+              }
+
+            if (
+              i === CALCULATOR_OUTPUT_MAPPING.length &&
+              !["id", "quantity"].includes(key)
+            ) {
+              newInfo["itemName"] = info[key];
+            }
+          });
+
+          response.info[index] = newInfo;
+        });
+      });
+    });
+
+    responseOrder.forEach((calculatorType) => {
+      if (MATERIAL_CALCULATOR_TYPES.includes(calculatorType)) {
+        componentDetail[calculatorType]?.forEach((response) => {
+          items.push(response);
+        });
+
+        return;
+      }
+
+      componentDetail[calculatorType]?.forEach((response) => {
+        const itemIndex = findIndex(items, (item) => item.id === response.id);
 
         if (itemIndex > -1) {
           items[itemIndex].info.forEach((info, i) => {
             const indexOfInfo = response.info.findIndex(
-              (res) => info.itemName === res.itemName && info.link === res.link
+              (res) => info.id === res.id && info.link === res.link
             );
 
             if (indexOfInfo > -1) {
@@ -229,7 +241,7 @@ export const getComponentSummary = (
             } else {
               items[itemIndex].info = uniqBy(
                 [...items[itemIndex].info, ...response.info],
-                "itemName"
+                "id"
               );
             }
           });
@@ -237,7 +249,7 @@ export const getComponentSummary = (
           if (items[itemIndex].info.length !== response.info.length) {
             items[itemIndex].info = uniqBy(
               [...items[itemIndex].info, ...response.info],
-              "itemName"
+              "id"
             );
           }
         } else {
@@ -247,41 +259,20 @@ export const getComponentSummary = (
     });
   });
 
-  const summaryData = items.flatMap((category: ItemData) =>
-    category.info.map((item) => ({
-      description: category.label,
-      ...item,
-      brand,
-    }))
+  const summaryData = items.flatMap(
+    (category: ItemData) => category.info as Summary[]
   );
 
   return summaryData;
 };
 
-export const getResultName = (calculatorType: string, items: ItemData[]) => {
-  let key = "Item Name";
-
-  if (calculatorType === "BoneReduction") {
-    key = "Bur Kit Name (Bone Reduction)";
-  } else if (calculatorType === "ChairSidePickUp") {
-    key = "Luting Agent Name";
-  } else if (calculatorType === "DrillKitAndSequence") {
-    key = "Drill Kit Name";
-  }
-
-  const item = find(items, { label: key });
-
-  return get(item, ["info", 0, "itemName"]) || "";
-};
-
 export const prepareExportProps = (
   calculatorType: string,
+  calculatorName: string,
   patientInfo: Patient,
   quiz: InputDetail[],
   items: ItemData[]
 ) => {
-  const calculatorName = getCalculatorName(calculatorType);
-
   const componentDetails = {
     [calculatorType]: items,
   };
@@ -293,11 +284,12 @@ export const prepareExportProps = (
     },
   };
 
-  const componentSummary = getComponentSummary(sitesData, [calculatorName]);
+  const componentSummary = getComponentSummary(sitesData, [calculatorType]);
 
   return {
     inputSummary: [{ name: "Site 1", inputDetails: quiz, componentDetails }],
     componentSummary,
+    calculatorType,
     calculatorName,
     patientInfo,
     showTeethSelection: false,
@@ -306,228 +298,122 @@ export const prepareExportProps = (
   };
 };
 
-export const parseItems = (
-  item: Record<string, string>,
-  calculatorType: string
-): ItemData[] => {
-  if (calculatorType === "BoneReduction") {
-    return [
-      {
-        label: "Bur Kit Name (Bone Reduction)",
-        info: [
-          {
-            itemName: trim(item["Bur Kit Name (Bone Reduction)"]),
-            itemNumber: trim(item["Item Number"]),
-            link: trim(item["Bur Kit (Bone Reduction) Link to Purchase"]),
-            quantity: 1,
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-      {
-        label: "Bur Kit (Denture Conversion) Name",
-        info: [
-          {
-            itemName: trim(item["Bur Kit (Denture Conversion) Name"]),
-            link: trim(item["Bur Kit (Denture Conversion) Link to Purchase"]),
-            quantity: 1,
-            notes: trim(item["Notes_1"]),
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "ChairSidePickUp") {
-    return [
-      {
-        label: "Luting Agent Name",
-        info: [
-          {
-            itemName: trim(item["Luting Agent Name"]),
-            link: trim(item["Luting Agent Link to Purchase"]),
-            quantity: 1,
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-      {
-        label: "Teflon Tape",
-        info: [
-          {
-            itemName: trim(item["Teflon Tape"]),
-            link: trim(item["Teflon Tape Link to Purchase"]),
-            quantity: 1,
-            notes: trim(item["Notes_1"]),
-          },
-        ],
-      },
-      {
-        label: "Material to Close Screw Access Hole Name",
-        info: [
-          {
-            itemName: trim(item["Material to Close Screw Access Hole Name"]),
-            link: trim(
-              item["Material to Close Screw Access Hole Link to Purchase"]
-            ),
-            quantity: 1,
-            notes: trim(item["Notes_2"]),
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "DrillKitAndSequence") {
-    const res: ItemData[] = [
-      {
-        label: "Implant Drill Kit Name",
-        info: [
-          {
-            itemName: trim(item["Drill Kit Name"]),
-            itemNumber: trim(item["Drill Kit Item Number"]),
-            link: trim(item["Drill Kit Link to Purchase"]),
-            quantity: 1,
-          },
-        ],
-      },
-    ];
-
-    const arr = ["(Extra Short)", "(Short)", "(Standard / Medium)", "(Long)"];
-
-    for (let i = 1; i < 20; i++) {
-      arr.forEach((size) => {
-        const itemKey = `Drill ${i} ${size}`;
-        const linkKey = `${itemKey} Link to Purchase`;
-        const itemNumberKey = `${itemKey} Item Number`;
-        const manfacturerKey = `${itemKey} Manufacturer Recommendations`;
-
-        const link = trim(item[linkKey]) || "";
-        const itemNumber = item[itemNumberKey] || "";
-        const recommendations = trim(item[manfacturerKey]) || "";
-
-        if (itemNumber) {
-          res.push({
-            label: itemKey,
-            info: [
-              {
-                itemName: itemKey,
-                itemNumber,
-                link,
-                manufacturerRecommendations: recommendations,
-                quantity: 1,
-              },
-            ],
-          });
-        }
-      });
-    }
-
-    return res;
-  }
-
-  if (
-    [
-      "RestorativeDirectToImplant",
-      "RestorativeMultiUnitAbutments",
-      "HealingAbutments",
-      "Implants",
-      "ImplantScrews",
-      "ImplantAnalogs",
-      "ImpressingCopingsDirectToImplants",
-      "ImpressingCopingsMUAs",
-      "MUAs",
-      "ScanbodyDriversDirectToImplants",
-      "ScanbodyDriversMUAs",
-      "StockAbutments",
-      "TemporaryCopingsDirectToImplants",
-      "TemporaryCopingsMUAs",
-      "TiBasesDirectToImplants",
-      "TiBasesMUAs",
-    ].includes(calculatorType)
-  ) {
-    return [
-      {
-        label: getCalculatorName(calculatorType),
-        info: [
-          {
-            itemName: trim(item["Item Name"]),
-            itemNumber: trim(item["Item Number"]),
-            link: trim(item["Link to Purchase"]),
-            quantity: 1,
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "Scanbodies") {
-    return [
-      {
-        label: "Master Scanbody",
-        info: [
-          {
-            itemName: trim(item["Item Name"]),
-            itemNumber: trim(item["Scanbody Item Number"]),
-            link: trim(item["Link to Purchase"]),
-            manufacturer: trim(item["Manufacturer"]),
-            quantity: 1,
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "ScanbodyMUAs") {
-    return [
-      {
-        label: "Master Scanbody",
-        info: [
-          {
-            itemName: trim(item["Item Name"]),
-            itemNumber: trim(item["Item Number"]),
-            link: trim(item["Link to Purchase"]),
-            manufacturer: trim(item["Manufacturer Name"]),
-            quantity: 1,
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-    ];
-  }
-
-  if (calculatorType === "ImplantTorquesGuide") {
-    return [
-      {
-        label: "Implant Torque Guide",
-        info: [
-          {
-            torqueValue: trim(item["Torque Value"]),
-            notes: trim(item["Notes"]),
-          },
-        ],
-      },
-    ];
-  }
-
-  return [];
+export const serializeColInfo = (
+  colInfo: Pick<
+    InputOutputValues,
+    | "colName"
+    | "groupText"
+    | "groupId"
+    | "calculatorType"
+    | "groupName"
+    | "colIndex"
+  >
+) => {
+  return `${colInfo.groupText || "EMPTY"}___${colInfo.colIndex}___${
+    colInfo.colName
+  }___${colInfo.groupId}___${colInfo.groupName}___${colInfo.calculatorType}`;
 };
 
-export const getQuizByCalculator = (
-  quiz: InputDetail[],
-  calculatorName: string
-) => {
-  const allQuestions = (CALCULATORS[calculatorName] || []).map(
-    (elem) => elem.name
-  );
+export const deserializeColInfo = (serializedColInfo: string) => {
+  const [groupText, colIndex, colName, groupId, groupName, calculatorType] =
+    serializedColInfo.split("___");
+  return {
+    groupText: groupText == "EMPTY" ? "" : groupText,
+    colIndex: parseInt(colIndex),
+    colName,
+    groupId,
+    calculatorType,
+    groupName,
+  };
+};
 
-  const filteredQuiz = quiz.filter((quiz) =>
-    allQuestions.includes(quiz.question)
-  );
-  return filteredQuiz.map((quiz) => ({
-    ...quiz,
-    question: (quiz.question || "").split("[")[0],
-  }));
+export const parseItems = (
+  item: Record<string, string>,
+  outputCalcInfo: InputOutputValues[]
+): ItemData[] => {
+  const findColumnFromColIndex = (colIndex: string) =>
+    outputCalcInfo.find((item) => item.colIndex == colIndex);
+
+  let resultInfo: ItemData[] = [],
+    i,
+    j;
+  let columnInfos = Object.keys(item)
+    .map((colIndex) => findColumnFromColIndex(colIndex))
+    .sort((left, right) => {
+      // let leftGroupId = left?.groupId || "",
+      //   rightGroupId = right?.groupId || "";
+      // return leftGroupId == rightGroupId
+      //   ? 0
+      //   : leftGroupId < rightGroupId
+      //   ? -1
+      //   : 1;
+      // We asuume that the same groupping columns would be placed nearby each other
+      return parseInt(left?.colIndex || "0") - parseInt(right?.colIndex || "0");
+    }) as InputOutputValues[];
+  for (i = 0; i < columnInfos.length; i = j) {
+    let newItem: ItemData = {
+      id: `${columnInfos[i].groupId} (${columnInfos[i].calculatorType})`,
+      label: columnInfos[i].groupName,
+      info: [],
+    };
+    let newInfo: ItemInsights = { id: columnInfos[i].groupId, quantity: 1 };
+
+    for (
+      j = i;
+      j < columnInfos.length &&
+      columnInfos[i].groupId == columnInfos[j].groupId;
+      ++j
+    ) {
+      let showText = serializeColInfo(columnInfos[j]);
+      if (item[columnInfos[j].colIndex])
+        newInfo[showText] = item[columnInfos[j].colIndex];
+    }
+    if (Object.keys(newInfo).length > 2) {
+      newItem.info.push(newInfo);
+      resultInfo.push(newItem);
+    }
+  }
+  return resultInfo;
+};
+
+export const formatToExploreDataItems = (
+  response: any[],
+  keys: string[],
+  prefix: string
+): EXPLORE_DATA_ITEM[] => {
+  const [firstKey, ...restKeys] = keys;
+  return uniq(response.map((item) => item[firstKey]))
+    .sort()
+    .map((firstValue: string) => {
+      let result: EXPLORE_DATA_ITEM = {
+        name: firstValue,
+      };
+      if (restKeys.length == 0) {
+        result.href = `${prefix}${encodeURIComponent(firstValue)}`;
+        return result;
+      }
+      let inspectedItems = response.filter(
+        (item) => item[firstKey] === firstValue
+      );
+      result.items = formatToExploreDataItems(
+        inspectedItems,
+        restKeys,
+        `${prefix}${encodeURIComponent(firstValue)},`
+      );
+      return result;
+    });
+};
+
+export const updateExploreAllData = (
+  allData: EXPLORE_DATA[],
+  itemName: string,
+  data: EXPLORE_DATA_ITEM[]
+) => {
+  let finalData = _.cloneDeep(allData);
+  for (let i = 0; i < finalData.length; ++i) {
+    for (let j = 0; j < finalData[i].sections.length; ++j)
+      if (finalData[i].sections[j].name == itemName)
+        finalData[i].sections[j].items = data;
+  }
+  return finalData;
 };

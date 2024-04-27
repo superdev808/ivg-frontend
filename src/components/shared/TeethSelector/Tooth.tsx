@@ -40,7 +40,7 @@ const Tooth: React.FC<ToothProps> = (props) => {
                 d={path.d}
                 style={
                   index === 0 && isSelected
-                    ? { ...path.style, fill: "lightgreen" }
+                    ? { ...path.style, fill: "#506c60" }
                     : path.style
                 }
                 fill={index === 0 && isSelected ? "green" : "inherit"}

@@ -111,20 +111,20 @@ const MultiSavedResultDetail: React.FC<MultiResultDetailProps> = ({
       message: "Do you want to delete this record?",
       header: "Delete Confirmation",
       icon: "pi pi-info-circle",
-      acceptClassName: "p-button-danger",
+      acceptClassName: "p-button-secondary",
       accept: onDelete,
     });
   };
 
-  const handleUpdateQuantity = (quantity: number, itemName: string) => {
+  const handleUpdateQuantity = (quantity: number, groupId: string) => {
     const newTotalQuantities = cloneDeep(totalQuantities);
 
     const index = newTotalQuantities.findIndex(
-      (item) => item.itemName === itemName
+      (item) => item.id === groupId
     );
 
     if (index === -1) {
-      newTotalQuantities.push({ itemName, quantity });
+      newTotalQuantities.push({ id: groupId, quantity });
     } else {
       newTotalQuantities[index].quantity = quantity;
     }

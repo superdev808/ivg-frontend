@@ -10,7 +10,7 @@ import { ComponentSummary as ComponentSummaryType } from "@/types/calculators";
 
 interface ComponentSummaryProps {
   summary: ComponentSummaryType[];
-  onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onUpdateQuantity: (quantity: number, groupId: string) => void;
 }
 
 const ComponentSummary: React.FC<ComponentSummaryProps> = ({
@@ -23,7 +23,8 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
     }
 
     return summary.some(
-      (item) => item.manufacturer && item.manufacturer !== item.brand
+      (item) =>
+        item.manufacturer && item.brand && item.manufacturer !== item.brand
     );
   }, [summary]);
 
@@ -32,7 +33,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
   }
 
   const renderManufacturer = (item: ComponentSummaryType) => {
-    return item.manufacturer && item.manufacturer !== item.brand
+    return item.manufacturer && item.brand && item.manufacturer !== item.brand
       ? item.manufacturer
       : "";
   };
@@ -47,7 +48,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
     }
 
     return (
-      <div className="text-center text-gray-500">
+      <div className="text-center">
         Please contact your
         <br />
         distributor to purchase.
@@ -64,7 +65,7 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
       <InputNumber
         value={item.quantity}
         onValueChange={({ value }) =>
-          onUpdateQuantity(value || 0, item.itemName || "")
+          onUpdateQuantity(value || 0, item.id || "")
         }
         showButtons
         buttonLayout="horizontal"

@@ -10,7 +10,6 @@ import {
   ComponentSummary as ComponentSummaryType,
   InputSummary as InputSummaryType,
   Patient,
-  SiteData,
   TotalQuantities,
 } from "@/types/calculators";
 
@@ -18,6 +17,7 @@ import ComponentSummary from "../ComponentSummary";
 import InputSummary from "../InputSummary";
 
 import styles from "./styles.module.scss";
+import { LINEAR_WORKFLOWS } from "@/constants/calculators";
 
 const cx = classNames.bind(styles);
 
@@ -28,6 +28,7 @@ export interface Site {
 
 interface PDFContentProps {
   calculatorName: string;
+  calculatorType: string;
   patientInfo?: Patient | null;
   showTeethSelection: boolean;
   totalQuantities: TotalQuantities[];
@@ -38,6 +39,7 @@ interface PDFContentProps {
 
 const PDFContent: React.FC<PDFContentProps> = ({
   calculatorName,
+  calculatorType,
   patientInfo,
   showTeethSelection,
   totalQuantities,
@@ -61,11 +63,11 @@ const PDFContent: React.FC<PDFContentProps> = ({
 
   return (
     <>
-      <div className={cx("bg-color", "px-0 py-3")} />
+      <div className="bg-dark-green px-0 py-3" />
       <div className="flex mx-4 mt-3 mb-3 justify-content-between">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/logo/Ivory-Guide-PDF-Logo.png"
+          src="/images/logo/Ivory-Guide-Logo-Horizontal-DarkGreen.png"
           alt="logo"
           width="auto"
           height={63}
@@ -106,7 +108,11 @@ const PDFContent: React.FC<PDFContentProps> = ({
         <div className="flex flex-column">
           <div className="py-2">
             Please see summary for{" "}
-            <span className="font-semibold">{calculatorName}</span> calculator.
+            <span className="font-semibold">{calculatorName}</span>{" "}
+            {LINEAR_WORKFLOWS.includes(calculatorType)
+              ? "workflow"
+              : "calculator"}
+            .
           </div>
         </div>
 
@@ -122,15 +128,22 @@ const PDFContent: React.FC<PDFContentProps> = ({
         )}
       </div>
 
-      <div className="px-4 py-1">
-        <InputSummary inputSummary={inputSummary} hideSite={hideSite} />
-      </div>
-
       <div className="px-4">
-        <ComponentSummary
-          summary={componentSummary}
-          totalQuantities={totalQuantities}
-        />
+        <div className="py-2">
+          <InputSummary
+            calculatorType={calculatorType}
+            inputSummary={inputSummary}
+            hideSite={hideSite}
+          />
+        </div>
+
+        {!LINEAR_WORKFLOWS.includes(calculatorType) && (
+          <ComponentSummary
+            calculatorType={calculatorType}
+            summary={componentSummary}
+            totalQuantities={totalQuantities}
+          />
+        )}
 
         <div className="flex flex-column pt-5 greet">
           <div>Thank You,</div>

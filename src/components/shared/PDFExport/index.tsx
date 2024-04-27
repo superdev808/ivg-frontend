@@ -46,10 +46,16 @@ const PDFExport: React.FC<PDFExportProps> = ({
 
   const filename = patientInfo?.filename || `${calculatorName}-Summary`;
 
-  const handleSave = async (name: string) => {
+  const handleCloseSaveDialog = () => {
+    setShowSaveDialog(false);
+  };
+
+  const handleSaveResult = async (name: string) => {
+    handleCloseSaveDialog();
+
     const compWithUpdatedQuantity = componentSummary.map((comp) => {
       const quantity = totalQuantities.find(
-        (elem) => elem.itemName === comp.itemName
+        (elem) => elem.id === comp.id
       )?.quantity;
 
       return {
@@ -161,14 +167,6 @@ const PDFExport: React.FC<PDFExportProps> = ({
     }
   };
 
-  const handleCloseSaveDialog = (resultName?: string) => {
-    setShowSaveDialog(false);
-
-    if (resultName) {
-      handleSave(resultName);
-    }
-  };
-
   const handleSubmit = (data: Patient) => {
     setVisible(false);
 
@@ -192,12 +190,13 @@ const PDFExport: React.FC<PDFExportProps> = ({
   };
 
   return (
-    <div className="relative flex justify-content-end mt-3">
+    <div className="relative flex justify-content-center mt-3">
       <div className="hidden">
         <div ref={contentRef}>
           {patientInfo && (
             <PDFContent
               calculatorName={calculatorName}
+              calculatorType={calculatorName}
               patientInfo={patientInfo}
               showTeethSelection={showTeethSelection}
               totalQuantities={totalQuantities}
@@ -208,27 +207,30 @@ const PDFExport: React.FC<PDFExportProps> = ({
         </div>
       </div>
 
-      <div className="flex align-items-center flex-shrink-0 gap-2">
+      <div className="flex align-items-center flex-shrink-0 gap-2 justify-content-center lg:align-items-center">
+        <Button
+          className="p-button p-button-lg px-5 py-2"
+          label="Email"
+          onClick={() => showPatientInfoDialog("export")}
+          style={{ fontSize: 28 }}
+        />
+
+        <Button
+          className="p-button p-button-lg px-5 py-2"
+          label="Export"
+          onClick={() => showPatientInfoDialog("download")}
+          style={{ fontSize: 28 }}
+        />
+
         {!hideSave && (
           <Button
-            className="px-3 py-2"
+            className="p-button p-button-lg px-5 py-2"
             label="Save"
             loading={isSavingResult}
             onClick={() => setShowSaveDialog(true)}
+            style={{ fontSize: 28 }}
           />
         )}
-
-        <Button
-          className="px-3 py-2"
-          label="Email"
-          onClick={() => showPatientInfoDialog("export")}
-        />
-
-        <Button
-          className="px-3 py-2"
-          label="Export"
-          onClick={() => showPatientInfoDialog("download")}
-        />
       </div>
 
       <Toast ref={toastRef} position="top-right" />
@@ -250,6 +252,7 @@ const PDFExport: React.FC<PDFExportProps> = ({
           isCustom ? "Custom Combinations" : "All-on-X Ordering Guide"
         }
         visible={showSaveDialog}
+        onSaveResult={handleSaveResult}
         onClose={handleCloseSaveDialog}
       />
     </div>

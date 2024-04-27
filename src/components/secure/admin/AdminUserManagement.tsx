@@ -28,7 +28,9 @@ import { EditUser } from "@/types/UserTypes";
 
 import AdminEditUser from "./AdminForms/AdminEditUser";
 
-const cx = classNames.bind({});
+import styles from "./Admin.module.scss";
+
+const cx = classNames.bind(styles);
 
 const AdminUserManagement: React.FC = () => {
   const { data, refetch } = useGetUsersListQuery({});
@@ -48,6 +50,7 @@ const AdminUserManagement: React.FC = () => {
     lastName: { value: null, matchMode: FilterMatchMode.CONTAINS },
     email: { value: null, matchMode: FilterMatchMode.CONTAINS },
     organizationName: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    organizationState: { value: null, matchMode: FilterMatchMode.EQUALS },
     role: { value: null, matchMode: FilterMatchMode.CONTAINS },
     verified: { value: null, matchMode: FilterMatchMode.EQUALS },
     active: { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -227,7 +230,7 @@ const AdminUserManagement: React.FC = () => {
     <div className="px-4">
       <div
         className={cx(
-          { "text-green-400": value, "text-red-400": !value },
+          { "text-light-green": value, "text-light-brown": !value },
           "border-round w-5 font-bold p-1"
         )}
       >
@@ -261,7 +264,7 @@ const AdminUserManagement: React.FC = () => {
         onHide={() => setSelectedUser(null)}
       >
         <p
-          className="cursor-pointer hover:text-gray-600"
+          className={cx("navLink")}
           onClick={(e) => {
             onEditUser();
             (menuPanel.current as OverlayPanel).toggle(e);
@@ -272,7 +275,7 @@ const AdminUserManagement: React.FC = () => {
 
         {!selectedUser?.verified && (
           <p
-            className="cursor-pointer hover:text-gray-600"
+            className={cx("navLink")}
             onClick={() => {
               onSendVerificationEmail(selectedUser as EditUser);
             }}
@@ -282,7 +285,7 @@ const AdminUserManagement: React.FC = () => {
         )}
 
         <p
-          className="cursor-pointer hover:text-gray-600"
+          className={cx("navLink")}
           onClick={() => {
             onSendResetPassword(selectedUser as EditUser);
           }}
@@ -291,12 +294,7 @@ const AdminUserManagement: React.FC = () => {
         </p>
 
         <p
-          className={cx(
-            "cursor-pointer",
-            { "text-red-500 hover:text-red-600": selectedUser?.active },
-            { "text-green-500 hover:text-green-600": !selectedUser?.active },
-            "hover:text-gray-600"
-          )}
+          className={cx("navLink")}
           onClick={() => {
             if (selectedUser?.active === true) {
               onDeactivateUser(selectedUser as EditUser);
@@ -342,7 +340,7 @@ const AdminUserManagement: React.FC = () => {
       optionLabel="label"
       optionValue="value"
       placeholder="Any"
-      className="p-column-filter border-round-xl"
+      className="p-column-filter border-round-xl w-full"
     />
   );
 
@@ -381,7 +379,7 @@ const AdminUserManagement: React.FC = () => {
     {
       field: "role",
       header: "Role",
-      body: (row: EditUser) => <span>{row.role}</span>,
+      body: (row: EditUser) => <span className="pl-4 pr-8">{row.role}</span>,
       sortable: true,
       filter: true,
       filterElement: roleFilterTemplate,
@@ -390,6 +388,13 @@ const AdminUserManagement: React.FC = () => {
       field: "organizationName",
       header: "Organization",
       body: (row: EditUser) => <span>{row.organizationName}</span>,
+      sortable: true,
+      filter: true,
+    },
+    {
+      field: "organizationState",
+      header: "Location",
+      body: (row: EditUser) => <span className="px-4">{row.organizationState}</span>,
       sortable: true,
       filter: true,
     },
@@ -429,7 +434,7 @@ const AdminUserManagement: React.FC = () => {
         <span className="text-2xl font-semibold">User Management</span>
       </div>
 
-      <div>
+      <div className="border-1 border-light-green border-round-2xl overflow-hidden">
         <DataTable
           stripedRows
           size="small"
@@ -443,6 +448,7 @@ const AdminUserManagement: React.FC = () => {
             "lastName",
             "email",
             "organizationName",
+            "organizationState",
             "role",
           ]}
           filters={filters}

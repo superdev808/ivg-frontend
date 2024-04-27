@@ -85,10 +85,10 @@ const SecondForm: React.FC<SecondFormProps> = ({
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="col-12 m-0 p-0 grid flex-column">
-        <span className="col-12 text-center text-2xl text-secondary">
+        <span className="col-12 text-center text-2xl text-dark-green">
           A few more questions
         </span>
-        <span className="col-12 text-center p-0 text-gray-600 mb-4">
+        <span className="col-12 text-center p-0 mb-4">
           To get started, tell us a little about yourself.
         </span>
 
@@ -225,13 +225,12 @@ const SecondForm: React.FC<SecondFormProps> = ({
                 <span className="p-float-label">
                   <InputText
                     id={field.name}
-                    className={cx({
-                      "p-invalid": fieldState.error,
-                      "w-full": true,
-                    })}
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
                     {...field}
                   />
-                  <label htmlFor={field.name}>Name</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Name
+                  </label>
                 </span>
               </div>
             )}
@@ -254,7 +253,9 @@ const SecondForm: React.FC<SecondFormProps> = ({
                     className={cx({ "p-invalid": fieldState.error }, "w-full")}
                   />
 
-                  <label htmlFor={field.name}>Location</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Location
+                  </label>
                 </span>
               </div>
             )}
@@ -273,13 +274,12 @@ const SecondForm: React.FC<SecondFormProps> = ({
                 <span className="p-float-label">
                   <InputText
                     id={field.name}
-                    className={cx({
-                      "p-invalid": fieldState.error,
-                      "w-full": true,
-                    })}
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
                     {...field}
                   />
-                  <label htmlFor={field.name}>License/School Number</label>
+                  <label className="bg-beige" htmlFor={field.name}>
+                    License/School Number
+                  </label>
                 </span>
               </div>
             )}
@@ -300,7 +300,7 @@ const SecondForm: React.FC<SecondFormProps> = ({
                 <div className="col-12 grid justify-content-between">
                   {referralSource.map((source) => (
                     <div
-                      className=" flex"
+                      className="flex"
                       style={{ width: 140 }}
                       key={`referral_${source.value.toString()}`}
                     >

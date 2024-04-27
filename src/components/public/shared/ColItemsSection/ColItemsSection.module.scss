@@ -1,7 +1,6 @@
 .col-container {
   display: flex;
   justify-content: center;
-  background-color: rgba(var(--primary-color-rgb), 0.1);
   padding: 2rem 0;
 }
 
@@ -15,8 +14,12 @@
     bottom: 0%;
     height: 1px;
     width: 40%;
-    background-color: rgba(var(--primary-color-rgb), 1);
+    background-color: var(--light-brown);
     transform: translateX(50%);
+  }
+
+  &.dark:not(:last-child)::after {
+    background-color: rgba(var(--primary-color-rgb), 1);
   }
 }
 
@@ -30,6 +33,10 @@
       bottom: 10%;
       width: 1px;
       height: 40%;
+      background-color: var(--light-brown);
+    }
+
+    &.dark:not(:last-child)::after {
       background-color: rgba(var(--primary-color-rgb), 1);
     }
   }

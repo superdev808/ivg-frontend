@@ -7,3 +7,11 @@ export interface ContactForm {
   message: string;
   token: string;
 }
+
+export interface RequestForm {
+  featureType: string;
+  productTypes: string;
+  notes: string;
+  discuss: string;
+  token: string;
+}

@@ -1,13 +1,7 @@
-'use client';
+"use client";
 
-import { ForbiddenContent } from '@/components/public/error/ForbiddenContent';
+import { ForbiddenContent } from "@/components/public/error/ForbiddenContent";
 
-const ForbiddenPage = () => {
-	return (
-		<>
-			<ForbiddenContent />
-		</>
-	);
-};
+const ForbiddenPage: React.FC = () => <ForbiddenContent />;
 
 export default ForbiddenPage;

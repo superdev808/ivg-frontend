@@ -1,51 +1,24 @@
 "use client";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+
 import Link from "next/link";
-import styles from "../Navigation.module.scss"
+
 import { useAppSelector } from "@/redux/hooks/hooks";
 
-const Logo = () => {
-  const {isLoading:authLoading, authenticated} = useAppSelector((state) => state.auth);
-  //update the size of the logo when the size of the screen changes
-  const [width, setWidth] = useState(0);
+import LogoLightIcon from "../../../../../public/images/logo/Ivory-Guide-Logo-Horizontal-Light.svg";
+import LogoDarkIcon from "../../../../../public/images/logo/Ivory-Guide-Logo-Horizontal-Dark.svg";
 
-  const updateWidth = () => {
-    const newWidth = window.innerWidth;
-    setWidth(newWidth);
-  };
+interface LogoProps {
+  light?: boolean;
+}
 
-  useEffect(() => {
-    window.addEventListener("resize", updateWidth);
-    updateWidth();
-  }, []);
+const Logo: React.FC<LogoProps> = ({ light }) => {
+  const { authenticated } = useAppSelector((state) => state.auth);
 
-  // change between the logo and the button when the user scrolls
-  const [showButton, setShowButton] = useState(false);
-
-  const changeNavButton = () => {
-    if (window.scrollY >= 400 && window.innerWidth < 768) {
-      setShowButton(true);
-    } else {
-      setShowButton(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", changeNavButton);
-  }, []);
+  const LogoComponent = light ? LogoLightIcon : LogoDarkIcon;
 
   return (
     <Link href={authenticated ? "/home" : "/"}>
-      <Image
-        src="/images/logo/Ivory-Guide-Horizontal-Logo-White.png"
-        alt="Logo"
-        // width={width < 1024 ? "180" : "320"}
-        // height={width < 1024 ? "45" : "64"}
-        width={"210"}
-        height={"35"}
-        className="relative"
-      />
+      <LogoComponent style={{ width: 210, height: 35 }} />
     </Link>
   );
 };

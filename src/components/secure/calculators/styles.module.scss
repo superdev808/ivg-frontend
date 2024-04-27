@@ -1,0 +1,156 @@
+.heading {
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--dark-green);
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.offering-section {
+  max-width: 350px;
+  box-sizing: content-box;
+
+  &__title {
+    font-size: 24px;
+  }
+
+  &__description {
+    font-size: 20px;
+  }
+
+  &__icon {
+    font-size: 60px;
+
+    @media screen and (max-width: 768px) {
+      font-size: 30px;
+    }
+  }
+
+  &:first-of-type {
+    padding-left: 10px;
+    padding-right: 100px;
+    border-style: solid;
+    border-color: var(--dark-green);
+    border-width: 0 2px 0 0;
+
+    @media screen and (max-width: 992px) {
+      padding-right: 50px;
+    }
+
+    @media screen and (max-width: 768px) {
+      padding: 0 0 30px 0;
+      border-width: 0 0 2px 0;
+    }
+  }
+
+  &:last-of-type {
+    padding-left: 100px;
+    padding-right: 10px;
+    border-style: solid;
+    border-color: var(--dark-green);
+    border-width: 0 0 0 2px;
+
+    @media screen and (max-width: 992px) {
+      padding-left: 50px;
+    }
+
+    @media screen and (max-width: 768px) {
+      padding: 30px 0 0 0;
+      border-width: 2px 0 0 0;
+    }
+  }
+}
+
+.slide {
+  overflow: hidden;
+  padding-bottom: 100px;
+  gap: 120px;
+
+  @media screen and (max-width: 768px) {
+    gap: 40px;
+  }
+
+  &__info {
+    width: 420px;
+
+    @media screen and (max-width: 768px) {
+      order: 2;
+      width: 100%;
+    }
+  }
+
+  &__title {
+    font-size: 28px;
+  }
+
+  &__description {
+    font-size: 20px;
+    padding: 8px 0 16px;
+  }
+
+  &__imageWrapper {
+    position: relative;
+    width: 500px;
+    height: 400px;
+    background-color: var(--dark-green);
+    z-index: 1;
+
+    @media screen and (max-width: 768px) {
+      order: 1;
+      width: 100%;
+      height: 300px;
+    }
+  }
+
+  &__imageWrapperNoHeight {
+    height: 0;
+  }
+
+  &__imageBackLeft,
+  &__imageBackRight {
+    position: absolute;
+    background-color: var(--light-green);
+    top: -50px;
+    bottom: -50px;
+    width: 100vw;
+    z-index: 0;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__imageBackLeft {
+    right: 80px;
+  }
+
+  &__imageBackRight {
+    left: 80px;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.nav-button {
+  width: 260px;
+
+  @media screen and (max-width: 992px) {
+    width: 240px;
+  }
+
+  @media screen and (max-width: 786px) {
+    width: 220px;
+  }
+
+  @media screen and (max-width: 690px) {
+    width: 200px;
+  }
+
+  @media screen and (max-width: 630px) {
+    width: 180px;
+  }
+}

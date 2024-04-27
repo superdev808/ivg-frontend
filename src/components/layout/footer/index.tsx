@@ -1,57 +1,61 @@
+import classNames from "classnames/bind";
 import Link from "next/link";
 import React from "react";
 
 import FooterExtended from "./FooterExtended";
 
-const devMode = process.env.NEXT_PUBLIC_DEV_MODE;
+import styles from "./Footer.module.scss";
+
+const cx = classNames.bind(styles);
+
+const IS_DEV_MODE = process.env.NEXT_PUBLIC_DEV_MODE;
 
 interface FooterProps {
   extendFooter?: boolean;
 }
 
 const Footer: React.FC<FooterProps> = ({ extendFooter }) => (
-  <div className="relative overflow-hidden">
-    <div className="radial-gradient z-0" />
+  <div className="relative overflow-hidde line-height-2 px-3 md:px-8">
     {extendFooter && <FooterExtended />}
-    <div className="flex px-3 md:px-8">
-      <div className="grid bg-tranparent m-0 h-5rem w-full">
-        <div className="col-12 md:col-5 flex flex-column align-items-start">
-          <p className="text-center md:text-left">
-            © {new Date().getFullYear()} Ivory Guide, LLC and its subsidiaries.
-            All rights reserved.
-          </p>
-        </div>
-        <div className="col-12 md:col-2 flex flex-column text-center">
-          <p className="text-center">
-            {devMode && (
-              <span className="text-red-700 border-1 border-red-700 border-round p-2 bg-red-100 z-0">
-                This is a development build.
-              </span>
-            )}
-          </p>
-        </div>
 
-        <div className="col-12 md:col-5 flex flex-column align-items-end">
-          <p className="text-center md:text-right">
-            <Link
-              href="/agreement"
-              className="text-600 font-bold"
-              target="_blank"
-              style={{ textDecorationColor: "var(--gray-600)" }}
-            >
-              Terms of Use
-            </Link>
-            {" | "}
-            <Link
-              href="/privacy-policy"
-              target="_blank"
-              className="text-600 font-bold"
-              style={{ textDecorationColor: "var(--gray-600)" }}
-            >
-              Privacy Notice
-            </Link>
-          </p>
-        </div>
+    <div
+      className={cx(
+        "relative flex flex-column gap-4 justify-content-between align-items-center py-5 text-center",
+        { "xl:flex-row": IS_DEV_MODE, "md:flex-row": !IS_DEV_MODE }
+      )}
+    >
+      <div className={cx("copyRight")}>
+        © {new Date().getFullYear()} Ivory Guide, LLC and its subsidiaries.
+        {"\n"}All rights reserved.
+      </div>
+
+      {IS_DEV_MODE && (
+        <span
+          className={cx(
+            "centerSection",
+            "text-dark-brown border-1 border-dark-brown border-round p-2 z-0"
+          )}
+        >
+          This is a development build.
+        </span>
+      )}
+
+      <div>
+        <Link
+          href="/agreement"
+          className="text-light-green font-bold"
+          target="_blank"
+        >
+          Terms of Use
+        </Link>
+        {" | "}
+        <Link
+          href="/privacy-policy"
+          target="_blank"
+          className="text-light-green font-bold"
+        >
+          Privacy Notice
+        </Link>
       </div>
     </div>
   </div>

@@ -3,7 +3,6 @@ import classNames from "classnames/bind";
 import html2pdf from "html2pdf.js";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { Image } from "primereact/image";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 import { useRef, useState } from "react";
@@ -11,11 +10,12 @@ import { useRef, useState } from "react";
 import PatientInfo from "@/components/shared/PatientInfo";
 import PDFContent from "@/components/shared/PDFExport/PDFContent";
 import SaveDialog from "@/components/shared/SaveDialog";
-import { getQuizByCalculator, prepareExportProps } from "@/helpers/calculators";
-import { getCalculatorName, productImages } from "@/helpers/util";
+import { CALCULATOR_IMAGES } from "@/constants/calculators";
+import { prepareExportProps } from "@/helpers/calculators";
 import { event as gaEvent } from "@/lib/gtag";
 import {
   useGetUserInfoQuery,
+  useSaveCalculatorMutation,
   useSaveResultMutation,
   useUpdateSavedResultMutation,
 } from "@/redux/hooks/apiHooks";
@@ -24,6 +24,8 @@ import { InputDetail, ItemData, Patient } from "@/types/calculators";
 import Outputs from "./Outputs";
 
 import styles from "./style.module.scss";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
+import InputSummary from "./InputSummary";
 
 const cx = classNames.bind(styles);
 
@@ -35,7 +37,7 @@ interface ResultProps {
   calculatorType: string;
   hideMenu?: boolean;
   className?: string;
-  onUpdateQuantity: (quantity: number, itemName: string) => void;
+  onUpdateQuantity: (quantity: number, groupId: string) => void;
 }
 
 const Result: React.FC<ResultProps> = ({
@@ -49,8 +51,11 @@ const Result: React.FC<ResultProps> = ({
   onUpdateQuantity,
 }) => {
   const { refetch } = useGetUserInfoQuery({});
+  const [saveCalculator, { isLoading: isSavingCalculator }] =
+    useSaveCalculatorMutation();
   const [saveResult, { isLoading: isSavingResult }] = useSaveResultMutation();
   const [updateSavedResult] = useUpdateSavedResultMutation();
+  const { calcInfoMap } = useCalculatorsInfo();
 
   const [showSaveDialog, setShowSaveDialog] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<"init" | "started" | "pending">(
@@ -64,10 +69,10 @@ const Result: React.FC<ResultProps> = ({
   const contentRef = useRef(null);
   const toastRef = useRef(null);
 
-  const calculatorName = getCalculatorName(calculatorType);
+  const calculatorName = calcInfoMap[calculatorType].label;
   const filename = patientInfo?.filename || `${calculatorName}-Summary`;
 
-  const image = productImages[calculatorType] || productImages["Default"];
+  const image = CALCULATOR_IMAGES[calculatorType];
 
   const isSaved = Boolean(id);
 
@@ -170,7 +175,13 @@ const Result: React.FC<ResultProps> = ({
     setVisible(true);
   };
 
-  const handleSave = async (name: string) => {
+  const handleCloseSaveDialog = () => {
+    setShowSaveDialog(false);
+  };
+
+  const handleSaveResult = async (name: string) => {
+    handleCloseSaveDialog();
+
     const payload = {
       calculatorType,
       items,
@@ -201,11 +212,30 @@ const Result: React.FC<ResultProps> = ({
     }
   };
 
-  const handleCloseSaveDialog = (resultName?: string) => {
-    setShowSaveDialog(false);
+  const handleSaveCalculator = async () => {
+    handleCloseSaveDialog();
 
-    if (resultName) {
-      handleSave(resultName);
+    const payload = { calculatorType };
+
+    try {
+      await saveCalculator(payload).unwrap();
+      refetch();
+
+      (toastRef.current as any).show({
+        severity: "success",
+        summary: "Success",
+        detail: "Saved calculator successfully",
+        life: 3000,
+        className: "mt-8",
+      });
+    } catch (error) {
+      (toastRef.current as any).show({
+        severity: "error",
+        summary: "Error",
+        detail: "Failed to save calculator",
+        life: 3000,
+        className: "mt-8",
+      });
     }
   };
 
@@ -272,13 +302,16 @@ const Result: React.FC<ResultProps> = ({
       <SaveDialog
         visible={showSaveDialog}
         defaultValue={name || calculatorName}
+        showSaveCalculator
+        onSaveCalculator={handleSaveCalculator}
+        onSaveResult={handleSaveResult}
         onClose={handleCloseSaveDialog}
       />
 
       <div className={cx("flex flex-column gap-4", className)}>
         <div
-          className={`flex flex-column gap-4 justify-content-between
-          lg:flex-row lg:align-items-center`}
+          className={`flex flex-column justify-content-center
+          align-items-center gap-2 lg:flex-row`}
         >
           <div className="flex align-items-center gap-2">
             {editMode !== "init" ? (
@@ -328,74 +361,57 @@ const Result: React.FC<ResultProps> = ({
           </div>
 
           {!hideMenu && (
-            <div className="flex align-items-center flex-shrink-0 gap-2">
+            <div className="flex align-items-center flex-shrink-0 gap-2 justify-content-center lg:align-items-center">
               <Button
-                className="px-3 py-2"
+                className="p-button p-button-lg px-5 py-2"
                 label="Email"
                 onClick={() => showPatientInfoDialog("export")}
+                style={{ fontSize: 28 }}
               />
               <Button
-                className="px-3 py-2"
+                className="p-button p-button-lg px-5 py-2"
                 label="Export"
                 onClick={() => showPatientInfoDialog("download")}
+                style={{ fontSize: 28 }}
               />
               {!isSaved && (
                 <Button
-                  className="px-3 py-2"
+                  className="p-button p-button-lg px-5 py-2"
                   label="Save"
-                  loading={isSavingResult}
+                  loading={isSavingCalculator || isSavingResult}
                   onClick={() => setShowSaveDialog(true)}
+                  style={{ fontSize: 28 }}
                 />
               )}
             </div>
           )}
         </div>
 
-        <div className="flex justify-content-between align-items-center gap-4 flex-column lg:flex-row">
-          {image && (
-            <div
-              className={cx(
-                "flex-1 flex justify-content-center overflow-hidden",
-                "image"
-              )}
-            >
-              <Image
-                src={image}
-                alt={name}
-                className="flex-1 flex justify-content-center"
-                imageClassName="w-full sm:w-5 lg:w-full lg:h-full"
-                imageStyle={{ objectFit: "contain" }}
-              />
-            </div>
-          )}
+        <Outputs
+          calculatorType={calculatorType}
+          items={items}
+          onUpdateQuantity={onUpdateQuantity}
+        />
 
-          <div
-            className={cx(
-              "bg-white flex flex-column justify-content-around gap-3 shadow-6 p-4 border-round-md",
-              "quiz"
-            )}
-          >
-            {getQuizByCalculator(quiz, calculatorName).map(
-              ({ question, answer }) => (
-                <div key={question} className="flex gap-1">
-                  <div className="text-left" style={{ maxWidth: "50%" }}>
-                    {question}
-                  </div>
-                  <div className="flex-1 text-right">{answer}</div>
-                </div>
-              )
-            )}
-          </div>
-        </div>
-
-        <Outputs items={items} onUpdateQuantity={onUpdateQuantity} />
+        <InputSummary
+          name={name}
+          calculatorType={calculatorType}
+          quiz={quiz}
+          image={image}
+        />
       </div>
 
       <div className="hidden">
         <div ref={contentRef}>
           {patientInfo && (
             <PDFContent
-              {...prepareExportProps(calculatorType, patientInfo, quiz, items)}
+              {...prepareExportProps(
+                calculatorType,
+                calculatorName,
+                patientInfo,
+                quiz,
+                items
+              )}
             />
           )}
         </div>

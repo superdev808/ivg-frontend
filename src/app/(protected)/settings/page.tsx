@@ -1,11 +1,7 @@
-'use client';
+"use client";
 
 import SettingsContainers from "@/components/secure/settings/SettingsContainers";
 
-export default function SettingsPage() {
-	return (
-		<>
-			<SettingsContainers/>
-		</>
-	);
-}
+const SettingsPage: React.FC = () => <SettingsContainers />;
+
+export default SettingsPage;

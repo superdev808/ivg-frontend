@@ -4,6 +4,7 @@
 @import "@/styles/theme.scss";
 
 @import "@/styles/public.scss";
+@import "@/styles/calculator-explore.scss";
 
 html,
 body {
@@ -15,8 +16,8 @@ body {
   font-family: var(--font-family);
   font-weight: normal;
   font-style: normal;
-  background-color: var(--surface-0);
-  color: var(--secondary-color);
+  background-color: var(--beige);
+  color: var(--light-green);
 }
 
 /* ===== Scrollbar CSS ===== */
@@ -52,10 +53,6 @@ body {
   z-index: 0;
 }
 
-.nav-offset {
-  padding-top: 5rem;
-}
-
 .radial-gradient {
   position: absolute;
   bottom: -400px;
@@ -64,7 +61,6 @@ body {
   background: radial-gradient(circle, #a6c7b470 0%, rgba(131, 184, 153, 0) 75%);
   left: 50%;
   transform: translateX(-50%);
-  // transform: translateY(-50%);
 }
 
 td {
@@ -89,7 +85,6 @@ td {
 
 .container {
   width: 100%;
-  height: calc(100vh - 5rem);
   z-index: 1;
 
   .wrapper {
@@ -122,8 +117,12 @@ td {
 .btn-secondary {
   @include styleclass("bg-secondary focus:bg-primary justify-content-center");
   &:hover {
-    background: rgba(var(--secondary-color-rgb), 0.85) !important;
+    background: rgba(var(--dark-green), 0.85) !important;
   }
+}
+
+.btn-light-brown {
+  @include styleclass("text-light-green border-light-green bg-light-brown");
 }
 
 // SWIPER

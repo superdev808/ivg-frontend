@@ -1,3 +1,19 @@
-.quiz-card--selected {
-  border-color: var(--teal-500) !important;
+.quiz-card {
+  border-style: solid;
+  border-color: var(--light-green);
+
+  &:hover,
+  &--selected {
+    border-color: var(--dark-brown);
+    color: var(--dark-brown);
+  }
+}
+
+.heading {
+  max-width: 70%;
+
+  @media screen and (max-width: 768px) {
+    max-width: initial;
+    padding-left: 80px;
+  }
 }
