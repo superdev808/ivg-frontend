@@ -173,6 +173,7 @@ export interface CalculatorInfoMap {
     description?: string;
     disabled?: boolean;
     isCustom?: boolean;
+    isProduction?: boolean;
     input: InputOutputValues[];
     output: InputOutputValues[];
   };

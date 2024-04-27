@@ -17,6 +17,7 @@ import {
   CalculatorInfoMap,
   EXPLORE_DATA,
   EXPLORE_DATA_ITEM,
+  EXPLORE_DATA_SECTION,
   InputAndResponse,
   InputDetail,
   InputOutputValues,
@@ -98,7 +99,9 @@ export const getProcedureCollections = (
         break;
     }
   } else {
-    collections = Object.keys(calcInfoMap).filter(collection => calcInfoMap[collection].isCustom);
+    collections = Object.keys(calcInfoMap).filter(
+      (collection) => calcInfoMap[collection].isCustom
+    );
   }
 
   return collections.sort();
@@ -416,4 +419,36 @@ export const updateExploreAllData = (
         finalData[i].sections[j].items = data;
   }
   return finalData;
+};
+
+const getExploreDataItems = (
+  data: EXPLORE_DATA_ITEM | EXPLORE_DATA_SECTION
+): EXPLORE_DATA_ITEM[] => {
+  return [
+    data,
+    ...(data.items ? _.flatMap(data.items, getExploreDataItems) : []),
+  ];
+};
+
+export const hasChildrenCalculator = (
+  item: EXPLORE_DATA_ITEM | EXPLORE_DATA_SECTION,
+  calcInfoMap: CalculatorInfoMap
+) => {
+  if (!Array.isArray(item.items)) return false;
+  const IS_DEV_MODE = process.env.NEXT_PUBLIC_DEV_MODE;
+  if (IS_DEV_MODE) return item.items.length > 0;
+  else {
+    return (
+      getExploreDataItems(item).filter(
+        (calculatorItem) =>
+          !Array.isArray(calculatorItem.items) &&
+          Object.keys(calcInfoMap).filter(
+            (calcType) =>
+              new RegExp(`^/calculators/${calcType}(\\?.+)?$`).test(
+                calculatorItem.href || ""
+              ) && calcInfoMap[calcType].isProduction === true
+          ).length > 0
+      ).length > 0
+    );
+  }
 };
