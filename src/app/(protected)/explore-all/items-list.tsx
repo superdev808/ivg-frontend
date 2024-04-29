@@ -5,6 +5,9 @@ import React, { useMemo, useState } from "react";
 import { EXPLORE_DATA_ITEM } from "@/types/calculators";
 
 import styles from "./items-list.module.scss";
+import _ from "lodash";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
+import { hasChildrenCalculator } from "@/helpers/calculators";
 
 const cx = classNames.bind(styles);
 
@@ -15,6 +18,7 @@ interface ItemsListProps {
 
 const ItemsList: React.FC<ItemsListProps> = ({ item, renderItems }) => {
   const router = useRouter();
+  const { calcInfoMap } = useCalculatorsInfo();
 
   const [isOpened, setIsOpened] = useState<boolean>(
     Boolean(item.openByDefault)
@@ -29,24 +33,27 @@ const ItemsList: React.FC<ItemsListProps> = ({ item, renderItems }) => {
   };
 
   const hasItems = useMemo(() => {
-    return Array.isArray(item.items) && item.items.length > 0;
-  }, [item]);
+    if (!Array.isArray(item.items)) return false;
+    return hasChildrenCalculator(item, calcInfoMap);
+  }, [item, calcInfoMap]);
 
   return (
-    <div className="flex flex-column gap-1">
-      <div
-        className={cx("cursor-pointer text-xl", {
-          "font-bold": hasItems || item.isHighlighted,
-          "item-with-children": hasItems,
-          "item-without-children": !hasItems,
-        })}
-        onClick={handleToggle}
-      >
-        {item.name} {hasItems && (isOpened ? "-" : "+")}
-      </div>
+    (hasItems || item.href) && (
+      <div className="flex flex-column gap-1">
+        <div
+          className={cx("cursor-pointer text-xl", {
+            "font-bold": hasItems || item.isHighlighted,
+            "item-with-children": hasItems,
+            "item-without-children": !hasItems,
+          })}
+          onClick={handleToggle}
+        >
+          {item.name} {hasItems && (isOpened ? "-" : "+")}
+        </div>
 
-      {isOpened && hasItems && renderItems(item.items)}
-    </div>
+        {isOpened && hasItems && renderItems(item.items)}
+      </div>
+    )
   );
 };
 
