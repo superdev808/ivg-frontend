@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
 // Sections
-import { HomeContentSection } from '@/components/public/home/HomeContentSection';
-import { HomeHeroSection } from '@/components/public/home/HomeHeroSection';
+import { HomeCarouselSection } from "@/components/public/home/HomeCarouselSection";
+import { HomeContentSection } from "@/components/public/home/HomeContentSection";
 
 export default function Index() {
-	return (
-		<>
-			<HomeHeroSection />
-			<HomeContentSection />
-		</>
-	);
+  return (
+    <>
+      <HomeCarouselSection />
+      <HomeContentSection />
+    </>
+  );
 }

@@ -159,7 +159,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
             outputFields={output}
             questions={input}
             answers={answers}
-            onGoBack={handleBackFromResult}
+            onGoBack={level > defaultAnswers.length ? handleBackFromResult : undefined}
           />
         ) : (
           <FeedbackDialogWrapper

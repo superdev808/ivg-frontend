@@ -38,3 +38,62 @@
     }
   }
 }
+
+.slide {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 30px;
+
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 6fr 6fr;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__socialButtons {
+    display: flex;
+    top: 50%;
+    transform: translateY(-50%);
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__content {
+    @media screen and (max-width: 768px) {
+      order: 2;
+    }
+  }
+
+  &__imageWrapper {
+    height: 500px;
+
+    @media screen and (max-width: 768px) {
+      height: auto;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    @media screen and (max-width: 768px) {
+      position: initial;
+      left: initial;
+      top: initial;
+      bottom: initial;
+      height: 300px;
+      order: 1;
+    }
+  }
+}

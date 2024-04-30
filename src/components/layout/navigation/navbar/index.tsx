@@ -191,7 +191,7 @@ const Navbar: React.FC<NavbarProps> = ({
         >
           {[...navLinks, ...rightNavLinks]
             .filter(sidebarLinksFilter)
-            .map((item) => (
+            .map((item) => item.link && (
               <Link
                 href={item.link || ""}
                 key={item.id}

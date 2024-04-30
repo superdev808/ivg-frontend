@@ -202,6 +202,7 @@ export const INFORMATIONAL_CALCULATOR_TYPES = [
   "PhysicalImpression",
   "IsolationTechniques",
   "ToothPreparation",
+  "ImplantTorqueGuide"
 ];
 
 export const MATERIAL_CALCULATOR_TYPES = [
@@ -730,6 +731,11 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                     ],
                   },
                 ],
+              },
+              {
+                name: "Implant Torques Guide",
+                isHighlighted: true,
+                href: "/calculators/ImplantTorqueGuide",
               },
             ],
           },
