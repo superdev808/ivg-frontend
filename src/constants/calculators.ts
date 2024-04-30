@@ -202,6 +202,7 @@ export const INFORMATIONAL_CALCULATOR_TYPES = [
   "PhysicalImpression",
   "IsolationTechniques",
   "ToothPreparation",
+  "ImplantTorqueGuide"
 ];
 
 export const MATERIAL_CALCULATOR_TYPES = [
