@@ -84,16 +84,13 @@ export const HomeCarouselSection: React.FC = () => {
                   High Quality Dental Care At Your Fingertips
                 </div>
 
-                <div className="capitalize bg-beige border-dark-brown border-3 border-round-xl text-dark-brown px-8 py-4 text-3xl">
+                <div className="capitalize bg-beige border-dark-brown border-3 border-solid border-round-xl text-dark-brown px-4 py-4 text-4xl sm:text-5xl lg:text-6xl">
                   {name}
                 </div>
 
                 {!authenticated && (
                   <Button
-                    className={cx(
-                      "bg-beige border-light-green border-3 border-round-xl text-light-green",
-                      "font-bold"
-                    )}
+                    className={cx("slide__joinButton", "font-bold")}
                     onClick={handleJoin}
                   >
                     Join for FREE
