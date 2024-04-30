@@ -202,7 +202,7 @@ export const INFORMATIONAL_CALCULATOR_TYPES = [
   "PhysicalImpression",
   "IsolationTechniques",
   "ToothPreparation",
-  "ImplantTorqueGuide"
+  "ImplantTorqueGuide",
 ];
 
 export const MATERIAL_CALCULATOR_TYPES = [
@@ -667,9 +667,17 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                 ],
               },
               {
-                name: "Implant Screws",
-                isHighlighted: true,
-                href: "/calculators/ImplantScrews",
+                name: "Screws",
+                items: [
+                  {
+                    name: "Cover Screws",
+                    href: "/calculators/CoverScrews",
+                  },
+                  {
+                    name: "Implant Screws",
+                    href: "/calculators/ImplantScrews",
+                  },
+                ],
               },
               {
                 name: "Implant Analogs",
