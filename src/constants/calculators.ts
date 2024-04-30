@@ -731,6 +731,11 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                   },
                 ],
               },
+              {
+                name: "Implant Torques Guide",
+                isHighlighted: true,
+                href: "/calculators/ImplantTorqueGuide",
+              },
             ],
           },
           {
