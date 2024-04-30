@@ -4,6 +4,7 @@ import React, { useMemo } from "react";
 import TeethSelector, {
   TeethSelectorVariant,
 } from "@/components/shared/TeethSelector";
+import { LINEAR_WORKFLOWS } from "@/constants/calculators";
 import { getCookie } from "@/helpers/cookie";
 import { formatDate, formatTime } from "@/helpers/util";
 import {
@@ -17,7 +18,6 @@ import ComponentSummary from "../ComponentSummary";
 import InputSummary from "../InputSummary";
 
 import styles from "./styles.module.scss";
-import { LINEAR_WORKFLOWS } from "@/constants/calculators";
 
 const cx = classNames.bind(styles);
 
@@ -140,7 +140,8 @@ const PDFContent: React.FC<PDFContentProps> = ({
         {!LINEAR_WORKFLOWS.includes(calculatorType) && (
           <ComponentSummary
             calculatorType={calculatorType}
-            summary={componentSummary}
+            componentSummary={componentSummary}
+            inputSummary={inputSummary}
             totalQuantities={totalQuantities}
           />
         )}

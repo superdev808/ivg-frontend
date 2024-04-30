@@ -10,6 +10,7 @@ import {
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
   MATERIAL_CALCULATOR_TYPES,
   MUA_OPTIONS,
+  POPUP_TEXTS,
   PROCEDURE_INPUTS_AND_RESPONSE,
   QUANTITY_MULTIPLES_LIST,
 } from "@/constants/calculators";
@@ -451,4 +452,13 @@ export const hasChildrenCalculator = (
       ).length > 0
     );
   }
+};
+
+export const filterPopups = (shouldInclude: boolean) => (key: string) => {
+  if (key == "id" || key == "quantity" || key == "link") return false;
+  const { groupText } = deserializeColInfo(key);
+  return POPUP_TEXTS.filter((popupText) => groupText.startsWith(popupText))
+    .length > 0
+    ? shouldInclude
+    : !shouldInclude;
 };

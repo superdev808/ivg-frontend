@@ -5,7 +5,7 @@ import React from "react";
 import { isValidUrl } from "@/helpers/calculators";
 import { Summary } from "@/types/calculators";
 
-import styles from "../InputSummary/styles.module.scss";
+import styles from "../../InputSummary/styles.module.scss";
 
 const cx = classNames.bind(styles);
 

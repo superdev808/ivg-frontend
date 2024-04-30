@@ -13,12 +13,12 @@ const LinearWorkflowInputSummary: React.FC<LinearWorkflowInputSummaryProps> = ({
   quiz,
 }) => (
   <>
-    {quiz.map((question) => {
-      const isAction = /^action/ig.test(question.questionText);
+    {quiz.map((question, questionIdx) => {
+      const isAction = /^action/gi.test(question.questionText);
 
       return (
         <div
-          key={question.id}
+          key={questionIdx}
           className={cx(
             "flex flex-column gap-3 border-2 border-round-md p-3 text-dark-green",
             {
