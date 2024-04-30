@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MATERIAL_CALCULATOR_TYPES } from "@/constants/calculators";
+import { INFORMATIONAL_CALCULATOR_TYPES } from "@/constants/calculators";
 import { Summary, TotalQuantities } from "@/types/calculators";
 
 import GenericComponentSummary from "./Generic";
@@ -17,14 +17,14 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
   summary,
   totalQuantities,
 }) => {
-  const isMaterialCalculator =
-    MATERIAL_CALCULATOR_TYPES.includes(calculatorType);
+  const isInformationalCalculator =
+    INFORMATIONAL_CALCULATOR_TYPES.includes(calculatorType);
 
   return (
     <>
       <h3 className="mb-1">Options:</h3>
 
-      {isMaterialCalculator ? (
+      {isInformationalCalculator ? (
         <MaterialComponentSummary summary={summary} />
       ) : (
         <GenericComponentSummary
