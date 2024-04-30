@@ -88,7 +88,7 @@ export const HomeCarouselSection: React.FC = () => {
                   {name}
                 </div>
 
-                {authenticated && (
+                {!authenticated && (
                   <Button
                     className={cx(
                       "bg-beige border-light-green border-3 border-round-xl text-light-green",
