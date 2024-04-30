@@ -23,7 +23,7 @@ interface DetailViewProps {
   outputFields: InputOutputValues[];
   questions: InputOutputValues[];
   answers: string[];
-  onGoBack: () => void;
+  onGoBack?: () => void;
 }
 
 const DetailView: React.FC<DetailViewProps> = ({
@@ -49,7 +49,11 @@ const DetailView: React.FC<DetailViewProps> = ({
   const quiz = useMemo(() => {
     return questions.reduce((acc, question, idx) => {
       if (answers[idx]) {
-        acc.push({ question: question.colName, questionText: question.groupText, answer: answers[idx] });
+        acc.push({
+          question: question.colName,
+          questionText: question.groupText,
+          answer: answers[idx],
+        });
       }
 
       return acc;
@@ -101,11 +105,13 @@ const DetailView: React.FC<DetailViewProps> = ({
   return (
     <>
       <div className="relative md:p-2 md:text-center">
-        <Button
-          icon="pi pi-arrow-left"
-          className="left-0 md:mt-3 md:absolute lg:ml-3 text-6xl px-5"
-          onClick={onGoBack}
-        />
+        {onGoBack && (
+          <Button
+            icon="pi pi-arrow-left"
+            className="left-0 md:mt-3 md:absolute lg:ml-3 text-6xl px-5"
+            onClick={onGoBack}
+          />
+        )}
         <h2>{calculatorName} Calculator</h2>
       </div>
 
