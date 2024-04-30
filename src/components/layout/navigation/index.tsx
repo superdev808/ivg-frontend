@@ -119,7 +119,7 @@ const Navigation = ({ authenticated, light }: NavigationProps) => {
     {
       id: "saved-results",
       title: "Saved Results",
-      link: "/saved-results",
+      link: "/settings/saved-results",
       icon: PrimeIcons.USER,
       visibility: "authenticatedSidebar",
     },
