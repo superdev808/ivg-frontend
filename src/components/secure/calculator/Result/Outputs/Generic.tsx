@@ -2,11 +2,12 @@ import classNames from "classnames/bind";
 import Link from "next/link";
 import React from "react";
 
+import { INFORMATIONAL_CALCULATOR_TYPES } from "@/constants/calculators";
 import {
-  INFORMATIONAL_CALCULATOR_TYPES,
-  POPUP_TEXTS,
-} from "@/constants/calculators";
-import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
+  deserializeColInfo,
+  filterPopups,
+  isValidUrl,
+} from "@/helpers/calculators";
 import { ItemInsights } from "@/types/calculators";
 
 import PopupOutput from "./Popup";
@@ -21,17 +22,7 @@ interface GenericOutputProps {
   item: ItemInsights;
 }
 
-const filterPopups = (shouldInclude: boolean) => (key: string) => {
-  if (key == "id" || key == "quantity" || key == "link") return false;
-  const { groupText } = deserializeColInfo(key);
-  return POPUP_TEXTS.filter((popupText) => groupText.startsWith(popupText))
-    .length > 0
-    ? shouldInclude
-    : !shouldInclude;
-};
-
 const GenericOutput: React.FC<GenericOutputProps> = ({
-  label,
   item,
   calculatorType,
 }) => {
@@ -53,7 +44,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
         count += 1;
         newSubGroupItem["id"] = transformedItems.length;
       }
-      if (count == 2) break;
+      if (count === 2) break;
       newSubGroupItem[sortedKeys[j]] = item[sortedKeys[j]];
     }
     transformedItems.push(newSubGroupItem);
