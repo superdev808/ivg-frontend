@@ -23,7 +23,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
   calculatorType,
 }) => {
   const { groupName } = deserializeColInfo(
-    Object.keys(item).filter((key) => key && !isPopup(key))[0]
+    Object.keys(item).filter((key) => key && isPopup(key) == false)[0]
   );
   const sortedKeys = Object.keys(item).sort(
     (left, right) =>
@@ -35,7 +35,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
     let newSubGroupItem: Record<string, string | number> = {},
       count = 0;
     for (j = i; j < sortedKeys.length; ++j) {
-      if (!isPopup(sortedKeys[j])) {
+      if (isPopup(sortedKeys[j]) === false) {
         // if the key is not reasoning column or supporting article column
         count += 1;
         newSubGroupItem["id"] = transformedItems.length;
@@ -69,7 +69,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
             />
           </div>
           {Object.keys(subgroupItem)
-            .filter((key) => !isPopup(key))
+            .filter((key) => isPopup(key) === false)
             .map((key) => {
               const { groupText } = deserializeColInfo(key);
               const value = subgroupItem[key];

@@ -15,6 +15,7 @@ import {
   QUANTITY_MULTIPLES_LIST,
 } from "@/constants/calculators";
 import {
+  ANSWER_TYPE,
   CalculatorInfoMap,
   EXPLORE_DATA,
   EXPLORE_DATA_ITEM,
@@ -455,8 +456,10 @@ export const hasChildrenCalculator = (
 };
 
 export const isPopup = (key: string) => {
-  if (key == "id" || key == "quantity" || key == "link") return false;
+  if (key == "id" || key == "quantity" || key == "link") return null;
   const { groupText } = deserializeColInfo(key);
   return POPUP_TEXTS.filter((popupText) => groupText.startsWith(popupText))
     .length > 0;
 };
+
+export const isEmptyAnswer = (answer: ANSWER_TYPE) => Object.values(answer).filter(answer => answer).length == 0;

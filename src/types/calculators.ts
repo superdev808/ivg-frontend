@@ -198,3 +198,5 @@ export interface EXPLORE_DATA {
   description?: string;
   sections: EXPLORE_DATA_SECTION[];
 }
+
+export type ANSWER_TYPE = Record<string, string>;

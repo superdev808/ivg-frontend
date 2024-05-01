@@ -15,7 +15,7 @@ import {
   BRAND_IMAGES,
   SHOULD_DISPLAY_TEXT_ONLY,
 } from "@/constants/calculators";
-import { InputOutputValues } from "@/types/calculators";
+import { ANSWER_TYPE, InputOutputValues } from "@/types/calculators";
 
 import PopupOutput from "./Result/Outputs/Popup";
 
@@ -26,12 +26,12 @@ const cx = classNames.bind(styles);
 interface QuizProps {
   calculatorName?: string;
   question: InputOutputValues;
-  currentAnswer: string;
-  answers: string[];
+  currentAnswer: ANSWER_TYPE | null | undefined;
+  answers: ANSWER_TYPE[];
   disabled?: boolean;
   progress?: number;
   onGoBack?: () => void;
-  onSelectAnswer: (e: string) => void;
+  onSelectAnswer: (e: ANSWER_TYPE) => void;
 }
 
 const Quiz: React.FC<QuizProps> = ({
@@ -55,9 +55,11 @@ const Quiz: React.FC<QuizProps> = ({
 
   const filteredAnswers = useMemo(() => {
     return (
-      answers?.filter((answer) => answer.includes(selectedSuggestion)) || []
+      answers?.filter((answer) =>
+        answer[question.colIndex]?.includes(selectedSuggestion)
+      ) || []
     );
-  }, [answers, selectedSuggestion]);
+  }, [answers, selectedSuggestion, question]);
 
   const questionName = useMemo(() => {
     if (/^action/gi.test(question.groupText)) {
@@ -81,13 +83,19 @@ const Quiz: React.FC<QuizProps> = ({
       return [];
     }
 
-    if (/^\d/gi.test(availableOptions[0])) {
-      return orderBy(availableOptions, (option) => parseFloat(option), ["asc"]);
+    if (/^\d/gi.test(availableOptions[0][question.colIndex])) {
+      return orderBy(
+        availableOptions,
+        (option) => parseFloat(option[question.colIndex]),
+        ["asc"]
+      );
     } // else {
     //   return orderBy(availableOptions, (option) => option, ["asc"]);
     // }
     return availableOptions;
-  }, [filteredAnswers, showAll]);
+  }, [filteredAnswers, showAll, question]);
+
+  console.log(answers, filteredAnswers, disabled);
 
   const dropdownOptionTemplate = (option: string) => {
     const image = BRAND_IMAGES[String(option).toLowerCase()];
@@ -118,7 +126,8 @@ const Quiz: React.FC<QuizProps> = ({
 
   const handleAutoCompleteMethod = (e: AutoCompleteCompleteEvent) => {
     const filteredSuggestions = answers
-      ?.filter((item) => item.toLowerCase().includes(e.query.toLowerCase()))
+      .map((item) => item[question.colIndex])
+      .filter((item) => item.toLowerCase().includes(e.query.toLowerCase()))
       .sort((a, b) => a.localeCompare(b));
 
     setSuggestions(filteredSuggestions);
@@ -134,9 +143,9 @@ const Quiz: React.FC<QuizProps> = ({
 
   useEffect(() => {
     if (answers && answers.length) {
-      setSuggestions(answers?.sort());
+      setSuggestions(answers.map((item) => item[question.colIndex]).filter(item => item).sort());
     }
-  }, [answers]);
+  }, [answers, question]);
 
   return (
     <>
@@ -238,7 +247,12 @@ const Quiz: React.FC<QuizProps> = ({
                         className={cx(
                           "quiz-card",
                           "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer bg-white",
-                          { "quiz-card--selected": currentAnswer === answer }
+                          {
+                            "quiz-card--selected":
+                              currentAnswer &&
+                              currentAnswer[question.colIndex] ===
+                                answer[question.colIndex],
+                          }
                         )}
                         style={{ height: 200 }}
                       >
@@ -249,17 +263,19 @@ const Quiz: React.FC<QuizProps> = ({
                             height="100%"
                             imageClassName="p-4"
                             imageStyle={{ objectFit: "contain" }}
-                            alt={answer}
+                            alt={answer[question.colIndex]}
                           />
                         ) : (
                           <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
-                            {answer}
+                            {answer[question.colIndex]}
                           </div>
                         )}
                       </div>
 
                       {image && (
-                        <p className="w-full text-3xl text-center">{answer}</p>
+                        <p className="w-full text-3xl text-center">
+                          {answer[question.colIndex]}
+                        </p>
                       )}
                     </div>
                   );
