@@ -143,7 +143,12 @@ const Quiz: React.FC<QuizProps> = ({
 
   useEffect(() => {
     if (answers && answers.length) {
-      setSuggestions(answers.map((item) => item[question.colIndex]).filter(item => item).sort());
+      setSuggestions(
+        answers
+          .map((item) => item[question.colIndex])
+          .filter((item) => item)   // while loading, `answers` object doesn't hold `question.colIndex` field and becomes null
+          .sort()
+      );
     }
   }, [answers, question]);
 
