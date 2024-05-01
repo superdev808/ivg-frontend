@@ -454,11 +454,9 @@ export const hasChildrenCalculator = (
   }
 };
 
-export const filterPopups = (shouldInclude: boolean) => (key: string) => {
+export const isPopup = (key: string) => {
   if (key == "id" || key == "quantity" || key == "link") return false;
   const { groupText } = deserializeColInfo(key);
   return POPUP_TEXTS.filter((popupText) => groupText.startsWith(popupText))
-    .length > 0
-    ? shouldInclude
-    : !shouldInclude;
+    .length > 0;
 };
