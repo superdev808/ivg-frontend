@@ -95,8 +95,6 @@ const Quiz: React.FC<QuizProps> = ({
     return availableOptions;
   }, [filteredAnswers, showAll, question]);
 
-  console.log(answers, filteredAnswers, disabled);
-
   const dropdownOptionTemplate = (option: string) => {
     const image = BRAND_IMAGES[String(option).toLowerCase()];
 
