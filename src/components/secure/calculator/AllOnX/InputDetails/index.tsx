@@ -9,6 +9,7 @@ import {
   InputOutputValues,
   ItemData,
   TotalQuantities,
+  ANSWER_TYPE,
 } from "@/types/calculators";
 
 import Questionnaire from "./Questionnaire";
@@ -25,8 +26,8 @@ interface InputDetailsProps {
   totalQuantities: TotalQuantities[];
   onInputSelect: (
     site: Site,
-    question: InputOutputValues,
-    answer: string
+    questions: InputOutputValues[],
+    answer: ANSWER_TYPE
   ) => void;
   onAutoPopulate: (dataToPopulate: AutoPopulateData | null) => void;
   onQuizResponse: (

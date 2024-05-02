@@ -80,12 +80,13 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
       const { data: newAnswerOptions }: { data: ANSWER_TYPE[] } =
         await response.json();
 
+      const originalAnswerOptions: any[] = answerOptions.slice(0, answerLevel);
       if (level == input.length) {
         setItems(newAnswerOptions || []);
         return;
       }
       // if (newAnswerOptions.length) {
-      setAnswerOptions([...answerOptions, newAnswerOptions]);
+      setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
       setItems([]);
       // }
     },
@@ -124,7 +125,8 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
     handleBack();
   };
 
-  const showLoader = isLoading || (input[level] && !Boolean(answerOptions[answerLevel]?.length));
+  const showLoader =
+    isLoading || (input[level] && !Boolean(answerOptions[answerLevel]?.length));
 
   useEffect(() => {
     if (!(level < questions.length) || showLoader) return;
@@ -147,7 +149,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
     handleSelectAnswer,
     questions,
     showLoader,
-    answerLevel
+    answerLevel,
   ]);
 
   return (
