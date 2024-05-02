@@ -265,9 +265,8 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
         newlevel += Object.keys(answers[i]).length;
       setLevel(newlevel);
       setAnswerLevel(index);
-      setAnswerOptions(answerOptions.slice(0, index + 1));
     },
-    [answers, handleAutoPopulateChange, answerOptions]
+    [answers, handleAutoPopulateChange]
   );
 
   const handleShowSummary = useCallback(() => {
