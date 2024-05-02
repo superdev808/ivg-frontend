@@ -66,7 +66,7 @@ const Quiz: React.FC<QuizProps> = ({
 
   const questionName = useMemo(() => {
     if (/^action/gi.test(question.groupText)) {
-      return `Action: ${answers?.[0] || ""}`;
+      return `Action: ${answers?.[0][question.colIndex] || ""}`;
     }
 
     return question.groupText;
