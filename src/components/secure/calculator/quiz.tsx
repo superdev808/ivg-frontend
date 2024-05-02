@@ -8,7 +8,7 @@ import {
 } from "primereact/autocomplete";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
 import {
@@ -153,6 +153,24 @@ const Quiz: React.FC<QuizProps> = ({
     }
   }, [answers, question]);
 
+  const popupComponentHOC = useCallback(
+    (answer: ANSWER_TYPE) => (
+      <PopupOutput
+        data={secondaryQuestions.reduce((result, secondaryQuestion) => {
+          let key = serializeColInfo(secondaryQuestion);
+          if (isPopup(key) === true)
+            return {
+              ...result,
+              [key]: answer[secondaryQuestion.colIndex],
+            };
+          return result;
+        }, {})}
+        size={24}
+      />
+    ),
+    [secondaryQuestions]
+  );
+
   return (
     <>
       <div className="col-12 flex flex-column justify-content-center align-items-center relative">
@@ -212,20 +230,19 @@ const Quiz: React.FC<QuizProps> = ({
         <>
           {isActionQuestion ? (
             <div className="flex align-items-start justify-content-around flex-wrap w-12">
-              <div
-                className="m-2 w-12 md:w-3 flex flex-column"
-                onClick={() => {
-                  if (!disabled) {
-                    onSelectAnswer(answers[0]);
-                  }
-                }}
-              >
+              <div className="m-2 w-12 md:w-3 flex gap-1">
+                {popupComponentHOC(answers[0])}
                 <div
                   className={cx(
                     "quiz-card",
                     "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer bg-white"
                   )}
                   style={{ height: 50 }}
+                  onClick={() => {
+                    if (!disabled) {
+                      onSelectAnswer(answers[0]);
+                    }
+                  }}
                 >
                   <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
                     Next
@@ -244,21 +261,7 @@ const Quiz: React.FC<QuizProps> = ({
                       key={`${question.colName}-${answer}-${index}`}
                       className="m-2 w-12 md:w-3 flex gap-1"
                     >
-                      <PopupOutput
-                        data={secondaryQuestions.reduce(
-                          (result, secondaryQuestion) => {
-                            let key = serializeColInfo(secondaryQuestion);
-                            if (isPopup(key) === true)
-                              return {
-                                ...result,
-                                [key]: answer[secondaryQuestion.colIndex],
-                              };
-                            return result;
-                          },
-                          {}
-                        )}
-                        size={24}
-                      />
+                      {popupComponentHOC(answer)}
                       <div
                         className={cx(
                           "quiz-card",
