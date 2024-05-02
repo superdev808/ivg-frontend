@@ -20,12 +20,14 @@ import { ANSWER_TYPE, InputOutputValues } from "@/types/calculators";
 import PopupOutput from "./Result/Outputs/Popup";
 
 import styles from "./quiz.module.scss";
+import { isPopup, serializeColInfo } from "@/helpers/calculators";
 
 const cx = classNames.bind(styles);
 
 interface QuizProps {
   calculatorName?: string;
   question: InputOutputValues;
+  secondaryQuestions: InputOutputValues[];
   currentAnswer: ANSWER_TYPE | null | undefined;
   answers: ANSWER_TYPE[];
   disabled?: boolean;
@@ -37,6 +39,7 @@ interface QuizProps {
 const Quiz: React.FC<QuizProps> = ({
   calculatorName,
   question,
+  secondaryQuestions,
   currentAnswer,
   answers,
   progress,
@@ -144,7 +147,7 @@ const Quiz: React.FC<QuizProps> = ({
       setSuggestions(
         answers
           .map((item) => item[question.colIndex])
-          .filter((item) => item)   // while loading, `answers` object doesn't hold `question.colIndex` field and becomes null
+          .filter((item) => item) // while loading, `answers` object doesn't hold `question.colIndex` field and becomes null
           .sort()
       );
     }
@@ -239,13 +242,23 @@ const Quiz: React.FC<QuizProps> = ({
                   return (
                     <div
                       key={`${question.colName}-${answer}-${index}`}
-                      className="m-2 w-12 md:w-3 flex flex-column"
-                      onClick={() => {
-                        if (!disabled) {
-                          onSelectAnswer(answer);
-                        }
-                      }}
+                      className="m-2 w-12 md:w-3 flex gap-1"
                     >
+                      <PopupOutput
+                        data={secondaryQuestions.reduce(
+                          (result, secondaryQuestion) => {
+                            let key = serializeColInfo(secondaryQuestion);
+                            if (isPopup(key) === true)
+                              return {
+                                ...result,
+                                [key]: answer[secondaryQuestion.colIndex],
+                              };
+                            return result;
+                          },
+                          {}
+                        )}
+                        size={24}
+                      />
                       <div
                         className={cx(
                           "quiz-card",
@@ -258,6 +271,11 @@ const Quiz: React.FC<QuizProps> = ({
                           }
                         )}
                         style={{ height: 200 }}
+                        onClick={() => {
+                          if (!disabled) {
+                            onSelectAnswer(answer);
+                          }
+                        }}
                       >
                         {image ? (
                           <Image

@@ -352,6 +352,13 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
             <Quiz
               key={`quiz-${level}`}
               question={questions[level]}
+              secondaryQuestions={input.slice(
+                level,
+                level +
+                  (answerOptions[answerLevel]
+                    ? Object.keys(answerOptions[answerLevel][0]).length
+                    : 1)
+              )}
               calculatorName={calcInfoMap[input[level].calculatorType].label}
               answers={answerOptions[answerLevel]}
               currentAnswer={answers[answerLevel]}

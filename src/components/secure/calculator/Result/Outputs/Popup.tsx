@@ -19,6 +19,7 @@ interface PopupOutputProps {
 }
 
 const PopupOutput: React.FC<PopupOutputProps> = ({ data, size = 16 }) => {
+  console.log(data);
   const [opened, setOpened] = useState(false);
 
   const handleOpenPopup = (event: any) => {

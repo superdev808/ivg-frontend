@@ -161,6 +161,13 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
               key={`quiz-${level}`}
               calculatorName={calcInfoMap[calculatorType].label}
               question={questions[level]}
+              secondaryQuestions={input.slice(
+                level,
+                level +
+                  (answerOptions[answerLevel]
+                    ? Object.keys(answerOptions[answerLevel][0]).length
+                    : 1)
+              )}
               answers={answerOptions[answerLevel]}
               currentAnswer={answers[answerLevel]}
               disabled={showLoader}
