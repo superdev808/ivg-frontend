@@ -96,4 +96,14 @@
       order: 1;
     }
   }
+
+  &__joinButton {
+    border-width: 6px;
+    background-color: var(--light-green);
+    color: var(--beige);
+  }
+
+  &__joinButton:hover {
+    color: var(--dark-brown) !important;
+  }
 }

@@ -25,11 +25,15 @@ const GenericComponentSummary: React.FC<GenericComponentSummaryProps> = ({
     );
   }, [summary]);
 
+  const showNumber = useMemo(() => {
+    return summary.some((item) => item.itemNumber !== undefined);
+  }, [summary]);
+
   const columns = [
     "Name",
     "Number",
     showManufacturer ? "Manufacturer" : "",
-    "Quantity",
+    showNumber ? "Quantity" : "",
   ].filter(Boolean);
 
   return (
@@ -67,7 +71,7 @@ const GenericComponentSummary: React.FC<GenericComponentSummaryProps> = ({
                   data.itemName
                 )}
               </td>
-              <td>{data.itemNumber}</td>
+              {showNumber && <td>{data.itemNumber}</td>}
               {showManufacturer && (
                 <td>
                   {data.manufacturer &&

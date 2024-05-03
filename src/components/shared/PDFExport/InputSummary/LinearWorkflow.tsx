@@ -22,7 +22,7 @@ const LinearWorkflowInputSummary: React.FC<LinearWorkflowInputSummaryProps> = ({
   return (
     <div className="flex flex-column gap-4">
       {quiz.map((question) => {
-        const isAction = /^action/ig.test(question.questionText);
+        const isAction = /^action/gi.test(question.questionText);
 
         return (
           <div

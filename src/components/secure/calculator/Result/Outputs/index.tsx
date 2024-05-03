@@ -93,7 +93,10 @@ const Outputs: React.FC<OutputsProps> = ({
                       />
                     </Link>
                   ) : (
-                    <div className="text-center" style={{ width: 172 }}>
+                    <div
+                      className="text-center text-base line-height-1"
+                      style={{ width: 172 }}
+                    >
                       Please contact your
                       <br />
                       distributor to purchase.
