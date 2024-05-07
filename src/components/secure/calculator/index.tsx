@@ -5,8 +5,10 @@ import { useQuery } from "react-query";
 import DetailView from "./detail";
 import FeedbackDialogWrapper from "./Feedback/FeedbackDialogWrapper";
 import Quiz from "./quiz";
-import { InputOutputValues } from "@/types/calculators";
+import { ANSWER_TYPE, InputOutputValues } from "@/types/calculators";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
+import { isEmptyAnswer, isPopup } from "@/helpers/calculators";
+import _ from "lodash";
 
 interface CalculatorContainerProps {
   defaultAnswers: string[];
@@ -22,9 +24,10 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   defaultAnswers,
 }) => {
   const [level, setLevel] = useState(0);
-  const [answerOptions, setAnswerOptions] = useState<any[]>([]);
-  const [answers, setAnswers] = useState<any[]>([]);
-  const [items, setItems] = useState<any[]>([]);
+  const [answerLevel, setAnswerLevel] = useState(0);
+  const [answerOptions, setAnswerOptions] = useState<ANSWER_TYPE[][]>([]);
+  const [answers, setAnswers] = useState<ANSWER_TYPE[]>([]);
+  const [items, setItems] = useState<ANSWER_TYPE[]>([]);
   const [canProceed, setCanProceed] = useState<boolean>(true);
   const { calcInfoMap } = useCalculatorsInfo();
 
@@ -41,11 +44,20 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
         return;
       }
 
-      const quiz = {} as any;
+      const quiz = _.merge({}, ...answers.slice(0, answerLevel));
 
-      answers.forEach((answer, index) => {
-        quiz[input[index].colIndex] = answer;
-      });
+      // Calculate which inputs to ask in the next step - BEGIN
+      let nextInputFields = [],
+        i,
+        count = 0;
+      for (i = level; i < input.length; ++i) {
+        if (isPopup(input[i].groupText) == false) {
+          count += 1;
+        }
+        if (count == 2) break;
+        nextInputFields.push(input[i].colIndex);
+      }
+      // Calculate which inputs to ask in the next step - END
 
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_APP_SERVER_URL}/materials`,
@@ -59,15 +71,16 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
             quiz,
             fields:
               level < input.length
-                ? [input[level]?.colIndex]
+                ? nextInputFields
                 : output.map((item) => item.colIndex),
           }),
         }
       );
 
-      const { data: newAnswerOptions } = await response.json();
+      const { data: newAnswerOptions }: { data: ANSWER_TYPE[] } =
+        await response.json();
 
-      const originalAnswerOptions: any[] = answerOptions.slice(0, level);
+      const originalAnswerOptions: any[] = answerOptions.slice(0, answerLevel);
       if (level == input.length) {
         setItems(newAnswerOptions || []);
         return;
@@ -85,42 +98,47 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   }, [input, level]);
 
   const handleSelectAnswer = useCallback(
-    (index: number) => (value: any) => {
+    (value: ANSWER_TYPE) => {
       setCanProceed(true);
-      setLevel(index + 1);
-      const newAnswers = answers.slice(0, index);
-      newAnswers[index] = value;
-      setAnswers(newAnswers);
+      setLevel(level + Object.keys(value).length);
+      setAnswers([...answers.slice(0, answerLevel), value]);
+      setAnswerLevel(answerLevel + 1);
     },
-    [answers]
+    [answers, level, answerLevel]
   );
 
-  const handleBack = (index: number) => () => {
+  const handleBack = () => {
     setCanProceed(false);
-    const lastAnswerIndex = answers
-      .slice(0, index)
-      .findLastIndex((answer) => answer !== "");
-    setLevel(lastAnswerIndex);
+    let newLevel = level,
+      i;
+    for (i = answerLevel - 1; i >= 0; i -= 1) {
+      newLevel -= Object.keys(answers[i]).length;
+      if (!isEmptyAnswer(answers[i])) break;
+    }
+    setLevel(newLevel);
+    setAnswerLevel(i);
+    setAnswerOptions(answerOptions.slice(0, i + 1));
   };
 
   const handleBackFromResult = () => {
     setItems([]);
-    handleBack(level)();
+    handleBack();
   };
 
   const showLoader =
-    isLoading || (input[level] && !Boolean(answerOptions[level]?.length));
+    isLoading || (input[level] && !Boolean(answerOptions[answerLevel]?.length));
 
   useEffect(() => {
     if (!(level < questions.length) || showLoader) return;
     if (level < defaultAnswers.length)
-      handleSelectAnswer(level)(defaultAnswers[level]);
+      handleSelectAnswer({
+        [questions[level].colIndex]: defaultAnswers[level],
+      });
     if (
-      answerOptions[level]?.length === 1 &&
-      (answerOptions[level][0] === "" ||
-        /description/gi.test(questions[level].groupId))
+      answerOptions[answerLevel].length === 1 &&
+      isEmptyAnswer(answerOptions[answerLevel][0])
     ) {
-      handleSelectAnswer(level)(answerOptions[level][0]);
+      handleSelectAnswer(answerOptions[answerLevel][0]);
     }
   }, [
     defaultAnswers,
@@ -131,6 +149,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
     handleSelectAnswer,
     questions,
     showLoader,
+    answerLevel,
   ]);
 
   return (
@@ -142,12 +161,19 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
               key={`quiz-${level}`}
               calculatorName={calcInfoMap[calculatorType].label}
               question={questions[level]}
-              answers={answerOptions[level]}
-              currentAnswer={answers[level]}
+              secondaryQuestions={input.slice(
+                level,
+                level +
+                  (answerOptions[answerLevel]
+                    ? Object.keys(answerOptions[answerLevel][0]).length
+                    : 1)
+              )}
+              answers={answerOptions[answerLevel]}
+              currentAnswer={answers[answerLevel]}
               disabled={showLoader}
               progress={Math.floor((level / input.length) * 100)}
-              onSelectAnswer={handleSelectAnswer(level)}
-              onGoBack={level > 0 ? handleBack(level) : undefined}
+              onSelectAnswer={handleSelectAnswer}
+              onGoBack={level > 0 ? handleBack : undefined}
             />
           )}
         </div>
@@ -158,15 +184,22 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
             items={items}
             outputFields={output}
             questions={input}
-            answers={answers}
-            onGoBack={level > defaultAnswers.length ? handleBackFromResult : undefined}
+            answers={(() => {
+              const plainAnswerObject = _.merge({}, ...answers);
+              return questions.map(
+                (question) => plainAnswerObject[question.colIndex]
+              );
+            })()}
+            onGoBack={
+              level > defaultAnswers.length ? handleBackFromResult : undefined
+            }
           />
         ) : (
           <FeedbackDialogWrapper
             calculatorName={calcInfoMap[calculatorType].label}
-            userAnswers={input.map((inputItem, index) => ({
+            userAnswers={input.map((inputItem) => ({
               ...inputItem,
-              answer: answers[index],
+              answer: _.merge({}, ...answers)[inputItem.colIndex],
             }))}
           />
         )}

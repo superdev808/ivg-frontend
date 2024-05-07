@@ -8,35 +8,38 @@ import {
 } from "primereact/autocomplete";
 import { Button } from "primereact/button";
 import { Image } from "primereact/image";
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
 import {
   BRAND_IMAGES,
   SHOULD_DISPLAY_TEXT_ONLY,
 } from "@/constants/calculators";
-import { InputOutputValues } from "@/types/calculators";
+import { ANSWER_TYPE, InputOutputValues } from "@/types/calculators";
 
 import PopupOutput from "./Result/Outputs/Popup";
 
 import styles from "./quiz.module.scss";
+import { isPopup, serializeColInfo } from "@/helpers/calculators";
 
 const cx = classNames.bind(styles);
 
 interface QuizProps {
   calculatorName?: string;
   question: InputOutputValues;
-  currentAnswer: string;
-  answers: string[];
+  secondaryQuestions: InputOutputValues[];
+  currentAnswer: ANSWER_TYPE | null | undefined;
+  answers: ANSWER_TYPE[];
   disabled?: boolean;
   progress?: number;
   onGoBack?: () => void;
-  onSelectAnswer: (e: string) => void;
+  onSelectAnswer: (e: ANSWER_TYPE) => void;
 }
 
 const Quiz: React.FC<QuizProps> = ({
   calculatorName,
   question,
+  secondaryQuestions,
   currentAnswer,
   answers,
   progress,
@@ -55,13 +58,15 @@ const Quiz: React.FC<QuizProps> = ({
 
   const filteredAnswers = useMemo(() => {
     return (
-      answers?.filter((answer) => answer.includes(selectedSuggestion)) || []
+      answers?.filter((answer) =>
+        answer[question.colIndex]?.includes(selectedSuggestion)
+      ) || []
     );
-  }, [answers, selectedSuggestion]);
+  }, [answers, selectedSuggestion, question]);
 
   const questionName = useMemo(() => {
     if (/^action/gi.test(question.groupText)) {
-      return `Action: ${answers?.[0] || ""}`;
+      return `Action: ${answers?.[0][question.colIndex] || ""}`;
     }
 
     return question.groupText;
@@ -81,13 +86,17 @@ const Quiz: React.FC<QuizProps> = ({
       return [];
     }
 
-    if (/^\d/gi.test(availableOptions[0])) {
-      return orderBy(availableOptions, (option) => parseFloat(option), ["asc"]);
+    if (/^\d/gi.test(availableOptions[0][question.colIndex])) {
+      return orderBy(
+        availableOptions,
+        (option) => parseFloat(option[question.colIndex]),
+        ["asc"]
+      );
     } // else {
     //   return orderBy(availableOptions, (option) => option, ["asc"]);
     // }
     return availableOptions;
-  }, [filteredAnswers, showAll]);
+  }, [filteredAnswers, showAll, question]);
 
   const dropdownOptionTemplate = (option: string) => {
     const image = BRAND_IMAGES[String(option).toLowerCase()];
@@ -118,7 +127,8 @@ const Quiz: React.FC<QuizProps> = ({
 
   const handleAutoCompleteMethod = (e: AutoCompleteCompleteEvent) => {
     const filteredSuggestions = answers
-      ?.filter((item) => item.toLowerCase().includes(e.query.toLowerCase()))
+      .map((item) => item[question.colIndex])
+      .filter((item) => item.toLowerCase().includes(e.query.toLowerCase()))
       .sort((a, b) => a.localeCompare(b));
 
     setSuggestions(filteredSuggestions);
@@ -134,9 +144,32 @@ const Quiz: React.FC<QuizProps> = ({
 
   useEffect(() => {
     if (answers && answers.length) {
-      setSuggestions(answers?.sort());
+      setSuggestions(
+        answers
+          .map((item) => item[question.colIndex])
+          .filter((item) => item) // while loading, `answers` object doesn't hold `question.colIndex` field and becomes null
+          .sort()
+      );
     }
-  }, [answers]);
+  }, [answers, question]);
+
+  const popupComponentHOC = useCallback(
+    (answer: ANSWER_TYPE) => (
+      <PopupOutput
+        data={secondaryQuestions.reduce((result, secondaryQuestion) => {
+          let key = serializeColInfo(secondaryQuestion);
+          if (isPopup(key) === true)
+            return {
+              ...result,
+              [key]: answer[secondaryQuestion.colIndex],
+            };
+          return result;
+        }, {})}
+        size={24}
+      />
+    ),
+    [secondaryQuestions]
+  );
 
   return (
     <>
@@ -197,20 +230,19 @@ const Quiz: React.FC<QuizProps> = ({
         <>
           {isActionQuestion ? (
             <div className="flex align-items-start justify-content-around flex-wrap w-12">
-              <div
-                className="m-2 w-12 md:w-3 flex flex-column"
-                onClick={() => {
-                  if (!disabled) {
-                    onSelectAnswer(answers[0]);
-                  }
-                }}
-              >
+              <div className="m-2 w-12 md:w-3 flex gap-1">
+                {popupComponentHOC(answers[0])}
                 <div
                   className={cx(
                     "quiz-card",
                     "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer bg-white"
                   )}
                   style={{ height: 50 }}
+                  onClick={() => {
+                    if (!disabled) {
+                      onSelectAnswer(answers[0]);
+                    }
+                  }}
                 >
                   <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
                     Next
@@ -227,20 +259,26 @@ const Quiz: React.FC<QuizProps> = ({
                   return (
                     <div
                       key={`${question.colName}-${answer}-${index}`}
-                      className="m-2 w-12 md:w-3 flex flex-column"
-                      onClick={() => {
-                        if (!disabled) {
-                          onSelectAnswer(answer);
-                        }
-                      }}
+                      className="m-2 w-12 md:w-3 flex gap-1"
                     >
+                      {popupComponentHOC(answer)}
                       <div
                         className={cx(
                           "quiz-card",
                           "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer bg-white",
-                          { "quiz-card--selected": currentAnswer === answer }
+                          {
+                            "quiz-card--selected":
+                              currentAnswer &&
+                              currentAnswer[question.colIndex] ===
+                                answer[question.colIndex],
+                          }
                         )}
                         style={{ height: 200 }}
+                        onClick={() => {
+                          if (!disabled) {
+                            onSelectAnswer(answer);
+                          }
+                        }}
                       >
                         {image ? (
                           <Image
@@ -249,17 +287,19 @@ const Quiz: React.FC<QuizProps> = ({
                             height="100%"
                             imageClassName="p-4"
                             imageStyle={{ objectFit: "contain" }}
-                            alt={answer}
+                            alt={answer[question.colIndex]}
                           />
                         ) : (
                           <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
-                            {answer}
+                            {answer[question.colIndex]}
                           </div>
                         )}
                       </div>
 
                       {image && (
-                        <p className="w-full text-3xl text-center">{answer}</p>
+                        <p className="w-full text-3xl text-center">
+                          {answer[question.colIndex]}
+                        </p>
                       )}
                     </div>
                   );

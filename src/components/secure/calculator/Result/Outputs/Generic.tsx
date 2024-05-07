@@ -3,11 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 import { INFORMATIONAL_CALCULATOR_TYPES } from "@/constants/calculators";
-import {
-  deserializeColInfo,
-  filterPopups,
-  isValidUrl,
-} from "@/helpers/calculators";
+import { deserializeColInfo, isPopup, isValidUrl } from "@/helpers/calculators";
 import { ItemInsights } from "@/types/calculators";
 
 import PopupOutput from "./Popup";
@@ -27,7 +23,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
   calculatorType,
 }) => {
   const { groupName } = deserializeColInfo(
-    Object.keys(item).filter((key) => key && filterPopups(false)(key))[0]
+    Object.keys(item).filter((key) => key && isPopup(key) == false)[0]
   );
   const sortedKeys = Object.keys(item).sort(
     (left, right) =>
@@ -39,7 +35,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
     let newSubGroupItem: Record<string, string | number> = {},
       count = 0;
     for (j = i; j < sortedKeys.length; ++j) {
-      if (filterPopups(false)(sortedKeys[j]) == true) {
+      if (isPopup(sortedKeys[j]) === false) {
         // if the key is not reasoning column or supporting article column
         count += 1;
         newSubGroupItem["id"] = transformedItems.length;
@@ -62,7 +58,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
           <div style={{ paddingTop: 2 }}>
             <PopupOutput
               data={Object.keys(subgroupItem)
-                .filter(filterPopups(true))
+                .filter(isPopup)
                 .reduce(
                   (result, curKey) => ({
                     ...result,
@@ -73,7 +69,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
             />
           </div>
           {Object.keys(subgroupItem)
-            .filter(filterPopups(false))
+            .filter((key) => isPopup(key) === false)
             .map((key) => {
               const { groupText } = deserializeColInfo(key);
               const value = subgroupItem[key];

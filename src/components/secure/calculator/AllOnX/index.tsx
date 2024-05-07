@@ -33,6 +33,7 @@ import {
   TotalQuantities,
   ItemData,
   PROCEDURE,
+  ANSWER_TYPE,
 } from "@/types/calculators";
 
 import AdditionalInputs from "./AdditionalInputs";
@@ -147,236 +148,265 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
   useEffect(() => {
     const procedureInputsAndResponse = getProcedureInputsAndResponse(
       calcInfoMap,
-      selectedCollections,
+      selectedCollections
     );
     setProcedureInputsAndResponse(procedureInputsAndResponse);
   }, [calcInfoMap, selectedCollections]);
 
-  const handleAdditionalInputs = useCallback((value: string, target: string) => {
-    let state = { ...additionalInputs };
-    if (
-      target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
-      value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value
-    ) {
-      delete state[MUA_OPTIONS[0].name];
-    }
-    if (
-      target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
-      value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
-    ) {
-      state = { ...state, [MUA_OPTIONS[0].name]: MUA_OPTIONS[0].value };
-    }
-    setAdditionalInputs({ ...state, [target]: value });
-    setSelectedSites([]);
-    setSitesData({});
-  }, [additionalInputs]);
-
-  const handleAllAnswered = useCallback((site: Site) => {
-    setAllAnsweredSites([...allAnsweredSites, site]);
-  }, [allAnsweredSites]);
-
-  const handleProcedureChange = useCallback((e: SelectButtonChangeEvent) => {
-    setProcedure(e.value);
-    setSelectedSites([]);
-    setSitesData({});
-    if (
-      e.value === PROCEDURE.RESTORATIVE ||
-      e.value === PROCEDURE.SURGERY_AND_RESTORATIVE
-    ) {
-      handleAdditionalInputs(
-        DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value,
-        DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name
-      );
-    }
-  }, [handleAdditionalInputs]);
-
-  const handleSiteChange = useCallback((tooth: number, isAnonymous?: boolean): void => {
-    let _selectedSites: Site[] = isAnonymous ? [] : [...selectedSites];
-    const isSelected: Site[] = _selectedSites.filter(
-      (site: Site) => site.key === tooth
-    );
-    if (isSelected.length === 0) {
-      const newSite: Site = isAnonymous
-        ? { name: `General Details`, key: tooth }
-        : { name: `Site ${tooth}`, key: tooth };
-      _selectedSites.push(newSite);
-      //Add new site data
-      if (!isAnonymous) {
-        const newSiteData = {
-          [`Site ${tooth}`]: { inputDetails: [], componentDetails: {} },
-        };
-        setSitesData((prev) => {
-          return { ...prev, ...newSiteData };
-        });
-        // _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
-      } else {
-        const newSiteData = {
-          "General Details": { inputDetails: [], componentDetails: {} },
-        };
-        setSitesData(newSiteData);
+  const handleAdditionalInputs = useCallback(
+    (value: string, target: string) => {
+      let state = { ...additionalInputs };
+      if (
+        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
+        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value
+      ) {
+        delete state[MUA_OPTIONS[0].name];
       }
-    } else {
-      _selectedSites = _selectedSites.filter(
-        (site: Site) => site.key !== tooth
+      if (
+        target === DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name &&
+        value === DENTAL_IMPLANT_PROCEDURE_OPTIONS[1].value
+      ) {
+        state = { ...state, [MUA_OPTIONS[0].name]: MUA_OPTIONS[0].value };
+      }
+      setAdditionalInputs({ ...state, [target]: value });
+      setSelectedSites([]);
+      setSitesData({});
+    },
+    [additionalInputs]
+  );
+
+  const handleAllAnswered = useCallback(
+    (site: Site) => {
+      setAllAnsweredSites([...allAnsweredSites, site]);
+    },
+    [allAnsweredSites]
+  );
+
+  const handleProcedureChange = useCallback(
+    (e: SelectButtonChangeEvent) => {
+      setProcedure(e.value);
+      setSelectedSites([]);
+      setSitesData({});
+      if (
+        e.value === PROCEDURE.RESTORATIVE ||
+        e.value === PROCEDURE.SURGERY_AND_RESTORATIVE
+      ) {
+        handleAdditionalInputs(
+          DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].value,
+          DENTAL_IMPLANT_PROCEDURE_OPTIONS[0].name
+        );
+      }
+    },
+    [handleAdditionalInputs]
+  );
+
+  const handleSiteChange = useCallback(
+    (tooth: number, isAnonymous?: boolean): void => {
+      let _selectedSites: Site[] = isAnonymous ? [] : [...selectedSites];
+      const isSelected: Site[] = _selectedSites.filter(
+        (site: Site) => site.key === tooth
       );
-      // remove site data
-      let _sitesData = { ...sitesData };
-      delete _sitesData[`Site ${tooth}`];
-      setSitesData(_sitesData);
-    }
-    setSelectedSites(_selectedSites);
-  }, [selectedSites, sitesData]);
+      if (isSelected.length === 0) {
+        const newSite: Site = isAnonymous
+          ? { name: `General Details`, key: tooth }
+          : { name: `Site ${tooth}`, key: tooth };
+        _selectedSites.push(newSite);
+        //Add new site data
+        if (!isAnonymous) {
+          const newSiteData = {
+            [`Site ${tooth}`]: { inputDetails: [], componentDetails: {} },
+          };
+          setSitesData((prev) => {
+            return { ...prev, ...newSiteData };
+          });
+          // _selectedSites = _selectedSites.sort((a, b) => a.key - b.key);
+        } else {
+          const newSiteData = {
+            "General Details": { inputDetails: [], componentDetails: {} },
+          };
+          setSitesData(newSiteData);
+        }
+      } else {
+        _selectedSites = _selectedSites.filter(
+          (site: Site) => site.key !== tooth
+        );
+        // remove site data
+        let _sitesData = { ...sitesData };
+        delete _sitesData[`Site ${tooth}`];
+        setSitesData(_sitesData);
+      }
+      setSelectedSites(_selectedSites);
+    },
+    [selectedSites, sitesData]
+  );
 
-  const handleInputSelect = useCallback((
-    site: Site,
-    question: InputOutputValues,
-    answer: string
-  ) => {
-    let data: SiteData = cloneDeep(sitesData);
-    const inputDetails: InputDetail[] = cloneDeep(data[site.name].inputDetails);
-    const indexOfQuestion: number = inputDetails.findIndex(
-      (input) => input.id === serializeColInfo(question)
-    );
-    if (indexOfQuestion > -1) {
-      inputDetails[indexOfQuestion].answer = answer;
-      inputDetails.splice(indexOfQuestion + 1);
-    } else {
-      inputDetails.push({
-        id: serializeColInfo(question),
-        question: question.colName,
-        questionText: question.groupText,
-        answer,
+  const handleInputSelect = useCallback(
+    (site: Site, questions: InputOutputValues[], answer: ANSWER_TYPE) => {
+      let data: SiteData = cloneDeep(sitesData);
+      const inputDetails: InputDetail[] = cloneDeep(
+        data[site.name].inputDetails
+      );
+      questions.forEach((question) => {
+        const indexOfQuestion: number = inputDetails.findIndex(
+          (input) => input.id === serializeColInfo(question)
+        );
+        if (indexOfQuestion > -1) {
+          inputDetails[indexOfQuestion].answer = answer[question.colIndex];
+          inputDetails.splice(indexOfQuestion + 1);
+        } else {
+          inputDetails.push({
+            id: serializeColInfo(question),
+            question: question.colName,
+            questionText: question.groupText,
+            answer: answer[question.colIndex],
+          });
+        }
       });
-    }
 
-    //remove next collection responses
-    const calculators: string[] = procedureInputsAndResponse?.responseOrder || [];
-    const componentDetails: ComponentDetail = cloneDeep(
-      data[site.name].componentDetails
-    );
-    const indexOfCollection: number = calculators.indexOf(question.calculatorType);
-    if (indexOfCollection !== -1) {
-      const keysToRemove: string[] = calculators.slice(indexOfCollection);
-      keysToRemove.map((col: string) => {
-        if (question.colName === "" && question.calculatorType == col)
-          return;
-        delete componentDetails[col];
-      });
-    }
+      //remove next collection responses
+      const calculators: string[] =
+        procedureInputsAndResponse?.responseOrder || [];
+      const componentDetails: ComponentDetail = cloneDeep(
+        data[site.name].componentDetails
+      );
+      questions.forEach(question => {
+        const indexOfCollection: number = calculators.indexOf(
+          question.calculatorType
+        );
+        if (indexOfCollection !== -1) {
+          const keysToRemove: string[] = calculators.slice(indexOfCollection);
+          keysToRemove.map((col: string) => {
+            if (question.colName === "" && question.calculatorType == col) return;
+            delete componentDetails[col];
+          });
+        }
+      })
 
-    const updatedData = {
-      ...data,
-      [site.name]: {
-        inputDetails,
-        componentDetails,
-      },
-    };
-    setSitesData(updatedData);
-  }, [procedureInputsAndResponse, sitesData]);
-
-  const handleQuizResponse = useCallback((
-    site: Site,
-    response: ItemData[],
-    collection: string
-  ) => {
-    let data: SiteData = cloneDeep(sitesData);
-    let componentDetails: ComponentDetail = cloneDeep(
-      data[site.name].componentDetails
-    );
-
-    if (
-      !(
-        has(componentDetails, collection) &&
-        isEqual(componentDetails[collection], response)
-      )
-    ) {
-      componentDetails = { ...componentDetails, [collection]: response };
       const updatedData = {
         ...data,
         [site.name]: {
-          inputDetails: data[site.name].inputDetails,
+          inputDetails,
           componentDetails,
         },
       };
       setSitesData(updatedData);
-    }
-  }, [sitesData]);
+    },
+    [procedureInputsAndResponse, sitesData]
+  );
 
-  const handleAutoPopulate = useCallback((dataToPopulate: AutoPopulateData | null) => {
-    setAutoPopulateData(dataToPopulate);
-
-    if (dataToPopulate) {
-      const newSitesData: SiteData = cloneDeep(sitesData);
-      const siteNameToPopulate = dataToPopulate.site.name;
-      const data = { ...newSitesData[siteNameToPopulate] };
-
-      Object.keys(newSitesData).forEach((siteName: string) => {
-        if (siteName !== siteNameToPopulate) {
-          newSitesData[siteName] = data;
-        }
-      });
-      setSitesData(newSitesData);
-    } else {
-      // const newSitesData: SiteData = cloneDeep(sitesData);
-      // const firstSiteName = selectedSites[0].name;
-
-      // Object.keys(newSitesData).forEach((siteName: string) => {
-      //   if (siteName !== firstSiteName) {
-      //     newSitesData[siteName] = {
-      //       inputDetails: [],
-      //       componentDetails: {},
-      //     };
-      //   }
-      // });
-      // setSitesData(newSitesData);
-    }
-  }, [sitesData]);
-
-  const handleSiteSpecificReport = useCallback((value: string) => {
-    setSiteSpecificReport(value);
-    if (value === SITE_SPECIFIC_REPORT_OPTIONS[1].value) {
-      handleSiteChange(1, true);
-    } else {
-      setSelectedSites([]);
-      setSitesData({});
-    }
-  }, [handleSiteChange]);
-
-  const handleCollectionChange = useCallback((e: CheckboxChangeEvent) => {
-    let _selectedCollections: string[] = [...selectedCollections];
-
-    if (
-      siteSpecificReport === SITE_SPECIFIC_REPORT_OPTIONS[1].value &&
-      !selectedCollections.length
-    ) {
-      handleSiteChange(1, true);
-    }
-    if (e.checked) {
-      _selectedCollections.push(e.value);
-    } else {
-      _selectedCollections = _selectedCollections.filter(
-        (collection) => collection !== e.value
+  const handleQuizResponse = useCallback(
+    (site: Site, response: ItemData[], collection: string) => {
+      let data: SiteData = cloneDeep(sitesData);
+      let componentDetails: ComponentDetail = cloneDeep(
+        data[site.name].componentDetails
       );
-    }
 
-    if (_selectedCollections.length === 0) {
-      setSelectedSites([]);
-      setSitesData({});
-    }
-    setSelectedCollections(_selectedCollections);
-  }, [handleSiteChange, siteSpecificReport, selectedCollections]);
+      if (
+        !(
+          has(componentDetails, collection) &&
+          isEqual(componentDetails[collection], response)
+        )
+      ) {
+        componentDetails = { ...componentDetails, [collection]: response };
+        const updatedData = {
+          ...data,
+          [site.name]: {
+            inputDetails: data[site.name].inputDetails,
+            componentDetails,
+          },
+        };
+        setSitesData(updatedData);
+      }
+    },
+    [sitesData]
+  );
 
-  const handleUpdateQuantity = useCallback((quantity: number, groupId: string) => {
-    const newTotalQuantities = cloneDeep(totalQuantities);
-    const index = newTotalQuantities.findIndex((item) => item.id === groupId);
+  const handleAutoPopulate = useCallback(
+    (dataToPopulate: AutoPopulateData | null) => {
+      setAutoPopulateData(dataToPopulate);
 
-    if (index === -1) {
-      newTotalQuantities.push({ id: groupId, quantity });
-    } else {
-      newTotalQuantities[index].quantity = quantity;
-    }
-    setTotalQuantities(newTotalQuantities);
-  }, []);
+      if (dataToPopulate) {
+        const newSitesData: SiteData = cloneDeep(sitesData);
+        const siteNameToPopulate = dataToPopulate.site.name;
+        const data = { ...newSitesData[siteNameToPopulate] };
+
+        Object.keys(newSitesData).forEach((siteName: string) => {
+          if (siteName !== siteNameToPopulate) {
+            newSitesData[siteName] = data;
+          }
+        });
+        setSitesData(newSitesData);
+      } else {
+        // const newSitesData: SiteData = cloneDeep(sitesData);
+        // const firstSiteName = selectedSites[0].name;
+        // Object.keys(newSitesData).forEach((siteName: string) => {
+        //   if (siteName !== firstSiteName) {
+        //     newSitesData[siteName] = {
+        //       inputDetails: [],
+        //       componentDetails: {},
+        //     };
+        //   }
+        // });
+        // setSitesData(newSitesData);
+      }
+    },
+    [sitesData]
+  );
+
+  const handleSiteSpecificReport = useCallback(
+    (value: string) => {
+      setSiteSpecificReport(value);
+      if (value === SITE_SPECIFIC_REPORT_OPTIONS[1].value) {
+        handleSiteChange(1, true);
+      } else {
+        setSelectedSites([]);
+        setSitesData({});
+      }
+    },
+    [handleSiteChange]
+  );
+
+  const handleCollectionChange = useCallback(
+    (e: CheckboxChangeEvent) => {
+      let _selectedCollections: string[] = [...selectedCollections];
+
+      if (
+        siteSpecificReport === SITE_SPECIFIC_REPORT_OPTIONS[1].value &&
+        !selectedCollections.length
+      ) {
+        handleSiteChange(1, true);
+      }
+      if (e.checked) {
+        _selectedCollections.push(e.value);
+      } else {
+        _selectedCollections = _selectedCollections.filter(
+          (collection) => collection !== e.value
+        );
+      }
+
+      if (_selectedCollections.length === 0) {
+        setSelectedSites([]);
+        setSitesData({});
+      }
+      setSelectedCollections(_selectedCollections);
+    },
+    [handleSiteChange, siteSpecificReport, selectedCollections]
+  );
+
+  const handleUpdateQuantity = useCallback(
+    (quantity: number, groupId: string) => {
+      const newTotalQuantities = cloneDeep(totalQuantities);
+      const index = newTotalQuantities.findIndex((item) => item.id === groupId);
+
+      if (index === -1) {
+        newTotalQuantities.push({ id: groupId, quantity });
+      } else {
+        newTotalQuantities[index].quantity = quantity;
+      }
+      setTotalQuantities(newTotalQuantities);
+    },
+    []
+  );
 
   return (
     <div className="flex-grow-1">
@@ -431,13 +461,13 @@ const AllOnXCalculator: React.FC<AllOnXCalculatorProps> = ({
                   procedureInputsAndResponse?.input &&
                   procedureInputsAndResponse?.input.length > 0 &&
                   siteSpecificReport ===
-                  SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
-                  <TeethSelector
-                    showLabel
-                    selectedSites={selectedSites}
-                    onSiteChange={handleSiteChange}
-                  />
-                )}
+                    SITE_SPECIFIC_REPORT_OPTIONS[0].value)) && (
+                <TeethSelector
+                  showLabel
+                  selectedSites={selectedSites}
+                  onSiteChange={handleSiteChange}
+                />
+              )}
 
               {selectedSites.length > 0 && (
                 <InputDetails

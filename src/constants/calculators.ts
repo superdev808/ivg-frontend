@@ -869,5 +869,6 @@ export const POPUP_TEXTS = [
   "Supporting Article",
   "Notes",
   "Recommendation",
+  "Case Details"
 ];
 export const SHOULD_DISPLAY_TEXT_ONLY = "ShouldDisplayTextOnly";
