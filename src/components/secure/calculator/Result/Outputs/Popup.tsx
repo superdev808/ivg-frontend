@@ -4,7 +4,7 @@ import { confirmPopup } from "primereact/confirmpopup";
 import React, { useState } from "react";
 
 import { SHOULD_DISPLAY_TEXT_ONLY } from "@/constants/calculators";
-import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
+import { deserializeColInfo, isEmptyAnswer, isValidUrl } from "@/helpers/calculators";
 
 import styles from "./style.module.scss";
 
@@ -60,7 +60,7 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ data, size = 16 }) => {
     });
   };
 
-  return Object.keys(data).length > 0 ? (
+  return Object.keys(data).length > 0 && !isEmptyAnswer(data) ? (
     <i
       className={cx(
         "pi text-light-green cursor-pointer pi-question-circle border-round-full",

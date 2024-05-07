@@ -256,7 +256,7 @@ const Quiz: React.FC<QuizProps> = ({
                 {options.map((answer, index) => {
                   const image = BRAND_IMAGES[`${answer}`.toLowerCase()];
 
-                  return (
+                  return answer[question.colIndex] && (
                     <div
                       key={`${question.colName}-${answer}-${index}`}
                       className="m-2 w-12 md:w-3 flex gap-1"
@@ -270,7 +270,7 @@ const Quiz: React.FC<QuizProps> = ({
                             "quiz-card--selected":
                               currentAnswer &&
                               currentAnswer[question.colIndex] ===
-                                answer[question.colIndex],
+                              answer[question.colIndex],
                           }
                         )}
                         style={{ height: 200 }}
