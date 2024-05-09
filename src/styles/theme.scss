@@ -7056,6 +7056,13 @@
 }
 .p-message .p-message-wrapper {
   padding: 1rem 1.25rem;
+  text-align: center;
+}
+.p-message .p-message-wrapper > div {
+  line-height: 3rem;
+}
+.p-message .p-message-wrapper h1 {
+  margin: 0;
 }
 .p-message .p-message-close {
   width: 2rem;
@@ -7085,16 +7092,16 @@
   color: #01579b;
 }
 .p-message.p-message-success {
-  background: #c8e6c9;
+  background: var(--dark-green);
   border: solid transparent;
   border-width: 0 0 0 0;
-  color: #1b5e20;
+  color: #ddbda4;
 }
 .p-message.p-message-success .p-message-icon {
-  color: #1b5e20;
+  color: #ddbda4;
 }
 .p-message.p-message-success .p-message-close {
-  color: #1b5e20;
+  color: #ddbda4;
 }
 .p-message.p-message-warn {
   background: #ffecb3;
