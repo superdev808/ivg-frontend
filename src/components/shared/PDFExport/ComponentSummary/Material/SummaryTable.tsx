@@ -27,21 +27,14 @@ const SummaryTable: React.FC<SummaryTableProps> = ({ items }) => {
 
   return (
     <table className={cx("striped-table")}>
-      <thead>
-        <tr>
-          {filteredKeys.map((key) => (
-            <th key={key}>{camelCaseToWords(key)}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {items.map((item, idx) => (
-          <tr key={idx}>
-            {filteredKeys.map((key) => {
+      {filteredKeys.map((key) => (
+        <tr key={key}>
+          <th>{camelCaseToWords(key)}</th>
+          {
+            items.map((item, idx) => {
               const value = item[key as keyof Summary];
-
               return (
-                <td key={key}>
+                <td key={idx}>
                   {isValidUrl(value) ? (
                     <a
                       href={value}
@@ -54,11 +47,11 @@ const SummaryTable: React.FC<SummaryTableProps> = ({ items }) => {
                     value || ""
                   )}
                 </td>
-              );
-            })}
-          </tr>
-        ))}
-      </tbody>
+              )
+            })
+          }
+        </tr>
+      ))}
     </table>
   );
 };
