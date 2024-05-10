@@ -76,8 +76,8 @@ export interface InputOutputValues {
 export interface AutoPopulateData {
   site: Site;
   questions: InputOutputValues[];
-  answerOptions: string[][];
-  answers: string[];
+  answerOptions: ANSWER_TYPE[][];
+  answers: ANSWER_TYPE[];
 }
 
 export interface RadioButtonOption {
@@ -198,3 +198,5 @@ export interface EXPLORE_DATA {
   description?: string;
   sections: EXPLORE_DATA_SECTION[];
 }
+
+export type ANSWER_TYPE = Record<string, string>;
