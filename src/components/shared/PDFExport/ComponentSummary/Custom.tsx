@@ -123,39 +123,33 @@ const CustomSummary: React.FC<CustomSummaryProps> = ({
 
     return (
       <table className={cx("striped-table")}>
-        <thead>
-          <tr>
-            {dataKeys.map((key) => (
-              <th key={key}>{key}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((elem, trIdx) => (
-            <tr key={trIdx}>
-              {dataKeys.map((key, tdIdx) => (
-                <td key={`${key}-${tdIdx}`}>
-                  {isValidUrl(elem[key]) ? (
-                    <a
-                      href={elem[key]}
-                      target="_blank"
-                      className="text-light-green"
-                    >
-                      Link
-                    </a>
-                  ) : (
-                    elem[key]
-                  )}
-                </td>
-              ))}
+        {
+          dataKeys.map((key) => (
+            <tr key={key}>
+              <th>{key}</th>
+              {
+                data.map((elem, trIdx) => (
+                  <td key={trIdx}>
+                    {isValidUrl(elem[key]) ? (
+                      <a
+                        href={elem[key]}
+                        target="_blank"
+                        className="text-light-green"
+                      >
+                        Link
+                      </a>
+                    ) : (
+                      elem[key]
+                    )}
+                  </td>
+                ))
+              }
             </tr>
-          ))}
-        </tbody>
+          ))
+        }
       </table>
     );
   };
-
-  console.log(summary, formattedItems);
 
   return (
     <div>
