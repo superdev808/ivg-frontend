@@ -458,8 +458,21 @@ export const hasChildrenCalculator = (
 export const isPopup = (key: string) => {
   if (key == "id" || key == "quantity" || key == "link") return null;
   const { groupText } = deserializeColInfo(key);
-  return POPUP_TEXTS.filter((popupText) => groupText.startsWith(popupText))
-    .length > 0;
+  return (
+    POPUP_TEXTS.filter((popupText) => groupText.startsWith(popupText)).length >
+    0
+  );
 };
 
-export const isEmptyAnswer = (answer: ANSWER_TYPE) => Object.values(answer).filter(answer => answer).length == 0;
+export const isEmptyAnswer = (answer: ANSWER_TYPE) =>
+  Object.values(answer).filter(Boolean).length == 0;
+
+export const makeEmptyAnswer = (fields: string[]) =>
+  fields.reduce((finalValue, field) => ({ ...finalValue, [field]: "" }), {});
+
+export const filterValidAnswers = (answer: ANSWER_TYPE) =>
+  Object.keys(answer).reduce((finalValue, key) => {
+    const result = { ...finalValue };
+    if (Boolean(answer[key])) result[key] = answer[key];
+    return result;
+  }, {} as ANSWER_TYPE);

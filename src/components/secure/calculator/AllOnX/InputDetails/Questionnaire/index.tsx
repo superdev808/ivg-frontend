@@ -18,6 +18,7 @@ import {
   ItemData,
   InputDetail,
   ANSWER_TYPE,
+  QUESTION_AVAILABILITY,
 } from "@/types/calculators";
 
 import Quiz from "../../../quiz";
@@ -26,7 +27,7 @@ import ComponentDetails from "../../ComponentDetails";
 import AutoPopulatePromt from "./AutoPopulatePromt";
 import QuestionNavbar from "./QuestionNavbar";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
-import { isEmptyAnswer, isPopup, parseItems } from "@/helpers/calculators";
+import { filterValidAnswers, isEmptyAnswer, isPopup, makeEmptyAnswer, parseItems } from "@/helpers/calculators";
 
 interface QuestionnaireProps {
   site: Site;
@@ -80,6 +81,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   const [canProceed, setCanProceed] = useState<boolean>(true);
   const toastRef = useRef(null);
   const { calcInfoMap } = useCalculatorsInfo();
+  const [questionAvailability, setQuestionAvailability] = useState<Record<string, QUESTION_AVAILABILITY>>({});  // { calculatorType: {colIndex: true/false} }
 
   const sitesCount = Object.keys(sitesData).length;
   useEffect(() => {
@@ -114,20 +116,23 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
       if (level >= input.length || autoPopulateData !== null) return;
 
       let quiz = {} as ANSWER_TYPE;
+      const originalAnswerOptions = answerOptions.slice(0, answerLevel);
+
       const inspectedCalculatorType = input[level].calculatorType;
       const inspectedCalculatorInput =
         calcInfoMap[inspectedCalculatorType].input;
       const inspectedCalculatorOutput =
         calcInfoMap[inspectedCalculatorType].output;
+      const inspectedQuestionAvailability = questionAvailability[inspectedCalculatorType] || {};
       let inspectedCalculatorLevel = 0;
 
       let currentAnswerIndex = 0;
-      for (let index = 0; index < level; ) {
+      for (let index = 0; index < level;) {
         if (
           input[index].isCommon ||
           input[index].calculatorType === inspectedCalculatorType
         ) {
-          quiz = { ...quiz, ...answers[currentAnswerIndex] };
+          quiz = { ...quiz, ...filterValidAnswers(answers[currentAnswerIndex]) };
           inspectedCalculatorLevel += Object.keys(
             answers[currentAnswerIndex]
           ).length;
@@ -137,21 +142,30 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
       }
 
       // Calculate which inputs to ask in the next step - BEGIN
-      let nextInputFields = [],
+      let nextInputFields = [], remainingInputFields = [],
         i,
-        count = 0;
+        count = 0, shouldRequest = true;
       for (
         i = level;
         i < input.length &&
-        input[i].calculatorType === input[level].calculatorType;
+        input[i].calculatorType === inspectedCalculatorType;
         ++i
       ) {
         if (isPopup(input[i].groupText) == false) {
           count += 1;
+          if (inspectedQuestionAvailability[input[i].colIndex] === false) // if this is not POPUP_TEXT question but it's already marked as false in questionAvailability, we needn't fetch the request
+            shouldRequest = false;
         }
         if (count == 2) break;
         nextInputFields.push(input[i].colIndex);
       }
+      if (shouldRequest === false) {
+        setAnswerOptions([...originalAnswerOptions, [makeEmptyAnswer(nextInputFields)]])
+        return;
+      }
+      for (; i < input.length && input[i].calculatorType === inspectedCalculatorType; ++i)
+        if (input[i].colIndex && inspectedQuestionAvailability[input[i].colIndex] !== false)  // only update if the answer for this question is available
+          remainingInputFields.push(input[i].colIndex);
       // Calculate which inputs to ask in the next step - END
 
       try {
@@ -169,6 +183,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
                 inspectedCalculatorLevel < inspectedCalculatorInput.length
                   ? nextInputFields
                   : inspectedCalculatorOutput.map((item) => item.colIndex),
+              remainingFields: remainingInputFields
             }),
           }
         );
@@ -186,10 +201,16 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
           });
           return;
         }
-        const { data: newAnswerOptions }: { data: ANSWER_TYPE[] } =
+        const { data: {
+          data: newAnswerOptions,
+          questionAvailability: newQuestionAvailability
+        } }: {
+          data: {
+            data: ANSWER_TYPE[],
+            questionAvailability: QUESTION_AVAILABILITY
+          }
+        } =
           await response.json();
-
-        const originalAnswerOptions = answerOptions.slice(0, answerLevel);
 
         if (inspectedCalculatorLevel == inspectedCalculatorInput.length) {
           onQuizResponse(
@@ -199,10 +220,16 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
               .flat(),
             inspectedCalculatorType
           );
-          setAnswerOptions([...originalAnswerOptions, [{ "": "" }]]);
+          setAnswerOptions([...originalAnswerOptions, [makeEmptyAnswer([""])]]);
           return;
         }
         // if (newAnswerOptions.length) {
+        setQuestionAvailability({
+          ...questionAvailability, [inspectedCalculatorType]: {
+            ...inspectedQuestionAvailability,
+            ...newQuestionAvailability
+          }
+        });
         setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
         // }
       } catch (error: any) {
@@ -265,6 +292,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
         newlevel += Object.keys(answers[i]).length;
       setLevel(newlevel);
       setAnswerLevel(index);
+      setQuestionAvailability({});
     },
     [answers, handleAutoPopulateChange]
   );
@@ -355,9 +383,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
               secondaryQuestions={input.slice(
                 level,
                 level +
-                  (answerOptions[answerLevel]
-                    ? Object.keys(answerOptions[answerLevel][0]).length
-                    : 1)
+                (answerOptions[answerLevel]
+                  ? Object.keys(answerOptions[answerLevel][0]).length
+                  : 1)
               )}
               calculatorName={calcInfoMap[input[level].calculatorType].label}
               answers={answerOptions[answerLevel]}
