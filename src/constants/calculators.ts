@@ -555,6 +555,15 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
               },
             ],
           },
+          {
+            name: "Shade Taking",
+            items: [
+              {
+                name: "Shade Guide Conversion",
+                href: "/calculators/ShadeGuideConversion",
+              },
+            ],
+          },
         ],
       },
       {
@@ -869,6 +878,6 @@ export const POPUP_TEXTS = [
   "Supporting Article",
   "Notes",
   "Recommendation",
-  "Case Details"
+  "Case Details",
 ];
 export const SHOULD_DISPLAY_TEXT_ONLY = "ShouldDisplayTextOnly";
