@@ -349,7 +349,6 @@ const FirstForm: React.FC<FirstFormProps> = ({ onSubmit }) => {
         <div>
           <Button
             type="submit"
-            outlined
             disabled={isLoading}
             icon={isLoading ? "pi pi-spin pi-spinner" : undefined}
             label="Continue"
