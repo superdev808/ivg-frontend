@@ -137,7 +137,7 @@ const CalculatorPage: NextPage = () => {
       }),
     })
       .then((response) => response.json())
-      .then(({ data }) => {
+      .then(({ data: { data } }) => {
         const commonSuppliesDataItems = formatToExploreDataItems(
           data as any[],
           inputKeys,

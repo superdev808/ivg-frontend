@@ -5,9 +5,9 @@ import { useQuery } from "react-query";
 import DetailView from "./detail";
 import FeedbackDialogWrapper from "./Feedback/FeedbackDialogWrapper";
 import Quiz from "./quiz";
-import { ANSWER_TYPE, InputOutputValues } from "@/types/calculators";
+import { ANSWER_TYPE, InputOutputValues, QUESTION_AVAILABILITY } from "@/types/calculators";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
-import { isEmptyAnswer, isPopup } from "@/helpers/calculators";
+import { filterValidAnswers, isEmptyAnswer, isPopup, makeEmptyAnswer } from "@/helpers/calculators";
 import _ from "lodash";
 
 interface CalculatorContainerProps {
@@ -30,6 +30,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
   const [items, setItems] = useState<ANSWER_TYPE[]>([]);
   const [canProceed, setCanProceed] = useState<boolean>(true);
   const { calcInfoMap } = useCalculatorsInfo();
+  const [questionAvailability, setQuestionAvailability] = useState<QUESTION_AVAILABILITY>({});
 
   const calculatorType = decodeURI(option);
 
@@ -44,19 +45,30 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
         return;
       }
 
-      const quiz = _.merge({}, ...answers.slice(0, answerLevel));
+      const quiz = filterValidAnswers(_.merge({}, ...answers.slice(0, answerLevel)));
+      const originalAnswerOptions: any[] = answerOptions.slice(0, answerLevel);
 
       // Calculate which inputs to ask in the next step - BEGIN
-      let nextInputFields = [],
+      let nextInputFields = [], remainingInputFields = [],
         i,
-        count = 0;
+        count = 0, shouldRequest = true;
       for (i = level; i < input.length; ++i) {
         if (isPopup(input[i].groupText) == false) {
           count += 1;
+          if (questionAvailability[input[i].colIndex] === false) // if this is not POPUP_TEXT question but it's already marked as false in questionAvailability, we needn't fetch the request
+            shouldRequest = false;
         }
         if (count == 2) break;
         nextInputFields.push(input[i].colIndex);
       }
+      if (shouldRequest === false) {
+        setAnswerOptions([...originalAnswerOptions, [makeEmptyAnswer(nextInputFields)]])
+        setItems([]);
+        return;
+      }
+      for (; i < input.length; ++i)
+        if (questionAvailability[input[i].colIndex] !== false)  // only update if the answer for this question is available
+          remainingInputFields.push(input[i].colIndex);
       // Calculate which inputs to ask in the next step - END
 
       const response = await fetch(
@@ -73,19 +85,28 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
               level < input.length
                 ? nextInputFields
                 : output.map((item) => item.colIndex),
+            remainingFields: remainingInputFields
           }),
         }
       );
 
-      const { data: newAnswerOptions }: { data: ANSWER_TYPE[] } =
+      const { data: {
+        data: newAnswerOptions,
+        questionAvailability: newQuestionAvailability
+      } }: {
+        data: {
+          data: ANSWER_TYPE[],
+          questionAvailability: QUESTION_AVAILABILITY
+        }
+      } =
         await response.json();
 
-      const originalAnswerOptions: any[] = answerOptions.slice(0, answerLevel);
       if (level == input.length) {
         setItems(newAnswerOptions || []);
         return;
       }
       // if (newAnswerOptions.length) {
+      setQuestionAvailability({ ...questionAvailability, ...newQuestionAvailability });
       setAnswerOptions([...originalAnswerOptions, newAnswerOptions]);
       setItems([]);
       // }
@@ -118,6 +139,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
     setLevel(newLevel);
     setAnswerLevel(i);
     setAnswerOptions(answerOptions.slice(0, i + 1));
+    setQuestionAvailability({});
   };
 
   const handleBackFromResult = () => {
@@ -164,9 +186,9 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
               secondaryQuestions={input.slice(
                 level,
                 level +
-                  (answerOptions[answerLevel]
-                    ? Object.keys(answerOptions[answerLevel][0]).length
-                    : 1)
+                (answerOptions[answerLevel]
+                  ? Object.keys(answerOptions[answerLevel][0]).length
+                  : 1)
               )}
               answers={answerOptions[answerLevel]}
               currentAnswer={answers[answerLevel]}
