@@ -83,6 +83,10 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   const { calcInfoMap } = useCalculatorsInfo();
   const [questionAvailability, setQuestionAvailability] = useState<Record<string, QUESTION_AVAILABILITY>>({});  // { calculatorType: {colIndex: true/false} }
 
+  const countValidQuestions = useCallback((_questions: InputOutputValues[]) => {
+    return _questions.map((q) => questionAvailability[q.calculatorType][q.colIndex]).filter(flag => flag !== false).length - 1;
+  }, [questionAvailability]);
+
   const sitesCount = Object.keys(sitesData).length;
   useEffect(() => {
     if (showAutoPopulatePrompt) {
@@ -153,10 +157,10 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
       ) {
         if (isPopup(input[i].groupText) == false) {
           count += 1;
+          if (count == 2) break;
           if (inspectedQuestionAvailability[input[i].colIndex] === false) // if this is not POPUP_TEXT question but it's already marked as false in questionAvailability, we needn't fetch the request
             shouldRequest = false;
         }
-        if (count == 2) break;
         nextInputFields.push(input[i].colIndex);
       }
       if (shouldRequest === false) {
@@ -391,7 +395,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
               answers={answerOptions[answerLevel]}
               currentAnswer={answers[answerLevel]}
               disabled={showLoader}
-              progress={Math.floor((level / input.length) * 100)}
+              progress={Math.floor(((countValidQuestions(questions) - 1) / countValidQuestions(input)) * 100)}
               onSelectAnswer={handleSelectAnswer}
             />
           )}
