@@ -84,7 +84,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   const [questionAvailability, setQuestionAvailability] = useState<Record<string, QUESTION_AVAILABILITY>>({});  // { calculatorType: {colIndex: true/false} }
 
   const countValidQuestions = useCallback((_questions: InputOutputValues[]) => {
-    return _questions.map((q) => questionAvailability[q.calculatorType][q.colIndex]).filter(flag => flag !== false).length - 1;
+    return _questions.map((q) => questionAvailability[q.calculatorType] && questionAvailability[q.calculatorType][q.colIndex]).filter(flag => flag !== false).length - 1;
   }, [questionAvailability]);
 
   const sitesCount = Object.keys(sitesData).length;
