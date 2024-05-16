@@ -85,7 +85,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   const [questionAvailability, setQuestionAvailability] = useState<Record<string, QUESTION_AVAILABILITY>>({});  // { calculatorType: {colIndex: true/false} }
 
   const countValidQuestions = useCallback((_questions: InputOutputValues[]) => {
-    return _questions.map((q) => questionAvailability[q.calculatorType] && questionAvailability[q.calculatorType][q.colIndex]).filter(flag => flag !== false).length - 1;
+    return _questions.map((q) => questionAvailability[q.calculatorType] && questionAvailability[q.calculatorType][q.colIndex]).filter(flag => flag !== false).length;
   }, [questionAvailability]);
 
   const sitesCount = Object.keys(sitesData).length;
@@ -341,7 +341,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
 
   const showLoader =
     isLoading || (input[level] && !Boolean(answerOptions[answerLevel]?.length));
-  const answerOptionsUnavailable = (_.isArray(answerOptions[answerLevel]) && answerOptions[answerLevel]?.length === 1 && isEmptyAnswer(answerOptions[answerLevel][0])) || input[level].colName == "";
+  const answerOptionsUnavailable = (_.isArray(answerOptions[answerLevel]) && answerOptions[answerLevel]?.length === 1 && isEmptyAnswer(answerOptions[answerLevel][0])) || input[level]?.colName == "";
 
   useEffect(() => {
     if (!(level < questions.length) || showLoader) return;
