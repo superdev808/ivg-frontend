@@ -29,40 +29,29 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
   return (
     <>
       <h3 className="mb-1">Inputs:</h3>
-
-      {chunk(questions, 9).map((questions, idx) => (
-        <table
-          className={cx("striped-table", { "mt-4": idx !== 0 })}
-          key={`uniqueQuestions-${idx}`}
-        >
-          <thead>
-            <tr>
-              {!hideSite && <th>Site Number</th>}
-              {questions.map((question, index) => (
-                <th key={index}>{question}</th>
-              ))}
-            </tr>
-          </thead>
-
-          <tbody>
-            {inputSummary.map(({ site, inputDetails }, idx) => (
-              <tr key={`${site}-${idx}`}>
-                {!hideSite && (
-                  <td>{(site || "").replace("Site", "").trim()}</td>
-                )}
-
-                {questions.map((question, index) => {
-                  const item =
-                    inputDetails.find((elem) => elem.question === question)
-                      ?.answer || "";
-
-                  return <td key={index}>{item || "-"}</td>;
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ))}
+      <table className={cx("striped-table")}>
+        {!hideSite && (
+          <tr>
+            {!hideSite && <th>Site Number</th>}
+            {
+              inputSummary.map(({ site, inputDetails }, idx) => (
+                <td key={`${site}-${idx}`}>{(site || "").replace("Site", "").trim()}</td>
+              ))
+            }
+          </tr>
+        )}
+        {questions.map((question, index) => (
+          <tr key={index}>
+            <th>{question}</th>
+            {inputSummary.map(({ site, inputDetails }, idx) => {
+              const item = inputDetails.find((elem) => elem.question === question)?.answer || "";
+              return (
+                <td key={`${site}-${idx}`}>{item || "-"}</td>
+              );
+            })}
+          </tr>
+        ))}
+      </table>
     </>
   );
 };

@@ -254,7 +254,7 @@ const Quiz: React.FC<QuizProps> = ({
             <>
               <div className="flex align-items-start justify-content-around flex-wrap w-12">
                 {options.map((answer, index) => {
-                  const image = BRAND_IMAGES[`${answer}`.toLowerCase()];
+                  const image = BRAND_IMAGES[`${answer[question.colIndex]}`.toLowerCase()];
 
                   return answer[question.colIndex] && (
                     <div
@@ -262,45 +262,47 @@ const Quiz: React.FC<QuizProps> = ({
                       className="m-2 w-12 md:w-3 flex gap-1"
                     >
                       {popupComponentHOC(answer)}
-                      <div
-                        className={cx(
-                          "quiz-card",
-                          "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer bg-white",
-                          {
-                            "quiz-card--selected":
-                              currentAnswer &&
-                              currentAnswer[question.colIndex] ===
-                              answer[question.colIndex],
-                          }
-                        )}
-                        style={{ height: 200 }}
-                        onClick={() => {
-                          if (!disabled) {
-                            onSelectAnswer(answer);
-                          }
-                        }}
-                      >
-                        {image ? (
-                          <Image
-                            src={image}
-                            width="100%"
-                            height="100%"
-                            imageClassName="p-4"
-                            imageStyle={{ objectFit: "contain" }}
-                            alt={answer[question.colIndex]}
-                          />
-                        ) : (
-                          <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
+                      <div className="flex flex-column w-full justify-content-center">
+                        <div
+                          className={cx(
+                            "quiz-card",
+                            "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer bg-white",
+                            {
+                              "quiz-card--selected":
+                                currentAnswer &&
+                                currentAnswer[question.colIndex] ===
+                                answer[question.colIndex],
+                            }
+                          )}
+                          style={{ height: 200 }}
+                          onClick={() => {
+                            if (!disabled) {
+                              onSelectAnswer(answer);
+                            }
+                          }}
+                        >
+                          {image ? (
+                            <Image
+                              src={image}
+                              width="100%"
+                              height="100%"
+                              imageClassName="p-4"
+                              imageStyle={{ objectFit: "contain" }}
+                              alt={answer[question.colIndex]}
+                            />
+                          ) : (
+                            <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
+                              {answer[question.colIndex]}
+                            </div>
+                          )}
+                        </div>
+
+                        {image && (
+                          <p className="w-full text-3xl text-center align-self-center">
                             {answer[question.colIndex]}
-                          </div>
+                          </p>
                         )}
                       </div>
-
-                      {image && (
-                        <p className="w-full text-3xl text-center">
-                          {answer[question.colIndex]}
-                        </p>
-                      )}
                     </div>
                   );
                 })}

@@ -200,3 +200,4 @@ export interface EXPLORE_DATA {
 }
 
 export type ANSWER_TYPE = Record<string, string>;
+export type QUESTION_AVAILABILITY = Record<string, boolean>;
