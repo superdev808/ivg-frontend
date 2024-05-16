@@ -427,6 +427,8 @@ export const BRAND_IMAGES: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/low+occlusal+load.png",
   molar:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/molar.png",
+  "split dam":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/multiple+isolation.png",
   "multiple isolation":
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/multiple+isolation.png",
   "not translucent":
