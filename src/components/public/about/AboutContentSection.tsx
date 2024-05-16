@@ -88,7 +88,7 @@ export const AboutContentSection = () => {
             className="flex justify-content-center relative w-full p-4 z-1"
           >
             <AboutContentSectionScoller>
-              <div
+              {/* <div
                 className="w-full px-2 xl:mb-6 grid justify-content-center absolute z-2"
                 style={{ maxWidth: 1600, top: 55 }}
               >
@@ -125,7 +125,7 @@ export const AboutContentSection = () => {
                     svgLine={<Line4 />}
                   />
                 </div>
-              </div>
+              </div> */}
             </AboutContentSectionScoller>
             {/* <Image
               imageClassName="xl:absolute top-0 left-0"
