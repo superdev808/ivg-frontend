@@ -17,6 +17,7 @@ import Procurement from "../../../../public/images/about/procurement.svg";
 import Treatment from "../../../../public/images/about/treatment.svg";
 
 import styles from "./About.module.scss";
+import AboutContentSectionScoller from "./AboutContentVideoScroller";
 
 const cx = classNames.bind(styles);
 
@@ -85,52 +86,53 @@ export const AboutContentSection = () => {
         <div className="flex flex-column align-items-center justify-content-center">
           <div
             className="flex justify-content-center relative w-full p-4 z-1"
-            style={{ maxWidth: 750 }}
           >
-            <Image
+            <AboutContentSectionScoller>
+              <div
+                className="w-full px-2 xl:mb-6 grid justify-content-center absolute z-2"
+                style={{ maxWidth: 1600, top: 55 }}
+              >
+                <div className="col-12 xl:col">
+                  <ScrollCard
+                    description="Easy to navigate, interactive interface"
+                    svgLine={<Line1 />}
+                  />
+                </div>
+                <div className="xl:col-4" />
+                <div className="col-12 xl:col">
+                  <ScrollCard
+                    description="Allows users to save, export and email result summaries"
+                    rtl
+                    svgLine={<Line2 />}
+                  />
+                </div>
+              </div>
+              <div
+                className="w-full px-2 grid justify-content-center absolute z-2"
+                style={{ maxWidth: 1500, top: 220 }}
+              >
+                <div className="col-12 xl:col">
+                  <ScrollCard
+                    description="Allows for planning of complicated treatment procedures with ease"
+                    svgLine={<Line3 />}
+                  />
+                </div>
+                <div className="xl:col-4" />
+                <div className="col-12 xl:col">
+                  <ScrollCard
+                    description="Provides quick links to purchase necessary components"
+                    rtl
+                    svgLine={<Line4 />}
+                  />
+                </div>
+              </div>
+            </AboutContentSectionScoller>
+            {/* <Image
               imageClassName="xl:absolute top-0 left-0"
               src="/images/about/output-mockup.png"
               alt="centerImage"
               width="100%"
-            />
-          </div>
-          <div
-            className="w-full px-2 xl:mb-6 grid justify-content-center relative z-2"
-            style={{ maxWidth: 1600 }}
-          >
-            <div className="col-12 xl:col">
-              <ScrollCard
-                description="Easy to navigate, interactive interface"
-                svgLine={<Line1 />}
-              />
-            </div>
-            <div className="xl:col-4" />
-            <div className="col-12 xl:col">
-              <ScrollCard
-                description="Allows users to save, export and email result summaries"
-                rtl
-                svgLine={<Line2 />}
-              />
-            </div>
-          </div>
-          <div
-            className="w-full px-2 grid justify-content-center relative z-2"
-            style={{ maxWidth: 1400 }}
-          >
-            <div className="col-12 xl:col">
-              <ScrollCard
-                description="Allows for planning of complicated treatment procedures with ease"
-                svgLine={<Line3 />}
-              />
-            </div>
-            <div className="xl:col-4" />
-            <div className="col-12 xl:col">
-              <ScrollCard
-                description="Provides quick links to purchase necessary components"
-                rtl
-                svgLine={<Line4 />}
-              />
-            </div>
+            /> */}
           </div>
         </div>
       </div>
