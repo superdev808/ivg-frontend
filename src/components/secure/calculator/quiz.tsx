@@ -222,12 +222,11 @@ const Quiz: React.FC<QuizProps> = ({
         </div>
       )}
 
-      <div className="relative md:absolute flex align-items-center justify-content-center w-full md:w-2 md:col-offset-10">
-        <PieChartProgressBar percentage={progress || 0} />
-      </div>
-
       {!disabled && (
         <>
+          <div className="relative md:absolute flex align-items-center justify-content-center w-full md:w-2 md:col-offset-10">
+            <PieChartProgressBar percentage={progress || 0} />
+          </div>
           {isActionQuestion ? (
             <div className="flex align-items-start justify-content-around flex-wrap w-12">
               <div className="m-2 w-12 md:w-3 flex gap-1">
