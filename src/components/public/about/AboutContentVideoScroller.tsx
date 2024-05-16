@@ -57,7 +57,7 @@ export default function AboutContentSectionScoller({ children }: AboutContentVid
   return (
     <div className={cx("content-video-scroller")}>
       <div className={cx("video-wrapper")}>
-        <video ref={videoRef} preload="preload" className={cx("video")}>
+        <video ref={videoRef} preload="preload" className={cx("video-custom")}>
           <source
             type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
             src={videoUrl}
