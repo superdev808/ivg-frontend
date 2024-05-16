@@ -7,7 +7,7 @@ import FeedbackDialogWrapper from "./Feedback/FeedbackDialogWrapper";
 import Quiz from "./quiz";
 import { ANSWER_TYPE, InputOutputValues, QUESTION_AVAILABILITY } from "@/types/calculators";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
-import { filterValidAnswers, isEmptyAnswer, isPopup, makeEmptyAnswer } from "@/helpers/calculators";
+import { filterValidAnswers, isEmptyAnswer, isPopup, makeEmptyAnswer, serializeColInfo } from "@/helpers/calculators";
 import _ from "lodash";
 
 interface CalculatorContainerProps {
@@ -34,6 +34,10 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
 
   const calculatorType = decodeURI(option);
 
+  const countValidQuestions = useCallback((_questions: InputOutputValues[]) => {
+    return _questions.map((q) => questionAvailability[q.colIndex]).filter(flag => flag !== false).length;
+  }, [questionAvailability]);
+
   const { isLoading } = useQuery(
     [input, level, answers, option, canProceed],
     async () => {
@@ -53,12 +57,12 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
         i,
         count = 0, shouldRequest = true;
       for (i = level; i < input.length; ++i) {
-        if (isPopup(input[i].groupText) == false) {
+        if (isPopup(serializeColInfo(input[i])) == false) {
           count += 1;
+          if (count == 2) break;
           if (questionAvailability[input[i].colIndex] === false) // if this is not POPUP_TEXT question but it's already marked as false in questionAvailability, we needn't fetch the request
             shouldRequest = false;
         }
-        if (count == 2) break;
         nextInputFields.push(input[i].colIndex);
       }
       if (shouldRequest === false) {
@@ -193,7 +197,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
               answers={answerOptions[answerLevel]}
               currentAnswer={answers[answerLevel]}
               disabled={showLoader}
-              progress={Math.floor((level / input.length) * 100)}
+              progress={Math.floor(((countValidQuestions(questions) - 1) / countValidQuestions(input)) * 100)}
               onSelectAnswer={handleSelectAnswer}
               onGoBack={level > 0 ? handleBack : undefined}
             />
