@@ -153,6 +153,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
 
   const showLoader =
     isLoading || (input[level] && !Boolean(answerOptions[answerLevel]?.length));
+  const answerOptionsUnavailable = _.isArray(answerOptions[answerLevel]) && answerOptions[answerLevel].length === 1 && isEmptyAnswer(answerOptions[answerLevel][0]);
 
   useEffect(() => {
     if (!(level < questions.length) || showLoader) return;
@@ -196,7 +197,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
               )}
               answers={answerOptions[answerLevel]}
               currentAnswer={answers[answerLevel]}
-              disabled={showLoader}
+              disabled={showLoader || answerOptionsUnavailable}
               progress={Math.floor(((countValidQuestions(questions) - 1) / countValidQuestions(input)) * 100)}
               onSelectAnswer={handleSelectAnswer}
               onGoBack={level > 0 ? handleBack : undefined}
@@ -230,7 +231,7 @@ const CalculatorContainer: React.FC<CalculatorContainerProps> = ({
           />
         )}
 
-        {showLoader && (
+        {(showLoader || answerOptionsUnavailable) && (
           <div className="w-12 flex justify-content-center">
             <ProgressSpinner className="w-1" />
           </div>

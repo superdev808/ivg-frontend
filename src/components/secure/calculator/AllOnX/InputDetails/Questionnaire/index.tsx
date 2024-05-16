@@ -28,6 +28,7 @@ import AutoPopulatePromt from "./AutoPopulatePromt";
 import QuestionNavbar from "./QuestionNavbar";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 import { filterValidAnswers, isEmptyAnswer, isPopup, makeEmptyAnswer, parseItems } from "@/helpers/calculators";
+import _ from "lodash";
 
 interface QuestionnaireProps {
   site: Site;
@@ -340,6 +341,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
 
   const showLoader =
     isLoading || (input[level] && !Boolean(answerOptions[answerLevel]?.length));
+  const answerOptionsUnavailable = (_.isArray(answerOptions[answerLevel]) && answerOptions[answerLevel]?.length === 1 && isEmptyAnswer(answerOptions[answerLevel][0])) || input[level].colName == "";
 
   useEffect(() => {
     if (!(level < questions.length) || showLoader) return;
@@ -373,7 +375,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
         onChange={handleChange}
       />
 
-      {showLoader ? (
+      {(showLoader || answerOptionsUnavailable) ? (
         <ProgressSpinner
           className="w-1 absolute top-50 left-50"
           style={{ transform: "translate(-50%, -50%)" }}
@@ -394,7 +396,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
               calculatorName={calcInfoMap[input[level].calculatorType].label}
               answers={answerOptions[answerLevel]}
               currentAnswer={answers[answerLevel]}
-              disabled={showLoader}
+              disabled={showLoader || answerOptionsUnavailable}
               progress={Math.floor(((countValidQuestions(questions) - 1) / countValidQuestions(input)) * 100)}
               onSelectAnswer={handleSelectAnswer}
             />
