@@ -13,6 +13,7 @@ import React, { useEffect, useState, useMemo, useCallback } from "react";
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
 import {
   BRAND_IMAGES,
+  QUESTION_ANSWER_BRAND_MAP,
   SHOULD_DISPLAY_TEXT_ONLY,
 } from "@/constants/calculators";
 import { ANSWER_TYPE, InputOutputValues } from "@/types/calculators";
@@ -23,6 +24,26 @@ import styles from "./quiz.module.scss";
 import { isPopup, serializeColInfo } from "@/helpers/calculators";
 
 const cx = classNames.bind(styles);
+
+const getImageForAnswerOption = (
+  answer: string,
+  question?: InputOutputValues
+) => {
+  let lowerCaseAnswer = answer.toLocaleLowerCase();
+  if (BRAND_IMAGES[lowerCaseAnswer]) {
+    return BRAND_IMAGES[lowerCaseAnswer];
+  }
+
+  if (!question) return "";
+
+  const answerMap = QUESTION_ANSWER_BRAND_MAP[question.colName];
+  const brand = answerMap?.[lowerCaseAnswer];
+  if (brand) {
+    return BRAND_IMAGES[brand];
+  }
+
+  return "";
+};
 
 interface QuizProps {
   calculatorName?: string;
@@ -98,8 +119,11 @@ const Quiz: React.FC<QuizProps> = ({
     return availableOptions;
   }, [filteredAnswers, showAll, question]);
 
-  const dropdownOptionTemplate = (option: string) => {
-    const image = BRAND_IMAGES[String(option).toLowerCase()];
+  const dropdownOptionTemplate = (
+    option: string,
+    question: InputOutputValues
+  ) => {
+    const image = getImageForAnswerOption(option, question);
 
     return (
       <div className="flex align-items-center justify-content-center">
@@ -216,7 +240,7 @@ const Quiz: React.FC<QuizProps> = ({
             inputClassName="w-full"
             completeMethod={handleAutoCompleteMethod}
             onSelect={handleSelect}
-            itemTemplate={dropdownOptionTemplate}
+            itemTemplate={(option) => dropdownOptionTemplate(option, question)}
             dropdown
           />
         </div>
@@ -253,56 +277,61 @@ const Quiz: React.FC<QuizProps> = ({
             <>
               <div className="flex align-items-start justify-content-around flex-wrap w-12">
                 {options.map((answer, index) => {
-                  const image = BRAND_IMAGES[`${answer[question.colIndex]}`.toLowerCase()];
+                  const image = getImageForAnswerOption(
+                    answer[question.colIndex],
+                    question
+                  );
 
-                  return answer[question.colIndex] && (
-                    <div
-                      key={`${question.colName}-${answer}-${index}`}
-                      className="m-2 w-12 md:w-3 flex gap-1"
-                    >
-                      {popupComponentHOC(answer)}
-                      <div className="flex flex-column w-full justify-content-center">
-                        <div
-                          className={cx(
-                            "quiz-card",
-                            "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer bg-white",
-                            {
-                              "quiz-card--selected":
-                                currentAnswer &&
-                                currentAnswer[question.colIndex] ===
-                                answer[question.colIndex],
-                            }
-                          )}
-                          style={{ height: 200 }}
-                          onClick={() => {
-                            if (!disabled) {
-                              onSelectAnswer(answer);
-                            }
-                          }}
-                        >
-                          {image ? (
-                            <Image
-                              src={image}
-                              width="100%"
-                              height="100%"
-                              imageClassName="p-4"
-                              imageStyle={{ objectFit: "contain" }}
-                              alt={answer[question.colIndex]}
-                            />
-                          ) : (
-                            <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
+                  return (
+                    answer[question.colIndex] && (
+                      <div
+                        key={`${question.colName}-${answer}-${index}`}
+                        className="m-2 w-12 md:w-3 flex gap-1"
+                      >
+                        {popupComponentHOC(answer)}
+                        <div className="flex flex-column w-full justify-content-center">
+                          <div
+                            className={cx(
+                              "quiz-card",
+                              "border-3 border-round-xl w-full p-0 flex justify-content-center cursor-pointer bg-white",
+                              {
+                                "quiz-card--selected":
+                                  currentAnswer &&
+                                  currentAnswer[question.colIndex] ===
+                                    answer[question.colIndex],
+                              }
+                            )}
+                            style={{ height: 200 }}
+                            onClick={() => {
+                              if (!disabled) {
+                                onSelectAnswer(answer);
+                              }
+                            }}
+                          >
+                            {image ? (
+                              <Image
+                                src={image}
+                                width="100%"
+                                height="100%"
+                                imageClassName="p-4"
+                                imageStyle={{ objectFit: "contain" }}
+                                alt={answer[question.colIndex]}
+                              />
+                            ) : (
+                              <div className="w-full m-1 text-3xl flex align-items-center justify-content-center text-center">
+                                {answer[question.colIndex]}
+                              </div>
+                            )}
+                          </div>
+
+                          {image && (
+                            <p className="w-full text-3xl text-center align-self-center">
                               {answer[question.colIndex]}
-                            </div>
+                            </p>
                           )}
                         </div>
-
-                        {image && (
-                          <p className="w-full text-3xl text-center align-self-center">
-                            {answer[question.colIndex]}
-                          </p>
-                        )}
                       </div>
-                    </div>
+                    )
                   );
                 })}
               </div>
