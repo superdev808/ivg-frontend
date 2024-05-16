@@ -254,7 +254,7 @@ const Quiz: React.FC<QuizProps> = ({
             <>
               <div className="flex align-items-start justify-content-around flex-wrap w-12">
                 {options.map((answer, index) => {
-                  const image = BRAND_IMAGES[`${answer}`.toLowerCase()];
+                  const image = BRAND_IMAGES[`${answer[question.colIndex]}`.toLowerCase()];
 
                   return answer[question.colIndex] && (
                     <div
@@ -297,7 +297,7 @@ const Quiz: React.FC<QuizProps> = ({
                       </div>
 
                       {image && (
-                        <p className="w-full text-3xl text-center">
+                        <p className="w-full text-3xl text-center align-self-center">
                           {answer[question.colIndex]}
                         </p>
                       )}
