@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 
 const playbackConst = 500; // Adjust the constant as needed
 const videoUrl =
-  "/images/about/output-mockup.mp4";
+  "https://ivoryguide.s3.us-west-1.amazonaws.com/images/about/output-mockup.mp4";
 
 interface AboutContentVideoScrollerProps {
   children: React.ReactNode
