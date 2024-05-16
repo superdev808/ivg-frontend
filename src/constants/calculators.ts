@@ -207,6 +207,13 @@ export const INFORMATIONAL_CALCULATOR_TYPES = [
   "ShadeGuideConversion",
 ];
 
+export const CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES = [
+  "BondingEtching",
+  "IsolationTechniques",
+  "ToothPreparation",
+  "PhysicalImpression",
+];
+
 export const MATERIAL_CALCULATOR_TYPES = [
   "ImplantBorneBridge",
   "ImplantBorneCrown",

@@ -4,7 +4,10 @@ import { InputNumber } from "primereact/inputnumber";
 import React, { useMemo } from "react";
 import cx from "classnames";
 
-import { INFORMATIONAL_CALCULATOR_TYPES } from "@/constants/calculators";
+import {
+  CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES,
+  INFORMATIONAL_CALCULATOR_TYPES,
+} from "@/constants/calculators";
 import { isValidUrl } from "@/helpers/calculators";
 import { ItemData, ItemInsights } from "@/types/calculators";
 
@@ -38,6 +41,9 @@ const Outputs: React.FC<OutputsProps> = ({
     <div className="flex flex-column gap-4 text-dark-green">
       {filteredItems.map(({ label, info }, filteredItemIndex) =>
         info.map((_item, itemIdx) => {
+          const needHighlight =
+            !CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES.includes(calculatorType) &&
+            filteredItemIndex === 0;
           let item: ItemInsights = { ..._item };
           Object.keys(item).forEach((key) => {
             if (
@@ -52,7 +58,12 @@ const Outputs: React.FC<OutputsProps> = ({
           return (
             <div
               key={`${label}-${itemIdx}`}
-              className="flex flex-column justify-content-between gap-4 p-3 border-round-md line-height-3 md:flex-row md:align-items-center border-light-green border-2"
+              className={cx(
+                "flex flex-column justify-content-between gap-4 p-3 border-round-md line-height-3 md:flex-row md:align-items-center",
+                needHighlight
+                  ? "text-xl border-dark-brown border-3"
+                  : "border-light-green border-2"
+              )}
             >
               <GenericOutput
                 label={label}
