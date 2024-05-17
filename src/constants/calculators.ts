@@ -204,6 +204,14 @@ export const INFORMATIONAL_CALCULATOR_TYPES = [
   "IsolationTechniques",
   "ToothPreparation",
   "ImplantTorqueGuide",
+  "ShadeGuideConversion",
+];
+
+export const CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES = [
+  "BondingEtching",
+  "IsolationTechniques",
+  "ToothPreparation",
+  "PhysicalImpression",
 ];
 
 export const MATERIAL_CALCULATOR_TYPES = [
@@ -419,6 +427,8 @@ export const BRAND_IMAGES: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/low+occlusal+load.png",
   molar:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/molar.png",
+  "split dam":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/multiple+isolation.png",
   "multiple isolation":
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/multiple+isolation.png",
   "not translucent":
