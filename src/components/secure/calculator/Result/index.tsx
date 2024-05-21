@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import PatientInfo from "@/components/shared/PatientInfo";
 import PDFContent from "@/components/shared/PDFExport/PDFContent";
@@ -75,6 +75,10 @@ const Result: React.FC<ResultProps> = ({
   const image = CALCULATOR_IMAGES[calculatorType];
 
   const isSaved = Boolean(id);
+
+  const filteredItems = useMemo(() => {
+    return items.filter((item) => item.info.length > 0);
+  }, [items]);
 
   const handleExportAndSendPDF = async (info: Patient) => {
     const element = contentRef.current;
@@ -389,11 +393,11 @@ const Result: React.FC<ResultProps> = ({
 
         <Outputs
           calculatorType={calculatorType}
-          items={items}
+          items={filteredItems}
           onUpdateQuantity={onUpdateQuantity}
         />
-
         <InputSummary
+          items={filteredItems}
           name={name}
           calculatorType={calculatorType}
           quiz={quiz}
