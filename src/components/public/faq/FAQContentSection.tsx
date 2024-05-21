@@ -7,6 +7,7 @@ import { useState } from "react";
 import { CTASection } from "../shared/CTASection";
 
 import styles from "./FAQ.module.scss";
+import { FAQ_VIDEOS } from "./constants";
 
 const cx = classNames.bind(styles);
 
@@ -52,7 +53,7 @@ export const FAQContentSection = () => {
                   outputs and links to purchase, when applicable.
                 </li>
               </ul>
-              {renderVideo("/videos/faq/Use a standalone calculator.mp4")}
+              {renderVideo(FAQ_VIDEOS.UseStandaloneCalc)}
             </>
           ),
         },
@@ -74,7 +75,7 @@ export const FAQContentSection = () => {
               <br />
               From there, answer the subsequent questions and receive a
               customized output for your procedure!
-              {renderVideo("/videos/faq/All-on-X Calc.mp4")}
+              {renderVideo(FAQ_VIDEOS.AllOnXCalc)}
             </>
           ),
         },
@@ -91,7 +92,7 @@ export const FAQContentSection = () => {
               You will then be directed through the relevant questions for each
               calculator before receiving a combined summary with the ability to
               save, email, or export your report.
-              {renderVideo("/videos/faq/Custom calc.mp4")}
+              {renderVideo(FAQ_VIDEOS.CustomCalc)}
             </>
           ),
         },
@@ -103,14 +104,14 @@ export const FAQContentSection = () => {
               <li>
                 Click the Export or Email buttons in the top right corner of the
                 summary page of your chosen calculator.
-                {renderVideo("/videos/faq/Export pdf.mp4")}
+                {renderVideo(FAQ_VIDEOS.ExportPdf)}
               </li>
               <li>
                 You will be prompted to enter a Patient Name and Patient
                 Address, as well as name the PDF export. This information is
                 optional. You can send this PDF to yourself, or to a colleague
                 or patient by providing their email address.
-                {renderVideo("/videos/faq/Email exporting a PDF overview.mp4")}
+                {renderVideo(FAQ_VIDEOS.EmailExportPdfOverview)}
               </li>
             </ul>
           ),
@@ -131,7 +132,7 @@ export const FAQContentSection = () => {
                   account icon in the top right corner.
                 </li>
               </ul>
-              {renderVideo("/videos/faq/Saving a Calc.mp4")}
+              {renderVideo(FAQ_VIDEOS.SavingCalc)}
             </>
           ),
         },
@@ -154,7 +155,7 @@ export const FAQContentSection = () => {
                   of the Explore All page.
                 </li>
               </ul>
-              {renderVideo("/videos/faq/Adding a Calc to favorite.mp4")}
+              {renderVideo(FAQ_VIDEOS.AddingCalc)}
             </>
           ),
         },
