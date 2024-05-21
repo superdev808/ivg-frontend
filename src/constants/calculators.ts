@@ -872,6 +872,10 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                     href: "/calculators/BallAttachmentsAndAbutments",
                   },
                   {
+                    name: "Burn-Out Abutments",
+                    href: "/calculators/BurnOutAbutments",
+                  },
+                  {
                     name: "Locator Abutments",
                     href: "/calculators/LocatorAbutments",
                   },
