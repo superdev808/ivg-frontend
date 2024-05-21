@@ -57,15 +57,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
         <div className="flex gap-2 align-items-start" key={subgroupItem["id"]}>
           <div style={{ paddingTop: 2 }}>
             <PopupOutput
-              data={Object.keys(subgroupItem)
-                .filter(isPopup)
-                .reduce(
-                  (result, curKey) => ({
-                    ...result,
-                    [curKey]: subgroupItem[curKey],
-                  }),
-                  {}
-                )}
+              data={subgroupItem}
             />
           </div>
           {Object.keys(subgroupItem)
