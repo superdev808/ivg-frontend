@@ -1029,4 +1029,5 @@ export const POPUP_TEXTS = [
   "Recommendation",
   "Case Details",
 ];
+export const LINK_TEXT_SUFFIX = "- Link Text"
 export const SHOULD_DISPLAY_TEXT_ONLY = "ShouldDisplayTextOnly";
