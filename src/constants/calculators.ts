@@ -872,6 +872,10 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                     href: "/calculators/BallAttachmentsAndAbutments",
                   },
                   {
+                    name: "Burn-Out Abutments",
+                    href: "/calculators/BurnOutAbutments",
+                  },
+                  {
                     name: "Locator Abutments",
                     href: "/calculators/LocatorAbutments",
                   },
@@ -1025,4 +1029,5 @@ export const POPUP_TEXTS = [
   "Recommendation",
   "Case Details",
 ];
+export const LINK_TEXT_SUFFIX = "- Link Text"
 export const SHOULD_DISPLAY_TEXT_ONLY = "ShouldDisplayTextOnly";
