@@ -6,6 +6,7 @@ import { deserializeColInfo, isValidUrl } from "@/helpers/calculators";
 import { InputSummary } from "@/types/calculators";
 
 import styles from "../InputSummary/styles.module.scss";
+import useCheckMobileScreen from "@/hooks/useCheckMobileScreen";
 
 const cx = classNames.bind(styles);
 
@@ -33,6 +34,7 @@ const CustomSummary: React.FC<CustomSummaryProps> = ({
   summary,
   calculatorType,
 }) => {
+  const isMobile = useCheckMobileScreen();
   const formattedItems = useMemo(() => {
     const items = get(summary, [0, "componentDetails", calculatorType])
       .filter((elem) => elem.info.length > 0)
@@ -121,15 +123,21 @@ const CustomSummary: React.FC<CustomSummaryProps> = ({
   const renderTable = (data: any[]) => {
     const dataKeys = keys(data[0]);
 
-    return (
-      <table className={cx("striped-table")}>
-        {
-          dataKeys.map((key) => (
-            <tr key={key}>
-              <th>{key}</th>
-              {
-                data.map((elem, trIdx) => (
-                  <td key={trIdx}>
+    if (!isMobile) {
+      return (
+        <table className={cx("striped-table")}>
+          <thead>
+            <tr>
+              {dataKeys.map((key) => (
+                <th key={key}>{key}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((elem, trIdx) => (
+              <tr key={trIdx}>
+                {dataKeys.map((key, tdIdx) => (
+                  <td key={`${key}-${tdIdx}`}>
                     {isValidUrl(elem[key]) ? (
                       <a
                         href={elem[key]}
@@ -142,11 +150,36 @@ const CustomSummary: React.FC<CustomSummaryProps> = ({
                       elem[key]
                     )}
                   </td>
-                ))
-              }
-            </tr>
-          ))
-        }
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    }
+
+    return (
+      <table className={cx("striped-table")}>
+        {dataKeys.map((key) => (
+          <tr key={key}>
+            <th>{key}</th>
+            {data.map((elem, trIdx) => (
+              <td key={trIdx}>
+                {isValidUrl(elem[key]) ? (
+                  <a
+                    href={elem[key]}
+                    target="_blank"
+                    className="text-light-green"
+                  >
+                    Link
+                  </a>
+                ) : (
+                  elem[key]
+                )}
+              </td>
+            ))}
+          </tr>
+        ))}
       </table>
     );
   };

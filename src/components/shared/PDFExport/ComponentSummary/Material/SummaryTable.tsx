@@ -6,6 +6,7 @@ import { isValidUrl } from "@/helpers/calculators";
 import { Summary } from "@/types/calculators";
 
 import styles from "../../InputSummary/styles.module.scss";
+import useCheckMobileScreen from "@/hooks/useCheckMobileScreen";
 
 const cx = classNames.bind(styles);
 
@@ -21,35 +22,69 @@ const camelCaseToWords = (str: string) =>
 const EXCLUDE_KEYS = ["id", "quantity", "brand", "manufacturer"];
 
 const SummaryTable: React.FC<SummaryTableProps> = ({ items }) => {
+  const isMobile = useCheckMobileScreen();
   const filteredKeys = keys(items[0])
     .filter((key) => !EXCLUDE_KEYS.includes(key))
     .filter(Boolean);
+
+  if (!isMobile) {
+    return (
+      <table className={cx("striped-table")}>
+        <thead>
+          <tr>
+            {filteredKeys.map((key) => (
+              <th key={key}>{camelCaseToWords(key)}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, idx) => (
+            <tr key={idx}>
+              {filteredKeys.map((key) => {
+                const value = item[key as keyof Summary];
+
+                return (
+                  <td key={key}>
+                    {isValidUrl(value) ? (
+                      <a
+                        href={value}
+                        target="_blank"
+                        className="text-light-green"
+                      >
+                        {camelCaseToWords(key)}
+                      </a>
+                    ) : (
+                      value || ""
+                    )}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
 
   return (
     <table className={cx("striped-table")}>
       {filteredKeys.map((key) => (
         <tr key={key}>
           <th>{camelCaseToWords(key)}</th>
-          {
-            items.map((item, idx) => {
-              const value = item[key as keyof Summary];
-              return (
-                <td key={idx}>
-                  {isValidUrl(value) ? (
-                    <a
-                      href={value}
-                      target="_blank"
-                      className="text-light-green"
-                    >
-                      {camelCaseToWords(key)}
-                    </a>
-                  ) : (
-                    value || ""
-                  )}
-                </td>
-              )
-            })
-          }
+          {items.map((item, idx) => {
+            const value = item[key as keyof Summary];
+            return (
+              <td key={idx}>
+                {isValidUrl(value) ? (
+                  <a href={value} target="_blank" className="text-light-green">
+                    {camelCaseToWords(key)}
+                  </a>
+                ) : (
+                  value || ""
+                )}
+              </td>
+            );
+          })}
         </tr>
       ))}
     </table>
