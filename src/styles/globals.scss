@@ -1,10 +1,10 @@
 @import "primeflex/primeflex.scss";
-@import "~video-react/styles/scss/video-react";
 
 @import "@/styles/theme.scss";
 
 @import "@/styles/public.scss";
 @import "@/styles/calculator-explore.scss";
+@import "~video-react/styles/scss/video-react";
 
 html,
 body {
@@ -145,4 +145,25 @@ td {
 
 .swiper-pagination-bullet-active {
   background-color: var(--primary-color) !important;
+}
+
+.video-react .video-react-big-play-button {
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  width: 1.5em;
+}
+
+.p-confirm-popup .p-confirm-popup-message {
+  flex: 1 1 !important;
+  margin-left: 0px;
+}
+
+.p-confirm-popup .p-confirm-popup-content {
+  padding: 0px;
+}
+
+.hide-vide-react-button .video-react-big-play-button {
+  display: none;
 }
