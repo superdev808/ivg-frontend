@@ -9,6 +9,7 @@ import { Toast } from "primereact/toast";
 import { useSubmitItemRequestMutation } from "@/redux/hooks/apiHooks";
 
 import styles from "../style.module.scss";
+import VideoPlayer from "@/components/shared/VideoPlayer";
 
 const cx = classNames.bind(styles);
 
@@ -32,6 +33,7 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
   quiz,
   name,
 }) => {
+  const shouldDisplayImage = (calculatorType !== "ImpressionCopingsDirectToImplant");
   const [submitItemRequest] = useSubmitItemRequestMutation();
   const msgs = useRef<Messages>(null);
   const noItem = items.length === 0;
@@ -80,7 +82,7 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
     >
       <div
         className={cx(
-          "flex flex-column justify-content-around gap-4 shadow-6 p-4 border-round-md border-2",
+          "flex-1 flex flex-column justify-content-around gap-4 shadow-6 p-4 border-round-md border-2 border-light-green",
           {
             quizWithoutImage: !image,
             quizWithImage: image,
@@ -91,7 +93,7 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
       >
         {noItem ? (
           <h3 className="text-center">
-            We're hard at work updating our database, but this item is not
+            We{"'"}re hard at work updating our database, but this item is not
             currently available.
             <br />
             <br />
@@ -124,20 +126,30 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
           </>
         )}
       </div>
-      {image && (
+      {(!shouldDisplayImage || image) && (
         <div
           className={cx(
-            "flex-1 flex justify-content-center overflow-hidden",
-            "image"
+            "flex-1 flex align-items-center justify-content-center overflow-hidden",
+            { "image": shouldDisplayImage }
           )}
         >
-          <Image
-            src={image}
-            alt={name}
-            className="flex-1 flex justify-content-center"
-            imageClassName="w-full sm:w-5 lg:w-full lg:h-full"
-            imageStyle={{ objectFit: "contain" }}
-          />
+          {!shouldDisplayImage ?
+            <VideoPlayer
+              forbidden={false}
+              videoSrc={"https://ivoryguide.s3.us-west-1.amazonaws.com/images/videos/Engaging+vs+nonengaging.mp4"}
+              zoomOnClick={false}
+              startTime={2}
+              title="Ivory Insignts"
+              subtitle="from Dr. Kyle Stanley"
+            /> :
+            <Image
+              src={image}
+              alt={name}
+              className="flex-1 flex justify-content-center"
+              imageClassName="w-full sm:w-5 lg:w-full lg:h-full"
+              imageStyle={{ objectFit: "contain" }}
+            />
+          }
         </div>
       )}
     </div>
