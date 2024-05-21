@@ -29,21 +29,17 @@ const Outputs: React.FC<OutputsProps> = ({
   onUpdateQuantity,
   calculatorType,
 }) => {
-  const filteredItems = useMemo(() => {
-    return items.filter((item) => item.info.length > 0);
-  }, [items]);
-
-  if (filteredItems.length === 0) {
+  if (items.length === 0) {
     return null;
   }
 
   return (
     <div className="flex flex-column gap-4 text-dark-green">
-      {filteredItems.map(({ label, info }, filteredItemIndex) =>
+      {items.map(({ label, info }, itemIndex) =>
         info.map((_item, itemIdx) => {
           const needHighlight =
             !CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES.includes(calculatorType) &&
-            filteredItemIndex === 0;
+            itemIndex === 0;
           let item: ItemInsights = { ..._item };
           Object.keys(item).forEach((key) => {
             if (
