@@ -35,7 +35,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
     let newSubGroupItem: Record<string, string | number> = {},
       count = 0;
     for (j = i; j < sortedKeys.length; ++j) {
-      if (isPopup(sortedKeys[j]) === false &&  isLinkText(sortedKeys[j]) === false) {
+      if (isPopup(sortedKeys[j]) === false && isLinkText(sortedKeys[j]) === false) {
         // if the key is not reasoning column or supporting article column
         count += 1;
         newSubGroupItem["id"] = transformedItems.length;
@@ -90,7 +90,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
                       target="_blank"
                       className="no-underline text-dark-green"
                     >
-                      {linkText}
+                      {groupText && <b>{groupText}: </b>} {linkText}
                     </Link>
                   ) : typeof value === "string" && /required/gi.test(value) ? (
                     <>
