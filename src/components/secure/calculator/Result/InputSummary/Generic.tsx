@@ -33,7 +33,6 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
   quiz,
   name,
 }) => {
-  const shouldDisplayImage = (calculatorType !== "ImpressionCopingsDirectToImplant");
   const [submitItemRequest] = useSubmitItemRequestMutation();
   const msgs = useRef<Messages>(null);
   const noItem = items.length === 0;
@@ -126,30 +125,20 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
           </>
         )}
       </div>
-      {(!shouldDisplayImage || image) && (
+      {image && (
         <div
           className={cx(
             "flex-1 flex align-items-center justify-content-center overflow-hidden",
-            { "image": shouldDisplayImage }
+            "image"
           )}
         >
-          {!shouldDisplayImage ?
-            <VideoPlayer
-              forbidden={false}
-              videoSrc={"https://ivoryguide.s3.us-west-1.amazonaws.com/images/videos/Engaging+vs+nonengaging.mp4"}
-              zoomOnClick={false}
-              startTime={2}
-              title="Ivory Insignts"
-              subtitle="from Dr. Kyle Stanley"
-            /> :
-            <Image
-              src={image}
-              alt={name}
-              className="flex-1 flex justify-content-center"
-              imageClassName="w-full sm:w-5 lg:w-full lg:h-full"
-              imageStyle={{ objectFit: "contain" }}
-            />
-          }
+          <Image
+            src={image}
+            alt={name}
+            className="flex-1 flex justify-content-center"
+            imageClassName="w-full sm:w-5 lg:w-full lg:h-full"
+            imageStyle={{ objectFit: "contain" }}
+          />
         </div>
       )}
     </div>

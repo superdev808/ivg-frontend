@@ -22,6 +22,7 @@ import PopupOutput from "./Result/Outputs/Popup";
 
 import styles from "./quiz.module.scss";
 import { isPopup, serializeColInfo } from "@/helpers/calculators";
+import VideoPlayer from "@/components/shared/VideoPlayer";
 
 const cx = classNames.bind(styles);
 
@@ -298,7 +299,7 @@ const Quiz: React.FC<QuizProps> = ({
                                 "quiz-card--selected":
                                   currentAnswer &&
                                   currentAnswer[question.colIndex] ===
-                                    answer[question.colIndex],
+                                  answer[question.colIndex],
                               }
                             )}
                             style={{ height: 200 }}
@@ -353,6 +354,20 @@ const Quiz: React.FC<QuizProps> = ({
             </>
           )}
         </>
+      )}
+      {question.calculatorType === "ImpressionCopingsDirectToImplant" && questionName === "Engaging or Non-Engaging" && (
+        <div className="w-full flex justify-content-center mt-4">
+          <div className="w-4">
+            <VideoPlayer
+              forbidden={false}
+              videoSrc={"https://ivoryguide.s3.us-west-1.amazonaws.com/images/videos/Engaging+vs+nonengaging.mp4"}
+              zoomOnClick={false}
+              startTime={2}
+              title="Ivory Insignts"
+              subtitle="from Dr. Kyle Stanley"
+            />
+          </div>
+        </div>
       )}
     </>
   );
