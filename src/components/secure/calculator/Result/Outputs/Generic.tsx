@@ -5,6 +5,7 @@ import React from "react";
 import { INFORMATIONAL_CALCULATOR_TYPES } from "@/constants/calculators";
 import { deserializeColInfo, getLinkText, isLinkText, isPopup, isValidUrl } from "@/helpers/calculators";
 import { ItemInsights } from "@/types/calculators";
+import parse from "html-react-parser";
 
 import PopupOutput from "./Popup";
 
@@ -95,7 +96,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
                   ) : (
                     <>
                       {groupText && <b>{groupText}: </b>}
-                      {value}
+                      <span>{parse(value.toString().replaceAll("\n", "<br />"))}</span>
                     </>
                   )}
                 </div>
