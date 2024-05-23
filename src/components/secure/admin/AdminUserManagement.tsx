@@ -348,8 +348,16 @@ const AdminUserManagement: React.FC = () => {
     <div className="flex justify-content-center">
       {row.verificationEmailSent
         ? `${formatDate(row.verificationEmailSent)} ${formatTime(
-            row.verificationEmailSent
-          )}`
+          row.verificationEmailSent
+        )}`
+        : ""}
+    </div>
+  );
+
+  const lastLoginDateTemplate = (row: EditUser) => (
+    <div className="flex justify-content-center">
+      {row.lastLoginDate
+        ? `${formatDate(row.lastLoginDate)} ${formatTime(row.lastLoginDate)}`
         : ""}
     </div>
   );
@@ -419,6 +427,13 @@ const AdminUserManagement: React.FC = () => {
       body: (row: EditUser) => checkBodyTemplate(row.active),
       sortable: true,
       filter: true,
+      filterElement: triStateFilterTemplate,
+    },
+    {
+      field: "lastLoginDate",
+      header: "Last Login",
+      body: (row: EditUser) => lastLoginDateTemplate(row),
+      sortable: true,
       filterElement: triStateFilterTemplate,
     },
     {
