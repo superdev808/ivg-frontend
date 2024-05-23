@@ -42,7 +42,7 @@ const PopupOutput: React.FC<PopupOutputProps> = ({ data, size = 16 }) => {
       },
       footer: <></>,
       message: (
-        <div className="flex flex-column align-items-center gap-2 text-center text-beige -ml-3">
+        <div className="flex flex-column align-items-center gap-2 text-center text-beige mx-4 my-4">
           {Object.entries(popupData).map(([label, text]) => {
             const { groupText } = deserializeColInfo(label);
             const linkText = getLinkText(data, groupText);

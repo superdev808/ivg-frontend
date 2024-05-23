@@ -363,7 +363,7 @@ const Quiz: React.FC<QuizProps> = ({
               videoSrc={"https://ivoryguide.s3.us-west-1.amazonaws.com/images/videos/Engaging+vs+nonengaging.mp4"}
               zoomOnClick={false}
               startTime={2}
-              title="Ivory Insignts"
+              title="Ivory Insight"
               subtitle="from Dr. Kyle Stanley"
             />
           </div>
