@@ -13,6 +13,7 @@ import React, { useEffect, useState, useMemo, useCallback } from "react";
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
 import {
   BRAND_IMAGES,
+  BRAND_IMAGES_MAP_ADDITIONAL,
   QUESTION_ANSWER_BRAND_MAP,
   SHOULD_DISPLAY_TEXT_ONLY,
 } from "@/constants/calculators";
@@ -26,15 +27,6 @@ import VideoPlayer from "@/components/shared/VideoPlayer";
 
 const cx = classNames.bind(styles);
 
-const BRAND_IMAGE_MAP_ADDITIONAL: Record<string, string> = {
-  molars: "molar",
-  premolars: "premolar",
-  "split dam": "multiple isolation",
-  zirconia: "crown",
-  "stock tray (full or sectional)": "stock tray",
-  "one-step impression": "physical impressions",
-};
-
 const getImageForAnswerOption = (
   answer: string,
   question?: InputOutputValues
@@ -44,7 +36,7 @@ const getImageForAnswerOption = (
     return BRAND_IMAGES[lowerCaseAnswer];
   }
 
-  const anotherName = BRAND_IMAGE_MAP_ADDITIONAL[lowerCaseAnswer];
+  const anotherName = BRAND_IMAGES_MAP_ADDITIONAL[lowerCaseAnswer];
   if (anotherName && BRAND_IMAGES[anotherName]) {
     return BRAND_IMAGES[anotherName];
   }

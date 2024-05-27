@@ -226,6 +226,15 @@ export const LINEAR_WORKFLOWS = [
   "ToothBorneCrownIssues",
 ];
 
+export const BRAND_IMAGES_MAP_ADDITIONAL: Record<string, string> = {
+  molars: "molar",
+  premolars: "premolar",
+  "split dam": "multiple isolation",
+  zirconia: "crown",
+  "stock tray (full or sectional)": "stock tray",
+  "one-step impression": "physical impressions",
+};
+
 export const BRAND_IMAGES: Record<string, string> = {
   "ab dental":
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/AB+Dental.png",
