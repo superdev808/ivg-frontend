@@ -876,6 +876,10 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                     href: "/calculators/BurnOutAbutments",
                   },
                   {
+                    name: "Healing Abutments",
+                    href: "/calculators/HealingAbutments",
+                  },
+                  {
                     name: "Locator Abutments",
                     href: "/calculators/LocatorAbutments",
                   },
