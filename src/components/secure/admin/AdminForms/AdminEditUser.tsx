@@ -40,6 +40,7 @@ const AdminEditUser: React.FC<AdminEditUserProps> = ({
       active: false,
       verified: false,
       verificationEmailSent: "",
+      lastLoginDate: "",
     },
   });
 
