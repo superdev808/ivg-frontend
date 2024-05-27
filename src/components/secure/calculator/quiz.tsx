@@ -31,6 +31,8 @@ const BRAND_IMAGE_MAP_ADDITIONAL: Record<string, string> = {
   premolars: "premolar",
   "split dam": "multiple isolation",
   zirconia: "crown",
+  "stock tray (full or sectional)": "stock tray",
+  "one-step impression": "physical impressions",
 };
 
 const getImageForAnswerOption = (

@@ -478,6 +478,26 @@ export const BRAND_IMAGES: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/cast+gold.png",
   "all metal":
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/all+metal.png",
+  "custom tray":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/custom+tray.png",
+  "dual tray":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/dual+tray.png",
+  "stock tray":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/stock+tray.png",
+  "addition silicone":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/addition+silicone.png",
+  alginate:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/alginate.png",
+  "condensation silicone":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/condensation+silicone.png",
+  polyether:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/polyether.png",
+  "physical impressions":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/physical+impressions.png",
+  "two-step impression":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/two-step+impression.png",
+  no: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/no+gag+reflex.png",
+  yes: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/gag+reflex.png",
 };
 
 export const CALCULATOR_IMAGES: Record<string, string> = {
@@ -686,6 +706,10 @@ export const QUESTION_ANSWER_BRAND_MAP: Record<string, ANSWER_TYPE> = {
   "Decayed Abutment?": {
     yes: "stable abutment",
     no: "decayed abutment",
+  },
+  "Does the patient have a gag reflex?": {
+    no: "no gag reflex.png",
+    yes: "gag reflex.png",
   },
 };
 
