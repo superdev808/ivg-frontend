@@ -226,6 +226,15 @@ export const LINEAR_WORKFLOWS = [
   "ToothBorneCrownIssues",
 ];
 
+export const BRAND_IMAGES_MAP_ADDITIONAL: Record<string, string> = {
+  molars: "molar",
+  premolars: "premolar",
+  "split dam": "multiple isolation",
+  zirconia: "crown",
+  "stock tray (full or sectional)": "stock tray",
+  "one-step impression": "physical impressions",
+};
+
 export const BRAND_IMAGES: Record<string, string> = {
   "ab dental":
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/AB+Dental.png",
@@ -427,8 +436,6 @@ export const BRAND_IMAGES: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/low+occlusal+load.png",
   molar:
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/molar.png",
-  "split dam":
-    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/multiple+isolation.png",
   "multiple isolation":
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/multiple+isolation.png",
   "not translucent":
@@ -451,6 +458,55 @@ export const BRAND_IMAGES: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/translucent.png",
   "two step (rubber dam)":
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/two+step+dam.png",
+  crown:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/crown.png",
+  endocrown:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/endocrown.png",
+  veneer:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/veneer.png",
+  pfm: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/PFM.png",
+  porcelain:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/porcelain.png",
+  composite:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/decayed+abutment.png",
+  "decayed abutment":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/decayed+abutment.png",
+  "stable abutment":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/stable+abutment.png",
+  supragingival:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/supragingival+finish+line.png",
+  equigingival:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/equgingival+finish+line.png",
+  subgingival:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/subgingival+finish+line.png",
+  onlay:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/onlay.png",
+  inlay:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/inlay.png",
+  "cast gold":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/cast+gold.png",
+  "all metal":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/all+metal.png",
+  "custom tray":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/custom+tray.png",
+  "dual tray":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/dual+tray.png",
+  "stock tray":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/stock+tray.png",
+  "addition silicone":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/addition+silicone.png",
+  alginate:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/alginate.png",
+  "condensation silicone":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/condensation+silicone.png",
+  polyether:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/polyether.png",
+  "physical impressions":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/physical+impressions.png",
+  "two-step impression":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/two-step+impression.png",
+  no: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/no+gag+reflex.png",
+  yes: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/gag+reflex.png",
 };
 
 export const CALCULATOR_IMAGES: Record<string, string> = {
@@ -655,6 +711,14 @@ export const QUESTION_ANSWER_BRAND_MAP: Record<string, ANSWER_TYPE> = {
   "Single or Multiple Isolation?": {
     single: "isolation technologies",
     multiple: "multiple isolation",
+  },
+  "Decayed Abutment?": {
+    yes: "stable abutment",
+    no: "decayed abutment",
+  },
+  "Does the patient have a gag reflex?": {
+    no: "no gag reflex.png",
+    yes: "gag reflex.png",
   },
 };
 
@@ -1032,7 +1096,7 @@ export const POPUP_TEXTS = [
   "Notes",
   "Recommendation",
   "Case Details",
-  "Citation"
+  "Citation",
 ];
-export const LINK_TEXT_SUFFIX = "- Link Text"
+export const LINK_TEXT_SUFFIX = "- Link Text";
 export const SHOULD_DISPLAY_TEXT_ONLY = "ShouldDisplayTextOnly";
