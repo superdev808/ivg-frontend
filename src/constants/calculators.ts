@@ -505,8 +505,10 @@ export const BRAND_IMAGES: Record<string, string> = {
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/physical+impressions.png",
   "two-step impression":
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/two-step+impression.png",
-  no: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/no+gag+reflex.png",
-  yes: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/gag+reflex.png",
+  "no gag reflex":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/no+gag+reflex.png",
+  "gag flex":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/gag+reflex.png",
 };
 
 export const CALCULATOR_IMAGES: Record<string, string> = {
@@ -666,10 +668,10 @@ export const QUESTION_ANSWER_BRAND_MAP: Record<string, ANSWER_TYPE> = {
     no: "low occlusal load",
   },
   "Does the patient have a high occlusal load, or is prone to clenching, grinding, or bruxing?":
-  {
-    yes: "high occlusal load",
-    no: "low occlusal load",
-  },
+    {
+      yes: "high occlusal load",
+      no: "low occlusal load",
+    },
   "Does this site have limited occlusal space?": {
     yes: "limited occ space",
     no: "not limited occ space",
@@ -691,15 +693,15 @@ export const QUESTION_ANSWER_BRAND_MAP: Record<string, ANSWER_TYPE> = {
     no: "non-angulated implant",
   },
   "Does the angulation of the implant place the screw access hole out of the facial/incisal of the proposed restoration":
-  {
-    yes: "access hole visible",
-    no: "access hole not visible",
-  },
+    {
+      yes: "access hole visible",
+      no: "access hole not visible",
+    },
   "Does the angulation of the implant place the screw access hole out of the facial/incisal of the proposed restoration?":
-  {
-    yes: "access hole visible",
-    no: "access hole not visible",
-  },
+    {
+      yes: "access hole visible",
+      no: "access hole not visible",
+    },
   "Does the patient have a latex allergy?": {
     yes: "allergies",
     no: "no allergies",
@@ -717,8 +719,8 @@ export const QUESTION_ANSWER_BRAND_MAP: Record<string, ANSWER_TYPE> = {
     no: "decayed abutment",
   },
   "Does the patient have a gag reflex?": {
-    no: "no gag reflex.png",
-    yes: "gag reflex.png",
+    no: "no gag reflex",
+    yes: "gag reflex",
   },
 };
 
