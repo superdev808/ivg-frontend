@@ -118,7 +118,7 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
                     <div className="flex-1 text-left text-dark-green">
                       {questionText}
                     </div>
-                    <div className="text-right">{answer}</div>
+                    <div className="text-right" style={{ width: '40%' }}>{answer}</div>
                   </div>
                 )
             )}
