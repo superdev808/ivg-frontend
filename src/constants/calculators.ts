@@ -770,7 +770,7 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
   },
   {
     id: "components",
-    name: "Implants Components",
+    name: "Implant Components",
     description:
       "Your guide to using compatible components for all of your procedures.",
     sections: [
