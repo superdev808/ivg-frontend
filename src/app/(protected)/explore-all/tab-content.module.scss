@@ -1,7 +1,6 @@
 .tab-content {
   max-width: 1020px;
   margin: 0 auto;
-  overflow: hidden;
 }
 
 .divider {
@@ -31,8 +30,8 @@
   border-style: solid;
   border-color: var(--light-green);
   border-width: 0;
-  height: 400px;
-  overflow-y: scroll;
+  max-height: calc(100vh - 472px);
+  overflow-y: auto;
 
   &:first-of-type {
     padding-right: 180px;

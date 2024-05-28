@@ -190,7 +190,7 @@ const CalculatorPage: NextPage = () => {
       </div>
 
       <TabView
-        className="calculator-explore-tab-view"
+        className="calculator-explore-tab-view flex flex-column flex-1"
         activeIndex={activeTab}
         onTabChange={({ index }) => setActiveTab(index)}
       >
