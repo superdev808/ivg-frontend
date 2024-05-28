@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import { Image } from "primereact/image";
+import Link from "next/link";
 import React from "react";
 
 import styles from "./styles.module.scss";
@@ -28,9 +29,11 @@ const Offering: React.FC = () => (
           alt="calculators"
           width="95"
         />
-        <div className={cx("offering-section__title", "font-bold")}>
+        <Link href="/explore-all" className={cx("text-dark-green","no-underline", "hover:underline")}>
+          <div className={cx("offering-section__title", "font-bold", "text-dark-green")}>
           Calculators
-        </div>
+          </div>
+        </Link>
         <div className={cx("offering-section__description")}>
           Explore our library of Calculators, ranging from compatible implant
           components to selecting the right restoration materials.
@@ -48,9 +51,11 @@ const Offering: React.FC = () => (
           alt="workflows"
           width="95"
         />
-        <div className={cx("offering-section__title", "font-bold")}>
+        <Link href="/explore-all" className={cx("text-dark-green", "no-underline", "hover:underline")}>
+          <div className={cx("offering-section__title", "font-bold", "text-dark-green")}>
           Workflows
-        </div>
+          </div>
+        </Link>
         <div className={cx("offering-section__description")}>
           Receive simple, comprehensive instructions to successfully complete a
           variety of clinical procedures, including tooth preparation and
