@@ -7,6 +7,7 @@ import { useState } from "react";
 import { CTASection } from "../shared/CTASection";
 
 import styles from "./FAQ.module.scss";
+import { FAQ_VIDEOS } from "./constants";
 
 const cx = classNames.bind(styles);
 
@@ -24,6 +25,14 @@ export const FAQContentSection = () => {
     </Link>
   );
 
+  const renderVideo = (video: string) => (
+    <div className="mt-3 flex flex-column gap-4">
+      <video controls preload="preload" className={cx("video-custom")}>
+        <source type="video/mp4" src={video}></source>
+      </video>
+    </div>
+  );
+
   const sections = [
     {
       title: "Calculator Usage Instructions",
@@ -31,19 +40,21 @@ export const FAQContentSection = () => {
         {
           question: "Use a standalone calculator",
           answer: (
-            <ul className="px-3 m-0 flex flex-column gap-4">
-              <li>
-                Within the Calculators homepage, select Implant Component
-                Selection and scroll through the calculators currently available
-                to support component procurement.
-              </li>
-              <li>
-                Clicking on a particular calculator will lead to a new page that
-                requests several pieces of information around implant and
-                product type before providing the correct components and links
-                to purchase.
-              </li>
-            </ul>
+            <>
+              <ul className="px-3 m-0 flex flex-column gap-4">
+                <li>
+                  Within the Calculators + Workflows dropdown, select Explore
+                  All and navigate through the tools currently available.
+                </li>
+                <li>
+                  Clicking on a particular calculator or workflow will lead to a
+                  new page that requests several pieces of information about the
+                  product or procedure type before providing the corresponding
+                  outputs and links to purchase, when applicable.
+                </li>
+              </ul>
+              {renderVideo(FAQ_VIDEOS.UseStandaloneCalc)}
+            </>
           ),
         },
 
@@ -56,14 +67,15 @@ export const FAQContentSection = () => {
               or restorative implant procedures.
               <br />
               <br />
-              Using it is simple - click on All-on-X Surgery and Restorative
-              Calculator within the calculator section, select which part of the
-              procedure you would like help with as well as the sites where
-              implants are being placed or restored.
+              Using it is simple - navigate to the Customize + Favorites tab on
+              the Explore All page, and click on All-on-X Ordering Guide. Then
+              select which part of the procedure you would like help with, as
+              well as the sites where implants are being placed or restored.
               <br />
               <br />
               From there, answer the subsequent questions and receive a
               customized output for your procedure!
+              {renderVideo(FAQ_VIDEOS.AllOnXCalc)}
             </>
           ),
         },
@@ -72,14 +84,15 @@ export const FAQContentSection = () => {
           question: "Create a custom calculator",
           answer: (
             <>
-              Within the Calculators homepage, click “Custom Combinations” and
-              select which calculators you would like to combine to make a
-              custom report.
+              Within the Explore All page, navigate to the Customize + Favorites
+              tab and click on “Custom.” Select which calculators you would like
+              to combine to make a custom report.
               <br />
               <br />
               You will then be directed through the relevant questions for each
               calculator before receiving a combined summary with the ability to
               save, email, or export your report.
+              {renderVideo(FAQ_VIDEOS.CustomCalc)}
             </>
           ),
         },
@@ -91,12 +104,14 @@ export const FAQContentSection = () => {
               <li>
                 Click the Export or Email buttons in the top right corner of the
                 summary page of your chosen calculator.
+                {renderVideo(FAQ_VIDEOS.ExportPdf)}
               </li>
               <li>
                 You will be prompted to enter a Patient Name and Patient
-                Address, as well as name the PDF export. You can send this PDF
-                to yourself, or to a colleague or patient by providing their
-                email address.
+                Address, as well as name the PDF export. This information is
+                optional. You can send this PDF to yourself, or to a colleague
+                or patient by providing their email address.
+                {renderVideo(FAQ_VIDEOS.EmailExportPdfOverview)}
               </li>
             </ul>
           ),
@@ -105,17 +120,43 @@ export const FAQContentSection = () => {
         {
           question: "Saving a calculator",
           answer: (
-            <ul className="px-3 m-0 flex flex-column gap-4">
-              <li>
-                Click the Save button in the top right corner of the summary
-                page of your chosen calculator.
-              </li>
-              <li>Name the Saved output.</li>
-              <li>
-                To access Saved outputs, select Saved Results within your
-                account Icon in the top right corner.
-              </li>
-            </ul>
+            <>
+              <ul className="px-3 m-0 flex flex-column gap-4">
+                <li>
+                  Click the Save button at the top of the output summary page of
+                  your chosen calculator.
+                </li>
+                <li>Name the Saved output, and click Save.</li>
+                <li>
+                  To access Saved outputs, select Saved Results within your
+                  account icon in the top right corner.
+                </li>
+              </ul>
+              {renderVideo(FAQ_VIDEOS.SavingCalc)}
+            </>
+          ),
+        },
+
+        {
+          question: "Adding a Calculator to your Favorites list",
+          answer: (
+            <>
+              <ul className="px-3 m-0 flex flex-column gap-4">
+                <li>
+                  Click the Save button at the top of the output summary page of
+                  your chosen calculator.
+                </li>
+                <li>
+                  Click the “Add Calculator to Favorites” button in the bottom
+                  left of the popup.
+                </li>
+                <li>
+                  You can view your Favorites on the Customize + Favorites tab
+                  of the Explore All page.
+                </li>
+              </ul>
+              {renderVideo(FAQ_VIDEOS.AddingCalc)}
+            </>
           ),
         },
       ],
@@ -126,7 +167,7 @@ export const FAQContentSection = () => {
       quiz: [
         {
           question:
-            "How can I request a new brand to be added into a calculator?",
+            "How can I request a new brand to be added into a calculator or workflow?",
           answer: (
             <>
               Email {renderEmailLInk("feedback@ivoryguide.com")} with specific
@@ -137,12 +178,14 @@ export const FAQContentSection = () => {
         },
 
         {
-          question: "How can I request a new type of calculator?",
+          question: "How can I request a new type of calculator or workflow?",
           answer: (
             <>
-              Email {renderEmailLInk("feedback@ivoryguide.com")} with details
-              about the type of calculator you are requesting. We will respond
-              within 24 hours.
+              On the Calculators + Workflows dropdown, select Submit Request and
+              fill out the form. Alternatively, email{" "}
+              {renderEmailLInk("feedback@ivoryguide.com")}
+              with details about the type of calculator you are requesting and
+              we will respond within 24 hours.
             </>
           ),
         },
@@ -170,12 +213,13 @@ export const FAQContentSection = () => {
       quiz: [
         {
           question:
-            "Report a content error within a calculator (i.e. an implant input or component output is incorrect).",
+            "Report a content error within a calculator or workflow (i.e. an implant input or component output is incorrect).",
           answer: (
             <>
               Email {renderEmailLInk("support@ivoryguide.com")} with details
               about where the error occurred and what the specific error was. We
-              will respond within 24 hours. <br />
+              will respond within 24 hours.
+              <br />
               <br />
               Alternatively, click the Feedback button inside the platform on
               the right side of the screen. There you can attach a screenshot

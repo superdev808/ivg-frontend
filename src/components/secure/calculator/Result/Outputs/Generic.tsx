@@ -3,8 +3,9 @@ import Link from "next/link";
 import React from "react";
 
 import { INFORMATIONAL_CALCULATOR_TYPES } from "@/constants/calculators";
-import { deserializeColInfo, isPopup, isValidUrl } from "@/helpers/calculators";
+import { deserializeColInfo, getLinkText, isLinkText, isPopup, isValidUrl } from "@/helpers/calculators";
 import { ItemInsights } from "@/types/calculators";
+import parse from "html-react-parser";
 
 import PopupOutput from "./Popup";
 
@@ -35,7 +36,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
     let newSubGroupItem: Record<string, string | number> = {},
       count = 0;
     for (j = i; j < sortedKeys.length; ++j) {
-      if (isPopup(sortedKeys[j]) === false) {
+      if (isPopup(sortedKeys[j]) === false && isLinkText(sortedKeys[j]) === false) {
         // if the key is not reasoning column or supporting article column
         count += 1;
         newSubGroupItem["id"] = transformedItems.length;
@@ -57,22 +58,15 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
         <div className="flex gap-2 align-items-start" key={subgroupItem["id"]}>
           <div style={{ paddingTop: 2 }}>
             <PopupOutput
-              data={Object.keys(subgroupItem)
-                .filter(isPopup)
-                .reduce(
-                  (result, curKey) => ({
-                    ...result,
-                    [curKey]: subgroupItem[curKey],
-                  }),
-                  {}
-                )}
+              data={subgroupItem}
             />
           </div>
           {Object.keys(subgroupItem)
-            .filter((key) => isPopup(key) === false)
+            .filter((key) => isPopup(key) === false && isLinkText(key) === false)
             .map((key) => {
               const { groupText } = deserializeColInfo(key);
               const value = subgroupItem[key];
+              const linkText = getLinkText(subgroupItem, groupText);
 
               if (!value) return null;
 
@@ -89,7 +83,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
                       target="_blank"
                       className="no-underline text-dark-green"
                     >
-                      Link to {groupText}
+                      {groupText && <b>{groupText}: </b>} {linkText}
                     </Link>
                   ) : typeof value === "string" && /required/gi.test(value) ? (
                     <>
@@ -102,7 +96,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
                   ) : (
                     <>
                       {groupText && <b>{groupText}: </b>}
-                      {value}
+                      <span>{parse(value.toString().replaceAll("\n", "<br />"))}</span>
                     </>
                   )}
                 </div>

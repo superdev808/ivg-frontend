@@ -8,6 +8,7 @@ import {
   Site,
   CalculatorGroupItem,
   EXPLORE_DATA,
+  ANSWER_TYPE,
 } from "@/types/calculators";
 
 export const CALCULATOR_MAPPINGS: KeyValuePair = {
@@ -203,6 +204,14 @@ export const INFORMATIONAL_CALCULATOR_TYPES = [
   "IsolationTechniques",
   "ToothPreparation",
   "ImplantTorqueGuide",
+  "ShadeGuideConversion",
+];
+
+export const CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES = [
+  "BondingEtching",
+  "IsolationTechniques",
+  "ToothPreparation",
+  "PhysicalImpression",
 ];
 
 export const MATERIAL_CALCULATOR_TYPES = [
@@ -216,6 +225,15 @@ export const LINEAR_WORKFLOWS = [
   "ImplantBorneCrownIssues",
   "ToothBorneCrownIssues",
 ];
+
+export const BRAND_IMAGES_MAP_ADDITIONAL: Record<string, string> = {
+  molars: "molar",
+  premolars: "premolar",
+  "split dam": "multiple isolation",
+  zirconia: "crown",
+  "stock tray (full or sectional)": "stock tray",
+  "one-step impression": "physical impressions",
+};
 
 export const BRAND_IMAGES: Record<string, string> = {
   "ab dental":
@@ -372,6 +390,123 @@ export const BRAND_IMAGES: Record<string, string> = {
   "zimmer dental (biomet 3i)":
     "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/zimvie.png",
   msdi: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/msdi.png",
+  maxilla:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/maxilla.png",
+  mandible:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/mandible.png",
+  "angulated implant":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Dentsply+Angled+Abutment+EV+4.2+20d+MH+2mm+H+7mm+25628.png",
+  "non-angulated implant":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Dentsply+Uni+Abutment+EV+5.4+D+3.6mm+H+5mm+25573.png",
+  "no allergies":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/No+allergies.png",
+  "no retention form":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/No+retention+form.png",
+  "not limited occ space":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/Not+limited+occ+space.png",
+  "access hole not visible":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/access+hole+Not+visible.png",
+  "access hole visible":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/access+hole+visible.png",
+  allergies:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/allergies.png",
+  anterior:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/anterior.png",
+  canine:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/canines.png",
+  "dark stump":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/dark+stump.png",
+  "good hygiene":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/good+hygiene.png",
+  "high occlusal load":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/high+occlusal+load.png",
+  incisors:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/incisors.png",
+  incisor:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/incisors.png",
+  "one step (rubber dam)":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/isolation+techniques.png",
+  "isolation technologies":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/isolation+techniques.png",
+  "light stump":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/light+stump.png",
+  "limited occ space":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/limited+occ+space.png",
+  "low occlusal load":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/low+occlusal+load.png",
+  molar:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/molar.png",
+  "multiple isolation":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/multiple+isolation.png",
+  "not translucent":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/not+translucent.png",
+  "poor hygiene":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/poor+hygiene.png",
+  posterior:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/posterior.png",
+  premolar:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/premolar.png",
+  "retention form":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/retention+form.png",
+  "standard biotype":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/standard+biotype.png",
+  "thin biotype":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/thin+biotype.png",
+  "transitioning anterior <> posterior":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/transition+anterior+to+posterior.png",
+  translucent:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/translucent.png",
+  "two step (rubber dam)":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/brands/two+step+dam.png",
+  crown:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/crown.png",
+  endocrown:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/endocrown.png",
+  veneer:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/veneer.png",
+  pfm: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/PFM.png",
+  porcelain:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/porcelain.png",
+  composite:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/decayed+abutment.png",
+  "decayed abutment":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/decayed+abutment.png",
+  "stable abutment":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/stable+abutment.png",
+  supragingival:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/supragingival+finish+line.png",
+  equigingival:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/equgingival+finish+line.png",
+  subgingival:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/subgingival+finish+line.png",
+  onlay:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/onlay.png",
+  inlay:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/inlay.png",
+  "cast gold":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/cast+gold.png",
+  "all metal":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/all+metal.png",
+  "custom tray":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/custom+tray.png",
+  "dual tray":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/dual+tray.png",
+  "stock tray":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/stock+tray.png",
+  "addition silicone":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/addition+silicone.png",
+  alginate:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/alginate.png",
+  "condensation silicone":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/condensation+silicone.png",
+  polyether:
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/polyether.png",
+  "physical impressions":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/physical+impressions.png",
+  "two-step impression":
+    "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/two-step+impression.png",
+  no: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/no+gag+reflex.png",
+  yes: "https://ivoryguide.s3.us-west-1.amazonaws.com/images/products/gag+reflex.png",
 };
 
 export const CALCULATOR_IMAGES: Record<string, string> = {
@@ -513,6 +648,80 @@ export const CALCULATOR_OUTPUT_MAPPING: [string, RegExp, string][] = [
   ["recommendedBridgeMaterial", /Recommended Bridge Material/gi, "material"],
 ];
 
+export const QUESTION_ANSWER_BRAND_MAP: Record<string, ANSWER_TYPE> = {
+  "Are aesthetics a top priority?": {
+    yes: "anterior",
+    no: "posterior",
+  },
+  "Does the preparation have retention and resistance form?": {
+    yes: "retention form",
+    no: "no retention form",
+  },
+  "Are neighboring teeth translucent?": {
+    yes: "translucent",
+    no: "not translucent",
+  },
+  "Does the patient have a high occlusal load?": {
+    yes: "high occlusal load",
+    no: "low occlusal load",
+  },
+  "Does the patient have a high occlusal load, or is prone to clenching, grinding, or bruxing?":
+  {
+    yes: "high occlusal load",
+    no: "low occlusal load",
+  },
+  "Does this site have limited occlusal space?": {
+    yes: "limited occ space",
+    no: "not limited occ space",
+  },
+  "Is the stump shade light or dark?": {
+    dark: "light stump",
+    light: "dark stump",
+  },
+  "Does the patient have a thin gingival biotype?": {
+    yes: "thin biotype",
+    no: "standard biotype",
+  },
+  "Does the patient practice good oral hygiene?": {
+    yes: "good hygiene",
+    no: "poor hygiene",
+  },
+  "Is the implant angulated?": {
+    yes: "angulated implant",
+    no: "non-angulated implant",
+  },
+  "Does the angulation of the implant place the screw access hole out of the facial/incisal of the proposed restoration":
+  {
+    yes: "access hole visible",
+    no: "access hole not visible",
+  },
+  "Does the angulation of the implant place the screw access hole out of the facial/incisal of the proposed restoration?":
+  {
+    yes: "access hole visible",
+    no: "access hole not visible",
+  },
+  "Does the patient have a latex allergy?": {
+    yes: "allergies",
+    no: "no allergies",
+  },
+  "Does the patient have allergies or sensitivities?": {
+    yes: "allergies",
+    no: "no allergies",
+  },
+  "Single or Multiple Isolation?": {
+    single: "isolation technologies",
+    multiple: "multiple isolation",
+  },
+  "Decayed Abutment?": {
+    yes: "stable abutment",
+    no: "decayed abutment",
+  },
+  "Does the patient have a gag reflex?": {
+    no: "no gag reflex.png",
+    yes: "gag reflex.png",
+  },
+};
+
 export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
   {
     id: "procedures",
@@ -625,7 +834,7 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
   },
   {
     id: "components",
-    name: "Components",
+    name: "Implants Components",
     description:
       "Your guide to using compatible components for all of your procedures.",
     sections: [
@@ -725,6 +934,14 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                   {
                     name: "Ball Attachments and Abutments",
                     href: "/calculators/BallAttachmentsAndAbutments",
+                  },
+                  {
+                    name: "Burn-Out Abutments",
+                    href: "/calculators/BurnOutAbutments",
+                  },
+                  {
+                    name: "Healing Abutments",
+                    href: "/calculators/HealingAbutments",
                   },
                   {
                     name: "Locator Abutments",
@@ -879,5 +1096,7 @@ export const POPUP_TEXTS = [
   "Notes",
   "Recommendation",
   "Case Details",
+  "Citation",
 ];
+export const LINK_TEXT_SUFFIX = "- Link Text";
 export const SHOULD_DISPLAY_TEXT_ONLY = "ShouldDisplayTextOnly";

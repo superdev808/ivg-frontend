@@ -49,4 +49,5 @@ export interface EditUser {
   organizationName: string;
   organizationState: string;
   verificationEmailSent: string;
+  lastLoginDate: string;
 }

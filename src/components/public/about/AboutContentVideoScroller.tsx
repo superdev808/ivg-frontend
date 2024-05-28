@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import classNames from "classnames/bind";
 import styles from "./About.module.scss";
+import { useInView } from "react-intersection-observer";
+import { Image } from "primereact/image";
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +18,7 @@ export default function AboutContentSectionScoller({ children }: AboutContentVid
   const videoRef = useRef<HTMLVideoElement>(null);
   const scrollSectionRef = useRef<HTMLDivElement>(null);
   const [hasLoaded, setLoaded] = useState(false);
+  const { ref, inView } = useInView({ threshold: 0.2 });
 
   // Debounce the scroll event for better performance
   const debouncedScrollPlay = useCallback(() => {
@@ -56,13 +59,26 @@ export default function AboutContentSectionScoller({ children }: AboutContentVid
 
   return (
     <div className={cx("content-video-scroller")}>
-      <div className={cx("video-wrapper")}>
-        <video ref={videoRef} preload="preload" className={cx("video")}>
+      <div className={cx("video-wrapper")} ref={ref}>
+        <video ref={videoRef} preload="preload" className={cx("video-custom")} style={{ transform: inView ? 'scale(0.7)' : 'scale(1)' }}>
           <source
             type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
             src={videoUrl}
           ></source>
         </video>
+        <Image
+          className="absolute top-50 left-50"
+          style={{
+            transform: 'translate(-50%, -46%)',
+            width: '92.5%',
+            opacity: inView ? '1' : '0',
+            transition: 'all .5s ease-in-out 1.8s',
+            maxWidth: '1575px'
+          }}
+          src="https://ivoryguide.s3.us-west-1.amazonaws.com/images/about/pc-frame.png"
+          alt="PC Frame"
+          width="100%"
+        />
         {children}
       </div>
       <div ref={scrollSectionRef} id={cx("scrollSection")}></div>

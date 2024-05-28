@@ -8,6 +8,7 @@ import uniqBy from "lodash/uniqBy";
 import {
   CALCULATOR_OUTPUT_MAPPING,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
+  LINK_TEXT_SUFFIX,
   MATERIAL_CALCULATOR_TYPES,
   MUA_OPTIONS,
   POPUP_TEXTS,
@@ -463,6 +464,20 @@ export const isPopup = (key: string) => {
     0
   );
 };
+
+export const isLinkText = (key: string) => {
+  const { groupText } = deserializeColInfo(key);
+  return groupText.endsWith(LINK_TEXT_SUFFIX);
+}
+
+export const getLinkText = (item: Record<string, string | number>, groupTextKey: string) => {
+  for (let key in item) {
+    const { groupText } = deserializeColInfo(key);
+    if (groupText.startsWith(groupTextKey) && groupText.endsWith(LINK_TEXT_SUFFIX))
+      return item[key];
+  }
+  return `Link to ${groupTextKey}`;
+}
 
 export const isEmptyAnswer = (answer: ANSWER_TYPE) =>
   Object.values(answer).filter(Boolean).length == 0;
