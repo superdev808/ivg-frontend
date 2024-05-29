@@ -25,6 +25,7 @@ import {
   usePostActivateUserMutation,
 } from "@/redux/hooks/apiHooks";
 import { EditUser } from "@/types/UserTypes";
+import { organizationRoleMap } from "@/components/auth/register/RegisterForms/constants";
 
 import AdminEditUser from "./AdminForms/AdminEditUser";
 
@@ -348,8 +349,8 @@ const AdminUserManagement: React.FC = () => {
     <div className="flex justify-content-center">
       {row.verificationEmailSent
         ? `${formatDate(row.verificationEmailSent)} ${formatTime(
-          row.verificationEmailSent
-        )}`
+            row.verificationEmailSent
+          )}`
         : ""}
     </div>
   );
@@ -387,7 +388,13 @@ const AdminUserManagement: React.FC = () => {
     {
       field: "role",
       header: "Role",
-      body: (row: EditUser) => <span className="pl-4 pr-8">{row.role}</span>,
+      body: (row: EditUser) => {
+        let role = organizationRoleMap[row.organizationRole];
+        if (row.role.toLocaleLowerCase() === "admin") {
+          role = `${role} (Admin)`;
+        }
+        return <span>{role}</span>;
+      },
       sortable: true,
       filter: true,
       filterElement: roleFilterTemplate,
@@ -402,7 +409,9 @@ const AdminUserManagement: React.FC = () => {
     {
       field: "organizationState",
       header: "Location",
-      body: (row: EditUser) => <span className="px-4">{row.organizationState}</span>,
+      body: (row: EditUser) => (
+        <span className="px-4">{row.organizationState}</span>
+      ),
       sortable: true,
       filter: true,
     },

@@ -34,6 +34,13 @@ export const organizationRole: OrganizationRole[] = [
   { label: "Other", value: ORGANIZATION_ROLE.OTHER },
 ];
 
+export const organizationRoleMap = organizationRole.reduce<
+  Record<ORGANIZATION_ROLE, string>
+>((acc, { label, value }) => {
+  acc[value] = label;
+  return acc;
+}, {} as Record<ORGANIZATION_ROLE, string>);
+
 export enum DENTAIL_PRACTICE_ROLE {
   GENERAL_DENTIST = "general_dentist",
   PEDIATRIC_DENTIST = "pediatric_dentist",
