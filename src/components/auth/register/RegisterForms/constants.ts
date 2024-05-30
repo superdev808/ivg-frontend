@@ -36,6 +36,13 @@ export const organizationRole: OrganizationRole[] = [
   { label: "Other", value: ORGANIZATION_ROLE.OTHER },
 ];
 
+export const organizationRoleMap = organizationRole.reduce<
+  Record<ORGANIZATION_ROLE, string>
+>((acc, { label, value }) => {
+  acc[value] = label;
+  return acc;
+}, {} as Record<ORGANIZATION_ROLE, string>);
+
 export enum DENTAIL_PRACTICE_ROLE {
   GENERAL_DENTIST = "general_dentist",
   PEDIATRIC_DENTIST = "pediatric_dentist",
@@ -80,6 +87,13 @@ export const referralSource: ReferralSource[] = [
   { label: "Social Media", value: REFERRAL_SOURCE.SOCIAL_MEDIA },
   { label: "Other", value: REFERRAL_SOURCE.OTHER },
 ];
+
+export const referralSourceMap = referralSource.reduce<
+  Record<REFERRAL_SOURCE, string>
+>((acc, { label, value }) => {
+  acc[value] = label;
+  return acc;
+}, {} as Record<REFERRAL_SOURCE, string>);
 
 export interface RegisterForm {
   firstName: string;

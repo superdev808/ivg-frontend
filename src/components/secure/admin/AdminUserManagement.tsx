@@ -17,6 +17,7 @@ import React, { useRef, useState } from "react";
 
 import { USER_ROLES_OPTIONS } from "@/constants/users";
 import { formatDate, formatTime } from "@/helpers/util";
+import { convertDataToExcelFormat } from "@/helpers/excel";
 import {
   useGetUsersListQuery,
   usePostDeactivateUserMutation,
@@ -24,7 +25,12 @@ import {
   usePostSendVerificationEmailMutation,
   usePostActivateUserMutation,
 } from "@/redux/hooks/apiHooks";
+import useDownload from "@/hooks/useDownload";
 import { EditUser } from "@/types/UserTypes";
+import {
+  organizationRoleMap,
+  referralSourceMap,
+} from "@/components/auth/register/RegisterForms/constants";
 
 import AdminEditUser from "./AdminForms/AdminEditUser";
 
@@ -38,6 +44,7 @@ const AdminUserManagement: React.FC = () => {
   const [postSendVerificationEmail] = usePostSendVerificationEmailMutation();
   const [postDeactivateUser] = usePostDeactivateUserMutation();
   const [postActivateUser] = usePostActivateUserMutation();
+  const { download } = useDownload();
 
   const [visibleEditUser, setVisibleEditUser] = useState<boolean>(false);
   const [selectedUser, setSelectedUser] = useState<EditUser | null>(null);
@@ -344,23 +351,32 @@ const AdminUserManagement: React.FC = () => {
     />
   );
 
-  const verificationEmailTemplate = (row: EditUser) => (
-    <div className="flex justify-content-center">
-      {row.verificationEmailSent
-        ? `${formatDate(row.verificationEmailSent)} ${formatTime(
+  const getRowVerificationEmailContent = (row: EditUser) =>
+    row.verificationEmailSent
+      ? `${formatDate(row.verificationEmailSent)} ${formatTime(
           row.verificationEmailSent
         )}`
-        : ""}
+      : "";
+
+  const verificationEmailTemplate = (row: EditUser) => (
+    <div className="flex justify-content-center">
+      {getRowVerificationEmailContent(row)}
     </div>
   );
 
+  const getRowLastLoginDateContent = (row: EditUser) =>
+    row.lastLoginDate
+      ? `${formatDate(row.lastLoginDate)} ${formatTime(row.lastLoginDate)}`
+      : "";
+
   const lastLoginDateTemplate = (row: EditUser) => (
     <div className="flex justify-content-center">
-      {row.lastLoginDate
-        ? `${formatDate(row.lastLoginDate)} ${formatTime(row.lastLoginDate)}`
-        : ""}
+      {getRowLastLoginDateContent(row)}
     </div>
   );
+
+  const getRowReferralSourceContent = (row: EditUser) =>
+    referralSourceMap[row.referralSource] || "";
 
   const columns = [
     {
@@ -387,7 +403,7 @@ const AdminUserManagement: React.FC = () => {
     {
       field: "role",
       header: "Role",
-      body: (row: EditUser) => <span className="pl-4 pr-8">{row.role}</span>,
+      body: (row: EditUser) => <span>{getRowRoleContent(row)}</span>,
       sortable: true,
       filter: true,
       filterElement: roleFilterTemplate,
@@ -402,7 +418,9 @@ const AdminUserManagement: React.FC = () => {
     {
       field: "organizationState",
       header: "Location",
-      body: (row: EditUser) => <span className="px-4">{row.organizationState}</span>,
+      body: (row: EditUser) => (
+        <span className="px-4">{row.organizationState}</span>
+      ),
       sortable: true,
       filter: true,
     },
@@ -420,6 +438,14 @@ const AdminUserManagement: React.FC = () => {
       body: (row: EditUser) => verificationEmailTemplate(row),
       sortable: true,
       filterElement: triStateFilterTemplate,
+    },
+    {
+      field: "referralSource",
+      header: "How did you hear about us?",
+      body: (row: EditUser) => (
+        <span className="px-4">{getRowReferralSourceContent(row)}</span>
+      ),
+      sortable: true,
     },
     {
       field: "active",
@@ -443,10 +469,42 @@ const AdminUserManagement: React.FC = () => {
     },
   ];
 
+  const getRowRoleContent = (row: EditUser) => {
+    let role = organizationRoleMap[row.organizationRole];
+    if (row.role.toLocaleLowerCase() === "admin") {
+      role = `${role} (Admin)`;
+    }
+    return role;
+  };
+
+  const handleDownload = () => {
+    const res = data.map((row: EditUser) => ({
+      "First Name": row.firstName,
+      "Last Name": row.lastName,
+      Email: row.email,
+      Role: getRowRoleContent(row),
+      Organization: row.organizationName,
+      Location: row.organizationState,
+      "Verified?": row.verified ? "Yes" : "No",
+      "Verification email sent?": getRowVerificationEmailContent(row),
+      "How did you hear about us?": getRowReferralSourceContent(row),
+      "Active?": row.active ? "Yes" : "No",
+      "Last Login": getRowLastLoginDateContent(row),
+    }));
+
+    const blob = convertDataToExcelFormat(res);
+    download(blob, "Users List.xlsx");
+  };
+
   return (
     <>
-      <div className="mb-3">
+      <div className="mb-3 flex align-items-center justify-content-between">
         <span className="text-2xl font-semibold">User Management</span>
+        <Button
+          className="p-button p-button-lg"
+          label="Export"
+          onClick={handleDownload}
+        />
       </div>
 
       <div className="border-1 border-light-green border-round-2xl overflow-hidden">
