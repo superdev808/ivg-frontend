@@ -18,6 +18,7 @@ export enum ORGANIZATION_ROLE {
   DENTAL_LABORATORY = "dental_laboratory",
   DENTAL_SCHOOL = "dental_school",
   DENTAL_STUDENT = "dental_student",
+  DENTAL_SUPPLIER = "dental_supplier",
   OTHER = "other",
 }
 
@@ -31,6 +32,7 @@ export const organizationRole: OrganizationRole[] = [
   { label: "Dental Laboratory", value: ORGANIZATION_ROLE.DENTAL_LABORATORY },
   { label: "Dental School", value: ORGANIZATION_ROLE.DENTAL_SCHOOL },
   { label: "Dental Student", value: ORGANIZATION_ROLE.DENTAL_STUDENT },
+  { label: "Dental Supplier", value: ORGANIZATION_ROLE.DENTAL_SUPPLIER},
   { label: "Other", value: ORGANIZATION_ROLE.OTHER },
 ];
 
@@ -155,4 +157,5 @@ export const states = [
   { name: "West Virginia", value: "WV" },
   { name: "Wisconsin", value: "WI" },
   { name: "Wyoming", value: "WY" },
+  { name: "Outside United States", value:"N/A"},
 ];
