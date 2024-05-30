@@ -24,7 +24,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
   calculatorType,
 }) => {
   const { groupName } = deserializeColInfo(
-    Object.keys(item).filter((key) => key && isPopup(key) == false)[0]
+    Object.keys(item).filter((key) => key && isPopup(key) != null)[0]
   );
   const sortedKeys = Object.keys(item).sort(
     (left, right) =>
