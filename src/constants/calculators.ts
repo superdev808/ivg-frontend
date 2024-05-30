@@ -677,8 +677,8 @@ export const QUESTION_ANSWER_BRAND_MAP: Record<string, ANSWER_TYPE> = {
     no: "not limited occ space",
   },
   "Is the stump shade light or dark?": {
-    dark: "light stump",
-    light: "dark stump",
+    dark: "dark stump",
+    light: "light stump",
   },
   "Does the patient have a thin gingival biotype?": {
     yes: "thin biotype",
