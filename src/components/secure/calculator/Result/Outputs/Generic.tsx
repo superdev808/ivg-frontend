@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 
 import { INFORMATIONAL_CALCULATOR_TYPES } from "@/constants/calculators";
@@ -54,56 +55,56 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
       })}
     >
       {groupName && <h4 className="m-0 text-xl">{groupName}</h4>}
-      {transformedItems.map((subgroupItem) => (
-        <div className="flex gap-2 align-items-start" key={subgroupItem["id"]}>
-          <div style={{ paddingTop: 2 }}>
-            <PopupOutput
-              data={subgroupItem}
-            />
+      {transformedItems.map((subgroupItem) => {
+        const mainKey = Object.keys(subgroupItem)
+          .filter((key) => isPopup(key) === false && isLinkText(key) === false)[0];
+        if (mainKey === undefined)
+          return null;
+        const { groupText } = deserializeColInfo(mainKey);
+        const value = subgroupItem[mainKey];
+        const linkText = getLinkText(subgroupItem, groupText);
+
+        return (
+          <div className="flex gap-2 align-items-start" key={subgroupItem["id"]}>
+            {/step/ig.test(groupText) && <Image src="/images/calculators/movie-videos-icon.svg" alt="Play" width={32} height={32} className="relative" style={{ top: '-3px' }} />}
+            <div style={{ paddingTop: 2 }}>
+              <PopupOutput
+                data={subgroupItem}
+              />
+            </div>
+            {value && (
+              <div
+                className={cx("flex-1", {
+                  "text-center text-2xl": mainKey === "torqueValue",
+                })}
+              >
+                {typeof value == "string" && isValidUrl(value) ? (
+                  <Link
+                    href={value}
+                    target="_blank"
+                    className="no-underline text-dark-green"
+                  >
+                    {groupText && <b>{groupText}: </b>} {linkText}
+                  </Link>
+                ) : typeof value === "string" && /required/gi.test(value) ? (
+                  <>
+                    <i
+                      className="pi pi-check text-light-green mr-2 font-bold"
+                      style={{ width: 16, height: 16 }}
+                    />
+                    {groupText && <>{groupText}</>}
+                  </>
+                ) : (
+                  <>
+                    {groupText && <b>{groupText}: </b>}
+                    <span>{parse(value.toString().replaceAll("\n", "<br />"))}</span>
+                  </>
+                )}
+              </div>
+            )}
           </div>
-          {Object.keys(subgroupItem)
-            .filter((key) => isPopup(key) === false && isLinkText(key) === false)
-            .map((key) => {
-              const { groupText } = deserializeColInfo(key);
-              const value = subgroupItem[key];
-              const linkText = getLinkText(subgroupItem, groupText);
-
-              if (!value) return null;
-
-              return (
-                <div
-                  key={key}
-                  className={cx("flex-1", {
-                    "text-center text-2xl": key === "torqueValue",
-                  })}
-                >
-                  {typeof value == "string" && isValidUrl(value) ? (
-                    <Link
-                      href={value}
-                      target="_blank"
-                      className="no-underline text-dark-green"
-                    >
-                      {groupText && <b>{groupText}: </b>} {linkText}
-                    </Link>
-                  ) : typeof value === "string" && /required/gi.test(value) ? (
-                    <>
-                      <i
-                        className="pi pi-check text-light-green mr-2 font-bold"
-                        style={{ width: 16, height: 16 }}
-                      />
-                      {groupText && <>{groupText}</>}
-                    </>
-                  ) : (
-                    <>
-                      {groupText && <b>{groupText}: </b>}
-                      <span>{parse(value.toString().replaceAll("\n", "<br />"))}</span>
-                    </>
-                  )}
-                </div>
-              );
-            })}
-        </div>
-      ))}
+        )
+      })}
     </div>
   );
 };

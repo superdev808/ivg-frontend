@@ -205,6 +205,8 @@ export const INFORMATIONAL_CALCULATOR_TYPES = [
   "ToothPreparation",
   "ImplantTorqueGuide",
   "ShadeGuideConversion",
+  "SingleCrownScanning",
+  "InlayAndOnlayScanning"
 ];
 
 export const CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES = [

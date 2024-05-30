@@ -57,7 +57,7 @@ const Outputs: React.FC<OutputsProps> = ({
               className={cx(
                 "flex flex-column justify-content-between gap-4 p-3 border-round-md line-height-3 md:flex-row md:align-items-center",
                 needHighlight
-                  ? "text-xl border-dark-brown border-3"
+                  ? "border-dark-brown border-3"
                   : "border-light-green border-2"
               )}
             >
