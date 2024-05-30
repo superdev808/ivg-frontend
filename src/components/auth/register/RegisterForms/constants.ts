@@ -86,6 +86,13 @@ export const referralSource: ReferralSource[] = [
   { label: "Other", value: REFERRAL_SOURCE.OTHER },
 ];
 
+export const referralSourceMap = referralSource.reduce<
+  Record<REFERRAL_SOURCE, string>
+>((acc, { label, value }) => {
+  acc[value] = label;
+  return acc;
+}, {} as Record<REFERRAL_SOURCE, string>);
+
 export interface RegisterForm {
   firstName: string;
   lastName: string;

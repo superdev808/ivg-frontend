@@ -27,7 +27,10 @@ import {
 } from "@/redux/hooks/apiHooks";
 import useDownload from "@/hooks/useDownload";
 import { EditUser } from "@/types/UserTypes";
-import { organizationRoleMap } from "@/components/auth/register/RegisterForms/constants";
+import {
+  organizationRoleMap,
+  referralSourceMap,
+} from "@/components/auth/register/RegisterForms/constants";
 
 import AdminEditUser from "./AdminForms/AdminEditUser";
 
@@ -372,6 +375,9 @@ const AdminUserManagement: React.FC = () => {
     </div>
   );
 
+  const getRowReferralSourceContent = (row: EditUser) =>
+    referralSourceMap[row.referralSource] || "";
+
   const columns = [
     {
       field: "firstName",
@@ -434,6 +440,14 @@ const AdminUserManagement: React.FC = () => {
       filterElement: triStateFilterTemplate,
     },
     {
+      field: "referralSource",
+      header: "How did you hear about us?",
+      body: (row: EditUser) => (
+        <span className="px-4">{getRowReferralSourceContent(row)}</span>
+      ),
+      sortable: true,
+    },
+    {
       field: "active",
       header: "Active?",
       body: (row: EditUser) => checkBodyTemplate(row.active),
@@ -473,6 +487,7 @@ const AdminUserManagement: React.FC = () => {
       Location: row.organizationState,
       "Verified?": row.verified ? "Yes" : "No",
       "Verification email sent?": getRowVerificationEmailContent(row),
+      "How did you hear about us?": getRowReferralSourceContent(row),
       "Active?": row.active ? "Yes" : "No",
       "Last Login": getRowLastLoginDateContent(row),
     }));

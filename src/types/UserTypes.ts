@@ -1,4 +1,7 @@
-import { ORGANIZATION_ROLE } from "@/components/auth/register/RegisterForms/constants";
+import {
+  ORGANIZATION_ROLE,
+  REFERRAL_SOURCE,
+} from "@/components/auth/register/RegisterForms/constants";
 
 export interface User {
   id?: string;
@@ -53,4 +56,5 @@ export interface EditUser {
   organizationState: string;
   verificationEmailSent: string;
   lastLoginDate: string;
+  referralSource: REFERRAL_SOURCE;
 }
