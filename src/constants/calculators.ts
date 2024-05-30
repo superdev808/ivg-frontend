@@ -858,6 +858,10 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                     name: "Multi-Unit Abutments (Abutment Level)",
                     href: "/calculators/ScanbodiesMultiUnitAbutments",
                   },
+                  {
+                    name: "Lab / Model",
+                    href: "/calculators/LabModelScanbodies",
+                  },
                 ],
               },
               {
