@@ -10,7 +10,16 @@
 }
 
 .heading {
-  max-width: 70%;
+  max-width: 40%;
+
+  @media screen and (max-width: 768px) {
+    max-width: initial;
+    padding-left: 80px;
+  }
+}
+
+.calculator-name {
+  max-width: 33%;
 
   @media screen and (max-width: 768px) {
     max-width: initial;

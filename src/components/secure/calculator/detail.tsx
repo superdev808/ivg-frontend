@@ -8,6 +8,8 @@ import { parseItems } from "@/helpers/calculators";
 import { event as gaEvent } from "@/lib/gtag";
 import { InputDetail, InputOutputValues, ItemData } from "@/types/calculators";
 
+import QuizRestartButton from "@/components/shared/QuizRestartButton";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -113,6 +115,11 @@ const DetailView: React.FC<DetailViewProps> = ({
           />
         )}
         <h2>{calculatorName} Calculator</h2>
+      </div>
+      <div className="relative md:absolute flex align-items-center justify-content-center w-full md:w-2 md:col-offset-9">
+        <div className="mt-3">
+          <QuizRestartButton />
+        </div> 
       </div>
 
       {results.length > 0 && (
