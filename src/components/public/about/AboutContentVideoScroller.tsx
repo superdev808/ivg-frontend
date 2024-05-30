@@ -19,6 +19,7 @@ export default function AboutContentSectionScoller({ children }: AboutContentVid
   const scrollSectionRef = useRef<HTMLDivElement>(null);
   const [hasLoaded, setLoaded] = useState(false);
   const { ref, inView } = useInView({ threshold: 0.2 });
+  const [animDone, setAnimDone] = useState(false);
 
   // Debounce the scroll event for better performance
   const debouncedScrollPlay = useCallback(() => {
@@ -27,6 +28,11 @@ export default function AboutContentSectionScoller({ children }: AboutContentVid
       videoRef.current.currentTime = frameNumber;
     }
   }, []);
+
+  useEffect(() => {
+    if (inView === true)
+      setAnimDone(true);
+  }, [inView]);
 
   useEffect(() => {
     setLoaded(true);
@@ -60,7 +66,7 @@ export default function AboutContentSectionScoller({ children }: AboutContentVid
   return (
     <div className={cx("content-video-scroller")}>
       <div className={cx("video-wrapper")} ref={ref}>
-        <video ref={videoRef} preload="preload" className={cx("video-custom")} style={{ transform: inView ? 'scale(0.7)' : 'scale(1)' }}>
+        <video ref={videoRef} preload="preload" className={cx("video-custom")} style={{ transform: animDone ? 'scale(0.7)' : 'scale(1)' }}>
           <source
             type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
             src={videoUrl}
@@ -71,7 +77,7 @@ export default function AboutContentSectionScoller({ children }: AboutContentVid
           style={{
             transform: 'translate(-50%, -46%)',
             width: '92.5%',
-            opacity: inView ? '1' : '0',
+            opacity: animDone ? '1' : '0',
             transition: 'all .5s ease-in-out 1.8s',
             maxWidth: '1575px'
           }}
