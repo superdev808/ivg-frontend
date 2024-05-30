@@ -32,6 +32,8 @@ export default function AboutContentSectionScoller({ children }: AboutContentVid
   useEffect(() => {
     if (inView === true)
       setAnimDone(true);
+    if (inView === false && window.scrollY < 2000)
+      setAnimDone(false);
   }, [inView]);
 
   useEffect(() => {
@@ -78,8 +80,7 @@ export default function AboutContentSectionScoller({ children }: AboutContentVid
             transform: 'translate(-50%, -46%)',
             width: '92.5%',
             opacity: animDone ? '1' : '0',
-            transition: 'all .5s ease-in-out 1.8s',
-            maxWidth: '1575px'
+            transition: `all .5s ease-in-out ${animDone ? 1 : 0.3}s`,
           }}
           src="https://ivoryguide.s3.us-west-1.amazonaws.com/images/about/pc-frame.png"
           alt="PC Frame"
