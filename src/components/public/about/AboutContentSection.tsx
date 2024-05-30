@@ -84,7 +84,7 @@ export const AboutContentSection = () => {
     <div className="bg-light-green">
       <div className={cx("section-container")}>
         <div className="flex flex-column align-items-center justify-content-center">
-          <h1 className="text-center text-6xl md:text-8xl mb-0" style={{ color: '#DDBCA3' }}>It{"'"}s this simple</h1>
+          <span className="text-center public-section-title mb-0" style={{ color: '#DDBCA3' }}>It{"'"}s this simple.</span>
           <div
             className="flex justify-content-center relative w-full p-4 z-1"
           >
