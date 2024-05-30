@@ -11,6 +11,7 @@ import { Image } from "primereact/image";
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
+import QuizRestartButton from "@/components/shared/QuizRestartButton"
 import {
   BRAND_IMAGES,
   BRAND_IMAGES_MAP_ADDITIONAL,
@@ -206,34 +207,35 @@ const Quiz: React.FC<QuizProps> = ({
     <>
       <div className="col-12 flex flex-column justify-content-center align-items-center relative">
         {onGoBack && (
-          <Button
-            icon="pi pi-arrow-left"
-            className="absolute left-0 ml-2 mt-5 px-5 md:ml-4 text-6xl bg-light-green"
-            disabled={disabled}
-            onClick={onGoBack}
-          />
-        )}
-
-        {calculatorName && <h1 className="underline">{calculatorName}</h1>}
-        {suggestions.length > 0 && (
-          <h1
-            className={cx(
-              "heading",
-              "flex gap-3 line-height-3 md:align-items-center md:text-center"
-            )}
-          >
-            {question.colText && (
-              <PopupOutput
-                className="text-2xl"
-                data={{
-                  [SHOULD_DISPLAY_TEXT_ONLY]: question.colText,
-                }}
-                size={48}
-              />
-            )}
-            {questionName}
-          </h1>
-        )}
+            <Button
+              icon="pi pi-arrow-left"
+              className="absolute left-0 ml-2 mt-5 px-5 md:ml-4 text-6xl bg-light-green"
+              disabled={disabled}
+              onClick={onGoBack}
+            />
+          )}
+          {calculatorName && 
+            <h1 className={cx("calculator-name", "underline")}>{calculatorName}</h1>
+          }
+          {suggestions.length > 0 && (
+            <h1
+              className={cx(
+                "heading",
+                "flex gap-3 line-height-3 md:align-items-center md:text-center"
+              )}
+            >
+              {question.colText && (
+                <PopupOutput
+                  className="text-2xl"
+                  data={{
+                    [SHOULD_DISPLAY_TEXT_ONLY]: question.colText,
+                  }}
+                  size={48}
+                />
+              )}
+              {questionName}
+            </h1>
+          )}
       </div>
 
       {answers?.length > 6 && (
@@ -255,7 +257,12 @@ const Quiz: React.FC<QuizProps> = ({
 
       {!disabled && (
         <>
-          <div className="relative md:absolute flex align-items-center justify-content-center w-full md:w-2 md:col-offset-10">
+          <div className="relative md:absolute flex align-items-center justify-content-center w-full md:w-2 md:col-offset-9">
+            { progress !== undefined && progress > 0 && 
+              <div className="mt-3">
+                <QuizRestartButton />
+              </div> 
+            }
             <PieChartProgressBar percentage={progress || 0} />
           </div>
           {isActionQuestion ? (
