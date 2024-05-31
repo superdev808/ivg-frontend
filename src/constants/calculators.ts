@@ -798,11 +798,11 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                     items: [
                       {
                         name: "Implant-Borne Bridge",
-                        href: "/calculators/ImplantBorneBridge",
+                        href: "/calculators/ImplantBridgeScanning",
                       },
                       {
                         name: "Implant-Borne Crown",
-                        href: "/calculators/ImplantBorneCrown",
+                        href: "/calculators/ImplantCrownScanning",
                       },
                       {
                         name: "Inlays and Onlays",
@@ -810,11 +810,11 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
                       },
                       {
                         name: "Tooth-Borne Bridge",
-                        href: "/calculators/ToothBorneBridge",
+                        href: "/calculators/BridgeScanning",
                       },
                       {
                         name: "Tooth-Borne Crown",
-                        href: "/calculators/ToothBorneCrown",
+                        href: "/calculators/SingleCrownScanning",
                       },
                     ],
                   },
