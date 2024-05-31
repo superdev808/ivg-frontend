@@ -66,7 +66,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
 
         return (
           <div className="flex gap-2 align-items-start" key={subgroupItem["id"]}>
-            {/step/ig.test(groupText) && <Image src="/images/calculators/movie-videos-icon.svg" alt="Play" width={32} height={32} className="relative" style={{ top: '-3px' }} />}
+            {/* {/step/ig.test(groupText) && <Image src="/images/calculators/movie-videos-icon.svg" alt="Play" width={32} height={32} className="relative" style={{ top: '-3px' }} />} */}
             <div style={{ paddingTop: 2 }}>
               <PopupOutput
                 data={subgroupItem}

@@ -207,6 +207,9 @@ export const INFORMATIONAL_CALCULATOR_TYPES = [
   "ShadeGuideConversion",
   "SingleCrownScanning",
   "InlayAndOnlayScanning",
+  "ImplantBridgeScanning",
+  "ImplantCrownScanning",
+  "BridgeScanning"
 ];
 
 export const CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES = [
