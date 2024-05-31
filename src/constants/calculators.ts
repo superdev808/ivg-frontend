@@ -206,7 +206,7 @@ export const INFORMATIONAL_CALCULATOR_TYPES = [
   "ImplantTorqueGuide",
   "ShadeGuideConversion",
   "SingleCrownScanning",
-  "InlayAndOnlayScanning"
+  "InlayAndOnlayScanning",
 ];
 
 export const CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES = [
@@ -810,6 +810,37 @@ export const EXPLORE_ALL_DATA: EXPLORE_DATA[] = [
               {
                 name: "Best Practices for Taking Physical Impressions",
                 href: "/calculators/PhysicalImpression",
+              },
+            ],
+          },
+          {
+            name: "Step by Step Scanning Guidance",
+            openByDefault: true,
+            items: [
+              {
+                name: "Fixed Restorations",
+                items: [
+                  {
+                    name: "Implant-Borne Bridge",
+                    href: "/calculators/ImplantBorneBridge",
+                  },
+                  {
+                    name: "Implant-Borne Crown",
+                    href: "/calculators/ImplantBorneCrown",
+                  },
+                  {
+                    name: "Inlays and Onlays",
+                    href: "/calculators/InlayAndOnlayScanning",
+                  },
+                  {
+                    name: "Tooth-Borne Bridge",
+                    href: "/calculators/ToothBorneBridge",
+                  },
+                  {
+                    name: "Tooth-Borne Crown",
+                    href: "/calculators/ToothBorneCrown",
+                  },
+                ],
               },
             ],
           },
