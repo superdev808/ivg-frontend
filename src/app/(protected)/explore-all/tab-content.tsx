@@ -6,6 +6,7 @@ import { EXPLORE_DATA, EXPLORE_DATA_ITEM } from "@/types/calculators";
 import ItemsList from "./items-list";
 
 import styles from "./tab-content.module.scss";
+import CustomScrollbar from "@/components/shared/CustomScrollbar";
 
 const cx = classNames.bind(styles);
 
@@ -37,7 +38,7 @@ const TabContent: React.FC<TabContentProps> = ({
         })}
       >
         {datum.sections.map((section) => (
-          <div
+          <CustomScrollbar
             key={section.name}
             className={cx(
               "section",
@@ -59,7 +60,7 @@ const TabContent: React.FC<TabContentProps> = ({
                 {renderItems(section.items)}
               </div>
             )}
-          </div>
+          </CustomScrollbar>
         ))}
       </div>
     </div>
