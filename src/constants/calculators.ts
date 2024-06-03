@@ -193,24 +193,19 @@ export const CALCULATOR_GROUP_ITEMS: CalculatorGroupItem[] = [
   },
 ];
 
-export const INFORMATIONAL_CALCULATOR_TYPES = [
-  "ImplantBorneBridge",
-  "ImplantBorneCrown",
-  "ToothBorneBridge",
-  "ToothBorneCrown",
-  "BondingEtching",
-  "ScanRequirements",
-  "PhysicalImpression",
-  "IsolationTechniques",
-  "ToothPreparation",
-  "ImplantTorqueGuide",
-  "ShadeGuideConversion",
-  "SingleCrownScanning",
-  "InlayAndOnlayScanning",
-  "ImplantBridgeScanning",
-  "ImplantCrownScanning",
-  "BridgeScanning"
-];
+export const OUTPUT_UI_TYPES: {
+  [key: string]: string
+} = {
+  "CALC-1A": "Calculator 1A - Single Value, No Purchase (Ex. Torque Value)",
+  "CALC-1B": "Calculator 1B - Single Value, Purchase (Ex. Scanbody)",
+  "CALC-2": "Calculator 2 - No Input, Single Value (Ex. Supplies)",
+  "CALC-3": "Calculator 3 - Multiple Outputs, Purchase (Ex. Drill Kits)",
+  "CALC-4": "Calculator 4 - Ranked Outputs (Ex. Crown Material Selection)",
+  "WORKFLOW-1": "Workflow 1 - Multiple Inputs / Output Checklist (Ex. Scan Requirements)",
+  "WORKFLOW-2": "Workflow 2 - Sequential Outputs (Ex. Isolation)",
+  "WORKFLOW-3": "Workflow 3 - Sequential Outputs w/ Videos (Ex. Scan instructions)",
+  "WORKFLOW-4": "Workflow 4 - Sequential Steps w/ Output Step Summary (Ex. Crown Issues)",
+}
 
 export const CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES = [
   "BondingEtching",

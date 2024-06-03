@@ -176,6 +176,7 @@ export interface CalculatorInfoMap {
     isProduction?: boolean;
     input: InputOutputValues[];
     output: InputOutputValues[];
+    outputType: string;
   };
 }
 

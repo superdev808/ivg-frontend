@@ -11,6 +11,7 @@ import { FormErrorMessage } from "@/components/shared/FormErrorMessage";
 import { useUploadCalculatorDataMutation } from "@/redux/hooks/apiHooks";
 import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 import NewCalculatorDialog from "./NewCalculatorDialog";
+import { OUTPUT_UI_TYPES } from "@/constants/calculators";
 
 const POLLING_INTERVAL = 3000;
 
@@ -19,6 +20,7 @@ interface FormValues {
   spreadsheetId: string;
   pageDataName: string;
   pageHeaderName: string;
+  outputType: string;
 }
 
 interface AdminUploadDataFormProps {}
@@ -40,6 +42,11 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
       id: calcType,
       label: calcInfoMap[calcType].label,
     }));
+  const outputTypeOptions = Object.keys(OUTPUT_UI_TYPES)
+    .map((outputType) => ({
+      id: outputType,
+      label: OUTPUT_UI_TYPES[outputType],
+    }));
 
   useEffect(() => {
     return () => {
@@ -54,6 +61,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
     control,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -61,6 +69,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
       spreadsheetId: "",
       pageHeaderName: "",
       pageDataName: "",
+      outputType: "",
     },
   });
 
@@ -70,6 +79,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
       spreadsheetId: trim(data.spreadsheetId),
       pageDataName: trim(data.pageDataName),
       pageHeaderName: trim(data.pageHeaderName),
+      outputType: trim(data.outputType),
     };
 
     try {
@@ -162,6 +172,10 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
                     optionLabel="label"
                     optionValue="id"
                     className={cx({ "p-invalid": fieldState.error }, "w-full")}
+                    onChange={(e) => {
+                      field.onChange(e.target.value);
+                      setValue("outputType", calcInfoMap[e.target.value].outputType);
+                    }}
                   />
 
                   <label className="bg-beige" htmlFor={field.name}>
@@ -271,6 +285,32 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
 
                   <label className="bg-beige" htmlFor={field.name}>
                     Data Header Name
+                  </label>
+                </span>
+
+                {FormErrorMessage({ message: errors[field.name]?.message })}
+              </div>
+            )}
+          />
+
+          <Controller
+            name="outputType"
+            control={control}
+            rules={{ required: "Please select Output Type." }}
+            render={({ field, fieldState }) => (
+              <div className="col-12 md:col-6">
+                <span className="p-float-label w-full">
+                  <Dropdown
+                    {...field}
+                    disabled={isLoading}
+                    options={outputTypeOptions}
+                    optionLabel="label"
+                    optionValue="id"
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
+                  />
+
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Output Type
                   </label>
                 </span>
 
