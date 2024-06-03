@@ -152,7 +152,7 @@ const AdminUploadDataForm: React.FC<AdminUploadDataFormProps> = ({}) => {
   return (
     <div className="flex flex-column flex-grow-1">
       <div className="mb-3 flex align-items-center">
-        <span className="text-2xl font-semibold">Caluclator Management</span>
+        <span className="text-2xl font-semibold">Calculator Management</span>
         <NewCalculatorDialog toastRef={toastRef} />
       </div>
       <Toast ref={toastRef} position="top-right" />

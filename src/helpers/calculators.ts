@@ -491,3 +491,7 @@ export const filterValidAnswers = (answer: ANSWER_TYPE) =>
     if (Boolean(answer[key])) result[key] = answer[key];
     return result;
   }, {} as ANSWER_TYPE);
+
+export const isClickPurchasable = (outputType: string) => {
+  return outputType === 'CALC-1A' || outputType.startsWith("WORKFLOW");
+}
