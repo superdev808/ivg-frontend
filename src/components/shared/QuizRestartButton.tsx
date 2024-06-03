@@ -16,8 +16,8 @@ const QuizRestartButton = () => {
         <Image
           src="/images/calculators/quiz-restart.png"
           alt="Restart"
-          width={60}
-          height={60}
+          width={120}
+          height={120}
           style={{
             width: '120px',
             height: '120px',
