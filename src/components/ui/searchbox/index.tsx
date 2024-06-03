@@ -4,7 +4,7 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import React, { useCallback, useEffect, useState } from "react";
 
 interface SearchBoxProps {
-  handleSearch: (str: string) => void;
+  handleSearch: (e: any, str: string) => void;
   loading: boolean;
   inputRef: any;
 }
@@ -20,7 +20,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({
 
   const handleChange = (e: any) => {
     setQueryString(e.target.value);
-    debouncedSearch(e.target.value);
+    debouncedSearch(e, e.target.value);
   };
 
   useEffect(() => {

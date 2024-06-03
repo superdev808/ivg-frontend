@@ -5,7 +5,7 @@
 
 .calculatorButton {
   background-color: transparent !important;
-  color: var(--beige) !important;
+  color: var(--dark-green) !important;
   border: 1px solid var(--beige) !important;
 
   &:hover,
@@ -22,4 +22,11 @@
 .content {
   max-width: 1160px;
   margin: 0 auto;
+}
+
+.searchPanelOverlay {
+  width: 400px;
+  height: 400px;
+  max-width: 85vw;
+  max-height: 100vh;
 }

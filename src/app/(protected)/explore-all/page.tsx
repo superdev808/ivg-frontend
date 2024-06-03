@@ -24,6 +24,8 @@ import { CalculatorGroupItem, EXPLORE_DATA } from "@/types/calculators";
 import TabContent from "./tab-content";
 
 import styles from "./page.module.scss";
+import { OverlayPanel } from "primereact/overlaypanel";
+import CustomScrollbar from "@/components/shared/CustomScrollbar";
 
 const cx = classNames.bind(styles);
 
@@ -36,6 +38,8 @@ const CalculatorPage: NextPage = () => {
   const [searchResult, setSearchResult] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<number>(0);
   const searchBoxRef = useRef(null);
+  const overlayPanelRef = useRef(null);
+  const emptyRef = useRef(null);
   const { calcInfoMap } = useCalculatorsInfo();
   const [exploreAllData, setExploreAllData] =
     useState<EXPLORE_DATA[]>(EXPLORE_ALL_DATA);
@@ -80,9 +84,10 @@ const CalculatorPage: NextPage = () => {
       }));
   }, [userInfo, calcInfoMap]);
 
-  const handleSearch = (str = "") => {
+  const handleSearch = (e: any, str: string = "") => {
     if (!str) {
       setSearchResult([]);
+      (overlayPanelRef?.current as any).hide();
       return;
     }
 
@@ -112,6 +117,7 @@ const CalculatorPage: NextPage = () => {
       })
       .finally(() => {
         setSearchResult(newCalcTypes);
+        (overlayPanelRef?.current as any)?.show(e, emptyRef.current);
         setLoading(false);
 
         if (searchBoxRef.current) {
@@ -162,7 +168,8 @@ const CalculatorPage: NextPage = () => {
         <div className={cx("content")}>
           <div className="text-beige text-center text-4xl">Explore All</div>
 
-          <div className="mt-4">
+          <div className="mt-4 flex">
+            <div style={{ width: '1px' }} ref={emptyRef}></div>
             <SearchBox
               handleSearch={handleSearch}
               loading={loading}
@@ -170,22 +177,26 @@ const CalculatorPage: NextPage = () => {
             />
           </div>
 
-          {searchResult.length > 0 && (
-            <div className="flex flex-wrap gap-3 mb-4 mt-3">
-              {searchResult.map((searchedCalcType, index) => (
-                <Button
-                  className={cx("calculatorButton", "p-3")}
-                  key={`searched-calc-${index}`}
-                  label={
-                    calcInfoMap[searchedCalcType].label || searchedCalcType
-                  }
-                  onClick={() => {
-                    router.push(`/calculators/${searchedCalcType}`);
-                  }}
-                />
-              ))}
+          <OverlayPanel ref={overlayPanelRef} showCloseIcon>
+            <div className={cx('searchPanelOverlay')}>
+              <CustomScrollbar>
+                <div className="flex flex-column">
+                  {searchResult.map((searchedCalcType, index) => (
+                    <Button
+                      className={cx("calculatorButton", "p-3 text-left")}
+                      label={
+                        calcInfoMap[searchedCalcType].label || searchedCalcType
+                      }
+                      key={`searched-calc-${index}`}
+                      onClick={() => {
+                        router.push(`/calculators/${searchedCalcType}`);
+                      }}
+                    />
+                  ))}
+                </div>
+              </CustomScrollbar>
             </div>
-          )}
+          </OverlayPanel>
         </div>
       </div>
 
