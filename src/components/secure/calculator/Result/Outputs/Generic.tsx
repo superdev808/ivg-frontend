@@ -1,9 +1,7 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
-import Image from "next/image";
 import React from "react";
 
-import { INFORMATIONAL_CALCULATOR_TYPES } from "@/constants/calculators";
 import { deserializeColInfo, getLinkText, isLinkText, isPopup, isValidUrl } from "@/helpers/calculators";
 import { ItemInsights } from "@/types/calculators";
 import parse from "html-react-parser";
@@ -11,6 +9,7 @@ import parse from "html-react-parser";
 import PopupOutput from "./Popup";
 
 import styles from "./style.module.scss";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 const cx = classNames.bind(styles);
 
@@ -32,6 +31,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
       deserializeColInfo(left).colIndex - deserializeColInfo(right).colIndex
   );
   const transformedItems = [];
+  const { calcInfoMap } = useCalculatorsInfo();
 
   for (let i = 0, j; i < sortedKeys.length; i = j) {
     let newSubGroupItem: Record<string, string | number> = {},
@@ -51,7 +51,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
   return (
     <div
       className={cx("flex flex-column gap-2", {
-        "w-12": INFORMATIONAL_CALCULATOR_TYPES.includes(calculatorType),
+        "w-12": calcInfoMap[calculatorType].outputType === 'CALC-1A',
       })}
     >
       {groupName && <h4 className="m-0 text-xl">{groupName}</h4>}
