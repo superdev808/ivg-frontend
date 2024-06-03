@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
-import { Image } from "primereact/image";
+import Image from "next/image";
 
 import AdvantageAppointments from "../../../../public/images/home/advantage_appointments.svg";
 import AdvantageProcedure from "../../../../public/images/home/advantage_procedure.svg";
@@ -102,12 +102,16 @@ export const HomeContentSection = () => {
       </div>
       <div className="flex flex-column md:flex-row align-items-center justify-content-center my-6">
         <div className="flex justify-content-center w-full relative p-2">
-          <Image
-            src="/images/home/calculator-mockup.png"
-            alt="centerImage"
-            className="flex justify-content-center"
-            imageClassName="w-full md:w-10 lg:w-8 xl:w-6"
-          />
+          <div className="flex flex-1 justify-content-center">
+            <Image
+              src="/images/home/calculator-mockup.png"
+              alt="centerImage"
+              className="w-full h-full md:w-10 lg:w-8 xl:w-6"
+              width={960}
+              height={720}
+              quality={40}
+            />
+          </div>
         </div>
       </div>
 

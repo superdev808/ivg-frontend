@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { Image } from "primereact/image";
+import Image from "next/image";
 import React, { useRef } from "react";
 
 import { InputDetail, ItemData } from "@/types/calculators";
@@ -132,13 +132,19 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
             "image"
           )}
         >
-          <Image
-            src={image}
-            alt={name}
+          <div
             className="flex-1 flex justify-content-center"
-            imageClassName="w-full sm:w-5 lg:w-full lg:h-full"
-            imageStyle={{ objectFit: "contain" }}
-          />
+          >
+            <Image
+              src={image}
+              alt={name}
+              className="w-full sm:w-5 lg:w-full lg:h-full"
+              width={512}
+              height={512}
+              quality={40}
+              objectFit="contain"
+            />
+          </div>
         </div>
       )}
     </div>

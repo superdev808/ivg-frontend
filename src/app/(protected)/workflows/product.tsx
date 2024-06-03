@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "primereact/button";
-import { Image } from "primereact/image";
 import { WorkflowsHeroSection } from "@/components/public/workflows/WorkflowsHeroSection";
 
 
