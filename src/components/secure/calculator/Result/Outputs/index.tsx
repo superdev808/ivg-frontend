@@ -5,7 +5,7 @@ import React, { useMemo } from "react";
 import cx from "classnames";
 
 import { CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES } from "@/constants/calculators";
-import { isValidUrl } from "@/helpers/calculators";
+import { isClickPurchasable, isValidUrl } from "@/helpers/calculators";
 import { ItemData, ItemInsights } from "@/types/calculators";
 
 import GenericOutput from "./Generic";
@@ -68,7 +68,7 @@ const Outputs: React.FC<OutputsProps> = ({
                 calculatorType={calculatorType}
               />
 
-              {!(calcInfoMap[calculatorType].outputType === 'CALC-1A') && (
+              {!isClickPurchasable(calcInfoMap[calculatorType].outputType) && (
                 <div className="flex align-items-center gap-4">
                   <InputNumber
                     value={item.quantity}

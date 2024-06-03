@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import Link from "next/link";
 import React from "react";
 
-import { deserializeColInfo, getLinkText, isLinkText, isPopup, isValidUrl } from "@/helpers/calculators";
+import { deserializeColInfo, getLinkText, isClickPurchasable, isLinkText, isPopup, isValidUrl } from "@/helpers/calculators";
 import { ItemInsights } from "@/types/calculators";
 import parse from "html-react-parser";
 
@@ -51,7 +51,7 @@ const GenericOutput: React.FC<GenericOutputProps> = ({
   return (
     <div
       className={cx("flex flex-column gap-2", {
-        "w-12": calcInfoMap[calculatorType].outputType === 'CALC-1A',
+        "w-12": isClickPurchasable(calcInfoMap[calculatorType].outputType),
       })}
     >
       {groupName && <h4 className="m-0 text-xl">{groupName}</h4>}
