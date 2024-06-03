@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from "next/link";
-import { Image } from "primereact/image";
+import Image from "next/image";
 import { ConfirmDialog } from "primereact/confirmdialog";
 
 const QuizRestartButton = () => {
@@ -16,9 +16,14 @@ const QuizRestartButton = () => {
         <Image
           src="/images/calculators/quiz-restart.png"
           alt="Restart"
-          width="120"
-          height="120"
-          className="relative mb-3"
+          width={60}
+          height={60}
+          style={{
+            width: '120px',
+            height: '120px',
+          }}
+          className="relative"
+          quality={40}
         />
       </Link>
       <ConfirmDialog  visible={visible} onHide={() => setVisible(false)} message="Are you sure you would like to restart this calculator?" 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import classNames from "classnames/bind";
 import styles from "./About.module.scss";
 import { useInView } from "react-intersection-observer";
-import { Image } from "primereact/image";
+import Image from "next/image";
 
 const cx = classNames.bind(styles);
 
@@ -74,7 +74,7 @@ export default function AboutContentSectionScoller({ children }: AboutContentVid
             src={videoUrl}
           ></source>
         </video>
-        <Image
+        <div
           className="absolute top-50 left-50"
           style={{
             transform: 'translate(-50%, -46%)',
@@ -82,10 +82,18 @@ export default function AboutContentSectionScoller({ children }: AboutContentVid
             opacity: animDone ? '1' : '0',
             transition: `all .5s ease-in-out ${animDone ? 1 : 0.3}s`,
           }}
-          src="https://ivoryguide.s3.us-west-1.amazonaws.com/images/about/pc-frame.png"
-          alt="PC Frame"
-          width="100%"
-        />
+        >
+          <Image
+            src="https://ivoryguide.s3.us-west-1.amazonaws.com/images/about/pc-frame.png"
+            alt="PC Frame"
+            width={414}
+            height={200}
+            style={{
+              width: '100%',
+              height: '100%'
+            }}
+          />
+          </div>
         {children}
       </div>
       <div ref={scrollSectionRef} id={cx("scrollSection")}></div>

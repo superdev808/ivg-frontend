@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { Button } from "primereact/button";
-import { Image } from "primereact/image";
+import Image from "next/image";
 import React from "react";
 
 import styles from "./styles.module.scss";
@@ -68,7 +68,10 @@ const Slide: React.FC<SlideProps> = ({ item, showInfoOnLeft, content }) => {
           <Image
             src={item.image}
             alt={item.title}
-            imageClassName={cx("slide__image")}
+            width={384}
+            height={384}
+            quality={40}
+            className={cx("slide__image")}
           />
         )}
       </div>

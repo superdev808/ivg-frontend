@@ -7,7 +7,7 @@ import {
   AutoCompleteSelectEvent,
 } from "primereact/autocomplete";
 import { Button } from "primereact/button";
-import { Image } from "primereact/image";
+import Image from "next/image";
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 
 import PieChartProgressBar from "@/components/shared/PieChartProgressbar";
@@ -140,7 +140,14 @@ const Quiz: React.FC<QuizProps> = ({
             <Image
               alt={option}
               src={image}
-              imageStyle={{ height: 60, width: 160, objectFit: "contain" }}
+              width={120}
+              height={45}
+              objectFit="contain"
+              style={{
+                width: 160,
+                height: 60
+              }}
+              quality={40}
             />
           )}
           <div>{option}</div>
@@ -160,7 +167,7 @@ const Quiz: React.FC<QuizProps> = ({
   const handleAutoCompleteMethod = (e: AutoCompleteCompleteEvent) => {
     const filteredSuggestions = answers
       .map((item) => item[question.colIndex])
-      .filter((item) => item.toLowerCase().includes(e.query.toLowerCase()))
+      .filter((item) => item && item.toLowerCase().includes(e.query.toLowerCase()))
       .sort((a, b) => a.localeCompare(b));
 
     setSuggestions(filteredSuggestions);
@@ -325,10 +332,15 @@ const Quiz: React.FC<QuizProps> = ({
                             {image ? (
                               <Image
                                 src={image}
-                                width="100%"
-                                height="100%"
-                                imageClassName="p-4"
-                                imageStyle={{ objectFit: "contain" }}
+                                objectFit="contain"
+                                width={150}
+                                height={100}
+                                style={{
+                                  width: "100%",
+                                  height: "100%"
+                                }}
+                                quality={30}
+                                className="p-4"
                                 alt={answer[question.colIndex]}
                               />
                             ) : (

@@ -1,6 +1,5 @@
 import classNames from "classnames/bind";
 import Link from "next/link";
-import { Image } from "primereact/image";
 
 import { ColItemsSection } from "../shared/ColItemsSection";
 import { CTASection } from "../shared/CTASection";
