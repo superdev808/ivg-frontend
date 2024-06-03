@@ -142,7 +142,9 @@ const GenericInputSummary: React.FC<GenericInputSummaryProps> = ({
               width={512}
               height={512}
               quality={40}
-              objectFit="contain"
+              style={{
+                objectFit: "contain"
+              }}
             />
           </div>
         </div>

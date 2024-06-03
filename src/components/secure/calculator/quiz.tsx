@@ -333,13 +333,14 @@ const Quiz: React.FC<QuizProps> = ({
                               <Image
                                 src={image}
                                 objectFit="contain"
-                                width={150}
-                                height={100}
+                                width={384}
+                                height={256}
                                 style={{
                                   width: "100%",
-                                  height: "100%"
+                                  height: "100%",
+                                  objectFit: "contain"
                                 }}
-                                quality={30}
+                                // quality={30}
                                 className="p-4"
                                 alt={answer[question.colIndex]}
                               />
