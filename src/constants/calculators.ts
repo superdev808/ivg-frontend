@@ -207,25 +207,6 @@ export const OUTPUT_UI_TYPES: {
   "WORKFLOW-4": "Workflow 4 - Sequential Steps w/ Output Step Summary (Ex. Crown Issues)",
 }
 
-export const CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES = [
-  "BondingEtching",
-  "IsolationTechniques",
-  "ToothPreparation",
-  "PhysicalImpression",
-];
-
-export const MATERIAL_CALCULATOR_TYPES = [
-  "ImplantBorneBridge",
-  "ImplantBorneCrown",
-  "ToothBorneBridge",
-  "ToothBorneCrown",
-];
-
-export const LINEAR_WORKFLOWS = [
-  "ImplantBorneCrownIssues",
-  "ToothBorneCrownIssues",
-];
-
 export const BRAND_IMAGES_MAP_ADDITIONAL: Record<string, string> = {
   molars: "molar",
   premolars: "premolar",

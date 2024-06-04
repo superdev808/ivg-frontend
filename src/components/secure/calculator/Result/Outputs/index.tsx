@@ -4,8 +4,7 @@ import { InputNumber } from "primereact/inputnumber";
 import React, { useMemo } from "react";
 import cx from "classnames";
 
-import { CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES } from "@/constants/calculators";
-import { isClickPurchasable, isValidUrl } from "@/helpers/calculators";
+import { isChairsideProceduresCalculator, isClickPurchasable, isValidUrl } from "@/helpers/calculators";
 import { ItemData, ItemInsights } from "@/types/calculators";
 
 import GenericOutput from "./Generic";
@@ -38,9 +37,7 @@ const Outputs: React.FC<OutputsProps> = ({
     <div className="flex flex-column gap-4 text-dark-green">
       {items.map(({ label, info }, itemIndex) =>
         info.map((_item, itemIdx) => {
-          const needHighlight =
-            !CHAIRSIDE_PROCEDURES_CALCULATOR_TYPES.includes(calculatorType) &&
-            itemIndex === 0;
+          const needHighlight = !isChairsideProceduresCalculator(calcInfoMap[calculatorType].outputType) && itemIndex === 0;
           let item: ItemInsights = { ..._item };
           Object.keys(item).forEach((key) => {
             if (

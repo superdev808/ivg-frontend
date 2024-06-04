@@ -1,11 +1,11 @@
 import React from "react";
-
-import { MATERIAL_CALCULATOR_TYPES } from "@/constants/calculators";
 import { InputSummary, Summary, TotalQuantities } from "@/types/calculators";
 
 import CustomSummary from "./Custom";
 import GenericComponentSummary from "./Generic";
 import MaterialComponentSummary from "./Material";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
+import { isChairsideProceduresCalculator } from "@/helpers/calculators";
 
 interface ComponentSummaryProps {
   calculatorType: string;
@@ -20,21 +20,14 @@ const ComponentSummary: React.FC<ComponentSummaryProps> = ({
   componentSummary,
   totalQuantities,
 }) => {
+  const { calcInfoMap } = useCalculatorsInfo();
   const renderContent = () => {
     if (
-      MATERIAL_CALCULATOR_TYPES.includes(calculatorType) ||
-      calculatorType === "ImplantTorqueGuide"
-    ) {
+      calcInfoMap[calculatorType].outputType === "CALC-4") {
       return <MaterialComponentSummary summary={componentSummary} />;
     }
 
-    if (
-      calculatorType === "ScanRequirements" ||
-      calculatorType === "BondingEtching" ||
-      calculatorType === "IsolationTechniques" ||
-      calculatorType === "ToothPreparation" ||
-      calculatorType === "PhysicalImpression"
-    ) {
+    if (isChairsideProceduresCalculator(calcInfoMap[calculatorType].outputType)) {
       return (
         <CustomSummary summary={inputSummary} calculatorType={calculatorType} />
       );

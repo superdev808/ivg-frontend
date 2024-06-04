@@ -9,7 +9,6 @@ import {
   CALCULATOR_OUTPUT_MAPPING,
   DENTAL_IMPLANT_PROCEDURE_OPTIONS,
   LINK_TEXT_SUFFIX,
-  MATERIAL_CALCULATOR_TYPES,
   MUA_OPTIONS,
   POPUP_TEXTS,
   PROCEDURE_INPUTS_AND_RESPONSE,
@@ -156,6 +155,7 @@ export const getProcedureInputsAndResponse = (
 };
 
 export const getComponentSummary = (
+  calcInfoMap: CalculatorInfoMap,
   sitesData: SiteData,
   responseOrder: string[]
 ): Summary[] => {
@@ -217,7 +217,7 @@ export const getComponentSummary = (
     });
 
     responseOrder.forEach((calculatorType) => {
-      if (MATERIAL_CALCULATOR_TYPES.includes(calculatorType)) {
+      if (calcInfoMap[calculatorType].outputType === "CALC-4") {
         componentDetail[calculatorType]?.forEach((response) => {
           items.push(response);
         });
@@ -273,6 +273,7 @@ export const getComponentSummary = (
 };
 
 export const prepareExportProps = (
+  calcInfoMap: CalculatorInfoMap,
   calculatorType: string,
   calculatorName: string,
   patientInfo: Patient,
@@ -290,7 +291,7 @@ export const prepareExportProps = (
     },
   };
 
-  const componentSummary = getComponentSummary(sitesData, [calculatorType]);
+  const componentSummary = getComponentSummary(calcInfoMap, sitesData, [calculatorType]);
 
   return {
     inputSummary: [{ name: "Site 1", inputDetails: quiz, componentDetails }],
@@ -494,4 +495,12 @@ export const filterValidAnswers = (answer: ANSWER_TYPE) =>
 
 export const isClickPurchasable = (outputType: string) => {
   return outputType === 'CALC-1A' || outputType.startsWith("WORKFLOW");
+};
+
+export const isChairsideProceduresCalculator = (outputType: string) => {
+  return outputType === "WORKFLOW-1" || outputType === "WORKFLOW-2";
+};
+
+export const isTroubleshootingCalculator = (outputType: string) => {
+  return outputType === "WORKFLOW-4";
 }
