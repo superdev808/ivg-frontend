@@ -14,10 +14,13 @@ import {
   AutoCompleteCompleteEvent,
 } from "primereact/autocomplete";
 import { InputTextarea } from "primereact/inputtextarea";
+import { Dropdown } from "primereact/dropdown";
+import { OUTPUT_UI_TYPES } from "@/constants/calculators";
 
 interface FormValues {
   label: string;
   description: string;
+  outputType: string;
 }
 
 interface NewCalculatorDialogProps {
@@ -44,6 +47,12 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({
     [calcInfoMap]
   );
 
+  const outputTypeOptions = Object.keys(OUTPUT_UI_TYPES)
+    .map((outputType) => ({
+      id: outputType,
+      label: OUTPUT_UI_TYPES[outputType],
+    }));
+
   useEffect(() => {
     setSuggestions(findSuggestions(""));
   }, [findSuggestions]);
@@ -66,6 +75,7 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({
       label: trim(data.label),
       description: trim(data.description),
       type: trim(toPascalCase(data.label)),
+      outputType: trim(data.outputType),
     };
 
     try {
@@ -106,6 +116,7 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({
     defaultValues: {
       label: "",
       description: "",
+      outputType: "",
     },
   });
 
@@ -175,11 +186,13 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({
                         if (
                           newSuggestions.length == 1 &&
                           calcInfoMap[newSuggestions[0]].label == e.target.value
-                        )
+                        ) {
                           setValue(
                             "description",
                             calcInfoMap[newSuggestions[0]].description || ""
                           );
+                          setValue("outputType", calcInfoMap[newSuggestions[0]].outputType || "");
+                        }
                       }}
                       dropdown
                     />
@@ -194,7 +207,30 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({
               );
             }}
           />
+          <Controller
+            name="outputType"
+            control={control}
+            rules={{ required: "Please select Output Type." }}
+            render={({ field, fieldState }) => (
+              <div className="flex-1">
+                <span className="p-float-label w-full">
+                  <Dropdown
+                    {...field}
+                    disabled={isUploading}
+                    options={outputTypeOptions}
+                    optionLabel="label"
+                    optionValue="id"
+                    className={cx({ "p-invalid": fieldState.error }, "w-full")}
+                  />
+                  <label className="bg-beige" htmlFor={field.name}>
+                    Output Type
+                  </label>
+                </span>
 
+                {FormErrorMessage({ message: errors[field.name]?.message })}
+              </div>
+            )}
+          />
           <Controller
             name="description"
             control={control}
