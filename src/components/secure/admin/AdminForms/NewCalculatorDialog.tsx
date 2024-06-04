@@ -123,13 +123,13 @@ const NewCalculatorDialog: React.FC<NewCalculatorDialogProps> = ({
   return (
     <>
       <Button
-        label="Add new calculator"
+        label="Add/Update Calculator"
         size="small"
         className="ml-3 text-md px-3 py-3"
         onClick={() => setNewCalculatorDialogVisible(true)}
       />
       <Dialog
-        header="Add new calculator"
+        header={suggestions.length == 1 ? "Update Calculator" : "Add New Calculator"}
         visible={newCalculatorDialogVisible}
         maximizable
         style={{ width: "50vw" }}
