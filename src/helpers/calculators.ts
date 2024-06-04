@@ -494,7 +494,7 @@ export const filterValidAnswers = (answer: ANSWER_TYPE) =>
   }, {} as ANSWER_TYPE);
 
 export const isClickPurchasable = (outputType: string) => {
-  return outputType === 'CALC-1A' || outputType.startsWith("WORKFLOW");
+  return outputType === 'CALC-1A' || outputType === 'CALC-4' || outputType.startsWith("WORKFLOW");
 };
 
 export const isChairsideProceduresCalculator = (outputType: string) => {
