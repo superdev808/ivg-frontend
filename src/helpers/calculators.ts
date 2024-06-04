@@ -291,7 +291,9 @@ export const prepareExportProps = (
     },
   };
 
-  const componentSummary = getComponentSummary(calcInfoMap, sitesData, [calculatorType]);
+  const componentSummary = getComponentSummary(calcInfoMap, sitesData, [
+    calculatorType,
+  ]);
 
   return {
     inputSummary: [{ name: "Site 1", inputDetails: quiz, componentDetails }],
@@ -469,16 +471,22 @@ export const isPopup = (key: string) => {
 export const isLinkText = (key: string) => {
   const { groupText } = deserializeColInfo(key);
   return groupText.endsWith(LINK_TEXT_SUFFIX);
-}
+};
 
-export const getLinkText = (item: Record<string, string | number>, groupTextKey: string) => {
+export const getLinkText = (
+  item: Record<string, string | number>,
+  groupTextKey: string
+) => {
   for (let key in item) {
     const { groupText } = deserializeColInfo(key);
-    if (groupText.startsWith(groupTextKey) && groupText.endsWith(LINK_TEXT_SUFFIX))
+    if (
+      groupText.startsWith(groupTextKey) &&
+      groupText.endsWith(LINK_TEXT_SUFFIX)
+    )
       return item[key];
   }
   return `Link to ${groupTextKey}`;
-}
+};
 
 export const isEmptyAnswer = (answer: ANSWER_TYPE) =>
   Object.values(answer).filter(Boolean).length == 0;
@@ -494,7 +502,11 @@ export const filterValidAnswers = (answer: ANSWER_TYPE) =>
   }, {} as ANSWER_TYPE);
 
 export const isClickPurchasable = (outputType: string) => {
-  return outputType === 'CALC-1A' || outputType === 'CALC-4' || outputType.startsWith("WORKFLOW");
+  return (
+    outputType === "CALC-1A" ||
+    outputType === "CALC-4" ||
+    outputType.startsWith("WORKFLOW")
+  );
 };
 
 export const isChairsideProceduresCalculator = (outputType: string) => {
@@ -503,4 +515,4 @@ export const isChairsideProceduresCalculator = (outputType: string) => {
 
 export const isTroubleshootingCalculator = (outputType: string) => {
   return outputType === "WORKFLOW-4";
-}
+};
