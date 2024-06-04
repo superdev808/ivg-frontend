@@ -4,7 +4,6 @@ import React, { useMemo } from "react";
 import TeethSelector, {
   TeethSelectorVariant,
 } from "@/components/shared/TeethSelector";
-import { LINEAR_WORKFLOWS } from "@/constants/calculators";
 import { getCookie } from "@/helpers/cookie";
 import { formatDate, formatTime } from "@/helpers/util";
 import {
@@ -18,6 +17,8 @@ import ComponentSummary from "../ComponentSummary";
 import InputSummary from "../InputSummary";
 
 import styles from "./styles.module.scss";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
+import { isTroubleshootingCalculator } from "@/helpers/calculators";
 
 const cx = classNames.bind(styles);
 
@@ -47,6 +48,7 @@ const PDFContent: React.FC<PDFContentProps> = ({
   inputSummary,
   componentSummary,
 }) => {
+  const { calcInfoMap } = useCalculatorsInfo();
   const currentDate = formatDate(patientInfo?.date);
   const currentTime = formatTime(patientInfo?.date);
 
@@ -109,9 +111,7 @@ const PDFContent: React.FC<PDFContentProps> = ({
           <div className="py-2">
             Please see summary for{" "}
             <span className="font-semibold">{calculatorName}</span>{" "}
-            {LINEAR_WORKFLOWS.includes(calculatorType)
-              ? "workflow"
-              : "calculator"}
+            {isTroubleshootingCalculator(calcInfoMap[calculatorType].outputType) ? "workflow" : "calculator"}
             .
           </div>
         </div>
@@ -121,7 +121,7 @@ const PDFContent: React.FC<PDFContentProps> = ({
             <TeethSelector
               showLabel={false}
               selectedSites={selectedSites}
-              onSiteChange={() => {}}
+              onSiteChange={() => { }}
               variant={TeethSelectorVariant.SMALL}
             />
           </div>
@@ -137,7 +137,7 @@ const PDFContent: React.FC<PDFContentProps> = ({
           />
         </div>
 
-        {!LINEAR_WORKFLOWS.includes(calculatorType) && (
+        {!isTroubleshootingCalculator(calcInfoMap[calculatorType].outputType) && (
           <ComponentSummary
             calculatorType={calculatorType}
             componentSummary={componentSummary}

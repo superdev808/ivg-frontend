@@ -410,6 +410,7 @@ const Result: React.FC<ResultProps> = ({
           {patientInfo && (
             <PDFContent
               {...prepareExportProps(
+                calcInfoMap,
                 calculatorType,
                 calculatorName,
                 patientInfo,

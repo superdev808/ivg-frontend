@@ -1,10 +1,11 @@
 import React from "react";
 
-import { LINEAR_WORKFLOWS } from "@/constants/calculators";
 import { InputDetail, ItemData } from "@/types/calculators";
 
 import GenericInputSummary from "./Generic";
 import LinearWorkflowInputSummary from "./LinearWorkflow";
+import { isTroubleshootingCalculator } from "@/helpers/calculators";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 interface InputSummaryProps {
   calculatorType: string;
@@ -21,7 +22,9 @@ const InputSummary: React.FC<InputSummaryProps> = ({
   name,
   items,
 }) => {
-  if (LINEAR_WORKFLOWS.includes(calculatorType)) {
+  const { calcInfoMap } = useCalculatorsInfo();
+
+  if (isTroubleshootingCalculator(calcInfoMap[calculatorType].outputType)) {
     return <LinearWorkflowInputSummary quiz={quiz} />;
   }
 

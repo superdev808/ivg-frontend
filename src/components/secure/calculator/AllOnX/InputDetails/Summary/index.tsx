@@ -11,6 +11,7 @@ import {
 
 import InputSummary from "./InputSummary";
 import ComponentSummary from "./ComponentSummary";
+import useCalculatorsInfo from "@/hooks/useCalculatorsInfo";
 
 interface SummaryProps {
   sitesData: SiteData;
@@ -29,6 +30,7 @@ const Summary: React.FC<SummaryProps> = ({
   totalQuantities,
   onUpdateQuantity,
 }) => {
+  const { calcInfoMap } = useCalculatorsInfo();
   const inputSummary = useMemo(() => {
     return Object.keys(sitesData).reduce((acc, site) => {
       acc.push({ site, ...sitesData[site] });
@@ -37,8 +39,8 @@ const Summary: React.FC<SummaryProps> = ({
   }, [sitesData]);
 
   const componentSummary = useMemo(() => {
-    return getComponentSummary(sitesData, responseOrder);
-  }, [sitesData, responseOrder]);
+    return getComponentSummary(calcInfoMap, sitesData, responseOrder);
+  }, [calcInfoMap, sitesData, responseOrder]);
 
   return (
     <div className="flex flex-column gap-4">
