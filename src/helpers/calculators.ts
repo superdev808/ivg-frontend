@@ -35,7 +35,8 @@ import _, { uniq } from "lodash";
 
 export const isValidUrl = (urlString = "") => {
   try {
-    new URL(urlString);
+    const newUrl = new URL(urlString);
+    return newUrl.protocol === 'http:' || newUrl.protocol === 'https:';
     return true;
   } catch (err) {
     return false;
