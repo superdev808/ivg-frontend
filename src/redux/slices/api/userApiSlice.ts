@@ -244,6 +244,15 @@ export const userApiSlice = apiSlice.injectEndpoints({
         return res.status === "Success" ? res.data : res.status;
       },
     }),
+    putUpdateLastActvivity: builder.mutation({
+      query: () => ({
+        url: "/update-last-activity",
+        method: "PUT",
+      }),
+      transformErrorResponse(baseQueryReturnValue) {
+        return baseQueryReturnValue;
+      },
+    }),
     getAnnouncementsList: builder.query<any, any>({
       query: () => ({
         url: "/announcements/get_all",

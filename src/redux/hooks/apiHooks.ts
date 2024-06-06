@@ -11,6 +11,7 @@ export const {
   useGetUserInfoQuery,
   usePutUpdateUserInfoMutation,
   usePutUpdateUserMutation,
+  usePutUpdateLastActvivityMutation,
   usePostSendResetPasswordMutation,
   usePostUploadLogoMutation,
   useGetUsersListQuery,
