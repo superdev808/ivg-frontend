@@ -18,7 +18,7 @@ import {
   formatToExploreDataItems,
   updateExploreAllData,
 } from "@/helpers/calculators";
-import { useGetUserInfoQuery } from "@/redux/hooks/apiHooks";
+import { useGetUserInfoQuery, usePutUpdateLastActvivityMutation } from "@/redux/hooks/apiHooks";
 import { CalculatorGroupItem, EXPLORE_DATA } from "@/types/calculators";
 
 import TabContent from "./tab-content";
@@ -34,6 +34,7 @@ const CalculatorPage: NextPage = () => {
   const searchParams = useSearchParams();
 
   const { data } = useGetUserInfoQuery({});
+  const [putUpdateLastActvivity] = usePutUpdateLastActvivityMutation();
   const [loading, setLoading] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -60,6 +61,8 @@ const CalculatorPage: NextPage = () => {
       setActiveTab(tabIndex);
     }
   }, [router, tabInUrl]); // eslint-disable-line
+
+  useEffect(() => { putUpdateLastActvivity({}); }, []);
 
   const calcItems = CALCULATOR_GROUP_ITEMS.reduce(
     (accumulator: string[], currentValue: CalculatorGroupItem) => [

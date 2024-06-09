@@ -56,5 +56,6 @@ export interface EditUser {
   organizationState: string;
   verificationEmailSent: string;
   lastLoginDate: string;
+  lastActivityDate: string;
   referralSource: REFERRAL_SOURCE;
 }

@@ -354,8 +354,8 @@ const AdminUserManagement: React.FC = () => {
   const getRowVerificationEmailContent = (row: EditUser) =>
     row.verificationEmailSent
       ? `${formatDate(row.verificationEmailSent)} ${formatTime(
-          row.verificationEmailSent
-        )}`
+        row.verificationEmailSent
+      )}`
       : "";
 
   const verificationEmailTemplate = (row: EditUser) => (
@@ -364,14 +364,16 @@ const AdminUserManagement: React.FC = () => {
     </div>
   );
 
-  const getRowLastLoginDateContent = (row: EditUser) =>
-    row.lastLoginDate
-      ? `${formatDate(row.lastLoginDate)} ${formatTime(row.lastLoginDate)}`
+  const getRowLastActivityDateContent = (row: EditUser) =>
+    row.lastActivityDate
+      ? `${formatDate(row.lastActivityDate)} ${formatTime(
+        row.lastActivityDate
+      )}`
       : "";
 
-  const lastLoginDateTemplate = (row: EditUser) => (
+  const lastActivityDateTemplate = (row: EditUser) => (
     <div className="flex justify-content-center">
-      {getRowLastLoginDateContent(row)}
+      {getRowLastActivityDateContent(row)}
     </div>
   );
 
@@ -456,9 +458,9 @@ const AdminUserManagement: React.FC = () => {
       filterElement: triStateFilterTemplate,
     },
     {
-      field: "lastLoginDate",
-      header: "Last Login",
-      body: (row: EditUser) => lastLoginDateTemplate(row),
+      field: "lastActivityDate",
+      header: "Last Activity",
+      body: (row: EditUser) => lastActivityDateTemplate(row),
       sortable: true,
       filterElement: triStateFilterTemplate,
     },
@@ -489,7 +491,7 @@ const AdminUserManagement: React.FC = () => {
       "Verification email sent?": getRowVerificationEmailContent(row),
       "How did you hear about us?": getRowReferralSourceContent(row),
       "Active?": row.active ? "Yes" : "No",
-      "Last Login": getRowLastLoginDateContent(row),
+      "Last Activity": getRowLastActivityDateContent(row),
     }));
 
     const blob = convertDataToExcelFormat(res);
